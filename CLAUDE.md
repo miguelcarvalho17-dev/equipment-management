@@ -27,6 +27,7 @@ so everything they need must be in that file or in the repo.
   `feature/<id>-<short-name>` (e.g. `feature/FR-002-equipment-assignment`), `fix/<short-name>`, or `chore/<short-name>`.
 - Merge into `main` only through a pull request. Do not merge or push to `main` yourself; open the PR and leave the merge to the user.
 - Commit and push only when the user asks.
+- Once a branch is merged into `main`, delete it locally and on GitHub (`git branch -d <branch>` and `git push origin --delete <branch>`), after updating local `main` with `git checkout main && git pull`.
 
 ## Hard rules (all agents)
 - Never modify base application objects. Extend only through extensions and events.
