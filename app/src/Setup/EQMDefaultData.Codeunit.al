@@ -23,11 +23,15 @@ codeunit 50105 "EQM Default Data"
         LaptopCodeTok: Label 'LAPTOP', Locked = true;
         MonitorCodeTok: Label 'MONITOR', Locked = true;
         PhoneCodeTok: Label 'PHONE', Locked = true;
+        TabletCodeTok: Label 'TABLET', Locked = true;
+        PrinterCodeTok: Label 'PRINTER', Locked = true;
         VehicleCodeTok: Label 'VEHICLE', Locked = true;
         ToolCodeTok: Label 'TOOL', Locked = true;
         LaptopDescriptionTxt: Label 'Laptop', MaxLength = 100;
         MonitorDescriptionTxt: Label 'Monitor', MaxLength = 100;
-        PhoneDescriptionTxt: Label 'Phone', MaxLength = 100;
+        PhoneDescriptionTxt: Label 'Mobile Phone', MaxLength = 100;
+        TabletDescriptionTxt: Label 'Tablet', MaxLength = 100;
+        PrinterDescriptionTxt: Label 'Printer', MaxLength = 100;
         VehicleDescriptionTxt: Label 'Vehicle', MaxLength = 100;
         ToolDescriptionTxt: Label 'Tool', MaxLength = 100;
 
@@ -49,7 +53,7 @@ codeunit 50105 "EQM Default Data"
 
     /// <summary>
     /// Creates the setup record, number series EQUIP (if the setup has no Equipment Nos.) and the starter
-    /// categories LAPTOP, MONITOR, PHONE, VEHICLE and TOOL. Safe to run repeatedly: existing records are never changed.
+    /// categories LAPTOP, MONITOR, PHONE, TABLET, PRINTER, VEHICLE and TOOL. Safe to run repeatedly: existing records are never changed.
     /// </summary>
     procedure CreateDefaultData()
     var
@@ -66,6 +70,8 @@ codeunit 50105 "EQM Default Data"
         InsertCategoryIfMissing(LaptopCodeTok, LaptopDescriptionTxt);
         InsertCategoryIfMissing(MonitorCodeTok, MonitorDescriptionTxt);
         InsertCategoryIfMissing(PhoneCodeTok, PhoneDescriptionTxt);
+        InsertCategoryIfMissing(TabletCodeTok, TabletDescriptionTxt);
+        InsertCategoryIfMissing(PrinterCodeTok, PrinterDescriptionTxt);
         InsertCategoryIfMissing(VehicleCodeTok, VehicleDescriptionTxt);
         InsertCategoryIfMissing(ToolCodeTok, ToolDescriptionTxt);
     end;
