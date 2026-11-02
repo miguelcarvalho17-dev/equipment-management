@@ -1,0 +1,31 @@
+{
+  "id": "eef4c303-e1d4-40b5-bc85-dd8bec4e0748",
+  "name": "Equipment Management Tests",
+  "publisher": "Miguel Carvalho",
+  "version": "1.0.0.0",
+  "brief": "Automated tests for Equipment Management.",
+  "description": "Test codeunits for the Equipment Management app.",
+  "privacyStatement": "",
+  "EULA": "",
+  "help": "",
+  "url": "",
+  "logo": "",
+  "dependencies": [
+    {
+      "id": "e6c30407-ec71-4f48-a790-70da80abc992",
+      "name": "Equipment Management",
+      "publisher": "Miguel Carvalho",
+      "version": "1.0.0.0"
+    }
+  ],
+  "screenshots": [],
+  "platform": "1.0.0.0",
+  "application": "29.0.0.0",
+  "idRanges": [
+    { "from": 50150, "to": 50199 }
+  ],
+  "test": "29.0.0.0",
+  "runtime": "18.0",
+  "target": "Cloud",
+  "features": [ "NoImplicitWith" ]
+}

@@ -1,0 +1,72 @@
+# Equipment Management for Business Central
+
+A Microsoft Dynamics 365 Business Central extension (AL) to register company equipment, track who uses it, and keep maintenance and warranty information in one place.
+
+> **Status:** in development (v1). Nothing here is released yet.
+
+## The problem
+
+Companies hand out equipment to their employees every day:
+
+- Laptops, cell phones and tablets
+- Monitors and other peripherals
+- Tools
+- Vehicles
+- Industrial equipment
+
+In most companies this information lives in **Excel spreadsheets** that are scattered across departments. As a result:
+
+- Nobody knows for sure **who has which item**, or where it is.
+- **Maintenance** is forgotten or done late because nothing reminds anyone.
+- **Warranties** expire unnoticed, so repairs that should have been free get paid for.
+- When an employee leaves, getting their equipment back is a manual, error-prone checklist.
+- The data is not connected to the ERP, so it can't be reported on or secured like the rest of the business data.
+
+## The solution
+
+Equipment Management brings this into Business Central, where the people, permissions and reports already live.
+
+## Version 1 (MVP)
+
+### Project objective
+
+The Equipment Management application enables organizations to register, track, and manage company-owned equipment assigned to employees.
+
+The initial release (V1) focuses on equipment registration, categorization, employee assignment tracking, and management visibility through dashboards and KPIs.
+
+### Scope of V1
+
+| Capability | What it gives you |
+|---|---|
+| **Register equipment** | A central equipment register with serial numbers and key details |
+| **Categorize equipment** | Categories such as laptops, phones, vehicles or tools |
+| **Track assignments** | Who uses each item now, with a history of previous assignments |
+| **Dashboards and KPIs** | Management visibility into the equipment base and how it is assigned |
+
+### Roadmap (after V1)
+
+These address the rest of the problem above and are planned for later versions:
+
+- Maintenance schedules and records
+- Warranty tracking
+- Location tracking
+- Automatic alerts for overdue maintenance and expiring warranties (via Job Queue)
+
+Out of scope for now: depreciation and fixed-asset accounting, purchasing workflows, and mobile or barcode scanning.
+
+## Technical overview
+
+- **Platform:** Business Central 29, AL runtime 18.0
+- **Layout:** `app/` (the extension) and `test/` (automated tests, depends on `app/`)
+- **Extensibility:** extends Business Central only through events and extension objects. No base application objects are modified.
+- **Object prefix:** `EQM`
+
+## Getting started
+
+1. Install the AL Language extension for VS Code.
+2. Open `app/` in VS Code, then run **AL: Download Symbols** against your sandbox.
+3. Press `F5` to publish to your sandbox, or use **AL: Package** to build the `.app`.
+
+## License
+
+[MIT](LICENSE)

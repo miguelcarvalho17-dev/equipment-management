@@ -1,0 +1,28 @@
+{
+  "id": "e6c30407-ec71-4f48-a790-70da80abc992",
+  "name": "Equipment Management",
+  "publisher": "Miguel Carvalho",
+  "version": "29.0.0.0",
+  "brief": "Track equipment, assignments and maintenance in Business Central.",
+  "description": "Equipment Management lets you register equipment, assign it to resources or employees and track maintenance.",
+  "privacyStatement": "",
+  "EULA": "",
+  "help": "",
+  "url": "",
+  "logo": "",
+  "dependencies": [],
+  "screenshots": [],
+  "platform": "1.0.0.0",
+  "application": "29.0.0.0",
+  "idRanges": [
+    { "from": 50100, "to": 50149 }
+  ],
+  "resourceExposurePolicy": {
+    "allowDebugging": true,
+    "allowDownloadingSource": true,
+    "includeSourceInSymbolFile": true
+  },
+  "runtime": "18.0",
+  "target": "Cloud",
+  "features": [ "NoImplicitWith" ]
+}

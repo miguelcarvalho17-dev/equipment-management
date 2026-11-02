@@ -1,0 +1,19 @@
+# AL build output and symbols
+*.app
+.alpackages/
+.snapshots/
+.output/
+rec/
+
+# Local tooling / credentials
+.altestrunner/
+.vscode/*.local.json
+.DS_Store
+
+# Private: Claude agents/skills and launch configs
+.claude/
+launch.json
+
+# AL extension caches
+.alcache/
+rad.json
