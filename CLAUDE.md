@@ -21,6 +21,13 @@ DELIVERY_MODE: AppSource
 Handoffs happen through `docs/plans/<feature>.md`. Subagents do not share chat context,
 so everything they need must be in that file or in the repo.
 
+## Git branching
+- `main` is protected on GitHub: no direct commits or pushes, pull requests only (applies to admins too).
+- Never commit to `main`. Before any change, work on a branch cut from an up-to-date `main`:
+  `feature/<id>-<short-name>` (e.g. `feature/FR-002-equipment-assignment`), `fix/<short-name>`, or `chore/<short-name>`.
+- Merge into `main` only through a pull request. Do not merge or push to `main` yourself; open the PR and leave the merge to the user.
+- Commit and push only when the user asks.
+
 ## Hard rules (all agents)
 - Never modify base application objects. Extend only through extensions and events.
 - Never invent object IDs. Take the next free ID inside the range above.
