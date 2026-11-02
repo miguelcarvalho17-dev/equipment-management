@@ -41,9 +41,15 @@ table 50100 "EQM Equipment"
         field(3; "Category Code"; Code[20])
         {
             Caption = 'Category Code';
-            ToolTip = 'Specifies the category of the equipment.';
-            TableRelation = "EQM Equipment Category";
+            ToolTip = 'Specifies the category of the equipment. Only active categories can be selected.';
+            TableRelation = "EQM Equipment Category" where(Active = const(true));
+            ValidateTableRelation = false;
             NotBlank = true;
+
+            trigger OnValidate()
+            begin
+                CheckCategoryAllowed("Category Code" <> xRec."Category Code");
+            end;
         }
         field(4; "Serial No."; Code[50])
         {
@@ -155,6 +161,8 @@ table 50100 "EQM Equipment"
         EmployeeNotActiveErr: Label 'You cannot assign equipment to employee %1 because the employee status is %2.', Comment = '%1 = employee number, %2 = employee status';
         EmployeePrivacyBlockedErr: Label 'You cannot assign equipment to employee %1 because the employee is blocked for privacy reasons.', Comment = '%1 = employee number';
         StatusChangeRemovesEmployeeQst: Label 'Changing the status removes the assigned employee %1 from equipment %2. Do you want to continue?', Comment = '%1 = employee number, %2 = equipment number';
+        CategoryNotFoundErr: Label 'Equipment category %1 does not exist. Choose a category from the Equipment Categories page.', Comment = '%1 = category code';
+        CategoryInactiveErr: Label 'You cannot select equipment category %1 because it is not active. Choose an active category, or ask an administrator to activate it.', Comment = '%1 = category code';
         DeleteAssignedQst: Label 'Equipment %1 is assigned to employee %2. Do you want to delete it anyway?', Comment = '%1 = equipment number, %2 = employee number';
 
     trigger OnInsert()
@@ -233,31 +241,61 @@ table 50100 "EQM Equipment"
     end;
 
     /// <summary>
-    /// Validates the record before it is inserted or modified: category filled in, serial number unique,
-    /// assigned employee allowed, and employee present when the status is Assigned.
+    /// Validates the record before it is inserted or modified: category filled in, category exists and is active
+    /// (active only when the category is new or changed), serial number unique, assigned employee allowed,
+    /// and employee present when the status is Assigned.
     /// Raises OnAfterCheckEquipmentConsistency at the end.
     /// </summary>
     /// <param name="IsNewRecord">True on insert. On modify (false), the Active / not privacy blocked check on the employee runs only if the assigned employee differs from the stored record.</param>
     internal procedure CheckEquipmentConsistency(IsNewRecord: Boolean)
     var
         StoredEquipment: Record "EQM Equipment";
+        CategoryChanged: Boolean;
         EmployeeChanged: Boolean;
     begin
         TestField("Category Code");
-        CheckSerialNoIsUnique();
 
+        CategoryChanged := true;
         EmployeeChanged := true;
         if not IsNewRecord then begin
-            StoredEquipment.SetLoadFields("Assigned Employee No.");
-            if StoredEquipment.Get("No.") then
+            StoredEquipment.SetLoadFields("Assigned Employee No.", "Category Code");
+            if StoredEquipment.Get("No.") then begin
+                CategoryChanged := StoredEquipment."Category Code" <> "Category Code";
                 EmployeeChanged := StoredEquipment."Assigned Employee No." <> "Assigned Employee No.";
+            end;
         end;
+        CheckCategoryAllowed(CategoryChanged);
+
+        CheckSerialNoIsUnique();
         CheckAssignedEmployeeAllowed(EmployeeChanged);
 
         if (Status = Status::Assigned) and ("Assigned Employee No." = '') then
             Error(AssignedEmployeeRequiredErr, FieldCaption("Assigned Employee No."), "No.", Format(Status));
 
         OnAfterCheckEquipmentConsistency(Rec);
+    end;
+
+    local procedure CheckCategoryAllowed(CheckIsActive: Boolean)
+    var
+        Category: Record "EQM Equipment Category";
+        IsHandled: Boolean;
+    begin
+        if "Category Code" = '' then
+            exit;
+
+        Category.SetLoadFields(Active);
+        if not Category.Get("Category Code") then
+            Error(CategoryNotFoundErr, "Category Code");
+
+        if not CheckIsActive then
+            exit;
+
+        OnBeforeCheckCategoryIsActive(Rec, IsHandled);
+        if IsHandled then
+            exit;
+
+        if not Category.Active then
+            Error(CategoryInactiveErr, "Category Code");
     end;
 
     local procedure CheckSerialNoIsUnique()
@@ -311,6 +349,16 @@ table 50100 "EQM Equipment"
     begin
         if not EquipmentSetup.Get() then
             Clear(EquipmentSetup);
+    end;
+
+    /// <summary>
+    /// Raised before the check that a new or changed category is active.
+    /// </summary>
+    /// <param name="Equipment">The record being checked (passed by value; changes are not kept).</param>
+    /// <param name="IsHandled">Set to true to allow an inactive category. The category must still exist.</param>
+    [IntegrationEvent(false, false)]
+    local procedure OnBeforeCheckCategoryIsActive(Equipment: Record "EQM Equipment"; var IsHandled: Boolean)
+    begin
     end;
 
     /// <summary>

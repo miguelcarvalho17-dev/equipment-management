@@ -70,8 +70,8 @@ Subscribed: table Employee, implicit `OnBeforeDeleteEvent` (see above).
 | Set | Allows |
 |---|---|
 | EQM - Read (`Equipment - Read`) | Read equipment (R), categories (R, indirect insert) and setup (R, indirect insert and modify); execute the app's tables, pages and the two internal codeunits. |
-| EQM - Edit (`Equipment - Edit`) | Includes Read; full RIMD on equipment and categories. |
-| EQM - Admin (`Equipment - Admin`) | Includes Edit; full RIMD on setup. |
+| EQM - Edit (`Equipment - Edit`) | Includes Read; full RIMD on equipment. (Categories moved to Admin in FR-002.) |
+| EQM - Admin (`Equipment - Admin`) | Includes Edit; full RIMD on setup (and on categories since FR-002). |
 | D365 BASIC (extension 50103) | Adds indirect read (`r`) on equipment so the Employee delete guard works for any user who can delete employees. |
 
 - Users also need a standard base set (D365 BASIC) for Employee, Location and No. Series access; the EQM sets do not grant base data.

@@ -1,0 +1,454 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xliff version="1.2" xmlns="urn:oasis:names:tc:xliff:document:1.2" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="urn:oasis:names:tc:xliff:document:1.2 xliff-core-1.2-transitional.xsd">
+  <file datatype="xml" source-language="en-US" target-language="en-US" original="Equipment Management">
+    <body>
+      <group id="body">
+        <trans-unit id="Table 4212454693 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Equipment</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table EQM Equipment - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Table 4212454693 - NamedType 2234424954" size-unit="char" translate="yes" xml:space="preserve">
+          <source>You must fill in %1 for equipment %2 because its status is %3. On the equipment card, use the Assign to Employee action.</source>
+          <note from="Developer" annotates="general" priority="2">%1 = field caption, %2 = equipment number, %3 = status caption</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table EQM Equipment - NamedType AssignedEmployeeRequiredErr</note>
+        </trans-unit>
+        <trans-unit id="Table 4212454693 - NamedType 4213876330" size-unit="char" translate="yes" xml:space="preserve">
+          <source>You cannot select equipment category %1 because it is not active. Choose an active category, or ask an administrator to activate it.</source>
+          <note from="Developer" annotates="general" priority="2">%1 = category code</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table EQM Equipment - NamedType CategoryInactiveErr</note>
+        </trans-unit>
+        <trans-unit id="Table 4212454693 - NamedType 2316592330" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Equipment category %1 does not exist. Choose a category from the Equipment Categories page.</source>
+          <note from="Developer" annotates="general" priority="2">%1 = category code</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table EQM Equipment - NamedType CategoryNotFoundErr</note>
+        </trans-unit>
+        <trans-unit id="Table 4212454693 - NamedType 2734481449" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Equipment %1 is assigned to employee %2. Do you want to delete it anyway?</source>
+          <note from="Developer" annotates="general" priority="2">%1 = equipment number, %2 = employee number</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table EQM Equipment - NamedType DeleteAssignedQst</note>
+        </trans-unit>
+        <trans-unit id="Table 4212454693 - NamedType 2695088842" size-unit="char" translate="yes" xml:space="preserve">
+          <source>You cannot assign equipment to employee %1 because the employee status is %2.</source>
+          <note from="Developer" annotates="general" priority="2">%1 = employee number, %2 = employee status</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table EQM Equipment - NamedType EmployeeNotActiveErr</note>
+        </trans-unit>
+        <trans-unit id="Table 4212454693 - NamedType 3181639616" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Employee %1 assigned to equipment %2 no longer exists. Use the Unassign action, then assign another employee.</source>
+          <note from="Developer" annotates="general" priority="2">%1 = employee number, %2 = equipment number</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table EQM Equipment - NamedType EmployeeNotFoundErr</note>
+        </trans-unit>
+        <trans-unit id="Table 4212454693 - NamedType 139642977" size-unit="char" translate="yes" xml:space="preserve">
+          <source>You can only fill in %1 when the status is %2.</source>
+          <note from="Developer" annotates="general" priority="2">%1 = Assigned Employee No. field caption, %2 = Assigned status caption</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table EQM Equipment - NamedType EmployeeOnlyWhenAssignedErr</note>
+        </trans-unit>
+        <trans-unit id="Table 4212454693 - NamedType 3068802027" size-unit="char" translate="yes" xml:space="preserve">
+          <source>You cannot assign equipment to employee %1 because the employee is blocked for privacy reasons.</source>
+          <note from="Developer" annotates="general" priority="2">%1 = employee number</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table EQM Equipment - NamedType EmployeePrivacyBlockedErr</note>
+        </trans-unit>
+        <trans-unit id="Table 4212454693 - NamedType 1157376359" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Serial No. %1 is already used by equipment %2.</source>
+          <note from="Developer" annotates="general" priority="2">%1 = serial number, %2 = equipment number</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table EQM Equipment - NamedType SerialNoAlreadyUsedErr</note>
+        </trans-unit>
+        <trans-unit id="Table 4212454693 - NamedType 3305734189" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Changing the status removes the assigned employee %1 from equipment %2. Do you want to continue?</source>
+          <note from="Developer" annotates="general" priority="2">%1 = employee number, %2 = equipment number</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table EQM Equipment - NamedType StatusChangeRemovesEmployeeQst</note>
+        </trans-unit>
+        <trans-unit id="Table 4212454693 - Field 1994602887 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Specifies the employee the equipment is assigned to. The employee can only be set when the status is Assigned.</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table EQM Equipment - Field Assigned Employee No. - Property ToolTip</note>
+        </trans-unit>
+        <trans-unit id="Table 4212454693 - Field 1994602887 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Assigned Employee No.</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table EQM Equipment - Field Assigned Employee No. - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Table 4212454693 - Field 3877927551 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Specifies the category of the equipment. Only active categories can be selected.</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table EQM Equipment - Field Category Code - Property ToolTip</note>
+        </trans-unit>
+        <trans-unit id="Table 4212454693 - Field 3877927551 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Category Code</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table EQM Equipment - Field Category Code - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Table 4212454693 - Field 3461834954 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Specifies a description of the equipment.</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table EQM Equipment - Field Description - Property ToolTip</note>
+        </trans-unit>
+        <trans-unit id="Table 4212454693 - Field 3461834954 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Description</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table EQM Equipment - Field Description - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Table 4212454693 - Field 2161572060 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Specifies the location where the equipment is kept.</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table EQM Equipment - Field Location Code - Property ToolTip</note>
+        </trans-unit>
+        <trans-unit id="Table 4212454693 - Field 2161572060 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Location Code</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table EQM Equipment - Field Location Code - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Table 4212454693 - Field 3647128553 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Specifies the manufacturer of the equipment.</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table EQM Equipment - Field Manufacturer - Property ToolTip</note>
+        </trans-unit>
+        <trans-unit id="Table 4212454693 - Field 3647128553 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Manufacturer</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table EQM Equipment - Field Manufacturer - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Table 4212454693 - Field 1695122201 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Specifies the model of the equipment.</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table EQM Equipment - Field Model - Property ToolTip</note>
+        </trans-unit>
+        <trans-unit id="Table 4212454693 - Field 1695122201 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Model</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table EQM Equipment - Field Model - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Table 4212454693 - Field 4200184881 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Specifies the number of the equipment.</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table EQM Equipment - Field No. - Property ToolTip</note>
+        </trans-unit>
+        <trans-unit id="Table 4212454693 - Field 4200184881 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>No.</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table EQM Equipment - Field No. - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Table 4212454693 - Field 1351594800 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Specifies the number series from which the equipment number was assigned.</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table EQM Equipment - Field No. Series - Property ToolTip</note>
+        </trans-unit>
+        <trans-unit id="Table 4212454693 - Field 1351594800 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>No. Series</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table EQM Equipment - Field No. Series - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Table 4212454693 - Field 2805819452 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Specifies the purchase cost of the equipment.</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table EQM Equipment - Field Purchase Cost - Property ToolTip</note>
+        </trans-unit>
+        <trans-unit id="Table 4212454693 - Field 2805819452 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Purchase Cost</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table EQM Equipment - Field Purchase Cost - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Table 4212454693 - Field 3920280169 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Specifies the date the equipment was purchased.</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table EQM Equipment - Field Purchase Date - Property ToolTip</note>
+        </trans-unit>
+        <trans-unit id="Table 4212454693 - Field 3920280169 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Purchase Date</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table EQM Equipment - Field Purchase Date - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Table 4212454693 - Field 47037625 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Specifies the serial number of the equipment. A serial number can be used by one equipment record only.</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table EQM Equipment - Field Serial No. - Property ToolTip</note>
+        </trans-unit>
+        <trans-unit id="Table 4212454693 - Field 47037625 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Serial No.</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table EQM Equipment - Field Serial No. - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Table 4212454693 - Field 513339096 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Specifies the status of the equipment. To assign equipment to an employee, use the Assign to Employee action.</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table EQM Equipment - Field Status - Property ToolTip</note>
+        </trans-unit>
+        <trans-unit id="Table 4212454693 - Field 513339096 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Status</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table EQM Equipment - Field Status - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Table 3451510709 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Equipment Category</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table EQM Equipment Category - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Table 3451510709 - NamedType 1965912515" size-unit="char" translate="yes" xml:space="preserve">
+          <source>You cannot delete category %1 because it is used by one or more equipment records. To stop using the category, clear the Active check box instead.</source>
+          <note from="Developer" annotates="general" priority="2">%1 = category code</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table EQM Equipment Category - NamedType CategoryInUseErr</note>
+        </trans-unit>
+        <trans-unit id="Table 3451510709 - NamedType 2317288242" size-unit="char" translate="yes" xml:space="preserve">
+          <source>You cannot rename category %1 because it is not active and is used by equipment. Select the Active check box, rename the category, and then clear the check box again.</source>
+          <note from="Developer" annotates="general" priority="2">%1 = category code</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table EQM Equipment Category - NamedType CategoryRenameInactiveErr</note>
+        </trans-unit>
+        <trans-unit id="Table 3451510709 - Field 1090351696 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Specifies whether the category can be selected for equipment. Equipment that already uses an inactive category keeps it.</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table EQM Equipment Category - Field Active - Property ToolTip</note>
+        </trans-unit>
+        <trans-unit id="Table 3451510709 - Field 1090351696 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Active</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table EQM Equipment Category - Field Active - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Table 3451510709 - Field 3004954119 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Specifies the code of the equipment category.</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table EQM Equipment Category - Field Code - Property ToolTip</note>
+        </trans-unit>
+        <trans-unit id="Table 3451510709 - Field 3004954119 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Code</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table EQM Equipment Category - Field Code - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Table 3451510709 - Field 3461834954 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Specifies a description of the equipment category.</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table EQM Equipment Category - Field Description - Property ToolTip</note>
+        </trans-unit>
+        <trans-unit id="Table 3451510709 - Field 3461834954 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Description</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table EQM Equipment Category - Field Description - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Table 1065098760 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Equipment Setup</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table EQM Equipment Setup - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Table 1065098760 - Field 3955986674 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Specifies the number series used to assign numbers to new equipment.</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table EQM Equipment Setup - Field Equipment Nos. - Property ToolTip</note>
+        </trans-unit>
+        <trans-unit id="Table 1065098760 - Field 3955986674 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Equipment Nos.</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table EQM Equipment Setup - Field Equipment Nos. - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Table 1065098760 - Field 1663593181 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Specifies the primary key of the equipment setup record.</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table EQM Equipment Setup - Field Primary Key - Property ToolTip</note>
+        </trans-unit>
+        <trans-unit id="Table 1065098760 - Field 1663593181 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Primary Key</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table EQM Equipment Setup - Field Primary Key - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Codeunit 55420158 - NamedType 2998168785" maxwidth="100" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Equipment</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit EQM Default Data - NamedType EquipmentSeriesDescriptionTxt</note>
+        </trans-unit>
+        <trans-unit id="Codeunit 55420158 - NamedType 2442218164" maxwidth="100" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Laptop</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit EQM Default Data - NamedType LaptopDescriptionTxt</note>
+        </trans-unit>
+        <trans-unit id="Codeunit 55420158 - NamedType 129052886" maxwidth="100" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Monitor</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit EQM Default Data - NamedType MonitorDescriptionTxt</note>
+        </trans-unit>
+        <trans-unit id="Codeunit 55420158 - NamedType 2781787358" maxwidth="100" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Mobile Phone</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit EQM Default Data - NamedType PhoneDescriptionTxt</note>
+        </trans-unit>
+        <trans-unit id="Codeunit 55420158 - NamedType 522378492" maxwidth="100" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Printer</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit EQM Default Data - NamedType PrinterDescriptionTxt</note>
+        </trans-unit>
+        <trans-unit id="Codeunit 55420158 - NamedType 2341049880" maxwidth="100" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Tablet</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit EQM Default Data - NamedType TabletDescriptionTxt</note>
+        </trans-unit>
+        <trans-unit id="Codeunit 55420158 - NamedType 1005459018" maxwidth="100" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Tool</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit EQM Default Data - NamedType ToolDescriptionTxt</note>
+        </trans-unit>
+        <trans-unit id="Codeunit 55420158 - NamedType 543160026" maxwidth="100" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Vehicle</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit EQM Default Data - NamedType VehicleDescriptionTxt</note>
+        </trans-unit>
+        <trans-unit id="Codeunit 250301630 - NamedType 2701412617" size-unit="char" translate="yes" xml:space="preserve">
+          <source>You cannot delete employee %1 because one or more equipment records are assigned to the employee.</source>
+          <note from="Developer" annotates="general" priority="2">%1 = employee number</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit EQM Employee Subscribers - NamedType EmployeeHasAssignedEquipmentErr</note>
+        </trans-unit>
+        <trans-unit id="Page 3574600233 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Equipment Card</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page EQM Equipment Card - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Page 3574600233 - Control 629510381 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Assignment</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page EQM Equipment Card - Control Assignment - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Page 3574600233 - Control 2754621559 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Specifies the name of the employee the equipment is assigned to.</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page EQM Equipment Card - Control Assigned Employee Name - Property ToolTip</note>
+        </trans-unit>
+        <trans-unit id="Page 3574600233 - Control 2754621559 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Assigned Employee Name</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page EQM Equipment Card - Control Assigned Employee Name - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Page 3574600233 - Control 3946021143 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Audit</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page EQM Equipment Card - Control Audit - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Page 3574600233 - Control 3124404040 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Specifies when the equipment record was created.</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page EQM Equipment Card - Control CreatedDate - Property ToolTip</note>
+        </trans-unit>
+        <trans-unit id="Page 3574600233 - Control 3124404040 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Created Date</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page EQM Equipment Card - Control CreatedDate - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Page 3574600233 - Control 3879387177 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Specifies when the equipment record was last modified.</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page EQM Equipment Card - Control LastModifiedDate - Property ToolTip</note>
+        </trans-unit>
+        <trans-unit id="Page 3574600233 - Control 3879387177 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Last Modified Date</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page EQM Equipment Card - Control LastModifiedDate - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Page 3574600233 - Control 2445482498 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>General</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page EQM Equipment Card - Control General - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Page 3574600233 - Control 395510365 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Purchase</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page EQM Equipment Card - Control Purchase - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Page 3574600233 - Action 1332525020 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Assigns the equipment to an active employee that you select.</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page EQM Equipment Card - Action AssignToEmployee - Property ToolTip</note>
+        </trans-unit>
+        <trans-unit id="Page 3574600233 - Action 1332525020 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Assign to Employee</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page EQM Equipment Card - Action AssignToEmployee - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Page 3574600233 - Action 640341854 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Removes the assigned employee and sets the status to Available.</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page EQM Equipment Card - Action Unassign - Property ToolTip</note>
+        </trans-unit>
+        <trans-unit id="Page 3574600233 - Action 640341854 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Unassign</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page EQM Equipment Card - Action Unassign - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Page 4152500839 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Equipment Categories</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page EQM Equipment Categories - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Page 2630064635 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Equipment</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page EQM Equipment List - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Page 2630064635 - Action 113145658 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Opens the list of equipment categories.</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page EQM Equipment List - Action Categories - Property ToolTip</note>
+        </trans-unit>
+        <trans-unit id="Page 2630064635 - Action 113145658 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Categories</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page EQM Equipment List - Action Categories - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Page 2630064635 - Action 1514883969 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Opens the equipment setup.</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page EQM Equipment List - Action Setup - Property ToolTip</note>
+        </trans-unit>
+        <trans-unit id="Page 2630064635 - Action 1514883969 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Setup</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page EQM Equipment List - Action Setup - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Page 1065098760 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Equipment Setup</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page EQM Equipment Setup - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Page 1065098760 - Control 1532816877 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Numbering</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page EQM Equipment Setup - Control Numbering - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Enum 3069227753 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Equipment Status</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Enum EQM Equipment Status - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Enum 3069227753 - EnumValue 1005746868 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Assigned</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Enum EQM Equipment Status - EnumValue Assigned - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Enum 3069227753 - EnumValue 3920084379 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Available</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Enum EQM Equipment Status - EnumValue Available - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Enum 3069227753 - EnumValue 4131727267 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Retired</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Enum EQM Equipment Status - EnumValue Retired - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Enum 3069227753 - EnumValue 1778928279 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Under Maintenance</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Enum EQM Equipment Status - EnumValue Under Maintenance - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="PermissionSet 2638768669 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Equipment - Admin</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">PermissionSet EQM - Admin - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="PermissionSet 2444916644 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Equipment - Edit</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">PermissionSet EQM - Edit - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="PermissionSet 3223607826 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Equipment - Read</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">PermissionSet EQM - Read - Property Caption</note>
+        </trans-unit>
+      </group>
+    </body>
+  </file>
+</xliff>

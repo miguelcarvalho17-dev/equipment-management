@@ -21,6 +21,9 @@ page 50102 "EQM Equipment Categories"
                 field(Description; Rec.Description)
                 {
                 }
+                field(Active; Rec.Active)
+                {
+                }
             }
         }
     }

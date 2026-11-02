@@ -7,5 +7,6 @@ permissionset 50102 "EQM - Admin"
     IncludedPermissionSets = "EQM - Edit";
 
     Permissions =
+        tabledata "EQM Equipment Category" = RIMD,
         tabledata "EQM Equipment Setup" = RIMD;
 }
