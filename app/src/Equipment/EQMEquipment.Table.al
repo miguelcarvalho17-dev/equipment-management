@@ -86,16 +86,22 @@ table 50100 "EQM Equipment"
         field(9; Status; Enum "EQM Equipment Status")
         {
             Caption = 'Status';
-            ToolTip = 'Specifies the lifecycle status of the equipment: Available, Assigned, In Maintenance, Lost or Disposed. To assign equipment to an employee, use the Assign to Employee action. Lost and Disposed are final statuses: the equipment cannot be assigned or change status again, and new equipment cannot start with them.';
+            ToolTip = 'Specifies the lifecycle status of the equipment: Available, Assigned, In Maintenance, Lost or Disposed. Only saved, available equipment can be assigned; use the Assign to Employee action. Lost and Disposed are final statuses: the equipment cannot be assigned or change status again. New equipment cannot start as Assigned, Lost or Disposed.';
             InitValue = Available;
 
             trigger OnValidate()
             var
                 ConfirmManagement: Codeunit "Confirm Management";
                 ConfirmQuestion: Text;
+                IsNew: Boolean;
             begin
-                if IsFinalStatus(Status) and not IsStoredRecord() then
+                IsNew := not IsStoredRecord();
+
+                if IsFinalStatus(Status) and IsNew then
                     Error(NewEquipmentFinalStatusErr, Format(Status));
+
+                if (Status = Status::Assigned) and IsNew then
+                    Error(NewEquipmentAssignedErr, Format(Status));
 
                 if Status <> xRec.Status then
                     CheckStatusTransitionAllowed(xRec.Status, Status);
@@ -121,7 +127,7 @@ table 50100 "EQM Equipment"
         field(10; "Assigned Employee No."; Code[20])
         {
             Caption = 'Assigned Employee No.';
-            ToolTip = 'Specifies the employee the equipment is assigned to. The employee can only be set when the status is Assigned.';
+            ToolTip = 'Specifies the employee the equipment is assigned to. To assign available equipment, use the Assign to Employee action. To change the employee, unassign the equipment first.';
             TableRelation = Employee."No.";
 
             trigger OnValidate()
@@ -191,7 +197,10 @@ table 50100 "EQM Equipment"
         AmbiguousStyleTok: Label 'Ambiguous', Locked = true;
         UnfavorableStyleTok: Label 'Unfavorable', Locked = true;
         SubordinateStyleTok: Label 'Subordinate', Locked = true;
-        DeleteAssignedQst: Label 'Equipment %1 is assigned to employee %2. Do you want to delete it anyway?', Comment = '%1 = equipment number, %2 = employee number';
+        NotAvailableForAssignmentErr: Label 'You cannot assign equipment %1 because its status is %2. Only equipment with the status %3 can be assigned.', Comment = '%1 = equipment number, %2 = current status caption, %3 = Available status caption';
+        AlreadyAssignedErr: Label 'Equipment %1 is already assigned to employee %2. Unassign the equipment first, and then assign it again.', Comment = '%1 = equipment number, %2 = employee number';
+        NewEquipmentAssignedErr: Label 'You cannot create equipment with the status %1. Create the equipment first, and then use the Assign to Employee action.', Comment = '%1 = status caption';
+        DeleteAssignedErr: Label 'You cannot delete equipment %1 because it is assigned to employee %2. Unassign the equipment first.', Comment = '%1 = equipment number, %2 = employee number';
 
     trigger OnInsert()
     var
@@ -210,17 +219,20 @@ table 50100 "EQM Equipment"
     end;
 
     trigger OnModify()
+    var
+        AssignmentMgt: Codeunit "EQM Assignment Mgt.";
     begin
         CheckEquipmentConsistency(false);
+        AssignmentMgt.UpdateAssignmentOnSave(Rec);
     end;
 
     trigger OnDelete()
     var
-        ConfirmManagement: Codeunit "Confirm Management";
+        AssignmentMgt: Codeunit "EQM Assignment Mgt.";
     begin
-        if (Status = Status::Assigned) and ("Assigned Employee No." <> '') then
-            if not ConfirmManagement.GetResponseOrDefault(StrSubstNo(DeleteAssignedQst, "No.", "Assigned Employee No."), true) then
-                Error('');
+        if Status = Status::Assigned then
+            Error(DeleteAssignedErr, "No.", "Assigned Employee No.");
+        AssignmentMgt.DeleteAssignments("No.");
     end;
 
     /// <summary>
@@ -247,14 +259,17 @@ table 50100 "EQM Equipment"
 
     /// <summary>
     /// Sets the status to Assigned, assigns the employee and saves the record with triggers.
-    /// Can also be used to reassign equipment that is already assigned.
-    /// Raises an error when the status is Lost or Disposed.
+    /// Only saved, Available equipment can be assigned. An active assignment entry with the work date and the current user
+    /// is created. Raises an error when the equipment is already assigned, or when the status is not Available (Lost and
+    /// Disposed always; other statuses unless an extension allows the transition).
     /// </summary>
     /// <param name="EmployeeNo">The employee to assign. Must exist, be Active and not be privacy blocked; otherwise an error is raised.</param>
     internal procedure AssignEmployee(EmployeeNo: Code[20])
     begin
         if IsFinalStatus(Status) then
             Error(CannotAssignFinalStatusErr, "No.", Format(Status));
+        if Status = Status::Assigned then
+            Error(AlreadyAssignedErr, "No.", "Assigned Employee No.");
 
         Validate(Status, Status::Assigned);
         Validate("Assigned Employee No.", EmployeeNo);
@@ -264,7 +279,7 @@ table 50100 "EQM Equipment"
     /// <summary>
     /// Sets the status to Available, which clears the assigned employee, and saves the record with triggers.
     /// If an employee is set, the user is asked to confirm first; answering No cancels with a silent error.
-    /// Without a UI session the confirmation defaults to Yes.
+    /// Without a UI session the confirmation defaults to Yes. The active assignment entry is closed.
     /// </summary>
     internal procedure UnassignEmployee()
     begin
@@ -275,7 +290,8 @@ table 50100 "EQM Equipment"
     /// <summary>
     /// Validates the record before it is inserted or modified: category filled in, category exists and is active
     /// (active only when the category is new or changed), new equipment not in a final status (Lost or Disposed),
-    /// status transition allowed on modify, serial number unique, assigned employee allowed only when the status
+    /// new equipment cannot be Assigned, status transition allowed on modify, the employee of assigned equipment
+    /// cannot be changed (unassign first), serial number unique, assigned employee allowed only when the status
     /// is Assigned, and employee present when the status is Assigned.
     /// Raises OnAfterCheckEquipmentConsistency at the end.
     /// </summary>
@@ -285,7 +301,9 @@ table 50100 "EQM Equipment"
         StoredEquipment: Record "EQM Equipment";
         CategoryChanged: Boolean;
         EmployeeChanged: Boolean;
+        IsReassignment: Boolean;
         StatusChanged: Boolean;
+        StoredEmployeeNo: Code[20];
         StoredStatus: Enum "EQM Equipment Status";
     begin
         TestField("Category Code");
@@ -299,14 +317,21 @@ table 50100 "EQM Equipment"
                 EmployeeChanged := StoredEquipment."Assigned Employee No." <> "Assigned Employee No.";
                 StatusChanged := StoredEquipment.Status <> Status;
                 StoredStatus := StoredEquipment.Status;
+                StoredEmployeeNo := StoredEquipment."Assigned Employee No.";
+                IsReassignment := (StoredEquipment.Status = Status::Assigned) and (Status = Status::Assigned) and
+                    (StoredEmployeeNo <> '') and ("Assigned Employee No." <> '') and (StoredEmployeeNo <> "Assigned Employee No.");
             end;
         end;
         CheckCategoryAllowed(CategoryChanged);
 
         if IsNewRecord and IsFinalStatus(Status) then
             Error(NewEquipmentFinalStatusErr, Format(Status));
+        if IsNewRecord and (Status = Status::Assigned) then
+            Error(NewEquipmentAssignedErr, Format(Status));
         if StatusChanged then
             CheckStatusTransitionAllowed(StoredStatus, Status);
+        if IsReassignment then
+            Error(AlreadyAssignedErr, "No.", StoredEmployeeNo);
 
         CheckSerialNoIsUnique();
         CheckAssignedEmployeeAllowed(EmployeeChanged);
@@ -404,6 +429,9 @@ table 50100 "EQM Equipment"
 
         if IsFinalStatus(FromStatus) then
             Error(StatusIsFinalErr, "No.", Format(FromStatus), Format(ToStatus));
+
+        if (ToStatus = ToStatus::Assigned) and (FromStatus <> FromStatus::Available) then
+            Error(NotAvailableForAssignmentErr, "No.", Format(FromStatus), Format(Status::Available));
     end;
 
     /// <summary>
@@ -494,7 +522,7 @@ table 50100 "EQM Equipment"
     /// <param name="Equipment">The record being checked (passed by value; changes are not kept).</param>
     /// <param name="FromStatus">The current status (the previous value on validate, the stored value on modify).</param>
     /// <param name="ToStatus">The new status.</param>
-    /// <param name="IsHandled">Set to true to skip the standard transition rules, such as Lost and Disposed being final. Lost and disposed equipment still cannot be assigned.</param>
+    /// <param name="IsHandled">Set to true to skip the standard transition rules: Lost and Disposed being final, and only Available equipment being assignable. Lost and disposed equipment still cannot be assigned.</param>
     [IntegrationEvent(false, false)]
     local procedure OnBeforeCheckStatusTransitionAllowed(Equipment: Record "EQM Equipment"; FromStatus: Enum "EQM Equipment Status"; ToStatus: Enum "EQM Equipment Status"; var IsHandled: Boolean)
     begin

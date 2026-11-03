@@ -74,6 +74,14 @@ page 50100 "EQM Equipment List"
                 Image = Setup;
                 RunObject = page "EQM Equipment Setup";
             }
+            action(Assignments)
+            {
+                Caption = 'Assignments';
+                ToolTip = 'View the assignment history of the equipment.';
+                Image = History;
+                RunObject = page "EQM Equipment Assignments";
+                RunPageLink = "Equipment No." = field("No.");
+            }
         }
         area(Promoted)
         {
@@ -81,6 +89,9 @@ page 50100 "EQM Equipment List"
             {
             }
             actionref(Setup_Promoted; Setup)
+            {
+            }
+            actionref(Assignments_Promoted; Assignments)
             {
             }
         }

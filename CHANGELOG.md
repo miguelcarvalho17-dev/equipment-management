@@ -1,6 +1,25 @@
 # Changelog
 Newest first. Grouped by Added / Changed / Fixed / Obsolete.
 
+## FR-004 Equipment Assignment (version stays 29.0.0.0, no bump)
+### Added
+- FR-004 Equipment Assignment: every assignment is recorded (equipment, employee, assignment date, assigned by) and closed automatically when the equipment stops being Assigned. Assignments list with views Active and Closed; actions on the equipment card, equipment list and Employee Card.
+- Table "EQM Equipment Assignment", enum "EQM Assignment Status", codeunit "EQM Assignment Mgt.", page "EQM Equipment Assignments", page extension "EQM Employee Card".
+- Events `OnBeforeInsertAssignment` and `OnBeforeCloseAssignment` in codeunit "EQM Assignment Mgt.".
+### Changed
+- Only Available equipment can be assigned: In Maintenance to Assigned is now refused (partners can relax it with `OnBeforeCheckStatusTransitionAllowed`).
+- Assigned equipment cannot be reassigned in one step; unassign first.
+- New equipment cannot be created as Assigned; the Status control on a new card offers Available and In Maintenance.
+- Assigned Employee No. on the equipment card is read-only; use Assign to Employee.
+- Deleting equipment: refused while Assigned (replaces the confirmation) or with an active assignment; closed assignments are deleted with the equipment.
+- EQM - Read gets read on assignments; EQM - Edit gets indirect rights only.
+### Fixed
+- None.
+### Obsolete
+- None.
+
+Note: not compiled (.NET 10 missing locally) and no automated tests (decision D8); see docs/features/FR-004-equipment-assignment.md. Equipment already Assigned before FR-004 has no assignment entry (no backfill).
+
 ## FR-003 Equipment Status Management
 ### Added
 - FR-003 Equipment Status Management: statuses Available, Assigned, In Maintenance, Lost and Disposed. Lost and Disposed are final: they cannot be assigned, cannot be changed to another status, and cannot be set on new equipment. Changing to Lost or Disposed asks for confirmation and removes the assigned employee.
@@ -66,3 +85,5 @@ uses them keeps them. Maintaining categories now requires the Equipment - Admin 
 get the Tablet and Printer categories.
 
 **Equipment status management.** Equipment now has the statuses Available, Assigned, In Maintenance, Lost and Disposed, shown in color, with a view for each status on the equipment list. Lost and Disposed are final: you confirm the change, the employee is removed, and the status cannot be changed again. New equipment cannot start as Lost or Disposed. "Under Maintenance" is now called In Maintenance and "Retired" is now called Disposed.
+
+**Equipment assignment.** Every assignment of equipment to an employee is now recorded with the date and the user, and closed automatically when the equipment is unassigned or its status changes. You can view the history per equipment and per employee. Only available equipment can be assigned: equipment in maintenance must first be set to Available, assigned equipment must be unassigned before it goes to someone else, and new equipment cannot start as Assigned. Equipment that is assigned cannot be deleted.
