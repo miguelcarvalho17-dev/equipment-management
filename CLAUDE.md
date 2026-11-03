@@ -17,7 +17,7 @@ DELIVERY_MODE: AppSource
 - Analyzers on: CodeCop, UICop, plus AppSourceCop (AppSource) or PerTenantExtensionCop (PTE)
 
 ## Workflow
-[event-finder, if standard behavior is touched] -> planner -> (human approves plan) -> developer -> reviewer -> tester -> documenter -> [appsource-validator, AppSource mode only].
+create feature branch (local + remote, see Git branching) -> [event-finder, if standard behavior is touched] -> planner -> (human approves plan) -> developer -> reviewer -> tester -> documenter -> [appsource-validator, AppSource mode only].
 Handoffs happen through `docs/plans/<feature>.md`. Subagents do not share chat context,
 so everything they need must be in that file or in the repo.
 
@@ -25,6 +25,7 @@ so everything they need must be in that file or in the repo.
 - `main` is protected on GitHub: no direct commits or pushes, pull requests only (applies to admins too).
 - Never commit to `main`. Before any change, work on a branch cut from an up-to-date `main`:
   `feature/<id>-<short-name>` (e.g. `feature/FR-002-equipment-assignment`), `fix/<short-name>`, or `chore/<short-name>`.
+- Create the branch first, before any planning, event search or other work on a feature: name it after the feature, cut it from an up-to-date `main`, and create it both locally and on GitHub (`git checkout -b <branch>` then `git push -u origin <branch>`). Pushing this empty branch is the one push allowed without asking; it is what makes the feature branch exist remotely from the start.
 - Merge into `main` only through a pull request. Do not merge or push to `main` yourself; open the PR and leave the merge to the user.
 - Commit and push only when the user asks.
 - Once a branch is merged into `main`, delete it locally and on GitHub (`git branch -d <branch>` and `git push origin --delete <branch>`), after updating local `main` with `git checkout main && git pull`.
