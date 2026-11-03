@@ -32,7 +32,8 @@ The **Assigned Employee No.** field is editable only while the status is Assigne
 ## Unassign equipment
 1. Open the equipment card and choose **Unassign**.
 2. Confirm the question. The employee is removed and the status becomes Available.
-If you change **Status** from Assigned to another value while an employee is set, you get the same question. Choose No to keep the status and the employee.
+If you change **Status** from Assigned to Available or In Maintenance while an employee is set, you get the same question. Choose No to keep the status and the employee.
+If you change it to Lost or Disposed, you get a different question, because those statuses are final; see the equipment status help.
 
 ## Delete equipment
 Select the equipment and delete it. If it is assigned to an employee, you are asked to confirm. Choose No to keep it.

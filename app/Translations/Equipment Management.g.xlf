@@ -13,6 +13,11 @@
           <note from="Developer" annotates="general" priority="2">%1 = field caption, %2 = equipment number, %3 = status caption</note>
           <note from="Xliff Generator" annotates="general" priority="3">Table EQM Equipment - NamedType AssignedEmployeeRequiredErr</note>
         </trans-unit>
+        <trans-unit id="Table 4212454693 - NamedType 506035735" size-unit="char" translate="yes" xml:space="preserve">
+          <source>You cannot assign equipment %1 because its status is %2.</source>
+          <note from="Developer" annotates="general" priority="2">%1 = equipment number, %2 = status caption</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table EQM Equipment - NamedType CannotAssignFinalStatusErr</note>
+        </trans-unit>
         <trans-unit id="Table 4212454693 - NamedType 4213876330" size-unit="char" translate="yes" xml:space="preserve">
           <source>You cannot select equipment category %1 because it is not active. Choose an active category, or ask an administrator to activate it.</source>
           <note from="Developer" annotates="general" priority="2">%1 = category code</note>
@@ -48,6 +53,21 @@
           <note from="Developer" annotates="general" priority="2">%1 = employee number</note>
           <note from="Xliff Generator" annotates="general" priority="3">Table EQM Equipment - NamedType EmployeePrivacyBlockedErr</note>
         </trans-unit>
+        <trans-unit id="Table 4212454693 - NamedType 322252266" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Equipment %1 is assigned to employee %2. Changing the status to %3 removes the employee, and you cannot change the status again. Do you want to continue?</source>
+          <note from="Developer" annotates="general" priority="2">%1 = equipment number, %2 = employee number, %3 = status caption</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table EQM Equipment - NamedType FinalStatusAssignedQst</note>
+        </trans-unit>
+        <trans-unit id="Table 4212454693 - NamedType 4096701466" size-unit="char" translate="yes" xml:space="preserve">
+          <source>The status %2 is final. After you change equipment %1 to %2, you cannot change its status again. Do you want to continue?</source>
+          <note from="Developer" annotates="general" priority="2">%1 = equipment number, %2 = status caption</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table EQM Equipment - NamedType FinalStatusQst</note>
+        </trans-unit>
+        <trans-unit id="Table 4212454693 - NamedType 1795378653" size-unit="char" translate="yes" xml:space="preserve">
+          <source>You cannot create equipment with the status %1. Create the equipment first, and then change its status.</source>
+          <note from="Developer" annotates="general" priority="2">%1 = status caption</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table EQM Equipment - NamedType NewEquipmentFinalStatusErr</note>
+        </trans-unit>
         <trans-unit id="Table 4212454693 - NamedType 1157376359" size-unit="char" translate="yes" xml:space="preserve">
           <source>Serial No. %1 is already used by equipment %2.</source>
           <note from="Developer" annotates="general" priority="2">%1 = serial number, %2 = equipment number</note>
@@ -57,6 +77,11 @@
           <source>Changing the status removes the assigned employee %1 from equipment %2. Do you want to continue?</source>
           <note from="Developer" annotates="general" priority="2">%1 = employee number, %2 = equipment number</note>
           <note from="Xliff Generator" annotates="general" priority="3">Table EQM Equipment - NamedType StatusChangeRemovesEmployeeQst</note>
+        </trans-unit>
+        <trans-unit id="Table 4212454693 - NamedType 2038608057" size-unit="char" translate="yes" xml:space="preserve">
+          <source>You cannot change the status of equipment %1 to %3 because %2 is a final status.</source>
+          <note from="Developer" annotates="general" priority="2">%1 = equipment number, %2 = current status caption, %3 = new status caption</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table EQM Equipment - NamedType StatusIsFinalErr</note>
         </trans-unit>
         <trans-unit id="Table 4212454693 - Field 1994602887 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
           <source>Specifies the employee the equipment is assigned to. The employee can only be set when the status is Assigned.</source>
@@ -169,7 +194,7 @@
           <note from="Xliff Generator" annotates="general" priority="3">Table EQM Equipment - Field Serial No. - Property Caption</note>
         </trans-unit>
         <trans-unit id="Table 4212454693 - Field 513339096 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
-          <source>Specifies the status of the equipment. To assign equipment to an employee, use the Assign to Employee action.</source>
+          <source>Specifies the lifecycle status of the equipment: Available, Assigned, In Maintenance, Lost or Disposed. To assign equipment to an employee, use the Assign to Employee action. Lost and Disposed are final statuses: the equipment cannot be assigned or change status again, and new equipment cannot start with them.</source>
           <note from="Developer" annotates="general" priority="2"></note>
           <note from="Xliff Generator" annotates="general" priority="3">Table EQM Equipment - Field Status - Property ToolTip</note>
         </trans-unit>
@@ -349,7 +374,7 @@
           <note from="Xliff Generator" annotates="general" priority="3">Page EQM Equipment Card - Control Purchase - Property Caption</note>
         </trans-unit>
         <trans-unit id="Page 3574600233 - Action 1332525020 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
-          <source>Assigns the equipment to an active employee that you select.</source>
+          <source>Assigns the equipment to an active employee that you select. Not available for lost or disposed equipment.</source>
           <note from="Developer" annotates="general" priority="2"></note>
           <note from="Xliff Generator" annotates="general" priority="3">Page EQM Equipment Card - Action AssignToEmployee - Property ToolTip</note>
         </trans-unit>
@@ -398,6 +423,31 @@
           <note from="Developer" annotates="general" priority="2"></note>
           <note from="Xliff Generator" annotates="general" priority="3">Page EQM Equipment List - Action Setup - Property Caption</note>
         </trans-unit>
+        <trans-unit id="Page 2630064635 - View 1005746868 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Assigned</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page EQM Equipment List - View Assigned - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Page 2630064635 - View 3920084379 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Available</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page EQM Equipment List - View Available - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Page 2630064635 - View 528908997 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Disposed</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page EQM Equipment List - View Disposed - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Page 2630064635 - View 1046725494 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>In Maintenance</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page EQM Equipment List - View InMaintenance - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Page 2630064635 - View 1596556440 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Lost</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page EQM Equipment List - View Lost - Property Caption</note>
+        </trans-unit>
         <trans-unit id="Page 1065098760 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
           <source>Equipment Setup</source>
           <note from="Developer" annotates="general" priority="2"></note>
@@ -423,15 +473,20 @@
           <note from="Developer" annotates="general" priority="2"></note>
           <note from="Xliff Generator" annotates="general" priority="3">Enum EQM Equipment Status - EnumValue Available - Property Caption</note>
         </trans-unit>
-        <trans-unit id="Enum 3069227753 - EnumValue 4131727267 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
-          <source>Retired</source>
+        <trans-unit id="Enum 3069227753 - EnumValue 528908997 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Disposed</source>
           <note from="Developer" annotates="general" priority="2"></note>
-          <note from="Xliff Generator" annotates="general" priority="3">Enum EQM Equipment Status - EnumValue Retired - Property Caption</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Enum EQM Equipment Status - EnumValue Disposed - Property Caption</note>
         </trans-unit>
-        <trans-unit id="Enum 3069227753 - EnumValue 1778928279 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
-          <source>Under Maintenance</source>
+        <trans-unit id="Enum 3069227753 - EnumValue 1748184454 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>In Maintenance</source>
           <note from="Developer" annotates="general" priority="2"></note>
-          <note from="Xliff Generator" annotates="general" priority="3">Enum EQM Equipment Status - EnumValue Under Maintenance - Property Caption</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Enum EQM Equipment Status - EnumValue In Maintenance - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Enum 3069227753 - EnumValue 1596556440 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Lost</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Enum EQM Equipment Status - EnumValue Lost - Property Caption</note>
         </trans-unit>
         <trans-unit id="PermissionSet 2638768669 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
           <source>Equipment - Admin</source>

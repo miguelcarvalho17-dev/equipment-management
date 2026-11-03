@@ -13,7 +13,7 @@ All objects are in the AL namespace `MiguelCarvalho.EquipmentManagement`. Partne
 
 | Type | ID | Name | Role |
 |---|---|---|---|
-| Enum | 50100 | EQM Equipment Status | Available, Assigned, Under Maintenance, Retired. Extensible. |
+| Enum | 50100 | EQM Equipment Status | Available, Assigned, In Maintenance, Disposed, Lost (changed in FR-003). Extensible. |
 | Table | 50100 | EQM Equipment | Equipment master, validation, confirmations, published events. Access = Public. |
 | Table | 50101 | EQM Equipment Category | Category master. Cannot be deleted while used. Access = Public. |
 | Table | 50102 | EQM Equipment Setup | Singleton setup (Equipment Nos.). Access = Public. |
@@ -45,12 +45,12 @@ Equipment (table 50100):
   - When the employee is entered or changed (validate, or a different employee on modify), the employee must exist, have Status Active and not be Privacy Blocked.
   - An employee already assigned who later becomes inactive does not block editing the equipment; unassigning is always possible.
   - If the assigned employee record no longer exists, every validate/insert/modify raises "Employee ... no longer exists" until the equipment is unassigned.
-- **Status change away from Assigned** while an employee is set: asks for confirmation; Yes clears the employee, No cancels the change.
+- **Status change away from Assigned** to Available or In Maintenance while an employee is set: asks for confirmation; Yes clears the employee, No cancels the change. Changing to Lost or Disposed asks a different confirmation (final status; also clears the employee) and those statuses cannot be left again; see `FR-003-equipment-status-management.md`.
 - **Delete** of equipment that is Assigned to an employee: asks for confirmation; No cancels the delete. Other equipment is deleted without a question.
 - Confirmations use codeunit "Confirm Management" `GetResponseOrDefault` with default Yes: in sessions without UI (API, job queue) no dialog appears and the answer is Yes.
 - Created Date / Last Modified Date are the system fields SystemCreatedAt / SystemModifiedAt (shown on the card, Additional importance).
 
-Equipment Card (page 50101): DelayedInsert is on, so a new record is saved only when the mandatory category is filled in. The "Assigned Employee No." field is editable only while Status = Assigned; its lookup lists only Active, not privacy-blocked employees (the table relation itself is not filtered). **Assign to Employee** (enabled for saved records) opens Employee List filtered the same way and assigns the choice, also for equipment that is already assigned. **Unassign** (enabled when Status = Assigned) clears the employee and sets Available. The "No." AssistEdit works only while No. is blank.
+Equipment Card (page 50101): DelayedInsert is on, so a new record is saved only when the mandatory category is filled in. The "Assigned Employee No." field is editable only while Status = Assigned; its lookup lists only Active, not privacy-blocked employees (the table relation itself is not filtered). **Assign to Employee** (enabled for saved records that are not Lost or Disposed) opens Employee List filtered the same way and assigns the choice, also for equipment that is already assigned. **Unassign** (enabled when Status = Assigned) clears the employee and sets Available. The "No." AssistEdit works only while No. is blank.
 
 Category (table 50101): deleting a category used by any equipment raises an error.
 
@@ -61,7 +61,8 @@ Published from table "EQM Equipment" as `[IntegrationEvent(false, false)]`, decl
 | Event | Raised | Parameters | What you can do |
 |---|---|---|---|
 | `OnBeforeCheckSerialNoIsUnique` | Before the serial number uniqueness check (on validating Serial No. and on insert/modify) | `Equipment`; `IsHandled` (var) | Set `IsHandled = true` to replace the uniqueness rule. |
-| `OnBeforeCheckAssignedEmployeeAllowed` | Before the assigned employee checks (on validating Assigned Employee No. and on insert/modify) | `Equipment`; `IsHandled` (var) | Set `IsHandled = true` to skip: "only when Assigned", employee exists, Active, not privacy blocked. The "Assigned requires an employee" rule is not skipped. |
+| `OnBeforeCheckEmployeeIsEligible` (FR-003, replaces `OnBeforeCheckAssignedEmployeeAllowed`) | Before the "employee is Active / not privacy blocked" checks (employee filled in, Status = Assigned, employee exists, new or changed) | `Equipment`; `IsHandled` (var) | Set `IsHandled = true` to skip only the Active and privacy-blocked checks. "Only when Assigned", employee exists and "Assigned requires an employee" are not skippable. |
+| `OnBeforeCheckStatusTransitionAllowed` (FR-003) | When the status changes (validate, and on modify when the stored status differs) | `Equipment`; `FromStatus`; `ToStatus`; `IsHandled` (var) | Set `IsHandled = true` to skip the "Lost and Disposed are final" rule. Lost/Disposed equipment still cannot be assigned. |
 | `OnAfterCheckEquipmentConsistency` | At the end of the insert/modify check, after all standard checks passed | `Equipment` | Add checks; raise an error to reject the save. |
 
 Subscribed: table Employee, implicit `OnBeforeDeleteEvent` (see above).
