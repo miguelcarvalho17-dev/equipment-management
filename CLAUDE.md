@@ -30,6 +30,13 @@ so everything they need must be in that file or in the repo.
 - Commit and push only when the user asks.
 - Once a branch is merged into `main`, delete it locally and on GitHub (`git branch -d <branch>` and `git push origin --delete <branch>`), after updating local `main` with `git checkout main && git pull`.
 
+## Closing a feature issue
+When a feature's PR is merged and its GitHub issue is closed, comment on the issue (`gh issue comment <n> --body-file <file>`), following the FR-001 to FR-003 pattern. This is posting on the user's behalf, so it is only done when the user reports the merge or asks for it:
+1. **Delivery summary:** what was built, the PR link and merge commit, review verdict, AppSource validator verdict, what is not verified yet (sandbox, tests), and links to the plan, feature doc, user help and changelog on `main`.
+2. **Technical plan (full text):** the whole `docs/plans/<feature>.md` inside `<details><summary>path</summary>`.
+3. **Feature documentation and user help (full text):** `docs/features/<feature>.md` and `docs/help/<feature>.md`, each inside its own `<details>` block. Include the events report from `docs/plans/<feature>-events.md` here when one exists.
+A comment is limited to 65,536 characters. Split into more comments when a document would exceed it.
+
 ## Hard rules (all agents)
 - Never modify base application objects. Extend only through extensions and events.
 - Never invent object IDs. Take the next free ID inside the range above.
