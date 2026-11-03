@@ -86,13 +86,31 @@ table 50100 "EQM Equipment"
         field(9; Status; Enum "EQM Equipment Status")
         {
             Caption = 'Status';
-            ToolTip = 'Specifies the status of the equipment. To assign equipment to an employee, use the Assign to Employee action.';
+            ToolTip = 'Specifies the lifecycle status of the equipment: Available, Assigned, In Maintenance, Lost or Disposed. To assign equipment to an employee, use the Assign to Employee action. Lost and Disposed are final statuses: the equipment cannot be assigned or change status again, and new equipment cannot start with them.';
             InitValue = Available;
 
             trigger OnValidate()
             var
                 ConfirmManagement: Codeunit "Confirm Management";
+                ConfirmQuestion: Text;
             begin
+                if IsFinalStatus(Status) and not IsStoredRecord() then
+                    Error(NewEquipmentFinalStatusErr, Format(Status));
+
+                if Status <> xRec.Status then
+                    CheckStatusTransitionAllowed(xRec.Status, Status);
+
+                if IsFinalStatus(Status) and (Status <> xRec.Status) then begin
+                    if "Assigned Employee No." <> '' then
+                        ConfirmQuestion := StrSubstNo(FinalStatusAssignedQst, "No.", "Assigned Employee No.", Format(Status))
+                    else
+                        ConfirmQuestion := StrSubstNo(FinalStatusQst, "No.", Format(Status));
+                    if not ConfirmManagement.GetResponseOrDefault(ConfirmQuestion, true) then
+                        Error('');
+                    "Assigned Employee No." := '';
+                    exit;
+                end;
+
                 if (Status <> Status::Assigned) and ("Assigned Employee No." <> '') then begin
                     if not ConfirmManagement.GetResponseOrDefault(StrSubstNo(StatusChangeRemovesEmployeeQst, "Assigned Employee No.", "No."), true) then
                         Error('');
@@ -163,6 +181,16 @@ table 50100 "EQM Equipment"
         StatusChangeRemovesEmployeeQst: Label 'Changing the status removes the assigned employee %1 from equipment %2. Do you want to continue?', Comment = '%1 = employee number, %2 = equipment number';
         CategoryNotFoundErr: Label 'Equipment category %1 does not exist. Choose a category from the Equipment Categories page.', Comment = '%1 = category code';
         CategoryInactiveErr: Label 'You cannot select equipment category %1 because it is not active. Choose an active category, or ask an administrator to activate it.', Comment = '%1 = category code';
+        CannotAssignFinalStatusErr: Label 'You cannot assign equipment %1 because its status is %2.', Comment = '%1 = equipment number, %2 = status caption';
+        StatusIsFinalErr: Label 'You cannot change the status of equipment %1 to %3 because %2 is a final status.', Comment = '%1 = equipment number, %2 = current status caption, %3 = new status caption';
+        NewEquipmentFinalStatusErr: Label 'You cannot create equipment with the status %1. Create the equipment first, and then change its status.', Comment = '%1 = status caption';
+        FinalStatusQst: Label 'The status %2 is final. After you change equipment %1 to %2, you cannot change its status again. Do you want to continue?', Comment = '%1 = equipment number, %2 = status caption';
+        FinalStatusAssignedQst: Label 'Equipment %1 is assigned to employee %2. Changing the status to %3 removes the employee, and you cannot change the status again. Do you want to continue?', Comment = '%1 = equipment number, %2 = employee number, %3 = status caption';
+        FavorableStyleTok: Label 'Favorable', Locked = true;
+        StandardStyleTok: Label 'Standard', Locked = true;
+        AmbiguousStyleTok: Label 'Ambiguous', Locked = true;
+        UnfavorableStyleTok: Label 'Unfavorable', Locked = true;
+        SubordinateStyleTok: Label 'Subordinate', Locked = true;
         DeleteAssignedQst: Label 'Equipment %1 is assigned to employee %2. Do you want to delete it anyway?', Comment = '%1 = equipment number, %2 = employee number';
 
     trigger OnInsert()
@@ -220,10 +248,14 @@ table 50100 "EQM Equipment"
     /// <summary>
     /// Sets the status to Assigned, assigns the employee and saves the record with triggers.
     /// Can also be used to reassign equipment that is already assigned.
+    /// Raises an error when the status is Lost or Disposed.
     /// </summary>
     /// <param name="EmployeeNo">The employee to assign. Must exist, be Active and not be privacy blocked; otherwise an error is raised.</param>
     internal procedure AssignEmployee(EmployeeNo: Code[20])
     begin
+        if IsFinalStatus(Status) then
+            Error(CannotAssignFinalStatusErr, "No.", Format(Status));
+
         Validate(Status, Status::Assigned);
         Validate("Assigned Employee No.", EmployeeNo);
         Modify(true);
@@ -242,8 +274,9 @@ table 50100 "EQM Equipment"
 
     /// <summary>
     /// Validates the record before it is inserted or modified: category filled in, category exists and is active
-    /// (active only when the category is new or changed), serial number unique, assigned employee allowed,
-    /// and employee present when the status is Assigned.
+    /// (active only when the category is new or changed), new equipment not in a final status (Lost or Disposed),
+    /// status transition allowed on modify, serial number unique, assigned employee allowed only when the status
+    /// is Assigned, and employee present when the status is Assigned.
     /// Raises OnAfterCheckEquipmentConsistency at the end.
     /// </summary>
     /// <param name="IsNewRecord">True on insert. On modify (false), the Active / not privacy blocked check on the employee runs only if the assigned employee differs from the stored record.</param>
@@ -252,19 +285,28 @@ table 50100 "EQM Equipment"
         StoredEquipment: Record "EQM Equipment";
         CategoryChanged: Boolean;
         EmployeeChanged: Boolean;
+        StatusChanged: Boolean;
+        StoredStatus: Enum "EQM Equipment Status";
     begin
         TestField("Category Code");
 
         CategoryChanged := true;
         EmployeeChanged := true;
         if not IsNewRecord then begin
-            StoredEquipment.SetLoadFields("Assigned Employee No.", "Category Code");
+            StoredEquipment.SetLoadFields("Assigned Employee No.", "Category Code", Status);
             if StoredEquipment.Get("No.") then begin
                 CategoryChanged := StoredEquipment."Category Code" <> "Category Code";
                 EmployeeChanged := StoredEquipment."Assigned Employee No." <> "Assigned Employee No.";
+                StatusChanged := StoredEquipment.Status <> Status;
+                StoredStatus := StoredEquipment.Status;
             end;
         end;
         CheckCategoryAllowed(CategoryChanged);
+
+        if IsNewRecord and IsFinalStatus(Status) then
+            Error(NewEquipmentFinalStatusErr, Format(Status));
+        if StatusChanged then
+            CheckStatusTransitionAllowed(StoredStatus, Status);
 
         CheckSerialNoIsUnique();
         CheckAssignedEmployeeAllowed(EmployeeChanged);
@@ -323,10 +365,6 @@ table 50100 "EQM Equipment"
         Employee: Record Employee;
         IsHandled: Boolean;
     begin
-        OnBeforeCheckAssignedEmployeeAllowed(Rec, IsHandled);
-        if IsHandled then
-            exit;
-
         if "Assigned Employee No." = '' then
             exit;
 
@@ -337,11 +375,80 @@ table 50100 "EQM Equipment"
         if not Employee.Get("Assigned Employee No.") then
             Error(EmployeeNotFoundErr, "Assigned Employee No.", "No.");
 
-        if CheckEmployeeIsActive then begin
-            if Employee."Privacy Blocked" then
-                Error(EmployeePrivacyBlockedErr, "Assigned Employee No.");
-            if Employee.Status <> Employee.Status::Active then
-                Error(EmployeeNotActiveErr, "Assigned Employee No.", Format(Employee.Status));
+        if not CheckEmployeeIsActive then
+            exit;
+
+        OnBeforeCheckEmployeeIsEligible(Rec, IsHandled);
+        if IsHandled then
+            exit;
+
+        if Employee."Privacy Blocked" then
+            Error(EmployeePrivacyBlockedErr, "Assigned Employee No.");
+        if Employee.Status <> Employee.Status::Active then
+            Error(EmployeeNotActiveErr, "Assigned Employee No.", Format(Employee.Status));
+    end;
+
+    local procedure CheckStatusTransitionAllowed(FromStatus: Enum "EQM Equipment Status"; ToStatus: Enum "EQM Equipment Status")
+    var
+        IsHandled: Boolean;
+    begin
+        if FromStatus = ToStatus then
+            exit;
+
+        if (ToStatus = ToStatus::Assigned) and IsFinalStatus(FromStatus) then
+            Error(CannotAssignFinalStatusErr, "No.", Format(FromStatus));
+
+        OnBeforeCheckStatusTransitionAllowed(Rec, FromStatus, ToStatus, IsHandled);
+        if IsHandled then
+            exit;
+
+        if IsFinalStatus(FromStatus) then
+            Error(StatusIsFinalErr, "No.", Format(FromStatus), Format(ToStatus));
+    end;
+
+    /// <summary>
+    /// True when this equipment already exists in the database (used to detect new records).
+    /// </summary>
+    local procedure IsStoredRecord(): Boolean
+    var
+        StoredEquipment: Record "EQM Equipment";
+    begin
+        if "No." = '' then
+            exit(false);
+
+        StoredEquipment.SetLoadFields("No.");
+        exit(StoredEquipment.Get("No."));
+    end;
+
+    /// <summary>
+    /// Returns whether the status is final. Lost and Disposed are final statuses.
+    /// </summary>
+    /// <param name="EquipmentStatus">The status to check.</param>
+    /// <returns>True when the status is Lost or Disposed.</returns>
+    internal procedure IsFinalStatus(EquipmentStatus: Enum "EQM Equipment Status"): Boolean
+    begin
+        exit(EquipmentStatus in [EquipmentStatus::Lost, EquipmentStatus::Disposed]);
+    end;
+
+    /// <summary>
+    /// Returns the page style name used to show the status of this record.
+    /// </summary>
+    /// <returns>The style name. Statuses added by extensions use the Standard style.</returns>
+    internal procedure GetStatusStyle(): Text
+    begin
+        case Status of
+            Status::Available:
+                exit(FavorableStyleTok);
+            Status::Assigned:
+                exit(StandardStyleTok);
+            Status::"In Maintenance":
+                exit(AmbiguousStyleTok);
+            Status::Lost:
+                exit(UnfavorableStyleTok);
+            Status::Disposed:
+                exit(SubordinateStyleTok);
+            else
+                exit(StandardStyleTok);
         end;
     end;
 
@@ -372,13 +479,24 @@ table 50100 "EQM Equipment"
     end;
 
     /// <summary>
-    /// Raised before the assigned employee checks (employee only when status is Assigned, employee exists,
-    /// employee is Active and not privacy blocked).
+    /// Raised before the checks that the assigned employee is Active and not blocked for privacy reasons.
     /// </summary>
     /// <param name="Equipment">The record being checked (passed by value; changes are not kept).</param>
-    /// <param name="IsHandled">Set to true to skip those checks. The rule that Assigned equipment must have an employee still applies.</param>
+    /// <param name="IsHandled">Set to true to allow an employee that is not Active or is privacy blocked. The employee must still exist, and an employee is only allowed when the status is Assigned.</param>
     [IntegrationEvent(false, false)]
-    local procedure OnBeforeCheckAssignedEmployeeAllowed(Equipment: Record "EQM Equipment"; var IsHandled: Boolean)
+    local procedure OnBeforeCheckEmployeeIsEligible(Equipment: Record "EQM Equipment"; var IsHandled: Boolean)
+    begin
+    end;
+
+    /// <summary>
+    /// Raised before the standard status transition rules run, when the status changes.
+    /// </summary>
+    /// <param name="Equipment">The record being checked (passed by value; changes are not kept).</param>
+    /// <param name="FromStatus">The current status (the previous value on validate, the stored value on modify).</param>
+    /// <param name="ToStatus">The new status.</param>
+    /// <param name="IsHandled">Set to true to skip the standard transition rules, such as Lost and Disposed being final. Lost and disposed equipment still cannot be assigned.</param>
+    [IntegrationEvent(false, false)]
+    local procedure OnBeforeCheckStatusTransitionAllowed(Equipment: Record "EQM Equipment"; FromStatus: Enum "EQM Equipment Status"; ToStatus: Enum "EQM Equipment Status"; var IsHandled: Boolean)
     begin
     end;
 

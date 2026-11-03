@@ -47,8 +47,22 @@ page 50101 "EQM Equipment Card"
             {
                 Caption = 'Assignment';
 
+                field(StatusNew; Rec.Status)
+                {
+                    ValuesAllowed = Available, Assigned, "In Maintenance";
+                    Visible = IsNewRecord;
+                    StyleExpr = StatusStyle;
+
+                    trigger OnValidate()
+                    begin
+                        UpdateControls();
+                    end;
+                }
                 field(Status; Rec.Status)
                 {
+                    Visible = IsSaved;
+                    StyleExpr = StatusStyle;
+
                     trigger OnValidate()
                     begin
                         UpdateControls();
@@ -124,9 +138,9 @@ page 50101 "EQM Equipment Card"
             action(AssignToEmployee)
             {
                 Caption = 'Assign to Employee';
-                ToolTip = 'Assigns the equipment to an active employee that you select.';
+                ToolTip = 'Assigns the equipment to an active employee that you select. Not available for lost or disposed equipment.';
                 Image = Employee;
-                Enabled = IsSaved;
+                Enabled = CanAssign;
 
                 trigger OnAction()
                 var
@@ -167,6 +181,9 @@ page 50101 "EQM Equipment Card"
         AssignedEmployeeName: Text[100];
         IsAssigned: Boolean;
         IsSaved: Boolean;
+        IsNewRecord: Boolean;
+        CanAssign: Boolean;
+        StatusStyle: Text;
 
     trigger OnAfterGetRecord()
     begin
@@ -201,6 +218,9 @@ page 50101 "EQM Equipment Card"
     begin
         IsAssigned := Rec.Status = Rec.Status::Assigned;
         IsSaved := Rec.SystemCreatedAt <> 0DT;
+        IsNewRecord := not IsSaved;
+        StatusStyle := Rec.GetStatusStyle();
+        CanAssign := IsSaved and not Rec.IsFinalStatus(Rec.Status);
         AssignedEmployeeName := '';
         if Rec."Assigned Employee No." <> '' then
             if Employee.Get(Rec."Assigned Employee No.") then

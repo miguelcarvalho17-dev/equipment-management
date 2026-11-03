@@ -36,6 +36,7 @@ page 50100 "EQM Equipment List"
                 }
                 field(Status; Rec.Status)
                 {
+                    StyleExpr = StatusStyle;
                 }
                 field("Assigned Employee No."; Rec."Assigned Employee No.")
                 {
@@ -84,4 +85,41 @@ page 50100 "EQM Equipment List"
             }
         }
     }
+
+    views
+    {
+        view(Available)
+        {
+            Caption = 'Available';
+            Filters = where(Status = const(Available));
+        }
+        view(Assigned)
+        {
+            Caption = 'Assigned';
+            Filters = where(Status = const(Assigned));
+        }
+        view(InMaintenance)
+        {
+            Caption = 'In Maintenance';
+            Filters = where(Status = const("In Maintenance"));
+        }
+        view(Lost)
+        {
+            Caption = 'Lost';
+            Filters = where(Status = const(Lost));
+        }
+        view(Disposed)
+        {
+            Caption = 'Disposed';
+            Filters = where(Status = const(Disposed));
+        }
+    }
+
+    var
+        StatusStyle: Text;
+
+    trigger OnAfterGetRecord()
+    begin
+        StatusStyle := Rec.GetStatusStyle();
+    end;
 }

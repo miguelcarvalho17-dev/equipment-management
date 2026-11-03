@@ -1,5 +1,9 @@
 namespace MiguelCarvalho.EquipmentManagement;
 
+/// <summary>
+/// Lifecycle status of equipment. Lost and Disposed are final: they cannot be assigned,
+/// cannot be changed to another status, and cannot be used for new equipment.
+/// </summary>
 enum 50100 "EQM Equipment Status"
 {
     Caption = 'Equipment Status';
@@ -13,12 +17,16 @@ enum 50100 "EQM Equipment Status"
     {
         Caption = 'Assigned';
     }
-    value(2; "Under Maintenance")
+    value(2; "In Maintenance")
     {
-        Caption = 'Under Maintenance';
+        Caption = 'In Maintenance';
     }
-    value(3; Retired)
+    value(3; Disposed)
     {
-        Caption = 'Retired';
+        Caption = 'Disposed';
+    }
+    value(4; Lost)
+    {
+        Caption = 'Lost';
     }
 }

@@ -1,6 +1,21 @@
 # Changelog
 Newest first. Grouped by Added / Changed / Fixed / Obsolete.
 
+## FR-003 Equipment Status Management
+### Added
+- FR-003 Equipment Status Management: statuses Available, Assigned, In Maintenance, Lost and Disposed. Lost and Disposed are final: they cannot be assigned, cannot be changed to another status, and cannot be set on new equipment. Changing to Lost or Disposed asks for confirmation and removes the assigned employee.
+- Status colors on the equipment list and card; list views for each status.
+- Event `OnBeforeCheckStatusTransitionAllowed` in table "EQM Equipment".
+### Changed
+- Enum "EQM Equipment Status": value "Under Maintenance" renamed to "In Maintenance", Retired renamed to Disposed (ordinals unchanged, so stored Retired records are now Disposed and final), new value Lost.
+- An employee is now allowed only when the status is Assigned; this can no longer be skipped by an extension.
+- Event `OnBeforeCheckAssignedEmployeeAllowed` replaced by `OnBeforeCheckEmployeeIsEligible`, which only skips the "employee is Active / not privacy blocked" checks.
+- Assign to Employee is disabled for Lost and Disposed equipment.
+### Fixed
+- None.
+### Obsolete
+- None.
+
 ## 29.1.0.0 - 2026-11-02
 ### Added
 - FR-002 Equipment Categories: **Active** flag on equipment categories (default Yes). Only active categories can be newly set on equipment; equipment that already uses a category keeps it.
@@ -49,3 +64,5 @@ assigned can no longer be deleted until the equipment is unassigned.
 can no longer be chosen for new equipment or when changing an equipment category, while equipment that already
 uses them keeps them. Maintaining categories now requires the Equipment - Admin permission set. New companies also
 get the Tablet and Printer categories.
+
+**Equipment status management.** Equipment now has the statuses Available, Assigned, In Maintenance, Lost and Disposed, shown in color, with a view for each status on the equipment list. Lost and Disposed are final: you confirm the change, the employee is removed, and the status cannot be changed again. New equipment cannot start as Lost or Disposed. "Under Maintenance" is now called In Maintenance and "Retired" is now called Disposed.
