@@ -49,7 +49,7 @@ page 50101 "EQM Equipment Card"
 
                 field(StatusNew; Rec.Status)
                 {
-                    ValuesAllowed = Available, Assigned, "In Maintenance";
+                    ValuesAllowed = Available, "In Maintenance";
                     Visible = IsNewRecord;
                     StyleExpr = StatusStyle;
 
@@ -65,28 +65,15 @@ page 50101 "EQM Equipment Card"
 
                     trigger OnValidate()
                     begin
+                        if (Rec.Status = Rec.Status::Assigned) and (xRec.Status <> Rec.Status::Assigned) then
+                            Error(UseAssignActionErr);
+
                         UpdateControls();
                     end;
                 }
                 field("Assigned Employee No."; Rec."Assigned Employee No.")
                 {
-                    Editable = IsAssigned;
-                    ShowMandatory = IsAssigned;
-
-                    trigger OnLookup(var Text: Text): Boolean
-                    var
-                        EmployeeNo: Code[20];
-                    begin
-                        if SelectActiveEmployee(EmployeeNo) then begin
-                            Text := EmployeeNo;
-                            exit(true);
-                        end;
-                    end;
-
-                    trigger OnValidate()
-                    begin
-                        UpdateControls();
-                    end;
+                    Editable = false;
                 }
                 field("Assigned Employee Name"; AssignedEmployeeName)
                 {
@@ -138,7 +125,7 @@ page 50101 "EQM Equipment Card"
             action(AssignToEmployee)
             {
                 Caption = 'Assign to Employee';
-                ToolTip = 'Assigns the equipment to an active employee that you select. Not available for lost or disposed equipment.';
+                ToolTip = 'Assigns available equipment to an active employee that you select. The assignment is recorded with the work date and your user name.';
                 Image = Employee;
                 Enabled = CanAssign;
 
@@ -155,7 +142,7 @@ page 50101 "EQM Equipment Card"
             action(Unassign)
             {
                 Caption = 'Unassign';
-                ToolTip = 'Removes the assigned employee and sets the status to Available.';
+                ToolTip = 'Removes the assigned employee, sets the status to Available and closes the assignment.';
                 Image = Undo;
                 Enabled = IsAssigned;
 
@@ -166,12 +153,27 @@ page 50101 "EQM Equipment Card"
                 end;
             }
         }
+        area(Navigation)
+        {
+            action(Assignments)
+            {
+                Caption = 'Assignments';
+                ToolTip = 'View the assignment history of the equipment.';
+                Image = History;
+                Enabled = IsSaved;
+                RunObject = page "EQM Equipment Assignments";
+                RunPageLink = "Equipment No." = field("No.");
+            }
+        }
         area(Promoted)
         {
             actionref(AssignToEmployee_Promoted; AssignToEmployee)
             {
             }
             actionref(Unassign_Promoted; Unassign)
+            {
+            }
+            actionref(Assignments_Promoted; Assignments)
             {
             }
         }
@@ -184,6 +186,7 @@ page 50101 "EQM Equipment Card"
         IsNewRecord: Boolean;
         CanAssign: Boolean;
         StatusStyle: Text;
+        UseAssignActionErr: Label 'To assign equipment, use the Assign to Employee action.';
 
     trigger OnAfterGetRecord()
     begin
@@ -220,7 +223,7 @@ page 50101 "EQM Equipment Card"
         IsSaved := Rec.SystemCreatedAt <> 0DT;
         IsNewRecord := not IsSaved;
         StatusStyle := Rec.GetStatusStyle();
-        CanAssign := IsSaved and not Rec.IsFinalStatus(Rec.Status);
+        CanAssign := IsSaved and (Rec.Status = Rec.Status::Available);
         AssignedEmployeeName := '';
         if Rec."Assigned Employee No." <> '' then
             if Employee.Get(Rec."Assigned Employee No.") then

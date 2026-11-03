@@ -1,0 +1,42 @@
+# Assign equipment to employees (AppSource end-user help)
+
+Every time you assign equipment to an employee, the app records an assignment: the equipment, the employee, the
+date and who assigned it. When the equipment stops being assigned, the assignment is closed automatically.
+
+## Before you start: permissions
+- **Equipment - Edit** to assign and unassign equipment.
+- **Equipment - Read** to view the assignment list.
+
+## Assign equipment
+1. Open the equipment card of saved equipment with the status **Available**.
+2. Choose **Assign to Employee** and select an active employee.
+3. The status becomes **Assigned**, and an assignment is recorded with your work date and your user name.
+
+Notes:
+- Only **Available** equipment can be assigned. Equipment in maintenance, lost or disposed cannot be assigned.
+- New equipment cannot start as Assigned. Create it first, then assign it. On a new card, **Status** offers only Available and In Maintenance.
+- **Assigned Employee No.** on the card cannot be typed in; use **Assign to Employee**.
+- To give assigned equipment to another employee, choose **Unassign** first, then assign it again.
+
+## End an assignment
+Choose **Unassign** on the card. The assignment is closed with today's work date and your user name. It is also closed
+when the status changes from Assigned to In Maintenance, Lost or Disposed.
+
+## View assignments
+- On the equipment card or list: **Assignments** shows the history of the equipment.
+- On the employee card: **Navigate > Equipment Assignments** shows the equipment assigned to that employee, now and before.
+- The list has the views **Active** and **Closed**. Entries cannot be edited or deleted.
+
+| Field | Meaning |
+|---|---|
+| Assignment Date / Assigned By | Work date and user at the time of assignment. |
+| Status | Active while assigned, Closed afterwards. |
+| Closing Date / Closed By | Work date and user when the assignment ended. |
+
+## Deleting equipment
+- Equipment that is Assigned cannot be deleted. Unassign it first.
+- When you delete other equipment, its closed assignments are deleted with it.
+- If you see a message that the equipment has an active assignment although it is not assigned, assign it to an employee and unassign it again, then delete it.
+
+## Existing data
+Equipment that was already assigned before this version has no assignment record until it is unassigned and assigned again.
