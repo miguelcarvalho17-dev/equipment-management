@@ -12,6 +12,7 @@ Open items after FR-001 Equipment Registration (written 2026-11-02). Nothing fro
   - [ ] Publish and republish into a fresh company: defaults appear once, no duplicates.
   - [ ] On a new card, the number-series button keeps the "No." until the page closes.
   - [ ] Setting Status to Assigned directly on an existing card fails on save (employee required); the Assign to Employee action is the intended path.
+  - [ ] FR-005: on an Assigned card, choosing Available in Status fails at once with the "use the Return action" message and no confirmation; In Maintenance still works and closes the entry. Return (card and Employee Card > Return Equipment) closes the entry, keeps it, and the equipment can be assigned again.
   - [ ] Deleting from the non-editable Equipment List shows the confirmation.
 
 ## Open design and fix items

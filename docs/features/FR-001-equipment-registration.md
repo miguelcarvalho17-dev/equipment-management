@@ -18,7 +18,7 @@ All objects are in the AL namespace `MiguelCarvalho.EquipmentManagement`. Partne
 | Table | 50101 | EQM Equipment Category | Category master. Cannot be deleted while used. Access = Public. |
 | Table | 50102 | EQM Equipment Setup | Singleton setup (Equipment Nos.). Access = Public. |
 | Page | 50100 | EQM Equipment List | Read-only list; links to Categories and Setup. |
-| Page | 50101 | EQM Equipment Card | Create and maintain; Assign to Employee / Unassign actions. |
+| Page | 50101 | EQM Equipment Card | Create and maintain; Assign to Employee / Return actions. |
 | Page | 50102 | EQM Equipment Categories | Editable category list. |
 | Page | 50103 | EQM Equipment Setup | Setup card; creates defaults when the setup record is missing. |
 | Codeunit | 50103 | EQM Employee Subscribers | Internal. Blocks Employee delete while equipment references the employee. |
@@ -43,14 +43,14 @@ Equipment (table 50100):
 - **Status**: defaults to Available.
 - **Assigned Employee No.**: may only be filled when Status = Assigned, and must be filled when Status = Assigned.
   - When the employee is entered or changed (validate, or a different employee on modify), the employee must exist, have Status Active and not be Privacy Blocked.
-  - An employee already assigned who later becomes inactive does not block editing the equipment; unassigning is always possible.
-  - If the assigned employee record no longer exists, every validate/insert/modify raises "Employee ... no longer exists" until the equipment is unassigned.
+  - An employee already assigned who later becomes inactive does not block editing the equipment; returning is always possible.
+  - If the assigned employee record no longer exists, every validate/insert/modify raises "Employee ... no longer exists" until the equipment is returned.
 - **Status change away from Assigned** to Available or In Maintenance while an employee is set: asks for confirmation; Yes clears the employee, No cancels the change. Changing to Lost or Disposed asks a different confirmation (final status; also clears the employee) and those statuses cannot be left again; see `FR-003-equipment-status-management.md`.
 - **Delete** of equipment that is Assigned to an employee: asks for confirmation; No cancels the delete. Other equipment is deleted without a question.
 - Confirmations use codeunit "Confirm Management" `GetResponseOrDefault` with default Yes: in sessions without UI (API, job queue) no dialog appears and the answer is Yes.
 - Created Date / Last Modified Date are the system fields SystemCreatedAt / SystemModifiedAt (shown on the card, Additional importance).
 
-Equipment Card (page 50101): DelayedInsert is on, so a new record is saved only when the mandatory category is filled in. The "Assigned Employee No." field is editable only while Status = Assigned; its lookup lists only Active, not privacy-blocked employees (the table relation itself is not filtered). **Assign to Employee** (enabled for saved records that are not Lost or Disposed) opens Employee List filtered the same way and assigns the choice, also for equipment that is already assigned. **Unassign** (enabled when Status = Assigned) clears the employee and sets Available. The "No." AssistEdit works only while No. is blank.
+Equipment Card (page 50101): DelayedInsert is on, so a new record is saved only when the mandatory category is filled in. The "Assigned Employee No." field is editable only while Status = Assigned; its lookup lists only Active, not privacy-blocked employees (the table relation itself is not filtered). **Assign to Employee** (enabled for saved records that are not Lost or Disposed) opens Employee List filtered the same way and assigns the choice, also for equipment that is already assigned. **Return** (formerly Unassign; enabled when Status = Assigned) clears the employee and sets Available (see FR-005). The "No." AssistEdit works only while No. is blank.
 
 Category (table 50101): deleting a category used by any equipment raises an error.
 

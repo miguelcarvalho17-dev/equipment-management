@@ -1,6 +1,20 @@
 # Changelog
 Newest first. Grouped by Added / Changed / Fixed / Obsolete.
 
+## FR-005 Equipment Unassignment (version stays 29.0.0.0, no bump)
+### Added
+- FR-005 Equipment Unassignment: equipment can be returned from the equipment card (action Return) and from the Employee Card (action Return Equipment, pick the employee's assigned equipment). A return clears the employee, sets the status to Available and closes the assignment entry, which is kept as history.
+### Changed
+- The card action "Unassign" is now "Return"; related messages and tooltips reworded. Internal names are unchanged.
+- Assigned equipment can become Available only through Return; choosing Available in the Status field is refused with a message.
+- `UnassignEmployee` (internal) refuses equipment that is not Assigned, asks a return-specific confirmation and returns a Boolean.
+### Fixed
+- None.
+### Obsolete
+- None.
+
+Note: no automated tests (deferred by user request); the return flow and the Employee Card action are not run-tested in a sandbox. No new events or objects. See docs/features/FR-005-equipment-unassignment.md.
+
 ## FR-004 Equipment Assignment (version stays 29.0.0.0, no bump)
 ### Added
 - FR-004 Equipment Assignment: every assignment is recorded (equipment, employee, assignment date, assigned by) and closed automatically when the equipment stops being Assigned. Assignments list with views Active and Closed; actions on the equipment card, equipment list and Employee Card.

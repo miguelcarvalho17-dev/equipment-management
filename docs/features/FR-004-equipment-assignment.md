@@ -47,7 +47,7 @@ Rules are in table 50100, so they apply to pages, code and APIs alike (with trig
   "Assign to Employee"). It sets Status = Assigned and the employee, and on modify codeunit 50106 inserts an Active entry
   (Assignment Date = `WorkDate()`, Assigned By = `UserId()`).
 - **Close:** when stored status is Assigned and the new status is not, all Active entries of the equipment get
-  Status Closed, Closing Date = `WorkDate()`, Closed By = `UserId()`. This covers Unassign, In Maintenance, Lost and Disposed.
+  Status Closed, Closing Date = `WorkDate()`, Closed By = `UserId()`. This covers Return (FR-005; formerly Unassign), In Maintenance, Lost and Disposed.
 - **Hook:** `UpdateAssignmentOnSave` runs in table 50100 `OnModify`, after `CheckEquipmentConsistency`, and compares the
   stored status with the new one. Creating an entry first closes any leftover Active entry of the same equipment.
 - **Employee card:** Navigation > Equipment Assignments shows that employee's entries (several allowed).
@@ -56,7 +56,7 @@ Rules are in table 50100, so they apply to pages, code and APIs alike (with trig
 - **In Maintenance -> Assigned is refused.** Only Available can become Assigned (reverses the FR-003 rule that allowed it).
   Partners can relax it through `OnBeforeCheckStatusTransitionAllowed` (`IsHandled`); Lost/Disposed still cannot become Assigned.
 - **No reassignment in one step.** Assigned equipment cannot be given to another employee: `AssignEmployee` and the modify
-  check raise "already assigned"; unassign first. `AssignEmployee` previously reassigned.
+  check raise "already assigned"; return first. `AssignEmployee` previously reassigned.
 - **New equipment cannot be Assigned.** Refused on Status validate and on insert (hard, no event). The card's Status
   control for new records now offers only Available and In Maintenance.
 - **Picking Assigned in the card's Status dropdown is refused.** On saved equipment the card raises "To assign equipment, use the Assign to Employee action." as soon as Assigned is chosen, and the status reverts. This avoids a dead end where the employee field is read-only and the action is disabled.
@@ -67,8 +67,8 @@ Rules are in table 50100, so they apply to pages, code and APIs alike (with trig
   - Otherwise the Closed entries of the equipment are deleted with it.
   - Entries cannot be deleted any other way: the list page has `DeleteAllowed = false` and no EQM permission set grants direct delete.
 - Not enforced when triggers are skipped (`Modify(false)`, `Insert(false)`, `Delete(false)`, `ModifyAll`, `DeleteAll`, RapidStart
-  without validation). A leftover state is repaired by assign + unassign.
-- No backfill (D10): equipment already Assigned before this feature has no entry until it is unassigned and assigned again.
+  without validation). A leftover state is repaired by assign + return.
+- No backfill (D10): equipment already Assigned before this feature has no entry until it is returned and assigned again.
 - Each equipment save adds one primary-key read of the stored record.
 
 ## Extending (events)

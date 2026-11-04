@@ -86,7 +86,7 @@ table 50100 "EQM Equipment"
         field(9; Status; Enum "EQM Equipment Status")
         {
             Caption = 'Status';
-            ToolTip = 'Specifies the lifecycle status of the equipment: Available, Assigned, In Maintenance, Lost or Disposed. Only saved, available equipment can be assigned; use the Assign to Employee action. Lost and Disposed are final statuses: the equipment cannot be assigned or change status again. New equipment cannot start as Assigned, Lost or Disposed.';
+            ToolTip = 'Specifies the lifecycle status of the equipment: Available, Assigned, In Maintenance, Lost or Disposed. Only saved, available equipment can be assigned; use the Assign to Employee action. Assigned equipment becomes available only through the Return action. Lost and Disposed are final statuses: the equipment cannot be assigned or change status again. New equipment cannot start as Assigned, Lost or Disposed.';
             InitValue = Available;
 
             trigger OnValidate()
@@ -102,6 +102,9 @@ table 50100 "EQM Equipment"
 
                 if (Status = Status::Assigned) and IsNew then
                     Error(NewEquipmentAssignedErr, Format(Status));
+
+                if (xRec.Status = Status::Assigned) and (Status = Status::Available) and not ReturnInProgress then
+                    Error(UseReturnActionErr, "No.");
 
                 if Status <> xRec.Status then
                     CheckStatusTransitionAllowed(xRec.Status, Status);
@@ -127,7 +130,7 @@ table 50100 "EQM Equipment"
         field(10; "Assigned Employee No."; Code[20])
         {
             Caption = 'Assigned Employee No.';
-            ToolTip = 'Specifies the employee the equipment is assigned to. To assign available equipment, use the Assign to Employee action. To change the employee, unassign the equipment first.';
+            ToolTip = 'Specifies the employee the equipment is assigned to. To assign available equipment, use the Assign to Employee action. To change the employee, return the equipment first.';
             TableRelation = Employee."No.";
 
             trigger OnValidate()
@@ -178,10 +181,11 @@ table 50100 "EQM Equipment"
     }
 
     var
+        ReturnInProgress: Boolean;
         SerialNoAlreadyUsedErr: Label 'Serial No. %1 is already used by equipment %2.', Comment = '%1 = serial number, %2 = equipment number';
         EmployeeOnlyWhenAssignedErr: Label 'You can only fill in %1 when the status is %2.', Comment = '%1 = Assigned Employee No. field caption, %2 = Assigned status caption';
         AssignedEmployeeRequiredErr: Label 'You must fill in %1 for equipment %2 because its status is %3. On the equipment card, use the Assign to Employee action.', Comment = '%1 = field caption, %2 = equipment number, %3 = status caption';
-        EmployeeNotFoundErr: Label 'Employee %1 assigned to equipment %2 no longer exists. Use the Unassign action, then assign another employee.', Comment = '%1 = employee number, %2 = equipment number';
+        EmployeeNotFoundErr: Label 'Employee %1 assigned to equipment %2 no longer exists. Use the Return action, then assign another employee.', Comment = '%1 = employee number, %2 = equipment number';
         EmployeeNotActiveErr: Label 'You cannot assign equipment to employee %1 because the employee status is %2.', Comment = '%1 = employee number, %2 = employee status';
         EmployeePrivacyBlockedErr: Label 'You cannot assign equipment to employee %1 because the employee is blocked for privacy reasons.', Comment = '%1 = employee number';
         StatusChangeRemovesEmployeeQst: Label 'Changing the status removes the assigned employee %1 from equipment %2. Do you want to continue?', Comment = '%1 = employee number, %2 = equipment number';
@@ -198,9 +202,12 @@ table 50100 "EQM Equipment"
         UnfavorableStyleTok: Label 'Unfavorable', Locked = true;
         SubordinateStyleTok: Label 'Subordinate', Locked = true;
         NotAvailableForAssignmentErr: Label 'You cannot assign equipment %1 because its status is %2. Only equipment with the status %3 can be assigned.', Comment = '%1 = equipment number, %2 = current status caption, %3 = Available status caption';
-        AlreadyAssignedErr: Label 'Equipment %1 is already assigned to employee %2. Unassign the equipment first, and then assign it again.', Comment = '%1 = equipment number, %2 = employee number';
+        AlreadyAssignedErr: Label 'Equipment %1 is already assigned to employee %2. Return the equipment first, and then assign it again.', Comment = '%1 = equipment number, %2 = employee number';
         NewEquipmentAssignedErr: Label 'You cannot create equipment with the status %1. Create the equipment first, and then use the Assign to Employee action.', Comment = '%1 = status caption';
-        DeleteAssignedErr: Label 'You cannot delete equipment %1 because it is assigned to employee %2. Unassign the equipment first.', Comment = '%1 = equipment number, %2 = employee number';
+        DeleteAssignedErr: Label 'You cannot delete equipment %1 because it is assigned to employee %2. Return the equipment first.', Comment = '%1 = equipment number, %2 = employee number';
+        NotAssignedErr: Label 'You cannot return equipment %1 because it is not assigned. Its status is %2.', Comment = '%1 = equipment number, %2 = status caption';
+        ReturnEquipmentQst: Label 'Do you want to return equipment %1 from employee %2? The status changes to %3 and the assignment is closed.', Comment = '%1 = equipment number, %2 = employee number, %3 = Available status caption';
+        UseReturnActionErr: Label 'To make assigned equipment %1 available, use the Return action on the equipment card or the Return Equipment action on the employee card.', Comment = '%1 = equipment number';
 
     trigger OnInsert()
     var
@@ -277,21 +284,35 @@ table 50100 "EQM Equipment"
     end;
 
     /// <summary>
-    /// Sets the status to Available, which clears the assigned employee, and saves the record with triggers.
-    /// If an employee is set, the user is asked to confirm first; answering No cancels with a silent error.
-    /// Without a UI session the confirmation defaults to Yes. The active assignment entry is closed.
+    /// Returns assigned equipment: removes the assigned employee, sets the status to Available, saves the record with
+    /// triggers and closes the active assignment entry. The entry is kept as history. The user is asked to confirm first;
+    /// without a UI session the answer defaults to Yes. This is the only way to change Assigned equipment to Available.
+    /// Raises an error when the equipment is not Assigned.
     /// </summary>
-    internal procedure UnassignEmployee()
+    /// <returns>True when the equipment was returned; false when the user cancelled.</returns>
+    internal procedure UnassignEmployee(): Boolean
+    var
+        ConfirmManagement: Codeunit "Confirm Management";
     begin
+        if Status <> Status::Assigned then
+            Error(NotAssignedErr, "No.", Format(Status));
+
+        if not ConfirmManagement.GetResponseOrDefault(StrSubstNo(ReturnEquipmentQst, "No.", "Assigned Employee No.", Format(Status::Available)), true) then
+            exit(false);
+
+        "Assigned Employee No." := '';
+        ReturnInProgress := true;
         Validate(Status, Status::Available);
+        ReturnInProgress := false;
         Modify(true);
+        exit(true);
     end;
 
     /// <summary>
     /// Validates the record before it is inserted or modified: category filled in, category exists and is active
     /// (active only when the category is new or changed), new equipment not in a final status (Lost or Disposed),
     /// new equipment cannot be Assigned, status transition allowed on modify, the employee of assigned equipment
-    /// cannot be changed (unassign first), serial number unique, assigned employee allowed only when the status
+    /// cannot be changed (return first), serial number unique, assigned employee allowed only when the status
     /// is Assigned, and employee present when the status is Assigned.
     /// Raises OnAfterCheckEquipmentConsistency at the end.
     /// </summary>

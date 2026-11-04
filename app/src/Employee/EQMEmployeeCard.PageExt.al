@@ -18,5 +18,50 @@ pageextension 50100 "EQM Employee Card" extends "Employee Card"
                 RunPageLink = "Employee No." = field("No.");
             }
         }
+        addlast(Processing)
+        {
+            action(EQMReturnEquipment)
+            {
+                ApplicationArea = All;
+                Caption = 'Return Equipment';
+                ToolTip = 'Returns equipment assigned to this employee. Choose the equipment in the list. Its status changes to Available and the assignment is closed.';
+                Image = Undo;
+
+                trigger OnAction()
+                begin
+                    ReturnAssignedEquipment();
+                end;
+            }
+        }
     }
+
+    var
+        NoAssignedEquipmentMsg: Label 'No equipment is assigned to employee %1.', Comment = '%1 = employee number';
+        EquipmentNoLongerAssignedErr: Label 'Equipment %1 is no longer assigned to employee %2.', Comment = '%1 = equipment number, %2 = employee number';
+
+    local procedure ReturnAssignedEquipment()
+    var
+        Equipment: Record "EQM Equipment";
+        EquipmentList: Page "EQM Equipment List";
+    begin
+        Equipment.SetCurrentKey("Assigned Employee No.", Status);
+        Equipment.SetRange("Assigned Employee No.", Rec."No.");
+        Equipment.SetRange(Status, Equipment.Status::Assigned);
+        if Equipment.IsEmpty() then begin
+            Message(NoAssignedEquipmentMsg, Rec."No.");
+            exit;
+        end;
+
+        EquipmentList.SetTableView(Equipment);
+        EquipmentList.LookupMode(true);
+        if EquipmentList.RunModal() <> Action::LookupOK then
+            exit;
+
+        EquipmentList.GetRecord(Equipment);
+        Equipment.Get(Equipment."No.");
+        if (Equipment.Status <> Equipment.Status::Assigned) or (Equipment."Assigned Employee No." <> Rec."No.") then
+            Error(EquipmentNoLongerAssignedErr, Equipment."No.", Rec."No.");
+
+        Equipment.UnassignEmployee();
+    end;
 }

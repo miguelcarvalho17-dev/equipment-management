@@ -10,7 +10,7 @@ codeunit 50106 "EQM Assignment Mgt."
                   tabledata "EQM Equipment" = r;
 
     var
-        ActiveAssignmentExistsErr: Label 'You cannot delete equipment %1 because it has an active assignment. Assign the equipment and then unassign it to close the assignment, and then delete the equipment.', Comment = '%1 = equipment number';
+        ActiveAssignmentExistsErr: Label 'You cannot delete equipment %1 because it has an active assignment. Assign the equipment and then return it to close the assignment, and then delete the equipment.', Comment = '%1 = equipment number';
 
     /// <summary>
     /// Creates an active assignment entry when saved equipment becomes Assigned, and closes it when the
