@@ -25,8 +25,11 @@ You can combine filters.
 ## Open equipment from a category
 On **Equipment Categories**, select a category and choose **Equipment**. The list opens with only that category. A category without equipment opens an empty list.
 
+## See assignment details
+On the equipment list, the **Assignment Details** pane shows the employee, since when and how often the equipment was assigned. See the usability help (NFR-003).
+
 ## Open an employee's equipment
-On the **Employee Card**, choose **Navigate > Assigned Equipment**. The list shows the equipment currently assigned to that employee. For past assignments, choose **Equipment Assignments** (see assignment history).
+On the **Employee Card**, choose **Related > Equipment > Assigned Equipment**. The list shows the equipment currently assigned to that employee. The **Assigned Equipment** pane on the card shows the same equipment. For past assignments, choose **Related > Equipment > Equipment Assignments** (see assignment history).
 
 ## Release notes
 The equipment list now explains how to search and filter, shows the name of the assigned employee, and can be opened already filtered from a category (Equipment Categories > Equipment) and from an employee (Employee Card > Assigned Equipment).

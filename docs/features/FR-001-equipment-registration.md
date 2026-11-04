@@ -17,8 +17,8 @@ All objects are in the AL namespace `MiguelCarvalho.EquipmentManagement`. Partne
 | Table | 50100 | EQM Equipment | Equipment master, validation, confirmations, published events. Access = Public. |
 | Table | 50101 | EQM Equipment Category | Category master. Cannot be deleted while used. Access = Public. |
 | Table | 50102 | EQM Equipment Setup | Singleton setup (Equipment Nos.). Access = Public. |
-| Page | 50100 | EQM Equipment List | Read-only list; links to Categories and Setup. |
-| Page | 50101 | EQM Equipment Card | Create and maintain; Assign to Employee / Return actions. |
+| Page | 50100 | EQM Equipment List | Read-only list; Related > Setup > Categories / Equipment Setup (NFR-003 grouping); Assignment Details FactBox, Notes and Links. |
+| Page | 50101 | EQM Equipment Card | Create and maintain; Assign to Employee / Return actions; Assignment Details FactBox, Notes and Links (NFR-003). |
 | Page | 50102 | EQM Equipment Categories | Editable category list. |
 | Page | 50103 | EQM Equipment Setup | Setup card; creates defaults when the setup record is missing. |
 | Codeunit | 50103 | EQM Employee Subscribers | Internal. Blocks Employee delete while equipment references the employee. |

@@ -32,9 +32,11 @@ page 50101 "EQM Equipment Card"
                 }
                 field(Description; Rec.Description)
                 {
+                    Importance = Promoted;
                 }
                 field("Category Code"; Rec."Category Code")
                 {
+                    Importance = Promoted;
                     ShowMandatory = true;
                 }
                 field("Serial No."; Rec."Serial No.")
@@ -85,6 +87,7 @@ page 50101 "EQM Equipment Card"
                 {
                     Caption = 'Assigned Employee Name';
                     Editable = false;
+                    Importance = Promoted;
                     ToolTip = 'Specifies the name of the employee the equipment is assigned to.';
                 }
                 field(AssignedSince; ActiveAssignmentDate)
@@ -149,6 +152,20 @@ page 50101 "EQM Equipment Card"
                 }
             }
         }
+        area(FactBoxes)
+        {
+            part(EquipmentFactBox; "EQM Equipment FactBox")
+            {
+                SubPageLink = "No." = field("No.");
+            }
+            systempart(Links; Links)
+            {
+                Visible = false;
+            }
+            systempart(Notes; Notes)
+            {
+            }
+        }
     }
 
     actions
@@ -158,7 +175,7 @@ page 50101 "EQM Equipment Card"
             action(AssignToEmployee)
             {
                 Caption = 'Assign to Employee';
-                ToolTip = 'Assigns available equipment to an active employee that you select. The assignment is recorded with the work date and your user name.';
+                ToolTip = 'Assign available equipment to an active employee that you select. The assignment is recorded with the work date and your user name.';
                 Image = Employee;
                 Enabled = CanAssign;
 
@@ -175,7 +192,7 @@ page 50101 "EQM Equipment Card"
             action(Unassign)
             {
                 Caption = 'Return';
-                ToolTip = 'Returns the equipment from the assigned employee. The status changes to Available and the assignment is closed with the work date and your user name. The assignment stays in the history.';
+                ToolTip = 'Return the equipment from the assigned employee. The status changes to Available and the assignment is closed with the work date and your user name. The assignment stays in the history.';
                 Image = Undo;
                 Enabled = IsAssigned;
 
@@ -188,26 +205,43 @@ page 50101 "EQM Equipment Card"
         }
         area(Navigation)
         {
-            action(Assignments)
+            group(EquipmentGroup)
             {
-                Caption = 'Assignments';
-                ToolTip = 'View the assignment history of the equipment.';
-                Image = History;
-                Enabled = IsSaved;
-                RunObject = page "EQM Equipment Assignments";
-                RunPageLink = "Equipment No." = field("No.");
+                Caption = 'Equipment';
+                Image = FixedAssets;
+
+                action(Assignments)
+                {
+                    Caption = 'Assignments';
+                    ToolTip = 'View the assignment history of the equipment.';
+                    Image = History;
+                    Enabled = IsSaved;
+                    ShortCutKey = 'Ctrl+F7';
+                    RunObject = page "EQM Equipment Assignments";
+                    RunPageLink = "Equipment No." = field("No.");
+                }
             }
         }
         area(Promoted)
         {
-            actionref(AssignToEmployee_Promoted; AssignToEmployee)
+            group(Category_Process)
             {
+                Caption = 'Process';
+
+                actionref(AssignToEmployee_Promoted; AssignToEmployee)
+                {
+                }
+                actionref(Unassign_Promoted; Unassign)
+                {
+                }
             }
-            actionref(Unassign_Promoted; Unassign)
+            group(Category_Category4)
             {
-            }
-            actionref(Assignments_Promoted; Assignments)
-            {
+                Caption = 'Equipment';
+
+                actionref(Assignments_Promoted; Assignments)
+                {
+                }
             }
         }
     }

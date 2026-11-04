@@ -21,6 +21,8 @@ permissionset 50100 "EQM - Reader"
         page "EQM Equipment Card" = X,
         page "EQM Equipment Assignments" = X,
         page "EQM Assignment History Part" = X,
+        page "EQM Equipment FactBox" = X,
+        page "EQM Assigned Equipment FactBox" = X,
         page "EQM Equipment Categories" = X,
         page "EQM Equipment Setup" = X,
         page "EQM Equipment Cues" = X,

@@ -56,7 +56,7 @@ page 50107 "EQM Equipment Category Chart"
             action(Refresh)
             {
                 Caption = 'Refresh';
-                ToolTip = 'Updates the chart with the current equipment data.';
+                ToolTip = 'Update the chart with the current equipment data.';
                 Image = Refresh;
 
                 trigger OnAction()

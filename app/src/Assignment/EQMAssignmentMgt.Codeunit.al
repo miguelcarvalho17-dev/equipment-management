@@ -62,6 +62,47 @@ codeunit 50106 "EQM Assignment Mgt."
         exit(EquipmentAssignment.FindLast());
     end;
 
+    /// <summary>
+    /// Returns the number of assignment entries of the equipment, active and closed.
+    /// </summary>
+    /// <param name="EquipmentNo">The equipment number.</param>
+    /// <returns>The number of entries.</returns>
+    internal procedure CountAssignments(EquipmentNo: Code[20]): Integer
+    var
+        EquipmentAssignment: Record "EQM Equipment Assignment";
+    begin
+        EquipmentAssignment.SetCurrentKey("Equipment No.", Status);
+        EquipmentAssignment.SetRange("Equipment No.", EquipmentNo);
+        exit(EquipmentAssignment.Count());
+    end;
+
+    /// <summary>
+    /// Finds the most recent closed assignment entry of the equipment.
+    /// </summary>
+    /// <param name="EquipmentNo">The equipment number.</param>
+    /// <param name="EquipmentAssignment">Returns the closed entry; empty when none is found.</param>
+    /// <returns>True when a closed entry exists.</returns>
+    internal procedure GetLastClosedAssignment(EquipmentNo: Code[20]; var EquipmentAssignment: Record "EQM Equipment Assignment"): Boolean
+    begin
+        EquipmentAssignment.Reset();
+        EquipmentAssignment.SetCurrentKey("Equipment No.", Status);
+        EquipmentAssignment.SetRange("Equipment No.", EquipmentNo);
+        EquipmentAssignment.SetRange(Status, EquipmentAssignment.Status::Closed);
+        exit(EquipmentAssignment.FindLast());
+    end;
+
+    /// <summary>
+    /// Opens the equipment assignments filtered to one piece of equipment.
+    /// </summary>
+    /// <param name="EquipmentNo">The equipment number to filter on.</param>
+    internal procedure ShowAssignments(EquipmentNo: Code[20])
+    var
+        EquipmentAssignment: Record "EQM Equipment Assignment";
+    begin
+        EquipmentAssignment.SetRange("Equipment No.", EquipmentNo);
+        Page.Run(Page::"EQM Equipment Assignments", EquipmentAssignment);
+    end;
+
     local procedure CreateAssignment(Equipment: Record "EQM Equipment")
     var
         EquipmentAssignment: Record "EQM Equipment Assignment";

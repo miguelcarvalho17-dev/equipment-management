@@ -34,7 +34,7 @@ page 50109 "EQM Equipment Dashboard"
             action(Refresh)
             {
                 Caption = 'Refresh';
-                ToolTip = 'Updates the tiles and charts with the current equipment data.';
+                ToolTip = 'Update the tiles and charts with the current equipment data.';
                 Image = Refresh;
 
                 trigger OnAction()
@@ -50,18 +50,28 @@ page 50109 "EQM Equipment Dashboard"
             action(Equipment)
             {
                 Caption = 'Equipment';
-                ToolTip = 'Opens the list of all equipment.';
+                ToolTip = 'Open the list of all equipment.';
                 Image = FixedAssets;
                 RunObject = page "EQM Equipment List";
             }
         }
         area(Promoted)
         {
-            actionref(Refresh_Promoted; Refresh)
+            group(Category_Process)
             {
+                Caption = 'Process';
+
+                actionref(Refresh_Promoted; Refresh)
+                {
+                }
             }
-            actionref(Equipment_Promoted; Equipment)
+            group(Category_Category4)
             {
+                Caption = 'Navigate';
+
+                actionref(Equipment_Promoted; Equipment)
+                {
+                }
             }
         }
     }

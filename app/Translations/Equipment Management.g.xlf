@@ -523,6 +523,11 @@
           <note from="Developer" annotates="general" priority="2">%1 = employee number</note>
           <note from="Xliff Generator" annotates="general" priority="3">Codeunit EQM Employee Subscribers - NamedType EmployeeHasAssignedEquipmentErr</note>
         </trans-unit>
+        <trans-unit id="Page 1366892938 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Assigned Equipment</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page EQM Assigned Equipment FactBox - Property Caption</note>
+        </trans-unit>
         <trans-unit id="Page 3400661137 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
           <source>Assignment History</source>
           <note from="Developer" annotates="general" priority="2"></note>
@@ -538,10 +543,25 @@
           <note from="Developer" annotates="general" priority="2"></note>
           <note from="Xliff Generator" annotates="general" priority="3">Page EQM Assignment History Part - Control Employee Name - Property Caption</note>
         </trans-unit>
+        <trans-unit id="Page 1964094621 - Property 1064389655" size-unit="char" translate="yes" xml:space="preserve">
+          <source>About equipment assignments</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page EQM Equipment Assignments - Property AboutTitle</note>
+        </trans-unit>
+        <trans-unit id="Page 1964094621 - Property 247559172" size-unit="char" translate="yes" xml:space="preserve">
+          <source>This list shows every assignment of equipment to an employee, newest first. Active assignments show who has the equipment now. Closed assignments are kept as history and cannot be changed. Choose a view at the top to see only active or closed assignments, and choose **Equipment** or **Employee** to open the related card.</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page EQM Equipment Assignments - Property AboutText</note>
+        </trans-unit>
         <trans-unit id="Page 1964094621 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
           <source>Equipment Assignments</source>
           <note from="Developer" annotates="general" priority="2"></note>
           <note from="Xliff Generator" annotates="general" priority="3">Page EQM Equipment Assignments - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Page 1964094621 - Property 3863440606" size-unit="char" translate="yes" xml:space="preserve">
+          <source>equipment history, equipment loans, issued equipment</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page EQM Equipment Assignments - Property AdditionalSearchTerms</note>
         </trans-unit>
         <trans-unit id="Page 1964094621 - Control 1480804031 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
           <source>Specifies the name of the employee.</source>
@@ -554,7 +574,7 @@
           <note from="Xliff Generator" annotates="general" priority="3">Page EQM Equipment Assignments - Control Employee Name - Property Caption</note>
         </trans-unit>
         <trans-unit id="Page 1964094621 - Action 1498446062 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
-          <source>Opens the employee card.</source>
+          <source>Open the employee card.</source>
           <note from="Developer" annotates="general" priority="2"></note>
           <note from="Xliff Generator" annotates="general" priority="3">Page EQM Equipment Assignments - Action Employee - Property ToolTip</note>
         </trans-unit>
@@ -564,7 +584,7 @@
           <note from="Xliff Generator" annotates="general" priority="3">Page EQM Equipment Assignments - Action Employee - Property Caption</note>
         </trans-unit>
         <trans-unit id="Page 1964094621 - Action 2876943422 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
-          <source>Opens the equipment card.</source>
+          <source>Open the equipment card.</source>
           <note from="Developer" annotates="general" priority="2"></note>
           <note from="Xliff Generator" annotates="general" priority="3">Page EQM Equipment Assignments - Action Equipment - Property ToolTip</note>
         </trans-unit>
@@ -572,6 +592,11 @@
           <source>Equipment</source>
           <note from="Developer" annotates="general" priority="2"></note>
           <note from="Xliff Generator" annotates="general" priority="3">Page EQM Equipment Assignments - Action Equipment - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Page 1964094621 - Action 1587086413 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Navigate</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page EQM Equipment Assignments - Action Category_Category4 - Property Caption</note>
         </trans-unit>
         <trans-unit id="Page 1964094621 - View 1090351696 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
           <source>Active</source>
@@ -698,6 +723,11 @@
           <note from="Developer" annotates="general" priority="2"></note>
           <note from="Xliff Generator" annotates="general" priority="3">Page EQM Equipment Card - Control Purchase - Property Caption</note>
         </trans-unit>
+        <trans-unit id="Page 3574600233 - Action 794261815 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Equipment</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page EQM Equipment Card - Action EquipmentGroup - Property Caption</note>
+        </trans-unit>
         <trans-unit id="Page 3574600233 - Action 2045583972 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
           <source>View the assignment history of the equipment.</source>
           <note from="Developer" annotates="general" priority="2"></note>
@@ -709,7 +739,7 @@
           <note from="Xliff Generator" annotates="general" priority="3">Page EQM Equipment Card - Action Assignments - Property Caption</note>
         </trans-unit>
         <trans-unit id="Page 3574600233 - Action 1332525020 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
-          <source>Assigns available equipment to an active employee that you select. The assignment is recorded with the work date and your user name.</source>
+          <source>Assign available equipment to an active employee that you select. The assignment is recorded with the work date and your user name.</source>
           <note from="Developer" annotates="general" priority="2"></note>
           <note from="Xliff Generator" annotates="general" priority="3">Page EQM Equipment Card - Action AssignToEmployee - Property ToolTip</note>
         </trans-unit>
@@ -719,7 +749,7 @@
           <note from="Xliff Generator" annotates="general" priority="3">Page EQM Equipment Card - Action AssignToEmployee - Property Caption</note>
         </trans-unit>
         <trans-unit id="Page 3574600233 - Action 640341854 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
-          <source>Returns the equipment from the assigned employee. The status changes to Available and the assignment is closed with the work date and your user name. The assignment stays in the history.</source>
+          <source>Return the equipment from the assigned employee. The status changes to Available and the assignment is closed with the work date and your user name. The assignment stays in the history.</source>
           <note from="Developer" annotates="general" priority="2"></note>
           <note from="Xliff Generator" annotates="general" priority="3">Page EQM Equipment Card - Action Unassign - Property ToolTip</note>
         </trans-unit>
@@ -728,10 +758,35 @@
           <note from="Developer" annotates="general" priority="2"></note>
           <note from="Xliff Generator" annotates="general" priority="3">Page EQM Equipment Card - Action Unassign - Property Caption</note>
         </trans-unit>
+        <trans-unit id="Page 3574600233 - Action 1587086413 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Equipment</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page EQM Equipment Card - Action Category_Category4 - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Page 3574600233 - Action 3383493608 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Process</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page EQM Equipment Card - Action Category_Process - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Page 4152500839 - Property 1064389655" size-unit="char" translate="yes" xml:space="preserve">
+          <source>About equipment categories</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page EQM Equipment Categories - Property AboutTitle</note>
+        </trans-unit>
+        <trans-unit id="Page 4152500839 - Property 247559172" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Categories group your equipment, for example laptops or phones. Every piece of equipment needs an active category. To stop using a category, clear **Active** instead of deleting it. Choose **Equipment** to see the equipment in a category.</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page EQM Equipment Categories - Property AboutText</note>
+        </trans-unit>
         <trans-unit id="Page 4152500839 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
           <source>Equipment Categories</source>
           <note from="Developer" annotates="general" priority="2"></note>
           <note from="Xliff Generator" annotates="general" priority="3">Page EQM Equipment Categories - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Page 4152500839 - Property 3863440606" size-unit="char" translate="yes" xml:space="preserve">
+          <source>equipment types, equipment groups</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page EQM Equipment Categories - Property AdditionalSearchTerms</note>
         </trans-unit>
         <trans-unit id="Page 4152500839 - Action 2876943422 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
           <source>View the equipment in the selected category.</source>
@@ -742,6 +797,11 @@
           <source>Equipment</source>
           <note from="Developer" annotates="general" priority="2"></note>
           <note from="Xliff Generator" annotates="general" priority="3">Page EQM Equipment Categories - Action Equipment - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Page 4152500839 - Action 1587086413 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Navigate</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page EQM Equipment Categories - Action Category_Category4 - Property Caption</note>
         </trans-unit>
         <trans-unit id="Page 213348105 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
           <source>Equipment by Category</source>
@@ -759,7 +819,7 @@
           <note from="Xliff Generator" annotates="general" priority="3">Page EQM Equipment Category Chart - NamedType EquipmentMeasureLbl</note>
         </trans-unit>
         <trans-unit id="Page 213348105 - Action 2026913255 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
-          <source>Updates the chart with the current equipment data.</source>
+          <source>Update the chart with the current equipment data.</source>
           <note from="Developer" annotates="general" priority="2"></note>
           <note from="Xliff Generator" annotates="general" priority="3">Page EQM Equipment Category Chart - Action Refresh - Property ToolTip</note>
         </trans-unit>
@@ -799,7 +859,7 @@
           <note from="Xliff Generator" annotates="general" priority="3">Page EQM Equipment Dashboard - Property AdditionalSearchTerms</note>
         </trans-unit>
         <trans-unit id="Page 3818031089 - Action 2876943422 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
-          <source>Opens the list of all equipment.</source>
+          <source>Open the list of all equipment.</source>
           <note from="Developer" annotates="general" priority="2"></note>
           <note from="Xliff Generator" annotates="general" priority="3">Page EQM Equipment Dashboard - Action Equipment - Property ToolTip</note>
         </trans-unit>
@@ -809,7 +869,7 @@
           <note from="Xliff Generator" annotates="general" priority="3">Page EQM Equipment Dashboard - Action Equipment - Property Caption</note>
         </trans-unit>
         <trans-unit id="Page 3818031089 - Action 2026913255 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
-          <source>Updates the tiles and charts with the current equipment data.</source>
+          <source>Update the tiles and charts with the current equipment data.</source>
           <note from="Developer" annotates="general" priority="2"></note>
           <note from="Xliff Generator" annotates="general" priority="3">Page EQM Equipment Dashboard - Action Refresh - Property ToolTip</note>
         </trans-unit>
@@ -817,6 +877,101 @@
           <source>Refresh</source>
           <note from="Developer" annotates="general" priority="2"></note>
           <note from="Xliff Generator" annotates="general" priority="3">Page EQM Equipment Dashboard - Action Refresh - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Page 3818031089 - Action 1587086413 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Navigate</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page EQM Equipment Dashboard - Action Category_Category4 - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Page 3818031089 - Action 3383493608 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Process</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page EQM Equipment Dashboard - Action Category_Process - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Page 3150665466 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Assignment Details</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page EQM Equipment FactBox - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Page 3150665466 - Control 2063795326 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Current Assignment</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page EQM Equipment FactBox - Control CurrentAssignment - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Page 3150665466 - Control 1133707045 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Specifies the user who assigned the equipment to the current employee. It is blank when the equipment is not assigned.</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page EQM Equipment FactBox - Control AssignedBy - Property ToolTip</note>
+        </trans-unit>
+        <trans-unit id="Page 3150665466 - Control 1133707045 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Assigned By</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page EQM Equipment FactBox - Control AssignedBy - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Page 3150665466 - Control 851676558 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Specifies the date the equipment was assigned to the current employee. It is blank when the equipment is not assigned.</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page EQM Equipment FactBox - Control AssignedSince - Property ToolTip</note>
+        </trans-unit>
+        <trans-unit id="Page 3150665466 - Control 851676558 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Assigned Since</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page EQM Equipment FactBox - Control AssignedSince - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Page 3150665466 - Control 1859946682 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Specifies the company email address of the employee the equipment is assigned to.</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page EQM Equipment FactBox - Control EmployeeEmail - Property ToolTip</note>
+        </trans-unit>
+        <trans-unit id="Page 3150665466 - Control 1859946682 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Company Email</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page EQM Equipment FactBox - Control EmployeeEmail - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Page 3150665466 - Control 2398731559 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Specifies the job title of the employee the equipment is assigned to.</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page EQM Equipment FactBox - Control EmployeeJobTitle - Property ToolTip</note>
+        </trans-unit>
+        <trans-unit id="Page 3150665466 - Control 2398731559 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Job Title</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page EQM Equipment FactBox - Control EmployeeJobTitle - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Page 3150665466 - Control 3434267879 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Specifies the name of the employee the equipment is assigned to.</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page EQM Equipment FactBox - Control EmployeeName - Property ToolTip</note>
+        </trans-unit>
+        <trans-unit id="Page 3150665466 - Control 3434267879 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Employee Name</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page EQM Equipment FactBox - Control EmployeeName - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Page 3150665466 - Control 4201773078 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>History</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page EQM Equipment FactBox - Control History - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Page 3150665466 - Control 1916750136 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Specifies the date the most recent closed assignment of the equipment ended, because the equipment was returned or its status changed. It is blank when no assignment has been closed.</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page EQM Equipment FactBox - Control LastClosedDate - Property ToolTip</note>
+        </trans-unit>
+        <trans-unit id="Page 3150665466 - Control 1916750136 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Last Assignment Closed</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page EQM Equipment FactBox - Control LastClosedDate - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Page 3150665466 - Control 958875716 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Specifies how many times the equipment has been assigned, including the current assignment. Choose the number to see the assignment history.</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page EQM Equipment FactBox - Control NoOfAssignments - Property ToolTip</note>
+        </trans-unit>
+        <trans-unit id="Page 3150665466 - Control 958875716 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>No. of Assignments</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page EQM Equipment FactBox - Control NoOfAssignments - Property Caption</note>
         </trans-unit>
         <trans-unit id="Page 2630064635 - Property 1064389655" size-unit="char" translate="yes" xml:space="preserve">
           <source>About equipment</source>
@@ -833,6 +988,11 @@
           <note from="Developer" annotates="general" priority="2"></note>
           <note from="Xliff Generator" annotates="general" priority="3">Page EQM Equipment List - Property Caption</note>
         </trans-unit>
+        <trans-unit id="Page 2630064635 - Property 3863440606" size-unit="char" translate="yes" xml:space="preserve">
+          <source>devices, tools, hardware, company equipment</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page EQM Equipment List - Property AdditionalSearchTerms</note>
+        </trans-unit>
         <trans-unit id="Page 2630064635 - Control 2754621559 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
           <source>Specifies the name of the employee the equipment is assigned to.</source>
           <note from="Developer" annotates="general" priority="2"></note>
@@ -843,8 +1003,13 @@
           <note from="Developer" annotates="general" priority="2"></note>
           <note from="Xliff Generator" annotates="general" priority="3">Page EQM Equipment List - Control Assigned Employee Name - Property Caption</note>
         </trans-unit>
+        <trans-unit id="Page 2630064635 - Action 794261815 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Equipment</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page EQM Equipment List - Action EquipmentGroup - Property Caption</note>
+        </trans-unit>
         <trans-unit id="Page 2630064635 - Action 2045583972 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
-          <source>View the assignment history of the equipment.</source>
+          <source>View the assignment history of the selected equipment.</source>
           <note from="Developer" annotates="general" priority="2"></note>
           <note from="Xliff Generator" annotates="general" priority="3">Page EQM Equipment List - Action Assignments - Property ToolTip</note>
         </trans-unit>
@@ -853,8 +1018,13 @@
           <note from="Developer" annotates="general" priority="2"></note>
           <note from="Xliff Generator" annotates="general" priority="3">Page EQM Equipment List - Action Assignments - Property Caption</note>
         </trans-unit>
+        <trans-unit id="Page 2630064635 - Action 2495166380 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Setup</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page EQM Equipment List - Action SetupGroup - Property Caption</note>
+        </trans-unit>
         <trans-unit id="Page 2630064635 - Action 113145658 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
-          <source>Opens the list of equipment categories.</source>
+          <source>Open the list of equipment categories.</source>
           <note from="Developer" annotates="general" priority="2"></note>
           <note from="Xliff Generator" annotates="general" priority="3">Page EQM Equipment List - Action Categories - Property ToolTip</note>
         </trans-unit>
@@ -863,8 +1033,28 @@
           <note from="Developer" annotates="general" priority="2"></note>
           <note from="Xliff Generator" annotates="general" priority="3">Page EQM Equipment List - Action Categories - Property Caption</note>
         </trans-unit>
+        <trans-unit id="Page 2630064635 - Action 1514883969 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Open the equipment setup.</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page EQM Equipment List - Action Setup - Property ToolTip</note>
+        </trans-unit>
+        <trans-unit id="Page 2630064635 - Action 1514883969 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Equipment Setup</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page EQM Equipment List - Action Setup - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Page 2630064635 - Action 1587086413 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Equipment</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page EQM Equipment List - Action Category_Category4 - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Page 2630064635 - Action 2234406979 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Report</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page EQM Equipment List - Action Category_Report - Property Caption</note>
+        </trans-unit>
         <trans-unit id="Page 2630064635 - Action 4169195256 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
-          <source>Opens the equipment dashboard with key figures and charts.</source>
+          <source>Open the equipment dashboard with key figures and charts.</source>
           <note from="Developer" annotates="general" priority="2"></note>
           <note from="Xliff Generator" annotates="general" priority="3">Page EQM Equipment List - Action Dashboard - Property ToolTip</note>
         </trans-unit>
@@ -872,16 +1062,6 @@
           <source>Dashboard</source>
           <note from="Developer" annotates="general" priority="2"></note>
           <note from="Xliff Generator" annotates="general" priority="3">Page EQM Equipment List - Action Dashboard - Property Caption</note>
-        </trans-unit>
-        <trans-unit id="Page 2630064635 - Action 1514883969 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
-          <source>Opens the equipment setup.</source>
-          <note from="Developer" annotates="general" priority="2"></note>
-          <note from="Xliff Generator" annotates="general" priority="3">Page EQM Equipment List - Action Setup - Property ToolTip</note>
-        </trans-unit>
-        <trans-unit id="Page 2630064635 - Action 1514883969 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
-          <source>Setup</source>
-          <note from="Developer" annotates="general" priority="2"></note>
-          <note from="Xliff Generator" annotates="general" priority="3">Page EQM Equipment List - Action Setup - Property Caption</note>
         </trans-unit>
         <trans-unit id="Page 2630064635 - View 1005746868 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
           <source>Assigned</source>
@@ -914,7 +1094,7 @@
           <note from="Xliff Generator" annotates="general" priority="3">Page EQM Equipment Manager RC - Property Caption</note>
         </trans-unit>
         <trans-unit id="Page 4775459 - Action 2416656850 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
-          <source>Creates a new equipment record.</source>
+          <source>Create a new equipment record.</source>
           <note from="Developer" annotates="general" priority="2"></note>
           <note from="Xliff Generator" annotates="general" priority="3">Page EQM Equipment Manager RC - Action NewEquipment - Property ToolTip</note>
         </trans-unit>
@@ -924,7 +1104,7 @@
           <note from="Xliff Generator" annotates="general" priority="3">Page EQM Equipment Manager RC - Action NewEquipment - Property Caption</note>
         </trans-unit>
         <trans-unit id="Page 4775459 - Action 564207155 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
-          <source>Opens the assignment history of all equipment.</source>
+          <source>Open the assignment history of all equipment.</source>
           <note from="Developer" annotates="general" priority="2"></note>
           <note from="Xliff Generator" annotates="general" priority="3">Page EQM Equipment Manager RC - Action AssignmentList - Property ToolTip</note>
         </trans-unit>
@@ -933,18 +1113,8 @@
           <note from="Developer" annotates="general" priority="2"></note>
           <note from="Xliff Generator" annotates="general" priority="3">Page EQM Equipment Manager RC - Action AssignmentList - Property Caption</note>
         </trans-unit>
-        <trans-unit id="Page 4775459 - Action 2268731406 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
-          <source>Opens the list of equipment categories.</source>
-          <note from="Developer" annotates="general" priority="2"></note>
-          <note from="Xliff Generator" annotates="general" priority="3">Page EQM Equipment Manager RC - Action CategoryList - Property ToolTip</note>
-        </trans-unit>
-        <trans-unit id="Page 4775459 - Action 2268731406 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
-          <source>Categories</source>
-          <note from="Developer" annotates="general" priority="2"></note>
-          <note from="Xliff Generator" annotates="general" priority="3">Page EQM Equipment Manager RC - Action CategoryList - Property Caption</note>
-        </trans-unit>
         <trans-unit id="Page 4775459 - Action 1621420164 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
-          <source>Opens the list of all equipment.</source>
+          <source>Open the list of all equipment.</source>
           <note from="Developer" annotates="general" priority="2"></note>
           <note from="Xliff Generator" annotates="general" priority="3">Page EQM Equipment Manager RC - Action EquipmentList - Property ToolTip</note>
         </trans-unit>
@@ -959,7 +1129,7 @@
           <note from="Xliff Generator" annotates="general" priority="3">Page EQM Equipment Manager RC - Action Setup - Property Caption</note>
         </trans-unit>
         <trans-unit id="Page 4775459 - Action 3623734480 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
-          <source>Opens the list of equipment categories.</source>
+          <source>Open the list of equipment categories.</source>
           <note from="Developer" annotates="general" priority="2"></note>
           <note from="Xliff Generator" annotates="general" priority="3">Page EQM Equipment Manager RC - Action EquipmentCategories - Property ToolTip</note>
         </trans-unit>
@@ -969,7 +1139,7 @@
           <note from="Xliff Generator" annotates="general" priority="3">Page EQM Equipment Manager RC - Action EquipmentCategories - Property Caption</note>
         </trans-unit>
         <trans-unit id="Page 4775459 - Action 313566759 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
-          <source>Opens the equipment setup.</source>
+          <source>Open the equipment setup.</source>
           <note from="Developer" annotates="general" priority="2"></note>
           <note from="Xliff Generator" annotates="general" priority="3">Page EQM Equipment Manager RC - Action EquipmentSetup - Property ToolTip</note>
         </trans-unit>
@@ -982,6 +1152,11 @@
           <source>Equipment Setup</source>
           <note from="Developer" annotates="general" priority="2"></note>
           <note from="Xliff Generator" annotates="general" priority="3">Page EQM Equipment Setup - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Page 1065098760 - Property 3863440606" size-unit="char" translate="yes" xml:space="preserve">
+          <source>equipment numbers, equipment number series</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page EQM Equipment Setup - Property AdditionalSearchTerms</note>
         </trans-unit>
         <trans-unit id="Page 1065098760 - NamedType 950344170" size-unit="char" translate="yes" xml:space="preserve">
           <source>The equipment setup has not been created in this company yet. Ask a user with the Equipment Administrator permission set to open the Equipment Setup page.</source>
@@ -1009,7 +1184,7 @@
           <note from="Xliff Generator" annotates="general" priority="3">Page EQM Equipment Status Chart - NamedType StatusDimensionLbl</note>
         </trans-unit>
         <trans-unit id="Page 4026658645 - Action 2026913255 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
-          <source>Updates the chart with the current equipment data.</source>
+          <source>Update the chart with the current equipment data.</source>
           <note from="Developer" annotates="general" priority="2"></note>
           <note from="Xliff Generator" annotates="general" priority="3">Page EQM Equipment Status Chart - Action Refresh - Property ToolTip</note>
         </trans-unit>
@@ -1038,6 +1213,11 @@
           <note from="Developer" annotates="general" priority="2">%1 = employee number</note>
           <note from="Xliff Generator" annotates="general" priority="3">PageExtension EQM Employee Card - NamedType NoAssignedEquipmentMsg</note>
         </trans-unit>
+        <trans-unit id="PageExtension 2678929633 - Action 837798757 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve" al-object-target="Page 866835530">
+          <source>Equipment</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">PageExtension EQM Employee Card - Action EQMEquipment - Property Caption</note>
+        </trans-unit>
         <trans-unit id="PageExtension 2678929633 - Action 1284571957 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve" al-object-target="Page 866835530">
           <source>View the equipment that is currently assigned to the employee.</source>
           <note from="Developer" annotates="general" priority="2"></note>
@@ -1049,7 +1229,7 @@
           <note from="Xliff Generator" annotates="general" priority="3">PageExtension EQM Employee Card - Action EQMAssignedEquipment - Property Caption</note>
         </trans-unit>
         <trans-unit id="PageExtension 2678929633 - Action 1766227661 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve" al-object-target="Page 866835530">
-          <source>View the equipment assignments of the employee.</source>
+          <source>View the equipment assignment history of the employee.</source>
           <note from="Developer" annotates="general" priority="2"></note>
           <note from="Xliff Generator" annotates="general" priority="3">PageExtension EQM Employee Card - Action EQMEquipmentAssignments - Property ToolTip</note>
         </trans-unit>
@@ -1059,7 +1239,7 @@
           <note from="Xliff Generator" annotates="general" priority="3">PageExtension EQM Employee Card - Action EQMEquipmentAssignments - Property Caption</note>
         </trans-unit>
         <trans-unit id="PageExtension 2678929633 - Action 737125131 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve" al-object-target="Page 866835530">
-          <source>Returns equipment assigned to this employee. Choose the equipment in the list. Its status changes to Available and the assignment is closed.</source>
+          <source>Return equipment that is assigned to this employee. Choose the equipment in the list. Its status changes to Available and the assignment is closed.</source>
           <note from="Developer" annotates="general" priority="2"></note>
           <note from="Xliff Generator" annotates="general" priority="3">PageExtension EQM Employee Card - Action EQMReturnEquipment - Property ToolTip</note>
         </trans-unit>

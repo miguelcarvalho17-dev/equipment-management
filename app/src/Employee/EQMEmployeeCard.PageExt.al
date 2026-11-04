@@ -4,27 +4,46 @@ using Microsoft.HumanResources.Employee;
 
 pageextension 50100 "EQM Employee Card" extends "Employee Card"
 {
+    layout
+    {
+        addfirst(FactBoxes)
+        {
+            part(EQMAssignedEquipmentFactBox; "EQM Assigned Equipment FactBox")
+            {
+                ApplicationArea = All;
+                SubPageLink = "Assigned Employee No." = field("No.");
+                Visible = EQMShowEquipmentFactBox;
+            }
+        }
+    }
+
     actions
     {
         addlast(Navigation)
         {
-            action(EQMEquipmentAssignments)
+            group(EQMEquipment)
             {
-                ApplicationArea = All;
-                Caption = 'Equipment Assignments';
-                ToolTip = 'View the equipment assignments of the employee.';
-                Image = Employee;
-                RunObject = page "EQM Equipment Assignments";
-                RunPageLink = "Employee No." = field("No.");
-            }
-            action(EQMAssignedEquipment)
-            {
-                ApplicationArea = All;
-                Caption = 'Assigned Equipment';
-                ToolTip = 'View the equipment that is currently assigned to the employee.';
+                Caption = 'Equipment';
                 Image = FixedAssets;
-                RunObject = page "EQM Equipment List";
-                RunPageLink = "Assigned Employee No." = field("No.");
+
+                action(EQMEquipmentAssignments)
+                {
+                    ApplicationArea = All;
+                    Caption = 'Equipment Assignments';
+                    ToolTip = 'View the equipment assignment history of the employee.';
+                    Image = History;
+                    RunObject = page "EQM Equipment Assignments";
+                    RunPageLink = "Employee No." = field("No.");
+                }
+                action(EQMAssignedEquipment)
+                {
+                    ApplicationArea = All;
+                    Caption = 'Assigned Equipment';
+                    ToolTip = 'View the equipment that is currently assigned to the employee.';
+                    Image = FixedAssets;
+                    RunObject = page "EQM Equipment List";
+                    RunPageLink = "Assigned Employee No." = field("No.");
+                }
             }
         }
         addlast(Processing)
@@ -33,7 +52,7 @@ pageextension 50100 "EQM Employee Card" extends "Employee Card"
             {
                 ApplicationArea = All;
                 Caption = 'Return Equipment';
-                ToolTip = 'Returns equipment assigned to this employee. Choose the equipment in the list. Its status changes to Available and the assignment is closed.';
+                ToolTip = 'Return equipment that is assigned to this employee. Choose the equipment in the list. Its status changes to Available and the assignment is closed.';
                 Image = Undo;
 
                 trigger OnAction()
@@ -45,8 +64,16 @@ pageextension 50100 "EQM Employee Card" extends "Employee Card"
     }
 
     var
+        EQMShowEquipmentFactBox: Boolean;
         NoAssignedEquipmentMsg: Label 'No equipment is assigned to employee %1.', Comment = '%1 = employee number';
         EquipmentNoLongerAssignedErr: Label 'Equipment %1 is no longer assigned to employee %2.', Comment = '%1 = equipment number, %2 = employee number';
+
+    trigger OnOpenPage()
+    var
+        Equipment: Record "EQM Equipment";
+    begin
+        EQMShowEquipmentFactBox := Equipment.ReadPermission();
+    end;
 
     local procedure ReturnAssignedEquipment()
     var

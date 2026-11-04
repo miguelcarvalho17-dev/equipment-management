@@ -11,8 +11,8 @@ No new objects, no schema change, no upgrade codeunit, no events.
 | Type | ID | Name | Change |
 |---|---|---|---|
 | Page | 50100 | EQM Equipment List | `AboutTitle` / `AboutText` teaching tip; new column "Assigned Employee Name" (page variable `AssignedEmployeeName`, Text[100]); `OnAfterGetRecord` fills it; `using Microsoft.HumanResources.Employee;` added. |
-| Page | 50102 | EQM Equipment Categories | New action `Equipment` (Navigation, promoted as `Equipment_Promoted`). |
-| PageExtension | 50100 | EQM Employee Card | New action `EQMAssignedEquipment` (Navigation, after `EQMEquipmentAssignments`, not promoted). |
+| Page | 50102 | EQM Equipment Categories | New action `Equipment` (Navigation, promoted as `Equipment_Promoted` in group 'Navigate'). |
+| PageExtension | 50100 | EQM Employee Card | New action `EQMAssignedEquipment` (Navigation, in group `EQMEquipment` after `EQMEquipmentAssignments`, not promoted; NFR-003 adds the Assigned Equipment FactBox, page 50112, to the same extension). |
 
 ## Requirement coverage
 | Requirement | How it is met |
