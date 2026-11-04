@@ -38,6 +38,11 @@
           <note from="Developer" annotates="general" priority="2">%1 = equipment number, %2 = employee number</note>
           <note from="Xliff Generator" annotates="general" priority="3">Table EQM Equipment - NamedType DeleteAssignedErr</note>
         </trans-unit>
+        <trans-unit id="Table 4212454693 - NamedType 2701587426" size-unit="char" translate="yes" xml:space="preserve">
+          <source>You cannot delete equipment %1 because it has assignment history. To stop using the equipment, set its status to %2 instead.</source>
+          <note from="Developer" annotates="general" priority="2">%1 = equipment number, %2 = Disposed status caption</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table EQM Equipment - NamedType DeleteHistoryExistsErr</note>
+        </trans-unit>
         <trans-unit id="Table 4212454693 - NamedType 2695088842" size-unit="char" translate="yes" xml:space="preserve">
           <source>You cannot assign equipment to employee %1 because the employee status is %2.</source>
           <note from="Developer" annotates="general" priority="2">%1 = employee number, %2 = employee status</note>
@@ -238,6 +243,11 @@
           <note from="Developer" annotates="general" priority="2"></note>
           <note from="Xliff Generator" annotates="general" priority="3">Table EQM Equipment Assignment - Property Caption</note>
         </trans-unit>
+        <trans-unit id="Table 1549914012 - NamedType 1224222137" size-unit="char" translate="yes" xml:space="preserve">
+          <source>You cannot change assignment entry %1 for equipment %2 because the assignment is closed. Closed assignments are kept as history and cannot be changed.</source>
+          <note from="Developer" annotates="general" priority="2">%1 = entry number, %2 = equipment number</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table EQM Equipment Assignment - NamedType ClosedEntryCannotBeChangedErr</note>
+        </trans-unit>
         <trans-unit id="Table 1549914012 - Field 3069971261 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
           <source>Specifies the user who assigned the equipment.</source>
           <note from="Developer" annotates="general" priority="2"></note>
@@ -319,7 +329,7 @@
           <note from="Xliff Generator" annotates="general" priority="3">Table EQM Equipment Assignment - Field Equipment No. - Property Caption</note>
         </trans-unit>
         <trans-unit id="Table 1549914012 - Field 513339096 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
-          <source>Specifies whether the assignment is active or closed. Equipment has at most one active assignment. The assignment is closed when the equipment is returned or its status changes from Assigned to another status. Closed assignments are kept as history.</source>
+          <source>Specifies whether the assignment is active or closed. Equipment has at most one active assignment. The assignment is closed when the equipment is returned or its status changes from Assigned to another status. Closed assignments are kept as history and cannot be changed.</source>
           <note from="Developer" annotates="general" priority="2"></note>
           <note from="Xliff Generator" annotates="general" priority="3">Table EQM Equipment Assignment - Field Status - Property ToolTip</note>
         </trans-unit>
@@ -397,11 +407,6 @@
           <source>Primary Key</source>
           <note from="Developer" annotates="general" priority="2"></note>
           <note from="Xliff Generator" annotates="general" priority="3">Table EQM Equipment Setup - Field Primary Key - Property Caption</note>
-        </trans-unit>
-        <trans-unit id="Codeunit 843097598 - NamedType 3150899718" size-unit="char" translate="yes" xml:space="preserve">
-          <source>You cannot delete equipment %1 because it has an active assignment. Assign the equipment and then return it to close the assignment, and then delete the equipment.</source>
-          <note from="Developer" annotates="general" priority="2">%1 = equipment number</note>
-          <note from="Xliff Generator" annotates="general" priority="3">Codeunit EQM Assignment Mgt. - NamedType ActiveAssignmentExistsErr</note>
         </trans-unit>
         <trans-unit id="Codeunit 55420158 - NamedType 2998168785" maxwidth="100" size-unit="char" translate="yes" xml:space="preserve">
           <source>Equipment</source>
@@ -588,10 +593,40 @@
           <note from="Developer" annotates="general" priority="2"></note>
           <note from="Xliff Generator" annotates="general" priority="3">Page EQM Equipment Categories - Property Caption</note>
         </trans-unit>
+        <trans-unit id="Page 4152500839 - Action 2876943422 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
+          <source>View the equipment in the selected category.</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page EQM Equipment Categories - Action Equipment - Property ToolTip</note>
+        </trans-unit>
+        <trans-unit id="Page 4152500839 - Action 2876943422 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Equipment</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page EQM Equipment Categories - Action Equipment - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Page 2630064635 - Property 1064389655" size-unit="char" translate="yes" xml:space="preserve">
+          <source>About equipment</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page EQM Equipment List - Property AboutTitle</note>
+        </trans-unit>
+        <trans-unit id="Page 2630064635 - Property 247559172" size-unit="char" translate="yes" xml:space="preserve">
+          <source>This list shows all your equipment. Use **Search** to find equipment by its number, serial number, or any other column you can see. To filter by category, status, or assigned employee, open the filter pane and add a filter on that field. You can also choose a status view at the top of the list.</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page EQM Equipment List - Property AboutText</note>
+        </trans-unit>
         <trans-unit id="Page 2630064635 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
           <source>Equipment</source>
           <note from="Developer" annotates="general" priority="2"></note>
           <note from="Xliff Generator" annotates="general" priority="3">Page EQM Equipment List - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Page 2630064635 - Control 2754621559 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Specifies the name of the employee the equipment is assigned to.</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page EQM Equipment List - Control Assigned Employee Name - Property ToolTip</note>
+        </trans-unit>
+        <trans-unit id="Page 2630064635 - Control 2754621559 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Assigned Employee Name</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page EQM Equipment List - Control Assigned Employee Name - Property Caption</note>
         </trans-unit>
         <trans-unit id="Page 2630064635 - Action 2045583972 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
           <source>View the assignment history of the equipment.</source>
@@ -667,6 +702,16 @@
           <source>No equipment is assigned to employee %1.</source>
           <note from="Developer" annotates="general" priority="2">%1 = employee number</note>
           <note from="Xliff Generator" annotates="general" priority="3">PageExtension EQM Employee Card - NamedType NoAssignedEquipmentMsg</note>
+        </trans-unit>
+        <trans-unit id="PageExtension 2678929633 - Action 1284571957 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve" al-object-target="Page 866835530">
+          <source>View the equipment that is currently assigned to the employee.</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">PageExtension EQM Employee Card - Action EQMAssignedEquipment - Property ToolTip</note>
+        </trans-unit>
+        <trans-unit id="PageExtension 2678929633 - Action 1284571957 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve" al-object-target="Page 866835530">
+          <source>Assigned Equipment</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">PageExtension EQM Employee Card - Action EQMAssignedEquipment - Property Caption</note>
         </trans-unit>
         <trans-unit id="PageExtension 2678929633 - Action 1766227661 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve" al-object-target="Page 866835530">
           <source>View the equipment assignments of the employee.</source>
