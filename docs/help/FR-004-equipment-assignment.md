@@ -24,7 +24,7 @@ when the status changes from Assigned to In Maintenance, Lost or Disposed.
 
 ## View assignments
 - On the equipment card or list: **Assignments** shows the history of the equipment.
-- On the employee card: **Navigate > Equipment Assignments** shows the equipment assigned to that employee, now and before.
+- On the employee card: **Related > Equipment > Equipment Assignments** shows the equipment assigned to that employee, now and before.
 - The list has the views **Active** and **Closed**. Entries cannot be edited or deleted, and closed entries can never be changed.
 
 | Field | Meaning |

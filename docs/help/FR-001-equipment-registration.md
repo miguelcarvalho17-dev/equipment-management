@@ -26,7 +26,7 @@ The equipment is saved when the category is filled in; closing the card without 
 ## Assign equipment to an employee
 1. Open the equipment card.
 2. Choose **Assign to Employee** and select an employee. Only active employees who are not blocked for privacy reasons are listed.
-Status becomes Assigned and the employee's name is shown. You can use the same action to give the equipment to someone else.
+Status becomes Assigned and the employee's name is shown. To give the equipment to someone else, return it first.
 The **Assigned Employee No.** field is editable only while the status is Assigned, and must be filled in then.
 
 ## Return equipment

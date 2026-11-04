@@ -7,8 +7,8 @@ cannot be changed, and equipment that has been assigned cannot be deleted.
 Everyone with **Equipment Reader** can see the assignment history. Nobody can change a closed assignment, and equipment with assignment history cannot be deleted.
 
 ## View the history
-- Equipment card or list: choose **Assignments**.
-- Employee card: choose **Navigate > Equipment Assignments**.
+- Equipment card or list: choose **Equipment > Assignments**, or press **Ctrl+F7**.
+- Employee card: choose **Related > Equipment > Equipment Assignments**.
 - Or search for **Equipment Assignments**.
 - Use the views **Active** and **Closed** to filter.
 

@@ -15,10 +15,10 @@ Status: describes the code as implemented. **Build is clean for the FR-009 files
 | Page | 50106 | EQM Equipment Cues | New CardPart "Equipment Activities": cuegroup "Equipment" with the six tiles, each with `DrillDownPageId = "EQM Equipment List"`. `RefreshOnActivate`. `OnOpenPage` inserts the single row into the temporary table. |
 | Page | 50107 | EQM Equipment Category Chart | New CardPart with the System Application `BusinessChart` add-in: column chart, one column per category that has equipment. Own Refresh action. |
 | Page | 50108 | EQM Equipment Status Chart | New CardPart, `BusinessChart` add-in: pie chart, one segment per value of enum "EQM Equipment Status" (zero counts included, enum order). Own Refresh action. |
-| Page | 50109 | EQM Equipment Dashboard | New Card, `UsageCategory = ReportsAndAnalysis` (found through Tell Me), holds the three parts. Actions Refresh and Equipment (promoted). Teaching tip (`AboutTitle`/`AboutText`). |
-| Page | 50110 | EQM Equipment Manager RC | New Role Center "Equipment Manager": the three parts plus Embedding actions Equipment, Assignments, Categories; Sections group Setup (Equipment Setup, Equipment Categories); Creation action Equipment (new equipment card). |
+| Page | 50109 | EQM Equipment Dashboard | New Card, `UsageCategory = ReportsAndAnalysis` (found through Tell Me), holds the three parts. Actions Refresh (promoted 'Process') and Equipment (promoted 'Navigate'). Teaching tip (`AboutTitle`/`AboutText`). |
+| Page | 50110 | EQM Equipment Manager RC | New Role Center "Equipment Manager": the three parts plus Embedding actions Equipment, Assignments (the duplicate Categories was removed in NFR-003); Sections group Setup (Equipment Setup, Equipment Categories); Creation action Equipment (new equipment card). |
 | Profile | - | EQM EQUIPMENT MANAGER | New. Caption "Equipment Manager", Role Center 50110, `Enabled = true`, `Promoted = true`. |
-| Page | 50100 | EQM Equipment List | New navigation action "Dashboard" (opens page 50109) plus promoted actionref. |
+| Page | 50100 | EQM Equipment List | Action "Dashboard" (opens page 50109) in `area(Reporting)` since NFR-003, promoted under 'Report'. |
 | PermissionSet | 50100 | EQM - Reader | `X` on table 50104, queries 50100 and 50101, pages 50106-50110 and codeunit 50107. |
 
 ## Behavior

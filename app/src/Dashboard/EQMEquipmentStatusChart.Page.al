@@ -54,7 +54,7 @@ page 50108 "EQM Equipment Status Chart"
             action(Refresh)
             {
                 Caption = 'Refresh';
-                ToolTip = 'Updates the chart with the current equipment data.';
+                ToolTip = 'Update the chart with the current equipment data.';
                 Image = Refresh;
 
                 trigger OnAction()

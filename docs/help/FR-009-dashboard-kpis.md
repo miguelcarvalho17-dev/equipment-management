@@ -7,7 +7,7 @@ Everyone with **Equipment Reader** can open the dashboard; Manager and Administr
 
 ## Open the dashboard
 - **Equipment Manager role:** open **My Settings**, choose **Equipment Manager** in the **Role** field, and save. The dashboard becomes your home page. An administrator can also assign the role in **Profiles (Roles)**.
-- **Any other role:** search for **Equipment Dashboard**, or open the **Equipment** list and choose **Dashboard**. The first time, a tip explains the page.
+- **Any other role:** search for **Equipment Dashboard**, or open the **Equipment** list and choose **Reports > Dashboard**. The first time, a tip explains the page.
 
 ## Tiles
 The tiles count your equipment:
@@ -26,7 +26,7 @@ Choose a column or a segment to open the Equipment list filtered to that categor
 The numbers are calculated when the page opens. To update them, choose **Refresh** on the dashboard, or on a chart.
 
 ## Role Center
-The Equipment Manager home page also has shortcuts to **Equipment**, **Assignments** and **Categories**, to **Equipment Setup** and **Equipment Categories**, and an action to create new equipment.
+The Equipment Manager home page also has shortcuts to **Equipment** and **Assignments**, to **Equipment Setup** and **Equipment Categories** (in the Setup section), and an action to create new equipment.
 
 ## Release notes
 New Equipment Dashboard with six equipment tiles and charts by category and by status. Choose a tile or chart segment to see the equipment behind it. The new Equipment Manager role shows the dashboard as your home page: choose it in My Settings. Other users open the dashboard from Tell Me or the Dashboard action on the Equipment list.

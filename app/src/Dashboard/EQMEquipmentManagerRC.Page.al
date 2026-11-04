@@ -29,20 +29,14 @@ page 50110 "EQM Equipment Manager RC"
             action(EquipmentList)
             {
                 Caption = 'Equipment';
-                ToolTip = 'Opens the list of all equipment.';
+                ToolTip = 'Open the list of all equipment.';
                 RunObject = page "EQM Equipment List";
             }
             action(AssignmentList)
             {
                 Caption = 'Assignments';
-                ToolTip = 'Opens the assignment history of all equipment.';
+                ToolTip = 'Open the assignment history of all equipment.';
                 RunObject = page "EQM Equipment Assignments";
-            }
-            action(CategoryList)
-            {
-                Caption = 'Categories';
-                ToolTip = 'Opens the list of equipment categories.';
-                RunObject = page "EQM Equipment Categories";
             }
         }
         area(Sections)
@@ -54,13 +48,13 @@ page 50110 "EQM Equipment Manager RC"
                 action(EquipmentSetup)
                 {
                     Caption = 'Equipment Setup';
-                    ToolTip = 'Opens the equipment setup.';
+                    ToolTip = 'Open the equipment setup.';
                     RunObject = page "EQM Equipment Setup";
                 }
                 action(EquipmentCategories)
                 {
                     Caption = 'Equipment Categories';
-                    ToolTip = 'Opens the list of equipment categories.';
+                    ToolTip = 'Open the list of equipment categories.';
                     RunObject = page "EQM Equipment Categories";
                 }
             }
@@ -70,7 +64,7 @@ page 50110 "EQM Equipment Manager RC"
             action(NewEquipment)
             {
                 Caption = 'Equipment';
-                ToolTip = 'Creates a new equipment record.';
+                ToolTip = 'Create a new equipment record.';
                 Image = New;
                 RunObject = page "EQM Equipment Card";
                 RunPageMode = Create;

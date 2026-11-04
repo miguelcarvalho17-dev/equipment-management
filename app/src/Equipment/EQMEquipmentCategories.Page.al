@@ -3,9 +3,12 @@ namespace MiguelCarvalho.EquipmentManagement;
 page 50102 "EQM Equipment Categories"
 {
     Caption = 'Equipment Categories';
+    AboutTitle = 'About equipment categories';
+    AboutText = 'Categories group your equipment, for example laptops or phones. Every piece of equipment needs an active category. To stop using a category, clear **Active** instead of deleting it. Choose **Equipment** to see the equipment in a category.';
     PageType = List;
     ApplicationArea = All;
     UsageCategory = Administration;
+    AdditionalSearchTerms = 'equipment types, equipment groups';
     SourceTable = "EQM Equipment Category";
     DelayedInsert = true;
 
@@ -43,8 +46,13 @@ page 50102 "EQM Equipment Categories"
         }
         area(Promoted)
         {
-            actionref(Equipment_Promoted; Equipment)
+            group(Category_Category4)
             {
+                Caption = 'Navigate';
+
+                actionref(Equipment_Promoted; Equipment)
+                {
+                }
             }
         }
     }

@@ -1,6 +1,32 @@
 # Changelog
 Newest first. Grouped by Added / Changed / Fixed / Obsolete.
 
+## NFR-003 Usability (version stays 29.0.0.0, no bump)
+### Added
+- Page 50111 "EQM Equipment FactBox" ('Assignment Details') on the Equipment List and Card: status, employee (name, job title, company email), assigned since/by, number of assignments, last assignment closed.
+- Page 50112 "EQM Assigned Equipment FactBox" ('Assigned Equipment') on the Employee Card, shown only to users who can read equipment.
+- Notes (visible) and Links (hidden by default) on the Equipment List and Card.
+- Ctrl+F7 for Assignments on the Equipment List and Card.
+- Teaching tips on Equipment Categories and Equipment Assignments; search terms on the Equipment List, Categories, Setup and Assignments.
+- Three internal procedures in codeunit 50106: `CountAssignments`, `GetLastClosedAssignment`, `ShowAssignments`.
+- EQM - Reader: X on pages 50111 and 50112.
+- Help article docs/help/NFR-003-usability.md.
+### Changed
+- Actions grouped on all pages (Process / Report / Equipment or Navigate); Dashboard moved to Reports on the Equipment List; Categories and Setup no longer promoted on the list (under Related > Setup); Setup action caption is now 'Equipment Setup'.
+- Equipment Assignments is listed under History in Tell Me (was Lists).
+- Equipment Card: Description, Category Code and Assigned Employee Name have `Importance = Promoted`.
+- Action ToolTips are imperative ("Open ...", "Assign ...").
+- Employee Card: equipment actions in a group 'Equipment', Equipment Assignments uses the History image.
+- Equipment Manager Role Center no longer lists Categories twice.
+### Fixed
+- FR-001 help sentence about reassigning: equipment must be returned first. Stale Employee Card action paths in the FR-004 to FR-007 help.
+### Obsolete
+- None.
+
+Release notes: Equipment actions are now grouped like other Business Central pages: Assignments under Equipment (Ctrl+F7), Categories and Setup under Related, Dashboard under Reports. New FactBoxes show who has the equipment, since when and how often it was assigned, and the equipment assigned to an employee on the Employee Card. Equipment pages also have Notes and Links. The Equipment Manager home page no longer lists Categories twice.
+
+Note: built with no warnings (reported by the user); review APPROVE WITH CHANGES (applied). No automated tests (deferred, Q1); sandbox checks UX-SB1 to UX-SB12 not run; risk R1 (ReadPermission() vs the indirect D365 BASIC read on the Employee Card FactBox) unverified. No schema change, events or upgrade logic. See docs/features/NFR-003-usability.md.
+
 ## NFR-002 Role-based access (version stays 29.0.0.0, no bump)
 Version note: nothing has been released; the version stays 29.0.0.0 (confirmed by the user 2026-11-04). The earlier "29.1.0.0" heading for FR-002 was renamed to match.
 ### Added

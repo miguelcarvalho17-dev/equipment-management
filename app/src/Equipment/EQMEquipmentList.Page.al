@@ -10,6 +10,7 @@ page 50100 "EQM Equipment List"
     PageType = List;
     ApplicationArea = All;
     UsageCategory = Lists;
+    AdditionalSearchTerms = 'devices, tools, hardware, company equipment';
     SourceTable = "EQM Equipment";
     CardPageId = "EQM Equipment Card";
     Editable = false;
@@ -63,55 +64,89 @@ page 50100 "EQM Equipment List"
                 }
             }
         }
+        area(FactBoxes)
+        {
+            part(EquipmentFactBox; "EQM Equipment FactBox")
+            {
+                SubPageLink = "No." = field("No.");
+            }
+            systempart(Links; Links)
+            {
+                Visible = false;
+            }
+            systempart(Notes; Notes)
+            {
+            }
+        }
     }
 
     actions
     {
         area(Navigation)
         {
-            action(Categories)
+            group(EquipmentGroup)
             {
-                Caption = 'Categories';
-                ToolTip = 'Opens the list of equipment categories.';
-                Image = Category;
-                RunObject = page "EQM Equipment Categories";
+                Caption = 'Equipment';
+                Image = FixedAssets;
+
+                action(Assignments)
+                {
+                    Caption = 'Assignments';
+                    ToolTip = 'View the assignment history of the selected equipment.';
+                    Image = History;
+                    ShortCutKey = 'Ctrl+F7';
+                    RunObject = page "EQM Equipment Assignments";
+                    RunPageLink = "Equipment No." = field("No.");
+                }
             }
-            action(Setup)
+            group(SetupGroup)
             {
                 Caption = 'Setup';
-                ToolTip = 'Opens the equipment setup.';
                 Image = Setup;
-                RunObject = page "EQM Equipment Setup";
+
+                action(Categories)
+                {
+                    Caption = 'Categories';
+                    ToolTip = 'Open the list of equipment categories.';
+                    Image = Category;
+                    RunObject = page "EQM Equipment Categories";
+                }
+                action(Setup)
+                {
+                    Caption = 'Equipment Setup';
+                    ToolTip = 'Open the equipment setup.';
+                    Image = Setup;
+                    RunObject = page "EQM Equipment Setup";
+                }
             }
-            action(Assignments)
-            {
-                Caption = 'Assignments';
-                ToolTip = 'View the assignment history of the equipment.';
-                Image = History;
-                RunObject = page "EQM Equipment Assignments";
-                RunPageLink = "Equipment No." = field("No.");
-            }
+        }
+        area(Reporting)
+        {
             action(Dashboard)
             {
                 Caption = 'Dashboard';
-                ToolTip = 'Opens the equipment dashboard with key figures and charts.';
+                ToolTip = 'Open the equipment dashboard with key figures and charts.';
                 Image = BarChart;
                 RunObject = page "EQM Equipment Dashboard";
             }
         }
         area(Promoted)
         {
-            actionref(Categories_Promoted; Categories)
+            group(Category_Category4)
             {
+                Caption = 'Equipment';
+
+                actionref(Assignments_Promoted; Assignments)
+                {
+                }
             }
-            actionref(Setup_Promoted; Setup)
+            group(Category_Report)
             {
-            }
-            actionref(Assignments_Promoted; Assignments)
-            {
-            }
-            actionref(Dashboard_Promoted; Dashboard)
-            {
+                Caption = 'Report';
+
+                actionref(Dashboard_Promoted; Dashboard)
+                {
+                }
             }
         }
     }

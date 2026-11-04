@@ -6,6 +6,7 @@ page 50103 "EQM Equipment Setup"
     PageType = Card;
     ApplicationArea = All;
     UsageCategory = Administration;
+    AdditionalSearchTerms = 'equipment numbers, equipment number series';
     SourceTable = "EQM Equipment Setup";
     InsertAllowed = false;
     DeleteAllowed = false;

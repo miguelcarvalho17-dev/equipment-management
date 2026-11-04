@@ -5,9 +5,12 @@ using Microsoft.HumanResources.Employee;
 page 50104 "EQM Equipment Assignments"
 {
     Caption = 'Equipment Assignments';
+    AboutTitle = 'About equipment assignments';
+    AboutText = 'This list shows every assignment of equipment to an employee, newest first. Active assignments show who has the equipment now. Closed assignments are kept as history and cannot be changed. Choose a view at the top to see only active or closed assignments, and choose **Equipment** or **Employee** to open the related card.';
     PageType = List;
     ApplicationArea = All;
-    UsageCategory = Lists;
+    UsageCategory = History;
+    AdditionalSearchTerms = 'equipment history, equipment loans, issued equipment';
     SourceTable = "EQM Equipment Assignment";
     SourceTableView = sorting("Entry No.") order(descending);
     Editable = false;
@@ -66,7 +69,7 @@ page 50104 "EQM Equipment Assignments"
             action(Equipment)
             {
                 Caption = 'Equipment';
-                ToolTip = 'Opens the equipment card.';
+                ToolTip = 'Open the equipment card.';
                 Image = FixedAssets;
                 RunObject = page "EQM Equipment Card";
                 RunPageLink = "No." = field("Equipment No.");
@@ -74,7 +77,7 @@ page 50104 "EQM Equipment Assignments"
             action(Employee)
             {
                 Caption = 'Employee';
-                ToolTip = 'Opens the employee card.';
+                ToolTip = 'Open the employee card.';
                 Image = Employee;
                 RunObject = page "Employee Card";
                 RunPageLink = "No." = field("Employee No.");
@@ -82,11 +85,16 @@ page 50104 "EQM Equipment Assignments"
         }
         area(Promoted)
         {
-            actionref(Equipment_Promoted; Equipment)
+            group(Category_Category4)
             {
-            }
-            actionref(Employee_Promoted; Employee)
-            {
+                Caption = 'Navigate';
+
+                actionref(Equipment_Promoted; Equipment)
+                {
+                }
+                actionref(Employee_Promoted; Employee)
+                {
+                }
             }
         }
     }

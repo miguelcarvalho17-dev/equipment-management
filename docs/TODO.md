@@ -37,12 +37,28 @@ Open items after FR-001 Equipment Registration (written 2026-11-02). Nothing fro
 - [ ] SB11 D365 BASIC only: Employee Card actions Equipment Assignments / Assigned Equipment are hidden or fail (record which); deleting an employee with equipment shows the guard error.
 - [ ] SB12 After the build, `Equipment Management.g.xlf` has the three new captions and the setup-missing label, and there are no CodeCop, UICop or AppSourceCop warnings.
 
+## NFR-003 sandbox checks (not run; automated tests deferred, Q1, test codeunit 50163 reserved)
+- [ ] UX-SB1 AL: Package on `app/` gives no errors or warnings (reported done by the user); `Equipment Management.g.xlf` contains the new captions, ToolTips, teaching tips and search terms.
+- [ ] UX-SB2 Equipment List action bar: Equipment menu (Assignments), Report menu (Dashboard); Related shows Equipment > Assignments and Setup > Categories / Equipment Setup; Reports shows Dashboard. Ctrl+F7 opens the row's assignments. Record how promoted groups render; every action within two clicks.
+- [ ] UX-SB3 Equipment Card: Process (Assign to Employee, Return), Equipment (Assignments), Ctrl+F7. Collapsed General shows Description and Category Code; collapsed Assignment shows Status and employee name.
+- [ ] UX-SB4 List FactBox follows the selected row; on the card it updates after Assign to Employee and Return.
+- [ ] UX-SB5 Add a note on a card: visible in the list FactBox for that row. Links hidden by default, can be shown through personalization.
+- [ ] UX-SB6 Employee Card: Related > Equipment > Equipment Assignments (History icon) / Assigned Equipment; Assigned Equipment FactBox at the top of the pane, lists only current equipment; No. opens the card.
+- [ ] UX-SB7 Tell Me: Equipment Assignments under History; "devices", "equipment types", "equipment number series", "equipment loans" find the right pages. Teaching tips appear on first open of Categories and Assignments.
+- [ ] UX-SB8 Role Center: Embedding shows Equipment and Assignments only; Setup section keeps Equipment Setup and Equipment Categories.
+- [ ] UX-SB9 **R1:** user with D365 BASIC only: Employee Card opens without error and without the Assigned Equipment FactBox. If the FactBox is visible and errors, report; fallback (needs approval) is to remove the part and keep the actions.
+- [ ] UX-SB10 Reader without D365 BASIC: list and card FactBox open with blank employee details, no error.
+- [ ] UX-SB11 Reader: list and card still read-only; Notes can be added (record result).
+- [ ] UX-SB12 Return Equipment lookup from the Employee Card (list in lookup mode) still works with the FactBox pane.
+
 ## Open design and fix items
 - [x] FR-007 known limitation (Employee read): addressed in code by NFR-002 (name blank without Employee read, `ReadPermission()` guard). Not verified in a sandbox (SB9).
 - [ ] **New companies:** default data and number series are created only in `OnInstallAppPerCompany`. In a company created later the setup record is missing, and equipment creation fails on `TestField("Equipment Nos.")`. Create the defaults on company initialization (subscribe to the company-initialize event) or give the user path working permissions. NFR-002: the Administrator path now has indirect No. Series rights (ri), but defaults are still created only on install or when an Administrator opens Setup. Readers and Managers get the setup-missing error. Not verified (SB8).
 - [x] **Setup permissions (Read too permissive):** addressed in code by NFR-002 (EQM - Reader has R only). Not verified in a sandbox (SB2, SB8).
 - [ ] Decide whether "Assigned Employee No." should carry a personal-data classification.
 - [ ] Setup defaults are created only when the setup record is missing. If the record exists but "Equipment Nos." is blank, nothing happens. Fix or document.
+- [ ] Document attachments on equipment (needs al-event-finder first; NFR-003 Q9).
+- [ ] Shared internal helper for the guarded employee full name, now repeated in five pages (NFR-003 R5).
 
 ## AppSource FAILs (validator verdict: NOT READY)
 - [ ] **Translations:** add `TranslationFile` to `features` in `app/app.json`, build to generate `Translations/Equipment Management.g.xlf`, and add an xlf per supported language.
