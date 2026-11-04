@@ -10,6 +10,7 @@ page 50101 "EQM Equipment Card"
     AboutText = 'Here you manage one piece of equipment. The first sections show its details, its current status and who it is assigned to. Use **Assign to Employee** and **Return** to change the assignment. Further down, **Assignment History** lists every assignment, and **Audit** shows who created the record and who changed it last.';
     PageType = Card;
     ApplicationArea = All;
+    UsageCategory = None;
     SourceTable = "EQM Equipment";
     DelayedInsert = true;
 
