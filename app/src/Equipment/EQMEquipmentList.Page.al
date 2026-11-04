@@ -155,7 +155,7 @@ page 50100 "EQM Equipment List"
     begin
         StatusStyle := Rec.GetStatusStyle();
         AssignedEmployeeName := '';
-        if Rec."Assigned Employee No." <> '' then begin
+        if (Rec."Assigned Employee No." <> '') and Employee.ReadPermission() then begin
             Employee.SetLoadFields("First Name", "Middle Name", "Last Name");
             if Employee.Get(Rec."Assigned Employee No.") then
                 AssignedEmployeeName := Employee.FullName();

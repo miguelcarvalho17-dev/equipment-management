@@ -983,6 +983,11 @@
           <note from="Developer" annotates="general" priority="2"></note>
           <note from="Xliff Generator" annotates="general" priority="3">Page EQM Equipment Setup - Property Caption</note>
         </trans-unit>
+        <trans-unit id="Page 1065098760 - NamedType 950344170" size-unit="char" translate="yes" xml:space="preserve">
+          <source>The equipment setup has not been created in this company yet. Ask a user with the Equipment Administrator permission set to open the Equipment Setup page.</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page EQM Equipment Setup - NamedType SetupMissingErr</note>
+        </trans-unit>
         <trans-unit id="Page 1065098760 - Control 1532816877 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
           <source>Numbering</source>
           <note from="Developer" annotates="general" priority="2"></note>
@@ -1118,20 +1123,20 @@
           <note from="Developer" annotates="general" priority="2"></note>
           <note from="Xliff Generator" annotates="general" priority="3">Enum EQM Equipment Status - EnumValue Lost - Property Caption</note>
         </trans-unit>
-        <trans-unit id="PermissionSet 2638768669 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
-          <source>Equipment - Admin</source>
+        <trans-unit id="PermissionSet 630416289 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Equipment Administrator</source>
           <note from="Developer" annotates="general" priority="2"></note>
-          <note from="Xliff Generator" annotates="general" priority="3">PermissionSet EQM - Admin - Property Caption</note>
+          <note from="Xliff Generator" annotates="general" priority="3">PermissionSet EQM - Administrator - Property Caption</note>
         </trans-unit>
-        <trans-unit id="PermissionSet 2444916644 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
-          <source>Equipment - Edit</source>
+        <trans-unit id="PermissionSet 2896812369 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Equipment Manager</source>
           <note from="Developer" annotates="general" priority="2"></note>
-          <note from="Xliff Generator" annotates="general" priority="3">PermissionSet EQM - Edit - Property Caption</note>
+          <note from="Xliff Generator" annotates="general" priority="3">PermissionSet EQM - Manager - Property Caption</note>
         </trans-unit>
-        <trans-unit id="PermissionSet 3223607826 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
-          <source>Equipment - Read</source>
+        <trans-unit id="PermissionSet 4096382515 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Equipment Reader</source>
           <note from="Developer" annotates="general" priority="2"></note>
-          <note from="Xliff Generator" annotates="general" priority="3">PermissionSet EQM - Read - Property Caption</note>
+          <note from="Xliff Generator" annotates="general" priority="3">PermissionSet EQM - Reader - Property Caption</note>
         </trans-unit>
       </group>
     </body>

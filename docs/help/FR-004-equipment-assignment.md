@@ -4,8 +4,8 @@ Every time you assign equipment to an employee, the app records an assignment: t
 date and who assigned it. When the equipment stops being assigned, the assignment is closed automatically.
 
 ## Before you start: permissions
-- **Equipment - Edit** to assign and return equipment.
-- **Equipment - Read** to view the assignment list.
+- **Equipment Manager** to assign and return equipment.
+- **Equipment Reader** to view the assignment list.
 
 ## Assign equipment
 1. Open the equipment card of saved equipment with the status **Available**.

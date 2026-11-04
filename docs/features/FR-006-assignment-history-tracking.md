@@ -16,7 +16,7 @@ No new objects, no schema change, no upgrade codeunit.
 | Table | 50103 | EQM Equipment Assignment | New OnModify and OnRename triggers, local `CheckEntryIsNotClosed`, label `ClosedEntryCannotBeChangedErr`, Status tooltip and summary text. |
 | Table | 50100 | EQM Equipment | OnDelete refuses equipment with history; label `DeleteHistoryExistsErr`. |
 | Codeunit | 50106 | EQM Assignment Mgt. | New internal `HasAssignmentHistory`; removed `DeleteAssignments` and label `ActiveAssignmentExistsErr`; `Permissions` now `rim`. |
-| PermissionSet | 50101 | EQM - Edit | Assignments `Rimd` -> `Rim`. |
+| PermissionSet | 50101 | EQM - Manager (was EQM - Edit) | Assignments `Rimd` -> `Rim`. |
 
 ## History content
 Field names and captions are unchanged. Mapping to the requirement:
@@ -52,9 +52,9 @@ No new events, no signature changes, no standard events subscribed. `OnBeforeIns
 ## Permissions
 | Set | Table 50103 |
 |---|---|
-| EQM - Read | Read (unchanged). |
-| EQM - Edit | `Rim` (was `Rimd`). Used through codeunit 50106; users cannot edit entries directly. Inherited by EQM - Admin. |
-No EQM set can delete entries. Everyone with Equipment - Read can see the history.
+| EQM - Reader | Read (unchanged). |
+| EQM - Manager | `Rim` (was `Rimd`). Used through codeunit 50106; users cannot edit entries directly. Inherited by EQM - Administrator. |
+No EQM set can delete entries. Everyone with Equipment Reader can see the history.
 
 ## Upgrade and compatibility
 - No schema change, no upgrade codeunit. Existing Closed entries become immutable and equipment that has entries becomes undeletable from the first publish.

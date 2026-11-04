@@ -3,7 +3,7 @@
 Use the equipment list to see all your equipment, search it, and narrow it down by category, status or assigned employee.
 
 ## Before you start: permissions
-Everyone with **Equipment - Read** can open the list, search it and filter it.
+Everyone with **Equipment Reader** (also Manager and Administrator) can open the list, search it and filter it. Employee names in the list need the standard **D365 BASIC** permission set; without it the name column is blank.
 
 ## Open the list
 Search for **Equipment** and open the page. It shows all equipment in every status. The first time you open it, a tip explains search and filters.

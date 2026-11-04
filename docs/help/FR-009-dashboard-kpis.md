@@ -3,7 +3,7 @@
 The equipment dashboard shows key figures and two charts about your equipment. It is the home page of the **Equipment Manager** role and is also available as a separate page.
 
 ## Before you start: permissions
-Everyone with **Equipment - Read** can open the dashboard. The edit permission set also includes it.
+Everyone with **Equipment Reader** can open the dashboard; Manager and Administrator include it. Choosing the **Equipment Manager** role (home page) does not give edit rights: what you can change depends on your permission set.
 
 ## Open the dashboard
 - **Equipment Manager role:** open **My Settings**, choose **Equipment Manager** in the **Role** field, and save. The dashboard becomes your home page. An administrator can also assign the role in **Profiles (Roles)**.

@@ -16,13 +16,13 @@ All objects are in namespace `MiguelCarvalho.EquipmentManagement`. All are chang
 | Table | 50100 | EQM Equipment | "Category Code" relation filtered to active categories, own existence and active checks, new event. |
 | Page | 50102 | EQM Equipment Categories | New Active column. |
 | Codeunit | 50105 | EQM Default Data | Adds TABLET and PRINTER; PHONE description is now "Mobile Phone". |
-| PermissionSet | 50101 / 50102 | EQM - Edit / EQM - Admin | Category maintenance moved from Edit to Admin. |
+| PermissionSet | 50101 / 50102 | EQM - Manager / EQM - Administrator (were Edit / Admin) | Category maintenance moved from Manager to Administrator. |
 | app.json | n/a | app/app.json | Version 29.1.0.0; feature `TranslationFile` added. |
 
 ## Setup
 1. Open **Equipment Categories** and add or change categories. A new category is active.
 2. To retire a category, clear **Active**. Equipment keeps the category; nobody can newly select it.
-3. Users who maintain categories need **EQM - Admin** (`Equipment - Admin`).
+3. Users who maintain categories need **EQM - Administrator** (`Equipment Administrator`).
 - New companies get seven starter categories: LAPTOP, MONITOR, PHONE ("Mobile Phone"), TABLET, PRINTER, VEHICLE, TOOL.
   Companies that already ran the default data do not get TABLET and PRINTER, and existing categories are never changed. Add them by hand if wanted.
 - Development sandboxes: when the Active column is synced onto existing category rows they get Active = false (`InitValue` applies to new rows only).
@@ -58,15 +58,15 @@ Subscribed: none new. Partner checks on save remain possible with the FR-001 eve
 ## Permissions
 | Set | Categories |
 |---|---|
-| EQM - Read | Read (R) and indirect insert (i); unchanged. |
-| EQM - Edit | Read only, through EQM - Read. Full rights on categories were removed. |
-| EQM - Admin | Includes Edit; full RIMD on categories and setup. |
+| EQM - Reader | Read (R). |
+| EQM - Manager | Read only, through EQM - Reader. |
+| EQM - Administrator | Includes Manager; full RIMD on categories and setup. The page is read-only for users without write permission (NFR-002). |
 
 ## Upgrade and compatibility
 No upgrade codeunit, upgrade tag or install change: the app has not been published. If 29.0.0.0 data must ever be kept, existing categories become inactive after the sync and an admin must tick Active (otherwise new equipment cannot be created).
 Behavior changes against FR-001 (see CHANGELOG):
 - FR-001 scenario 9 (non-existing category): the error is now our own `CategoryNotFoundErr`, not the platform table-relation error.
-- FR-001 scenario 53 (EQM - Edit maintains categories): no longer true; maintenance is EQM - Admin only.
+- FR-001 scenario 53 (Manager maintains categories): no longer true; maintenance is EQM - Administrator only.
 Once published, field 50101.3 and the event signature become contracts. `CheckCategoryAllowed` is local, not API.
 
 ## Known limitations / verification pending

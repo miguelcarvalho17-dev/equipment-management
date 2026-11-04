@@ -3,7 +3,7 @@
 Categories group your equipment (for example Laptop or Printer). You can retire a category without touching the equipment that uses it.
 
 ## Before you start: permissions
-Maintaining categories needs the **Equipment - Admin** permission set. Users with **Equipment - Edit** or **Equipment - Read** can see categories and choose one on equipment, but cannot add, change or delete them.
+Maintaining categories needs the **Equipment Administrator** permission set. Users with **Equipment Manager** or **Equipment Reader** can see categories and choose one on equipment, but cannot add, change or delete them; the page opens read-only for them.
 
 ## Add a category
 1. Search for **Equipment Categories** and open the page.

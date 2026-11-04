@@ -3,7 +3,7 @@
 Use equipment records to keep track of devices and tools and who has them.
 
 ## Before you start: permissions
-- Assign one EQM permission set: **Equipment - Read** (view), **Equipment - Edit** (create, change, delete equipment) or **Equipment - Admin** (also change the setup and the categories).
+- Assign one EQM permission set: **Equipment Reader** (view), **Equipment Manager** (create and change equipment, assign and return) or **Equipment Administrator** (also delete equipment and change setup and categories). See the roles help article.
 - Users also need the standard **D365 BASIC** permission set. The Equipment sets do not give access to employees, locations or number series.
 
 ## Set up numbering

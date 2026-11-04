@@ -63,9 +63,11 @@ page 50105 "EQM Assignment History Part"
         Employee: Record Employee;
     begin
         EmployeeName := '';
-        Employee.SetLoadFields("First Name", "Middle Name", "Last Name");
-        if Employee.Get(Rec."Employee No.") then
-            EmployeeName := Employee.FullName();
+        if Employee.ReadPermission() then begin
+            Employee.SetLoadFields("First Name", "Middle Name", "Last Name");
+            if Employee.Get(Rec."Employee No.") then
+                EmployeeName := Employee.FullName();
+        end;
 
         if Rec.Status = Rec.Status::Active then
             StatusStyle := FavorableStyleTok

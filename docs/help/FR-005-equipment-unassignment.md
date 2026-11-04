@@ -4,8 +4,8 @@ When an employee gives equipment back, return it. The employee is removed, the s
 assignment is closed. The assignment stays in the history, so you can still see who had the equipment and when.
 
 ## Before you start: permissions
-- **Equipment - Edit** to return equipment.
-- **Equipment - Read** as well to use **Return Equipment** on the employee card.
+- **Equipment Manager** to return equipment.
+- **Equipment Reader** (included in Manager) as well to use **Return Equipment** on the employee card.
 
 ## Return equipment from the equipment card
 1. Open the card of equipment with the status **Assigned**.

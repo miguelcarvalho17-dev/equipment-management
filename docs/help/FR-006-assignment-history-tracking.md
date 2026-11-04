@@ -4,7 +4,7 @@ The app keeps a history of every assignment of equipment to an employee. History
 cannot be changed, and equipment that has been assigned cannot be deleted.
 
 ## Before you start: permissions
-Everyone with **Equipment - Read** can see the assignment history. Nobody can change a closed assignment, and equipment with assignment history cannot be deleted.
+Everyone with **Equipment Reader** can see the assignment history. Nobody can change a closed assignment, and equipment with assignment history cannot be deleted.
 
 ## View the history
 - Equipment card or list: choose **Assignments**.

@@ -1,15 +1,15 @@
 namespace MiguelCarvalho.EquipmentManagement;
 
-permissionset 50100 "EQM - Read"
+permissionset 50100 "EQM - Reader"
 {
-    Caption = 'Equipment - Read';
+    Caption = 'Equipment Reader';
     Assignable = true;
 
     Permissions =
         tabledata "EQM Equipment" = R,
         tabledata "EQM Equipment Assignment" = R,
-        tabledata "EQM Equipment Category" = Ri,
-        tabledata "EQM Equipment Setup" = Rim,
+        tabledata "EQM Equipment Category" = R,
+        tabledata "EQM Equipment Setup" = R,
         table "EQM Equipment" = X,
         table "EQM Equipment Assignment" = X,
         table "EQM Equipment Category" = X,

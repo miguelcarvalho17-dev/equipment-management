@@ -24,7 +24,7 @@ All objects are in the AL namespace `MiguelCarvalho.EquipmentManagement`. Partne
 | Codeunit | 50103 | EQM Employee Subscribers | Internal. Blocks Employee delete while equipment references the employee. |
 | Codeunit | 50104 | EQM Install | Install; calls default data creation per company. |
 | Codeunit | 50105 | EQM Default Data | Internal. Idempotent creation of setup, series EQUIP and starter categories. |
-| PermissionSet | 50100 / 50101 / 50102 | EQM - Read / Edit / Admin | See Permissions. |
+| PermissionSet | 50100 / 50101 / 50102 | EQM - Reader / Manager / Administrator (renamed in NFR-002) | See Permissions. |
 | PermissionSetExtension | 50103 | EQM D365 BASIC | Extends standard set "D365 BASIC" with indirect read on equipment. |
 
 ## Setup
@@ -70,9 +70,9 @@ Subscribed: table Employee, implicit `OnBeforeDeleteEvent` (see above).
 ## Permissions
 | Set | Allows |
 |---|---|
-| EQM - Read (`Equipment - Read`) | Read equipment (R), categories (R, indirect insert) and setup (R, indirect insert and modify); execute the app's tables, pages and the two internal codeunits. |
-| EQM - Edit (`Equipment - Edit`) | Includes Read; full RIMD on equipment (delete is refused when the equipment has assignment history, FR-006). (Categories moved to Admin in FR-002.) |
-| EQM - Admin (`Equipment - Admin`) | Includes Edit; full RIMD on setup (and on categories since FR-002). |
+| EQM - Reader (`Equipment Reader`) | Read (R) on equipment, assignments, categories and setup; execute the app's tables, queries, pages and codeunits. |
+| EQM - Manager (`Equipment Manager`) | Includes Reader; RIM on equipment (no delete). |
+| EQM - Administrator (`Equipment Administrator`) | Includes Manager; adds delete on equipment (refused when the equipment has assignment history, FR-006), RIMD on categories and setup, indirect ri on No. Series and No. Series Line. See NFR-002. |
 | D365 BASIC (extension 50103) | Adds indirect read (`r`) on equipment so the Employee delete guard works for any user who can delete employees. |
 
 - Users also need a standard base set (D365 BASIC) for Employee, Location and No. Series access; the EQM sets do not grant base data.
@@ -90,7 +90,7 @@ Uninstalling does not remove the default data.
 - **Manual sandbox checks still open:**
   1. The implicit Employee `OnBeforeDeleteEvent` subscriber fires when an Employee is deleted from the Employee Card with equipment assigned (guard error expected). No published Employee delete event was confirmed.
   2. Indirect permissions: a user with only D365 BASIC (no EQM set) deletes an Employee with equipment (expect the guard error, not a permission error) and one without equipment (expect success).
-  3. A user with only EQM - Read opens Equipment Setup in a fresh company: expect no permission error and defaults created.
+  3. In a company without setup: a user with EQM - Reader or EQM - Manager opening Equipment Setup gets the setup-missing error; an EQM - Administrator creates the defaults without a permission error (NFR-002 SB8).
   4. Publish into a fresh company: defaults exist; republish: no duplicates.
 - Deletes with RunTrigger = false bypass the Employee guard (accepted).
 - Location delete is not guarded; Location Code may dangle.

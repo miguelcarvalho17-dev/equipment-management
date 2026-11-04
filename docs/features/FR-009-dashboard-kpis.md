@@ -19,7 +19,7 @@ Status: describes the code as implemented. **Build is clean for the FR-009 files
 | Page | 50110 | EQM Equipment Manager RC | New Role Center "Equipment Manager": the three parts plus Embedding actions Equipment, Assignments, Categories; Sections group Setup (Equipment Setup, Equipment Categories); Creation action Equipment (new equipment card). |
 | Profile | - | EQM EQUIPMENT MANAGER | New. Caption "Equipment Manager", Role Center 50110, `Enabled = true`, `Promoted = true`. |
 | Page | 50100 | EQM Equipment List | New navigation action "Dashboard" (opens page 50109) plus promoted actionref. |
-| PermissionSet | 50100 | EQM - Read | `X` on table 50104, queries 50100 and 50101, pages 50106-50110 and codeunit 50107. |
+| PermissionSet | 50100 | EQM - Reader | `X` on table 50104, queries 50100 and 50101, pages 50106-50110 and codeunit 50107. |
 
 ## Behavior
 - **Counts are live**, computed when the page opens, on activation of the cue part, or when the user chooses Refresh. Nothing is cached or stored.
@@ -40,13 +40,13 @@ Status: describes the code as implemented. **Build is clean for the FR-009 files
 ## Setup
 1. Users open **My Settings** and choose **Equipment Manager** in the **Role** field, or an administrator assigns it in **Profiles (Roles)**. The profile is not assigned to anyone and is not made default by the app.
 2. Users in other roles open **Equipment Dashboard** through Tell Me, or **Dashboard** on the Equipment list.
-3. Give users the permission set **Equipment - Read** (EQM - Read) at least; EQM - Edit includes it.
+3. Give users the permission set **Equipment Reader** (EQM - Reader) at least; Manager and Administrator include it.
 
 ## Extending (events)
 No events published or subscribed. All new codeunit procedures are internal. Partners can extend the pages with page extensions; the new control names (`Cues`, `CategoryChart`, `StatusChart`, `Chart`, `Refresh`) could clash with same-named partner controls.
 
 ## Permissions
-EQM - Read now grants `X` on the new table, queries, pages and codeunit (a profile needs no permission). EQM - Edit includes EQM - Read and EQM - Admin includes EQM - Edit (`IncludedPermissionSets`), so both get the new objects. No insert permission is needed for the cue table because it is temporary.
+EQM - Reader now grants `X` on the new table, queries, pages and codeunit (a profile needs no permission). EQM - Manager includes EQM - Reader and EQM - Administrator includes EQM - Manager (`IncludedPermissionSets`), so both get the new objects. No insert permission is needed for the cue table because it is temporary.
 
 **Known limitations:**
 - **Blank Category Code:** equipment without a category appears in the category chart as a column with an empty label (review edge case). It still counts in Total and the status chart. Clicking it is silently ignored if the label does not match; TODO(verify) behavior in a sandbox.

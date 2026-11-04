@@ -48,4 +48,10 @@ page 50102 "EQM Equipment Categories"
             }
         }
     }
+
+    trigger OnOpenPage()
+    begin
+        if not Rec.WritePermission() then
+            CurrPage.Editable := false;
+    end;
 }

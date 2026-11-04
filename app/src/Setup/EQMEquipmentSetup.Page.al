@@ -25,12 +25,20 @@ page 50103 "EQM Equipment Setup"
         }
     }
 
+    var
+        SetupMissingErr: Label 'The equipment setup has not been created in this company yet. Ask a user with the Equipment Administrator permission set to open the Equipment Setup page.';
+
     trigger OnOpenPage()
     var
         DefaultData: Codeunit "EQM Default Data";
     begin
-        if DefaultData.EnsureSetupExists() then
+        if not Rec.Get() then begin
+            if not Rec.WritePermission() then
+                Error(SetupMissingErr);
             DefaultData.CreateDefaultData();
-        Rec.Get();
+            Rec.Get();
+        end;
+        if not Rec.WritePermission() then
+            CurrPage.Editable := false;
     end;
 }
