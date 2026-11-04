@@ -141,8 +141,8 @@ page 50101 "EQM Equipment Card"
             }
             action(Unassign)
             {
-                Caption = 'Unassign';
-                ToolTip = 'Removes the assigned employee, sets the status to Available and closes the assignment.';
+                Caption = 'Return';
+                ToolTip = 'Returns the equipment from the assigned employee. The status changes to Available and the assignment is closed with the work date and your user name. The assignment stays in the history.';
                 Image = Undo;
                 Enabled = IsAssigned;
 

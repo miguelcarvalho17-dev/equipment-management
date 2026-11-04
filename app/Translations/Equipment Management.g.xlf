@@ -9,7 +9,7 @@
           <note from="Xliff Generator" annotates="general" priority="3">Table EQM Equipment - Property Caption</note>
         </trans-unit>
         <trans-unit id="Table 4212454693 - NamedType 1661547909" size-unit="char" translate="yes" xml:space="preserve">
-          <source>Equipment %1 is already assigned to employee %2. Unassign the equipment first, and then assign it again.</source>
+          <source>Equipment %1 is already assigned to employee %2. Return the equipment first, and then assign it again.</source>
           <note from="Developer" annotates="general" priority="2">%1 = equipment number, %2 = employee number</note>
           <note from="Xliff Generator" annotates="general" priority="3">Table EQM Equipment - NamedType AlreadyAssignedErr</note>
         </trans-unit>
@@ -34,7 +34,7 @@
           <note from="Xliff Generator" annotates="general" priority="3">Table EQM Equipment - NamedType CategoryNotFoundErr</note>
         </trans-unit>
         <trans-unit id="Table 4212454693 - NamedType 2572955672" size-unit="char" translate="yes" xml:space="preserve">
-          <source>You cannot delete equipment %1 because it is assigned to employee %2. Unassign the equipment first.</source>
+          <source>You cannot delete equipment %1 because it is assigned to employee %2. Return the equipment first.</source>
           <note from="Developer" annotates="general" priority="2">%1 = equipment number, %2 = employee number</note>
           <note from="Xliff Generator" annotates="general" priority="3">Table EQM Equipment - NamedType DeleteAssignedErr</note>
         </trans-unit>
@@ -44,7 +44,7 @@
           <note from="Xliff Generator" annotates="general" priority="3">Table EQM Equipment - NamedType EmployeeNotActiveErr</note>
         </trans-unit>
         <trans-unit id="Table 4212454693 - NamedType 3181639616" size-unit="char" translate="yes" xml:space="preserve">
-          <source>Employee %1 assigned to equipment %2 no longer exists. Use the Unassign action, then assign another employee.</source>
+          <source>Employee %1 assigned to equipment %2 no longer exists. Use the Return action, then assign another employee.</source>
           <note from="Developer" annotates="general" priority="2">%1 = employee number, %2 = equipment number</note>
           <note from="Xliff Generator" annotates="general" priority="3">Table EQM Equipment - NamedType EmployeeNotFoundErr</note>
         </trans-unit>
@@ -78,10 +78,20 @@
           <note from="Developer" annotates="general" priority="2">%1 = status caption</note>
           <note from="Xliff Generator" annotates="general" priority="3">Table EQM Equipment - NamedType NewEquipmentFinalStatusErr</note>
         </trans-unit>
+        <trans-unit id="Table 4212454693 - NamedType 299185268" size-unit="char" translate="yes" xml:space="preserve">
+          <source>You cannot return equipment %1 because it is not assigned. Its status is %2.</source>
+          <note from="Developer" annotates="general" priority="2">%1 = equipment number, %2 = status caption</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table EQM Equipment - NamedType NotAssignedErr</note>
+        </trans-unit>
         <trans-unit id="Table 4212454693 - NamedType 303853923" size-unit="char" translate="yes" xml:space="preserve">
           <source>You cannot assign equipment %1 because its status is %2. Only equipment with the status %3 can be assigned.</source>
           <note from="Developer" annotates="general" priority="2">%1 = equipment number, %2 = current status caption, %3 = Available status caption</note>
           <note from="Xliff Generator" annotates="general" priority="3">Table EQM Equipment - NamedType NotAvailableForAssignmentErr</note>
+        </trans-unit>
+        <trans-unit id="Table 4212454693 - NamedType 3790029474" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Do you want to return equipment %1 from employee %2? The status changes to %3 and the assignment is closed.</source>
+          <note from="Developer" annotates="general" priority="2">%1 = equipment number, %2 = employee number, %3 = Available status caption</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table EQM Equipment - NamedType ReturnEquipmentQst</note>
         </trans-unit>
         <trans-unit id="Table 4212454693 - NamedType 1157376359" size-unit="char" translate="yes" xml:space="preserve">
           <source>Serial No. %1 is already used by equipment %2.</source>
@@ -98,8 +108,13 @@
           <note from="Developer" annotates="general" priority="2">%1 = equipment number, %2 = current status caption, %3 = new status caption</note>
           <note from="Xliff Generator" annotates="general" priority="3">Table EQM Equipment - NamedType StatusIsFinalErr</note>
         </trans-unit>
+        <trans-unit id="Table 4212454693 - NamedType 3051862358" size-unit="char" translate="yes" xml:space="preserve">
+          <source>To make assigned equipment %1 available, use the Return action on the equipment card or the Return Equipment action on the employee card.</source>
+          <note from="Developer" annotates="general" priority="2">%1 = equipment number</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table EQM Equipment - NamedType UseReturnActionErr</note>
+        </trans-unit>
         <trans-unit id="Table 4212454693 - Field 1994602887 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
-          <source>Specifies the employee the equipment is assigned to. To assign available equipment, use the Assign to Employee action. To change the employee, unassign the equipment first.</source>
+          <source>Specifies the employee the equipment is assigned to. To assign available equipment, use the Assign to Employee action. To change the employee, return the equipment first.</source>
           <note from="Developer" annotates="general" priority="2"></note>
           <note from="Xliff Generator" annotates="general" priority="3">Table EQM Equipment - Field Assigned Employee No. - Property ToolTip</note>
         </trans-unit>
@@ -209,7 +224,7 @@
           <note from="Xliff Generator" annotates="general" priority="3">Table EQM Equipment - Field Serial No. - Property Caption</note>
         </trans-unit>
         <trans-unit id="Table 4212454693 - Field 513339096 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
-          <source>Specifies the lifecycle status of the equipment: Available, Assigned, In Maintenance, Lost or Disposed. Only saved, available equipment can be assigned; use the Assign to Employee action. Lost and Disposed are final statuses: the equipment cannot be assigned or change status again. New equipment cannot start as Assigned, Lost or Disposed.</source>
+          <source>Specifies the lifecycle status of the equipment: Available, Assigned, In Maintenance, Lost or Disposed. Only saved, available equipment can be assigned; use the Assign to Employee action. Assigned equipment becomes available only through the Return action. Lost and Disposed are final statuses: the equipment cannot be assigned or change status again. New equipment cannot start as Assigned, Lost or Disposed.</source>
           <note from="Developer" annotates="general" priority="2"></note>
           <note from="Xliff Generator" annotates="general" priority="3">Table EQM Equipment - Field Status - Property ToolTip</note>
         </trans-unit>
@@ -304,7 +319,7 @@
           <note from="Xliff Generator" annotates="general" priority="3">Table EQM Equipment Assignment - Field Equipment No. - Property Caption</note>
         </trans-unit>
         <trans-unit id="Table 1549914012 - Field 513339096 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
-          <source>Specifies whether the assignment is active or closed. Equipment has at most one active assignment. The assignment is closed when the equipment is unassigned or its status changes from Assigned to another status.</source>
+          <source>Specifies whether the assignment is active or closed. Equipment has at most one active assignment. The assignment is closed when the equipment is returned or its status changes from Assigned to another status. Closed assignments are kept as history.</source>
           <note from="Developer" annotates="general" priority="2"></note>
           <note from="Xliff Generator" annotates="general" priority="3">Table EQM Equipment Assignment - Field Status - Property ToolTip</note>
         </trans-unit>
@@ -384,7 +399,7 @@
           <note from="Xliff Generator" annotates="general" priority="3">Table EQM Equipment Setup - Field Primary Key - Property Caption</note>
         </trans-unit>
         <trans-unit id="Codeunit 843097598 - NamedType 3150899718" size-unit="char" translate="yes" xml:space="preserve">
-          <source>You cannot delete equipment %1 because it has an active assignment. Assign the equipment and then unassign it to close the assignment, and then delete the equipment.</source>
+          <source>You cannot delete equipment %1 because it has an active assignment. Assign the equipment and then return it to close the assignment, and then delete the equipment.</source>
           <note from="Developer" annotates="general" priority="2">%1 = equipment number</note>
           <note from="Xliff Generator" annotates="general" priority="3">Codeunit EQM Assignment Mgt. - NamedType ActiveAssignmentExistsErr</note>
         </trans-unit>
@@ -559,12 +574,12 @@
           <note from="Xliff Generator" annotates="general" priority="3">Page EQM Equipment Card - Action AssignToEmployee - Property Caption</note>
         </trans-unit>
         <trans-unit id="Page 3574600233 - Action 640341854 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
-          <source>Removes the assigned employee, sets the status to Available and closes the assignment.</source>
+          <source>Returns the equipment from the assigned employee. The status changes to Available and the assignment is closed with the work date and your user name. The assignment stays in the history.</source>
           <note from="Developer" annotates="general" priority="2"></note>
           <note from="Xliff Generator" annotates="general" priority="3">Page EQM Equipment Card - Action Unassign - Property ToolTip</note>
         </trans-unit>
         <trans-unit id="Page 3574600233 - Action 640341854 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
-          <source>Unassign</source>
+          <source>Return</source>
           <note from="Developer" annotates="general" priority="2"></note>
           <note from="Xliff Generator" annotates="general" priority="3">Page EQM Equipment Card - Action Unassign - Property Caption</note>
         </trans-unit>
@@ -643,6 +658,16 @@
           <note from="Developer" annotates="general" priority="2"></note>
           <note from="Xliff Generator" annotates="general" priority="3">Page EQM Equipment Setup - Control Numbering - Property Caption</note>
         </trans-unit>
+        <trans-unit id="PageExtension 2678929633 - NamedType 3362745869" size-unit="char" translate="yes" xml:space="preserve" al-object-target="PageExtension 2678929633">
+          <source>Equipment %1 is no longer assigned to employee %2.</source>
+          <note from="Developer" annotates="general" priority="2">%1 = equipment number, %2 = employee number</note>
+          <note from="Xliff Generator" annotates="general" priority="3">PageExtension EQM Employee Card - NamedType EquipmentNoLongerAssignedErr</note>
+        </trans-unit>
+        <trans-unit id="PageExtension 2678929633 - NamedType 739249302" size-unit="char" translate="yes" xml:space="preserve" al-object-target="PageExtension 2678929633">
+          <source>No equipment is assigned to employee %1.</source>
+          <note from="Developer" annotates="general" priority="2">%1 = employee number</note>
+          <note from="Xliff Generator" annotates="general" priority="3">PageExtension EQM Employee Card - NamedType NoAssignedEquipmentMsg</note>
+        </trans-unit>
         <trans-unit id="PageExtension 2678929633 - Action 1766227661 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve" al-object-target="Page 866835530">
           <source>View the equipment assignments of the employee.</source>
           <note from="Developer" annotates="general" priority="2"></note>
@@ -652,6 +677,16 @@
           <source>Equipment Assignments</source>
           <note from="Developer" annotates="general" priority="2"></note>
           <note from="Xliff Generator" annotates="general" priority="3">PageExtension EQM Employee Card - Action EQMEquipmentAssignments - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="PageExtension 2678929633 - Action 737125131 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve" al-object-target="Page 866835530">
+          <source>Returns equipment assigned to this employee. Choose the equipment in the list. Its status changes to Available and the assignment is closed.</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">PageExtension EQM Employee Card - Action EQMReturnEquipment - Property ToolTip</note>
+        </trans-unit>
+        <trans-unit id="PageExtension 2678929633 - Action 737125131 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve" al-object-target="Page 866835530">
+          <source>Return Equipment</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">PageExtension EQM Employee Card - Action EQMReturnEquipment - Property Caption</note>
         </trans-unit>
         <trans-unit id="Enum 1029943338 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
           <source>Equipment Assignment Status</source>

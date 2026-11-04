@@ -35,7 +35,7 @@ Rules (table 50100):
 | Confirmation | Changing to Lost or Disposed asks one question and clears the assigned employee (the question names the employee when one is set). No answers cancels the change. | n/a |
 
 - Other transitions among Available, Assigned and In Maintenance are allowed. In Maintenance equipment can be assigned directly.
-- Moving from Assigned to Available or In Maintenance keeps the FR-001 behavior (confirm, then the employee is cleared).
+- Moving from Assigned to In Maintenance keeps the FR-001 behavior (confirm, then the employee is cleared). Assigned to Available is refused in Status OnValidate unless it comes from the Return action (FR-005).
 - Checks run on Status validate (previous value from the record's `xRec`) and again on insert/modify in `CheckEquipmentConsistency`, comparing against the stored record. Direct field assignment followed by `Modify(true)` is therefore also checked.
 - Without UI (API, job queue) the confirmations answer Yes (`GetResponseOrDefault` default).
 - Not enforced when triggers are skipped (`Modify(false)`, `Insert(false)`, `ModifyAll`, RapidStart without validation).

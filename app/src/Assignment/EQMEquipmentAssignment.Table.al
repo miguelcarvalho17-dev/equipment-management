@@ -5,7 +5,7 @@ using System.Security.AccessControl;
 
 /// <summary>
 /// One entry per assignment of equipment to an employee. Entries are created and closed by the app when
-/// equipment is assigned and unassigned; users cannot edit them. Closed entries are deleted together with their equipment.
+/// equipment is assigned and returned; users cannot edit them. Closed entries are deleted together with their equipment.
 /// </summary>
 table 50103 "EQM Equipment Assignment"
 {
@@ -54,7 +54,7 @@ table 50103 "EQM Equipment Assignment"
         field(6; Status; Enum "EQM Assignment Status")
         {
             Caption = 'Status';
-            ToolTip = 'Specifies whether the assignment is active or closed. Equipment has at most one active assignment. The assignment is closed when the equipment is unassigned or its status changes from Assigned to another status.';
+            ToolTip = 'Specifies whether the assignment is active or closed. Equipment has at most one active assignment. The assignment is closed when the equipment is returned or its status changes from Assigned to another status. Closed assignments are kept as history.';
             InitValue = Active;
         }
         field(7; "Closing Date"; Date)

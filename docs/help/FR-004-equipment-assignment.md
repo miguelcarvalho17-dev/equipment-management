@@ -4,7 +4,7 @@ Every time you assign equipment to an employee, the app records an assignment: t
 date and who assigned it. When the equipment stops being assigned, the assignment is closed automatically.
 
 ## Before you start: permissions
-- **Equipment - Edit** to assign and unassign equipment.
+- **Equipment - Edit** to assign and return equipment.
 - **Equipment - Read** to view the assignment list.
 
 ## Assign equipment
@@ -16,10 +16,10 @@ Notes:
 - Only **Available** equipment can be assigned. Equipment in maintenance, lost or disposed cannot be assigned.
 - New equipment cannot start as Assigned. Create it first, then assign it. On a new card, **Status** offers only Available and In Maintenance.
 - **Assigned Employee No.** on the card cannot be typed in; use **Assign to Employee**.
-- To give assigned equipment to another employee, choose **Unassign** first, then assign it again.
+- To give assigned equipment to another employee, choose **Return** first, then assign it again.
 
 ## End an assignment
-Choose **Unassign** on the card. The assignment is closed with today's work date and your user name. It is also closed
+Choose **Return** on the card. The assignment is closed with today's work date and your user name. It is also closed
 when the status changes from Assigned to In Maintenance, Lost or Disposed.
 
 ## View assignments
@@ -34,9 +34,9 @@ when the status changes from Assigned to In Maintenance, Lost or Disposed.
 | Closing Date / Closed By | Work date and user when the assignment ended. |
 
 ## Deleting equipment
-- Equipment that is Assigned cannot be deleted. Unassign it first.
+- Equipment that is Assigned cannot be deleted. Return it first.
 - When you delete other equipment, its closed assignments are deleted with it.
-- If you see a message that the equipment has an active assignment although it is not assigned, assign it to an employee and unassign it again, then delete it.
+- If you see a message that the equipment has an active assignment although it is not assigned, assign it to an employee and return it again, then delete it.
 
 ## Existing data
-Equipment that was already assigned before this version has no assignment record until it is unassigned and assigned again.
+Equipment that was already assigned before this version has no assignment record until it is returned and assigned again.

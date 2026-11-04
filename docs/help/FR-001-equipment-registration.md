@@ -29,8 +29,8 @@ The equipment is saved when the category is filled in; closing the card without 
 Status becomes Assigned and the employee's name is shown. You can use the same action to give the equipment to someone else.
 The **Assigned Employee No.** field is editable only while the status is Assigned, and must be filled in then.
 
-## Unassign equipment
-1. Open the equipment card and choose **Unassign**.
+## Return equipment
+1. Open the equipment card and choose **Return**. Assigned equipment becomes Available only through Return.
 2. Confirm the question. The employee is removed and the status becomes Available.
 If you change **Status** from Assigned to Available or In Maintenance while an employee is set, you get the same question. Choose No to keep the status and the employee.
 If you change it to Lost or Disposed, you get a different question, because those statuses are final; see the equipment status help.
@@ -41,9 +41,9 @@ Equipment that is not assigned is deleted without a question.
 Where no screen is shown (for example automated integrations), these questions are answered Yes automatically.
 
 ## Employees with equipment
-You cannot delete an employee while equipment is assigned to that employee. Unassign the equipment first.
+You cannot delete an employee while equipment is assigned to that employee. Return the equipment first.
 Deleting through methods that skip triggers, such as some data migration tools, bypasses this check.
-If an assigned employee no longer exists, use **Unassign** and assign someone else.
+If an assigned employee no longer exists, use **Return** and assign someone else.
 
 ## Related
 - Equipment List, Equipment Card, Equipment Categories, Equipment Setup
