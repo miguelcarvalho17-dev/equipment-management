@@ -1,6 +1,27 @@
 # Changelog
 Newest first. Grouped by Added / Changed / Fixed / Obsolete.
 
+## NFR-002 Role-based access (version stays 29.0.0.0, no bump)
+Version note: nothing has been released; the version stays 29.0.0.0 (confirmed by the user 2026-11-04). The earlier "29.1.0.0" heading for FR-002 was renamed to match.
+### Added
+- Help article docs/help/NFR-002-role-based-access.md.
+- Equipment Setup and Equipment Categories open read-only for users without write permission.
+- Error `SetupMissingErr` when a user without write permission opens Equipment Setup in a company with no setup record.
+### Changed
+- Permission sets renamed and re-captioned (object IDs unchanged): EQM - Read -> EQM - Reader ('Equipment Reader'), EQM - Edit -> EQM - Manager ('Equipment Manager'), EQM - Admin -> EQM - Administrator ('Equipment Administrator').
+- Reader: read only; no longer has indirect insert on categories or insert/modify on setup.
+- Manager: no longer deletes equipment (RIM).
+- Administrator: gains delete on equipment and indirect insert/read on No. Series and No. Series Line.
+- Employee names on the equipment list, card, Equipment Assignments and the history part are blank instead of raising an error when the user has no Employee read permission.
+### Fixed
+- TODO items "Setup permissions" (Reader too permissive) and "Assigned Employee Name" (Employee read), addressed in code, not yet verified in a sandbox.
+### Obsolete
+- None.
+
+Release notes: The app now has three clear roles. Equipment Reader can view everything but change nothing, Equipment Manager can also create and change equipment and assign and return it, and Equipment Administrator can also delete equipment and maintain categories and setup. The permission sets were renamed (Equipment Reader, Equipment Manager, Equipment Administrator): in test environments, assign the new sets to users again. All users still need the standard D365 BASIC set.
+
+Note: built with no warnings; review APPROVE WITH CHANGES (applied). No automated tests (deferred, Q7); sandbox checks SB0-SB12 not run. No schema change, events or upgrade logic. See docs/features/NFR-002-role-based-access.md.
+
 ## FR-009 Dashboard and KPIs (version stays 29.0.0.0, no bump)
 ### Added
 - Equipment Dashboard (page 50109): six KPI tiles (Total, Available, Assigned, In Maintenance, Lost, Disposed equipment), chart Equipment by Category (column) and chart Equipment by Status (pie). Tiles and chart data points open the Equipment list filtered to the equipment behind the number.
@@ -115,7 +136,7 @@ Note: not compiled (.NET 10 missing locally) and no automated tests (decision D8
 ### Obsolete
 - None.
 
-## 29.1.0.0 - 2026-11-02
+## FR-002 Equipment Categories - 2026-11-02 (version stays 29.0.0.0, no bump)
 ### Added
 - FR-002 Equipment Categories: **Active** flag on equipment categories (default Yes). Only active categories can be newly set on equipment; equipment that already uses a category keeps it.
 - Starter categories TABLET and PRINTER for new companies.

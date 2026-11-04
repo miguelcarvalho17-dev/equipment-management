@@ -48,7 +48,7 @@ No new events, no signature changes, no standard events subscribed.
 - `OnBeforeCloseAssignment` (codeunit 50106) is raised on every return. On a return the `Equipment` parameter already has a blank "Assigned Employee No."; use the entry's "Employee No." instead.
 
 ## Permissions
-No permission set changes. Returning needs EQM - Edit (modify equipment; the entry is closed indirectly through codeunit 50106). The Employee Card action also needs EQM - Read to open the equipment list. A user with only indirect read on EQM Equipment (D365 BASIC) gets a permission error when using it; the action is shown to all users.
+No permission set changes. Returning needs EQM - Manager (modify equipment; the entry is closed indirectly through codeunit 50106). The Employee Card action also needs EQM - Reader to open the equipment list. A user with only indirect read on EQM Equipment (D365 BASIC) gets a permission error when using it; the action is shown to all users.
 
 ## Upgrade and compatibility
 - No schema change, no upgrade codeunit, no new public surface. Existing data unaffected.

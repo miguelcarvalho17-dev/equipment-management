@@ -3,7 +3,7 @@
 Every piece of equipment has one status that shows where it stands.
 
 ## Before you start: permissions
-Changing the status needs the **Equipment - Edit** permission set. With **Equipment - Read** you can see the status and use the list views, but not change it.
+Changing the status needs the **Equipment Manager** permission set (or Equipment Administrator). With **Equipment Reader** you can see the status and use the list views, but not change it.
 
 ## Statuses
 | Status | Meaning |

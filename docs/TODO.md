@@ -8,7 +8,7 @@ Open items after FR-001 Equipment Registration (written 2026-11-02). Nothing fro
 - [ ] Sandbox checks (also listed in `docs/features/FR-001-equipment-registration.md`):
   - [ ] Deleting an Employee from the Employee Card fires the implicit `OnBeforeDeleteEvent` guard: blocked when equipment references the employee, allowed otherwise.
   - [ ] A user with only D365 BASIC (and no EQM set) can delete an employee who has no equipment (indirect permission on EQM Equipment works).
-  - [ ] A user with only EQM - Read can open Equipment Setup in a fresh company.
+  - [ ] (reversed by NFR-002, see SB8) Formerly: a user with only EQM - Read can open Equipment Setup in a fresh company. Now expected: EQM - Reader and EQM - Manager get the setup-missing error; EQM - Administrator creates the defaults.
   - [ ] Publish and republish into a fresh company: defaults appear once, no duplicates.
   - [ ] On a new card, the number-series button keeps the "No." until the page closes.
   - [ ] Setting Status to Assigned directly on an existing card fails on save (employee required); the Assign to Employee action is the intended path.
@@ -22,10 +22,25 @@ Open items after FR-001 Equipment Registration (written 2026-11-02). Nothing fro
   - [ ] FR-007: search box finds partial equipment and serial numbers; filter pane offers Category Code, Status, Assigned Employee No.
   - [ ] FR-007: Equipment Categories > Equipment and Employee Card > Assigned Equipment open the filtered list; Return Equipment lookup still works and shows the name column.
 
+## NFR-002 sandbox checks (not run; automated tests deferred, Q7, test codeunit 50162 reserved)
+- [ ] SB0 After publishing, EQM - READER / Equipment Reader, EQM - MANAGER / Equipment Manager and EQM - ADMINISTRATOR / Equipment Administrator exist and the old EQM - READ/EDIT/ADMIN are gone. **Assignments to the old set names must be redone** for every test user (old assignments are orphaned).
+- [ ] SB1 Create three test users (not SUPER), each with D365 BASIC plus one EQM set, and a fourth with EQM - Reader only.
+- [ ] SB2 Reader: list, card, history, categories, setup and dashboard open; nothing can be changed.
+- [ ] SB3 Reader: Assign to Employee (pick an employee, then permission error, card unchanged) and Return (confirm, then permission error).
+- [ ] SB4 Reader on list and card: New and Delete not offered or blocked; typing in a card field cannot be saved. Record what the client does.
+- [ ] SB5 Manager: create, change, change status, assign, return; delete not offered or fails. Also confirm the number series is consumed for a non-SUPER Manager.
+- [ ] SB6 Manager: Equipment Categories and Equipment Setup open read-only.
+- [ ] SB7 Administrator: delete never-assigned equipment, maintain categories, change the setup.
+- [ ] SB8 Company without setup: Reader and Manager opening Setup get the setup-missing error; the Administrator (not SUPER) creates EQUIP and the starter categories with no permission error.
+- [ ] SB9 Reader without D365 BASIC: list, card, Assignments and history part open with blank employee names and no error.
+- [ ] SB10 Reader on the Equipment Manager Role Center: tiles and charts work; New > Equipment fails on save with a permission error.
+- [ ] SB11 D365 BASIC only: Employee Card actions Equipment Assignments / Assigned Equipment are hidden or fail (record which); deleting an employee with equipment shows the guard error.
+- [ ] SB12 After the build, `Equipment Management.g.xlf` has the three new captions and the setup-missing label, and there are no CodeCop, UICop or AppSourceCop warnings.
+
 ## Open design and fix items
-- [ ] FR-007 known limitation: the Assigned Employee Name column needs Employee read access, which only D365 BASIC grants. Consider `tabledata Employee = R` in EQM - Read.
-- [ ] **New companies:** default data and number series are created only in `OnInstallAppPerCompany`. In a company created later the setup record is missing, and equipment creation fails on `TestField("Equipment Nos.")`. Create the defaults on company initialization (subscribe to the company-initialize event) or give the user path working permissions. A non-SUPER user opening Setup needs No. Series insert rights, which no EQM set grants.
-- [ ] **Setup permissions:** EQM - Read has indirect insert/modify (`Rim`) on EQM Equipment Setup. The validator finds this too permissive for a read set. Consider restricting modify to EQM - Admin.
+- [x] FR-007 known limitation (Employee read): addressed in code by NFR-002 (name blank without Employee read, `ReadPermission()` guard). Not verified in a sandbox (SB9).
+- [ ] **New companies:** default data and number series are created only in `OnInstallAppPerCompany`. In a company created later the setup record is missing, and equipment creation fails on `TestField("Equipment Nos.")`. Create the defaults on company initialization (subscribe to the company-initialize event) or give the user path working permissions. NFR-002: the Administrator path now has indirect No. Series rights (ri), but defaults are still created only on install or when an Administrator opens Setup. Readers and Managers get the setup-missing error. Not verified (SB8).
+- [x] **Setup permissions (Read too permissive):** addressed in code by NFR-002 (EQM - Reader has R only). Not verified in a sandbox (SB2, SB8).
 - [ ] Decide whether "Assigned Employee No." should carry a personal-data classification.
 - [ ] Setup defaults are created only when the setup record is missing. If the record exists but "Equipment Nos." is blank, nothing happens. Fix or document.
 

@@ -263,9 +263,11 @@ page 50101 "EQM Equipment Card"
         StatusStyle := Rec.GetStatusStyle();
         CanAssign := IsSaved and (Rec.Status = Rec.Status::Available);
         AssignedEmployeeName := '';
-        if Rec."Assigned Employee No." <> '' then
+        if (Rec."Assigned Employee No." <> '') and Employee.ReadPermission() then begin
+            Employee.SetLoadFields("First Name", "Middle Name", "Last Name");
             if Employee.Get(Rec."Assigned Employee No.") then
                 AssignedEmployeeName := Employee.FullName();
+        end;
 
         ActiveAssignmentDate := 0D;
         ActiveAssignedBy := '';

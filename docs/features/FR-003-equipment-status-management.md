@@ -61,7 +61,7 @@ Subscribed: none.
 Internal (not API): `IsFinalStatus(Status)` (true for Lost/Disposed), `GetStatusStyle()`, `AssignEmployee`, `CheckEquipmentConsistency`.
 
 ## Permissions
-No change. Changing status needs `tabledata "EQM Equipment"` modify, which EQM - Edit (and Admin by inclusion) has. EQM - Read users see colors and views but cannot change status.
+No change. Changing status needs `tabledata "EQM Equipment"` modify, which EQM - Manager (and Administrator by inclusion) has. EQM - Reader users see colors and views but cannot change status.
 
 ## Upgrade and compatibility
 - No upgrade codeunit (ordinals kept). Nothing is released, so the following breaking changes were made without obsoleting: enum value renames and removal of `OnBeforeCheckAssignedEmployeeAllowed`. After a release these would be breaking.

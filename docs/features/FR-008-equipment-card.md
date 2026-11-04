@@ -11,7 +11,7 @@ Status: describes the code as implemented. **Not compiled and not run in a sandb
 | Page | 50105 | EQM Assignment History Part | New. ListPart on table "EQM Equipment Assignment", read-only (no insert, modify, delete), sorted by "Entry No." descending (newest first). Columns: Employee No., Employee Name (looked up, display only), Assignment Date, Assigned By, Status, Closing Date, Closed By. "Entry No." is hidden. Status is green (Favorable) when Active, otherwise Subordinate. |
 | Page | 50101 | EQM Equipment Card | Teaching tip (`AboutTitle`/`AboutText`). New fields Assigned Since, Assigned By (assignment group), Created By, Last Modified By (Audit group). New part `AssignmentHistory` linked on "Equipment No." = "No.". Status fields `Importance = Promoted`. Created Date and Last Modified Date no longer `Importance = Additional`. `using System.Security.AccessControl;` added. |
 | Codeunit | 50106 | EQM Assignment Mgt. | New internal procedure `GetActiveAssignment`. |
-| PermissionSet | 50100 | EQM - Read | `page "EQM Assignment History Part" = X` added. |
+| PermissionSet | 50100 | EQM - Reader | `page "EQM Assignment History Part" = X` added. |
 
 ## Behavior
 - **Assigned Since / Assigned By:** shown from the active assignment entry (Assignment Date, Assigned By). Filled only for a saved record with status Assigned; otherwise blank.
@@ -25,7 +25,7 @@ Status: describes the code as implemented. **Not compiled and not run in a sandb
 No events published or subscribed, no signature changes. `GetActiveAssignment` is internal and not callable from other apps. Partners can extend the card with page extensions; new control names (`AssignedSince`, `AssignedBy`, `CreatedBy`, `LastModifiedBy`, `AssignmentHistory`) could clash with same-named partner controls.
 
 ## Permissions
-EQM - Read now includes `page "EQM Assignment History Part" = X`; it already had `tabledata "EQM Equipment Assignment" = R` and `codeunit "EQM Assignment Mgt." = X`. EQM - Edit and other sets are unchanged. TODO(verify): EQM - Edit contains EQM - Read or otherwise grants the new page.
+EQM - Reader now includes `page "EQM Assignment History Part" = X`; it already had `tabledata "EQM Equipment Assignment" = R` and `codeunit "EQM Assignment Mgt." = X`. EQM - Manager and Administrator include it by inclusion. Since NFR-002 the Assigned Employee Name is blank without Employee read permission.
 
 **Known limitations:**
 - **Created By and Last Modified By show blank without read access to the User table.** No EQM set grants it. This is deliberate: the page checks `User.ReadPermission()` and shows blank rather than failing.

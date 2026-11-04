@@ -4,9 +4,10 @@ using Microsoft.Foundation.NoSeries;
 
 // Permission design: every read or write of the setup, the categories and the number series for the
 // default data happens in this codeunit. The Permissions property grants INDIRECT permissions only:
-// it works when the user's permission sets contain the matching indirect (lowercase) rights. The EQM
-// sets provide them (EQM - Read has Rim on the setup and Ri on the categories). Callers (install
-// codeunit, setup page) only call into it.
+// it works only with matching rights in the user's permission sets. Only EQM - Administrator has them
+// (direct RIMD on the setup and the categories, indirect ri on No. Series and No. Series Line).
+// The setup page calls this codeunit only for users with write permission on the setup. The install
+// codeunit runs it as the installing user.
 // This behavior still needs a sandbox check.
 codeunit 50105 "EQM Default Data"
 {

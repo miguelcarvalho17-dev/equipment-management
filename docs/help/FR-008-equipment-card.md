@@ -3,7 +3,7 @@
 The equipment card shows everything about one piece of equipment: its details, status, current assignment, assignment history and who created and last changed it.
 
 ## Before you start: permissions
-Everyone with **Equipment - Read** can open the card and see the history. To change equipment or assign it, you need the edit permission set.
+Everyone with **Equipment Reader** can open the card and see the history. To change equipment or assign it, you need **Equipment Manager**.
 
 ## Open the card
 Search for **Equipment**, then open a piece of equipment from the list. The first time you open the card, a tip explains its sections.

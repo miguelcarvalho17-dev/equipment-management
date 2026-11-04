@@ -23,7 +23,7 @@ Namespace `MiguelCarvalho.EquipmentManagement`.
 | Table | 50100 | EQM Equipment | Changed: assignment rules, create/close hooks, delete rules. |
 | Page | 50101 | EQM Equipment Card | Changed: Assigned Employee No. read-only, new Status control without Assigned, Assignments action. |
 | Page | 50100 | EQM Equipment List | New action "Assignments". |
-| Permission sets | 50100, 50101 | EQM - Read, EQM - Edit | Changed (see Permissions). |
+| Permission sets | 50100, 50101 | EQM - Reader, EQM - Manager | Changed (see Permissions). |
 
 ### Table 50103 fields
 | No. | Field | Notes |
@@ -85,9 +85,9 @@ Subscribed: `Database::Employee` `OnBeforeDeleteEvent` in codeunit 50103 (from F
 Internal (not API): `UpdateAssignmentOnSave`, `HasAssignmentHistory` (FR-006; replaces `DeleteAssignments`), `AssignEmployee`, `UnassignEmployee`.
 
 ## Permissions
-- EQM - Read: read on table 50103, execute on table 50103, page 50104 and codeunit 50106.
-- EQM - Edit: indirect rights `Rim` on table 50103 (read, plus indirect insert/modify; the indirect delete right was removed in FR-006), used only through codeunit 50106. Users cannot edit entries directly.
-- EQM - Admin: no change (inherits Edit).
+- EQM - Reader: read on table 50103, execute on table 50103, page 50104 and codeunit 50106.
+- EQM - Manager: indirect rights `Rim` on table 50103 (read, plus indirect insert/modify; the indirect delete right was removed in FR-006), used only through codeunit 50106. Users cannot edit entries directly.
+- EQM - Administrator: no change (inherits Manager).
 - Page extension action on the Employee Card uses `ApplicationArea = All`.
 
 ## Upgrade and compatibility

@@ -116,9 +116,11 @@ page 50104 "EQM Equipment Assignments"
         EmployeeRec: Record Employee;
     begin
         EmployeeName := '';
-        EmployeeRec.SetLoadFields("First Name", "Middle Name", "Last Name");
-        if EmployeeRec.Get(Rec."Employee No.") then
-            EmployeeName := EmployeeRec.FullName();
+        if EmployeeRec.ReadPermission() then begin
+            EmployeeRec.SetLoadFields("First Name", "Middle Name", "Last Name");
+            if EmployeeRec.Get(Rec."Employee No.") then
+                EmployeeName := EmployeeRec.FullName();
+        end;
 
         if Rec.Status = Rec.Status::Active then
             StatusStyle := FavorableStyleTok
