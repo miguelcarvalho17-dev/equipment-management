@@ -17,7 +17,7 @@ DELIVERY_MODE: AppSource
 - Analyzers on: CodeCop, UICop, plus AppSourceCop (AppSource) or PerTenantExtensionCop (PTE)
 
 ## Workflow
-create feature branch (local + remote, see Git branching) -> [event-finder, if standard behavior is touched] -> planner -> (human approves plan) -> developer -> reviewer -> tester -> documenter -> [appsource-validator, AppSource mode only].
+create feature branch (local + remote, see Git branching) -> [event-finder, if standard behavior is touched] -> planner -> (human approves plan) -> developer -> reviewer -> build (compile, fix errors and warnings via developer) -> tester -> documenter -> [appsource-validator, AppSource mode only].
 Handoffs happen through `docs/plans/<feature>.md`. Subagents do not share chat context,
 so everything they need must be in that file or in the repo.
 
