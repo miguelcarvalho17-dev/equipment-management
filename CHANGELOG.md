@@ -1,6 +1,23 @@
 # Changelog
 Newest first. Grouped by Added / Changed / Fixed / Obsolete.
 
+## FR-006 Assignment History Tracking (version stays 29.0.0.0, no bump)
+### Added
+- Closed assignment entries can no longer be modified or renamed (error `ClosedEntryCannotBeChangedErr`, raised by the table triggers).
+- Internal procedure `HasAssignmentHistory` in codeunit "EQM Assignment Mgt.".
+### Changed
+- Equipment with any assignment entry (active or closed) cannot be deleted; the message tells the user to set the status to Disposed. Closed entries are no longer deleted with their equipment. Supersedes the FR-004 and FR-005 delete rule.
+- EQM - Edit has `Rim` (no delete) on assignments; the codeunit permission `d` was removed.
+- Tooltip of the Status field on assignments extended. Field names are unchanged: Start Date = Assignment Date, End Date = Closing Date.
+### Fixed
+- None.
+### Obsolete
+- Removed internal `DeleteAssignments` and the label `ActiveAssignmentExistsErr`.
+
+Release notes: Assignment history is now protected. Every assignment is kept with its start date (Assignment Date), end date (Closing Date) and the user who assigned it. Closed assignments cannot be changed, and equipment that has ever been assigned cannot be deleted; set it to Disposed instead.
+
+Note: no automated tests (deferred, D4) and not run in a sandbox; see docs/features/FR-006-assignment-history-tracking.md. No new objects, events or schema changes. Trigger-less writes (`Modify(false)`, `Delete(false)`) bypass both rules.
+
 ## FR-005 Equipment Unassignment (version stays 29.0.0.0, no bump)
 ### Added
 - FR-005 Equipment Unassignment: equipment can be returned from the equipment card (action Return) and from the Employee Card (action Return Equipment, pick the employee's assigned equipment). A return clears the employee, sets the status to Available and closes the assignment entry, which is kept as history.

@@ -36,8 +36,7 @@ If you change **Status** from Assigned to Available or In Maintenance while an e
 If you change it to Lost or Disposed, you get a different question, because those statuses are final; see the equipment status help.
 
 ## Delete equipment
-Select the equipment and delete it. If it is assigned to an employee, you are asked to confirm. Choose No to keep it.
-Equipment that is not assigned is deleted without a question.
+Select the equipment and delete it. You can delete equipment only if it was never assigned to an employee. Equipment that is assigned, or that has assignment history, is refused with a message. To stop using equipment that has history, set its status to **Disposed**. See the assignment history help.
 Where no screen is shown (for example automated integrations), these questions are answered Yes automatically.
 
 ## Employees with equipment

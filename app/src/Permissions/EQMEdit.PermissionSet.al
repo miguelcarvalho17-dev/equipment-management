@@ -8,5 +8,5 @@ permissionset 50101 "EQM - Edit"
 
     Permissions =
         tabledata "EQM Equipment" = RIMD,
-        tabledata "EQM Equipment Assignment" = Rimd;
+        tabledata "EQM Equipment Assignment" = Rim;
 }

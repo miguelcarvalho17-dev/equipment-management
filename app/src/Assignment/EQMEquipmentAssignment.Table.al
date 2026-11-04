@@ -4,8 +4,9 @@ using Microsoft.HumanResources.Employee;
 using System.Security.AccessControl;
 
 /// <summary>
-/// One entry per assignment of equipment to an employee. Entries are created and closed by the app when
-/// equipment is assigned and returned; users cannot edit them. Closed entries are deleted together with their equipment.
+/// One entry per assignment of equipment to an employee: the assignment history. Entries are created and closed by the
+/// app when equipment is assigned and returned or leaves the Assigned status; users cannot edit them. A closed entry can
+/// never be modified or renamed. Entries are never deleted: equipment that has entries cannot be deleted.
 /// </summary>
 table 50103 "EQM Equipment Assignment"
 {
@@ -54,7 +55,7 @@ table 50103 "EQM Equipment Assignment"
         field(6; Status; Enum "EQM Assignment Status")
         {
             Caption = 'Status';
-            ToolTip = 'Specifies whether the assignment is active or closed. Equipment has at most one active assignment. The assignment is closed when the equipment is returned or its status changes from Assigned to another status. Closed assignments are kept as history.';
+            ToolTip = 'Specifies whether the assignment is active or closed. Equipment has at most one active assignment. The assignment is closed when the equipment is returned or its status changes from Assigned to another status. Closed assignments are kept as history and cannot be changed.';
             InitValue = Active;
         }
         field(7; "Closing Date"; Date)
@@ -100,4 +101,31 @@ table 50103 "EQM Equipment Assignment"
         {
         }
     }
+
+    var
+        ClosedEntryCannotBeChangedErr: Label 'You cannot change assignment entry %1 for equipment %2 because the assignment is closed. Closed assignments are kept as history and cannot be changed.', Comment = '%1 = entry number, %2 = equipment number';
+
+    trigger OnModify()
+    begin
+        CheckEntryIsNotClosed(Rec."Entry No.");
+    end;
+
+    trigger OnRename()
+    begin
+        CheckEntryIsNotClosed(xRec."Entry No.");
+    end;
+
+    /// <summary>
+    /// Raises an error when the stored assignment entry is closed. Closed entries are history and cannot be changed.
+    /// </summary>
+    /// <param name="EntryNo">The entry number of the stored entry to check.</param>
+    local procedure CheckEntryIsNotClosed(EntryNo: Integer)
+    var
+        StoredAssignment: Record "EQM Equipment Assignment";
+    begin
+        StoredAssignment.SetLoadFields(Status, "Equipment No.");
+        if StoredAssignment.Get(EntryNo) then
+            if StoredAssignment.Status = StoredAssignment.Status::Closed then
+                Error(ClosedEntryCannotBeChangedErr, EntryNo, StoredAssignment."Equipment No.");
+    end;
 }

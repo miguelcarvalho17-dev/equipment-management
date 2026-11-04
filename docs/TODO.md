@@ -14,6 +14,9 @@ Open items after FR-001 Equipment Registration (written 2026-11-02). Nothing fro
   - [ ] Setting Status to Assigned directly on an existing card fails on save (employee required); the Assign to Employee action is the intended path.
   - [ ] FR-005: on an Assigned card, choosing Available in Status fails at once with the "use the Return action" message and no confirmation; In Maintenance still works and closes the entry. Return (card and Employee Card > Return Equipment) closes the entry, keeps it, and the equipment can be assigned again.
   - [ ] Deleting from the non-editable Equipment List shows the confirmation.
+  - [ ] FR-006: open a Closed entry on Equipment Assignments (no field editable). Rename equipment and an employee that have closed history: no error, and the entries show the new numbers (plan H12, risk R3).
+  - [ ] FR-006: delete equipment with history from the card and from the list (Available, Disposed, Lost, In Maintenance): the history error appears and nothing is deleted. Assigned equipment gives the "return first" error. Never-assigned equipment is deleted.
+  - [ ] FR-006: after build, `Equipment Management.g.xlf` contains the new labels and tooltip and no `ActiveAssignmentExistsErr`.
 
 ## Open design and fix items
 - [ ] **New companies:** default data and number series are created only in `OnInstallAppPerCompany`. In a company created later the setup record is missing, and equipment creation fails on `TestField("Equipment Nos.")`. Create the defaults on company initialization (subscribe to the company-initialize event) or give the user path working permissions. A non-SUPER user opening Setup needs No. Series insert rights, which no EQM set grants.
