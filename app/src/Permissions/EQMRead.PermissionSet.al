@@ -17,6 +17,7 @@ permissionset 50100 "EQM - Read"
         page "EQM Equipment List" = X,
         page "EQM Equipment Card" = X,
         page "EQM Equipment Assignments" = X,
+        page "EQM Assignment History Part" = X,
         page "EQM Equipment Categories" = X,
         page "EQM Equipment Setup" = X,
         codeunit "EQM Assignment Mgt." = X,

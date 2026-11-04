@@ -1,6 +1,22 @@
 # Changelog
 Newest first. Grouped by Added / Changed / Fixed / Obsolete.
 
+## FR-008 Equipment Card (version stays 29.0.0.0, no bump)
+### Added
+- Equipment Card: teaching tip; fields Assigned Since and Assigned By (from the active assignment); Assignment History section (new page 50105 "EQM Assignment History Part"); fields Created By and Last Modified By.
+- Internal procedure `GetActiveAssignment` in codeunit "EQM Assignment Mgt.".
+- EQM - Read: execute permission on page "EQM Assignment History Part".
+### Changed
+- Status is promoted on the card; Created Date and Last Modified Date are visible by default.
+### Fixed
+- None.
+### Obsolete
+- None.
+
+Release notes: The equipment card now shows who the equipment is assigned to and since when, lists the full assignment history, and shows who created and last changed the record. Created By and Last Modified By are blank for users without access to the user list.
+
+Note: not compiled and not run in a sandbox; no automated tests (deferred by user, Q5). The translation file must be regenerated with AL: Package. No schema change, events or upgrade logic. See docs/features/FR-008-equipment-card.md.
+
 ## FR-007 Equipment List Management (version stays 29.0.0.0, no bump)
 ### Added
 - Equipment List: teaching tip on search and filters, and a column "Assigned Employee Name".

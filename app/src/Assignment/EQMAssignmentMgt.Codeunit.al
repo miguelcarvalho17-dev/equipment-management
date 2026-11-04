@@ -46,6 +46,22 @@ codeunit 50106 "EQM Assignment Mgt."
         exit(not EquipmentAssignment.IsEmpty());
     end;
 
+    /// <summary>
+    /// Finds the active assignment entry of the equipment. Equipment has at most one active entry; if there
+    /// are more, the newest is returned.
+    /// </summary>
+    /// <param name="EquipmentNo">The equipment number.</param>
+    /// <param name="EquipmentAssignment">Returns the active entry; empty when none is found.</param>
+    /// <returns>True when an active entry exists.</returns>
+    internal procedure GetActiveAssignment(EquipmentNo: Code[20]; var EquipmentAssignment: Record "EQM Equipment Assignment"): Boolean
+    begin
+        EquipmentAssignment.Reset();
+        EquipmentAssignment.SetCurrentKey("Equipment No.", Status);
+        EquipmentAssignment.SetRange("Equipment No.", EquipmentNo);
+        EquipmentAssignment.SetRange(Status, EquipmentAssignment.Status::Active);
+        exit(EquipmentAssignment.FindLast());
+    end;
+
     local procedure CreateAssignment(Equipment: Record "EQM Equipment")
     var
         EquipmentAssignment: Record "EQM Equipment Assignment";

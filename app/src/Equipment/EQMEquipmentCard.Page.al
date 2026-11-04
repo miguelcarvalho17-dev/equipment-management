@@ -1,10 +1,13 @@
 namespace MiguelCarvalho.EquipmentManagement;
 
 using Microsoft.HumanResources.Employee;
+using System.Security.AccessControl;
 
 page 50101 "EQM Equipment Card"
 {
     Caption = 'Equipment Card';
+    AboutTitle = 'About equipment details';
+    AboutText = 'Here you manage one piece of equipment. The first sections show its details, its current status and who it is assigned to. Use **Assign to Employee** and **Return** to change the assignment. Further down, **Assignment History** lists every assignment, and **Audit** shows who created the record and who changed it last.';
     PageType = Card;
     ApplicationArea = All;
     SourceTable = "EQM Equipment";
@@ -50,6 +53,7 @@ page 50101 "EQM Equipment Card"
                 field(StatusNew; Rec.Status)
                 {
                     ValuesAllowed = Available, "In Maintenance";
+                    Importance = Promoted;
                     Visible = IsNewRecord;
                     StyleExpr = StatusStyle;
 
@@ -60,6 +64,7 @@ page 50101 "EQM Equipment Card"
                 }
                 field(Status; Rec.Status)
                 {
+                    Importance = Promoted;
                     Visible = IsSaved;
                     StyleExpr = StatusStyle;
 
@@ -81,6 +86,18 @@ page 50101 "EQM Equipment Card"
                     Editable = false;
                     ToolTip = 'Specifies the name of the employee the equipment is assigned to.';
                 }
+                field(AssignedSince; ActiveAssignmentDate)
+                {
+                    Caption = 'Assigned Since';
+                    Editable = false;
+                    ToolTip = 'Specifies the date the equipment was assigned to the current employee. It is blank when the equipment is not assigned.';
+                }
+                field(AssignedBy; ActiveAssignedBy)
+                {
+                    Caption = 'Assigned By';
+                    Editable = false;
+                    ToolTip = 'Specifies the user who assigned the equipment to the current employee. It is blank when the equipment is not assigned.';
+                }
                 field("Location Code"; Rec."Location Code")
                 {
                 }
@@ -96,6 +113,11 @@ page 50101 "EQM Equipment Card"
                 {
                 }
             }
+            part(AssignmentHistory; "EQM Assignment History Part")
+            {
+                Caption = 'Assignment History';
+                SubPageLink = "Equipment No." = field("No.");
+            }
             group(Audit)
             {
                 Caption = 'Audit';
@@ -104,15 +126,25 @@ page 50101 "EQM Equipment Card"
                 {
                     Caption = 'Created Date';
                     Editable = false;
-                    Importance = Additional;
                     ToolTip = 'Specifies when the equipment record was created.';
+                }
+                field(CreatedBy; CreatedByUserName)
+                {
+                    Caption = 'Created By';
+                    Editable = false;
+                    ToolTip = 'Specifies the user who created the equipment record.';
                 }
                 field(LastModifiedDate; Rec.SystemModifiedAt)
                 {
                     Caption = 'Last Modified Date';
                     Editable = false;
-                    Importance = Additional;
                     ToolTip = 'Specifies when the equipment record was last modified.';
+                }
+                field(LastModifiedBy; ModifiedByUserName)
+                {
+                    Caption = 'Last Modified By';
+                    Editable = false;
+                    ToolTip = 'Specifies the user who last changed the equipment record.';
                 }
             }
         }
@@ -186,6 +218,10 @@ page 50101 "EQM Equipment Card"
         IsNewRecord: Boolean;
         CanAssign: Boolean;
         StatusStyle: Text;
+        ActiveAssignmentDate: Date;
+        ActiveAssignedBy: Code[50];
+        CreatedByUserName: Code[50];
+        ModifiedByUserName: Code[50];
         UseAssignActionErr: Label 'To assign equipment, use the Assign to Employee action.';
 
     trigger OnAfterGetRecord()
@@ -218,6 +254,8 @@ page 50101 "EQM Equipment Card"
     local procedure UpdateControls()
     var
         Employee: Record Employee;
+        ActiveAssignment: Record "EQM Equipment Assignment";
+        AssignmentMgt: Codeunit "EQM Assignment Mgt.";
     begin
         IsAssigned := Rec.Status = Rec.Status::Assigned;
         IsSaved := Rec.SystemCreatedAt <> 0DT;
@@ -228,5 +266,31 @@ page 50101 "EQM Equipment Card"
         if Rec."Assigned Employee No." <> '' then
             if Employee.Get(Rec."Assigned Employee No.") then
                 AssignedEmployeeName := Employee.FullName();
+
+        ActiveAssignmentDate := 0D;
+        ActiveAssignedBy := '';
+        CreatedByUserName := '';
+        ModifiedByUserName := '';
+        if IsSaved and (Rec.Status = Rec.Status::Assigned) then
+            if AssignmentMgt.GetActiveAssignment(Rec."No.", ActiveAssignment) then begin
+                ActiveAssignmentDate := ActiveAssignment."Assignment Date";
+                ActiveAssignedBy := ActiveAssignment."Assigned By";
+            end;
+        CreatedByUserName := GetUserName(Rec.SystemCreatedBy);
+        ModifiedByUserName := GetUserName(Rec.SystemModifiedBy);
+    end;
+
+    local procedure GetUserName(UserSecurityId: Guid): Code[50]
+    var
+        User: Record User;
+    begin
+        if IsNullGuid(UserSecurityId) then
+            exit('');
+        if not User.ReadPermission() then
+            exit('');
+        User.SetLoadFields("User Name");
+        if User.Get(UserSecurityId) then
+            exit(User."User Name");
+        exit('');
     end;
 }
