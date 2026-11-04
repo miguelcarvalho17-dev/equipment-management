@@ -1,6 +1,24 @@
 # Changelog
 Newest first. Grouped by Added / Changed / Fixed / Obsolete.
 
+## FR-009 Dashboard and KPIs (version stays 29.0.0.0, no bump)
+### Added
+- Equipment Dashboard (page 50109): six KPI tiles (Total, Available, Assigned, In Maintenance, Lost, Disposed equipment), chart Equipment by Category (column) and chart Equipment by Status (pie). Tiles and chart data points open the Equipment list filtered to the equipment behind the number.
+- New role **Equipment Manager** (profile "EQM EQUIPMENT MANAGER", Role Center page 50110 with the dashboard, navigation and setup shortcuts). Choose it in My Settings (Role field) or have an administrator assign it in Profiles (Roles). It is not assigned automatically.
+- New objects: table 50104 "EQM Equipment Cue" (temporary), queries 50100 and 50101, codeunit 50107 "EQM Dashboard Mgt." (internal), pages 50106 to 50110.
+- Equipment List: action Dashboard.
+- EQM - Read: execute permission on the new table, queries, pages and codeunit.
+### Changed
+- None.
+### Fixed
+- None.
+### Obsolete
+- None.
+
+Release notes: New Equipment Dashboard with six equipment tiles and charts by category and by status. Choose a tile or chart segment to see the equipment behind it. The new Equipment Manager role shows the dashboard as your home page: choose it in My Settings. Other users open the dashboard from Tell Me or the Dashboard action on the Equipment list.
+
+Note: build clean for FR-009 files; review APPROVE WITH CHANGES (applied). No automated tests (deferred, Q6); not run in a sandbox (chart drill-down payload key, Count FlowFields on the temporary table, chart rendering, Role Center/profile, D365 BASIC requirement for charts are open). Known edge case: equipment with a blank category shows as an unlabeled column. No schema change, events or upgrade logic. See docs/features/FR-009-dashboard-kpis.md.
+
 ## FR-008 Equipment Card (version stays 29.0.0.0, no bump)
 ### Added
 - Equipment Card: teaching tip; fields Assigned Since and Assigned By (from the active assignment); Assignment History section (new page 50105 "EQM Assignment History Part"); fields Created By and Last Modified By.

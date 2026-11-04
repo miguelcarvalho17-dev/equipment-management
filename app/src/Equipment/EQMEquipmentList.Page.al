@@ -91,6 +91,13 @@ page 50100 "EQM Equipment List"
                 RunObject = page "EQM Equipment Assignments";
                 RunPageLink = "Equipment No." = field("No.");
             }
+            action(Dashboard)
+            {
+                Caption = 'Dashboard';
+                ToolTip = 'Opens the equipment dashboard with key figures and charts.';
+                Image = BarChart;
+                RunObject = page "EQM Equipment Dashboard";
+            }
         }
         area(Promoted)
         {
@@ -101,6 +108,9 @@ page 50100 "EQM Equipment List"
             {
             }
             actionref(Assignments_Promoted; Assignments)
+            {
+            }
+            actionref(Dashboard_Promoted; Dashboard)
             {
             }
         }
