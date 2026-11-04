@@ -27,4 +27,25 @@ page 50102 "EQM Equipment Categories"
             }
         }
     }
+
+    actions
+    {
+        area(Navigation)
+        {
+            action(Equipment)
+            {
+                Caption = 'Equipment';
+                ToolTip = 'View the equipment in the selected category.';
+                Image = FixedAssets;
+                RunObject = page "EQM Equipment List";
+                RunPageLink = "Category Code" = field("Code");
+            }
+        }
+        area(Promoted)
+        {
+            actionref(Equipment_Promoted; Equipment)
+            {
+            }
+        }
+    }
 }

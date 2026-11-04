@@ -1,8 +1,12 @@
 namespace MiguelCarvalho.EquipmentManagement;
 
+using Microsoft.HumanResources.Employee;
+
 page 50100 "EQM Equipment List"
 {
     Caption = 'Equipment';
+    AboutTitle = 'About equipment';
+    AboutText = 'This list shows all your equipment. Use **Search** to find equipment by its number, serial number, or any other column you can see. To filter by category, status, or assigned employee, open the filter pane and add a filter on that field. You can also choose a status view at the top of the list.';
     PageType = List;
     ApplicationArea = All;
     UsageCategory = Lists;
@@ -40,6 +44,11 @@ page 50100 "EQM Equipment List"
                 }
                 field("Assigned Employee No."; Rec."Assigned Employee No.")
                 {
+                }
+                field("Assigned Employee Name"; AssignedEmployeeName)
+                {
+                    Caption = 'Assigned Employee Name';
+                    ToolTip = 'Specifies the name of the employee the equipment is assigned to.';
                 }
                 field("Location Code"; Rec."Location Code")
                 {
@@ -128,9 +137,18 @@ page 50100 "EQM Equipment List"
 
     var
         StatusStyle: Text;
+        AssignedEmployeeName: Text[100];
 
     trigger OnAfterGetRecord()
+    var
+        Employee: Record Employee;
     begin
         StatusStyle := Rec.GetStatusStyle();
+        AssignedEmployeeName := '';
+        if Rec."Assigned Employee No." <> '' then begin
+            Employee.SetLoadFields("First Name", "Middle Name", "Last Name");
+            if Employee.Get(Rec."Assigned Employee No.") then
+                AssignedEmployeeName := Employee.FullName();
+        end;
     end;
 }

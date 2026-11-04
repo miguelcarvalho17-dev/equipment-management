@@ -26,3 +26,4 @@ If a category was retired after you chose it, you can still save other changes t
 
 ## Related
 - Equipment Categories, Equipment Card
+- To see the equipment of a category, select it and choose **Equipment**: see docs/help/FR-007-equipment-list-management.md

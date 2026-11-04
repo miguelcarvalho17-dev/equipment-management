@@ -17,8 +17,13 @@ Open items after FR-001 Equipment Registration (written 2026-11-02). Nothing fro
   - [ ] FR-006: open a Closed entry on Equipment Assignments (no field editable). Rename equipment and an employee that have closed history: no error, and the entries show the new numbers (plan H12, risk R3).
   - [ ] FR-006: delete equipment with history from the card and from the list (Available, Disposed, Lost, In Maintenance): the history error appears and nothing is deleted. Assigned equipment gives the "return first" error. Never-assigned equipment is deleted.
   - [ ] FR-006: after build, `Equipment Management.g.xlf` contains the new labels and tooltip and no `ActiveAssignmentExistsErr`.
+  - [ ] FR-007: code not yet compiled; run AL: Package, then check `Equipment Management.g.xlf` has the AboutTitle, AboutText, new captions and tooltips.
+  - [ ] FR-007: teaching tip appears on first open of the Equipment list and `**Search**` renders bold.
+  - [ ] FR-007: search box finds partial equipment and serial numbers; filter pane offers Category Code, Status, Assigned Employee No.
+  - [ ] FR-007: Equipment Categories > Equipment and Employee Card > Assigned Equipment open the filtered list; Return Equipment lookup still works and shows the name column.
 
 ## Open design and fix items
+- [ ] FR-007 known limitation: the Assigned Employee Name column needs Employee read access, which only D365 BASIC grants. Consider `tabledata Employee = R` in EQM - Read.
 - [ ] **New companies:** default data and number series are created only in `OnInstallAppPerCompany`. In a company created later the setup record is missing, and equipment creation fails on `TestField("Equipment Nos.")`. Create the defaults on company initialization (subscribe to the company-initialize event) or give the user path working permissions. A non-SUPER user opening Setup needs No. Series insert rights, which no EQM set grants.
 - [ ] **Setup permissions:** EQM - Read has indirect insert/modify (`Rim`) on EQM Equipment Setup. The validator finds this too permissive for a read set. Consider restricting modify to EQM - Admin.
 - [ ] Decide whether "Assigned Employee No." should carry a personal-data classification.

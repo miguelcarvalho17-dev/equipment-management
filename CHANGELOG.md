@@ -1,6 +1,21 @@
 # Changelog
 Newest first. Grouped by Added / Changed / Fixed / Obsolete.
 
+## FR-007 Equipment List Management (version stays 29.0.0.0, no bump)
+### Added
+- Equipment List: teaching tip on search and filters, and a column "Assigned Employee Name".
+- Action Equipment on Equipment Categories (list filtered on the category) and action Assigned Equipment on the Employee Card (list filtered on the employee).
+### Changed
+- None.
+### Fixed
+- None.
+### Obsolete
+- None.
+
+Release notes: The equipment list now explains how to search and filter, shows the name of the assigned employee, and can be opened already filtered from a category (Equipment Categories > Equipment) and from an employee (Employee Card > Assigned Equipment).
+
+Note: not compiled and no automated tests (deferred by user, Q5); not run in a sandbox. Review: APPROVE WITH COMMENTS. No new objects, events or schema changes. Name column needs Employee read access (D365 BASIC); known limitation. See docs/features/FR-007-equipment-list-management.md.
+
 ## FR-006 Assignment History Tracking (version stays 29.0.0.0, no bump)
 ### Added
 - Closed assignment entries can no longer be modified or renamed (error `ClosedEntryCannotBeChangedErr`, raised by the table triggers).

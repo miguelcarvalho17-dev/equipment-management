@@ -46,4 +46,5 @@ If an assigned employee no longer exists, use **Return** and assign someone else
 
 ## Related
 - Equipment List, Equipment Card, Equipment Categories, Equipment Setup
+- Searching and filtering the list: see docs/help/FR-007-equipment-list-management.md
 - Employees
