@@ -25,7 +25,7 @@ when the status changes from Assigned to In Maintenance, Lost or Disposed.
 ## View assignments
 - On the equipment card or list: **Assignments** shows the history of the equipment.
 - On the employee card: **Navigate > Equipment Assignments** shows the equipment assigned to that employee, now and before.
-- The list has the views **Active** and **Closed**. Entries cannot be edited or deleted.
+- The list has the views **Active** and **Closed**. Entries cannot be edited or deleted, and closed entries can never be changed.
 
 | Field | Meaning |
 |---|---|
@@ -35,8 +35,9 @@ when the status changes from Assigned to In Maintenance, Lost or Disposed.
 
 ## Deleting equipment
 - Equipment that is Assigned cannot be deleted. Return it first.
-- When you delete other equipment, its closed assignments are deleted with it.
-- If you see a message that the equipment has an active assignment although it is not assigned, assign it to an employee and return it again, then delete it.
+- Equipment that has been assigned at least once has assignment history and cannot be deleted, even after it is returned. Set its status to **Disposed** instead.
+- Only equipment that was never assigned can be deleted.
+- Assignments are never deleted. Closed assignments cannot be changed. See the FR-006 help.
 
 ## Existing data
 Equipment that was already assigned before this version has no assignment record until it is returned and assigned again.

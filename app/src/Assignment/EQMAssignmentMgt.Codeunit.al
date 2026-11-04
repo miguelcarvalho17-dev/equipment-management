@@ -6,11 +6,8 @@ namespace MiguelCarvalho.EquipmentManagement;
 codeunit 50106 "EQM Assignment Mgt."
 {
     Access = Public;
-    Permissions = tabledata "EQM Equipment Assignment" = rimd,
+    Permissions = tabledata "EQM Equipment Assignment" = rim,
                   tabledata "EQM Equipment" = r;
-
-    var
-        ActiveAssignmentExistsErr: Label 'You cannot delete equipment %1 because it has an active assignment. Assign the equipment and then return it to close the assignment, and then delete the equipment.', Comment = '%1 = equipment number';
 
     /// <summary>
     /// Creates an active assignment entry when saved equipment becomes Assigned, and closes it when the
@@ -35,22 +32,18 @@ codeunit 50106 "EQM Assignment Mgt."
     end;
 
     /// <summary>
-    /// Deletes the closed assignment entries of the equipment. Raises an error when the equipment still has an
-    /// active assignment entry.
+    /// Returns whether the equipment has any assignment entry, active or closed. Equipment with assignment
+    /// history cannot be deleted.
     /// </summary>
-    /// <param name="EquipmentNo">The number of the equipment that is being deleted.</param>
-    internal procedure DeleteAssignments(EquipmentNo: Code[20])
+    /// <param name="EquipmentNo">The equipment number.</param>
+    /// <returns>True when at least one entry exists.</returns>
+    internal procedure HasAssignmentHistory(EquipmentNo: Code[20]): Boolean
     var
         EquipmentAssignment: Record "EQM Equipment Assignment";
     begin
         EquipmentAssignment.SetCurrentKey("Equipment No.", Status);
         EquipmentAssignment.SetRange("Equipment No.", EquipmentNo);
-        EquipmentAssignment.SetRange(Status, EquipmentAssignment.Status::Active);
-        if not EquipmentAssignment.IsEmpty() then
-            Error(ActiveAssignmentExistsErr, EquipmentNo);
-
-        EquipmentAssignment.SetRange(Status, EquipmentAssignment.Status::Closed);
-        EquipmentAssignment.DeleteAll(false);
+        exit(not EquipmentAssignment.IsEmpty());
     end;
 
     local procedure CreateAssignment(Equipment: Record "EQM Equipment")

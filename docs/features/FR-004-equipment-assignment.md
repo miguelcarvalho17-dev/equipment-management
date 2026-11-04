@@ -17,7 +17,7 @@ Namespace `MiguelCarvalho.EquipmentManagement`.
 |---|---|---|---|
 | Table | 50103 | EQM Equipment Assignment | One entry per assignment. |
 | Enum | 50101 | EQM Assignment Status | Active, Closed. Not extensible. |
-| Codeunit | 50106 | EQM Assignment Mgt. | Creates and closes entries, deletes closed entries with their equipment. Two events. |
+| Codeunit | 50106 | EQM Assignment Mgt. | Creates and closes entries; since FR-006 it also answers whether equipment has history. Two events. |
 | Page | 50104 | EQM Equipment Assignments | Read-only list, views Active and Closed. |
 | PageExtension | 50100 | EQM Employee Card | Navigation action "Equipment Assignments" (entries of the employee). |
 | Table | 50100 | EQM Equipment | Changed: assignment rules, create/close hooks, delete rules. |
@@ -61,11 +61,11 @@ Rules are in table 50100, so they apply to pages, code and APIs alike (with trig
   control for new records now offers only Available and In Maintenance.
 - **Picking Assigned in the card's Status dropdown is refused.** On saved equipment the card raises "To assign equipment, use the Assign to Employee action." as soon as Assigned is chosen, and the status reverts. This avoids a dead end where the employee field is read-only and the action is disabled.
 - **Assigned Employee No. on the card is read-only.** The employee is set only through Assign to Employee. The card action is enabled only for saved Available equipment.
-- **Deleting equipment (D6):** replaces the FR-001 confirmation.
+- **Deleting equipment (D6, superseded by FR-006 D2):** replaces the FR-001 confirmation.
   - Refused while status is Assigned.
-  - Refused while an Active entry exists (leftover after trigger-less writes).
-  - Otherwise the Closed entries of the equipment are deleted with it.
-  - Entries cannot be deleted any other way: the list page has `DeleteAllowed = false` and no EQM permission set grants direct delete.
+  - Since FR-006: refused when the equipment has any assignment entry, Active or Closed (`DeleteHistoryExistsErr`). Entries are no longer deleted with the equipment; `DeleteAssignments` and `ActiveAssignmentExistsErr` were removed. Only equipment that was never assigned can be deleted.
+  - Entries cannot be deleted any other way: the list page has `DeleteAllowed = false` and no EQM permission set grants delete.
+  - Since FR-006 a Closed entry cannot be modified or renamed (see `FR-006-assignment-history-tracking.md`).
 - Not enforced when triggers are skipped (`Modify(false)`, `Insert(false)`, `Delete(false)`, `ModifyAll`, `DeleteAll`, RapidStart
   without validation). A leftover state is repaired by assign + return.
 - No backfill (D10): equipment already Assigned before this feature has no entry until it is returned and assigned again.
@@ -82,11 +82,11 @@ Published from codeunit 50106 as `[IntegrationEvent(false, false)]`, declared `l
 Changed doc for existing event `OnBeforeCheckStatusTransitionAllowed`: `IsHandled` now also skips "only Available can become Assigned".
 Subscribed: `Database::Employee` `OnBeforeDeleteEvent` in codeunit 50103 (from FR-001; unchanged here).
 
-Internal (not API): `UpdateAssignmentOnSave`, `DeleteAssignments`, `AssignEmployee`, `UnassignEmployee`.
+Internal (not API): `UpdateAssignmentOnSave`, `HasAssignmentHistory` (FR-006; replaces `DeleteAssignments`), `AssignEmployee`, `UnassignEmployee`.
 
 ## Permissions
 - EQM - Read: read on table 50103, execute on table 50103, page 50104 and codeunit 50106.
-- EQM - Edit: indirect rights `Rimd` on table 50103 (read, plus indirect insert/modify/delete), used only through codeunit 50106. Users cannot edit entries directly.
+- EQM - Edit: indirect rights `Rim` on table 50103 (read, plus indirect insert/modify; the indirect delete right was removed in FR-006), used only through codeunit 50106. Users cannot edit entries directly.
 - EQM - Admin: no change (inherits Edit).
 - Page extension action on the Employee Card uses `ApplicationArea = All`.
 

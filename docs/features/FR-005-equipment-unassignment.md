@@ -37,10 +37,10 @@ No new objects. Namespace `MiguelCarvalho.EquipmentManagement`.
   2. Opens page "EQM Equipment List" in lookup mode on that filter; Cancel stops.
   3. Re-reads the chosen record; if it is no longer Assigned to this employee, raises `EquipmentNoLongerAssignedErr`.
   4. Calls `UnassignEmployee` (confirmation, return). The result is ignored.
-- Reworded texts ("Unassign" -> "Return"): `EmployeeNotFoundErr`, `AlreadyAssignedErr`, `DeleteAssignedErr` (table 50100), `ActiveAssignmentExistsErr` (codeunit 50106), tooltips of Status and "Assigned Employee No." (table 50100) and of Status (table 50103).
+- Reworded texts ("Unassign" -> "Return"): `EmployeeNotFoundErr`, `AlreadyAssignedErr`, `DeleteAssignedErr` (table 50100), `ActiveAssignmentExistsErr` (codeunit 50106, removed again in FR-006), tooltips of Status and "Assigned Employee No." (table 50100) and of Status (table 50103).
 - Not enforced when triggers are skipped (`Modify(false)`, `ModifyAll`, RapidStart without validation).
 - Equipment Assigned before FR-004 has no entry; it can be returned and nothing is closed, no error.
-- FR-004 delete rule unchanged: Closed entries are deleted together with their equipment.
+- Delete rule changed by FR-006: Closed entries are no longer deleted with their equipment; equipment with assignment history cannot be deleted (see `FR-006-assignment-history-tracking.md`). This replaces the earlier "Closed entries are deleted together with their equipment" rule.
 
 ## Extending (events)
 No new events, no signature changes, no standard events subscribed.

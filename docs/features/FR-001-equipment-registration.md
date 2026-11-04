@@ -46,7 +46,7 @@ Equipment (table 50100):
   - An employee already assigned who later becomes inactive does not block editing the equipment; returning is always possible.
   - If the assigned employee record no longer exists, every validate/insert/modify raises "Employee ... no longer exists" until the equipment is returned.
 - **Status change away from Assigned** to Available or In Maintenance while an employee is set: asks for confirmation; Yes clears the employee, No cancels the change. Changing to Lost or Disposed asks a different confirmation (final status; also clears the employee) and those statuses cannot be left again; see `FR-003-equipment-status-management.md`.
-- **Delete** of equipment that is Assigned to an employee: asks for confirmation; No cancels the delete. Other equipment is deleted without a question.
+- **Delete** of equipment that is Assigned to an employee: asks for confirmation; No cancels the delete. Since FR-004/FR-006 the delete is refused for assigned equipment (no confirmation) and for any equipment with assignment history; only never-assigned equipment is deleted, without a question. See `FR-006-assignment-history-tracking.md`.
 - Confirmations use codeunit "Confirm Management" `GetResponseOrDefault` with default Yes: in sessions without UI (API, job queue) no dialog appears and the answer is Yes.
 - Created Date / Last Modified Date are the system fields SystemCreatedAt / SystemModifiedAt (shown on the card, Additional importance).
 
@@ -71,7 +71,7 @@ Subscribed: table Employee, implicit `OnBeforeDeleteEvent` (see above).
 | Set | Allows |
 |---|---|
 | EQM - Read (`Equipment - Read`) | Read equipment (R), categories (R, indirect insert) and setup (R, indirect insert and modify); execute the app's tables, pages and the two internal codeunits. |
-| EQM - Edit (`Equipment - Edit`) | Includes Read; full RIMD on equipment. (Categories moved to Admin in FR-002.) |
+| EQM - Edit (`Equipment - Edit`) | Includes Read; full RIMD on equipment (delete is refused when the equipment has assignment history, FR-006). (Categories moved to Admin in FR-002.) |
 | EQM - Admin (`Equipment - Admin`) | Includes Edit; full RIMD on setup (and on categories since FR-002). |
 | D365 BASIC (extension 50103) | Adds indirect read (`r`) on equipment so the Employee delete guard works for any user who can delete employees. |
 
@@ -95,7 +95,7 @@ Uninstalling does not remove the default data.
 - Deletes with RunTrigger = false bypass the Employee guard (accepted).
 - Location delete is not guarded; Location Code may dangle.
 - TODO(verify): setting Status to Assigned directly on the card for an existing record is expected to fail on save (employee required); the intended path is the Assign to Employee action. Not exercised in a client.
-- TODO(verify): Delete from the (non-editable) Equipment List is expected to show the confirmation for assigned equipment.
+- TODO(verify): Delete from the (non-editable) Equipment List is expected to show the delete error for equipment that is assigned or has history (FR-006).
 - app.json is not AppSource-ready (outside FR-001): empty privacyStatement, EULA, help, url, logo; no translation file; demo ID range.
 
 ## Plan discrepancies
