@@ -54,6 +54,29 @@ These address the rest of the problem above and are planned for later versions:
 
 Out of scope for now: depreciation and fixed-asset accounting, purchasing workflows, and mobile or barcode scanning.
 
+## Version 2
+
+### Project objective
+
+The V2 release extends the Equipment Management solution by introducing maintenance management, warranty tracking, automated notifications, and equipment lifecycle monitoring.
+
+The objective is to ensure that equipment remains operational, warranty coverage is monitored proactively, and managers are notified of upcoming actions requiring attention.
+
+### Scope of V2
+
+| Capability | What it gives you |
+|---|---|
+| **Maintenance management** | Maintenance schedules and records for each item of equipment |
+| **Warranty tracking** | Warranty coverage per item, monitored before it expires |
+| **Automated notifications** | Managers are alerted to upcoming actions that need attention |
+| **Lifecycle monitoring** | Visibility of equipment across its life, from purchase to disposal |
+
+### Roadmap (after V2)
+
+- Location tracking
+
+Out of scope for now: depreciation and fixed-asset accounting, purchasing workflows, and mobile or barcode scanning.
+
 ## Technical overview
 
 - **Platform:** Business Central 29, AL runtime 18.0
