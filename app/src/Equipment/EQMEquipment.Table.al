@@ -206,6 +206,7 @@ table 50100 "EQM Equipment"
         NewEquipmentAssignedErr: Label 'You cannot create equipment with the status %1. Create the equipment first, and then use the Assign to Employee action.', Comment = '%1 = status caption';
         DeleteAssignedErr: Label 'You cannot delete equipment %1 because it is assigned to employee %2. Return the equipment first.', Comment = '%1 = equipment number, %2 = employee number';
         DeleteHistoryExistsErr: Label 'You cannot delete equipment %1 because it has assignment history. To stop using the equipment, set its status to %2 instead.', Comment = '%1 = equipment number, %2 = Disposed status caption';
+        DeleteMaintenanceExistsErr: Label 'You cannot delete equipment %1 because it has maintenance records. To stop using the equipment, set its status to %2 instead.', Comment = '%1 = equipment number, %2 = Disposed status caption';
         NotAssignedErr: Label 'You cannot return equipment %1 because it is not assigned. Its status is %2.', Comment = '%1 = equipment number, %2 = status caption';
         ReturnEquipmentQst: Label 'Do you want to return equipment %1 from employee %2? The status changes to %3 and the assignment is closed.', Comment = '%1 = equipment number, %2 = employee number, %3 = Available status caption';
         UseReturnActionErr: Label 'To make assigned equipment %1 available, use the Return action on the equipment card or the Return Equipment action on the employee card.', Comment = '%1 = equipment number';
@@ -237,11 +238,14 @@ table 50100 "EQM Equipment"
     trigger OnDelete()
     var
         AssignmentMgt: Codeunit "EQM Assignment Mgt.";
+        MaintenanceMgt: Codeunit "EQM Maintenance Mgt.";
     begin
         if Status = Status::Assigned then
             Error(DeleteAssignedErr, "No.", "Assigned Employee No.");
         if AssignmentMgt.HasAssignmentHistory("No.") then
             Error(DeleteHistoryExistsErr, "No.", Format(Status::Disposed));
+        if MaintenanceMgt.HasMaintenanceRecords("No.") then
+            Error(DeleteMaintenanceExistsErr, "No.", Format(Status::Disposed));
     end;
 
     /// <summary>

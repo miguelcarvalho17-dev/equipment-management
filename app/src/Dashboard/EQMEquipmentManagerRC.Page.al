@@ -38,6 +38,12 @@ page 50110 "EQM Equipment Manager RC"
                 ToolTip = 'Open the assignment history of all equipment.';
                 RunObject = page "EQM Equipment Assignments";
             }
+            action(MaintenanceList)
+            {
+                Caption = 'Maintenance';
+                ToolTip = 'Open the maintenance records of all equipment.';
+                RunObject = page "EQM Maintenance Records";
+            }
         }
         area(Sections)
         {
@@ -67,6 +73,14 @@ page 50110 "EQM Equipment Manager RC"
                 ToolTip = 'Create a new equipment record.';
                 Image = New;
                 RunObject = page "EQM Equipment Card";
+                RunPageMode = Create;
+            }
+            action(NewMaintenanceRecord)
+            {
+                Caption = 'Maintenance Record';
+                ToolTip = 'Register maintenance that was performed on equipment.';
+                Image = New;
+                RunObject = page "EQM Maintenance Record Card";
                 RunPageMode = Create;
             }
         }

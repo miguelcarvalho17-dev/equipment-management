@@ -21,6 +21,9 @@ codeunit 50105 "EQM Default Data"
         EquipmentSeriesCodeTok: Label 'EQUIP', Locked = true;
         EquipmentSeriesStartTok: Label 'EQ00001', Locked = true;
         EquipmentSeriesDescriptionTxt: Label 'Equipment', MaxLength = 100;
+        MaintenanceSeriesCodeTok: Label 'EQMAINT', Locked = true;
+        MaintenanceSeriesStartTok: Label 'MNT00001', Locked = true;
+        MaintenanceSeriesDescriptionTxt: Label 'Equipment Maintenance', MaxLength = 100;
         LaptopCodeTok: Label 'LAPTOP', Locked = true;
         MonitorCodeTok: Label 'MONITOR', Locked = true;
         PhoneCodeTok: Label 'PHONE', Locked = true;
@@ -53,20 +56,28 @@ codeunit 50105 "EQM Default Data"
     end;
 
     /// <summary>
-    /// Creates the setup record, number series EQUIP (if the setup has no Equipment Nos.) and the starter
-    /// categories LAPTOP, MONITOR, PHONE, TABLET, PRINTER, VEHICLE and TOOL. Safe to run repeatedly: existing records are never changed.
+    /// Creates the setup record, number series EQUIP (if the setup has no Equipment Nos.), number series EQMAINT
+    /// (if the setup has no Maintenance Nos.) and the starter categories LAPTOP, MONITOR, PHONE, TABLET, PRINTER, VEHICLE and TOOL. Safe to run repeatedly: existing records are never changed.
     /// </summary>
     procedure CreateDefaultData()
     var
         EquipmentSetup: Record "EQM Equipment Setup";
+        SetupChanged: Boolean;
     begin
         EnsureSetupExists();
         EquipmentSetup.Get();
         if EquipmentSetup."Equipment Nos." = '' then begin
-            EnsureEquipmentNoSeries();
+            EnsureNoSeries(EquipmentSeriesCodeTok, EquipmentSeriesStartTok, EquipmentSeriesDescriptionTxt);
             EquipmentSetup."Equipment Nos." := CopyStr(EquipmentSeriesCodeTok, 1, MaxStrLen(EquipmentSetup."Equipment Nos."));
-            EquipmentSetup.Modify();
+            SetupChanged := true;
         end;
+        if EquipmentSetup."Maintenance Nos." = '' then begin
+            EnsureNoSeries(MaintenanceSeriesCodeTok, MaintenanceSeriesStartTok, MaintenanceSeriesDescriptionTxt);
+            EquipmentSetup."Maintenance Nos." := CopyStr(MaintenanceSeriesCodeTok, 1, MaxStrLen(EquipmentSetup."Maintenance Nos."));
+            SetupChanged := true;
+        end;
+        if SetupChanged then
+            EquipmentSetup.Modify();
 
         InsertCategoryIfMissing(LaptopCodeTok, LaptopDescriptionTxt);
         InsertCategoryIfMissing(MonitorCodeTok, MonitorDescriptionTxt);
@@ -77,19 +88,19 @@ codeunit 50105 "EQM Default Data"
         InsertCategoryIfMissing(ToolCodeTok, ToolDescriptionTxt);
     end;
 
-    local procedure EnsureEquipmentNoSeries()
+    local procedure EnsureNoSeries(SeriesCodeTxt: Text; StartingNoTxt: Text; SeriesDescription: Text)
     var
         NoSeries: Record "No. Series";
         NoSeriesLine: Record "No. Series Line";
         SeriesCode: Code[20];
         StartingNo: Code[20];
     begin
-        SeriesCode := CopyStr(EquipmentSeriesCodeTok, 1, MaxStrLen(SeriesCode));
-        StartingNo := CopyStr(EquipmentSeriesStartTok, 1, MaxStrLen(StartingNo));
+        SeriesCode := CopyStr(SeriesCodeTxt, 1, MaxStrLen(SeriesCode));
+        StartingNo := CopyStr(StartingNoTxt, 1, MaxStrLen(StartingNo));
         if not NoSeries.Get(SeriesCode) then begin
             NoSeries.Init();
             NoSeries.Code := SeriesCode;
-            NoSeries.Description := EquipmentSeriesDescriptionTxt;
+            NoSeries.Description := CopyStr(SeriesDescription, 1, MaxStrLen(NoSeries.Description));
             NoSeries."Default Nos." := true;
             NoSeries."Manual Nos." := true;
             NoSeries.Insert();

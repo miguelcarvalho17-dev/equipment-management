@@ -43,6 +43,11 @@
           <note from="Developer" annotates="general" priority="2">%1 = equipment number, %2 = Disposed status caption</note>
           <note from="Xliff Generator" annotates="general" priority="3">Table EQM Equipment - NamedType DeleteHistoryExistsErr</note>
         </trans-unit>
+        <trans-unit id="Table 4212454693 - NamedType 2577169971" size-unit="char" translate="yes" xml:space="preserve">
+          <source>You cannot delete equipment %1 because it has maintenance records. To stop using the equipment, set its status to %2 instead.</source>
+          <note from="Developer" annotates="general" priority="2">%1 = equipment number, %2 = Disposed status caption</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table EQM Equipment - NamedType DeleteMaintenanceExistsErr</note>
+        </trans-unit>
         <trans-unit id="Table 4212454693 - NamedType 2695088842" size-unit="char" translate="yes" xml:space="preserve">
           <source>You cannot assign equipment to employee %1 because the employee status is %2.</source>
           <note from="Developer" annotates="general" priority="2">%1 = employee number, %2 = employee status</note>
@@ -468,6 +473,16 @@
           <note from="Developer" annotates="general" priority="2"></note>
           <note from="Xliff Generator" annotates="general" priority="3">Table EQM Equipment Setup - Field Equipment Nos. - Property Caption</note>
         </trans-unit>
+        <trans-unit id="Table 1065098760 - Field 983963595 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Specifies the number series used to assign numbers to new maintenance records.</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table EQM Equipment Setup - Field Maintenance Nos. - Property ToolTip</note>
+        </trans-unit>
+        <trans-unit id="Table 1065098760 - Field 983963595 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Maintenance Nos.</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table EQM Equipment Setup - Field Maintenance Nos. - Property Caption</note>
+        </trans-unit>
         <trans-unit id="Table 1065098760 - Field 1663593181 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
           <source>Specifies the primary key of the equipment setup record.</source>
           <note from="Developer" annotates="general" priority="2"></note>
@@ -478,6 +493,146 @@
           <note from="Developer" annotates="general" priority="2"></note>
           <note from="Xliff Generator" annotates="general" priority="3">Table EQM Equipment Setup - Field Primary Key - Property Caption</note>
         </trans-unit>
+        <trans-unit id="Table 3517502179 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Maintenance Record</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table EQM Maintenance Record - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Table 3517502179 - NamedType 1247007500" size-unit="char" translate="yes" xml:space="preserve">
+          <source>You cannot change the equipment of maintenance record %1. The record belongs to equipment %2.</source>
+          <note from="Developer" annotates="general" priority="2">%1 = maintenance record number, %2 = equipment number</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table EQM Maintenance Record - NamedType EquipmentCannotChangeErr</note>
+        </trans-unit>
+        <trans-unit id="Table 3517502179 - NamedType 2920716401" size-unit="char" translate="yes" xml:space="preserve">
+          <source>You cannot register maintenance for equipment %1 because its status is %2.</source>
+          <note from="Developer" annotates="general" priority="2">%1 = equipment number, %2 = status caption (Lost or Disposed)</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table EQM Maintenance Record - NamedType EquipmentFinalStatusErr</note>
+        </trans-unit>
+        <trans-unit id="Table 3517502179 - NamedType 3946311952" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Equipment %1 does not exist. Register the equipment before you register maintenance for it.</source>
+          <note from="Developer" annotates="general" priority="2">%1 = equipment number</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table EQM Maintenance Record - NamedType EquipmentNotFoundErr</note>
+        </trans-unit>
+        <trans-unit id="Table 3517502179 - NamedType 1067498080" size-unit="char" translate="yes" xml:space="preserve">
+          <source>The maintenance date %1 is in the future. Enter a date that is not later than today (%2).</source>
+          <note from="Developer" annotates="general" priority="2">%1 = maintenance date, %2 = today's date</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table EQM Maintenance Record - NamedType FutureDateErr</note>
+        </trans-unit>
+        <trans-unit id="Table 3517502179 - NamedType 2986928077" size-unit="char" translate="yes" xml:space="preserve">
+          <source>You cannot delete maintenance record %1. Maintenance records are kept as the maintenance history of the equipment.</source>
+          <note from="Developer" annotates="general" priority="2">%1 = maintenance record number</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table EQM Maintenance Record - NamedType MaintenanceCannotBeDeletedErr</note>
+        </trans-unit>
+        <trans-unit id="Table 3517502179 - NamedType 2545791887" size-unit="char" translate="yes" xml:space="preserve">
+          <source>The cost of maintenance record %1 must be zero or greater.</source>
+          <note from="Developer" annotates="general" priority="2">%1 = maintenance record number</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table EQM Maintenance Record - NamedType NegativeCostErr</note>
+        </trans-unit>
+        <trans-unit id="Table 3517502179 - NamedType 3435470116" size-unit="char" translate="yes" xml:space="preserve">
+          <source>You cannot change the number of maintenance record %1.</source>
+          <note from="Developer" annotates="general" priority="2">%1 = maintenance record number</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table EQM Maintenance Record - NamedType RenameNotAllowedErr</note>
+        </trans-unit>
+        <trans-unit id="Table 3517502179 - Field 4231510117 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Specifies the cost of the maintenance in local currency. The cost must be zero or greater.</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table EQM Maintenance Record - Field Cost - Property ToolTip</note>
+        </trans-unit>
+        <trans-unit id="Table 3517502179 - Field 4231510117 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Cost</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table EQM Maintenance Record - Field Cost - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Table 3517502179 - Field 3461834954 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Specifies a description of the maintenance work.</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table EQM Maintenance Record - Field Description - Property ToolTip</note>
+        </trans-unit>
+        <trans-unit id="Table 3517502179 - Field 3461834954 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Description</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table EQM Maintenance Record - Field Description - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Table 3517502179 - Field 446225960 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Specifies the description of the equipment.</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table EQM Maintenance Record - Field Equipment Description - Property ToolTip</note>
+        </trans-unit>
+        <trans-unit id="Table 3517502179 - Field 446225960 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Equipment Description</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table EQM Maintenance Record - Field Equipment Description - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Table 3517502179 - Field 1827518031 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Specifies the equipment the maintenance was performed on. The equipment must exist and cannot be lost or disposed of. You cannot change it after the record is created.</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table EQM Maintenance Record - Field Equipment No. - Property ToolTip</note>
+        </trans-unit>
+        <trans-unit id="Table 3517502179 - Field 1827518031 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Equipment No.</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table EQM Maintenance Record - Field Equipment No. - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Table 3517502179 - Field 1361924619 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Specifies the date the maintenance was performed. The date cannot be later than today. If you leave it blank, the work date is used.</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table EQM Maintenance Record - Field Maintenance Date - Property ToolTip</note>
+        </trans-unit>
+        <trans-unit id="Table 3517502179 - Field 1361924619 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Maintenance Date</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table EQM Maintenance Record - Field Maintenance Date - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Table 3517502179 - Field 2155264991 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Specifies the type of maintenance: Preventive, Corrective, Inspection or Upgrade. New records start as Preventive.</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table EQM Maintenance Record - Field Maintenance Type - Property ToolTip</note>
+        </trans-unit>
+        <trans-unit id="Table 3517502179 - Field 2155264991 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Maintenance Type</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table EQM Maintenance Record - Field Maintenance Type - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Table 3517502179 - Field 4200184881 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Specifies the number of the maintenance record.</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table EQM Maintenance Record - Field No. - Property ToolTip</note>
+        </trans-unit>
+        <trans-unit id="Table 3517502179 - Field 4200184881 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>No.</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table EQM Maintenance Record - Field No. - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Table 3517502179 - Field 1351594800 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Specifies the number series from which the maintenance record number was assigned.</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table EQM Maintenance Record - Field No. Series - Property ToolTip</note>
+        </trans-unit>
+        <trans-unit id="Table 3517502179 - Field 1351594800 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>No. Series</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table EQM Maintenance Record - Field No. Series - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Table 3517502179 - Field 3671552629 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Specifies the name of the person or team that performed the maintenance.</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table EQM Maintenance Record - Field Performed By - Property ToolTip</note>
+        </trans-unit>
+        <trans-unit id="Table 3517502179 - Field 3671552629 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Performed By</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table EQM Maintenance Record - Field Performed By - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Table 3517502179 - Field 1527594213 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Specifies the vendor that performed the maintenance. Leave it blank when the maintenance was done internally.</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table EQM Maintenance Record - Field Vendor No. - Property ToolTip</note>
+        </trans-unit>
+        <trans-unit id="Table 3517502179 - Field 1527594213 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Vendor No.</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table EQM Maintenance Record - Field Vendor No. - Property Caption</note>
+        </trans-unit>
         <trans-unit id="Codeunit 55420158 - NamedType 2998168785" maxwidth="100" size-unit="char" translate="yes" xml:space="preserve">
           <source>Equipment</source>
           <note from="Developer" annotates="general" priority="2"></note>
@@ -487,6 +642,11 @@
           <source>Laptop</source>
           <note from="Developer" annotates="general" priority="2"></note>
           <note from="Xliff Generator" annotates="general" priority="3">Codeunit EQM Default Data - NamedType LaptopDescriptionTxt</note>
+        </trans-unit>
+        <trans-unit id="Codeunit 55420158 - NamedType 2101709188" maxwidth="100" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Equipment Maintenance</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit EQM Default Data - NamedType MaintenanceSeriesDescriptionTxt</note>
         </trans-unit>
         <trans-unit id="Codeunit 55420158 - NamedType 129052886" maxwidth="100" size-unit="char" translate="yes" xml:space="preserve">
           <source>Monitor</source>
@@ -738,6 +898,16 @@
           <note from="Developer" annotates="general" priority="2"></note>
           <note from="Xliff Generator" annotates="general" priority="3">Page EQM Equipment Card - Action Assignments - Property Caption</note>
         </trans-unit>
+        <trans-unit id="Page 3574600233 - Action 350249191 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
+          <source>View the maintenance records of the equipment.</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page EQM Equipment Card - Action Maintenance - Property ToolTip</note>
+        </trans-unit>
+        <trans-unit id="Page 3574600233 - Action 350249191 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Maintenance</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page EQM Equipment Card - Action Maintenance - Property Caption</note>
+        </trans-unit>
         <trans-unit id="Page 3574600233 - Action 1332525020 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
           <source>Assign available equipment to an active employee that you select. The assignment is recorded with the work date and your user name.</source>
           <note from="Developer" annotates="general" priority="2"></note>
@@ -747,6 +917,16 @@
           <source>Assign to Employee</source>
           <note from="Developer" annotates="general" priority="2"></note>
           <note from="Xliff Generator" annotates="general" priority="3">Page EQM Equipment Card - Action AssignToEmployee - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Page 3574600233 - Action 4048384024 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Register maintenance that was performed on the equipment. Not available for lost or disposed equipment.</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page EQM Equipment Card - Action RegisterMaintenance - Property ToolTip</note>
+        </trans-unit>
+        <trans-unit id="Page 3574600233 - Action 4048384024 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Register Maintenance</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page EQM Equipment Card - Action RegisterMaintenance - Property Caption</note>
         </trans-unit>
         <trans-unit id="Page 3574600233 - Action 640341854 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
           <source>Return the equipment from the assigned employee. The status changes to Available and the assignment is closed with the work date and your user name. The assignment stays in the history.</source>
@@ -1018,6 +1198,16 @@
           <note from="Developer" annotates="general" priority="2"></note>
           <note from="Xliff Generator" annotates="general" priority="3">Page EQM Equipment List - Action Assignments - Property Caption</note>
         </trans-unit>
+        <trans-unit id="Page 2630064635 - Action 350249191 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
+          <source>View the maintenance records of the selected equipment.</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page EQM Equipment List - Action Maintenance - Property ToolTip</note>
+        </trans-unit>
+        <trans-unit id="Page 2630064635 - Action 350249191 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Maintenance</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page EQM Equipment List - Action Maintenance - Property Caption</note>
+        </trans-unit>
         <trans-unit id="Page 2630064635 - Action 2495166380 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
           <source>Setup</source>
           <note from="Developer" annotates="general" priority="2"></note>
@@ -1103,6 +1293,16 @@
           <note from="Developer" annotates="general" priority="2"></note>
           <note from="Xliff Generator" annotates="general" priority="3">Page EQM Equipment Manager RC - Action NewEquipment - Property Caption</note>
         </trans-unit>
+        <trans-unit id="Page 4775459 - Action 385939752 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Register maintenance that was performed on equipment.</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page EQM Equipment Manager RC - Action NewMaintenanceRecord - Property ToolTip</note>
+        </trans-unit>
+        <trans-unit id="Page 4775459 - Action 385939752 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Maintenance Record</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page EQM Equipment Manager RC - Action NewMaintenanceRecord - Property Caption</note>
+        </trans-unit>
         <trans-unit id="Page 4775459 - Action 564207155 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
           <source>Open the assignment history of all equipment.</source>
           <note from="Developer" annotates="general" priority="2"></note>
@@ -1122,6 +1322,16 @@
           <source>Equipment</source>
           <note from="Developer" annotates="general" priority="2"></note>
           <note from="Xliff Generator" annotates="general" priority="3">Page EQM Equipment Manager RC - Action EquipmentList - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Page 4775459 - Action 2128951761 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Open the maintenance records of all equipment.</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page EQM Equipment Manager RC - Action MaintenanceList - Property ToolTip</note>
+        </trans-unit>
+        <trans-unit id="Page 4775459 - Action 2128951761 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Maintenance</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page EQM Equipment Manager RC - Action MaintenanceList - Property Caption</note>
         </trans-unit>
         <trans-unit id="Page 4775459 - Action 1514883969 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
           <source>Setup</source>
@@ -1154,7 +1364,7 @@
           <note from="Xliff Generator" annotates="general" priority="3">Page EQM Equipment Setup - Property Caption</note>
         </trans-unit>
         <trans-unit id="Page 1065098760 - Property 3863440606" size-unit="char" translate="yes" xml:space="preserve">
-          <source>equipment numbers, equipment number series</source>
+          <source>equipment numbers, equipment number series, maintenance number series</source>
           <note from="Developer" annotates="general" priority="2"></note>
           <note from="Xliff Generator" annotates="general" priority="3">Page EQM Equipment Setup - Property AdditionalSearchTerms</note>
         </trans-unit>
@@ -1192,6 +1402,186 @@
           <source>Refresh</source>
           <note from="Developer" annotates="general" priority="2"></note>
           <note from="Xliff Generator" annotates="general" priority="3">Page EQM Equipment Status Chart - Action Refresh - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Page 1059192635 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Maintenance</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page EQM Maintenance FactBox - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Page 1059192635 - Control 3073587453 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Specifies the date of the most recent maintenance of the equipment. It is blank when no maintenance has been registered.</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page EQM Maintenance FactBox - Control LastMaintenanceDate - Property ToolTip</note>
+        </trans-unit>
+        <trans-unit id="Page 1059192635 - Control 3073587453 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Last Maintenance Date</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page EQM Maintenance FactBox - Control LastMaintenanceDate - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Page 1059192635 - Control 1827352817 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Specifies the type of the most recent maintenance of the equipment. It is blank when no maintenance has been registered.</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page EQM Maintenance FactBox - Control LastMaintenanceType - Property ToolTip</note>
+        </trans-unit>
+        <trans-unit id="Page 1059192635 - Control 1827352817 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Last Maintenance Type</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page EQM Maintenance FactBox - Control LastMaintenanceType - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Page 1059192635 - Control 743693861 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Specifies how many maintenance records the equipment has. Choose the number to see them.</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page EQM Maintenance FactBox - Control NoOfMaintenanceRecords - Property ToolTip</note>
+        </trans-unit>
+        <trans-unit id="Page 1059192635 - Control 743693861 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>No. of Maintenance Records</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page EQM Maintenance FactBox - Control NoOfMaintenanceRecords - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Page 1059192635 - Control 917450800 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Specifies the total cost of all maintenance registered for the equipment, in local currency.</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page EQM Maintenance FactBox - Control TotalMaintenanceCost - Property ToolTip</note>
+        </trans-unit>
+        <trans-unit id="Page 1059192635 - Control 917450800 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Total Maintenance Cost</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page EQM Maintenance FactBox - Control TotalMaintenanceCost - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Page 774058295 - Property 1064389655" size-unit="char" translate="yes" xml:space="preserve">
+          <source>About maintenance records</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page EQM Maintenance Record Card - Property AboutTitle</note>
+        </trans-unit>
+        <trans-unit id="Page 774058295 - Property 247559172" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Register maintenance that was done on equipment. Choose the equipment, the date and the type of maintenance, and add the vendor, the cost and who did the work. You cannot register maintenance for lost or disposed equipment. You can correct a record later, but you cannot delete it or move it to other equipment.</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page EQM Maintenance Record Card - Property AboutText</note>
+        </trans-unit>
+        <trans-unit id="Page 774058295 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Maintenance Record</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page EQM Maintenance Record Card - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Page 774058295 - Control 3991974766 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Vendor and Cost</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page EQM Maintenance Record Card - Control Execution - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Page 774058295 - Control 779730061 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Specifies the name of the vendor that performed the maintenance.</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page EQM Maintenance Record Card - Control VendorName - Property ToolTip</note>
+        </trans-unit>
+        <trans-unit id="Page 774058295 - Control 779730061 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Vendor Name</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page EQM Maintenance Record Card - Control VendorName - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Page 774058295 - Control 2445482498 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>General</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page EQM Maintenance Record Card - Control General - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Page 774058295 - Action 2876943422 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Open the equipment card.</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page EQM Maintenance Record Card - Action Equipment - Property ToolTip</note>
+        </trans-unit>
+        <trans-unit id="Page 774058295 - Action 2876943422 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Equipment</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page EQM Maintenance Record Card - Action Equipment - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Page 774058295 - Action 1936001480 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Open the vendor card.</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page EQM Maintenance Record Card - Action Vendor - Property ToolTip</note>
+        </trans-unit>
+        <trans-unit id="Page 774058295 - Action 1936001480 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Vendor</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page EQM Maintenance Record Card - Action Vendor - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Page 774058295 - Action 1587086413 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Navigate</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page EQM Maintenance Record Card - Action Category_Category4 - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Page 2177390062 - Property 1064389655" size-unit="char" translate="yes" xml:space="preserve">
+          <source>About equipment maintenance</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page EQM Maintenance Records - Property AboutTitle</note>
+        </trans-unit>
+        <trans-unit id="Page 2177390062 - Property 247559172" size-unit="char" translate="yes" xml:space="preserve">
+          <source>This list shows the maintenance work done on your equipment: when, what type, by whom and at what cost. Choose **New** to register maintenance. Maintenance records cannot be deleted, so they stay in the history of the equipment. Choose a view at the top to see one maintenance type.</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page EQM Maintenance Records - Property AboutText</note>
+        </trans-unit>
+        <trans-unit id="Page 2177390062 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Equipment Maintenance</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page EQM Maintenance Records - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Page 2177390062 - Property 3863440606" size-unit="char" translate="yes" xml:space="preserve">
+          <source>equipment maintenance, maintenance history, repairs, inspections, equipment service</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page EQM Maintenance Records - Property AdditionalSearchTerms</note>
+        </trans-unit>
+        <trans-unit id="Page 2177390062 - Control 779730061 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Specifies the name of the vendor that performed the maintenance.</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page EQM Maintenance Records - Control VendorName - Property ToolTip</note>
+        </trans-unit>
+        <trans-unit id="Page 2177390062 - Control 779730061 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Vendor Name</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page EQM Maintenance Records - Control VendorName - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Page 2177390062 - Action 2876943422 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Open the equipment card.</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page EQM Maintenance Records - Action Equipment - Property ToolTip</note>
+        </trans-unit>
+        <trans-unit id="Page 2177390062 - Action 2876943422 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Equipment</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page EQM Maintenance Records - Action Equipment - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Page 2177390062 - Action 1936001480 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Open the vendor card.</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page EQM Maintenance Records - Action Vendor - Property ToolTip</note>
+        </trans-unit>
+        <trans-unit id="Page 2177390062 - Action 1936001480 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Vendor</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page EQM Maintenance Records - Action Vendor - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Page 2177390062 - Action 1587086413 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Navigate</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page EQM Maintenance Records - Action Category_Category4 - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Page 2177390062 - View 1853199792 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Corrective</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page EQM Maintenance Records - View Corrective - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Page 2177390062 - View 2441333386 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Inspection</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page EQM Maintenance Records - View Inspection - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Page 2177390062 - View 1451030032 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Preventive</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page EQM Maintenance Records - View Preventive - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Page 2177390062 - View 587499452 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Upgrade</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page EQM Maintenance Records - View Upgrade - Property Caption</note>
         </trans-unit>
         <trans-unit id="Query 611850204 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
           <source>Equipment by Category</source>
@@ -1302,6 +1692,31 @@
           <source>Lost</source>
           <note from="Developer" annotates="general" priority="2"></note>
           <note from="Xliff Generator" annotates="general" priority="3">Enum EQM Equipment Status - EnumValue Lost - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Enum 3832738256 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Maintenance Type</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Enum EQM Maintenance Type - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Enum 3832738256 - EnumValue 1853199792 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Corrective</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Enum EQM Maintenance Type - EnumValue Corrective - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Enum 3832738256 - EnumValue 2441333386 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Inspection</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Enum EQM Maintenance Type - EnumValue Inspection - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Enum 3832738256 - EnumValue 1451030032 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Preventive</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Enum EQM Maintenance Type - EnumValue Preventive - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Enum 3832738256 - EnumValue 587499452 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Upgrade</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Enum EQM Maintenance Type - EnumValue Upgrade - Property Caption</note>
         </trans-unit>
         <trans-unit id="PermissionSet 630416289 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
           <source>Equipment Administrator</source>

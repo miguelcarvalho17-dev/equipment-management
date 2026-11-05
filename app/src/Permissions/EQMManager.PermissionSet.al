@@ -8,5 +8,6 @@ permissionset 50101 "EQM - Manager"
 
     Permissions =
         tabledata "EQM Equipment" = RIM,
-        tabledata "EQM Equipment Assignment" = Rim;
+        tabledata "EQM Equipment Assignment" = Rim,
+        tabledata "EQM Maintenance Record" = RIM;
 }

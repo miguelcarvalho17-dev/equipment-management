@@ -6,7 +6,7 @@ page 50103 "EQM Equipment Setup"
     PageType = Card;
     ApplicationArea = All;
     UsageCategory = Administration;
-    AdditionalSearchTerms = 'equipment numbers, equipment number series';
+    AdditionalSearchTerms = 'equipment numbers, equipment number series, maintenance number series';
     SourceTable = "EQM Equipment Setup";
     InsertAllowed = false;
     DeleteAllowed = false;
@@ -20,6 +20,9 @@ page 50103 "EQM Equipment Setup"
                 Caption = 'Numbering';
 
                 field("Equipment Nos."; Rec."Equipment Nos.")
+                {
+                }
+                field("Maintenance Nos."; Rec."Maintenance Nos.")
                 {
                 }
             }
