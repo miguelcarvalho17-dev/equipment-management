@@ -158,6 +158,10 @@ page 50101 "EQM Equipment Card"
             {
                 SubPageLink = "No." = field("No.");
             }
+            part(MaintenanceFactBox; "EQM Maintenance FactBox")
+            {
+                SubPageLink = "No." = field("No.");
+            }
             systempart(Links; Links)
             {
                 Visible = false;
@@ -202,6 +206,16 @@ page 50101 "EQM Equipment Card"
                     CurrPage.Update(false);
                 end;
             }
+            action(RegisterMaintenance)
+            {
+                Caption = 'Register Maintenance';
+                ToolTip = 'Register maintenance that was performed on the equipment. Not available for lost or disposed equipment.';
+                Image = ServiceLedger;
+                Enabled = CanRegisterMaintenance;
+                RunObject = page "EQM Maintenance Record Card";
+                RunPageLink = "Equipment No." = field("No.");
+                RunPageMode = Create;
+            }
         }
         area(Navigation)
         {
@@ -220,6 +234,15 @@ page 50101 "EQM Equipment Card"
                     RunObject = page "EQM Equipment Assignments";
                     RunPageLink = "Equipment No." = field("No.");
                 }
+                action(Maintenance)
+                {
+                    Caption = 'Maintenance';
+                    ToolTip = 'View the maintenance records of the equipment.';
+                    Image = MaintenanceRegistrations;
+                    Enabled = IsSaved;
+                    RunObject = page "EQM Maintenance Records";
+                    RunPageLink = "Equipment No." = field("No.");
+                }
             }
         }
         area(Promoted)
@@ -234,12 +257,18 @@ page 50101 "EQM Equipment Card"
                 actionref(Unassign_Promoted; Unassign)
                 {
                 }
+                actionref(RegisterMaintenance_Promoted; RegisterMaintenance)
+                {
+                }
             }
             group(Category_Category4)
             {
                 Caption = 'Equipment';
 
                 actionref(Assignments_Promoted; Assignments)
+                {
+                }
+                actionref(Maintenance_Promoted; Maintenance)
                 {
                 }
             }
@@ -252,6 +281,7 @@ page 50101 "EQM Equipment Card"
         IsSaved: Boolean;
         IsNewRecord: Boolean;
         CanAssign: Boolean;
+        CanRegisterMaintenance: Boolean;
         StatusStyle: Text;
         ActiveAssignmentDate: Date;
         ActiveAssignedBy: Code[50];
@@ -297,6 +327,7 @@ page 50101 "EQM Equipment Card"
         IsNewRecord := not IsSaved;
         StatusStyle := Rec.GetStatusStyle();
         CanAssign := IsSaved and (Rec.Status = Rec.Status::Available);
+        CanRegisterMaintenance := IsSaved and not Rec.IsFinalStatus(Rec.Status);
         AssignedEmployeeName := '';
         if (Rec."Assigned Employee No." <> '') and Employee.ReadPermission() then begin
             Employee.SetLoadFields("First Name", "Middle Name", "Last Name");

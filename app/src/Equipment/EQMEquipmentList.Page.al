@@ -70,6 +70,10 @@ page 50100 "EQM Equipment List"
             {
                 SubPageLink = "No." = field("No.");
             }
+            part(MaintenanceFactBox; "EQM Maintenance FactBox")
+            {
+                SubPageLink = "No." = field("No.");
+            }
             systempart(Links; Links)
             {
                 Visible = false;
@@ -96,6 +100,14 @@ page 50100 "EQM Equipment List"
                     Image = History;
                     ShortCutKey = 'Ctrl+F7';
                     RunObject = page "EQM Equipment Assignments";
+                    RunPageLink = "Equipment No." = field("No.");
+                }
+                action(Maintenance)
+                {
+                    Caption = 'Maintenance';
+                    ToolTip = 'View the maintenance records of the selected equipment.';
+                    Image = MaintenanceRegistrations;
+                    RunObject = page "EQM Maintenance Records";
                     RunPageLink = "Equipment No." = field("No.");
                 }
             }
@@ -137,6 +149,9 @@ page 50100 "EQM Equipment List"
                 Caption = 'Equipment';
 
                 actionref(Assignments_Promoted; Assignments)
+                {
+                }
+                actionref(Maintenance_Promoted; Maintenance)
                 {
                 }
             }

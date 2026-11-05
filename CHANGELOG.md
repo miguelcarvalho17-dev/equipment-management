@@ -1,6 +1,27 @@
 # Changelog
 Newest first. Grouped by Added / Changed / Fixed / Obsolete.
 
+## FR-010 Maintenance Registration (version stays 29.0.0.0, no bump)
+### Added
+- Table 50105 "EQM Maintenance Record", enum 50102 "EQM Maintenance Type" (Preventive, Corrective, Inspection, Upgrade, extensible), codeunit 50108 "EQM Maintenance Mgt." (internal).
+- Pages 50113 'Equipment Maintenance' (list, views per type), 50114 'Maintenance Record' (card), 50115 'Maintenance' (FactBox).
+- Field "Maintenance Nos." (field 3) on Equipment Setup; default data creates number series EQMAINT (MNT00001).
+- Equipment Card: action Register Maintenance, action Maintenance, Maintenance FactBox. Equipment List: action Maintenance, Maintenance FactBox. Equipment Manager Role Center: Maintenance and Maintenance Record actions.
+- Integration event `OnAfterCheckMaintenanceConsistency` (local) on table 50105.
+- EQM - Reader: R on the new table, X on the new table, pages and codeunit. EQM - Manager: RIM on maintenance records.
+- Help article docs/help/FR-010-maintenance-registration.md.
+### Changed
+- Equipment cannot be deleted when it has maintenance records.
+- `EQM Default Data` creates both number series through the local `EnsureNoSeries`.
+### Fixed
+- None.
+### Obsolete
+- None.
+
+Release notes: You can now register maintenance on equipment: date, type (preventive, corrective, inspection, upgrade), vendor, cost and who did the work. Choose Register Maintenance on the equipment card, or open the Equipment Maintenance list. A new Maintenance FactBox shows the number of records, the last maintenance and the total cost. Maintenance records cannot be deleted. In companies that already use the app, an administrator must choose Maintenance Nos. in Equipment Setup.
+
+Note: build clean under CodeCop and UICop. No automated tests (deferred, Q10; test ID 50164 reserved); sandbox checks MT-SB0 to MT-SB11 not run. Register Maintenance uses image ServiceLedger instead of the planned Maintenance (AL0482). Existing companies must set Maintenance Nos. in Equipment Setup. See docs/features/FR-010-maintenance-registration.md.
+
 ## NFR-003 Usability (version stays 29.0.0.0, no bump)
 ### Added
 - Page 50111 "EQM Equipment FactBox" ('Assignment Details') on the Equipment List and Card: status, employee (name, job title, company email), assigned since/by, number of assignments, last assignment closed.

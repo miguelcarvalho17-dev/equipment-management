@@ -21,6 +21,12 @@ table 50102 "EQM Equipment Setup"
             ToolTip = 'Specifies the number series used to assign numbers to new equipment.';
             TableRelation = "No. Series";
         }
+        field(3; "Maintenance Nos."; Code[20])
+        {
+            Caption = 'Maintenance Nos.';
+            ToolTip = 'Specifies the number series used to assign numbers to new maintenance records.';
+            TableRelation = "No. Series";
+        }
     }
 
     keys
