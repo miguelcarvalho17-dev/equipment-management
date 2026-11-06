@@ -3,11 +3,14 @@ namespace MiguelCarvalho.EquipmentManagement;
 using Microsoft.Purchases.Vendor;
 
 /// <summary>
-/// Read helpers for maintenance records shown on equipment pages.
+/// Read helpers for maintenance records shown on equipment pages, and the confirmation before posting.
 /// </summary>
 codeunit 50108 "EQM Maintenance Mgt."
 {
     Access = Internal;
+
+    var
+        PostQst: Label 'Do you want to post maintenance record %1? It is copied to the maintenance history, and after that you cannot change it.', Comment = '%1 = maintenance record number';
 
     /// <summary>
     /// Returns whether the equipment has any maintenance record. Equipment with maintenance records cannot be deleted.
@@ -76,6 +79,20 @@ codeunit 50108 "EQM Maintenance Mgt."
     begin
         MaintenanceRecord.SetRange("Equipment No.", EquipmentNo);
         Page.Run(Page::"EQM Maintenance Records", MaintenanceRecord);
+    end;
+
+    /// <summary>
+    /// Asks the user to confirm, then posts the maintenance record. Returns false when the user cancels.
+    /// </summary>
+    /// <param name="MaintenanceRecord">The record to post. It shows Status = Posted afterwards.</param>
+    /// <returns>True when the record was posted; false when the user cancelled.</returns>
+    internal procedure PostWithConfirmation(var MaintenanceRecord: Record "EQM Maintenance Record"): Boolean
+    begin
+        if not Confirm(PostQst, true, MaintenanceRecord."No.") then
+            exit(false);
+
+        Codeunit.Run(Codeunit::"EQM Maintenance-Post", MaintenanceRecord);
+        exit(true);
     end;
 
     /// <summary>

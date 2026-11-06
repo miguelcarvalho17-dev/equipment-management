@@ -7,7 +7,7 @@ page 50101 "EQM Equipment Card"
 {
     Caption = 'Equipment Card';
     AboutTitle = 'About equipment details';
-    AboutText = 'Here you manage one piece of equipment. The first sections show its details, its current status and who it is assigned to. Use **Assign to Employee** and **Return** to change the assignment. Further down, **Assignment History** lists every assignment, and **Audit** shows who created the record and who changed it last.';
+    AboutText = 'Here you manage one piece of equipment. The first sections show its details, its current status and who it is assigned to. Use **Assign to Employee** and **Return** to change the assignment, and **Register Maintenance** to record maintenance work. Further down, **Assignment History** lists every assignment, **Maintenance History** lists every posted maintenance, and **Audit** shows who created the record and who changed it last.';
     PageType = Card;
     ApplicationArea = All;
     UsageCategory = None;
@@ -120,6 +120,11 @@ page 50101 "EQM Equipment Card"
             part(AssignmentHistory; "EQM Assignment History Part")
             {
                 Caption = 'Assignment History';
+                SubPageLink = "Equipment No." = field("No.");
+            }
+            part(MaintenanceHistory; "EQM Maintenance History Part")
+            {
+                Caption = 'Maintenance History';
                 SubPageLink = "Equipment No." = field("No.");
             }
             group(Audit)
@@ -243,6 +248,15 @@ page 50101 "EQM Equipment Card"
                     RunObject = page "EQM Maintenance Records";
                     RunPageLink = "Equipment No." = field("No.");
                 }
+                action(ShowMaintenanceHistory)
+                {
+                    Caption = 'Maintenance History';
+                    ToolTip = 'View the posted maintenance history of the equipment.';
+                    Image = LedgerEntries;
+                    Enabled = IsSaved;
+                    RunObject = page "EQM Maintenance History";
+                    RunPageLink = "Equipment No." = field("No.");
+                }
             }
         }
         area(Promoted)
@@ -269,6 +283,9 @@ page 50101 "EQM Equipment Card"
                 {
                 }
                 actionref(Maintenance_Promoted; Maintenance)
+                {
+                }
+                actionref(ShowMaintenanceHistory_Promoted; ShowMaintenanceHistory)
                 {
                 }
             }

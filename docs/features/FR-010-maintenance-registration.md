@@ -1,6 +1,8 @@
 # FR-010 Maintenance Registration
 
 ## Purpose
+FR-011 update: records now have a Status (Open or Posted). Corrections are possible only while Open; posting freezes the record and writes it to the maintenance history. See docs/features/FR-011-maintenance-history.md.
+
 Users register each maintenance activity done on a piece of equipment (preventive, corrective, inspection, upgrade) with date, vendor, cost and who did the work. Records form the maintenance history of the equipment, are shown on the Equipment List and Card, and cannot be deleted.
 
 Status: describes the code as implemented. **Build is clean under CodeCop and UICop. No automated tests (deferred, plan decision Q10; test codeunit ID 50164 is reserved and unused). Sandbox checks MT-SB0 to MT-SB11 are NOT yet run.** App version stays 29.0.0.0. Namespace `MiguelCarvalho.EquipmentManagement`. New stored table and one new field on "EQM Equipment Setup"; no upgrade codeunit.
@@ -25,7 +27,7 @@ Status: describes the code as implemented. **Build is clean under CodeCop and UI
 ## Behavior
 - **Numbering:** on insert with a blank "No.", the next number is taken from "Maintenance Nos."; if it is empty, `TestField` raises an error. A manually typed number requires the series to allow manual numbers (`TestManual`). AssistEdit on "No." lets the user pick a related series.
 - **Maintenance Date:** blank on insert becomes the work date. A date later than today is rejected (`FutureDateErr`), on validate and on save.
-- **Equipment checks on insert:** equipment must exist; Lost or Disposed equipment is rejected (`EquipmentFinalStatusErr`). The status is not checked again when an existing record is modified, so old records of equipment that was later disposed can still be corrected.
+- **Equipment checks on insert:** equipment must exist; Lost or Disposed equipment is rejected (`EquipmentFinalStatusErr`). The status is not checked again when an existing record is modified, so old Open records of equipment that was later disposed can still be corrected. Since FR-011 only Open records can be corrected; a Posted record is frozen (`PostedRecordCannotBeChangedErr`).
 - **Equipment cannot change** on a saved record (`EquipmentCannotChangeErr`), and the number cannot be renamed (`RenameNotAllowedErr`).
 - **Cost** must be zero or greater (MinValue and a check on save).
 - **No delete:** `OnDelete` on the table always raises `MaintenanceCannotBeDeletedErr`, for every user including Administrator. Pages also have delete disabled. Equipment with maintenance records cannot be deleted either.
@@ -61,7 +63,7 @@ The publisher is `local`, so it can be subscribed to only from inside this app. 
 - Number series consumption by a non-SUPER Manager (indirect No. Series access) is unverified (MT-SB5).
 
 **Known limitations:**
-- Maintenance cannot be removed once saved. A wrong record can only be corrected.
+- Maintenance cannot be removed once saved. A wrong Open record can be corrected; a Posted record (FR-011) cannot, and a new record must describe the correction.
 - Cost is in local currency only; no currency, no scheduling or reminders.
 - The Register Maintenance action uses the image `ServiceLedger`, not the planned `Maintenance` (compiler error AL0482 for that name).
 

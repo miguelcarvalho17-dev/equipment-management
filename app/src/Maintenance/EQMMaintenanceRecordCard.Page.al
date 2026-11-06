@@ -6,7 +6,7 @@ page 50114 "EQM Maintenance Record Card"
 {
     Caption = 'Maintenance Record';
     AboutTitle = 'About maintenance records';
-    AboutText = 'Register maintenance that was done on equipment. Choose the equipment, the date and the type of maintenance, and add the vendor, the cost and who did the work. You cannot register maintenance for lost or disposed equipment. You can correct a record later, but you cannot delete it or move it to other equipment.';
+    AboutText = 'Register maintenance that was done on equipment. Choose the equipment, the date and the type of maintenance, and add the vendor, the cost and who did the work. You cannot register maintenance for lost or disposed equipment. You can correct the record until you choose **Post**. Posting copies it to the maintenance history, and after that it cannot be changed. Maintenance records can never be deleted.';
     PageType = Card;
     ApplicationArea = All;
     UsageCategory = None;
@@ -21,6 +21,7 @@ page 50114 "EQM Maintenance Record Card"
             group(General)
             {
                 Caption = 'General';
+                Editable = IsOpen;
 
                 field("No."; Rec."No.")
                 {
@@ -51,10 +52,16 @@ page 50114 "EQM Maintenance Record Card"
                 {
                     Importance = Promoted;
                 }
+                field(Status; Rec.Status)
+                {
+                    Importance = Promoted;
+                    StyleExpr = StatusStyle;
+                }
             }
             group(Execution)
             {
                 Caption = 'Vendor and Cost';
+                Editable = IsOpen;
 
                 field("Vendor No."; Rec."Vendor No.")
                 {
@@ -99,6 +106,24 @@ page 50114 "EQM Maintenance Record Card"
 
     actions
     {
+        area(Processing)
+        {
+            action(Post)
+            {
+                Caption = 'Post';
+                ToolTip = 'Post the maintenance record. It is copied to the maintenance history, and after that it cannot be changed or deleted.';
+                Image = PostDocument;
+                ShortCutKey = 'F9';
+                Enabled = CanPost;
+
+                trigger OnAction()
+                begin
+                    CurrPage.SaveRecord();
+                    if MaintenanceMgt.PostWithConfirmation(Rec) then
+                        CurrPage.Update(false);
+                end;
+            }
+        }
         area(Navigation)
         {
             action(Equipment)
@@ -117,9 +142,26 @@ page 50114 "EQM Maintenance Record Card"
                 RunObject = page "Vendor Card";
                 RunPageLink = "No." = field("Vendor No.");
             }
+            action(HistoryEntry)
+            {
+                Caption = 'History Entry';
+                ToolTip = 'View the maintenance history entry that was created when the record was posted.';
+                Image = LedgerEntries;
+                Enabled = not IsOpen;
+                RunObject = page "EQM Maintenance History";
+                RunPageLink = "Maintenance No." = field("No.");
+            }
         }
         area(Promoted)
         {
+            group(Category_Process)
+            {
+                Caption = 'Process';
+
+                actionref(Post_Promoted; Post)
+                {
+                }
+            }
             group(Category_Category4)
             {
                 Caption = 'Navigate';
@@ -130,6 +172,9 @@ page 50114 "EQM Maintenance Record Card"
                 actionref(Vendor_Promoted; Vendor)
                 {
                 }
+                actionref(HistoryEntry_Promoted; HistoryEntry)
+                {
+                }
             }
         }
     }
@@ -138,6 +183,9 @@ page 50114 "EQM Maintenance Record Card"
         MaintenanceMgt: Codeunit "EQM Maintenance Mgt.";
         VendorName: Text[100];
         IsNewRecord: Boolean;
+        IsOpen: Boolean;
+        CanPost: Boolean;
+        StatusStyle: Text;
 
     trigger OnAfterGetRecord()
     begin
@@ -152,6 +200,9 @@ page 50114 "EQM Maintenance Record Card"
     local procedure UpdateControls()
     begin
         IsNewRecord := Rec.SystemCreatedAt = 0DT;
+        IsOpen := Rec.Status = Rec.Status::Open;
+        CanPost := (not IsNewRecord) and IsOpen;
+        StatusStyle := Rec.GetStatusStyle();
         VendorName := MaintenanceMgt.GetVendorName(Rec."Vendor No.");
     end;
 }
