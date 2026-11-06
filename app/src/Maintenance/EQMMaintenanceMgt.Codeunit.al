@@ -10,7 +10,7 @@ codeunit 50108 "EQM Maintenance Mgt."
     Access = Internal;
 
     var
-        PostQst: Label 'Do you want to post maintenance record %1? It is copied to the maintenance history, and after that you cannot change it.', Comment = '%1 = maintenance record number';
+        PostQst: Label 'Do you want to post maintenance record %1? It is copied to the maintenance history, and after that you cannot change it. If no other maintenance is open for the equipment, its status changes from In Maintenance to Available.', Comment = '%1 = maintenance record number';
 
     /// <summary>
     /// Returns whether the equipment has any maintenance record. Equipment with maintenance records cannot be deleted.
@@ -78,6 +78,51 @@ codeunit 50108 "EQM Maintenance Mgt."
         MaintenanceRecord: Record "EQM Maintenance Record";
     begin
         MaintenanceRecord.SetRange("Equipment No.", EquipmentNo);
+        Page.Run(Page::"EQM Maintenance Records", MaintenanceRecord);
+    end;
+
+    /// <summary>
+    /// Returns whether the equipment has at least one open maintenance record. Equipment with open
+    /// maintenance cannot be assigned.
+    /// </summary>
+    /// <param name="EquipmentNo">The equipment number.</param>
+    /// <returns>True when at least one open record exists.</returns>
+    internal procedure HasOpenMaintenance(EquipmentNo: Code[20]): Boolean
+    var
+        MaintenanceRecord: Record "EQM Maintenance Record";
+    begin
+        MaintenanceRecord.SetCurrentKey("Equipment No.", Status);
+        MaintenanceRecord.SetRange("Equipment No.", EquipmentNo);
+        MaintenanceRecord.SetRange(Status, MaintenanceRecord.Status::Open);
+        exit(not MaintenanceRecord.IsEmpty());
+    end;
+
+    /// <summary>
+    /// Returns the number of open maintenance records of the equipment.
+    /// </summary>
+    /// <param name="EquipmentNo">The equipment number.</param>
+    /// <returns>The number of open records.</returns>
+    internal procedure CountOpenMaintenanceRecords(EquipmentNo: Code[20]): Integer
+    var
+        MaintenanceRecord: Record "EQM Maintenance Record";
+    begin
+        MaintenanceRecord.SetCurrentKey("Equipment No.", Status);
+        MaintenanceRecord.SetRange("Equipment No.", EquipmentNo);
+        MaintenanceRecord.SetRange(Status, MaintenanceRecord.Status::Open);
+        exit(MaintenanceRecord.Count());
+    end;
+
+    /// <summary>
+    /// Opens the open maintenance records filtered to one piece of equipment.
+    /// </summary>
+    /// <param name="EquipmentNo">The equipment number to filter on.</param>
+    internal procedure ShowOpenMaintenanceRecords(EquipmentNo: Code[20])
+    var
+        MaintenanceRecord: Record "EQM Maintenance Record";
+    begin
+        MaintenanceRecord.SetCurrentKey("Equipment No.", Status);
+        MaintenanceRecord.SetRange("Equipment No.", EquipmentNo);
+        MaintenanceRecord.SetRange(Status, MaintenanceRecord.Status::Open);
         Page.Run(Page::"EQM Maintenance Records", MaintenanceRecord);
     end;
 

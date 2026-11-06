@@ -34,7 +34,7 @@ Rules (table 50100):
 | New equipment | A new (not yet stored) record cannot have Lost or Disposed. Checked on Status validate and on insert. | No |
 | Confirmation | Changing to Lost or Disposed asks one question and clears the assigned employee (the question names the employee when one is set). No answers cancels the change. | n/a |
 
-- Other transitions among Available, Assigned and In Maintenance are allowed. In Maintenance equipment can be assigned directly.
+- Other transitions among Available, Assigned and In Maintenance are allowed. Only Available equipment can be assigned (FR-004; the earlier text that In Maintenance equipment could be assigned directly no longer applies). Since FR-012, equipment with an open maintenance record cannot be assigned and its status cannot leave In Maintenance except to Lost or Disposed (see FR-012).
 - Moving from Assigned to In Maintenance keeps the FR-001 behavior (confirm, then the employee is cleared). Assigned to Available is refused in Status OnValidate unless it comes from the Return action (FR-005).
 - Checks run on Status validate (previous value from the record's `xRec`) and again on insert/modify in `CheckEquipmentConsistency`, comparing against the stored record. Direct field assignment followed by `Modify(true)` is therefore also checked.
 - Without UI (API, job queue) the confirmations answer Yes (`GetResponseOrDefault` default).

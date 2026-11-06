@@ -15,7 +15,8 @@ Register the maintenance work done on your equipment: when it was done, what kin
 Good to know:
 - The date cannot be later than today. If you leave it blank, the work date is used.
 - You cannot register maintenance for equipment that is **Lost** or **Disposed**. On the card, Register Maintenance is then unavailable.
-- Registering maintenance does not change the equipment **Status**. Set it to **In Maintenance** yourself if needed.
+- Registering maintenance sets the equipment **Status** to **In Maintenance**, also for work in the past. The equipment cannot be assigned until its open records are posted, and it becomes **Available** again when the last open record is posted.
+- If the equipment is **Assigned**, you are asked to confirm. On Yes the equipment is returned from the employee and the assignment is closed; on No nothing is registered.
 
 ## View maintenance
 - **Equipment Maintenance** list: all records, newest number first. Use the views at the top (Preventive, Corrective, Inspection, Upgrade) to show one type. Choose **Equipment** or **Vendor** to open those cards.

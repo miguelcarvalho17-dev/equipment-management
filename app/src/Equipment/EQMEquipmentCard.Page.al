@@ -184,7 +184,7 @@ page 50101 "EQM Equipment Card"
             action(AssignToEmployee)
             {
                 Caption = 'Assign to Employee';
-                ToolTip = 'Assign available equipment to an active employee that you select. The assignment is recorded with the work date and your user name.';
+                ToolTip = 'Assign available equipment to an active employee that you select. The assignment is recorded with the work date and your user name. Not available while the equipment has open maintenance.';
                 Image = Employee;
                 Enabled = CanAssign;
 
@@ -214,7 +214,7 @@ page 50101 "EQM Equipment Card"
             action(RegisterMaintenance)
             {
                 Caption = 'Register Maintenance';
-                ToolTip = 'Register maintenance that was performed on the equipment. Not available for lost or disposed equipment.';
+                ToolTip = 'Register maintenance for the equipment. The equipment status changes to In Maintenance, and the equipment cannot be assigned until the maintenance record is posted. Not available for lost or disposed equipment.';
                 Image = ServiceLedger;
                 Enabled = CanRegisterMaintenance;
                 RunObject = page "EQM Maintenance Record Card";
@@ -338,12 +338,15 @@ page 50101 "EQM Equipment Card"
         Employee: Record Employee;
         ActiveAssignment: Record "EQM Equipment Assignment";
         AssignmentMgt: Codeunit "EQM Assignment Mgt.";
+        MaintenanceMgt: Codeunit "EQM Maintenance Mgt.";
     begin
         IsAssigned := Rec.Status = Rec.Status::Assigned;
         IsSaved := Rec.SystemCreatedAt <> 0DT;
         IsNewRecord := not IsSaved;
         StatusStyle := Rec.GetStatusStyle();
         CanAssign := IsSaved and (Rec.Status = Rec.Status::Available);
+        if CanAssign then
+            CanAssign := not MaintenanceMgt.HasOpenMaintenance(Rec."No.");
         CanRegisterMaintenance := IsSaved and not Rec.IsFinalStatus(Rec.Status);
         AssignedEmployeeName := '';
         if (Rec."Assigned Employee No." <> '') and Employee.ReadPermission() then begin

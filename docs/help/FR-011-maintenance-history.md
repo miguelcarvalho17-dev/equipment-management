@@ -19,7 +19,7 @@ After posting:
 
 Good to know:
 - There is no way to undo posting. If a posted record is wrong, register a new maintenance record that describes the correction.
-- Posting works for equipment that is **Lost** or **Disposed**. Posting does not change the equipment **Status**.
+- Posting works for equipment that is **Lost** or **Disposed**. Posting does not change the status of Lost or Disposed equipment. For equipment that is **In Maintenance**, posting the last open maintenance record sets it to **Available**.
 - If posting fails, for example because the date is later than today, nothing is posted and the record stays **Open**.
 - On the list, **Post** works on the selected row only.
 

@@ -78,6 +78,16 @@
           <note from="Developer" annotates="general" priority="2">%1 = equipment number, %2 = status caption</note>
           <note from="Xliff Generator" annotates="general" priority="3">Table EQM Equipment - NamedType FinalStatusQst</note>
         </trans-unit>
+        <trans-unit id="Table 4212454693 - NamedType 1463542039" size-unit="char" translate="yes" xml:space="preserve">
+          <source>You cannot assign equipment %1 because it has open maintenance. Post the open maintenance records of the equipment first.</source>
+          <note from="Developer" annotates="general" priority="2">%1 = equipment number</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table EQM Equipment - NamedType MaintenanceOpenAssignErr</note>
+        </trans-unit>
+        <trans-unit id="Table 4212454693 - NamedType 9144924" size-unit="char" translate="yes" xml:space="preserve">
+          <source>You cannot change the status of equipment %1 to %2 because it has open maintenance. The status changes to %3 automatically when the last open maintenance record is posted.</source>
+          <note from="Developer" annotates="general" priority="2">%1 = equipment number, %2 = new status caption, %3 = Available status caption</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table EQM Equipment - NamedType MaintenanceOpenStatusErr</note>
+        </trans-unit>
         <trans-unit id="Table 4212454693 - NamedType 258004005" size-unit="char" translate="yes" xml:space="preserve">
           <source>You cannot create equipment with the status %1. Create the equipment first, and then use the Assign to Employee action.</source>
           <note from="Developer" annotates="general" priority="2">%1 = status caption</note>
@@ -107,6 +117,11 @@
           <source>Serial No. %1 is already used by equipment %2.</source>
           <note from="Developer" annotates="general" priority="2">%1 = serial number, %2 = equipment number</note>
           <note from="Xliff Generator" annotates="general" priority="3">Table EQM Equipment - NamedType SerialNoAlreadyUsedErr</note>
+        </trans-unit>
+        <trans-unit id="Table 4212454693 - NamedType 2280758221" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Equipment %1 is assigned to employee %2. Registering maintenance returns the equipment from the employee and changes its status to %3. Do you want to continue?</source>
+          <note from="Developer" annotates="general" priority="2">%1 = equipment number, %2 = employee number, %3 = In Maintenance status caption</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table EQM Equipment - NamedType StartMaintenanceAssignedQst</note>
         </trans-unit>
         <trans-unit id="Table 4212454693 - NamedType 3305734189" size-unit="char" translate="yes" xml:space="preserve">
           <source>Changing the status removes the assigned employee %1 from equipment %2. Do you want to continue?</source>
@@ -234,7 +249,7 @@
           <note from="Xliff Generator" annotates="general" priority="3">Table EQM Equipment - Field Serial No. - Property Caption</note>
         </trans-unit>
         <trans-unit id="Table 4212454693 - Field 513339096 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
-          <source>Specifies the lifecycle status of the equipment: Available, Assigned, In Maintenance, Lost or Disposed. Only saved, available equipment can be assigned; use the Assign to Employee action. Assigned equipment becomes available only through the Return action. Lost and Disposed are final statuses: the equipment cannot be assigned or change status again. New equipment cannot start as Assigned, Lost or Disposed.</source>
+          <source>Specifies the lifecycle status of the equipment: Available, Assigned, In Maintenance, Lost or Disposed. Only saved, available equipment without open maintenance can be assigned; use the Assign to Employee action. Assigned equipment becomes available only through the Return action. Registering maintenance sets the status to In Maintenance, and posting the last open maintenance record sets it back to Available. Lost and Disposed are final statuses: the equipment cannot be assigned or change status again. New equipment cannot start as Assigned, Lost or Disposed.</source>
           <note from="Developer" annotates="general" priority="2"></note>
           <note from="Xliff Generator" annotates="general" priority="3">Table EQM Equipment - Field Status - Property ToolTip</note>
         </trans-unit>
@@ -729,7 +744,7 @@
           <note from="Xliff Generator" annotates="general" priority="3">Table EQM Maintenance Record - Field Equipment Description - Property Caption</note>
         </trans-unit>
         <trans-unit id="Table 3517502179 - Field 1827518031 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
-          <source>Specifies the equipment the maintenance was performed on. The equipment must exist and cannot be lost or disposed of. You cannot change it after the record is created.</source>
+          <source>Specifies the equipment the maintenance is performed on. The equipment must exist and cannot be lost or disposed of. Registering the record sets the equipment status to In Maintenance. You cannot change the equipment after the record is created.</source>
           <note from="Developer" annotates="general" priority="2"></note>
           <note from="Xliff Generator" annotates="general" priority="3">Table EQM Maintenance Record - Field Equipment No. - Property ToolTip</note>
         </trans-unit>
@@ -789,7 +804,7 @@
           <note from="Xliff Generator" annotates="general" priority="3">Table EQM Maintenance Record - Field Performed By - Property Caption</note>
         </trans-unit>
         <trans-unit id="Table 3517502179 - Field 513339096 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
-          <source>Specifies whether the maintenance record is open or posted. You can correct an open record. Posting copies it to the maintenance history, and after that the record cannot be changed.</source>
+          <source>Specifies whether the maintenance record is open or posted. While a record is open, the equipment is In Maintenance and cannot be assigned. Posting copies the record to the maintenance history, and after that it cannot be changed. When the last open record of the equipment is posted, the equipment becomes Available.</source>
           <note from="Developer" annotates="general" priority="2"></note>
           <note from="Xliff Generator" annotates="general" priority="3">Table EQM Maintenance Record - Field Status - Property ToolTip</note>
         </trans-unit>
@@ -859,7 +874,7 @@
           <note from="Xliff Generator" annotates="general" priority="3">Codeunit EQM Employee Subscribers - NamedType EmployeeHasAssignedEquipmentErr</note>
         </trans-unit>
         <trans-unit id="Codeunit 3359203152 - NamedType 2141140146" size-unit="char" translate="yes" xml:space="preserve">
-          <source>Do you want to post maintenance record %1? It is copied to the maintenance history, and after that you cannot change it.</source>
+          <source>Do you want to post maintenance record %1? It is copied to the maintenance history, and after that you cannot change it. If no other maintenance is open for the equipment, its status changes from In Maintenance to Available.</source>
           <note from="Developer" annotates="general" priority="2">%1 = maintenance record number</note>
           <note from="Xliff Generator" annotates="general" priority="3">Codeunit EQM Maintenance Mgt. - NamedType PostQst</note>
         </trans-unit>
@@ -1114,7 +1129,7 @@
           <note from="Xliff Generator" annotates="general" priority="3">Page EQM Equipment Card - Action ShowMaintenanceHistory - Property Caption</note>
         </trans-unit>
         <trans-unit id="Page 3574600233 - Action 1332525020 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
-          <source>Assign available equipment to an active employee that you select. The assignment is recorded with the work date and your user name.</source>
+          <source>Assign available equipment to an active employee that you select. The assignment is recorded with the work date and your user name. Not available while the equipment has open maintenance.</source>
           <note from="Developer" annotates="general" priority="2"></note>
           <note from="Xliff Generator" annotates="general" priority="3">Page EQM Equipment Card - Action AssignToEmployee - Property ToolTip</note>
         </trans-unit>
@@ -1124,7 +1139,7 @@
           <note from="Xliff Generator" annotates="general" priority="3">Page EQM Equipment Card - Action AssignToEmployee - Property Caption</note>
         </trans-unit>
         <trans-unit id="Page 3574600233 - Action 4048384024 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
-          <source>Register maintenance that was performed on the equipment. Not available for lost or disposed equipment.</source>
+          <source>Register maintenance for the equipment. The equipment status changes to In Maintenance, and the equipment cannot be assigned until the maintenance record is posted. Not available for lost or disposed equipment.</source>
           <note from="Developer" annotates="general" priority="2"></note>
           <note from="Xliff Generator" annotates="general" priority="3">Page EQM Equipment Card - Action RegisterMaintenance - Property ToolTip</note>
         </trans-unit>
@@ -1643,6 +1658,16 @@
           <note from="Developer" annotates="general" priority="2"></note>
           <note from="Xliff Generator" annotates="general" priority="3">Page EQM Maintenance FactBox - Control NoOfMaintenanceRecords - Property Caption</note>
         </trans-unit>
+        <trans-unit id="Page 1059192635 - Control 1581214305 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Specifies how many maintenance records of the equipment are open. While a record is open, the equipment cannot be assigned. Choose the number to see them.</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page EQM Maintenance FactBox - Control NoOfOpenMaintenanceRecords - Property ToolTip</note>
+        </trans-unit>
+        <trans-unit id="Page 1059192635 - Control 1581214305 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Open Maintenance Records</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page EQM Maintenance FactBox - Control NoOfOpenMaintenanceRecords - Property Caption</note>
+        </trans-unit>
         <trans-unit id="Page 1059192635 - Control 917450800 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
           <source>Specifies the total cost of all maintenance registered for the equipment, in local currency.</source>
           <note from="Developer" annotates="general" priority="2"></note>
@@ -1739,7 +1764,7 @@
           <note from="Xliff Generator" annotates="general" priority="3">Page EQM Maintenance Record Card - Property AboutTitle</note>
         </trans-unit>
         <trans-unit id="Page 774058295 - Property 247559172" size-unit="char" translate="yes" xml:space="preserve">
-          <source>Register maintenance that was done on equipment. Choose the equipment, the date and the type of maintenance, and add the vendor, the cost and who did the work. You cannot register maintenance for lost or disposed equipment. You can correct the record until you choose **Post**. Posting copies it to the maintenance history, and after that it cannot be changed. Maintenance records can never be deleted.</source>
+          <source>Register maintenance on equipment. Choose the equipment, the date and the type of maintenance, and add the vendor, the cost and who did the work. When you register the record, the equipment status changes to In Maintenance and the equipment cannot be assigned. You cannot register maintenance for lost or disposed equipment. You can correct the record until you choose **Post**. Posting copies it to the maintenance history, locks it and, when no other maintenance is open, makes the equipment Available again. Maintenance records can never be deleted.</source>
           <note from="Developer" annotates="general" priority="2"></note>
           <note from="Xliff Generator" annotates="general" priority="3">Page EQM Maintenance Record Card - Property AboutText</note>
         </trans-unit>
@@ -1799,7 +1824,7 @@
           <note from="Xliff Generator" annotates="general" priority="3">Page EQM Maintenance Record Card - Action Vendor - Property Caption</note>
         </trans-unit>
         <trans-unit id="Page 774058295 - Action 2282416948 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
-          <source>Post the maintenance record. It is copied to the maintenance history, and after that it cannot be changed or deleted.</source>
+          <source>Post the maintenance record. It is copied to the maintenance history, and after that it cannot be changed or deleted. If no other maintenance is open for the equipment, the equipment becomes Available.</source>
           <note from="Developer" annotates="general" priority="2"></note>
           <note from="Xliff Generator" annotates="general" priority="3">Page EQM Maintenance Record Card - Action Post - Property ToolTip</note>
         </trans-unit>
@@ -1824,7 +1849,7 @@
           <note from="Xliff Generator" annotates="general" priority="3">Page EQM Maintenance Records - Property AboutTitle</note>
         </trans-unit>
         <trans-unit id="Page 2177390062 - Property 247559172" size-unit="char" translate="yes" xml:space="preserve">
-          <source>This list shows the maintenance work done on your equipment: when, what type, by whom and at what cost. Choose **New** to register maintenance and **Post** when a record is final. Posting copies the record to the maintenance history and locks it. No record can be deleted. Choose a view at the top to see one maintenance type, or only open or posted records.</source>
+          <source>This list shows the maintenance work on your equipment: when, what type, by whom and at what cost. Choose **New** to register maintenance. While a record is open, its equipment is In Maintenance and cannot be assigned. Choose **Post** when the work is done: the record is copied to the maintenance history and locked, and the equipment becomes Available when no other maintenance is open. No record can be deleted. Choose a view at the top to see one maintenance type, or only open or posted records.</source>
           <note from="Developer" annotates="general" priority="2"></note>
           <note from="Xliff Generator" annotates="general" priority="3">Page EQM Maintenance Records - Property AboutText</note>
         </trans-unit>
@@ -1879,7 +1904,7 @@
           <note from="Xliff Generator" annotates="general" priority="3">Page EQM Maintenance Records - Action Vendor - Property Caption</note>
         </trans-unit>
         <trans-unit id="Page 2177390062 - Action 2282416948 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
-          <source>Post the maintenance record. It is copied to the maintenance history, and after that it cannot be changed or deleted.</source>
+          <source>Post the maintenance record. It is copied to the maintenance history, and after that it cannot be changed or deleted. If no other maintenance is open for the equipment, the equipment becomes Available.</source>
           <note from="Developer" annotates="general" priority="2"></note>
           <note from="Xliff Generator" annotates="general" priority="3">Page EQM Maintenance Records - Action Post - Property ToolTip</note>
         </trans-unit>
