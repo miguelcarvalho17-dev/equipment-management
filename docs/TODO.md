@@ -66,6 +66,19 @@ Open items after FR-001 Equipment Registration (written 2026-11-02). Nothing fro
 - [ ] HS-SB12 An error during posting (for example a future date set by data) leaves no entry and the record stays Open.
 - [ ] FR-011 follow-ups: update the personal-data classification item to include "Posted By", "Performed By" and "Vendor Name" (R5). Tests need `internalsVisibleTo` for the test app in app.json (H8).
 
+## FR-012 sandbox checks (not run; automated tests deferred, Q9, test codeunit 50166 reserved)
+- [ ] MS-SB0 After publishing, list equipment with open maintenance records from FR-010/FR-011 testing; post them or accept that they cannot be assigned until posted.
+- [ ] MS-SB1 Build with CodeCop, UICop and AppSourceCop: no errors or warnings; `.g.xlf` contains the new and changed texts.
+- [ ] MS-SB2 Register maintenance for Available equipment from the Equipment Card: status becomes In Maintenance, Assign to Employee is disabled, the FactBox shows 1 open record.
+- [ ] MS-SB3 Register maintenance for assigned equipment: one confirm; No cancels without a message and creates no record; Yes returns the equipment and closes the assignment. Note whether a series number was skipped after No. While the confirm is open, check that a second session registering on the same series or posting for the same equipment waits (accepted, option B).
+- [ ] MS-SB4 Two open records: post one (still In Maintenance), post the other (Available). Check the post confirm text.
+- [ ] MS-SB5 Status = Available by hand while a record is open: error. Disposed while open: allowed; then post the record, the status stays Disposed.
+- [ ] MS-SB6 A non-SUPER Manager does all of the above without permission errors.
+- [ ] MS-SB7 Reader: Register fails with a permission error; nothing changes.
+- [ ] MS-SB8 Equipment List view In Maintenance and the dashboard tile include the equipment while maintenance is open.
+- [ ] MS-SB9 Two sessions: register a record for E in session A and post the last other open record of E in session B; record whether B waits and the final status is In Maintenance. Also record how long B waits while A's confirm for assigned equipment is open.
+- [ ] MS-SB10 Teaching tips of pages 50113 and 50114 show the new texts.
+
 ## Open design and fix items
 - [x] FR-007 known limitation (Employee read): addressed in code by NFR-002 (name blank without Employee read, `ReadPermission()` guard). Not verified in a sandbox (SB9).
 - [ ] **New companies:** default data and number series are created only in `OnInstallAppPerCompany`. In a company created later the setup record is missing, and equipment creation fails on `TestField("Equipment Nos.")`. Create the defaults on company initialization (subscribe to the company-initialize event) or give the user path working permissions. NFR-002: the Administrator path now has indirect No. Series rights (ri), but defaults are still created only on install or when an Administrator opens Setup. Readers and Managers get the setup-missing error. Not verified (SB8).

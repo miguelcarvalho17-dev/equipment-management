@@ -1,8 +1,9 @@
 namespace MiguelCarvalho.EquipmentManagement;
 
 /// <summary>
-/// Posts a maintenance record: freezes it and writes a read-only maintenance history entry. Run it with Codeunit.Run
-/// on the record. It shows no dialogs.
+/// Posts a maintenance record: freezes it, writes a read-only maintenance history entry and, when no other maintenance
+/// is open, sets the equipment from In Maintenance back to Available. Run it with Codeunit.Run on the record. It shows
+/// no dialogs.
 /// </summary>
 codeunit 50109 "EQM Maintenance-Post"
 {
@@ -37,6 +38,7 @@ codeunit 50109 "EQM Maintenance-Post"
         Rec.Modify(true);
 
         InsertHistoryEntry(Rec, MaintenanceHistoryEntry);
+        CompleteEquipmentMaintenance(Rec);
 
         OnAfterPostMaintenanceRecord(Rec, MaintenanceHistoryEntry);
     end;
@@ -64,6 +66,15 @@ codeunit 50109 "EQM Maintenance-Post"
         MaintenanceHistoryEntry.Insert(true);
     end;
 
+    local procedure CompleteEquipmentMaintenance(MaintenanceRecord: Record "EQM Maintenance Record")
+    var
+        Equipment: Record "EQM Equipment";
+    begin
+        Equipment.ReadIsolation := IsolationLevel::UpdLock;
+        if Equipment.Get(MaintenanceRecord."Equipment No.") then
+            Equipment.CompleteMaintenance(MaintenanceRecord);
+    end;
+
     /// <summary>
     /// Raised after the checks that the record is saved, Open and not yet in the history, and before the status changes.
     /// </summary>
@@ -85,6 +96,7 @@ codeunit 50109 "EQM Maintenance-Post"
 
     /// <summary>
     /// Raised after the status change and the insert of the history entry. Subscribers must not commit.
+    /// The equipment status has already been updated.
     /// </summary>
     /// <param name="MaintenanceRecord">The posted record (passed by value).</param>
     /// <param name="MaintenanceHistoryEntry">The history entry that was written (passed by value).</param>

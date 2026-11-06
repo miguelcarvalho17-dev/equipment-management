@@ -1,6 +1,27 @@
 # Changelog
 Newest first. Grouped by Added / Changed / Fixed / Obsolete.
 
+## FR-012 Equipment Maintenance Status (version stays 29.0.0.0, no bump)
+### Added
+- Table 50100: internal `StartMaintenance` and `CompleteMaintenance`; events `OnBeforeStartMaintenance` and `OnBeforeCompleteMaintenance` (local; the latter with IsHandled).
+- Codeunit 50108: internal `HasOpenMaintenance`, `CountOpenMaintenanceRecords`, `ShowOpenMaintenanceRecords`. Key `EquipmentStatus` on table 50105.
+- Maintenance FactBox: field Open Maintenance Records with drill-down.
+- Help article docs/help/FR-012-equipment-maintenance-status.md.
+### Changed
+- Registering maintenance sets the equipment to In Maintenance; assigned equipment asks for confirmation and is returned from the employee (assignment closed).
+- Posting the last open maintenance record sets In Maintenance equipment to Available (codeunit 50109).
+- Equipment with an open maintenance record cannot be assigned, and In Maintenance equipment cannot be set to Available by hand while a record is open (Lost and Disposed stay allowed). IsHandled of `OnBeforeCheckStatusTransitionAllowed` cannot bypass this.
+- Equipment Card: Assign to Employee is unavailable while maintenance is open. ToolTips, AboutTexts and the post confirmation text updated.
+- Reverses FR-010 "registering does not change the status"; FR-011 posting may now set the status. Docs of FR-003, FR-004, FR-005, FR-010 and FR-011 corrected (FR-003 help wrongly said In Maintenance equipment can be assigned directly).
+### Fixed
+- None.
+### Obsolete
+- None.
+
+Release notes: Registering maintenance now sets the equipment to In Maintenance, and equipment with open maintenance cannot be assigned. Posting the last open maintenance record sets the equipment back to Available. For assigned equipment you confirm first; the equipment is then returned from the employee. The Maintenance FactBox shows the number of open records.
+
+Note: built with alc and the analyzers, no new warnings. Review CHANGES resolved. No automated tests (deferred, Q9; test ID 50166 reserved); sandbox checks MS-SB0 to MS-SB10 not run. Accepted: the confirmation for assigned equipment is asked while the number series line and the equipment row are locked, so other users may wait. See docs/features/FR-012-equipment-maintenance-status.md.
+
 ## FR-011 Equipment Maintenance History (version stays 29.0.0.0, no bump)
 ### Added
 - Enum 50103 "EQM Maintenance Status" (Open, Posted; not extensible). Field 11 Status on table 50105.

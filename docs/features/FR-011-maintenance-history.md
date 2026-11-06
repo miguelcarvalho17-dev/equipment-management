@@ -26,9 +26,10 @@ Status: describes the code as implemented. **Build is clean under CodeCop and UI
   1. Reads the stored record with `UpdLock`. Not found: `RecordNotSavedErr`. Already Posted: `AlreadyPostedErr`.
   2. When a history entry already exists for the "Maintenance No.": `AlreadyPostedErr`.
   3. Raises `OnBeforePostMaintenanceRecord`.
-  4. Sets Status to Posted and calls `Modify(true)`. This reruns the FR-010 checks (equipment exists and is unchanged, date not in the future, cost >= 0). The equipment status is not checked, so Lost or Disposed equipment can still have maintenance posted.
+  4. Sets Status to Posted and calls `Modify(true)`. This reruns the FR-010 checks (equipment exists and is unchanged, date not in the future, cost >= 0). The equipment status is not checked, so Lost or Disposed equipment can still have maintenance posted (its status stays).
   5. Writes the history entry: copies Equipment No., Maintenance Date, Maintenance Type, Vendor No., Cost, Description and Performed By by assignment. Vendor Name comes from `GetVendorName` (blank when the user cannot read vendors). Posted By is `UserId()`, Posted At is `CurrentDateTime()`. Raises `OnBeforeInsertMaintenanceHistoryEntry`, then inserts.
-  6. Raises `OnAfterPostMaintenanceRecord`.
+  6. Since FR-012: calls `Equipment.CompleteMaintenance` (equipment read with `UpdLock`), which sets the equipment from In Maintenance to Available when no other record is open. Other statuses are not touched.
+  7. Raises `OnAfterPostMaintenanceRecord`.
   An error at any step rolls back both the status change and the entry. The codeunit shows no dialog.
 - **Confirmation:** `PostWithConfirmation` asks "Do you want to post maintenance record %1?" and runs the codeunit on Yes. The card saves the record before posting. The list posts the current row only.
 - **No reversal:** a posted record never returns to Open. `OnModify` of table 50105 checks the stored record (`CheckNotPosted`) and raises `PostedRecordCannotBeChangedErr` for every role. Delete and rename of 50105 stay refused (FR-010).

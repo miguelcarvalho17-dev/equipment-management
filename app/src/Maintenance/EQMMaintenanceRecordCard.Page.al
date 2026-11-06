@@ -6,7 +6,7 @@ page 50114 "EQM Maintenance Record Card"
 {
     Caption = 'Maintenance Record';
     AboutTitle = 'About maintenance records';
-    AboutText = 'Register maintenance that was done on equipment. Choose the equipment, the date and the type of maintenance, and add the vendor, the cost and who did the work. You cannot register maintenance for lost or disposed equipment. You can correct the record until you choose **Post**. Posting copies it to the maintenance history, and after that it cannot be changed. Maintenance records can never be deleted.';
+    AboutText = 'Register maintenance on equipment. Choose the equipment, the date and the type of maintenance, and add the vendor, the cost and who did the work. When you register the record, the equipment status changes to In Maintenance and the equipment cannot be assigned. You cannot register maintenance for lost or disposed equipment. You can correct the record until you choose **Post**. Posting copies it to the maintenance history, locks it and, when no other maintenance is open, makes the equipment Available again. Maintenance records can never be deleted.';
     PageType = Card;
     ApplicationArea = All;
     UsageCategory = None;
@@ -111,7 +111,7 @@ page 50114 "EQM Maintenance Record Card"
             action(Post)
             {
                 Caption = 'Post';
-                ToolTip = 'Post the maintenance record. It is copied to the maintenance history, and after that it cannot be changed or deleted.';
+                ToolTip = 'Post the maintenance record. It is copied to the maintenance history, and after that it cannot be changed or deleted. If no other maintenance is open for the equipment, the equipment becomes Available.';
                 Image = PostDocument;
                 ShortCutKey = 'F9';
                 Enabled = CanPost;

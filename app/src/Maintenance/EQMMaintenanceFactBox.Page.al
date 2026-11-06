@@ -24,6 +24,18 @@ page 50115 "EQM Maintenance FactBox"
                     MaintenanceMgt.ShowMaintenanceRecords(Rec."No.");
                 end;
             }
+            field(NoOfOpenMaintenanceRecords; NoOfOpenMaintenanceRecords)
+            {
+                Caption = 'Open Maintenance Records';
+                ToolTip = 'Specifies how many maintenance records of the equipment are open. While a record is open, the equipment cannot be assigned. Choose the number to see them.';
+
+                trigger OnDrillDown()
+                var
+                    MaintenanceMgt: Codeunit "EQM Maintenance Mgt.";
+                begin
+                    MaintenanceMgt.ShowOpenMaintenanceRecords(Rec."No.");
+                end;
+            }
             field(LastMaintenanceDate; LastMaintenanceDate)
             {
                 Caption = 'Last Maintenance Date';
@@ -45,6 +57,7 @@ page 50115 "EQM Maintenance FactBox"
 
     var
         NoOfMaintenanceRecords: Integer;
+        NoOfOpenMaintenanceRecords: Integer;
         LastMaintenanceDate: Date;
         LastMaintenanceType: Text;
         TotalMaintenanceCost: Decimal;
@@ -64,6 +77,7 @@ page 50115 "EQM Maintenance FactBox"
     local procedure ClearFactBox()
     begin
         NoOfMaintenanceRecords := 0;
+        NoOfOpenMaintenanceRecords := 0;
         LastMaintenanceDate := 0D;
         LastMaintenanceType := '';
         TotalMaintenanceCost := 0;
@@ -80,6 +94,8 @@ page 50115 "EQM Maintenance FactBox"
         NoOfMaintenanceRecords := MaintenanceMgt.CountMaintenanceRecords(Rec."No.");
         if NoOfMaintenanceRecords = 0 then
             exit;
+
+        NoOfOpenMaintenanceRecords := MaintenanceMgt.CountOpenMaintenanceRecords(Rec."No.");
 
         if MaintenanceMgt.GetLastMaintenanceRecord(Rec."No.", MaintenanceRecord) then begin
             LastMaintenanceDate := MaintenanceRecord."Maintenance Date";

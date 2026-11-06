@@ -86,7 +86,7 @@ table 50100 "EQM Equipment"
         field(9; Status; Enum "EQM Equipment Status")
         {
             Caption = 'Status';
-            ToolTip = 'Specifies the lifecycle status of the equipment: Available, Assigned, In Maintenance, Lost or Disposed. Only saved, available equipment can be assigned; use the Assign to Employee action. Assigned equipment becomes available only through the Return action. Lost and Disposed are final statuses: the equipment cannot be assigned or change status again. New equipment cannot start as Assigned, Lost or Disposed.';
+            ToolTip = 'Specifies the lifecycle status of the equipment: Available, Assigned, In Maintenance, Lost or Disposed. Only saved, available equipment without open maintenance can be assigned; use the Assign to Employee action. Assigned equipment becomes available only through the Return action. Registering maintenance sets the status to In Maintenance, and posting the last open maintenance record sets it back to Available. Lost and Disposed are final statuses: the equipment cannot be assigned or change status again. New equipment cannot start as Assigned, Lost or Disposed.';
             InitValue = Available;
 
             trigger OnValidate()
@@ -210,6 +210,9 @@ table 50100 "EQM Equipment"
         NotAssignedErr: Label 'You cannot return equipment %1 because it is not assigned. Its status is %2.', Comment = '%1 = equipment number, %2 = status caption';
         ReturnEquipmentQst: Label 'Do you want to return equipment %1 from employee %2? The status changes to %3 and the assignment is closed.', Comment = '%1 = equipment number, %2 = employee number, %3 = Available status caption';
         UseReturnActionErr: Label 'To make assigned equipment %1 available, use the Return action on the equipment card or the Return Equipment action on the employee card.', Comment = '%1 = equipment number';
+        MaintenanceOpenAssignErr: Label 'You cannot assign equipment %1 because it has open maintenance. Post the open maintenance records of the equipment first.', Comment = '%1 = equipment number';
+        MaintenanceOpenStatusErr: Label 'You cannot change the status of equipment %1 to %2 because it has open maintenance. The status changes to %3 automatically when the last open maintenance record is posted.', Comment = '%1 = equipment number, %2 = new status caption, %3 = Available status caption';
+        StartMaintenanceAssignedQst: Label 'Equipment %1 is assigned to employee %2. Registering maintenance returns the equipment from the employee and changes its status to %3. Do you want to continue?', Comment = '%1 = equipment number, %2 = employee number, %3 = In Maintenance status caption';
 
     trigger OnInsert()
     var
@@ -274,7 +277,8 @@ table 50100 "EQM Equipment"
     /// Sets the status to Assigned, assigns the employee and saves the record with triggers.
     /// Only saved, Available equipment can be assigned. An active assignment entry with the work date and the current user
     /// is created. Raises an error when the equipment is already assigned, or when the status is not Available (Lost and
-    /// Disposed always; other statuses unless an extension allows the transition).
+    /// Disposed always; other statuses unless an extension allows the transition). Raises an error when the equipment has
+    /// open maintenance.
     /// </summary>
     /// <param name="EmployeeNo">The employee to assign. Must exist, be Active and not be privacy blocked; otherwise an error is raised.</param>
     internal procedure AssignEmployee(EmployeeNo: Code[20])
@@ -312,6 +316,57 @@ table 50100 "EQM Equipment"
         ReturnInProgress := false;
         Modify(true);
         exit(true);
+    end;
+
+    /// <summary>
+    /// Sets the status to In Maintenance and saves the record with triggers. Called when a maintenance record is
+    /// registered. Does nothing when the status is already In Maintenance, Lost or Disposed. For assigned equipment the user
+    /// is asked to confirm (Yes without a UI session); the equipment is then returned from the employee and the assignment
+    /// is closed. Raises an empty error when the user answers No.
+    /// </summary>
+    /// <param name="MaintenanceRecord">The maintenance record being registered (passed by value). Used for the event.</param>
+    internal procedure StartMaintenance(MaintenanceRecord: Record "EQM Maintenance Record")
+    var
+        ConfirmManagement: Codeunit "Confirm Management";
+    begin
+        if Status = Status::"In Maintenance" then
+            exit;
+        if IsFinalStatus(Status) then
+            exit;
+
+        if Status = Status::Assigned then begin
+            if not ConfirmManagement.GetResponseOrDefault(StrSubstNo(StartMaintenanceAssignedQst, "No.", "Assigned Employee No.", Format(Status::"In Maintenance")), true) then
+                Error('');
+            "Assigned Employee No." := '';
+        end;
+
+        Status := Status::"In Maintenance";
+        OnBeforeStartMaintenance(Rec, MaintenanceRecord);
+        Modify(true);
+    end;
+
+    /// <summary>
+    /// Sets the status from In Maintenance back to Available and saves the record with triggers, when the
+    /// equipment has no open maintenance record left. Called after a maintenance record is posted. Does nothing when the
+    /// status is not In Maintenance or when other maintenance is still open.
+    /// </summary>
+    /// <param name="MaintenanceRecord">The posted maintenance record (passed by value). Used for the event.</param>
+    internal procedure CompleteMaintenance(MaintenanceRecord: Record "EQM Maintenance Record")
+    var
+        MaintenanceMgt: Codeunit "EQM Maintenance Mgt.";
+        IsHandled: Boolean;
+    begin
+        if Status <> Status::"In Maintenance" then
+            exit;
+        if MaintenanceMgt.HasOpenMaintenance("No.") then
+            exit;
+
+        OnBeforeCompleteMaintenance(Rec, MaintenanceRecord, IsHandled);
+        if IsHandled then
+            exit;
+
+        Validate(Status, Status::Available);
+        Modify(true);
     end;
 
     /// <summary>
@@ -442,6 +497,7 @@ table 50100 "EQM Equipment"
 
     local procedure CheckStatusTransitionAllowed(FromStatus: Enum "EQM Equipment Status"; ToStatus: Enum "EQM Equipment Status")
     var
+        MaintenanceMgt: Codeunit "EQM Maintenance Mgt.";
         IsHandled: Boolean;
     begin
         if FromStatus = ToStatus then
@@ -449,6 +505,12 @@ table 50100 "EQM Equipment"
 
         if (ToStatus = ToStatus::Assigned) and IsFinalStatus(FromStatus) then
             Error(CannotAssignFinalStatusErr, "No.", Format(FromStatus));
+
+        if (ToStatus = ToStatus::Assigned) and MaintenanceMgt.HasOpenMaintenance("No.") then
+            Error(MaintenanceOpenAssignErr, "No.");
+
+        if (FromStatus = FromStatus::"In Maintenance") and not IsFinalStatus(ToStatus) and MaintenanceMgt.HasOpenMaintenance("No.") then
+            Error(MaintenanceOpenStatusErr, "No.", Format(ToStatus), Format(Status::Available));
 
         OnBeforeCheckStatusTransitionAllowed(Rec, FromStatus, ToStatus, IsHandled);
         if IsHandled then
@@ -549,7 +611,7 @@ table 50100 "EQM Equipment"
     /// <param name="Equipment">The record being checked (passed by value; changes are not kept).</param>
     /// <param name="FromStatus">The current status (the previous value on validate, the stored value on modify).</param>
     /// <param name="ToStatus">The new status.</param>
-    /// <param name="IsHandled">Set to true to skip the standard transition rules: Lost and Disposed being final, and only Available equipment being assignable. Lost and disposed equipment still cannot be assigned.</param>
+    /// <param name="IsHandled">Set to true to skip the standard transition rules: Lost and Disposed being final, and only Available equipment being assignable. Lost and disposed equipment still cannot be assigned. Equipment with open maintenance still cannot be assigned, and its status cannot leave In Maintenance except to Lost or Disposed.</param>
     [IntegrationEvent(false, false)]
     local procedure OnBeforeCheckStatusTransitionAllowed(Equipment: Record "EQM Equipment"; FromStatus: Enum "EQM Equipment Status"; ToStatus: Enum "EQM Equipment Status"; var IsHandled: Boolean)
     begin
@@ -561,6 +623,29 @@ table 50100 "EQM Equipment"
     /// <param name="Equipment">The record being saved (passed by value; changes are not kept). Raise an error to reject the save.</param>
     [IntegrationEvent(false, false)]
     local procedure OnAfterCheckEquipmentConsistency(Equipment: Record "EQM Equipment")
+    begin
+    end;
+
+    /// <summary>
+    /// Raised when registering maintenance changes the equipment status to In Maintenance, after the status and the
+    /// employee are set and before the record is saved.
+    /// </summary>
+    /// <param name="Equipment">The equipment, with Status = In Maintenance and the employee removed. You can set fields that your extension added; do not change the standard fields. Raise an error to stop the registration.</param>
+    /// <param name="MaintenanceRecord">The maintenance record being registered (passed by value).</param>
+    [IntegrationEvent(false, false)]
+    local procedure OnBeforeStartMaintenance(var Equipment: Record "EQM Equipment"; MaintenanceRecord: Record "EQM Maintenance Record")
+    begin
+    end;
+
+    /// <summary>
+    /// Raised when the last open maintenance record of equipment in maintenance is posted, before the status changes to
+    /// Available.
+    /// </summary>
+    /// <param name="Equipment">The equipment, still In Maintenance.</param>
+    /// <param name="MaintenanceRecord">The posted maintenance record (passed by value).</param>
+    /// <param name="IsHandled">Set to true to keep the equipment In Maintenance. The user can set it to Available later.</param>
+    [IntegrationEvent(false, false)]
+    local procedure OnBeforeCompleteMaintenance(var Equipment: Record "EQM Equipment"; MaintenanceRecord: Record "EQM Maintenance Record"; var IsHandled: Boolean)
     begin
     end;
 }

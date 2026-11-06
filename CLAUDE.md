@@ -28,6 +28,7 @@ so everything they need must be in that file or in the repo.
 - Create the branch first, before any planning, event search or other work on a feature: name it after the feature, cut it from an up-to-date `main`, and create it both locally and on GitHub (`git checkout -b <branch>` then `git push -u origin <branch>`). Pushing this empty branch is the one push allowed without asking; it is what makes the feature branch exist remotely from the start.
 - Merge into `main` only through a pull request. Do not merge or push to `main` yourself; open the PR and leave the merge to the user.
 - Commit and push only when the user asks.
+- After a commit and push on a feature, fix or chore branch, create the pull request into `main` (`gh pr create`) right away, without asking again. The PR description links the GitHub issue (`Closes #<n>`) and summarizes what changed, the review verdict, the build result and what is not verified. Leave the merge to the user.
 - Once a branch is merged into `main`, delete it locally and on GitHub (`git branch -d <branch>` and `git push origin --delete <branch>`), after updating local `main` with `git checkout main && git pull`.
 
 ## Closing a feature issue

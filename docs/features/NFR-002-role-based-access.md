@@ -71,6 +71,15 @@ FR-011 update (maintenance, from code reading, not run in a sandbox):
 | Change a Posted record | no | no (business error) | no (business error) |
 | Insert, change, rename or delete a history entry directly | no | no | no |
 
+FR-012 update (no permission set changes; from code reading, not run in a sandbox, MS-SB6 and MS-SB7):
+| Function | Reader | Manager | Administrator |
+|---|---|---|---|
+| Register maintenance (sets In Maintenance) | no | yes | yes |
+| Post maintenance (may set Available) | no | yes | yes |
+| Assign equipment with open maintenance | no | no (business error) | no (business error) |
+| In Maintenance to Available by hand while a record is open | no | no (business error) | no (business error) |
+| In Maintenance to Lost or Disposed while a record is open | no | yes | yes |
+
 Partners extend roles with their own `permissionsetextension` on these sets. No events are published or subscribed by this feature.
 
 ## Upgrade and compatibility

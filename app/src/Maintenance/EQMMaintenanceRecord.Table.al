@@ -5,8 +5,10 @@ using Microsoft.Purchases.Vendor;
 
 /// <summary>
 /// One record per maintenance activity performed on equipment. Maintenance cannot be registered for Lost or Disposed
-/// equipment. Open records can be corrected. Posting freezes the record and writes a maintenance history entry. Records
-/// are never deleted, so equipment that has maintenance records cannot be deleted either.
+/// equipment. Registering a record sets the equipment status to In Maintenance; while the equipment has open records it
+/// cannot be assigned. Open records can be corrected. Posting freezes the record, writes a maintenance history entry
+/// and, when no other record is open, sets the equipment back to Available. Records are never deleted, so equipment
+/// that has maintenance records cannot be deleted either.
 /// </summary>
 table 50105 "EQM Maintenance Record"
 {
@@ -39,7 +41,7 @@ table 50105 "EQM Maintenance Record"
         field(2; "Equipment No."; Code[20])
         {
             Caption = 'Equipment No.';
-            ToolTip = 'Specifies the equipment the maintenance was performed on. The equipment must exist and cannot be lost or disposed of. You cannot change it after the record is created.';
+            ToolTip = 'Specifies the equipment the maintenance is performed on. The equipment must exist and cannot be lost or disposed of. Registering the record sets the equipment status to In Maintenance. You cannot change the equipment after the record is created.';
             TableRelation = "EQM Equipment"."No.";
             NotBlank = true;
 
@@ -109,7 +111,7 @@ table 50105 "EQM Maintenance Record"
         field(11; Status; Enum "EQM Maintenance Status")
         {
             Caption = 'Status';
-            ToolTip = 'Specifies whether the maintenance record is open or posted. You can correct an open record. Posting copies it to the maintenance history, and after that the record cannot be changed.';
+            ToolTip = 'Specifies whether the maintenance record is open or posted. While a record is open, the equipment is In Maintenance and cannot be assigned. Posting copies the record to the maintenance history, and after that it cannot be changed. When the last open record of the equipment is posted, the equipment becomes Available.';
             Editable = false;
         }
     }
@@ -123,6 +125,9 @@ table 50105 "EQM Maintenance Record"
         key(EquipmentDate; "Equipment No.", "Maintenance Date")
         {
             SumIndexFields = Cost;
+        }
+        key(EquipmentStatus; "Equipment No.", Status)
+        {
         }
     }
 
@@ -153,6 +158,7 @@ table 50105 "EQM Maintenance Record"
     trigger OnInsert()
     var
         EquipmentSetup: Record "EQM Equipment Setup";
+        Equipment: Record "EQM Equipment";
         NoSeries: Codeunit "No. Series";
     begin
         if "No." = '' then begin
@@ -168,6 +174,10 @@ table 50105 "EQM Maintenance Record"
         if Status <> Status::Open then
             Error(InsertPostedErr, "No.");
         CheckMaintenanceConsistency(true);
+
+        Equipment.ReadIsolation := IsolationLevel::UpdLock;
+        if Equipment.Get("Equipment No.") then
+            Equipment.StartMaintenance(Rec);
     end;
 
     trigger OnModify()

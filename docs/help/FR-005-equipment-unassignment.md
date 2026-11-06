@@ -24,6 +24,7 @@ If the equipment was returned by someone else in the meantime, you get a message
 
 ## Good to know
 - Assigned equipment becomes **Available** only through **Return**. If you choose **Available** in the **Status** field of assigned equipment, you get a message to use the Return action.
+- Registering maintenance for assigned equipment also returns it from the employee (after a confirmation) and closes the assignment.
 - You can still change assigned equipment to **In Maintenance**, **Lost** or **Disposed** in the **Status** field; the assignment is closed then too.
 - Returned equipment can be assigned again with **Assign to Employee**. The old assignment stays closed and a new one is created.
 - Closed assignments are never deleted. Equipment that has been assigned at least once can no longer be deleted; set it to **Disposed** instead. See the FR-006 help.

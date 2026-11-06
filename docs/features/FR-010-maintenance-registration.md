@@ -31,7 +31,7 @@ Status: describes the code as implemented. **Build is clean under CodeCop and UI
 - **Equipment cannot change** on a saved record (`EquipmentCannotChangeErr`), and the number cannot be renamed (`RenameNotAllowedErr`).
 - **Cost** must be zero or greater (MinValue and a check on save).
 - **No delete:** `OnDelete` on the table always raises `MaintenanceCannotBeDeletedErr`, for every user including Administrator. Pages also have delete disabled. Equipment with maintenance records cannot be deleted either.
-- **Registering maintenance does not change the equipment status.** Setting In Maintenance remains a separate, manual status change (FR-003). TODO(verify) against the plan if a link was intended.
+- **Registering maintenance sets the equipment status to In Maintenance** (changed by FR-012; the earlier statement that registering does not change the status no longer holds). See docs/features/FR-012-equipment-maintenance-status.md.
 - **Rename of equipment:** TODO(verify) (MT-SB9) that records follow a renamed equipment number.
 - **Vendor Name** is shown only when the user can read vendors; otherwise blank.
 - **FactBox:** counts and sums are live; Last Maintenance is the latest date (highest "No." on equal dates, by `FindLast` on the key).

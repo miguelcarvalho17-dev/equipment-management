@@ -13,7 +13,7 @@ date and who assigned it. When the equipment stops being assigned, the assignmen
 3. The status becomes **Assigned**, and an assignment is recorded with your work date and your user name.
 
 Notes:
-- Only **Available** equipment can be assigned. Equipment in maintenance, lost or disposed cannot be assigned.
+- Only **Available** equipment can be assigned. Equipment in maintenance, lost or disposed cannot be assigned. Equipment with an open maintenance record cannot be assigned either; Assign to Employee is then unavailable.
 - New equipment cannot start as Assigned. Create it first, then assign it. On a new card, **Status** offers only Available and In Maintenance.
 - **Assigned Employee No.** on the card cannot be typed in; use **Assign to Employee**.
 - To give assigned equipment to another employee, choose **Return** first, then assign it again.

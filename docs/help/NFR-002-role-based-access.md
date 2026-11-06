@@ -9,7 +9,7 @@ The app has three permission sets. Give each user the one that matches their wor
 | **Equipment Manager** | People who run the equipment | Everything a Reader can, plus create and change equipment, change its status, assign it to an employee and return it. Cannot delete equipment. |
 | **Equipment Administrator** | The person responsible for the app | Everything a Manager can, plus delete equipment, maintain categories and change the setup. |
 
-Nobody can change or delete assignment history entries by hand, not even an administrator.
+Nobody can change or delete assignment history entries by hand, not even an administrator. Registering maintenance sets the equipment to In Maintenance and posting the last open record sets it to Available, so only Managers and Administrators can change the status this way. Nobody can assign equipment that has open maintenance.
 
 Maintenance: a Reader can see the maintenance history. Managers and Administrators can register maintenance, correct open records and post them. A posted record and the maintenance history cannot be changed or deleted by anyone, not even an administrator.
 
