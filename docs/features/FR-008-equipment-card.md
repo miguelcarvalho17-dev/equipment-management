@@ -21,6 +21,9 @@ Status: describes the code as implemented. **Not compiled and not run in a sandb
 - **Audit group** is the last section and its dates are visible without "Show more".
 - **Teaching tip:** one translated string pair. `AboutText` uses `**bold**` markup. TODO(verify): renders as bold in a sandbox.
 
+## FR-011 update (maintenance history)
+The card also has part `MaintenanceHistory` (page 50116) after Assignment History, linked on "Equipment No." = "No.", and action `ShowMaintenanceHistory` (Equipment group, promoted under Navigate, enabled when the record is saved) that opens page 50117 filtered on the equipment. The `AboutText` was extended. The part shows posted entries only. Details: docs/features/FR-011-maintenance-history.md. Not run in a sandbox (HS-SB2).
+
 ## Extending (events)
 No events published or subscribed, no signature changes. `GetActiveAssignment` is internal and not callable from other apps. Partners can extend the card with page extensions; new control names (`AssignedSince`, `AssignedBy`, `CreatedBy`, `LastModifiedBy`, `AssignmentHistory`) could clash with same-named partner controls.
 

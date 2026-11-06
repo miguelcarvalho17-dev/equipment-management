@@ -57,6 +57,20 @@ What each role may do:
 | Create setup and defaults when missing | no (error) | no (error) | yes |
 | Change or delete assignment entries directly | no | no | no |
 
+FR-011 update (maintenance, from code reading, not run in a sandbox):
+| Table | Reader | Manager | Administrator |
+|---|---|---|---|
+| 50105 EQM Maintenance Record | R | RIM | RIM (inherited; delete always refused by the table) |
+| 50106 EQM Maintenance History Entry | R | indirect i | indirect i (inherited) |
+
+| Function | Reader | Manager | Administrator |
+|---|---|---|---|
+| See maintenance history | yes | yes | yes |
+| Register and correct an Open maintenance record | no | yes | yes |
+| Post a maintenance record | no (permission error) | yes | yes |
+| Change a Posted record | no | no (business error) | no (business error) |
+| Insert, change, rename or delete a history entry directly | no | no | no |
+
 Partners extend roles with their own `permissionsetextension` on these sets. No events are published or subscribed by this feature.
 
 ## Upgrade and compatibility

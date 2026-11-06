@@ -5,7 +5,8 @@ using Microsoft.Purchases.Vendor;
 
 /// <summary>
 /// One record per maintenance activity performed on equipment. Maintenance cannot be registered for Lost or Disposed
-/// equipment. Records can be corrected but never deleted, so equipment that has maintenance records cannot be deleted either.
+/// equipment. Open records can be corrected. Posting freezes the record and writes a maintenance history entry. Records
+/// are never deleted, so equipment that has maintenance records cannot be deleted either.
 /// </summary>
 table 50105 "EQM Maintenance Record"
 {
@@ -105,6 +106,12 @@ table 50105 "EQM Maintenance Record"
             CalcFormula = lookup("EQM Equipment".Description where("No." = field("Equipment No.")));
             Editable = false;
         }
+        field(11; Status; Enum "EQM Maintenance Status")
+        {
+            Caption = 'Status';
+            ToolTip = 'Specifies whether the maintenance record is open or posted. You can correct an open record. Posting copies it to the maintenance history, and after that the record cannot be changed.';
+            Editable = false;
+        }
     }
 
     keys
@@ -137,6 +144,11 @@ table 50105 "EQM Maintenance Record"
         FutureDateErr: Label 'The maintenance date %1 is in the future. Enter a date that is not later than today (%2).', Comment = '%1 = maintenance date, %2 = today''s date';
         NegativeCostErr: Label 'The cost of maintenance record %1 must be zero or greater.', Comment = '%1 = maintenance record number';
         RenameNotAllowedErr: Label 'You cannot change the number of maintenance record %1.', Comment = '%1 = maintenance record number';
+        PostedRecordCannotBeChangedErr: Label 'You cannot change maintenance record %1 because it is posted. Posted maintenance is part of the maintenance history and is read-only.', Comment = '%1 = maintenance record number';
+        InsertPostedErr: Label 'Maintenance record %1 must be registered as open. Register the record first, and then post it.', Comment = '%1 = maintenance record number';
+        AmbiguousStyleTok: Label 'Ambiguous', Locked = true;
+        FavorableStyleTok: Label 'Favorable', Locked = true;
+        StandardStyleTok: Label 'Standard', Locked = true;
 
     trigger OnInsert()
     var
@@ -153,11 +165,14 @@ table 50105 "EQM Maintenance Record"
         end;
         if "Maintenance Date" = 0D then
             "Maintenance Date" := WorkDate();
+        if Status <> Status::Open then
+            Error(InsertPostedErr, "No.");
         CheckMaintenanceConsistency(true);
     end;
 
     trigger OnModify()
     begin
+        CheckNotPosted();
         CheckMaintenanceConsistency(false);
     end;
 
@@ -226,6 +241,32 @@ table 50105 "EQM Maintenance Record"
             Error(NegativeCostErr, "No.");
 
         OnAfterCheckMaintenanceConsistency(Rec);
+    end;
+
+    /// <summary>
+    /// Returns the style name used to show the status on pages.
+    /// </summary>
+    /// <returns>The style name for the current status.</returns>
+    internal procedure GetStatusStyle(): Text
+    begin
+        case Status of
+            Status::Open:
+                exit(AmbiguousStyleTok);
+            Status::Posted:
+                exit(FavorableStyleTok);
+            else
+                exit(StandardStyleTok);
+        end;
+    end;
+
+    local procedure CheckNotPosted()
+    var
+        StoredRecord: Record "EQM Maintenance Record";
+    begin
+        StoredRecord.SetLoadFields(Status);
+        if StoredRecord.Get("No.") then
+            if StoredRecord.Status = StoredRecord.Status::Posted then
+                Error(PostedRecordCannotBeChangedErr, "No.");
     end;
 
     local procedure CheckEquipmentAllowsMaintenance()

@@ -1,6 +1,28 @@
 # Changelog
 Newest first. Grouped by Added / Changed / Fixed / Obsolete.
 
+## FR-011 Equipment Maintenance History (version stays 29.0.0.0, no bump)
+### Added
+- Enum 50103 "EQM Maintenance Status" (Open, Posted; not extensible). Field 11 Status on table 50105.
+- Table 50106 "EQM Maintenance History Entry" (read-only; no modify, rename or delete; insert only through posting).
+- Codeunit 50109 "EQM Maintenance-Post" (public): posts a record, freezes it and writes the history entry. Integration events `OnBeforePostMaintenanceRecord`, `OnBeforeInsertMaintenanceHistoryEntry`, `OnAfterPostMaintenanceRecord` (local).
+- Pages 50116 'Maintenance History' (Equipment Card part) and 50117 'Maintenance History' (list, History in Tell Me, views per type).
+- Post action (F9) and History Entry action on the maintenance list and card; Status column; views Open and Posted on the list.
+- Equipment Card: Maintenance History part and action.
+- EQM - Reader: R on table 50106, X on the new table, pages and codeunit. EQM - Manager: indirect insert on table 50106.
+- Help article docs/help/FR-011-maintenance-history.md.
+### Changed
+- A maintenance record can be corrected only while Open. A posted record cannot be changed by any role. A record cannot be inserted as Posted.
+- Internal: `PostWithConfirmation` in codeunit 50108, `GetStatusStyle` in table 50105.
+### Fixed
+- None.
+### Obsolete
+- None.
+
+Release notes: Maintenance records now have a status. Choose Post (F9) when a record is final: it is locked and copied to a read-only maintenance history that cannot be changed or deleted. The history is shown on the Equipment Card and in a new Maintenance History list, with date, type, vendor, cost and description. The Equipment Maintenance list has a Status column and views for open and posted records.
+
+Note: build clean under CodeCop and UICop (0 errors, 0 warnings). No automated tests (deferred, Q8; test ID 50165 reserved); sandbox checks HS-SB1 to HS-SB12 not run, including equipment rename (R2). See docs/features/FR-011-maintenance-history.md.
+
 ## FR-010 Maintenance Registration (version stays 29.0.0.0, no bump)
 ### Added
 - Table 50105 "EQM Maintenance Record", enum 50102 "EQM Maintenance Type" (Preventive, Corrective, Inspection, Upgrade, extensible), codeunit 50108 "EQM Maintenance Mgt." (internal).

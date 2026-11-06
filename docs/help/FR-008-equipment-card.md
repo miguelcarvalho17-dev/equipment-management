@@ -21,6 +21,9 @@ These fields are blank when the equipment is not assigned. Use **Assign to Emplo
 ## Assignment History
 This section lists every assignment of the equipment, newest first: employee, assignment date, who assigned it, status, closing date and who closed it. The current assignment is shown in green. You cannot edit the history here.
 
+## Maintenance History
+This section lists the posted maintenance of the equipment, newest date first: date, type, vendor, cost and description. Maintenance that is still open is not shown here until you post it. Choose **Show Maintenance Record** to open the record behind a row. To see the history in a full list, choose **Maintenance History** under Related > Equipment on a saved card.
+
 ## Audit
 Shows **Created Date**, **Created By**, **Last Modified Date** and **Last Modified By**. **Created By** and **Last Modified By** are blank if you do not have read access to the list of users. Ask your administrator if you need to see them.
 

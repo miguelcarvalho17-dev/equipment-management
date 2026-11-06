@@ -11,6 +11,8 @@ The app has three permission sets. Give each user the one that matches their wor
 
 Nobody can change or delete assignment history entries by hand, not even an administrator.
 
+Maintenance: a Reader can see the maintenance history. Managers and Administrators can register maintenance, correct open records and post them. A posted record and the maintenance history cannot be changed or deleted by anyone, not even an administrator.
+
 ## Assign a permission set
 1. Search for **Users** and open the user.
 2. In **User Permission Sets**, add **Equipment Reader**, **Equipment Manager** or **Equipment Administrator**.

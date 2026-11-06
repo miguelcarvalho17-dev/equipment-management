@@ -51,6 +51,21 @@ Open items after FR-001 Equipment Registration (written 2026-11-02). Nothing fro
 - [ ] UX-SB11 Reader: list and card still read-only; Notes can be added (record result).
 - [ ] UX-SB12 Return Equipment lookup from the Employee Card (list in lookup mode) still works with the FactBox pane.
 
+## FR-011 sandbox checks (not run; automated tests deferred, Q8, test codeunit 50165 reserved)
+- [ ] HS-SB1 Build with CodeCop, UICop and AppSourceCop: no errors or warnings (CodeCop and UICop reported clean; AppSourceCop not confirmed). `Equipment Management.g.xlf` contains the new captions, ToolTips, labels and AboutTexts.
+- [ ] HS-SB2 Equipment Card shows the Maintenance History FastTab after Assignment History, newest first, posted entries only. Related > Equipment > Maintenance History opens page 50117 filtered.
+- [ ] HS-SB3 Post from the maintenance card with F9 and with the action. After confirming, the record is read-only and an entry appears in page 50117. Return to the Equipment Card and record whether the part needs a refresh (R6).
+- [ ] HS-SB4 Post from the list on the current row. The Open and Posted views work. History Entry opens the right entry.
+- [ ] HS-SB5 A non-SUPER Manager can post (indirect insert works, no permission error). A non-SUPER Reader gets a permission error.
+- [ ] HS-SB6 Pages 50116 and 50117 offer no New, Edit or Delete for any role, including Administrator.
+- [ ] HS-SB7 Tell Me finds "Maintenance History" (also "posted maintenance", "maintenance costs") under History. Teaching tips show the new text.
+- [ ] HS-SB8 Existing development records show as Open after publishing and can be posted.
+- [ ] HS-SB9 **R2:** rename equipment that has history entries as a non-SUPER Manager and as an Administrator. Record whether the entries follow the new number and whether a permission error on table 50106 appears. If it fails, follow-up needs approval: block rename when maintenance exists, or remove the TableRelation on "Equipment No.".
+- [ ] HS-SB10 Rename a vendor used in posted maintenance as a non-EQM user: no error, and the entries keep the old vendor number and name.
+- [ ] HS-SB11 Posting user without Vendor read: posting works and Vendor Name on the entry is blank (R4).
+- [ ] HS-SB12 An error during posting (for example a future date set by data) leaves no entry and the record stays Open.
+- [ ] FR-011 follow-ups: update the personal-data classification item to include "Posted By", "Performed By" and "Vendor Name" (R5). Tests need `internalsVisibleTo` for the test app in app.json (H8).
+
 ## Open design and fix items
 - [x] FR-007 known limitation (Employee read): addressed in code by NFR-002 (name blank without Employee read, `ReadPermission()` guard). Not verified in a sandbox (SB9).
 - [ ] **New companies:** default data and number series are created only in `OnInstallAppPerCompany`. In a company created later the setup record is missing, and equipment creation fails on `TestField("Equipment Nos.")`. Create the defaults on company initialization (subscribe to the company-initialize event) or give the user path working permissions. NFR-002: the Administrator path now has indirect No. Series rights (ri), but defaults are still created only on install or when an Administrator opens Setup. Readers and Managers get the setup-missing error. Not verified (SB8).
