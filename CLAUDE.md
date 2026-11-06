@@ -36,7 +36,8 @@ When a feature's PR is merged and its GitHub issue is closed, comment on the iss
 1. **Delivery summary:** what was built, the PR link and merge commit, review verdict, AppSource validator verdict, what is not verified yet (sandbox, tests), and links to the plan, feature doc, user help and changelog on `main`.
 2. **Technical plan (full text):** the whole `docs/plans/<feature>.md` inside `<details><summary>path</summary>`.
 3. **Feature documentation and user help (full text):** `docs/features/<feature>.md` and `docs/help/<feature>.md`, each inside its own `<details>` block. Include the events report from `docs/plans/<feature>-events.md` here when one exists.
-A comment is limited to 65,536 characters. Split into more comments when a document would exceed it.
+**Exactly three separate comments, in this order, one `gh issue comment` each. Never merge two parts into one comment** (not even to save a call), and never post a different number of comments. Each of parts 2 and 3 starts with its heading (`## Technical plan (full text)`, `## Feature documentation and user help (full text)`). Part 1 follows the structure of the latest closed issue's summary: `## Delivery summary`, "What was built", "Documents (on `main`)" links, workflow line, AppSource validator verdict, "Open items". Before posting, read the comments of the most recent closed feature issue (`gh issue view <n> --json comments`) and match them.
+A comment is limited to 65,536 characters. Only when one part alone would exceed it, split that part into numbered continuation comments (e.g. "(part 2)").
 
 ## Hard rules (all agents)
 - Never modify base application objects. Extend only through extensions and events.
