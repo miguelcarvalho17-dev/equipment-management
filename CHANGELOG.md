@@ -1,6 +1,24 @@
 # Changelog
 Newest first. Grouped by Added / Changed / Fixed / Obsolete.
 
+## FR-014 Warranty Information (version stays 29.0.0.0, no bump)
+### Added
+- Table 50100 fields 17 "Warranty Start Date" (Date), 18 "Warranty End Date" (Date), 19 "Warranty Provider" (Text[100]), 20 "Warranty Reference No." (Text[50]); all optional, stored.
+- Rule: when both warranty dates are filled in, the end date must be later than the start date (equal dates rejected). Checked on field validation and in `CheckEquipmentConsistency` (insert and modify).
+- Event `OnBeforeCheckWarrantyDates(Equipment, var IsHandled)` (local integration event on table 50100); IsHandled skips the standard rule.
+- Equipment Card: group Warranty after Purchase (End Date and Provider shown when collapsed). Equipment list: four warranty columns, hidden by default.
+- Help article docs/help/FR-014-warranty-information.md.
+### Changed
+- Equipment Card teaching tip mentions purchase and warranty information.
+### Fixed
+- None.
+### Obsolete
+- None.
+
+Release notes: You can now record the warranty of each piece of equipment: start date, end date, provider and reference number. The fields are in the new Warranty section of the Equipment Card and can be shown as columns on the Equipment list, for example to filter on the warranty end date. All fields are optional. When you fill in both dates, the end date must be later than the start date.
+
+Note: no new objects, no permission set change, no upgrade code. Automated tests are deferred (Q8; test ID 50168 reserved); sandbox checks WS-SB1 to WS-SB8 are not run. Build result and review verdict: not recorded by the documenter. See docs/features/FR-014-warranty-information.md.
+
 ## FR-013 Maintenance Cost Tracking (version stays 29.0.0.0, no bump)
 ### Added
 - Table 50100 fields 13 "Date Filter" (FlowFilter), 14 "Total Maintenance Cost", 15 "No. of Posted Maintenances", 16 "Average Maintenance Cost" (FlowFields over table 50106); internal `GetMaintenanceCostPercentage`, `GetMaintenanceCostStyle`.

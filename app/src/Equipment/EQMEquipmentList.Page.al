@@ -62,6 +62,22 @@ page 50100 "EQM Equipment List"
                 {
                     Visible = false;
                 }
+                field("Warranty Start Date"; Rec."Warranty Start Date")
+                {
+                    Visible = false;
+                }
+                field("Warranty End Date"; Rec."Warranty End Date")
+                {
+                    Visible = false;
+                }
+                field("Warranty Provider"; Rec."Warranty Provider")
+                {
+                    Visible = false;
+                }
+                field("Warranty Reference No."; Rec."Warranty Reference No.")
+                {
+                    Visible = false;
+                }
                 field("Total Maintenance Cost"; Rec."Total Maintenance Cost")
                 {
                 }

@@ -183,6 +183,36 @@ table 50100 "EQM Equipment"
             AutoFormatType = 1;
             Editable = false;
         }
+        field(17; "Warranty Start Date"; Date)
+        {
+            Caption = 'Warranty Start Date';
+            ToolTip = 'Specifies the date the warranty of the equipment starts. Leave it blank when the equipment has no warranty or the start date is not known.';
+
+            trigger OnValidate()
+            begin
+                CheckWarrantyDates();
+            end;
+        }
+        field(18; "Warranty End Date"; Date)
+        {
+            Caption = 'Warranty End Date';
+            ToolTip = 'Specifies the date the warranty of the equipment ends. When both warranty dates are filled in, the end date must be later than the start date. Leave it blank when the equipment has no warranty or the end date is not known.';
+
+            trigger OnValidate()
+            begin
+                CheckWarrantyDates();
+            end;
+        }
+        field(19; "Warranty Provider"; Text[100])
+        {
+            Caption = 'Warranty Provider';
+            ToolTip = 'Specifies the company that provides the warranty, for example the manufacturer, the vendor or a service company.';
+        }
+        field(20; "Warranty Reference No."; Text[50])
+        {
+            Caption = 'Warranty Reference No.';
+            ToolTip = 'Specifies the reference of the warranty, such as the contract, certificate or registration number from the warranty provider.';
+        }
     }
 
     keys
@@ -245,6 +275,7 @@ table 50100 "EQM Equipment"
         MaintenanceOpenAssignErr: Label 'You cannot assign equipment %1 because it has open maintenance. Post the open maintenance records of the equipment first.', Comment = '%1 = equipment number';
         MaintenanceOpenStatusErr: Label 'You cannot change the status of equipment %1 to %2 because it has open maintenance. The status changes to %3 automatically when the last open maintenance record is posted.', Comment = '%1 = equipment number, %2 = new status caption, %3 = Available status caption';
         StartMaintenanceAssignedQst: Label 'Equipment %1 is assigned to employee %2. Registering maintenance returns the equipment from the employee and changes its status to %3. Do you want to continue?', Comment = '%1 = equipment number, %2 = employee number, %3 = In Maintenance status caption';
+        WarrantyEndDateErr: Label 'The warranty end date %1 must be later than the warranty start date %2. Change one of the dates, or clear the date that is not known.', Comment = '%1 = warranty end date, %2 = warranty start date';
 
     trigger OnInsert()
     var
@@ -405,8 +436,9 @@ table 50100 "EQM Equipment"
     /// Validates the record before it is inserted or modified: category filled in, category exists and is active
     /// (active only when the category is new or changed), new equipment not in a final status (Lost or Disposed),
     /// new equipment cannot be Assigned, status transition allowed on modify, the employee of assigned equipment
-    /// cannot be changed (return first), serial number unique, assigned employee allowed only when the status
-    /// is Assigned, and employee present when the status is Assigned.
+    /// cannot be changed (return first), serial number unique, warranty end date later than the warranty start
+    /// date when both are filled in, assigned employee allowed only when the status is Assigned, and employee
+    /// present when the status is Assigned.
     /// Raises OnAfterCheckEquipmentConsistency at the end.
     /// </summary>
     /// <param name="IsNewRecord">True on insert. On modify (false), the Active / not privacy blocked check on the employee runs only if the assigned employee differs from the stored record.</param>
@@ -448,6 +480,7 @@ table 50100 "EQM Equipment"
             Error(AlreadyAssignedErr, "No.", StoredEmployeeNo);
 
         CheckSerialNoIsUnique();
+        CheckWarrantyDates();
         CheckAssignedEmployeeAllowed(EmployeeChanged);
 
         if (Status = Status::Assigned) and ("Assigned Employee No." = '') then
@@ -553,6 +586,25 @@ table 50100 "EQM Equipment"
 
         if (ToStatus = ToStatus::Assigned) and (FromStatus <> FromStatus::Available) then
             Error(NotAvailableForAssignmentErr, "No.", Format(FromStatus), Format(Status::Available));
+    end;
+
+    /// <summary>
+    /// Checks that the warranty end date is later than the warranty start date. The check runs only when both
+    /// dates are filled in.
+    /// </summary>
+    local procedure CheckWarrantyDates()
+    var
+        IsHandled: Boolean;
+    begin
+        OnBeforeCheckWarrantyDates(Rec, IsHandled);
+        if IsHandled then
+            exit;
+
+        if ("Warranty Start Date" = 0D) or ("Warranty End Date" = 0D) then
+            exit;
+
+        if "Warranty End Date" <= "Warranty Start Date" then
+            Error(WarrantyEndDateErr, "Warranty End Date", "Warranty Start Date");
     end;
 
     /// <summary>
@@ -673,6 +725,17 @@ table 50100 "EQM Equipment"
     /// <param name="IsHandled">Set to true to skip the standard transition rules: Lost and Disposed being final, and only Available equipment being assignable. Lost and disposed equipment still cannot be assigned. Equipment with open maintenance still cannot be assigned, and its status cannot leave In Maintenance except to Lost or Disposed.</param>
     [IntegrationEvent(false, false)]
     local procedure OnBeforeCheckStatusTransitionAllowed(Equipment: Record "EQM Equipment"; FromStatus: Enum "EQM Equipment Status"; ToStatus: Enum "EQM Equipment Status"; var IsHandled: Boolean)
+    begin
+    end;
+
+    /// <summary>
+    /// Raised before the check that the warranty end date is later than the warranty start date, when either
+    /// warranty date is validated and on insert and modify.
+    /// </summary>
+    /// <param name="Equipment">The record being checked (passed by value; changes are not kept).</param>
+    /// <param name="IsHandled">Set to true to skip the standard check. Raise an error in the subscriber to apply your own rule.</param>
+    [IntegrationEvent(false, false)]
+    local procedure OnBeforeCheckWarrantyDates(Equipment: Record "EQM Equipment"; var IsHandled: Boolean)
     begin
     end;
 
