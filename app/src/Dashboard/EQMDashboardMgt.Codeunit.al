@@ -1,5 +1,8 @@
 namespace MiguelCarvalho.EquipmentManagement;
 
+/// <summary>
+/// Data and drill-down helpers for the equipment dashboard tiles and charts.
+/// </summary>
 codeunit 50107 "EQM Dashboard Mgt."
 {
     Access = Internal;
@@ -84,5 +87,72 @@ codeunit 50107 "EQM Dashboard Mgt."
     begin
         Equipment.SetRange(Status, Enum::"EQM Equipment Status".FromInteger(StatusOrdinal));
         Page.Run(Page::"EQM Equipment List", Equipment);
+    end;
+
+    /// <summary>
+    /// Returns the posted maintenance cost per equipment category, highest cost first. Categories without posted
+    /// maintenance cost are not returned. The current category of each equipment is used.
+    /// </summary>
+    /// <param name="CategoryCodes">Returns the category codes, highest cost first. A blank code means equipment without a category.</param>
+    /// <param name="MaintenanceCosts">Returns the maintenance cost for each category code, in the same order.</param>
+    internal procedure GetMaintenanceCostByCategory(var CategoryCodes: List of [Code[20]]; var MaintenanceCosts: List of [Decimal])
+    var
+        MaintCostByCategory: Query "EQM Maint. Cost by Category";
+    begin
+        Clear(CategoryCodes);
+        Clear(MaintenanceCosts);
+
+        MaintCostByCategory.Open();
+        while MaintCostByCategory.Read() do begin
+            CategoryCodes.Add(MaintCostByCategory.CategoryCode);
+            MaintenanceCosts.Add(MaintCostByCategory.TotalCost);
+        end;
+        MaintCostByCategory.Close();
+    end;
+
+    /// <summary>
+    /// Returns the equipment with the highest posted maintenance cost, highest first, at most NumberOfEquipment
+    /// entries. Equipment without posted maintenance cost is not returned.
+    /// </summary>
+    /// <param name="NumberOfEquipment">The maximum number of equipment records to return. Zero or less returns nothing.</param>
+    /// <param name="EquipmentNos">Returns the equipment numbers, highest cost first.</param>
+    /// <param name="MaintenanceCosts">Returns the maintenance cost for each equipment number, in the same order.</param>
+    internal procedure GetTopMaintenanceCostByEquipment(NumberOfEquipment: Integer; var EquipmentNos: List of [Code[20]]; var MaintenanceCosts: List of [Decimal])
+    var
+        MaintCostByEquipment: Query "EQM Maint. Cost by Equipment";
+    begin
+        Clear(EquipmentNos);
+        Clear(MaintenanceCosts);
+        if NumberOfEquipment <= 0 then
+            exit;
+
+        MaintCostByEquipment.TopNumberOfRows(NumberOfEquipment);
+        MaintCostByEquipment.Open();
+        while MaintCostByEquipment.Read() do begin
+            EquipmentNos.Add(MaintCostByEquipment.EquipmentNo);
+            MaintenanceCosts.Add(MaintCostByEquipment.TotalCost);
+        end;
+        MaintCostByEquipment.Close();
+    end;
+
+    /// <summary>
+    /// Returns how many equipment records the maintenance cost chart shows.
+    /// </summary>
+    /// <returns>The number of equipment records in the chart.</returns>
+    internal procedure GetTopEquipmentLimit(): Integer
+    begin
+        exit(10);
+    end;
+
+    /// <summary>
+    /// Opens the posted maintenance history filtered to one piece of equipment.
+    /// </summary>
+    /// <param name="EquipmentNo">The equipment number to filter on.</param>
+    internal procedure ShowMaintenanceHistory(EquipmentNo: Code[20])
+    var
+        MaintenanceHistoryEntry: Record "EQM Maintenance History Entry";
+    begin
+        MaintenanceHistoryEntry.SetRange("Equipment No.", EquipmentNo);
+        Page.Run(Page::"EQM Maintenance History", MaintenanceHistoryEntry);
     end;
 }

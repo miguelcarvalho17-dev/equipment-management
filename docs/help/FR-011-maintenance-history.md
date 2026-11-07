@@ -27,7 +27,7 @@ Good to know:
 - **Equipment Card:** the **Maintenance History** section lists the posted maintenance of that equipment, newest date first. Open records are not shown there. Choose **Show Maintenance Record** to open the record behind a row.
 - **Maintenance History** list: search for **Maintenance History**, or choose **Maintenance History** in the Equipment Card (Related). It shows every posted maintenance. Use the views at the top (Preventive, Corrective, Inspection, Upgrade) to show one type. Choose **Equipment** or **Maintenance Record** to open those cards.
 - **Equipment Maintenance** list: the new **Status** column shows Open or Posted. Use the views **Open** and **Posted** to filter. On a posted row, choose **History Entry** to see its entry.
-- The **Maintenance** FactBox still counts and totals both open and posted records.
+- The **Maintenance** FactBox counts both open and posted records. Its **Total Maintenance Cost** counts posted maintenance only (changed in the maintenance cost update), so it can be lower than the sum in the Equipment Maintenance list.
 
 ## Release notes
 Maintenance records now have a status. Choose Post (F9) when a record is final: it is locked and copied to a read-only maintenance history that cannot be changed or deleted. The history is shown on the Equipment Card and in a new Maintenance History list, with date, type, vendor, cost and description. The Equipment Maintenance list has a Status column and views for open and posted records.

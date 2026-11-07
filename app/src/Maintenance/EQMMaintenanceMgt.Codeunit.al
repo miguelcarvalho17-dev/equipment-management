@@ -55,21 +55,6 @@ codeunit 50108 "EQM Maintenance Mgt."
     end;
 
     /// <summary>
-    /// Returns the total cost of all maintenance records of the equipment.
-    /// </summary>
-    /// <param name="EquipmentNo">The equipment number.</param>
-    /// <returns>The sum of Cost, in local currency.</returns>
-    internal procedure GetTotalMaintenanceCost(EquipmentNo: Code[20]): Decimal
-    var
-        MaintenanceRecord: Record "EQM Maintenance Record";
-    begin
-        MaintenanceRecord.SetCurrentKey("Equipment No.", "Maintenance Date");
-        MaintenanceRecord.SetRange("Equipment No.", EquipmentNo);
-        MaintenanceRecord.CalcSums(Cost);
-        exit(MaintenanceRecord.Cost);
-    end;
-
-    /// <summary>
     /// Opens the maintenance records filtered to one piece of equipment.
     /// </summary>
     /// <param name="EquipmentNo">The equipment number to filter on.</param>

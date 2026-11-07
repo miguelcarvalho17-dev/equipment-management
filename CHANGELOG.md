@@ -1,6 +1,28 @@
 # Changelog
 Newest first. Grouped by Added / Changed / Fixed / Obsolete.
 
+## FR-013 Maintenance Cost Tracking (version stays 29.0.0.0, no bump)
+### Added
+- Table 50100 fields 13 "Date Filter" (FlowFilter), 14 "Total Maintenance Cost", 15 "No. of Posted Maintenances", 16 "Average Maintenance Cost" (FlowFields over table 50106); internal `GetMaintenanceCostPercentage`, `GetMaintenanceCostStyle`.
+- Table 50104 FlowFields "Total Maintenance Cost" and "Average Maintenance Cost"; cue group "Maintenance Costs" on page 50106.
+- Internal queries 50102 "EQM Maint. Cost by Category" and 50103 "EQM Maint. Cost by Equipment".
+- Pages 50118 "EQM Category Cost Chart" and 50119 "EQM Equipment Cost Chart" (top 10), on the dashboard and the Equipment Manager Role Center. Role Center Embedding action Maintenance History.
+- Codeunit 50107: internal `GetMaintenanceCostByCategory`, `GetTopMaintenanceCostByEquipment`, `GetTopEquipmentLimit`, `ShowMaintenanceHistory`.
+- Equipment list: Total Maintenance Cost column; No. of Posted Maintenances, Average Maintenance Cost and Maintenance Cost % (red at 100 % or more) hidden by default. Maintenance FactBox: Average Maintenance Cost and Maintenance Cost %.
+- EQM - Reader: X on the two queries and two chart pages.
+- Help article docs/help/FR-013-maintenance-cost-tracking.md.
+### Changed
+- **Behavior change:** the Maintenance FactBox "Total Maintenance Cost" now sums posted maintenance only (it summed open and posted records). Record counts still include open records. Docs of FR-007, FR-009, FR-010 and FR-011 updated.
+- Dashboard teaching tip, Refresh ToolTip and search terms; Equipment list teaching tip.
+### Fixed
+- None.
+### Obsolete
+- None. Codeunit 50108 internal `GetTotalMaintenanceCost` removed (no other caller; nothing released).
+
+Release notes: Maintenance costs are now tracked. The Equipment list shows the total posted maintenance cost per equipment, with optional columns for the number of maintenances, the average cost and the cost as a percentage of the purchase cost (red at 100 % or more). Use Filter totals by > Date Filter to see the cost of a period. The dashboard and the Equipment Manager Role Center show total and average maintenance cost tiles, a chart of cost by category and a chart of the ten most expensive pieces of equipment. The total in the Maintenance pane now counts posted maintenance only.
+
+Note: source builds with 0 errors and 0 warnings (CodeCop, UICop, AppSourceCop); remaining diagnostics are app.json manifest items. Review APPROVE WITH CHANGES, no blockers. No automated tests (deferred, Q8; test ID 50167 reserved); sandbox checks CS-SB1 to CS-SB10 not run. See docs/features/FR-013-maintenance-cost-tracking.md.
+
 ## FR-012 Equipment Maintenance Status (version stays 29.0.0.0, no bump)
 ### Added
 - Table 50100: internal `StartMaintenance` and `CompleteMaintenance`; events `OnBeforeStartMaintenance` and `OnBeforeCompleteMaintenance` (local; the latter with IsHandled).

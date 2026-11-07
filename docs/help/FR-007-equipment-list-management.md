@@ -19,6 +19,9 @@ Open the filter pane and add a filter on the field you want:
 
 You can combine filters.
 
+## See maintenance costs
+The list shows **Total Maintenance Cost** for each piece of equipment. You can also show **No. of Posted Maintenances**, **Average Maintenance Cost** and **Maintenance Cost %**, and filter on the cost in the filter pane. To see the cost of one period, choose **Filter totals by** and set **Date Filter**. See the maintenance costs help (FR-013).
+
 ## See who has the equipment
 **Assigned Employee Name** shows the name of the employee the equipment is assigned to. It is blank when the equipment is not assigned. You cannot filter or search on the name. Filter on **Assigned Employee No.** instead; the employee lookup shows names.
 
@@ -32,4 +35,4 @@ On the equipment list, the **Assignment Details** pane shows the employee, since
 On the **Employee Card**, choose **Related > Equipment > Assigned Equipment**. The list shows the equipment currently assigned to that employee. The **Assigned Equipment** pane on the card shows the same equipment. For past assignments, choose **Related > Equipment > Equipment Assignments** (see assignment history).
 
 ## Release notes
-The equipment list now explains how to search and filter, shows the name of the assigned employee, and can be opened already filtered from a category (Equipment Categories > Equipment) and from an employee (Employee Card > Assigned Equipment).
+The list now also shows the total posted maintenance cost, with optional columns and a Date Filter for one period (see maintenance costs help). The equipment list now explains how to search and filter, shows the name of the assigned employee, and can be opened already filtered from a category (Equipment Categories > Equipment) and from an employee (Employee Card > Assigned Equipment).

@@ -46,11 +46,19 @@ page 50115 "EQM Maintenance FactBox"
                 Caption = 'Last Maintenance Type';
                 ToolTip = 'Specifies the type of the most recent maintenance of the equipment. It is blank when no maintenance has been registered.';
             }
-            field(TotalMaintenanceCost; TotalMaintenanceCost)
+            field(TotalMaintenanceCost; Rec."Total Maintenance Cost")
             {
-                Caption = 'Total Maintenance Cost';
-                AutoFormatType = 1;
-                ToolTip = 'Specifies the total cost of all maintenance registered for the equipment, in local currency.';
+            }
+            field(AverageMaintenanceCost; Rec."Average Maintenance Cost")
+            {
+            }
+            field(MaintenanceCostPct; MaintenanceCostPct)
+            {
+                Caption = 'Maintenance Cost %';
+                ToolTip = 'Specifies the total posted maintenance cost as a percentage of the purchase cost. A value of 100 or more means that maintenance has cost as much as the equipment itself, which may justify replacing it. It is blank when the equipment has no purchase cost or no posted maintenance.';
+                DecimalPlaces = 0 : 1;
+                BlankZero = true;
+                StyleExpr = MaintenanceCostStyle;
             }
         }
     }
@@ -60,7 +68,8 @@ page 50115 "EQM Maintenance FactBox"
         NoOfOpenMaintenanceRecords: Integer;
         LastMaintenanceDate: Date;
         LastMaintenanceType: Text;
-        TotalMaintenanceCost: Decimal;
+        MaintenanceCostPct: Decimal;
+        MaintenanceCostStyle: Text;
 
     trigger OnFindRecord(Which: Text): Boolean
     begin
@@ -80,7 +89,8 @@ page 50115 "EQM Maintenance FactBox"
         NoOfOpenMaintenanceRecords := 0;
         LastMaintenanceDate := 0D;
         LastMaintenanceType := '';
-        TotalMaintenanceCost := 0;
+        MaintenanceCostPct := 0;
+        MaintenanceCostStyle := '';
     end;
 
     local procedure UpdateFactBox()
@@ -101,6 +111,7 @@ page 50115 "EQM Maintenance FactBox"
             LastMaintenanceDate := MaintenanceRecord."Maintenance Date";
             LastMaintenanceType := Format(MaintenanceRecord."Maintenance Type");
         end;
-        TotalMaintenanceCost := MaintenanceMgt.GetTotalMaintenanceCost(Rec."No.");
+        MaintenanceCostPct := Rec.GetMaintenanceCostPercentage();
+        MaintenanceCostStyle := Rec.GetMaintenanceCostStyle(MaintenanceCostPct);
     end;
 }

@@ -6,7 +6,7 @@ page 50100 "EQM Equipment List"
 {
     Caption = 'Equipment';
     AboutTitle = 'About equipment';
-    AboutText = 'This list shows all your equipment. Use **Search** to find equipment by its number, serial number, or any other column you can see. To filter by category, status, or assigned employee, open the filter pane and add a filter on that field. You can also choose a status view at the top of the list.';
+    AboutText = 'This list shows all your equipment. Use **Search** to find equipment by its number, serial number, or any other column you can see. To filter by category, status, or assigned employee, open the filter pane and add a filter on that field. You can also choose a status view at the top of the list. **Total Maintenance Cost** shows the cost of posted maintenance; to see the cost of one period, set **Date Filter** under **Filter totals by**.';
     PageType = List;
     ApplicationArea = All;
     UsageCategory = Lists;
@@ -60,6 +60,26 @@ page 50100 "EQM Equipment List"
                 }
                 field("Purchase Cost"; Rec."Purchase Cost")
                 {
+                    Visible = false;
+                }
+                field("Total Maintenance Cost"; Rec."Total Maintenance Cost")
+                {
+                }
+                field("No. of Posted Maintenances"; Rec."No. of Posted Maintenances")
+                {
+                    Visible = false;
+                }
+                field("Average Maintenance Cost"; Rec."Average Maintenance Cost")
+                {
+                    Visible = false;
+                }
+                field(MaintenanceCostPct; MaintenanceCostPct)
+                {
+                    Caption = 'Maintenance Cost %';
+                    ToolTip = 'Specifies the total posted maintenance cost as a percentage of the purchase cost. A value of 100 or more means that maintenance has cost as much as the equipment itself, which may justify replacing it. It is blank when the equipment has no purchase cost or no posted maintenance.';
+                    DecimalPlaces = 0 : 1;
+                    BlankZero = true;
+                    StyleExpr = MaintenanceCostStyle;
                     Visible = false;
                 }
             }
@@ -198,12 +218,16 @@ page 50100 "EQM Equipment List"
     var
         StatusStyle: Text;
         AssignedEmployeeName: Text[100];
+        MaintenanceCostPct: Decimal;
+        MaintenanceCostStyle: Text;
 
     trigger OnAfterGetRecord()
     var
         Employee: Record Employee;
     begin
         StatusStyle := Rec.GetStatusStyle();
+        MaintenanceCostPct := Rec.GetMaintenanceCostPercentage();
+        MaintenanceCostStyle := Rec.GetMaintenanceCostStyle(MaintenanceCostPct);
         AssignedEmployeeName := '';
         if (Rec."Assigned Employee No." <> '') and Employee.ReadPermission() then begin
             Employee.SetLoadFields("First Name", "Middle Name", "Last Name");
