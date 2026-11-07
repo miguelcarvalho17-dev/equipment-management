@@ -138,6 +138,11 @@
           <note from="Developer" annotates="general" priority="2">%1 = equipment number</note>
           <note from="Xliff Generator" annotates="general" priority="3">Table EQM Equipment - NamedType UseReturnActionErr</note>
         </trans-unit>
+        <trans-unit id="Table 4212454693 - NamedType 3009849878" size-unit="char" translate="yes" xml:space="preserve">
+          <source>The warranty end date %1 must be later than the warranty start date %2. Change one of the dates, or clear the date that is not known.</source>
+          <note from="Developer" annotates="general" priority="2">%1 = warranty end date, %2 = warranty start date</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table EQM Equipment - NamedType WarrantyEndDateErr</note>
+        </trans-unit>
         <trans-unit id="Table 4212454693 - Field 1994602887 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
           <source>Specifies the employee the equipment is assigned to. To assign available equipment, use the Assign to Employee action. To change the employee, return the equipment first.</source>
           <note from="Developer" annotates="general" priority="2"></note>
@@ -297,6 +302,46 @@
           <source>Total Maintenance Cost</source>
           <note from="Developer" annotates="general" priority="2"></note>
           <note from="Xliff Generator" annotates="general" priority="3">Table EQM Equipment - Field Total Maintenance Cost - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Table 4212454693 - Field 2616922401 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Specifies the date the warranty of the equipment ends. When both warranty dates are filled in, the end date must be later than the start date. Leave it blank when the equipment has no warranty or the end date is not known.</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table EQM Equipment - Field Warranty End Date - Property ToolTip</note>
+        </trans-unit>
+        <trans-unit id="Table 4212454693 - Field 2616922401 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Warranty End Date</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table EQM Equipment - Field Warranty End Date - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Table 4212454693 - Field 451596839 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Specifies the company that provides the warranty, for example the manufacturer, the vendor or a service company.</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table EQM Equipment - Field Warranty Provider - Property ToolTip</note>
+        </trans-unit>
+        <trans-unit id="Table 4212454693 - Field 451596839 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Warranty Provider</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table EQM Equipment - Field Warranty Provider - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Table 4212454693 - Field 3719933164 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Specifies the reference of the warranty, such as the contract, certificate or registration number from the warranty provider.</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table EQM Equipment - Field Warranty Reference No. - Property ToolTip</note>
+        </trans-unit>
+        <trans-unit id="Table 4212454693 - Field 3719933164 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Warranty Reference No.</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table EQM Equipment - Field Warranty Reference No. - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Table 4212454693 - Field 3827909068 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Specifies the date the warranty of the equipment starts. Leave it blank when the equipment has no warranty or the start date is not known.</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table EQM Equipment - Field Warranty Start Date - Property ToolTip</note>
+        </trans-unit>
+        <trans-unit id="Table 4212454693 - Field 3827909068 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Warranty Start Date</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table EQM Equipment - Field Warranty Start Date - Property Caption</note>
         </trans-unit>
         <trans-unit id="Table 1549914012 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
           <source>Equipment Assignment</source>
@@ -1069,7 +1114,7 @@
           <note from="Xliff Generator" annotates="general" priority="3">Page EQM Equipment Card - Property AboutTitle</note>
         </trans-unit>
         <trans-unit id="Page 3574600233 - Property 247559172" size-unit="char" translate="yes" xml:space="preserve">
-          <source>Here you manage one piece of equipment. The first sections show its details, its current status and who it is assigned to. Use **Assign to Employee** and **Return** to change the assignment, and **Register Maintenance** to record maintenance work. Further down, **Assignment History** lists every assignment, **Maintenance History** lists every posted maintenance, and **Audit** shows who created the record and who changed it last.</source>
+          <source>Here you manage one piece of equipment. The first sections show its details, its current status and who it is assigned to, and its purchase and warranty information. Use **Assign to Employee** and **Return** to change the assignment, and **Register Maintenance** to record maintenance work. Further down, **Assignment History** lists every assignment, **Maintenance History** lists every posted maintenance, and **Audit** shows who created the record and who changed it last.</source>
           <note from="Developer" annotates="general" priority="2"></note>
           <note from="Xliff Generator" annotates="general" priority="3">Page EQM Equipment Card - Property AboutText</note>
         </trans-unit>
@@ -1182,6 +1227,11 @@
           <source>Purchase</source>
           <note from="Developer" annotates="general" priority="2"></note>
           <note from="Xliff Generator" annotates="general" priority="3">Page EQM Equipment Card - Control Purchase - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Page 3574600233 - Control 1903978320 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Warranty</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page EQM Equipment Card - Control Warranty - Property Caption</note>
         </trans-unit>
         <trans-unit id="Page 3574600233 - Action 794261815 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
           <source>Equipment</source>

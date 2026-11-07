@@ -91,6 +91,16 @@ Open items after FR-001 Equipment Registration (written 2026-11-02). Nothing fro
 - [ ] CS-SB9 Teaching tips of pages 50100 and 50109 show the new texts; Tell Me finds the dashboard with "maintenance cost".
 - [ ] CS-SB10 Role Center Embedding shows Maintenance History and it opens page 50117.
 
+## FR-014 sandbox checks (not run; automated tests deferred, Q8, test codeunit 50168 reserved)
+- [ ] WS-SB1 Build with CodeCop, UICop and AppSourceCop: no errors or warnings; `.g.xlf` contains the new captions, ToolTips, the error label with its comment, the group caption and the new card AboutText.
+- [ ] WS-SB2 Publish over the existing development data: no schema sync error; existing equipment opens with blank warranty fields.
+- [ ] WS-SB3 Equipment Card: the Warranty section appears after Purchase; when collapsed it shows Warranty End Date and Warranty Provider.
+- [ ] WS-SB4 Enter an end date earlier than or equal to the start date: the error appears on the field, the text is readable and the dates are in the regional format.
+- [ ] WS-SB5 Move an existing warranty to a later period: end date first, then start date: no error. Start date first, to a date after the old end date: error (R2); record whether the message is clear enough.
+- [ ] WS-SB6 Equipment List: the four columns can be shown through personalization; filtering on Warranty End Date works.
+- [ ] WS-SB7 Non-SUPER Reader sees the warranty fields and cannot change them; non-SUPER Manager can.
+- [ ] WS-SB8 Teaching tip of the Equipment Card shows the new text.
+
 ## Open design and fix items
 - [x] FR-007 known limitation (Employee read): addressed in code by NFR-002 (name blank without Employee read, `ReadPermission()` guard). Not verified in a sandbox (SB9).
 - [ ] **New companies:** default data and number series are created only in `OnInstallAppPerCompany`. In a company created later the setup record is missing, and equipment creation fails on `TestField("Equipment Nos.")`. Create the defaults on company initialization (subscribe to the company-initialize event) or give the user path working permissions. NFR-002: the Administrator path now has indirect No. Series rights (ri), but defaults are still created only on install or when an Administrator opens Setup. Readers and Managers get the setup-missing error. Not verified (SB8).
