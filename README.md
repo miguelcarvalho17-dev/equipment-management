@@ -2,7 +2,7 @@
 
 A Microsoft Dynamics 365 Business Central extension (AL) to register company equipment, track who uses it, and keep maintenance and warranty information in one place.
 
-> **Status:** in development (v1). Nothing here is released yet.
+> **Status:** V1 is built and V2 is in development. Nothing here is released yet.
 
 ## The problem
 
@@ -66,10 +66,22 @@ The objective is to ensure that equipment remains operational, warranty coverage
 
 | Capability | What it gives you |
 |---|---|
-| **Maintenance management** | Maintenance schedules and records for each item of equipment |
+| **Maintenance management** | Maintenance records and history for each item of equipment, an automatic In Maintenance status that blocks assignment while work is open, and maintenance cost tracking (totals, averages, cost by category and by equipment) |
 | **Warranty tracking** | Warranty coverage per item, monitored before it expires |
 | **Automated notifications** | Managers are alerted to upcoming actions that need attention |
 | **Lifecycle monitoring** | Visibility of equipment across its life, from purchase to disposal |
+
+### V2 progress
+
+| Capability | State |
+|---|---|
+| Maintenance registration, history, equipment status and cost tracking (FR-010 to FR-013) | Built, not yet verified in a Business Central sandbox |
+| Maintenance schedules | Planned |
+| Warranty tracking | Planned |
+| Automated notifications | Planned |
+| Lifecycle monitoring | Planned |
+
+Feature documentation is in `docs/features/`, user help in `docs/help/` and the change history in `CHANGELOG.md`.
 
 ### Roadmap (after V2)
 
