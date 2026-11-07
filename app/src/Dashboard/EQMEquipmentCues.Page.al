@@ -42,6 +42,19 @@ page 50106 "EQM Equipment Cues"
                     DrillDownPageId = "EQM Equipment List";
                 }
             }
+            cuegroup(MaintenanceCosts)
+            {
+                Caption = 'Maintenance Costs';
+
+                field("Total Maintenance Cost"; Rec."Total Maintenance Cost")
+                {
+                    DrillDownPageId = "EQM Maintenance History";
+                }
+                field("Average Maintenance Cost"; Rec."Average Maintenance Cost")
+                {
+                    DrillDownPageId = "EQM Maintenance History";
+                }
+            }
         }
     }
 

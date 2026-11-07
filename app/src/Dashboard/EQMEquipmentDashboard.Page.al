@@ -4,11 +4,11 @@ page 50109 "EQM Equipment Dashboard"
 {
     Caption = 'Equipment Dashboard';
     AboutTitle = 'About the equipment dashboard';
-    AboutText = 'The tiles count your equipment by status. **Total Equipment** includes lost and disposed equipment. The charts show how your equipment is spread over categories and statuses. Choose a tile or a chart segment to open the matching equipment. Choose **Refresh** to update the numbers.';
+    AboutText = 'The tiles count your equipment by status and show the total and average cost of posted maintenance. **Total Equipment** includes lost and disposed equipment. The charts show how your equipment is spread over categories and statuses, which categories cost the most in maintenance, and the ten pieces of equipment with the highest maintenance cost. Choose a tile or a chart segment to see the details. Choose **Refresh** to update the numbers.';
     PageType = Card;
     ApplicationArea = All;
     UsageCategory = ReportsAndAnalysis;
-    AdditionalSearchTerms = 'equipment kpi, equipment overview, equipment chart';
+    AdditionalSearchTerms = 'equipment kpi, equipment overview, equipment chart, maintenance cost, maintenance kpi';
     Editable = false;
 
     layout
@@ -24,6 +24,12 @@ page 50109 "EQM Equipment Dashboard"
             part(StatusChart; "EQM Equipment Status Chart")
             {
             }
+            part(CategoryCostChart; "EQM Category Cost Chart")
+            {
+            }
+            part(EquipmentCostChart; "EQM Equipment Cost Chart")
+            {
+            }
         }
     }
 
@@ -34,7 +40,7 @@ page 50109 "EQM Equipment Dashboard"
             action(Refresh)
             {
                 Caption = 'Refresh';
-                ToolTip = 'Update the tiles and charts with the current equipment data.';
+                ToolTip = 'Update the tiles and charts with the current equipment and maintenance data.';
                 Image = Refresh;
 
                 trigger OnAction()
@@ -42,6 +48,8 @@ page 50109 "EQM Equipment Dashboard"
                     CurrPage.Cues.Page.RefreshCues();
                     CurrPage.CategoryChart.Page.RefreshChart();
                     CurrPage.StatusChart.Page.RefreshChart();
+                    CurrPage.CategoryCostChart.Page.RefreshChart();
+                    CurrPage.EquipmentCostChart.Page.RefreshChart();
                 end;
             }
         }

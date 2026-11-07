@@ -61,6 +61,24 @@ table 50104 "EQM Equipment Cue"
             CalcFormula = count("EQM Equipment" where(Status = const(Disposed)));
             Editable = false;
         }
+        field(20; "Total Maintenance Cost"; Decimal)
+        {
+            Caption = 'Total Maintenance Cost';
+            ToolTip = 'Specifies the total cost of all posted maintenance, in local currency.';
+            FieldClass = FlowField;
+            CalcFormula = sum("EQM Maintenance History Entry".Cost);
+            AutoFormatType = 1;
+            Editable = false;
+        }
+        field(21; "Average Maintenance Cost"; Decimal)
+        {
+            Caption = 'Average Maintenance Cost';
+            ToolTip = 'Specifies the average cost of one posted maintenance, in local currency. Maintenance with a cost of zero is included.';
+            FieldClass = FlowField;
+            CalcFormula = average("EQM Maintenance History Entry".Cost);
+            AutoFormatType = 1;
+            Editable = false;
+        }
     }
 
     keys

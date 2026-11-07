@@ -15,7 +15,7 @@ Status: describes the code as implemented. **Build is clean under CodeCop and UI
 | Codeunit | 50108 | EQM Maintenance Mgt. | New, `Access = Internal`. Read helpers (see below). |
 | Page | 50113 | EQM Maintenance Records | New list 'Equipment Maintenance', `UsageCategory = Lists`, read-only, no delete, sorted by "No." descending, card 50114. Views Preventive, Corrective, Inspection, Upgrade. Equipment FactBox, Notes, Links (hidden). Actions Equipment, Vendor. |
 | Page | 50114 | EQM Maintenance Record Card | New card 'Maintenance Record', `UsageCategory = None`, `DelayedInsert`, delete not allowed. Equipment No. editable only on a new record. Vendor Name shown (display only). FactBoxes: Equipment (50111) and Maintenance (50115). Actions Equipment, Vendor. |
-| Page | 50115 | EQM Maintenance FactBox | New CardPart 'Maintenance': No. of Maintenance Records (drill-down), Last Maintenance Date, Last Maintenance Type, Total Maintenance Cost. |
+| Page | 50115 | EQM Maintenance FactBox | New CardPart 'Maintenance': No. of Maintenance Records (drill-down), Last Maintenance Date, Last Maintenance Type, Total Maintenance Cost (since FR-013: posted maintenance only, FlowField on table 50100). |
 | Table | 50102 | EQM Equipment Setup | New field 3 "Maintenance Nos." (relation to No. Series). Page 50103 shows it; search terms extended. |
 | Table | 50100 | EQM Equipment | `OnDelete` also blocks deletion when maintenance records exist (error `DeleteMaintenanceExistsErr`). |
 | Page | 50101 | EQM Equipment Card | Maintenance FactBox. Action Register Maintenance (Process; enabled when saved and not Lost/Disposed; opens a new maintenance card with Equipment No. filled). Action Maintenance (Equipment group, enabled when saved). |
@@ -40,7 +40,7 @@ Status: describes the code as implemented. **Build is clean under CodeCop and UI
 - `HasMaintenanceRecords(EquipmentNo): Boolean`
 - `CountMaintenanceRecords(EquipmentNo): Integer`
 - `GetLastMaintenanceRecord(EquipmentNo; var MaintenanceRecord): Boolean`
-- `GetTotalMaintenanceCost(EquipmentNo): Decimal` (CalcSums on Cost)
+- ~~`GetTotalMaintenanceCost(EquipmentNo): Decimal`~~ **Removed by FR-013.** The FactBox total is now the FlowField "Total Maintenance Cost" on table 50100 (posted maintenance only).
 - `ShowMaintenanceRecords(EquipmentNo)`: runs page 50113 filtered to the equipment.
 - `GetVendorName(VendorNo): Text[100]`
 

@@ -79,6 +79,18 @@ Open items after FR-001 Equipment Registration (written 2026-11-02). Nothing fro
 - [ ] MS-SB9 Two sessions: register a record for E in session A and post the last other open record of E in session B; record whether B waits and the final status is In Maintenance. Also record how long B waits while A's confirm for assigned equipment is open.
 - [ ] MS-SB10 Teaching tips of pages 50113 and 50114 show the new texts.
 
+## FR-013 sandbox checks (not run; automated tests deferred, Q8, test codeunit 50167 reserved)
+- [ ] CS-SB1 Build with CodeCop, UICop and AppSourceCop: no errors or warnings (source reported clean; manifest items remain); `.g.xlf` contains the new texts.
+- [ ] CS-SB2 Equipment List: Total Maintenance Cost column visible; the hidden columns can be shown; "Filter totals by: Date Filter" changes the totals; filter pane on Total Maintenance Cost > 1000 works.
+- [ ] CS-SB3 Equipment Card and List FactBox: Total, Average and Maintenance Cost % shown; 100 % or more is shown in the Unfavorable style; drill-down on Total opens the history.
+- [ ] CS-SB4 Dashboard and Role Center: the Maintenance Costs tile group renders amounts readably (record the format), the two new charts show bars, clicking a category bar opens the Equipment list filtered on that category, clicking an equipment bar opens its maintenance history; Refresh updates all charts.
+- [ ] CS-SB5 With no posted maintenance, the new charts are empty and no error appears.
+- [ ] CS-SB6 Post a record and come back to the Role Center: the tiles update (RefreshOnActivate); the charts update after Refresh.
+- [ ] CS-SB7 Non-SUPER Reader sees all of the above with no permission error.
+- [ ] CS-SB8 Reproduce the issue example (Laptop A): 500 last year, 700 this year, purchase cost 1,200: Total 1,200 and 100 % in red.
+- [ ] CS-SB9 Teaching tips of pages 50100 and 50109 show the new texts; Tell Me finds the dashboard with "maintenance cost".
+- [ ] CS-SB10 Role Center Embedding shows Maintenance History and it opens page 50117.
+
 ## Open design and fix items
 - [x] FR-007 known limitation (Employee read): addressed in code by NFR-002 (name blank without Employee read, `ReadPermission()` guard). Not verified in a sandbox (SB9).
 - [ ] **New companies:** default data and number series are created only in `OnInstallAppPerCompany`. In a company created later the setup record is missing, and equipment creation fails on `TestField("Equipment Nos.")`. Create the defaults on company initialization (subscribe to the company-initialize event) or give the user path working permissions. NFR-002: the Administrator path now has indirect No. Series rights (ri), but defaults are still created only on install or when an Administrator opens Setup. Readers and Managers get the setup-missing error. Not verified (SB8).

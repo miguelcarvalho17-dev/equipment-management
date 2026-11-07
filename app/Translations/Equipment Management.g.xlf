@@ -148,6 +148,16 @@
           <note from="Developer" annotates="general" priority="2"></note>
           <note from="Xliff Generator" annotates="general" priority="3">Table EQM Equipment - Field Assigned Employee No. - Property Caption</note>
         </trans-unit>
+        <trans-unit id="Table 4212454693 - Field 1766843919 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Specifies the average cost of one posted maintenance of the equipment, in local currency. Maintenance with a cost of zero is included. Use the date filter to see the average of a period.</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table EQM Equipment - Field Average Maintenance Cost - Property ToolTip</note>
+        </trans-unit>
+        <trans-unit id="Table 4212454693 - Field 1766843919 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Average Maintenance Cost</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table EQM Equipment - Field Average Maintenance Cost - Property Caption</note>
+        </trans-unit>
         <trans-unit id="Table 4212454693 - Field 3877927551 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
           <source>Specifies the category of the equipment. Only active categories can be selected.</source>
           <note from="Developer" annotates="general" priority="2"></note>
@@ -157,6 +167,16 @@
           <source>Category Code</source>
           <note from="Developer" annotates="general" priority="2"></note>
           <note from="Xliff Generator" annotates="general" priority="3">Table EQM Equipment - Field Category Code - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Table 4212454693 - Field 995090288 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Specifies a date filter for the maintenance cost fields. Only maintenance with a maintenance date within the filter is included.</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table EQM Equipment - Field Date Filter - Property ToolTip</note>
+        </trans-unit>
+        <trans-unit id="Table 4212454693 - Field 995090288 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Date Filter</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table EQM Equipment - Field Date Filter - Property Caption</note>
         </trans-unit>
         <trans-unit id="Table 4212454693 - Field 3461834954 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
           <source>Specifies a description of the equipment.</source>
@@ -208,6 +228,16 @@
           <note from="Developer" annotates="general" priority="2"></note>
           <note from="Xliff Generator" annotates="general" priority="3">Table EQM Equipment - Field No. - Property Caption</note>
         </trans-unit>
+        <trans-unit id="Table 4212454693 - Field 2712326515 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Specifies how many maintenance records of the equipment have been posted. Use the date filter to count the maintenance of a period. Choose the number to see the maintenance history.</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table EQM Equipment - Field No. of Posted Maintenances - Property ToolTip</note>
+        </trans-unit>
+        <trans-unit id="Table 4212454693 - Field 2712326515 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>No. of Posted Maintenances</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table EQM Equipment - Field No. of Posted Maintenances - Property Caption</note>
+        </trans-unit>
         <trans-unit id="Table 4212454693 - Field 1351594800 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
           <source>Specifies the number series from which the equipment number was assigned.</source>
           <note from="Developer" annotates="general" priority="2"></note>
@@ -257,6 +287,16 @@
           <source>Status</source>
           <note from="Developer" annotates="general" priority="2"></note>
           <note from="Xliff Generator" annotates="general" priority="3">Table EQM Equipment - Field Status - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Table 4212454693 - Field 1394947864 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Specifies the total cost of the posted maintenance of the equipment, in local currency. Open maintenance records are not included until they are posted. Use the date filter to see the cost of a period. Choose the amount to see the maintenance history.</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table EQM Equipment - Field Total Maintenance Cost - Property ToolTip</note>
+        </trans-unit>
+        <trans-unit id="Table 4212454693 - Field 1394947864 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Total Maintenance Cost</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table EQM Equipment - Field Total Maintenance Cost - Property Caption</note>
         </trans-unit>
         <trans-unit id="Table 1549914012 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
           <source>Equipment Assignment</source>
@@ -428,6 +468,16 @@
           <note from="Developer" annotates="general" priority="2"></note>
           <note from="Xliff Generator" annotates="general" priority="3">Table EQM Equipment Cue - Field Available Equipment - Property Caption</note>
         </trans-unit>
+        <trans-unit id="Table 2297682612 - Field 1766843919 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Specifies the average cost of one posted maintenance, in local currency. Maintenance with a cost of zero is included.</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table EQM Equipment Cue - Field Average Maintenance Cost - Property ToolTip</note>
+        </trans-unit>
+        <trans-unit id="Table 2297682612 - Field 1766843919 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Average Maintenance Cost</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table EQM Equipment Cue - Field Average Maintenance Cost - Property Caption</note>
+        </trans-unit>
         <trans-unit id="Table 2297682612 - Field 373483027 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
           <source>Specifies the number of equipment records that are disposed of.</source>
           <note from="Developer" annotates="general" priority="2"></note>
@@ -472,6 +522,16 @@
           <source>Total Equipment</source>
           <note from="Developer" annotates="general" priority="2"></note>
           <note from="Xliff Generator" annotates="general" priority="3">Table EQM Equipment Cue - Field Total Equipment - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Table 2297682612 - Field 1394947864 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Specifies the total cost of all posted maintenance, in local currency.</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table EQM Equipment Cue - Field Total Maintenance Cost - Property ToolTip</note>
+        </trans-unit>
+        <trans-unit id="Table 2297682612 - Field 1394947864 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Total Maintenance Cost</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table EQM Equipment Cue - Field Total Maintenance Cost - Property Caption</note>
         </trans-unit>
         <trans-unit id="Table 1065098760 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
           <source>Equipment Setup</source>
@@ -908,6 +968,36 @@
           <note from="Developer" annotates="general" priority="2"></note>
           <note from="Xliff Generator" annotates="general" priority="3">Page EQM Assignment History Part - Control Employee Name - Property Caption</note>
         </trans-unit>
+        <trans-unit id="Page 651069626 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Maintenance Cost by Category</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page EQM Category Cost Chart - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Page 651069626 - NamedType 1054788988" size-unit="char" translate="yes" xml:space="preserve">
+          <source>(blank)</source>
+          <note from="Developer" annotates="general" priority="2">Shown in the chart for equipment without a category</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page EQM Category Cost Chart - NamedType BlankCategoryLbl</note>
+        </trans-unit>
+        <trans-unit id="Page 651069626 - NamedType 3993793526" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Category</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page EQM Category Cost Chart - NamedType CategoryDimensionLbl</note>
+        </trans-unit>
+        <trans-unit id="Page 651069626 - NamedType 1967348592" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Maintenance Cost</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page EQM Category Cost Chart - NamedType MaintenanceCostMeasureLbl</note>
+        </trans-unit>
+        <trans-unit id="Page 651069626 - Action 2026913255 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Update the chart with the current maintenance costs.</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page EQM Category Cost Chart - Action Refresh - Property ToolTip</note>
+        </trans-unit>
+        <trans-unit id="Page 651069626 - Action 2026913255 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Refresh</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page EQM Category Cost Chart - Action Refresh - Property Caption</note>
+        </trans-unit>
         <trans-unit id="Page 1964094621 - Property 1064389655" size-unit="char" translate="yes" xml:space="preserve">
           <source>About equipment assignments</source>
           <note from="Developer" annotates="general" priority="2"></note>
@@ -1228,6 +1318,31 @@
           <note from="Developer" annotates="general" priority="2"></note>
           <note from="Xliff Generator" annotates="general" priority="3">Page EQM Equipment Category Chart - Action Refresh - Property Caption</note>
         </trans-unit>
+        <trans-unit id="Page 1692753080 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Top 10 Equipment by Maintenance Cost</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page EQM Equipment Cost Chart - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Page 1692753080 - NamedType 2487931468" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Equipment</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page EQM Equipment Cost Chart - NamedType EquipmentDimensionLbl</note>
+        </trans-unit>
+        <trans-unit id="Page 1692753080 - NamedType 1967348592" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Maintenance Cost</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page EQM Equipment Cost Chart - NamedType MaintenanceCostMeasureLbl</note>
+        </trans-unit>
+        <trans-unit id="Page 1692753080 - Action 2026913255 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Update the chart with the current maintenance costs.</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page EQM Equipment Cost Chart - Action Refresh - Property ToolTip</note>
+        </trans-unit>
+        <trans-unit id="Page 1692753080 - Action 2026913255 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Refresh</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page EQM Equipment Cost Chart - Action Refresh - Property Caption</note>
+        </trans-unit>
         <trans-unit id="Page 2077431605 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
           <source>Equipment Activities</source>
           <note from="Developer" annotates="general" priority="2"></note>
@@ -1238,13 +1353,18 @@
           <note from="Developer" annotates="general" priority="2"></note>
           <note from="Xliff Generator" annotates="general" priority="3">Page EQM Equipment Cues - Control Equipment - Property Caption</note>
         </trans-unit>
+        <trans-unit id="Page 2077431605 - Control 1238100999 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Maintenance Costs</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page EQM Equipment Cues - Control MaintenanceCosts - Property Caption</note>
+        </trans-unit>
         <trans-unit id="Page 3818031089 - Property 1064389655" size-unit="char" translate="yes" xml:space="preserve">
           <source>About the equipment dashboard</source>
           <note from="Developer" annotates="general" priority="2"></note>
           <note from="Xliff Generator" annotates="general" priority="3">Page EQM Equipment Dashboard - Property AboutTitle</note>
         </trans-unit>
         <trans-unit id="Page 3818031089 - Property 247559172" size-unit="char" translate="yes" xml:space="preserve">
-          <source>The tiles count your equipment by status. **Total Equipment** includes lost and disposed equipment. The charts show how your equipment is spread over categories and statuses. Choose a tile or a chart segment to open the matching equipment. Choose **Refresh** to update the numbers.</source>
+          <source>The tiles count your equipment by status and show the total and average cost of posted maintenance. **Total Equipment** includes lost and disposed equipment. The charts show how your equipment is spread over categories and statuses, which categories cost the most in maintenance, and the ten pieces of equipment with the highest maintenance cost. Choose a tile or a chart segment to see the details. Choose **Refresh** to update the numbers.</source>
           <note from="Developer" annotates="general" priority="2"></note>
           <note from="Xliff Generator" annotates="general" priority="3">Page EQM Equipment Dashboard - Property AboutText</note>
         </trans-unit>
@@ -1254,7 +1374,7 @@
           <note from="Xliff Generator" annotates="general" priority="3">Page EQM Equipment Dashboard - Property Caption</note>
         </trans-unit>
         <trans-unit id="Page 3818031089 - Property 3863440606" size-unit="char" translate="yes" xml:space="preserve">
-          <source>equipment kpi, equipment overview, equipment chart</source>
+          <source>equipment kpi, equipment overview, equipment chart, maintenance cost, maintenance kpi</source>
           <note from="Developer" annotates="general" priority="2"></note>
           <note from="Xliff Generator" annotates="general" priority="3">Page EQM Equipment Dashboard - Property AdditionalSearchTerms</note>
         </trans-unit>
@@ -1269,7 +1389,7 @@
           <note from="Xliff Generator" annotates="general" priority="3">Page EQM Equipment Dashboard - Action Equipment - Property Caption</note>
         </trans-unit>
         <trans-unit id="Page 3818031089 - Action 2026913255 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
-          <source>Update the tiles and charts with the current equipment data.</source>
+          <source>Update the tiles and charts with the current equipment and maintenance data.</source>
           <note from="Developer" annotates="general" priority="2"></note>
           <note from="Xliff Generator" annotates="general" priority="3">Page EQM Equipment Dashboard - Action Refresh - Property ToolTip</note>
         </trans-unit>
@@ -1379,7 +1499,7 @@
           <note from="Xliff Generator" annotates="general" priority="3">Page EQM Equipment List - Property AboutTitle</note>
         </trans-unit>
         <trans-unit id="Page 2630064635 - Property 247559172" size-unit="char" translate="yes" xml:space="preserve">
-          <source>This list shows all your equipment. Use **Search** to find equipment by its number, serial number, or any other column you can see. To filter by category, status, or assigned employee, open the filter pane and add a filter on that field. You can also choose a status view at the top of the list.</source>
+          <source>This list shows all your equipment. Use **Search** to find equipment by its number, serial number, or any other column you can see. To filter by category, status, or assigned employee, open the filter pane and add a filter on that field. You can also choose a status view at the top of the list. **Total Maintenance Cost** shows the cost of posted maintenance; to see the cost of one period, set **Date Filter** under **Filter totals by**.</source>
           <note from="Developer" annotates="general" priority="2"></note>
           <note from="Xliff Generator" annotates="general" priority="3">Page EQM Equipment List - Property AboutText</note>
         </trans-unit>
@@ -1402,6 +1522,16 @@
           <source>Assigned Employee Name</source>
           <note from="Developer" annotates="general" priority="2"></note>
           <note from="Xliff Generator" annotates="general" priority="3">Page EQM Equipment List - Control Assigned Employee Name - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Page 2630064635 - Control 3737427859 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Specifies the total posted maintenance cost as a percentage of the purchase cost. A value of 100 or more means that maintenance has cost as much as the equipment itself, which may justify replacing it. It is blank when the equipment has no purchase cost or no posted maintenance.</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page EQM Equipment List - Control MaintenanceCostPct - Property ToolTip</note>
+        </trans-unit>
+        <trans-unit id="Page 2630064635 - Control 3737427859 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Maintenance Cost %</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page EQM Equipment List - Control MaintenanceCostPct - Property Caption</note>
         </trans-unit>
         <trans-unit id="Page 2630064635 - Action 794261815 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
           <source>Equipment</source>
@@ -1543,6 +1673,16 @@
           <note from="Developer" annotates="general" priority="2"></note>
           <note from="Xliff Generator" annotates="general" priority="3">Page EQM Equipment Manager RC - Action EquipmentList - Property Caption</note>
         </trans-unit>
+        <trans-unit id="Page 4775459 - Action 1782039815 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Open the posted maintenance history of all equipment, with costs.</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page EQM Equipment Manager RC - Action MaintenanceHistoryList - Property ToolTip</note>
+        </trans-unit>
+        <trans-unit id="Page 4775459 - Action 1782039815 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Maintenance History</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page EQM Equipment Manager RC - Action MaintenanceHistoryList - Property Caption</note>
+        </trans-unit>
         <trans-unit id="Page 4775459 - Action 2128951761 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
           <source>Open the maintenance records of all equipment.</source>
           <note from="Developer" annotates="general" priority="2"></note>
@@ -1648,6 +1788,16 @@
           <note from="Developer" annotates="general" priority="2"></note>
           <note from="Xliff Generator" annotates="general" priority="3">Page EQM Maintenance FactBox - Control LastMaintenanceType - Property Caption</note>
         </trans-unit>
+        <trans-unit id="Page 1059192635 - Control 3737427859 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Specifies the total posted maintenance cost as a percentage of the purchase cost. A value of 100 or more means that maintenance has cost as much as the equipment itself, which may justify replacing it. It is blank when the equipment has no purchase cost or no posted maintenance.</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page EQM Maintenance FactBox - Control MaintenanceCostPct - Property ToolTip</note>
+        </trans-unit>
+        <trans-unit id="Page 1059192635 - Control 3737427859 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Maintenance Cost %</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page EQM Maintenance FactBox - Control MaintenanceCostPct - Property Caption</note>
+        </trans-unit>
         <trans-unit id="Page 1059192635 - Control 743693861 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
           <source>Specifies how many maintenance records the equipment has. Choose the number to see them.</source>
           <note from="Developer" annotates="general" priority="2"></note>
@@ -1667,16 +1817,6 @@
           <source>Open Maintenance Records</source>
           <note from="Developer" annotates="general" priority="2"></note>
           <note from="Xliff Generator" annotates="general" priority="3">Page EQM Maintenance FactBox - Control NoOfOpenMaintenanceRecords - Property Caption</note>
-        </trans-unit>
-        <trans-unit id="Page 1059192635 - Control 917450800 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
-          <source>Specifies the total cost of all maintenance registered for the equipment, in local currency.</source>
-          <note from="Developer" annotates="general" priority="2"></note>
-          <note from="Xliff Generator" annotates="general" priority="3">Page EQM Maintenance FactBox - Control TotalMaintenanceCost - Property ToolTip</note>
-        </trans-unit>
-        <trans-unit id="Page 1059192635 - Control 917450800 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
-          <source>Total Maintenance Cost</source>
-          <note from="Developer" annotates="general" priority="2"></note>
-          <note from="Xliff Generator" annotates="general" priority="3">Page EQM Maintenance FactBox - Control TotalMaintenanceCost - Property Caption</note>
         </trans-unit>
         <trans-unit id="Page 629942618 - Property 1064389655" size-unit="char" translate="yes" xml:space="preserve">
           <source>About the maintenance history</source>
@@ -1962,6 +2102,16 @@
           <source>Equipment by Status</source>
           <note from="Developer" annotates="general" priority="2"></note>
           <note from="Xliff Generator" annotates="general" priority="3">Query EQM Equipment by Status - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Query 3223416860 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Maintenance Cost by Category</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Query EQM Maint. Cost by Category - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Query 2601708454 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Maintenance Cost by Equipment</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Query EQM Maint. Cost by Equipment - Property Caption</note>
         </trans-unit>
         <trans-unit id="PageExtension 2678929633 - NamedType 3362745869" size-unit="char" translate="yes" xml:space="preserve" al-object-target="PageExtension 2678929633">
           <source>Equipment %1 is no longer assigned to employee %2.</source>

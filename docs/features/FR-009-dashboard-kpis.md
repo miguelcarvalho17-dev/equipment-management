@@ -21,6 +21,9 @@ Status: describes the code as implemented. **Build is clean for the FR-009 files
 | Page | 50100 | EQM Equipment List | Action "Dashboard" (opens page 50109) in `area(Reporting)` since NFR-003, promoted under 'Report'. |
 | PermissionSet | 50100 | EQM - Reader | `X` on table 50104, queries 50100 and 50101, pages 50106-50110 and codeunit 50107. |
 
+## Added by FR-013 (maintenance costs)
+Table 50104 gets FlowFields "Total Maintenance Cost" and "Average Maintenance Cost" (cue group "Maintenance Costs" on page 50106, drill-down to page 50117). Pages 50118 "EQM Category Cost Chart" and 50119 "EQM Equipment Cost Chart" (top 10) are added to pages 50109 and 50110; the dashboard Refresh also refreshes them. Codeunit 50107 gets four procedures. Page 50110 gets the Embedding action Maintenance History. Details: docs/features/FR-013-maintenance-cost-tracking.md. The six equipment tiles and the two FR-009 charts are unchanged.
+
 ## Behavior
 - **Counts are live**, computed when the page opens, on activation of the cue part, or when the user chooses Refresh. Nothing is cached or stored.
 - **Total Equipment** counts every record, Lost and Disposed included. With the five standard statuses, Total = Available + Assigned + In Maintenance + Lost + Disposed. A status added by an extension counts in Total but has no tile.

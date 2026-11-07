@@ -19,6 +19,12 @@ page 50110 "EQM Equipment Manager RC"
             part(StatusChart; "EQM Equipment Status Chart")
             {
             }
+            part(CategoryCostChart; "EQM Category Cost Chart")
+            {
+            }
+            part(EquipmentCostChart; "EQM Equipment Cost Chart")
+            {
+            }
         }
     }
 
@@ -43,6 +49,12 @@ page 50110 "EQM Equipment Manager RC"
                 Caption = 'Maintenance';
                 ToolTip = 'Open the maintenance records of all equipment.';
                 RunObject = page "EQM Maintenance Records";
+            }
+            action(MaintenanceHistoryList)
+            {
+                Caption = 'Maintenance History';
+                ToolTip = 'Open the posted maintenance history of all equipment, with costs.';
+                RunObject = page "EQM Maintenance History";
             }
         }
         area(Sections)

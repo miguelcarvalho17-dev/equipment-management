@@ -151,6 +151,38 @@ table 50100 "EQM Equipment"
             TableRelation = "No. Series";
             Editable = false;
         }
+        field(13; "Date Filter"; Date)
+        {
+            Caption = 'Date Filter';
+            ToolTip = 'Specifies a date filter for the maintenance cost fields. Only maintenance with a maintenance date within the filter is included.';
+            FieldClass = FlowFilter;
+        }
+        field(14; "Total Maintenance Cost"; Decimal)
+        {
+            Caption = 'Total Maintenance Cost';
+            ToolTip = 'Specifies the total cost of the posted maintenance of the equipment, in local currency. Open maintenance records are not included until they are posted. Use the date filter to see the cost of a period. Choose the amount to see the maintenance history.';
+            FieldClass = FlowField;
+            CalcFormula = sum("EQM Maintenance History Entry".Cost where("Equipment No." = field("No."), "Maintenance Date" = field("Date Filter")));
+            AutoFormatType = 1;
+            Editable = false;
+        }
+        field(15; "No. of Posted Maintenances"; Integer)
+        {
+            Caption = 'No. of Posted Maintenances';
+            ToolTip = 'Specifies how many maintenance records of the equipment have been posted. Use the date filter to count the maintenance of a period. Choose the number to see the maintenance history.';
+            FieldClass = FlowField;
+            CalcFormula = count("EQM Maintenance History Entry" where("Equipment No." = field("No."), "Maintenance Date" = field("Date Filter")));
+            Editable = false;
+        }
+        field(16; "Average Maintenance Cost"; Decimal)
+        {
+            Caption = 'Average Maintenance Cost';
+            ToolTip = 'Specifies the average cost of one posted maintenance of the equipment, in local currency. Maintenance with a cost of zero is included. Use the date filter to see the average of a period.';
+            FieldClass = FlowField;
+            CalcFormula = average("EQM Maintenance History Entry".Cost where("Equipment No." = field("No."), "Maintenance Date" = field("Date Filter")));
+            AutoFormatType = 1;
+            Editable = false;
+        }
     }
 
     keys
@@ -567,6 +599,33 @@ table 50100 "EQM Equipment"
             else
                 exit(StandardStyleTok);
         end;
+    end;
+
+    /// <summary>
+    /// Returns the total posted maintenance cost as a percentage of the purchase cost, rounded to one decimal.
+    /// Uses the date filter set on the record. Returns 0 when the equipment has no purchase cost.
+    /// </summary>
+    /// <returns>The percentage, or 0 when the purchase cost is 0.</returns>
+    internal procedure GetMaintenanceCostPercentage(): Decimal
+    begin
+        if "Purchase Cost" = 0 then
+            exit(0);
+
+        CalcFields("Total Maintenance Cost");
+        exit(Round("Total Maintenance Cost" / "Purchase Cost" * 100, 0.1));
+    end;
+
+    /// <summary>
+    /// Returns the page style for the maintenance cost percentage. Unfavorable when maintenance has cost at least as
+    /// much as the purchase cost.
+    /// </summary>
+    /// <param name="MaintenanceCostPercentage">The percentage from GetMaintenanceCostPercentage.</param>
+    /// <returns>The style name.</returns>
+    internal procedure GetMaintenanceCostStyle(MaintenanceCostPercentage: Decimal): Text
+    begin
+        if MaintenanceCostPercentage >= 100 then
+            exit(UnfavorableStyleTok);
+        exit(StandardStyleTok);
     end;
 
     local procedure GetSetup(var EquipmentSetup: Record "EQM Equipment Setup")

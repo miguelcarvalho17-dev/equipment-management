@@ -21,7 +21,7 @@ Good to know:
 ## View maintenance
 - **Equipment Maintenance** list: all records, newest number first. Use the views at the top (Preventive, Corrective, Inspection, Upgrade) to show one type. Choose **Equipment** or **Vendor** to open those cards.
 - From an equipment card or the Equipment list, choose **Maintenance** (Navigate) to see that equipment's records only.
-- The **Maintenance** FactBox on the equipment pages shows **No. of Maintenance Records** (choose it to open them), **Last Maintenance Date**, **Last Maintenance Type** and **Total Maintenance Cost**. The last date and type are blank when nothing is registered.
+- The **Maintenance** FactBox on the equipment pages shows **No. of Maintenance Records** (choose it to open them), **Last Maintenance Date**, **Last Maintenance Type** and **Total Maintenance Cost** (posted maintenance only). The last date and type are blank when nothing is registered.
 
 ## Correct a record
 You can change the date, type, vendor, cost and descriptions of a saved record as long as its **Status** is **Open**. After you choose **Post**, the record is locked (see the maintenance history help). You cannot change its **Equipment No.** or number, and you cannot delete it. Equipment that has maintenance records cannot be deleted either; set its status to **Disposed** instead.
