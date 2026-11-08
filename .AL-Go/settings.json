@@ -7,9 +7,7 @@
   "appFolders": [
     "app"
   ],
-  "testFolders": [
-    "test"
-  ],
+  "testFolders": [],
   "bcptTestFolders": [],
   "rulesetFile": ".AL-Go/equipment.ruleset.json"
 }
