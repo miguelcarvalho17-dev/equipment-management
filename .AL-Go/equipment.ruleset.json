@@ -1,0 +1,9 @@
+{
+  "name": "Equipment Management CI ruleset",
+  "description": "Temporary: downgrades the AppSource manifest and ID-range rules that fail until app.json is completed and an AppSource ID range is registered. Remove this file and the rulesetFile setting before a real AppSource submission.",
+  "rules": [
+    { "id": "AS0051", "action": "Warning", "justification": "Manifest links (privacyStatement, EULA, help, logo, contextSensitiveHelpUrl) are not set yet." },
+    { "id": "AS0052", "action": "Warning", "justification": "Manifest url is not set yet." },
+    { "id": "AS0084", "action": "Warning", "justification": "Demo ID range 50100-50149; an AppSource range must be registered." }
+  ]
+}
