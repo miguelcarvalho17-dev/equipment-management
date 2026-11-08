@@ -196,7 +196,7 @@ table 50100 "EQM Equipment"
         field(18; "Warranty End Date"; Date)
         {
             Caption = 'Warranty End Date';
-            ToolTip = 'Specifies the date the warranty of the equipment ends. When both warranty dates are filled in, the end date must be later than the start date. Leave it blank when the equipment has no warranty or the end date is not known.';
+            ToolTip = 'Specifies the date the warranty of the equipment ends. When both warranty dates are filled in, the end date must be later than the start date. The warranty status is calculated from this date: Expiring Soon from 30 days before the end date, and Expired after it. Leave it blank when the equipment has no warranty or the end date is not known.';
 
             trigger OnValidate()
             begin
@@ -678,6 +678,64 @@ table 50100 "EQM Equipment"
         if MaintenanceCostPercentage >= 100 then
             exit(UnfavorableStyleTok);
         exit(StandardStyleTok);
+    end;
+
+    /// <summary>
+    /// Returns how many days before the warranty end date the warranty status becomes Expiring Soon.
+    /// </summary>
+    /// <returns>The number of days.</returns>
+    internal procedure GetWarrantyExpiringSoonDays(): Integer
+    begin
+        exit(30);
+    end;
+
+    /// <summary>
+    /// Calculates the warranty status on a given date from the Warranty End Date. Blank when no end date is filled
+    /// in; Expired when the end date is before the reference date; Expiring Soon when the end date is on the reference
+    /// date or at most the number of days from GetWarrantyExpiringSoonDays later; otherwise Active. The Warranty Start
+    /// Date is not used.
+    /// </summary>
+    /// <param name="ReferenceDate">The date to calculate the status on. 0D means today.</param>
+    /// <returns>The warranty status.</returns>
+    internal procedure CalcWarrantyStatus(ReferenceDate: Date): Enum "EQM Warranty Status"
+    begin
+        if ReferenceDate = 0D then
+            ReferenceDate := Today();
+        if "Warranty End Date" = 0D then
+            exit("EQM Warranty Status"::" ");
+        if "Warranty End Date" < ReferenceDate then
+            exit("EQM Warranty Status"::Expired);
+        if "Warranty End Date" <= ReferenceDate + GetWarrantyExpiringSoonDays() then
+            exit("EQM Warranty Status"::"Expiring Soon");
+        exit("EQM Warranty Status"::Active);
+    end;
+
+    /// <summary>
+    /// Returns the warranty status of the equipment today. See CalcWarrantyStatus.
+    /// </summary>
+    /// <returns>The warranty status today.</returns>
+    internal procedure GetWarrantyStatus(): Enum "EQM Warranty Status"
+    begin
+        exit(CalcWarrantyStatus(Today()));
+    end;
+
+    /// <summary>
+    /// Returns the page style name used to show a warranty status.
+    /// </summary>
+    /// <param name="WarrantyStatus">The status from GetWarrantyStatus.</param>
+    /// <returns>The style name.</returns>
+    internal procedure GetWarrantyStatusStyle(WarrantyStatus: Enum "EQM Warranty Status"): Text
+    begin
+        case WarrantyStatus of
+            WarrantyStatus::Active:
+                exit(FavorableStyleTok);
+            WarrantyStatus::"Expiring Soon":
+                exit(AmbiguousStyleTok);
+            WarrantyStatus::Expired:
+                exit(UnfavorableStyleTok);
+            else
+                exit(StandardStyleTok);
+        end;
     end;
 
     local procedure GetSetup(var EquipmentSetup: Record "EQM Equipment Setup")

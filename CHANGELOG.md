@@ -1,6 +1,25 @@
 # Changelog
 Newest first. Grouped by Added / Changed / Fixed / Obsolete.
 
+## FR-015 Warranty Monitoring (version stays 29.0.0.0, no bump)
+### Added
+- Enum 50104 "EQM Warranty Status" (blank, Active, Expiring Soon, Expired; not extensible). Calculated from "Warranty End Date" and today's date, never stored.
+- Table 50100 internal procedures `GetWarrantyExpiringSoonDays` (30), `CalcWarrantyStatus`, `GetWarrantyStatus`, `GetWarrantyStatusStyle`.
+- Table 50104 FlowFields "Warranty Expiring Soon" and "Warranty Expired" (Lost and Disposed excluded) and two FlowFilters; codeunit 50107 internal `SetWarrantyCueFilters`.
+- Cue group "Warranty" with two tiles on page 50106 (dashboard and Role Center), drilling down to the Equipment List.
+- Warranty Status on the Equipment Card (after Warranty End Date) and as a visible column on the Equipment list, styled green / yellow / red.
+- Help article docs/help/FR-015-warranty-monitoring.md.
+### Changed
+- ToolTip of "Warranty End Date"; teaching tips of the Equipment list and the dashboard; dashboard search terms.
+### Fixed
+- None.
+### Obsolete
+- None.
+
+Release notes: The Equipment Card and Equipment list now show a Warranty Status: Active, Expiring Soon (the warranty ends within 30 days) or Expired. It is calculated automatically from the Warranty End Date and is blank when no end date is filled in. The dashboard and the Equipment Manager Role Center have two new tiles, Warranty Expiring Soon and Warranty Expired, which open the matching equipment. The tiles do not count lost and disposed equipment.
+
+Note: no stored field, no permission set change, no upgrade code, no events. Known limitation: Warranty Status cannot be filtered, sorted or exported; "30 days" is fixed and also written in several tooltips. Automated tests are deferred (Q10; test ID 50169 reserved); sandbox checks WM-SB1 to WM-SB10 are not run. Review: APPROVE WITH COMMENTS; build without AL errors or warnings. See docs/features/FR-015-warranty-monitoring.md.
+
 ## FR-014 Warranty Information (version stays 29.0.0.0, no bump)
 ### Added
 - Table 50100 fields 17 "Warranty Start Date" (Date), 18 "Warranty End Date" (Date), 19 "Warranty Provider" (Text[100]), 20 "Warranty Reference No." (Text[50]); all optional, stored.

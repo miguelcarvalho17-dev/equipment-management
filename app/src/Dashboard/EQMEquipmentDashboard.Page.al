@@ -4,11 +4,11 @@ page 50109 "EQM Equipment Dashboard"
 {
     Caption = 'Equipment Dashboard';
     AboutTitle = 'About the equipment dashboard';
-    AboutText = 'The tiles count your equipment by status and show the total and average cost of posted maintenance. **Total Equipment** includes lost and disposed equipment. The charts show how your equipment is spread over categories and statuses, which categories cost the most in maintenance, and the ten pieces of equipment with the highest maintenance cost. Choose a tile or a chart segment to see the details. Choose **Refresh** to update the numbers.';
+    AboutText = 'The tiles count your equipment by status, show how many warranties are expiring within 30 days or have expired, and show the total and average cost of posted maintenance. **Total Equipment** includes lost and disposed equipment; the warranty tiles do not. The charts show how your equipment is spread over categories and statuses, which categories cost the most in maintenance, and the ten pieces of equipment with the highest maintenance cost. Choose a tile or a chart segment to see the details. Choose **Refresh** to update the numbers.';
     PageType = Card;
     ApplicationArea = All;
     UsageCategory = ReportsAndAnalysis;
-    AdditionalSearchTerms = 'equipment kpi, equipment overview, equipment chart, maintenance cost, maintenance kpi';
+    AdditionalSearchTerms = 'equipment kpi, equipment overview, equipment chart, maintenance cost, maintenance kpi, warranty expiration, expiring warranties';
     Editable = false;
 
     layout

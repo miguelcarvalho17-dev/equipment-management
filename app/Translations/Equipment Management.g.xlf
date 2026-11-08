@@ -304,7 +304,7 @@
           <note from="Xliff Generator" annotates="general" priority="3">Table EQM Equipment - Field Total Maintenance Cost - Property Caption</note>
         </trans-unit>
         <trans-unit id="Table 4212454693 - Field 2616922401 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
-          <source>Specifies the date the warranty of the equipment ends. When both warranty dates are filled in, the end date must be later than the start date. Leave it blank when the equipment has no warranty or the end date is not known.</source>
+          <source>Specifies the date the warranty of the equipment ends. When both warranty dates are filled in, the end date must be later than the start date. The warranty status is calculated from this date: Expiring Soon from 30 days before the end date, and Expired after it. Leave it blank when the equipment has no warranty or the end date is not known.</source>
           <note from="Developer" annotates="general" priority="2"></note>
           <note from="Xliff Generator" annotates="general" priority="3">Table EQM Equipment - Field Warranty End Date - Property ToolTip</note>
         </trans-unit>
@@ -577,6 +577,46 @@
           <source>Total Maintenance Cost</source>
           <note from="Developer" annotates="general" priority="2"></note>
           <note from="Xliff Generator" annotates="general" priority="3">Table EQM Equipment Cue - Field Total Maintenance Cost - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Table 2297682612 - Field 732195245 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Specifies the number of equipment records whose warranty end date has passed. Lost and disposed equipment and equipment without a warranty end date are not counted.</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table EQM Equipment Cue - Field Warranty Expired - Property ToolTip</note>
+        </trans-unit>
+        <trans-unit id="Table 2297682612 - Field 732195245 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Warranty Expired</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table EQM Equipment Cue - Field Warranty Expired - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Table 2297682612 - Field 2070437525 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Specifies the warranty end dates that count as expired. It is set automatically.</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table EQM Equipment Cue - Field Warranty Expired Filter - Property ToolTip</note>
+        </trans-unit>
+        <trans-unit id="Table 2297682612 - Field 2070437525 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Warranty Expired Filter</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table EQM Equipment Cue - Field Warranty Expired Filter - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Table 2297682612 - Field 2540444054 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Specifies the warranty end dates that count as expiring soon. It is set automatically.</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table EQM Equipment Cue - Field Warranty Expiring Filter - Property ToolTip</note>
+        </trans-unit>
+        <trans-unit id="Table 2297682612 - Field 2540444054 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Warranty Expiring Filter</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table EQM Equipment Cue - Field Warranty Expiring Filter - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Table 2297682612 - Field 3768265657 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Specifies the number of equipment records whose warranty ends within the next 30 days, today included. Lost and disposed equipment is not counted.</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table EQM Equipment Cue - Field Warranty Expiring Soon - Property ToolTip</note>
+        </trans-unit>
+        <trans-unit id="Table 2297682612 - Field 3768265657 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Warranty Expiring Soon</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table EQM Equipment Cue - Field Warranty Expiring Soon - Property Caption</note>
         </trans-unit>
         <trans-unit id="Table 1065098760 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
           <source>Equipment Setup</source>
@@ -1233,6 +1273,16 @@
           <note from="Developer" annotates="general" priority="2"></note>
           <note from="Xliff Generator" annotates="general" priority="3">Page EQM Equipment Card - Control Warranty - Property Caption</note>
         </trans-unit>
+        <trans-unit id="Page 3574600233 - Control 3258932812 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Specifies whether the warranty is Active, Expiring Soon (it ends within 30 days) or Expired (the end date has passed). It is calculated from the warranty end date and today's date, and is blank when no warranty end date is filled in.</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page EQM Equipment Card - Control WarrantyStatus - Property ToolTip</note>
+        </trans-unit>
+        <trans-unit id="Page 3574600233 - Control 3258932812 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Warranty Status</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page EQM Equipment Card - Control WarrantyStatus - Property Caption</note>
+        </trans-unit>
         <trans-unit id="Page 3574600233 - Action 794261815 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
           <source>Equipment</source>
           <note from="Developer" annotates="general" priority="2"></note>
@@ -1408,13 +1458,18 @@
           <note from="Developer" annotates="general" priority="2"></note>
           <note from="Xliff Generator" annotates="general" priority="3">Page EQM Equipment Cues - Control MaintenanceCosts - Property Caption</note>
         </trans-unit>
+        <trans-unit id="Page 2077431605 - Control 1903978320 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Warranty</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page EQM Equipment Cues - Control Warranty - Property Caption</note>
+        </trans-unit>
         <trans-unit id="Page 3818031089 - Property 1064389655" size-unit="char" translate="yes" xml:space="preserve">
           <source>About the equipment dashboard</source>
           <note from="Developer" annotates="general" priority="2"></note>
           <note from="Xliff Generator" annotates="general" priority="3">Page EQM Equipment Dashboard - Property AboutTitle</note>
         </trans-unit>
         <trans-unit id="Page 3818031089 - Property 247559172" size-unit="char" translate="yes" xml:space="preserve">
-          <source>The tiles count your equipment by status and show the total and average cost of posted maintenance. **Total Equipment** includes lost and disposed equipment. The charts show how your equipment is spread over categories and statuses, which categories cost the most in maintenance, and the ten pieces of equipment with the highest maintenance cost. Choose a tile or a chart segment to see the details. Choose **Refresh** to update the numbers.</source>
+          <source>The tiles count your equipment by status, show how many warranties are expiring within 30 days or have expired, and show the total and average cost of posted maintenance. **Total Equipment** includes lost and disposed equipment; the warranty tiles do not. The charts show how your equipment is spread over categories and statuses, which categories cost the most in maintenance, and the ten pieces of equipment with the highest maintenance cost. Choose a tile or a chart segment to see the details. Choose **Refresh** to update the numbers.</source>
           <note from="Developer" annotates="general" priority="2"></note>
           <note from="Xliff Generator" annotates="general" priority="3">Page EQM Equipment Dashboard - Property AboutText</note>
         </trans-unit>
@@ -1424,7 +1479,7 @@
           <note from="Xliff Generator" annotates="general" priority="3">Page EQM Equipment Dashboard - Property Caption</note>
         </trans-unit>
         <trans-unit id="Page 3818031089 - Property 3863440606" size-unit="char" translate="yes" xml:space="preserve">
-          <source>equipment kpi, equipment overview, equipment chart, maintenance cost, maintenance kpi</source>
+          <source>equipment kpi, equipment overview, equipment chart, maintenance cost, maintenance kpi, warranty expiration, expiring warranties</source>
           <note from="Developer" annotates="general" priority="2"></note>
           <note from="Xliff Generator" annotates="general" priority="3">Page EQM Equipment Dashboard - Property AdditionalSearchTerms</note>
         </trans-unit>
@@ -1549,7 +1604,7 @@
           <note from="Xliff Generator" annotates="general" priority="3">Page EQM Equipment List - Property AboutTitle</note>
         </trans-unit>
         <trans-unit id="Page 2630064635 - Property 247559172" size-unit="char" translate="yes" xml:space="preserve">
-          <source>This list shows all your equipment. Use **Search** to find equipment by its number, serial number, or any other column you can see. To filter by category, status, or assigned employee, open the filter pane and add a filter on that field. You can also choose a status view at the top of the list. **Total Maintenance Cost** shows the cost of posted maintenance; to see the cost of one period, set **Date Filter** under **Filter totals by**.</source>
+          <source>This list shows all your equipment. Use **Search** to find equipment by its number, serial number, or any other column you can see. To filter by category, status, or assigned employee, open the filter pane and add a filter on that field. You can also choose a status view at the top of the list. **Warranty Status** shows whether the warranty is active, expiring soon or expired; to find equipment by warranty, filter on **Warranty End Date** or choose a warranty tile on the dashboard. **Total Maintenance Cost** shows the cost of posted maintenance; to see the cost of one period, set **Date Filter** under **Filter totals by**.</source>
           <note from="Developer" annotates="general" priority="2"></note>
           <note from="Xliff Generator" annotates="general" priority="3">Page EQM Equipment List - Property AboutText</note>
         </trans-unit>
@@ -1582,6 +1637,16 @@
           <source>Maintenance Cost %</source>
           <note from="Developer" annotates="general" priority="2"></note>
           <note from="Xliff Generator" annotates="general" priority="3">Page EQM Equipment List - Control MaintenanceCostPct - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Page 2630064635 - Control 3258932812 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Specifies whether the warranty is Active, Expiring Soon (it ends within 30 days) or Expired (the end date has passed). It is calculated from the warranty end date and today's date, and is blank when no warranty end date is filled in.</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page EQM Equipment List - Control WarrantyStatus - Property ToolTip</note>
+        </trans-unit>
+        <trans-unit id="Page 2630064635 - Control 3258932812 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Warranty Status</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page EQM Equipment List - Control WarrantyStatus - Property Caption</note>
         </trans-unit>
         <trans-unit id="Page 2630064635 - Action 794261815 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
           <source>Equipment</source>
@@ -2302,6 +2367,31 @@
           <source>Upgrade</source>
           <note from="Developer" annotates="general" priority="2"></note>
           <note from="Xliff Generator" annotates="general" priority="3">Enum EQM Maintenance Type - EnumValue Upgrade - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Enum 2565042555 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Warranty Status</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Enum EQM Warranty Status - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Enum 2565042555 - EnumValue 1371923692 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source> </source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Enum EQM Warranty Status - EnumValue   - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Enum 2565042555 - EnumValue 1090351696 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Active</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Enum EQM Warranty Status - EnumValue Active - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Enum 2565042555 - EnumValue 1481297009 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Expired</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Enum EQM Warranty Status - EnumValue Expired - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Enum 2565042555 - EnumValue 3969349685 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Expiring Soon</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Enum EQM Warranty Status - EnumValue Expiring Soon - Property Caption</note>
         </trans-unit>
         <trans-unit id="PermissionSet 630416289 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
           <source>Equipment Administrator</source>
