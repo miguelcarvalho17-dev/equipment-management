@@ -10,5 +10,6 @@
   "testFolders": [
     "test"
   ],
-  "bcptTestFolders": []
+  "bcptTestFolders": [],
+  "rulesetFile": ".AL-Go/equipment.ruleset.json"
 }
