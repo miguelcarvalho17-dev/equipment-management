@@ -127,6 +127,19 @@ page 50101 "EQM Equipment Card"
                 field("Warranty End Date"; Rec."Warranty End Date")
                 {
                     Importance = Promoted;
+
+                    trigger OnValidate()
+                    begin
+                        UpdateWarrantyStatus();
+                    end;
+                }
+                field(WarrantyStatus; WarrantyStatus)
+                {
+                    Caption = 'Warranty Status';
+                    ToolTip = 'Specifies whether the warranty is Active, Expiring Soon (it ends within 30 days) or Expired (the end date has passed). It is calculated from the warranty end date and today''s date, and is blank when no warranty end date is filled in.';
+                    Editable = false;
+                    Importance = Promoted;
+                    StyleExpr = WarrantyStatusStyle;
                 }
                 field("Warranty Provider"; Rec."Warranty Provider")
                 {
@@ -319,6 +332,8 @@ page 50101 "EQM Equipment Card"
         CanAssign: Boolean;
         CanRegisterMaintenance: Boolean;
         StatusStyle: Text;
+        WarrantyStatus: Enum "EQM Warranty Status";
+        WarrantyStatusStyle: Text;
         ActiveAssignmentDate: Date;
         ActiveAssignedBy: Code[50];
         CreatedByUserName: Code[50];
@@ -385,6 +400,13 @@ page 50101 "EQM Equipment Card"
             end;
         CreatedByUserName := GetUserName(Rec.SystemCreatedBy);
         ModifiedByUserName := GetUserName(Rec.SystemModifiedBy);
+        UpdateWarrantyStatus();
+    end;
+
+    local procedure UpdateWarrantyStatus()
+    begin
+        WarrantyStatus := Rec.GetWarrantyStatus();
+        WarrantyStatusStyle := Rec.GetWarrantyStatusStyle(WarrantyStatus);
     end;
 
     local procedure GetUserName(UserSecurityId: Guid): Code[50]

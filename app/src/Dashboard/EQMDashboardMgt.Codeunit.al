@@ -90,6 +90,25 @@ codeunit 50107 "EQM Dashboard Mgt."
     end;
 
     /// <summary>
+    /// Sets the date filters of the warranty tiles so that they count the same equipment as the warranty status:
+    /// expiring soon from the reference date to the end of the expiring period, expired before the reference date.
+    /// 0D means today.
+    /// </summary>
+    /// <param name="EquipmentCue">The cue record to set the filters on.</param>
+    /// <param name="ReferenceDate">The date the tiles are calculated on.</param>
+    internal procedure SetWarrantyCueFilters(var EquipmentCue: Record "EQM Equipment Cue"; ReferenceDate: Date)
+    var
+        Equipment: Record "EQM Equipment";
+        ExpiringSoonDays: Integer;
+    begin
+        if ReferenceDate = 0D then
+            ReferenceDate := Today();
+        ExpiringSoonDays := Equipment.GetWarrantyExpiringSoonDays();
+        EquipmentCue.SetRange("Warranty Expiring Filter", ReferenceDate, ReferenceDate + ExpiringSoonDays);
+        EquipmentCue.SetFilter("Warranty Expired Filter", '<>%1&<%2', 0D, ReferenceDate);
+    end;
+
+    /// <summary>
     /// Returns the posted maintenance cost per equipment category, highest cost first. Categories without posted
     /// maintenance cost are not returned. The current category of each equipment is used.
     /// </summary>

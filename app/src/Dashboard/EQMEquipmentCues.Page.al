@@ -42,6 +42,19 @@ page 50106 "EQM Equipment Cues"
                     DrillDownPageId = "EQM Equipment List";
                 }
             }
+            cuegroup(Warranty)
+            {
+                Caption = 'Warranty';
+
+                field("Warranty Expiring Soon"; Rec."Warranty Expiring Soon")
+                {
+                    DrillDownPageId = "EQM Equipment List";
+                }
+                field("Warranty Expired"; Rec."Warranty Expired")
+                {
+                    DrillDownPageId = "EQM Equipment List";
+                }
+            }
             cuegroup(MaintenanceCosts)
             {
                 Caption = 'Maintenance Costs';
@@ -59,12 +72,15 @@ page 50106 "EQM Equipment Cues"
     }
 
     trigger OnOpenPage()
+    var
+        DashboardMgt: Codeunit "EQM Dashboard Mgt.";
     begin
         Rec.Reset();
         if not Rec.Get() then begin
             Rec.Init();
             Rec.Insert();
         end;
+        DashboardMgt.SetWarrantyCueFilters(Rec, Today());
     end;
 
     /// <summary>

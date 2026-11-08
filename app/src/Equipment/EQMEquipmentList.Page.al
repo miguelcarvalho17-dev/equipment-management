@@ -6,7 +6,7 @@ page 50100 "EQM Equipment List"
 {
     Caption = 'Equipment';
     AboutTitle = 'About equipment';
-    AboutText = 'This list shows all your equipment. Use **Search** to find equipment by its number, serial number, or any other column you can see. To filter by category, status, or assigned employee, open the filter pane and add a filter on that field. You can also choose a status view at the top of the list. **Total Maintenance Cost** shows the cost of posted maintenance; to see the cost of one period, set **Date Filter** under **Filter totals by**.';
+    AboutText = 'This list shows all your equipment. Use **Search** to find equipment by its number, serial number, or any other column you can see. To filter by category, status, or assigned employee, open the filter pane and add a filter on that field. You can also choose a status view at the top of the list. **Warranty Status** shows whether the warranty is active, expiring soon or expired; to find equipment by warranty, filter on **Warranty End Date** or choose a warranty tile on the dashboard. **Total Maintenance Cost** shows the cost of posted maintenance; to see the cost of one period, set **Date Filter** under **Filter totals by**.';
     PageType = List;
     ApplicationArea = All;
     UsageCategory = Lists;
@@ -61,6 +61,12 @@ page 50100 "EQM Equipment List"
                 field("Purchase Cost"; Rec."Purchase Cost")
                 {
                     Visible = false;
+                }
+                field(WarrantyStatus; WarrantyStatus)
+                {
+                    Caption = 'Warranty Status';
+                    ToolTip = 'Specifies whether the warranty is Active, Expiring Soon (it ends within 30 days) or Expired (the end date has passed). It is calculated from the warranty end date and today''s date, and is blank when no warranty end date is filled in.';
+                    StyleExpr = WarrantyStatusStyle;
                 }
                 field("Warranty Start Date"; Rec."Warranty Start Date")
                 {
@@ -236,6 +242,8 @@ page 50100 "EQM Equipment List"
         AssignedEmployeeName: Text[100];
         MaintenanceCostPct: Decimal;
         MaintenanceCostStyle: Text;
+        WarrantyStatus: Enum "EQM Warranty Status";
+        WarrantyStatusStyle: Text;
 
     trigger OnAfterGetRecord()
     var
@@ -244,6 +252,8 @@ page 50100 "EQM Equipment List"
         StatusStyle := Rec.GetStatusStyle();
         MaintenanceCostPct := Rec.GetMaintenanceCostPercentage();
         MaintenanceCostStyle := Rec.GetMaintenanceCostStyle(MaintenanceCostPct);
+        WarrantyStatus := Rec.GetWarrantyStatus();
+        WarrantyStatusStyle := Rec.GetWarrantyStatusStyle(WarrantyStatus);
         AssignedEmployeeName := '';
         if (Rec."Assigned Employee No." <> '') and Employee.ReadPermission() then begin
             Employee.SetLoadFields("First Name", "Middle Name", "Last Name");
