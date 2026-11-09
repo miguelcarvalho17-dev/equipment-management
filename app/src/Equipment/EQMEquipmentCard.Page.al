@@ -337,6 +337,9 @@ page 50101 "EQM Equipment Card"
     }
 
     var
+        NotificationMgt: Codeunit "EQM Notification Mgt.";
+        NotifiedEquipmentNo: Code[20];
+        NotificationsChecked: Boolean;
         AssignedEmployeeName: Text[100];
         IsAssigned: Boolean;
         IsSaved: Boolean;
@@ -360,6 +363,16 @@ page 50101 "EQM Equipment Card"
     trigger OnNewRecord(BelowxRec: Boolean)
     begin
         UpdateControls();
+    end;
+
+    trigger OnAfterGetCurrRecord()
+    begin
+        if NotificationsChecked and (Rec."No." = NotifiedEquipmentNo) then
+            exit;
+
+        NotifiedEquipmentNo := Rec."No.";
+        NotificationsChecked := true;
+        NotificationMgt.ShowEquipmentNotifications(Rec);
     end;
 
     local procedure SelectActiveEmployee(var EmployeeNo: Code[20]): Boolean

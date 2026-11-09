@@ -181,6 +181,10 @@ page 50114 "EQM Maintenance Record Card"
 
     var
         MaintenanceMgt: Codeunit "EQM Maintenance Mgt.";
+        NotificationMgt: Codeunit "EQM Notification Mgt.";
+        NotifiedMaintenanceNo: Code[20];
+        NotifiedStatus: Enum "EQM Maintenance Status";
+        NotificationsChecked: Boolean;
         VendorName: Text[100];
         IsNewRecord: Boolean;
         IsOpen: Boolean;
@@ -195,6 +199,17 @@ page 50114 "EQM Maintenance Record Card"
     trigger OnNewRecord(BelowxRec: Boolean)
     begin
         UpdateControls();
+    end;
+
+    trigger OnAfterGetCurrRecord()
+    begin
+        if NotificationsChecked and (Rec."No." = NotifiedMaintenanceNo) and (Rec.Status = NotifiedStatus) then
+            exit;
+
+        NotifiedMaintenanceNo := Rec."No.";
+        NotifiedStatus := Rec.Status;
+        NotificationsChecked := true;
+        NotificationMgt.ShowMaintenanceRecordNotification(Rec);
     end;
 
     local procedure UpdateControls()

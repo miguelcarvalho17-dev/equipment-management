@@ -1158,6 +1158,111 @@
           <note from="Developer" annotates="general" priority="2">%1 = maintenance record number</note>
           <note from="Xliff Generator" annotates="general" priority="3">Codeunit EQM Maintenance-Post - NamedType RecordNotSavedErr</note>
         </trans-unit>
+        <trans-unit id="Codeunit 3064850336 - NamedType 3826440826" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Don't show again</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit EQM Notification Mgt. - NamedType DontShowAgainActionLbl</note>
+        </trans-unit>
+        <trans-unit id="Codeunit 3064850336 - NamedType 3845457704" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Maintenance %1 for %2 %3 has been open for %4 days. Post it when the work is finished.</source>
+          <note from="Developer" annotates="general" priority="2">%1 = maintenance record number, %2 = equipment description, or the category code when the description is blank, %3 = equipment number, %4 = number of days since the maintenance date</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit EQM Notification Mgt. - NamedType EquipmentMaintenanceOverdueMsg</note>
+        </trans-unit>
+        <trans-unit id="Codeunit 3064850336 - NamedType 367861021" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Maintenance record %1 has been open for %2 days. Post it when the work is finished.</source>
+          <note from="Developer" annotates="general" priority="2">%1 = maintenance record number, %2 = number of days since the maintenance date</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit EQM Notification Mgt. - NamedType MaintenanceRecordOverdueMsg</note>
+        </trans-unit>
+        <trans-unit id="Codeunit 3064850336 - NamedType 462190509" size-unit="char" translate="yes" xml:space="preserve">
+          <source>1 warranty alert is open. Review the warranty that is about to expire.</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit EQM Notification Mgt. - NamedType OneOpenWarrantyAlertMsg</note>
+        </trans-unit>
+        <trans-unit id="Codeunit 3064850336 - NamedType 3731735046" size-unit="char" translate="yes" xml:space="preserve">
+          <source>1 maintenance record has been open for more than %1 days. Post it when the work is finished.</source>
+          <note from="Developer" annotates="general" priority="2">%1 = number of days after which maintenance is overdue</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit EQM Notification Mgt. - NamedType OneOverdueMaintenanceMsg</note>
+        </trans-unit>
+        <trans-unit id="Codeunit 3064850336 - NamedType 217821250" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Open equipment card</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit EQM Notification Mgt. - NamedType OpenEquipmentCardActionLbl</note>
+        </trans-unit>
+        <trans-unit id="Codeunit 3064850336 - NamedType 1703034648" size-unit="char" translate="yes" xml:space="preserve">
+          <source>%1 warranty alerts are open. Review the warranties that are about to expire.</source>
+          <note from="Developer" annotates="general" priority="2">%1 = number of open warranty alerts</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit EQM Notification Mgt. - NamedType OpenWarrantyAlertsMsg</note>
+        </trans-unit>
+        <trans-unit id="Codeunit 3064850336 - NamedType 2573257734" size-unit="char" translate="yes" xml:space="preserve">
+          <source>%1 maintenance records have been open for more than %2 days. Post them when the work is finished.</source>
+          <note from="Developer" annotates="general" priority="2">%1 = number of overdue maintenance records, %2 = number of days after which maintenance is overdue</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit EQM Notification Mgt. - NamedType OverdueMaintenanceSummaryMsg</note>
+        </trans-unit>
+        <trans-unit id="Codeunit 3064850336 - NamedType 1812760746" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Show a notification when a maintenance record has been open for more than 14 days without being posted.</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit EQM Notification Mgt. - NamedType OverdueNotificationDescTxt</note>
+        </trans-unit>
+        <trans-unit id="Codeunit 3064850336 - NamedType 380717644" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Equipment maintenance is overdue</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit EQM Notification Mgt. - NamedType OverdueNotificationNameTxt</note>
+        </trans-unit>
+        <trans-unit id="Codeunit 3064850336 - NamedType 4193016835" size-unit="char" translate="yes" xml:space="preserve">
+          <source>%1 %2 is back from maintenance and is available again.</source>
+          <note from="Developer" annotates="general" priority="2">%1 = equipment description, or the category code when the description is blank, %2 = equipment number</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit EQM Notification Mgt. - NamedType ReturnedFromMaintenanceMsg</note>
+        </trans-unit>
+        <trans-unit id="Codeunit 3064850336 - NamedType 1964570849" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Show a notification when posting maintenance makes the equipment available again.</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit EQM Notification Mgt. - NamedType ReturnedNotificationDescTxt</note>
+        </trans-unit>
+        <trans-unit id="Codeunit 3064850336 - NamedType 1870503427" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Equipment returned from maintenance</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit EQM Notification Mgt. - NamedType ReturnedNotificationNameTxt</note>
+        </trans-unit>
+        <trans-unit id="Codeunit 3064850336 - NamedType 2855142474" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Show open maintenance</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit EQM Notification Mgt. - NamedType ShowOpenMaintenanceActionLbl</note>
+        </trans-unit>
+        <trans-unit id="Codeunit 3064850336 - NamedType 4281689372" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Show overdue maintenance</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit EQM Notification Mgt. - NamedType ShowOverdueMaintenanceActionLbl</note>
+        </trans-unit>
+        <trans-unit id="Codeunit 3064850336 - NamedType 3208050378" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Show warranty alerts</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit EQM Notification Mgt. - NamedType ShowWarrantyAlertsActionLbl</note>
+        </trans-unit>
+        <trans-unit id="Codeunit 3064850336 - NamedType 1824789583" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Warranty for %1 %2 will expire in %3 days.</source>
+          <note from="Developer" annotates="general" priority="2">%1 = equipment description, or the category code when the description is blank, %2 = equipment number, %3 = number of days until the warranty end date</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit EQM Notification Mgt. - NamedType WarrantyExpiresInDaysMsg</note>
+        </trans-unit>
+        <trans-unit id="Codeunit 3064850336 - NamedType 3348432038" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Warranty for %1 %2 expires today.</source>
+          <note from="Developer" annotates="general" priority="2">%1 = equipment description, or the category code when the description is blank, %2 = equipment number</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit EQM Notification Mgt. - NamedType WarrantyExpiresTodayMsg</note>
+        </trans-unit>
+        <trans-unit id="Codeunit 3064850336 - NamedType 188479768" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Warranty for %1 %2 will expire tomorrow.</source>
+          <note from="Developer" annotates="general" priority="2">%1 = equipment description, or the category code when the description is blank, %2 = equipment number</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit EQM Notification Mgt. - NamedType WarrantyExpiresTomorrowMsg</note>
+        </trans-unit>
+        <trans-unit id="Codeunit 3064850336 - NamedType 3673431748" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Show a notification when the warranty of equipment will expire soon and its warranty alert is still open.</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit EQM Notification Mgt. - NamedType WarrantyNotificationDescTxt</note>
+        </trans-unit>
+        <trans-unit id="Codeunit 3064850336 - NamedType 2640566498" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Equipment warranty is expiring</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit EQM Notification Mgt. - NamedType WarrantyNotificationNameTxt</note>
+        </trans-unit>
         <trans-unit id="Codeunit 1013676421 - NamedType 1359352173" size-unit="char" translate="yes" xml:space="preserve">
           <source>The selected warranty alerts are already acknowledged or cancelled.</source>
           <note from="Developer" annotates="general" priority="2"></note>
