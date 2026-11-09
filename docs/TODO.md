@@ -112,6 +112,19 @@ Source: "Verification still open" in `docs/plans/FR-018-automated-background-pro
 - [ ] BG-SB9 Copied environment (sandbox from production): behavior of the entries.
 - [ ] Record the result and update the "Not verified" section of `docs/features/FR-018-automated-background-processing.md` and the "first run" and error wording in the help article.
 
+## FR-019 sandbox checks (not run; automated tests deferred, Q11, test codeunit 50173 reserved)
+Source: "Manual sandbox checks" in `docs/plans/FR-019-planned-maintenance.md`.
+- [ ] PM-SB1 Build with CodeCop, UICop and AppSourceCop; `.g.xlf` has the new texts and not the locked date formula token (V2, V3).
+- [ ] PM-SB2 Publish over existing development data: no schema sync error; existing equipment shows blank fields (V4).
+- [ ] PM-SB3 Issue example on the card: 1 January 2026 + 6 months = 1 July 2026, in the regional date format.
+- [ ] PM-SB4 Month end: 31 August 2026 + 6 = 28 February 2027 (V1); record the result.
+- [ ] PM-SB5 A future last date gives the error with readable dates.
+- [ ] PM-SB6 Register and post a Preventive record: Last and Next update; a Corrective record does not change them.
+- [ ] PM-SB7 Equipment List: Next Maintenance Date column; date range and "up to" filter (V5); hidden columns via personalization.
+- [ ] PM-SB8 Maintenance FactBox shows the new captions and Next Maintenance Date.
+- [ ] PM-SB9 Non-SUPER Reader cannot change the fields; non-SUPER Manager can and can post; teaching tips show the new texts.
+- [ ] Record the results and update "Test status" in `docs/features/FR-019-planned-maintenance.md` and the TODO(verify) items in the help article.
+
 ## Open design and fix items
 - [x] FR-007 known limitation (Employee read): addressed in code by NFR-002 (name blank without Employee read, `ReadPermission()` guard). Not verified in a sandbox (SB9).
 - [ ] **New companies:** default data and number series are created only in `OnInstallAppPerCompany`. In a company created later the setup record is missing, and equipment creation fails on `TestField("Equipment Nos.")`. Create the defaults on company initialization (subscribe to the company-initialize event) or give the user path working permissions. NFR-002: the Administrator path now has indirect No. Series rights (ri), but defaults are still created only on install or when an Administrator opens Setup. Readers and Managers get the setup-missing error. Not verified (SB8).

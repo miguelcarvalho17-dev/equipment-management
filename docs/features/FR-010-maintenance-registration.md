@@ -15,7 +15,7 @@ Status: describes the code as implemented. **Build is clean under CodeCop and UI
 | Codeunit | 50108 | EQM Maintenance Mgt. | New, `Access = Internal`. Read helpers (see below). |
 | Page | 50113 | EQM Maintenance Records | New list 'Equipment Maintenance', `UsageCategory = Lists`, read-only, no delete, sorted by "No." descending, card 50114. Views Preventive, Corrective, Inspection, Upgrade. Equipment FactBox, Notes, Links (hidden). Actions Equipment, Vendor. |
 | Page | 50114 | EQM Maintenance Record Card | New card 'Maintenance Record', `UsageCategory = None`, `DelayedInsert`, delete not allowed. Equipment No. editable only on a new record. Vendor Name shown (display only). FactBoxes: Equipment (50111) and Maintenance (50115). Actions Equipment, Vendor. |
-| Page | 50115 | EQM Maintenance FactBox | New CardPart 'Maintenance': No. of Maintenance Records (drill-down), Last Maintenance Date, Last Maintenance Type, Total Maintenance Cost (since FR-013: posted maintenance only, FlowField on table 50100). |
+| Page | 50115 | EQM Maintenance FactBox | New CardPart 'Maintenance': No. of Maintenance Records (drill-down), Latest Record Date, Latest Record Type (captions renamed by FR-019; latest record of any type, open or posted), Next Maintenance Date (added by FR-019), Total Maintenance Cost (since FR-013: posted maintenance only, FlowField on table 50100). |
 | Table | 50102 | EQM Equipment Setup | New field 3 "Maintenance Nos." (relation to No. Series). Page 50103 shows it; search terms extended. |
 | Table | 50100 | EQM Equipment | `OnDelete` also blocks deletion when maintenance records exist (error `DeleteMaintenanceExistsErr`). |
 | Page | 50101 | EQM Equipment Card | Maintenance FactBox. Action Register Maintenance (Process; enabled when saved and not Lost/Disposed; opens a new maintenance card with Equipment No. filled). Action Maintenance (Equipment group, enabled when saved). |
@@ -34,7 +34,7 @@ Status: describes the code as implemented. **Build is clean under CodeCop and UI
 - **Registering maintenance sets the equipment status to In Maintenance** (changed by FR-012; the earlier statement that registering does not change the status no longer holds). See docs/features/FR-012-equipment-maintenance-status.md.
 - **Rename of equipment:** TODO(verify) (MT-SB9) that records follow a renamed equipment number.
 - **Vendor Name** is shown only when the user can read vendors; otherwise blank.
-- **FactBox:** counts and sums are live; Last Maintenance is the latest date (highest "No." on equal dates, by `FindLast` on the key).
+- **FactBox:** counts and sums are live; Latest Record Date/Type is the latest date (highest "No." on equal dates, by `FindLast` on the key).
 
 ### Codeunit 50108 "EQM Maintenance Mgt." (internal; `///` comments present)
 - `HasMaintenanceRecords(EquipmentNo): Boolean`

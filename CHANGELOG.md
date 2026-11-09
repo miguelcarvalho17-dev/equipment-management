@@ -1,6 +1,26 @@
 # Changelog
 Newest first. Grouped by Added / Changed / Fixed / Obsolete.
 
+## FR-019 Planned Maintenance (version stays 29.0.0.0, no bump)
+### Added
+- Table 50100 "EQM Equipment": stored fields 21 "Last Maintenance Date", 22 "Next Maintenance Date" (not editable, calculated) and 23 "Maintenance Frequency (Months)" (0 to 120, 0 shown blank).
+- Next Maintenance Date = Last Maintenance Date + frequency in months; recalculated on validation, insert and modify. Last Maintenance Date cannot be later than today.
+- Posting a Preventive maintenance record moves Last Maintenance Date forward (never backwards); other types do not change it.
+- Published events on table 50100: `OnBeforeCalcNextMaintenanceDate` (with IsHandled) and `OnBeforeUpdateLastMaintenanceFromPosting`.
+- Equipment Card group Planned Maintenance; Equipment List columns Next Maintenance Date (visible), Last Maintenance Date and Maintenance Frequency (Months) (hidden); Next Maintenance Date in the Maintenance FactBox.
+- Help article docs/help/FR-019-planned-maintenance.md.
+### Changed
+- Maintenance FactBox captions 'Last Maintenance Date' / 'Last Maintenance Type' renamed to 'Latest Record Date' / 'Latest Record Type' (same calculation).
+- Codeunit 50109 "EQM Maintenance-Post": `CompleteEquipmentMaintenance` also updates the planned maintenance dates. `CheckEquipmentConsistency` rejects a future Last Maintenance Date. Teaching tips of the Equipment Card and List updated.
+### Fixed
+- None.
+### Obsolete
+- None.
+
+Release notes: On the Equipment Card you can now enter how often equipment must be maintained (in months) and when it was last maintained, and the app calculates the next maintenance date. Posting a Preventive maintenance record moves the last maintenance date forward automatically. The Equipment list shows the next maintenance date, so you can filter for equipment that is due in a period. In the Maintenance FactBox, the fields for the most recent record are renamed Latest Record Date and Latest Record Type.
+
+Note: no upgrade code, no new objects, no permission change; existing equipment has blank dates. Fields 21 to 23 and the two events become permanent at release. Code and UICop compile clean; AppSourceCop shows only the 8 project-level app.json/config errors that also exist on main. Automated tests are deferred (test ID 50173 reserved); platform checks V1 to V4 and sandbox checks PM-SB1 to PM-SB9 are not run.
+
 ## FR-018 Automated Background Processing (version stays 29.0.0.0, no bump)
 ### Added
 - Codeunit 50114 "EQM Maintenance Monitor Job" (public, run from a job queue entry): daily overdue maintenance check, logs a count to telemetry, changes no data.

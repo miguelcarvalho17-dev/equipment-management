@@ -78,6 +78,11 @@
           <note from="Developer" annotates="general" priority="2">%1 = equipment number, %2 = status caption</note>
           <note from="Xliff Generator" annotates="general" priority="3">Table EQM Equipment - NamedType FinalStatusQst</note>
         </trans-unit>
+        <trans-unit id="Table 4212454693 - NamedType 1349888309" size-unit="char" translate="yes" xml:space="preserve">
+          <source>The last maintenance date %1 is in the future. Enter a date that is not later than today (%2).</source>
+          <note from="Developer" annotates="general" priority="2">%1 = last maintenance date, %2 = today's date</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table EQM Equipment - NamedType LastMaintenanceDateFutureErr</note>
+        </trans-unit>
         <trans-unit id="Table 4212454693 - NamedType 1463542039" size-unit="char" translate="yes" xml:space="preserve">
           <source>You cannot assign equipment %1 because it has open maintenance. Post the open maintenance records of the equipment first.</source>
           <note from="Developer" annotates="general" priority="2">%1 = equipment number</note>
@@ -193,6 +198,16 @@
           <note from="Developer" annotates="general" priority="2"></note>
           <note from="Xliff Generator" annotates="general" priority="3">Table EQM Equipment - Field Description - Property Caption</note>
         </trans-unit>
+        <trans-unit id="Table 4212454693 - Field 1634127573 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Specifies the date the equipment was last maintained according to its maintenance plan. Posting a preventive maintenance record with a later date updates it automatically. The date cannot be later than today. The next maintenance date is calculated from this date and the maintenance frequency.</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table EQM Equipment - Field Last Maintenance Date - Property ToolTip</note>
+        </trans-unit>
+        <trans-unit id="Table 4212454693 - Field 1634127573 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Last Maintenance Date</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table EQM Equipment - Field Last Maintenance Date - Property Caption</note>
+        </trans-unit>
         <trans-unit id="Table 4212454693 - Field 2161572060 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
           <source>Specifies the location where the equipment is kept.</source>
           <note from="Developer" annotates="general" priority="2"></note>
@@ -202,6 +217,16 @@
           <source>Location Code</source>
           <note from="Developer" annotates="general" priority="2"></note>
           <note from="Xliff Generator" annotates="general" priority="3">Table EQM Equipment - Field Location Code - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Table 4212454693 - Field 3441722469 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Specifies how often the equipment must be maintained, in months, for example 6 for every six months. Leave it blank when the equipment has no planned maintenance. The next maintenance date is calculated from the last maintenance date and this frequency.</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table EQM Equipment - Field Maintenance Frequency (Months) - Property ToolTip</note>
+        </trans-unit>
+        <trans-unit id="Table 4212454693 - Field 3441722469 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Maintenance Frequency (Months)</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table EQM Equipment - Field Maintenance Frequency (Months) - Property Caption</note>
         </trans-unit>
         <trans-unit id="Table 4212454693 - Field 3647128553 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
           <source>Specifies the manufacturer of the equipment.</source>
@@ -222,6 +247,16 @@
           <source>Model</source>
           <note from="Developer" annotates="general" priority="2"></note>
           <note from="Xliff Generator" annotates="general" priority="3">Table EQM Equipment - Field Model - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Table 4212454693 - Field 666366514 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Specifies when the next planned maintenance of the equipment is due. It is calculated as the last maintenance date plus the maintenance frequency in months, and is blank when either is missing.</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table EQM Equipment - Field Next Maintenance Date - Property ToolTip</note>
+        </trans-unit>
+        <trans-unit id="Table 4212454693 - Field 666366514 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Next Maintenance Date</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table EQM Equipment - Field Next Maintenance Date - Property Caption</note>
         </trans-unit>
         <trans-unit id="Table 4212454693 - Field 4200184881 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
           <source>Specifies the number of the equipment.</source>
@@ -1409,7 +1444,7 @@
           <note from="Xliff Generator" annotates="general" priority="3">Page EQM Equipment Card - Property AboutTitle</note>
         </trans-unit>
         <trans-unit id="Page 3574600233 - Property 247559172" size-unit="char" translate="yes" xml:space="preserve">
-          <source>Here you manage one piece of equipment. The first sections show its details, its current status and who it is assigned to, and its purchase and warranty information. Use **Assign to Employee** and **Return** to change the assignment, and **Register Maintenance** to record maintenance work. Further down, **Assignment History** lists every assignment, **Maintenance History** lists every posted maintenance, and **Audit** shows who created the record and who changed it last.</source>
+          <source>Here you manage one piece of equipment. The first sections show its details, its current status and who it is assigned to, its purchase and warranty information, and its planned maintenance. Use **Assign to Employee** and **Return** to change the assignment, and **Register Maintenance** to record maintenance work. Further down, **Assignment History** lists every assignment, **Maintenance History** lists every posted maintenance, and **Audit** shows who created the record and who changed it last.</source>
           <note from="Developer" annotates="general" priority="2"></note>
           <note from="Xliff Generator" annotates="general" priority="3">Page EQM Equipment Card - Property AboutText</note>
         </trans-unit>
@@ -1517,6 +1552,11 @@
           <source>Maintenance History</source>
           <note from="Developer" annotates="general" priority="2"></note>
           <note from="Xliff Generator" annotates="general" priority="3">Page EQM Equipment Card - Control MaintenanceHistory - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Page 3574600233 - Control 3542843059 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Planned Maintenance</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page EQM Equipment Card - Control PlannedMaintenance - Property Caption</note>
         </trans-unit>
         <trans-unit id="Page 3574600233 - Control 395510365 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
           <source>Purchase</source>
@@ -1869,7 +1909,7 @@
           <note from="Xliff Generator" annotates="general" priority="3">Page EQM Equipment List - Property AboutTitle</note>
         </trans-unit>
         <trans-unit id="Page 2630064635 - Property 247559172" size-unit="char" translate="yes" xml:space="preserve">
-          <source>This list shows all your equipment. Use **Search** to find equipment by its number, serial number, or any other column you can see. To filter by category, status, or assigned employee, open the filter pane and add a filter on that field. You can also choose a status view at the top of the list. **Warranty Status** shows whether the warranty is active, expiring soon or expired; to find equipment by warranty, filter on **Warranty End Date** or choose a warranty tile on the dashboard. **Total Maintenance Cost** shows the cost of posted maintenance; to see the cost of one period, set **Date Filter** under **Filter totals by**.</source>
+          <source>This list shows all your equipment. Use **Search** to find equipment by its number, serial number, or any other column you can see. To filter by category, status, or assigned employee, open the filter pane and add a filter on that field. You can also choose a status view at the top of the list. **Warranty Status** shows whether the warranty is active, expiring soon or expired; to find equipment by warranty, filter on **Warranty End Date** or choose a warranty tile on the dashboard. **Next Maintenance Date** shows when planned maintenance is due; to find equipment that is due in a period, filter on it with a date range. **Total Maintenance Cost** shows the cost of posted maintenance; to see the cost of one period, set **Date Filter** under **Filter totals by**.</source>
           <note from="Developer" annotates="general" priority="2"></note>
           <note from="Xliff Generator" annotates="general" priority="3">Page EQM Equipment List - Property AboutText</note>
         </trans-unit>
@@ -2224,22 +2264,22 @@
           <note from="Xliff Generator" annotates="general" priority="3">Page EQM Maintenance FactBox - Property Caption</note>
         </trans-unit>
         <trans-unit id="Page 1059192635 - Control 3073587453 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
-          <source>Specifies the date of the most recent maintenance of the equipment. It is blank when no maintenance has been registered.</source>
+          <source>Specifies the date of the most recent maintenance record of the equipment, of any type, open or posted. It is blank when no maintenance has been registered.</source>
           <note from="Developer" annotates="general" priority="2"></note>
           <note from="Xliff Generator" annotates="general" priority="3">Page EQM Maintenance FactBox - Control LastMaintenanceDate - Property ToolTip</note>
         </trans-unit>
         <trans-unit id="Page 1059192635 - Control 3073587453 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
-          <source>Last Maintenance Date</source>
+          <source>Latest Record Date</source>
           <note from="Developer" annotates="general" priority="2"></note>
           <note from="Xliff Generator" annotates="general" priority="3">Page EQM Maintenance FactBox - Control LastMaintenanceDate - Property Caption</note>
         </trans-unit>
         <trans-unit id="Page 1059192635 - Control 1827352817 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
-          <source>Specifies the type of the most recent maintenance of the equipment. It is blank when no maintenance has been registered.</source>
+          <source>Specifies the type of the most recent maintenance record of the equipment. It is blank when no maintenance has been registered.</source>
           <note from="Developer" annotates="general" priority="2"></note>
           <note from="Xliff Generator" annotates="general" priority="3">Page EQM Maintenance FactBox - Control LastMaintenanceType - Property ToolTip</note>
         </trans-unit>
         <trans-unit id="Page 1059192635 - Control 1827352817 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
-          <source>Last Maintenance Type</source>
+          <source>Latest Record Type</source>
           <note from="Developer" annotates="general" priority="2"></note>
           <note from="Xliff Generator" annotates="general" priority="3">Page EQM Maintenance FactBox - Control LastMaintenanceType - Property Caption</note>
         </trans-unit>
