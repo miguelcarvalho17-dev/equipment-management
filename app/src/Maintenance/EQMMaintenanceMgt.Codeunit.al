@@ -11,6 +11,14 @@ codeunit 50108 "EQM Maintenance Mgt."
 
     var
         PostQst: Label 'Do you want to post maintenance record %1? It is copied to the maintenance history, and after that you cannot change it. If no other maintenance is open for the equipment, its status changes from In Maintenance to Available.', Comment = '%1 = maintenance record number';
+        OverdueCheckedTelemetryTok: Label 'EQM0002', Locked = true;
+        OverdueCheckedTelemetryMsg: Label 'Overdue maintenance checked.', Locked = true;
+        ScheduledTok: Label 'JobQueue', Locked = true;
+        ManualTok: Label 'Manual', Locked = true;
+        OverdueCountDimTok: Label 'OverdueCount', Locked = true;
+        OverdueDaysDimTok: Label 'OverdueDays', Locked = true;
+        ReferenceDateDimTok: Label 'ReferenceDate', Locked = true;
+        TriggerDimTok: Label 'Trigger', Locked = true;
 
     /// <summary>
     /// Returns whether the equipment has any maintenance record. Equipment with maintenance records cannot be deleted.
@@ -207,6 +215,38 @@ codeunit 50108 "EQM Maintenance Mgt."
     begin
         SetOverdueMaintenanceFilter(MaintenanceRecord, ReferenceDate);
         Page.Run(Page::"EQM Maintenance Records", MaintenanceRecord);
+    end;
+
+    /// <summary>
+    /// Checks how many maintenance records are overdue on the reference date and logs the result to telemetry.
+    /// Changes no data. 0D means today.
+    /// </summary>
+    /// <param name="ReferenceDate">The date to check on. 0D means today.</param>
+    /// <param name="IsScheduled">True when a job queue entry runs the check; false when a user does.</param>
+    /// <returns>The number of overdue records.</returns>
+    internal procedure CheckOverdueMaintenance(ReferenceDate: Date; IsScheduled: Boolean): Integer
+    var
+        OverdueCount: Integer;
+    begin
+        if ReferenceDate = 0D then
+            ReferenceDate := Today();
+        OverdueCount := CountOverdueMaintenance(ReferenceDate);
+        LogOverdueCheckTelemetry(ReferenceDate, IsScheduled, OverdueCount);
+        exit(OverdueCount);
+    end;
+
+    local procedure LogOverdueCheckTelemetry(ReferenceDate: Date; IsScheduled: Boolean; OverdueCount: Integer)
+    var
+        Dimensions: Dictionary of [Text, Text];
+    begin
+        Dimensions.Add(OverdueCountDimTok, Format(OverdueCount, 0, 9));
+        Dimensions.Add(OverdueDaysDimTok, Format(GetMaintenanceOverdueDays(), 0, 9));
+        Dimensions.Add(ReferenceDateDimTok, Format(ReferenceDate, 0, 9));
+        if IsScheduled then
+            Dimensions.Add(TriggerDimTok, ScheduledTok)
+        else
+            Dimensions.Add(TriggerDimTok, ManualTok);
+        Session.LogMessage(OverdueCheckedTelemetryTok, OverdueCheckedTelemetryMsg, Verbosity::Normal, DataClassification::SystemMetadata, TelemetryScope::All, Dimensions);
     end;
 
     /// <summary>

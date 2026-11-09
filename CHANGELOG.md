@@ -1,6 +1,26 @@
 # Changelog
 Newest first. Grouped by Added / Changed / Fixed / Obsolete.
 
+## FR-018 Automated Background Processing (version stays 29.0.0.0, no bump)
+### Added
+- Codeunit 50114 "EQM Maintenance Monitor Job" (public, run from a job queue entry): daily overdue maintenance check, logs a count to telemetry, changes no data.
+- Codeunit 50115 "EQM Monitoring Job Mgt." (internal): creates job queue category `EQM` and one daily entry (`<1D>`, 06:00, 3 attempts) for codeunits 50111 and 50114 when none exists; never changes existing entries. Skips with telemetry when a write transaction is open or tasks cannot be created.
+- Entries are created on install, when the setup is first created in a company, and by the new Equipment Setup action Schedule Monitoring Jobs.
+- Equipment Setup: group Background Monitoring (status of both jobs), actions Schedule Monitoring Jobs and Monitoring Job Queue Entries, teaching tip text and search terms.
+- Codeunit 50108 internal procedure `CheckOverdueMaintenance`. Telemetry EQM0002 (overdue check), EQM0003 (entries ensured), EQM0004 (entries not created).
+- Permissions: EQM - Reader execute on codeunits 50114 and 50115; EQM - Administrator indirect `rim` on Job Queue Entry.
+- Help article docs/help/FR-018-automated-background-processing.md.
+### Changed
+- `OnInstallAppPerCompany` (codeunit 50104) and `OnOpenPage` of Equipment Setup schedule the monitoring jobs before writing default data.
+### Fixed
+- None.
+### Obsolete
+- None.
+
+Release notes: The app now creates two daily job queue entries by itself, one that creates warranty alerts and one that checks overdue maintenance. Equipment Setup shows the status of both jobs, and the new action Schedule Monitoring Jobs creates missing entries without changing existing ones.
+
+Note: no upgrade code, no published events. Run-on flags and rerun delay are left to the standard defaults. Codeunit ID 50114, category `EQM` and telemetry IDs become permanent at release. Automated tests are deferred (test ID 50172 reserved); sandbox checks BG-SB1 to BG-SB9 are not run, build result and review verdict not recorded here.
+
 ## FR-017 Equipment Notifications (version stays 29.0.0.0, no bump)
 ### Added
 - Codeunit 50112 "EQM Notification Mgt." (internal): warranty expiring, overdue maintenance and returned from maintenance notifications with actions and Don't show again.

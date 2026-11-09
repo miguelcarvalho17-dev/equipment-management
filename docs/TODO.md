@@ -101,6 +101,17 @@ Open items after FR-001 Equipment Registration (written 2026-11-02). Nothing fro
 - [ ] WS-SB7 Non-SUPER Reader sees the warranty fields and cannot change them; non-SUPER Manager can.
 - [ ] WS-SB8 Teaching tip of the Equipment Card shows the new text.
 
+## FR-018 sandbox checks (not run; automated tests deferred, Q11, test codeunit 50172 reserved)
+Source: "Verification still open" in `docs/plans/FR-018-automated-background-processing.md`.
+- [ ] BG-SB1 Build with CodeCop, UICop and AppSourceCop: no errors or warnings. Covers `TaskScheduler.CanCreateTask` on runtime 18.0, text page variables with `Editable = false` and tooltips, `Session.LogMessage` with a dictionary, images Calendar and JobListSetup (fallbacks in the plan). `.g.xlf` has the new texts.
+- [ ] BG-SB2 (mandatory) Behavior of `ScheduleRecurrentJobQueueEntryWithRunDateFormula`: entry is inserted and Ready, the Description set by `Modify(true)` is kept, record Earliest Start Date/Time, Run-on flags and rerun delay. Decides whether `CreateRecurringJob` stays as is.
+- [ ] BG-SB3 Install isolation: install into a company, then a multi-company install (BG11); record which companies get entries and which are skipped (telemetry EQM0004 WriteTransaction). Delegated admin / admin center install if possible.
+- [ ] BG-SB4 (mandatory) First run time, rerun delay and time zone of the 06:00 start.
+- [ ] BG-SB5 Recurring entry after its last failed attempt (3 attempts): does it stay in Error and stop recurring?
+- [ ] BG-SB6 Job Queue Entry `rim` line in EQM - Administrator: keep or drop (BG26); Administrator, Manager and Reader without SUPER, with D365 BASIC, can or cannot schedule and see the status.
+- [ ] BG-SB9 Copied environment (sandbox from production): behavior of the entries.
+- [ ] Record the result and update the "Not verified" section of `docs/features/FR-018-automated-background-processing.md` and the "first run" and error wording in the help article.
+
 ## Open design and fix items
 - [x] FR-007 known limitation (Employee read): addressed in code by NFR-002 (name blank without Employee read, `ReadPermission()` guard). Not verified in a sandbox (SB9).
 - [ ] **New companies:** default data and number series are created only in `OnInstallAppPerCompany`. In a company created later the setup record is missing, and equipment creation fails on `TestField("Equipment Nos.")`. Create the defaults on company initialization (subscribe to the company-initialize event) or give the user path working permissions. NFR-002: the Administrator path now has indirect No. Series rights (ri), but defaults are still created only on install or when an Administrator opens Setup. Readers and Managers get the setup-missing error. Not verified (SB8).

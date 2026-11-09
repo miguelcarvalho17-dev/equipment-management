@@ -76,6 +76,7 @@ The objective is to ensure that equipment remains operational, warranty coverage
 | Capability | State |
 |---|---|
 | Maintenance registration, history, equipment status and cost tracking (FR-010 to FR-013) | Built, not yet verified in a Business Central sandbox |
+| Automated background processing, daily job queue entries for warranty alerts and overdue maintenance (FR-018) | Built, not yet verified in a Business Central sandbox |
 | Maintenance schedules | Planned |
 | Warranty tracking | Planned |
 | Automated notifications | Planned |

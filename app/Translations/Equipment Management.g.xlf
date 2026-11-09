@@ -1158,6 +1158,26 @@
           <note from="Developer" annotates="general" priority="2">%1 = maintenance record number</note>
           <note from="Xliff Generator" annotates="general" priority="3">Codeunit EQM Maintenance-Post - NamedType RecordNotSavedErr</note>
         </trans-unit>
+        <trans-unit id="Codeunit 3191281590 - NamedType 1171711945" maxwidth="30" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Equipment Management</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit EQM Monitoring Job Mgt. - NamedType JobQueueCategoryDescTxt</note>
+        </trans-unit>
+        <trans-unit id="Codeunit 3191281590 - NamedType 1302444453" maxwidth="250" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Equipment Management: check overdue maintenance</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit EQM Monitoring Job Mgt. - NamedType MaintenanceJobDescTxt</note>
+        </trans-unit>
+        <trans-unit id="Codeunit 3191281590 - NamedType 3043440048" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Not scheduled</source>
+          <note from="Developer" annotates="general" priority="2">Shown on Equipment Setup when no job queue entry exists for the monitoring job.</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit EQM Monitoring Job Mgt. - NamedType NotScheduledTxt</note>
+        </trans-unit>
+        <trans-unit id="Codeunit 3191281590 - NamedType 1926805278" maxwidth="250" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Equipment Management: create warranty alerts</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit EQM Monitoring Job Mgt. - NamedType WarrantyJobDescTxt</note>
+        </trans-unit>
         <trans-unit id="Codeunit 3064850336 - NamedType 3826440826" size-unit="char" translate="yes" xml:space="preserve">
           <source>Don't show again</source>
           <note from="Developer" annotates="general" priority="2"></note>
@@ -2088,25 +2108,90 @@
           <note from="Developer" annotates="general" priority="2"></note>
           <note from="Xliff Generator" annotates="general" priority="3">Page EQM Equipment Manager RC - Action EquipmentSetup - Property Caption</note>
         </trans-unit>
+        <trans-unit id="Page 1065098760 - Property 1064389655" size-unit="char" translate="yes" xml:space="preserve">
+          <source>About equipment setup</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page EQM Equipment Setup - Property AboutTitle</note>
+        </trans-unit>
+        <trans-unit id="Page 1065098760 - Property 247559172" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Set the number series for equipment and maintenance records. The app runs its monitoring every day through job queue entries: one creates warranty alerts, one checks overdue maintenance. They are created automatically; if one is missing, choose **Schedule Monitoring Jobs**.</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page EQM Equipment Setup - Property AboutText</note>
+        </trans-unit>
         <trans-unit id="Page 1065098760 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
           <source>Equipment Setup</source>
           <note from="Developer" annotates="general" priority="2"></note>
           <note from="Xliff Generator" annotates="general" priority="3">Page EQM Equipment Setup - Property Caption</note>
         </trans-unit>
         <trans-unit id="Page 1065098760 - Property 3863440606" size-unit="char" translate="yes" xml:space="preserve">
-          <source>equipment numbers, equipment number series, maintenance number series</source>
+          <source>equipment numbers, equipment number series, maintenance number series, equipment job queue, equipment monitoring</source>
           <note from="Developer" annotates="general" priority="2"></note>
           <note from="Xliff Generator" annotates="general" priority="3">Page EQM Equipment Setup - Property AdditionalSearchTerms</note>
+        </trans-unit>
+        <trans-unit id="Page 1065098760 - NamedType 3076905720" size-unit="char" translate="yes" xml:space="preserve">
+          <source>%1 monitoring job queue entries were created. %2 already existed and were not changed.</source>
+          <note from="Developer" annotates="general" priority="2">%1 = number of job queue entries created, %2 = number of job queue entries that already existed</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page EQM Equipment Setup - NamedType JobsScheduledMsg</note>
         </trans-unit>
         <trans-unit id="Page 1065098760 - NamedType 950344170" size-unit="char" translate="yes" xml:space="preserve">
           <source>The equipment setup has not been created in this company yet. Ask a user with the Equipment Administrator permission set to open the Equipment Setup page.</source>
           <note from="Developer" annotates="general" priority="2"></note>
           <note from="Xliff Generator" annotates="general" priority="3">Page EQM Equipment Setup - NamedType SetupMissingErr</note>
         </trans-unit>
+        <trans-unit id="Page 1065098760 - Control 4124422310 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Background Monitoring</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page EQM Equipment Setup - Control BackgroundMonitoring - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Page 1065098760 - Control 4165820242 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Specifies the status of the job queue entry that checks overdue maintenance every day. Not scheduled means that no entry exists; choose Schedule Monitoring Jobs to create it.</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page EQM Equipment Setup - Control MaintenanceJobStatus - Property ToolTip</note>
+        </trans-unit>
+        <trans-unit id="Page 1065098760 - Control 4165820242 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Overdue Maintenance Job</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page EQM Equipment Setup - Control MaintenanceJobStatus - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Page 1065098760 - Control 2874843649 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Specifies the status of the job queue entry that creates warranty alerts every day. Not scheduled means that no entry exists; choose Schedule Monitoring Jobs to create it.</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page EQM Equipment Setup - Control WarrantyJobStatus - Property ToolTip</note>
+        </trans-unit>
+        <trans-unit id="Page 1065098760 - Control 2874843649 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Warranty Alert Job</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page EQM Equipment Setup - Control WarrantyJobStatus - Property Caption</note>
+        </trans-unit>
         <trans-unit id="Page 1065098760 - Control 1532816877 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
           <source>Numbering</source>
           <note from="Developer" annotates="general" priority="2"></note>
           <note from="Xliff Generator" annotates="general" priority="3">Page EQM Equipment Setup - Control Numbering - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Page 1065098760 - Action 904281732 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
+          <source>View the job queue entries that run the equipment monitoring, to see when they ran, change the time or restart them.</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page EQM Equipment Setup - Action MonitoringJobQueueEntries - Property ToolTip</note>
+        </trans-unit>
+        <trans-unit id="Page 1065098760 - Action 904281732 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Monitoring Job Queue Entries</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page EQM Equipment Setup - Action MonitoringJobQueueEntries - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Page 1065098760 - Action 1063323679 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Create the job queue entries that run the equipment monitoring every day, if they do not exist. Existing entries are not changed.</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page EQM Equipment Setup - Action ScheduleMonitoringJobs - Property ToolTip</note>
+        </trans-unit>
+        <trans-unit id="Page 1065098760 - Action 1063323679 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Schedule Monitoring Jobs</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page EQM Equipment Setup - Action ScheduleMonitoringJobs - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Page 1065098760 - Action 3383493608 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Process</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page EQM Equipment Setup - Action Category_Process - Property Caption</note>
         </trans-unit>
         <trans-unit id="Page 4026658645 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
           <source>Equipment by Status</source>
