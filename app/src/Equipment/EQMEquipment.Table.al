@@ -738,6 +738,22 @@ table 50100 "EQM Equipment"
         end;
     end;
 
+    /// <summary>
+    /// Returns the number of days from the reference date to the warranty end date. 0 on the end date itself, negative
+    /// after it, and 0 when no end date is filled in; check CalcWarrantyStatus first to tell these apart. 0D means
+    /// today.
+    /// </summary>
+    /// <param name="ReferenceDate">The date the days are counted from. 0D means today.</param>
+    /// <returns>The number of days remaining.</returns>
+    internal procedure GetWarrantyDaysRemaining(ReferenceDate: Date): Integer
+    begin
+        if ReferenceDate = 0D then
+            ReferenceDate := Today();
+        if "Warranty End Date" = 0D then
+            exit(0);
+        exit("Warranty End Date" - ReferenceDate);
+    end;
+
     local procedure GetSetup(var EquipmentSetup: Record "EQM Equipment Setup")
     begin
         if not EquipmentSetup.Get() then

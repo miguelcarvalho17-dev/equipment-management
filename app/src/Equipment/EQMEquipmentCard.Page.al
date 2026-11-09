@@ -289,6 +289,15 @@ page 50101 "EQM Equipment Card"
                     RunObject = page "EQM Maintenance History";
                     RunPageLink = "Equipment No." = field("No.");
                 }
+                action(WarrantyAlerts)
+                {
+                    Caption = 'Warranty Alerts';
+                    ToolTip = 'View the warranty alerts of the equipment. An alert is created 90, 60 and 30 days before the warranty ends.';
+                    Image = Alerts;
+                    Enabled = IsSaved;
+                    RunObject = page "EQM Warranty Alerts";
+                    RunPageLink = "Equipment No." = field("No.");
+                }
             }
         }
         area(Promoted)
@@ -318,6 +327,9 @@ page 50101 "EQM Equipment Card"
                 {
                 }
                 actionref(ShowMaintenanceHistory_Promoted; ShowMaintenanceHistory)
+                {
+                }
+                actionref(WarrantyAlerts_Promoted; WarrantyAlerts)
                 {
                 }
             }

@@ -56,6 +56,12 @@ page 50110 "EQM Equipment Manager RC"
                 ToolTip = 'Open the posted maintenance history of all equipment, with costs.';
                 RunObject = page "EQM Maintenance History";
             }
+            action(WarrantyAlertList)
+            {
+                Caption = 'Warranty Alerts';
+                ToolTip = 'Open the warranty alerts of all equipment.';
+                RunObject = page "EQM Warranty Alerts";
+            }
         }
         area(Sections)
         {

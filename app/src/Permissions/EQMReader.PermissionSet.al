@@ -12,6 +12,7 @@ permissionset 50100 "EQM - Reader"
         tabledata "EQM Equipment Setup" = R,
         tabledata "EQM Maintenance History Entry" = R,
         tabledata "EQM Maintenance Record" = R,
+        tabledata "EQM Warranty Alert" = R,
         table "EQM Equipment" = X,
         table "EQM Equipment Assignment" = X,
         table "EQM Equipment Category" = X,
@@ -19,6 +20,7 @@ permissionset 50100 "EQM - Reader"
         table "EQM Maintenance History Entry" = X,
         table "EQM Maintenance Record" = X,
         table "EQM Equipment Cue" = X,
+        table "EQM Warranty Alert" = X,
         query "EQM Equipment by Category" = X,
         query "EQM Equipment by Status" = X,
         query "EQM Maint. Cost by Category" = X,
@@ -43,10 +45,13 @@ permissionset 50100 "EQM - Reader"
         page "EQM Maintenance FactBox" = X,
         page "EQM Maintenance History Part" = X,
         page "EQM Maintenance History" = X,
+        page "EQM Warranty Alerts" = X,
         codeunit "EQM Assignment Mgt." = X,
         codeunit "EQM Employee Subscribers" = X,
         codeunit "EQM Default Data" = X,
         codeunit "EQM Dashboard Mgt." = X,
         codeunit "EQM Maintenance Mgt." = X,
-        codeunit "EQM Maintenance-Post" = X;
+        codeunit "EQM Maintenance-Post" = X,
+        codeunit "EQM Warranty Alert Mgt." = X,
+        codeunit "EQM Warranty Alert Job" = X;
 }
