@@ -213,6 +213,36 @@ table 50100 "EQM Equipment"
             Caption = 'Warranty Reference No.';
             ToolTip = 'Specifies the reference of the warranty, such as the contract, certificate or registration number from the warranty provider.';
         }
+        field(21; "Last Maintenance Date"; Date)
+        {
+            Caption = 'Last Maintenance Date';
+            ToolTip = 'Specifies the date the equipment was last maintained according to its maintenance plan. Posting a preventive maintenance record with a later date updates it automatically. The date cannot be later than today. The next maintenance date is calculated from this date and the maintenance frequency.';
+
+            trigger OnValidate()
+            begin
+                CheckLastMaintenanceDate();
+                UpdateNextMaintenanceDate();
+            end;
+        }
+        field(22; "Next Maintenance Date"; Date)
+        {
+            Caption = 'Next Maintenance Date';
+            ToolTip = 'Specifies when the next planned maintenance of the equipment is due. It is calculated as the last maintenance date plus the maintenance frequency in months, and is blank when either is missing.';
+            Editable = false;
+        }
+        field(23; "Maintenance Frequency (Months)"; Integer)
+        {
+            Caption = 'Maintenance Frequency (Months)';
+            ToolTip = 'Specifies how often the equipment must be maintained, in months, for example 6 for every six months. Leave it blank when the equipment has no planned maintenance. The next maintenance date is calculated from the last maintenance date and this frequency.';
+            MinValue = 0;
+            MaxValue = 120;
+            BlankZero = true;
+
+            trigger OnValidate()
+            begin
+                UpdateNextMaintenanceDate();
+            end;
+        }
     }
 
     keys
@@ -276,6 +306,8 @@ table 50100 "EQM Equipment"
         MaintenanceOpenStatusErr: Label 'You cannot change the status of equipment %1 to %2 because it has open maintenance. The status changes to %3 automatically when the last open maintenance record is posted.', Comment = '%1 = equipment number, %2 = new status caption, %3 = Available status caption';
         StartMaintenanceAssignedQst: Label 'Equipment %1 is assigned to employee %2. Registering maintenance returns the equipment from the employee and changes its status to %3. Do you want to continue?', Comment = '%1 = equipment number, %2 = employee number, %3 = In Maintenance status caption';
         WarrantyEndDateErr: Label 'The warranty end date %1 must be later than the warranty start date %2. Change one of the dates, or clear the date that is not known.', Comment = '%1 = warranty end date, %2 = warranty start date';
+        LastMaintenanceDateFutureErr: Label 'The last maintenance date %1 is in the future. Enter a date that is not later than today (%2).', Comment = '%1 = last maintenance date, %2 = today''s date';
+        MonthsDateFormulaTok: Label '<%1M>', Locked = true;
 
     trigger OnInsert()
     var
@@ -290,6 +322,7 @@ table 50100 "EQM Equipment"
                 "No. Series" := xRec."No. Series";
             "No." := NoSeries.GetNextNo("No. Series");
         end;
+        UpdateNextMaintenanceDate();
         CheckEquipmentConsistency(true);
     end;
 
@@ -297,6 +330,7 @@ table 50100 "EQM Equipment"
     var
         AssignmentMgt: Codeunit "EQM Assignment Mgt.";
     begin
+        UpdateNextMaintenanceDate();
         CheckEquipmentConsistency(false);
         AssignmentMgt.UpdateAssignmentOnSave(Rec);
     end;
@@ -437,8 +471,8 @@ table 50100 "EQM Equipment"
     /// (active only when the category is new or changed), new equipment not in a final status (Lost or Disposed),
     /// new equipment cannot be Assigned, status transition allowed on modify, the employee of assigned equipment
     /// cannot be changed (return first), serial number unique, warranty end date later than the warranty start
-    /// date when both are filled in, assigned employee allowed only when the status is Assigned, and employee
-    /// present when the status is Assigned.
+    /// date when both are filled in, last maintenance date not later than today, assigned employee allowed only when the
+    /// status is Assigned, and employee present when the status is Assigned.
     /// Raises OnAfterCheckEquipmentConsistency at the end.
     /// </summary>
     /// <param name="IsNewRecord">True on insert. On modify (false), the Active / not privacy blocked check on the employee runs only if the assigned employee differs from the stored record.</param>
@@ -481,6 +515,7 @@ table 50100 "EQM Equipment"
 
         CheckSerialNoIsUnique();
         CheckWarrantyDates();
+        CheckLastMaintenanceDate();
         CheckAssignedEmployeeAllowed(EmployeeChanged);
 
         if (Status = Status::Assigned) and ("Assigned Employee No." = '') then
@@ -605,6 +640,68 @@ table 50100 "EQM Equipment"
 
         if "Warranty End Date" <= "Warranty Start Date" then
             Error(WarrantyEndDateErr, "Warranty End Date", "Warranty Start Date");
+    end;
+
+    /// <summary>
+    /// Calculates the next planned maintenance date from the last maintenance date and the maintenance frequency
+    /// in months. Returns 0D when the last maintenance date is blank or the frequency is 0.
+    /// </summary>
+    /// <returns>The next maintenance date, or 0D when it cannot be calculated.</returns>
+    internal procedure CalcNextMaintenanceDate(): Date
+    var
+        NextMaintenanceDate: Date;
+        IsHandled: Boolean;
+    begin
+        OnBeforeCalcNextMaintenanceDate(Rec, NextMaintenanceDate, IsHandled);
+        if IsHandled then
+            exit(NextMaintenanceDate);
+
+        if ("Last Maintenance Date" = 0D) or ("Maintenance Frequency (Months)" <= 0) then
+            exit(0D);
+
+        exit(CalcDate(StrSubstNo(MonthsDateFormulaTok, Format("Maintenance Frequency (Months)", 0, 9)), "Last Maintenance Date"));
+    end;
+
+    /// <summary>
+    /// Sets the next maintenance date from CalcNextMaintenanceDate.
+    /// </summary>
+    local procedure UpdateNextMaintenanceDate()
+    begin
+        "Next Maintenance Date" := CalcNextMaintenanceDate();
+    end;
+
+    /// <summary>
+    /// Checks that the last maintenance date is not later than today.
+    /// </summary>
+    local procedure CheckLastMaintenanceDate()
+    begin
+        if "Last Maintenance Date" > Today() then
+            Error(LastMaintenanceDateFutureErr, "Last Maintenance Date", Today());
+    end;
+
+    /// <summary>
+    /// Moves the last maintenance date forward to the date of a posted maintenance record and recalculates the
+    /// next maintenance date, then saves the equipment with triggers. By default only Preventive maintenance updates the
+    /// dates, and only when its date is later than the current last maintenance date. Called by the posting codeunit.
+    /// </summary>
+    /// <param name="MaintenanceRecord">The posted maintenance record (passed by value).</param>
+    internal procedure UpdateLastMaintenanceFromPosting(MaintenanceRecord: Record "EQM Maintenance Record")
+    var
+        UpdateSchedule: Boolean;
+    begin
+        UpdateSchedule := MaintenanceRecord."Maintenance Type" = MaintenanceRecord."Maintenance Type"::Preventive;
+        OnBeforeUpdateLastMaintenanceFromPosting(Rec, MaintenanceRecord, UpdateSchedule);
+        if not UpdateSchedule then
+            exit;
+
+        if MaintenanceRecord."Maintenance Date" = 0D then
+            exit;
+
+        if ("Last Maintenance Date" <> 0D) and (MaintenanceRecord."Maintenance Date" <= "Last Maintenance Date") then
+            exit;
+
+        Validate("Last Maintenance Date", MaintenanceRecord."Maintenance Date");
+        Modify(true);
     end;
 
     /// <summary>
@@ -810,6 +907,29 @@ table 50100 "EQM Equipment"
     /// <param name="IsHandled">Set to true to skip the standard check. Raise an error in the subscriber to apply your own rule.</param>
     [IntegrationEvent(false, false)]
     local procedure OnBeforeCheckWarrantyDates(Equipment: Record "EQM Equipment"; var IsHandled: Boolean)
+    begin
+    end;
+
+    /// <summary>
+    /// Raised before the next maintenance date is calculated from the last maintenance date and the
+    /// maintenance frequency, on validation of either field and on insert and modify.
+    /// </summary>
+    /// <param name="Equipment">The record being calculated (passed by value; changes are not kept).</param>
+    /// <param name="NextMaintenanceDate">The date to use when IsHandled is set.</param>
+    /// <param name="IsHandled">Set to true to use NextMaintenanceDate instead of the standard calculation.</param>
+    [IntegrationEvent(false, false)]
+    local procedure OnBeforeCalcNextMaintenanceDate(Equipment: Record "EQM Equipment"; var NextMaintenanceDate: Date; var IsHandled: Boolean)
+    begin
+    end;
+
+    /// <summary>
+    /// Raised when a maintenance record is posted, before the equipment's last maintenance date is moved forward.
+    /// </summary>
+    /// <param name="Equipment">The equipment (passed by value; changes are not kept).</param>
+    /// <param name="MaintenanceRecord">The posted record (passed by value).</param>
+    /// <param name="UpdateSchedule">True when the record updates the planned maintenance dates. By default true only for Preventive maintenance. The date still moves only forward.</param>
+    [IntegrationEvent(false, false)]
+    local procedure OnBeforeUpdateLastMaintenanceFromPosting(Equipment: Record "EQM Equipment"; MaintenanceRecord: Record "EQM Maintenance Record"; var UpdateSchedule: Boolean)
     begin
     end;
 

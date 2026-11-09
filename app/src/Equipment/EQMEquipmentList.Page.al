@@ -6,7 +6,7 @@ page 50100 "EQM Equipment List"
 {
     Caption = 'Equipment';
     AboutTitle = 'About equipment';
-    AboutText = 'This list shows all your equipment. Use **Search** to find equipment by its number, serial number, or any other column you can see. To filter by category, status, or assigned employee, open the filter pane and add a filter on that field. You can also choose a status view at the top of the list. **Warranty Status** shows whether the warranty is active, expiring soon or expired; to find equipment by warranty, filter on **Warranty End Date** or choose a warranty tile on the dashboard. **Total Maintenance Cost** shows the cost of posted maintenance; to see the cost of one period, set **Date Filter** under **Filter totals by**.';
+    AboutText = 'This list shows all your equipment. Use **Search** to find equipment by its number, serial number, or any other column you can see. To filter by category, status, or assigned employee, open the filter pane and add a filter on that field. You can also choose a status view at the top of the list. **Warranty Status** shows whether the warranty is active, expiring soon or expired; to find equipment by warranty, filter on **Warranty End Date** or choose a warranty tile on the dashboard. **Next Maintenance Date** shows when planned maintenance is due; to find equipment that is due in a period, filter on it with a date range. **Total Maintenance Cost** shows the cost of posted maintenance; to see the cost of one period, set **Date Filter** under **Filter totals by**.';
     PageType = List;
     ApplicationArea = All;
     UsageCategory = Lists;
@@ -81,6 +81,17 @@ page 50100 "EQM Equipment List"
                     Visible = false;
                 }
                 field("Warranty Reference No."; Rec."Warranty Reference No.")
+                {
+                    Visible = false;
+                }
+                field("Next Maintenance Date"; Rec."Next Maintenance Date")
+                {
+                }
+                field("Last Maintenance Date"; Rec."Last Maintenance Date")
+                {
+                    Visible = false;
+                }
+                field("Maintenance Frequency (Months)"; Rec."Maintenance Frequency (Months)")
                 {
                     Visible = false;
                 }

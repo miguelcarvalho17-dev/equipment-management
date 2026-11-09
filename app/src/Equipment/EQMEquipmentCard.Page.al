@@ -7,7 +7,7 @@ page 50101 "EQM Equipment Card"
 {
     Caption = 'Equipment Card';
     AboutTitle = 'About equipment details';
-    AboutText = 'Here you manage one piece of equipment. The first sections show its details, its current status and who it is assigned to, and its purchase and warranty information. Use **Assign to Employee** and **Return** to change the assignment, and **Register Maintenance** to record maintenance work. Further down, **Assignment History** lists every assignment, **Maintenance History** lists every posted maintenance, and **Audit** shows who created the record and who changed it last.';
+    AboutText = 'Here you manage one piece of equipment. The first sections show its details, its current status and who it is assigned to, its purchase and warranty information, and its planned maintenance. Use **Assign to Employee** and **Return** to change the assignment, and **Register Maintenance** to record maintenance work. Further down, **Assignment History** lists every assignment, **Maintenance History** lists every posted maintenance, and **Audit** shows who created the record and who changed it last.';
     PageType = Card;
     ApplicationArea = All;
     UsageCategory = None;
@@ -147,6 +147,22 @@ page 50101 "EQM Equipment Card"
                 }
                 field("Warranty Reference No."; Rec."Warranty Reference No.")
                 {
+                }
+            }
+            group(PlannedMaintenance)
+            {
+                Caption = 'Planned Maintenance';
+
+                field("Last Maintenance Date"; Rec."Last Maintenance Date")
+                {
+                }
+                field("Maintenance Frequency (Months)"; Rec."Maintenance Frequency (Months)")
+                {
+                    Importance = Promoted;
+                }
+                field("Next Maintenance Date"; Rec."Next Maintenance Date")
+                {
+                    Importance = Promoted;
                 }
             }
             part(AssignmentHistory; "EQM Assignment History Part")

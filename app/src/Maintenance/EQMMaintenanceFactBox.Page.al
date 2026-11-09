@@ -38,13 +38,16 @@ page 50115 "EQM Maintenance FactBox"
             }
             field(LastMaintenanceDate; LastMaintenanceDate)
             {
-                Caption = 'Last Maintenance Date';
-                ToolTip = 'Specifies the date of the most recent maintenance of the equipment. It is blank when no maintenance has been registered.';
+                Caption = 'Latest Record Date';
+                ToolTip = 'Specifies the date of the most recent maintenance record of the equipment, of any type, open or posted. It is blank when no maintenance has been registered.';
             }
             field(LastMaintenanceType; LastMaintenanceType)
             {
-                Caption = 'Last Maintenance Type';
-                ToolTip = 'Specifies the type of the most recent maintenance of the equipment. It is blank when no maintenance has been registered.';
+                Caption = 'Latest Record Type';
+                ToolTip = 'Specifies the type of the most recent maintenance record of the equipment. It is blank when no maintenance has been registered.';
+            }
+            field("Next Maintenance Date"; Rec."Next Maintenance Date")
+            {
             }
             field(TotalMaintenanceCost; Rec."Total Maintenance Cost")
             {

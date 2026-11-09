@@ -1,9 +1,9 @@
 namespace MiguelCarvalho.EquipmentManagement;
 
 /// <summary>
-/// Posts a maintenance record: freezes it, writes a read-only maintenance history entry and, when no other maintenance
-/// is open, sets the equipment from In Maintenance back to Available. Run it with Codeunit.Run on the record. It shows
-/// no dialogs.
+/// Posts a maintenance record: freezes it, writes a read-only maintenance history entry, moves the equipment's last
+/// maintenance date forward for preventive maintenance and, when no other maintenance is open, sets the equipment from
+/// In Maintenance back to Available. Run it with Codeunit.Run on the record. It shows no dialogs.
 /// </summary>
 codeunit 50109 "EQM Maintenance-Post"
 {
@@ -71,8 +71,10 @@ codeunit 50109 "EQM Maintenance-Post"
         Equipment: Record "EQM Equipment";
     begin
         Equipment.ReadIsolation := IsolationLevel::UpdLock;
-        if Equipment.Get(MaintenanceRecord."Equipment No.") then
+        if Equipment.Get(MaintenanceRecord."Equipment No.") then begin
+            Equipment.UpdateLastMaintenanceFromPosting(MaintenanceRecord);
             Equipment.CompleteMaintenance(MaintenanceRecord);
+        end;
     end;
 
     /// <summary>
@@ -96,7 +98,7 @@ codeunit 50109 "EQM Maintenance-Post"
 
     /// <summary>
     /// Raised after the status change and the insert of the history entry. Subscribers must not commit.
-    /// The equipment status has already been updated.
+    /// The equipment status and planned maintenance dates have already been updated.
     /// </summary>
     /// <param name="MaintenanceRecord">The posted record (passed by value).</param>
     /// <param name="MaintenanceHistoryEntry">The history entry that was written (passed by value).</param>

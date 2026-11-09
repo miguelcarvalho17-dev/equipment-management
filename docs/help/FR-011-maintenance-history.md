@@ -13,6 +13,7 @@ Post a maintenance record when it is final. Posting locks the record and adds it
 3. Choose **Post** (or press F9) and confirm. On the card, your changes are saved first.
 
 After posting:
+- For a **Preventive** record, the equipment's **Last Maintenance Date** moves forward to the record's Maintenance Date, if that date is later than the current one, and **Next Maintenance Date** is recalculated. Other types do not change it. See the planned maintenance help (FR-019).
 - **Status** shows **Posted** and the record can no longer be changed. Nobody can delete it.
 - A history entry is created with the date, type, vendor, cost, description, who did the work, who posted it and when.
 - The vendor number and name are saved as they were when you posted. A later vendor change does not alter the history.
