@@ -55,5 +55,7 @@ permissionset 50100 "EQM - Reader"
         codeunit "EQM Warranty Alert Mgt." = X,
         codeunit "EQM Warranty Alert Job" = X,
         codeunit "EQM Notification Mgt." = X,
-        codeunit "EQM Notification Subscribers" = X;
+        codeunit "EQM Notification Subscribers" = X,
+        codeunit "EQM Maintenance Monitor Job" = X,
+        codeunit "EQM Monitoring Job Mgt." = X;
 }

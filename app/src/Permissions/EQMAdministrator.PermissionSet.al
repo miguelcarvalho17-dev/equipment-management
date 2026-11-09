@@ -1,6 +1,7 @@
 namespace MiguelCarvalho.EquipmentManagement;
 
 using Microsoft.Foundation.NoSeries;
+using System.Threading;
 
 permissionset 50102 "EQM - Administrator"
 {
@@ -13,5 +14,6 @@ permissionset 50102 "EQM - Administrator"
         tabledata "EQM Equipment Category" = RIMD,
         tabledata "EQM Equipment Setup" = RIMD,
         tabledata "No. Series" = ri,
-        tabledata "No. Series Line" = ri;
+        tabledata "No. Series Line" = ri,
+        tabledata "Job Queue Entry" = rim;
 }
