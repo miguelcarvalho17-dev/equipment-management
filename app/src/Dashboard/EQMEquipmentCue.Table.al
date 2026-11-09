@@ -95,6 +95,14 @@ table 50104 "EQM Equipment Cue"
             CalcFormula = count("EQM Equipment" where("Warranty End Date" = field("Warranty Expired Filter"), Status = filter(<> Lost & <> Disposed)));
             Editable = false;
         }
+        field(32; "Open Warranty Alerts"; Integer)
+        {
+            Caption = 'Open Warranty Alerts';
+            ToolTip = 'Specifies the number of warranty alerts that are open. An alert is created 90, 60 and 30 days before a warranty ends. Choose the number to see and acknowledge the alerts.';
+            FieldClass = FlowField;
+            CalcFormula = count("EQM Warranty Alert" where(Status = const(Open)));
+            Editable = false;
+        }
         field(40; "Warranty Expiring Filter"; Date)
         {
             Caption = 'Warranty Expiring Filter';

@@ -54,6 +54,10 @@ page 50106 "EQM Equipment Cues"
                 {
                     DrillDownPageId = "EQM Equipment List";
                 }
+                field("Open Warranty Alerts"; Rec."Open Warranty Alerts")
+                {
+                    DrillDownPageId = "EQM Warranty Alerts";
+                }
             }
             cuegroup(MaintenanceCosts)
             {

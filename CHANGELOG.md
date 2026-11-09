@@ -1,6 +1,26 @@
 # Changelog
 Newest first. Grouped by Added / Changed / Fixed / Obsolete.
 
+## FR-016 Warranty Alerts (version stays 29.0.0.0, no bump)
+### Added
+- Enums 50105 "EQM Warranty Alert Interval" (30, 60, 90 Days) and 50106 "EQM Warranty Alert Status" (Open, Acknowledged, Cancelled); both not extensible.
+- Table 50107 "EQM Warranty Alert" (public, stored): one alert per equipment, warranty end date and interval.
+- Page 50120 "EQM Warranty Alerts": list with actions Acknowledge, Generate Alerts and Equipment, and views Open, Acknowledged, Cancelled.
+- Codeunit 50110 "EQM Warranty Alert Mgt." (internal) and codeunit 50111 "EQM Warranty Alert Job" (public, run from a job queue entry). Telemetry signal EQM0001 per run (counts only).
+- Table 50100 internal procedure `GetWarrantyDaysRemaining`; table 50104 FlowField 32 "Open Warranty Alerts"; third tile in the Warranty cue group; action "Warranty Alerts" on the Equipment Card and the Equipment Manager Role Center.
+- Permissions: EQM - Reader R on the alert table plus execute on the new objects; EQM - Manager RIM on the alert table.
+- Help article docs/help/FR-016-warranty-alerts.md.
+### Changed
+- Teaching tip and search terms of the Equipment Dashboard.
+### Fixed
+- None.
+### Obsolete
+- None.
+
+Release notes: The app now creates a warranty alert 90, 60 and 30 days before a warranty ends, so you can renew it, plan a replacement or raise a claim in time. Open the new Warranty Alerts list from the Equipment Manager Role Center or the Equipment Card, see the number of open alerts in the new Open Warranty Alerts tile on the dashboard, and acknowledge alerts when you have acted on them. Alerts are created every day by a job queue entry that an administrator sets up, or when a manager chooses Generate Alerts. If the warranty end date changes, the open alerts are cancelled and new ones are created for the new date.
+
+Note: no upgrade code, no events. The job queue entry is not created by the app; see the help article. Known limitations: alerts appear only when a run happens; fixed 90/60/30 intervals; no notification or email; alerts are never deleted. Automated tests are deferred (Q12; test ID 50170 reserved); sandbox checks WA-SB1 to WA-SB12 are not run. Build: no source-file diagnostics from the compiler, CodeCop, UICop and AppSourceCop; only the known app.json diagnostics AS0051, AS0052, AS0054, AS0084 and AS0092 remain. Review verdict not recorded by the documenter. See docs/features/FR-016-warranty-alerts.md.
+
 ## FR-015 Warranty Monitoring (version stays 29.0.0.0, no bump)
 ### Added
 - Enum 50104 "EQM Warranty Status" (blank, Active, Expiring Soon, Expired; not extensible). Calculated from "Warranty End Date" and today's date, never stored.

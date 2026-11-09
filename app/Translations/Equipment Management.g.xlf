@@ -553,6 +553,16 @@
           <note from="Developer" annotates="general" priority="2"></note>
           <note from="Xliff Generator" annotates="general" priority="3">Table EQM Equipment Cue - Field Lost Equipment - Property Caption</note>
         </trans-unit>
+        <trans-unit id="Table 2297682612 - Field 401514863 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Specifies the number of warranty alerts that are open. An alert is created 90, 60 and 30 days before a warranty ends. Choose the number to see and acknowledge the alerts.</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table EQM Equipment Cue - Field Open Warranty Alerts - Property ToolTip</note>
+        </trans-unit>
+        <trans-unit id="Table 2297682612 - Field 401514863 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Open Warranty Alerts</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table EQM Equipment Cue - Field Open Warranty Alerts - Property Caption</note>
+        </trans-unit>
         <trans-unit id="Table 2297682612 - Field 1663593181 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
           <source>Primary Key</source>
           <note from="Developer" annotates="general" priority="2"></note>
@@ -968,6 +978,121 @@
           <note from="Developer" annotates="general" priority="2"></note>
           <note from="Xliff Generator" annotates="general" priority="3">Table EQM Maintenance Record - Field Vendor No. - Property Caption</note>
         </trans-unit>
+        <trans-unit id="Table 2395741581 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Warranty Alert</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table EQM Warranty Alert - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Table 2395741581 - Field 2973365067 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Specifies when the alert was acknowledged.</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table EQM Warranty Alert - Field Acknowledged At - Property ToolTip</note>
+        </trans-unit>
+        <trans-unit id="Table 2395741581 - Field 2973365067 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Acknowledged At</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table EQM Warranty Alert - Field Acknowledged At - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Table 2395741581 - Field 310963001 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Specifies the user who acknowledged the alert.</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table EQM Warranty Alert - Field Acknowledged By - Property ToolTip</note>
+        </trans-unit>
+        <trans-unit id="Table 2395741581 - Field 310963001 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Acknowledged By</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table EQM Warranty Alert - Field Acknowledged By - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Table 2395741581 - Field 1902780062 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Specifies the date the alert was created.</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table EQM Warranty Alert - Field Alert Date - Property ToolTip</note>
+        </trans-unit>
+        <trans-unit id="Table 2395741581 - Field 1902780062 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Alert Date</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table EQM Warranty Alert - Field Alert Date - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Table 2395741581 - Field 242859051 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Specifies how many days before the warranty end date the alert was created: 90, 60 or 30 days.</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table EQM Warranty Alert - Field Alert Interval - Property ToolTip</note>
+        </trans-unit>
+        <trans-unit id="Table 2395741581 - Field 242859051 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Alert Interval</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table EQM Warranty Alert - Field Alert Interval - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Table 2395741581 - Field 2362114274 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Specifies when the alert was cancelled.</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table EQM Warranty Alert - Field Cancelled At - Property ToolTip</note>
+        </trans-unit>
+        <trans-unit id="Table 2395741581 - Field 2362114274 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Cancelled At</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table EQM Warranty Alert - Field Cancelled At - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Table 2395741581 - Field 883711285 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Specifies the number of the warranty alert.</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table EQM Warranty Alert - Field Entry No. - Property ToolTip</note>
+        </trans-unit>
+        <trans-unit id="Table 2395741581 - Field 883711285 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Entry No.</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table EQM Warranty Alert - Field Entry No. - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Table 2395741581 - Field 446225960 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Specifies the description of the equipment.</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table EQM Warranty Alert - Field Equipment Description - Property ToolTip</note>
+        </trans-unit>
+        <trans-unit id="Table 2395741581 - Field 446225960 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Equipment Description</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table EQM Warranty Alert - Field Equipment Description - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Table 2395741581 - Field 1827518031 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Specifies the equipment whose warranty is about to end.</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table EQM Warranty Alert - Field Equipment No. - Property ToolTip</note>
+        </trans-unit>
+        <trans-unit id="Table 2395741581 - Field 1827518031 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Equipment No.</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table EQM Warranty Alert - Field Equipment No. - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Table 2395741581 - Field 513339096 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Specifies whether the alert is Open, Acknowledged or Cancelled. Use the Acknowledge action when you have acted on an alert. Alerts are cancelled automatically when the warranty end date changes or the equipment is lost, disposed of or deleted.</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table EQM Warranty Alert - Field Status - Property ToolTip</note>
+        </trans-unit>
+        <trans-unit id="Table 2395741581 - Field 513339096 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Status</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table EQM Warranty Alert - Field Status - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Table 2395741581 - Field 2616922401 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Specifies the warranty end date of the equipment when the alert was created. If the end date of the equipment is changed later, this alert is cancelled and new alerts are created for the new date.</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table EQM Warranty Alert - Field Warranty End Date - Property ToolTip</note>
+        </trans-unit>
+        <trans-unit id="Table 2395741581 - Field 2616922401 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Warranty End Date</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table EQM Warranty Alert - Field Warranty End Date - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Table 2395741581 - Field 451596839 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Specifies the company that provides the warranty. Contact it to renew the warranty or to raise a claim.</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table EQM Warranty Alert - Field Warranty Provider - Property ToolTip</note>
+        </trans-unit>
+        <trans-unit id="Table 2395741581 - Field 451596839 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Warranty Provider</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table EQM Warranty Alert - Field Warranty Provider - Property Caption</note>
+        </trans-unit>
         <trans-unit id="Codeunit 55420158 - NamedType 2998168785" maxwidth="100" size-unit="char" translate="yes" xml:space="preserve">
           <source>Equipment</source>
           <note from="Developer" annotates="general" priority="2"></note>
@@ -1032,6 +1157,11 @@
           <source>You cannot post maintenance record %1 because it has not been saved.</source>
           <note from="Developer" annotates="general" priority="2">%1 = maintenance record number</note>
           <note from="Xliff Generator" annotates="general" priority="3">Codeunit EQM Maintenance-Post - NamedType RecordNotSavedErr</note>
+        </trans-unit>
+        <trans-unit id="Codeunit 1013676421 - NamedType 1359352173" size-unit="char" translate="yes" xml:space="preserve">
+          <source>The selected warranty alerts are already acknowledged or cancelled.</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit EQM Warranty Alert Mgt. - NamedType NothingToAcknowledgeErr</note>
         </trans-unit>
         <trans-unit id="Page 1366892938 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
           <source>Assigned Equipment</source>
@@ -1318,6 +1448,16 @@
           <note from="Developer" annotates="general" priority="2"></note>
           <note from="Xliff Generator" annotates="general" priority="3">Page EQM Equipment Card - Action ShowMaintenanceHistory - Property Caption</note>
         </trans-unit>
+        <trans-unit id="Page 3574600233 - Action 282604739 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
+          <source>View the warranty alerts of the equipment. An alert is created 90, 60 and 30 days before the warranty ends.</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page EQM Equipment Card - Action WarrantyAlerts - Property ToolTip</note>
+        </trans-unit>
+        <trans-unit id="Page 3574600233 - Action 282604739 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Warranty Alerts</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page EQM Equipment Card - Action WarrantyAlerts - Property Caption</note>
+        </trans-unit>
         <trans-unit id="Page 3574600233 - Action 1332525020 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
           <source>Assign available equipment to an active employee that you select. The assignment is recorded with the work date and your user name. Not available while the equipment has open maintenance.</source>
           <note from="Developer" annotates="general" priority="2"></note>
@@ -1469,7 +1609,7 @@
           <note from="Xliff Generator" annotates="general" priority="3">Page EQM Equipment Dashboard - Property AboutTitle</note>
         </trans-unit>
         <trans-unit id="Page 3818031089 - Property 247559172" size-unit="char" translate="yes" xml:space="preserve">
-          <source>The tiles count your equipment by status, show how many warranties are expiring within 30 days or have expired, and show the total and average cost of posted maintenance. **Total Equipment** includes lost and disposed equipment; the warranty tiles do not. The charts show how your equipment is spread over categories and statuses, which categories cost the most in maintenance, and the ten pieces of equipment with the highest maintenance cost. Choose a tile or a chart segment to see the details. Choose **Refresh** to update the numbers.</source>
+          <source>The tiles count your equipment by status, show how many warranties are expiring within 30 days or have expired, how many warranty alerts are open, and show the total and average cost of posted maintenance. **Total Equipment** includes lost and disposed equipment; the warranty tiles do not. The charts show how your equipment is spread over categories and statuses, which categories cost the most in maintenance, and the ten pieces of equipment with the highest maintenance cost. Choose a tile or a chart segment to see the details. Choose **Refresh** to update the numbers.</source>
           <note from="Developer" annotates="general" priority="2"></note>
           <note from="Xliff Generator" annotates="general" priority="3">Page EQM Equipment Dashboard - Property AboutText</note>
         </trans-unit>
@@ -1479,7 +1619,7 @@
           <note from="Xliff Generator" annotates="general" priority="3">Page EQM Equipment Dashboard - Property Caption</note>
         </trans-unit>
         <trans-unit id="Page 3818031089 - Property 3863440606" size-unit="char" translate="yes" xml:space="preserve">
-          <source>equipment kpi, equipment overview, equipment chart, maintenance cost, maintenance kpi, warranty expiration, expiring warranties</source>
+          <source>equipment kpi, equipment overview, equipment chart, maintenance cost, maintenance kpi, warranty expiration, expiring warranties, warranty alerts</source>
           <note from="Developer" annotates="general" priority="2"></note>
           <note from="Xliff Generator" annotates="general" priority="3">Page EQM Equipment Dashboard - Property AdditionalSearchTerms</note>
         </trans-unit>
@@ -1807,6 +1947,16 @@
           <source>Maintenance</source>
           <note from="Developer" annotates="general" priority="2"></note>
           <note from="Xliff Generator" annotates="general" priority="3">Page EQM Equipment Manager RC - Action MaintenanceList - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Page 4775459 - Action 740495708 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Open the warranty alerts of all equipment.</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page EQM Equipment Manager RC - Action WarrantyAlertList - Property ToolTip</note>
+        </trans-unit>
+        <trans-unit id="Page 4775459 - Action 740495708 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Warranty Alerts</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page EQM Equipment Manager RC - Action WarrantyAlertList - Property Caption</note>
         </trans-unit>
         <trans-unit id="Page 4775459 - Action 1514883969 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
           <source>Setup</source>
@@ -2208,6 +2358,96 @@
           <note from="Developer" annotates="general" priority="2"></note>
           <note from="Xliff Generator" annotates="general" priority="3">Page EQM Maintenance Records - View Upgrade - Property Caption</note>
         </trans-unit>
+        <trans-unit id="Page 2717703876 - Property 1064389655" size-unit="char" translate="yes" xml:space="preserve">
+          <source>About warranty alerts</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page EQM Warranty Alerts - Property AboutTitle</note>
+        </trans-unit>
+        <trans-unit id="Page 2717703876 - Property 247559172" size-unit="char" translate="yes" xml:space="preserve">
+          <source>An alert is created when a warranty has 90, 60 or 30 days left, so you can renew it, plan a replacement or raise a claim in time. Alerts are created every day by a job queue entry, or when you choose **Generate Alerts**. When you have acted on an alert, choose **Acknowledge**. If the warranty end date of the equipment changes, its open alerts are cancelled and new alerts are created for the new date.</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page EQM Warranty Alerts - Property AboutText</note>
+        </trans-unit>
+        <trans-unit id="Page 2717703876 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Warranty Alerts</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page EQM Warranty Alerts - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Page 2717703876 - Property 3863440606" size-unit="char" translate="yes" xml:space="preserve">
+          <source>warranty expiration, expiring warranties, warranty renewal, warranty claims, warranty reminders</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page EQM Warranty Alerts - Property AdditionalSearchTerms</note>
+        </trans-unit>
+        <trans-unit id="Page 2717703876 - NamedType 2149164677" size-unit="char" translate="yes" xml:space="preserve">
+          <source>%1 warranty alerts were created and %2 alerts that no longer apply were cancelled.</source>
+          <note from="Developer" annotates="general" priority="2">%1 = number of new alerts, %2 = number of cancelled alerts</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page EQM Warranty Alerts - NamedType AlertsGeneratedMsg</note>
+        </trans-unit>
+        <trans-unit id="Page 2717703876 - Control 3848865237 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Specifies how many days are left until the warranty end date of the alert, counted from today. It is negative when the end date has passed.</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page EQM Warranty Alerts - Control DaysRemaining - Property ToolTip</note>
+        </trans-unit>
+        <trans-unit id="Page 2717703876 - Control 3848865237 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Days Remaining</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page EQM Warranty Alerts - Control DaysRemaining - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Page 2717703876 - Action 3569358754 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Open the equipment card of the selected alert.</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page EQM Warranty Alerts - Action EquipmentCard - Property ToolTip</note>
+        </trans-unit>
+        <trans-unit id="Page 2717703876 - Action 3569358754 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Equipment</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page EQM Warranty Alerts - Action EquipmentCard - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Page 2717703876 - Action 4147068940 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Mark the selected open alerts as handled. Acknowledged alerts are not created again for the same warranty end date.</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page EQM Warranty Alerts - Action Acknowledge - Property ToolTip</note>
+        </trans-unit>
+        <trans-unit id="Page 2717703876 - Action 4147068940 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Acknowledge</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page EQM Warranty Alerts - Action Acknowledge - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Page 2717703876 - Action 448818730 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Create the warranty alerts that are due today now, instead of waiting for the job queue. Alerts that already exist are not created again.</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page EQM Warranty Alerts - Action GenerateAlerts - Property ToolTip</note>
+        </trans-unit>
+        <trans-unit id="Page 2717703876 - Action 448818730 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Generate Alerts</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page EQM Warranty Alerts - Action GenerateAlerts - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Page 2717703876 - Action 1587086413 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Equipment</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page EQM Warranty Alerts - Action Category_Category4 - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Page 2717703876 - Action 3383493608 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Process</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page EQM Warranty Alerts - Action Category_Process - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Page 2717703876 - View 559477891 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Acknowledged</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page EQM Warranty Alerts - View AcknowledgedAlerts - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Page 2717703876 - View 2725381810 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Cancelled</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page EQM Warranty Alerts - View CancelledAlerts - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Page 2717703876 - View 2961545235 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Open</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page EQM Warranty Alerts - View OpenAlerts - Property Caption</note>
+        </trans-unit>
         <trans-unit id="Query 611850204 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
           <source>Equipment by Category</source>
           <note from="Developer" annotates="general" priority="2"></note>
@@ -2367,6 +2607,46 @@
           <source>Upgrade</source>
           <note from="Developer" annotates="general" priority="2"></note>
           <note from="Xliff Generator" annotates="general" priority="3">Enum EQM Maintenance Type - EnumValue Upgrade - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Enum 1049926840 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Warranty Alert Interval</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Enum EQM Warranty Alert Interval - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Enum 1049926840 - EnumValue 1974715592 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>30 Days</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Enum EQM Warranty Alert Interval - EnumValue 30 Days - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Enum 1049926840 - EnumValue 380452243 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>60 Days</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Enum EQM Warranty Alert Interval - EnumValue 60 Days - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Enum 1049926840 - EnumValue 3718615698 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>90 Days</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Enum EQM Warranty Alert Interval - EnumValue 90 Days - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Enum 2663473873 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Warranty Alert Status</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Enum EQM Warranty Alert Status - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Enum 2663473873 - EnumValue 4259673360 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Acknowledged</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Enum EQM Warranty Alert Status - EnumValue Acknowledged - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Enum 2663473873 - EnumValue 4069904181 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Cancelled</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Enum EQM Warranty Alert Status - EnumValue Cancelled - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Enum 2663473873 - EnumValue 4259830144 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Open</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Enum EQM Warranty Alert Status - EnumValue Open - Property Caption</note>
         </trans-unit>
         <trans-unit id="Enum 2565042555 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
           <source>Warranty Status</source>
