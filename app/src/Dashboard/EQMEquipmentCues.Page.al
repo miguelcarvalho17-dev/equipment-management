@@ -78,6 +78,7 @@ page 50106 "EQM Equipment Cues"
     trigger OnOpenPage()
     var
         DashboardMgt: Codeunit "EQM Dashboard Mgt.";
+        NotificationMgt: Codeunit "EQM Notification Mgt.";
     begin
         Rec.Reset();
         if not Rec.Get() then begin
@@ -85,6 +86,7 @@ page 50106 "EQM Equipment Cues"
             Rec.Insert();
         end;
         DashboardMgt.SetWarrantyCueFilters(Rec, Today());
+        NotificationMgt.ShowRoleCenterNotifications();
     end;
 
     /// <summary>

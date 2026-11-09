@@ -1,6 +1,26 @@
 # Changelog
 Newest first. Grouped by Added / Changed / Fixed / Obsolete.
 
+## FR-017 Equipment Notifications (version stays 29.0.0.0, no bump)
+### Added
+- Codeunit 50112 "EQM Notification Mgt." (internal): warranty expiring, overdue maintenance and returned from maintenance notifications with actions and Don't show again.
+- Codeunit 50113 "EQM Notification Subscribers" (internal): subscribes to page "My Notifications" `OnInitializingNotificationWithDefaultState` and registers the three kinds (enabled by default).
+- Codeunit 50108 internal procedures for overdue maintenance (open more than 14 days after the Maintenance Date); codeunit 50110 internal procedures `HasOpenAlert`, `CountOpenAlerts`, `ShowOpenAlerts`.
+- Table 50105 key `StatusDate` (Status, Maintenance Date).
+- Notifications on the Equipment Card, the Maintenance Record Card, after posting maintenance, and from the cue part on the Equipment Manager Role Center and the Equipment Dashboard.
+- Permissions: EQM - Reader execute on codeunits 50112 and 50113.
+- Help article docs/help/FR-017-equipment-notifications.md.
+### Changed
+- `PostWithConfirmation` (codeunit 50108) shows a notification after posting when the equipment is back from maintenance. Confirm text and return value unchanged.
+### Fixed
+- None.
+### Obsolete
+- None.
+
+Release notes: The app now shows a notification when a warranty is about to end (while its warranty alert is open), when a maintenance record has been open for more than 14 days without being posted, and when posting maintenance makes equipment available again. Notifications appear on the Equipment Card, the Maintenance Record Card, the Equipment Manager Role Center and the dashboard, each with an action that opens the matching records. You can switch each kind off with Don't show again or in My Notifications.
+
+Note: no upgrade code, no published events; one standard event subscribed (My Notifications). The three notification GUIDs become permanent at release. Known limitations: shown only when a page is opened; warranty notifications need FR-016 alerts; fixed 14-day overdue limit; no tile or list notifications. Automated tests are deferred (test ID 50171 reserved); sandbox checks NT-SB1 to NT-SB12 are not run (My Notifications registration, enabled-by-default behavior, action handlers in the internal codeunit, Reader permissions, cue-part notifications on the Role Center). Build result and review verdict not recorded by the documenter. See docs/features/FR-017-equipment-notifications.md.
+
 ## FR-016 Warranty Alerts (version stays 29.0.0.0, no bump)
 ### Added
 - Enums 50105 "EQM Warranty Alert Interval" (30, 60, 90 Days) and 50106 "EQM Warranty Alert Status" (Open, Acknowledged, Cancelled); both not extensible.

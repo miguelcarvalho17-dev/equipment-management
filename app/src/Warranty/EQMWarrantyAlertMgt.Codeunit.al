@@ -207,6 +207,50 @@ codeunit 50110 "EQM Warranty Alert Mgt."
         exit(AcknowledgedCount);
     end;
 
+    /// <summary>
+    /// Returns whether an open warranty alert exists for the equipment and warranty end date.
+    /// </summary>
+    /// <param name="EquipmentNo">The equipment number.</param>
+    /// <param name="WarrantyEndDate">The warranty end date the alert was created for.</param>
+    /// <returns>True when an open alert exists.</returns>
+    internal procedure HasOpenAlert(EquipmentNo: Code[20]; WarrantyEndDate: Date): Boolean
+    var
+        WarrantyAlert: Record "EQM Warranty Alert";
+    begin
+        WarrantyAlert.SetCurrentKey("Equipment No.", "Warranty End Date", "Alert Interval");
+        WarrantyAlert.SetRange("Equipment No.", EquipmentNo);
+        WarrantyAlert.SetRange("Warranty End Date", WarrantyEndDate);
+        WarrantyAlert.SetRange(Status, WarrantyAlert.Status::Open);
+        exit(not WarrantyAlert.IsEmpty());
+    end;
+
+    /// <summary>
+    /// Returns the number of open warranty alerts.
+    /// </summary>
+    /// <returns>The number of open alerts.</returns>
+    internal procedure CountOpenAlerts(): Integer
+    var
+        WarrantyAlert: Record "EQM Warranty Alert";
+    begin
+        WarrantyAlert.SetCurrentKey(Status, "Warranty End Date");
+        WarrantyAlert.SetRange(Status, WarrantyAlert.Status::Open);
+        exit(WarrantyAlert.Count());
+    end;
+
+    /// <summary>
+    /// Opens the open warranty alerts, for one piece of equipment or for all equipment.
+    /// </summary>
+    /// <param name="EquipmentNo">The equipment number to filter on. Blank shows all equipment.</param>
+    internal procedure ShowOpenAlerts(EquipmentNo: Code[20])
+    var
+        WarrantyAlert: Record "EQM Warranty Alert";
+    begin
+        WarrantyAlert.SetRange(Status, WarrantyAlert.Status::Open);
+        if EquipmentNo <> '' then
+            WarrantyAlert.SetRange("Equipment No.", EquipmentNo);
+        Page.Run(Page::"EQM Warranty Alerts", WarrantyAlert);
+    end;
+
     local procedure RestoreStatusFilter(var WarrantyAlert: Record "EQM Warranty Alert"; StatusFilter: Text)
     begin
         if StatusFilter = '' then

@@ -112,16 +112,124 @@ codeunit 50108 "EQM Maintenance Mgt."
     end;
 
     /// <summary>
-    /// Asks the user to confirm, then posts the maintenance record. Returns false when the user cancels.
+    /// Returns after how many days an open maintenance record is overdue.
+    /// </summary>
+    /// <returns>The number of days.</returns>
+    internal procedure GetMaintenanceOverdueDays(): Integer
+    begin
+        exit(14);
+    end;
+
+    /// <summary>
+    /// Returns the number of days an open maintenance record has been open, counted from its maintenance date.
+    /// </summary>
+    /// <param name="MaintenanceRecord">The maintenance record.</param>
+    /// <param name="ReferenceDate">The date to count to. 0D means today.</param>
+    /// <returns>The number of days; 0 when the maintenance date is blank.</returns>
+    internal procedure CalcDaysOpen(MaintenanceRecord: Record "EQM Maintenance Record"; ReferenceDate: Date): Integer
+    begin
+        if ReferenceDate = 0D then
+            ReferenceDate := Today();
+        if MaintenanceRecord."Maintenance Date" = 0D then
+            exit(0);
+        exit(ReferenceDate - MaintenanceRecord."Maintenance Date");
+    end;
+
+    /// <summary>
+    /// Returns whether the maintenance record is open and has been open longer than the overdue limit.
+    /// </summary>
+    /// <param name="MaintenanceRecord">The maintenance record.</param>
+    /// <param name="ReferenceDate">The date to count to. 0D means today.</param>
+    /// <returns>True when the record is overdue.</returns>
+    internal procedure IsMaintenanceOverdue(MaintenanceRecord: Record "EQM Maintenance Record"; ReferenceDate: Date): Boolean
+    begin
+        if MaintenanceRecord.Status <> MaintenanceRecord.Status::Open then
+            exit(false);
+        if MaintenanceRecord."Maintenance Date" = 0D then
+            exit(false);
+        exit(CalcDaysOpen(MaintenanceRecord, ReferenceDate) > GetMaintenanceOverdueDays());
+    end;
+
+    /// <summary>
+    /// Sets the filters that select the overdue maintenance records.
+    /// </summary>
+    /// <param name="MaintenanceRecord">The record to filter.</param>
+    /// <param name="ReferenceDate">The date to count to. 0D means today.</param>
+    internal procedure SetOverdueMaintenanceFilter(var MaintenanceRecord: Record "EQM Maintenance Record"; ReferenceDate: Date)
+    begin
+        if ReferenceDate = 0D then
+            ReferenceDate := Today();
+        MaintenanceRecord.SetCurrentKey(Status, "Maintenance Date");
+        MaintenanceRecord.SetRange(Status, MaintenanceRecord.Status::Open);
+        MaintenanceRecord.SetFilter("Maintenance Date", '<>%1&..%2', 0D, ReferenceDate - GetMaintenanceOverdueDays() - 1);
+    end;
+
+    /// <summary>
+    /// Returns the number of overdue maintenance records.
+    /// </summary>
+    /// <param name="ReferenceDate">The date to count to. 0D means today.</param>
+    /// <returns>The number of overdue records.</returns>
+    internal procedure CountOverdueMaintenance(ReferenceDate: Date): Integer
+    var
+        MaintenanceRecord: Record "EQM Maintenance Record";
+    begin
+        SetOverdueMaintenanceFilter(MaintenanceRecord, ReferenceDate);
+        exit(MaintenanceRecord.Count());
+    end;
+
+    /// <summary>
+    /// Finds the oldest overdue open maintenance record of the equipment.
+    /// </summary>
+    /// <param name="EquipmentNo">The equipment number.</param>
+    /// <param name="ReferenceDate">The date to count to. 0D means today.</param>
+    /// <param name="MaintenanceRecord">Returns the record; empty when none is found.</param>
+    /// <returns>True when an overdue record exists.</returns>
+    internal procedure FindOldestOverdueMaintenance(EquipmentNo: Code[20]; ReferenceDate: Date; var MaintenanceRecord: Record "EQM Maintenance Record"): Boolean
+    begin
+        if ReferenceDate = 0D then
+            ReferenceDate := Today();
+        MaintenanceRecord.Reset();
+        MaintenanceRecord.SetCurrentKey("Equipment No.", "Maintenance Date");
+        MaintenanceRecord.SetRange("Equipment No.", EquipmentNo);
+        MaintenanceRecord.SetRange(Status, MaintenanceRecord.Status::Open);
+        MaintenanceRecord.SetFilter("Maintenance Date", '<>%1&..%2', 0D, ReferenceDate - GetMaintenanceOverdueDays() - 1);
+        MaintenanceRecord.SetLoadFields("No.", "Maintenance Date");
+        exit(MaintenanceRecord.FindFirst());
+    end;
+
+    /// <summary>
+    /// Opens the overdue maintenance records.
+    /// </summary>
+    /// <param name="ReferenceDate">The date to count to. 0D means today.</param>
+    internal procedure ShowOverdueMaintenanceRecords(ReferenceDate: Date)
+    var
+        MaintenanceRecord: Record "EQM Maintenance Record";
+    begin
+        SetOverdueMaintenanceFilter(MaintenanceRecord, ReferenceDate);
+        Page.Run(Page::"EQM Maintenance Records", MaintenanceRecord);
+    end;
+
+    /// <summary>
+    /// Asks the user to confirm, then posts the maintenance record and shows a notification when the equipment is
+    /// back from maintenance. Returns false when the user cancels.
     /// </summary>
     /// <param name="MaintenanceRecord">The record to post. It shows Status = Posted afterwards.</param>
     /// <returns>True when the record was posted; false when the user cancelled.</returns>
     internal procedure PostWithConfirmation(var MaintenanceRecord: Record "EQM Maintenance Record"): Boolean
+    var
+        Equipment: Record "EQM Equipment";
+        NotificationMgt: Codeunit "EQM Notification Mgt.";
+        StatusBeforePosting: Enum "EQM Equipment Status";
     begin
         if not Confirm(PostQst, true, MaintenanceRecord."No.") then
             exit(false);
 
+        Equipment.SetLoadFields(Status);
+        if Equipment.Get(MaintenanceRecord."Equipment No.") then
+            StatusBeforePosting := Equipment.Status;
+
         Codeunit.Run(Codeunit::"EQM Maintenance-Post", MaintenanceRecord);
+        NotificationMgt.SendReturnedFromMaintenanceNotification(MaintenanceRecord."Equipment No.", StatusBeforePosting);
         exit(true);
     end;
 

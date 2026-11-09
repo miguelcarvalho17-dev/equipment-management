@@ -129,6 +129,9 @@ table 50105 "EQM Maintenance Record"
         key(EquipmentStatus; "Equipment No.", Status)
         {
         }
+        key(StatusDate; Status, "Maintenance Date")
+        {
+        }
     }
 
     fieldgroups
