@@ -249,7 +249,7 @@
           <note from="Xliff Generator" annotates="general" priority="3">Table EQM Equipment - Field Model - Property Caption</note>
         </trans-unit>
         <trans-unit id="Table 4212454693 - Field 666366514 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
-          <source>Specifies when the next planned maintenance of the equipment is due. It is calculated as the last maintenance date plus the maintenance frequency in months, and is blank when either is missing.</source>
+          <source>Specifies when the next planned maintenance of the equipment is due. It is calculated as the last maintenance date plus the maintenance frequency in months, and is blank when either is missing. When the date is before today, the maintenance is overdue and the date is highlighted, unless the equipment is lost or disposed.</source>
           <note from="Developer" annotates="general" priority="2"></note>
           <note from="Xliff Generator" annotates="general" priority="3">Table EQM Equipment - Field Next Maintenance Date - Property ToolTip</note>
         </trans-unit>
@@ -597,6 +597,26 @@
           <source>Open Warranty Alerts</source>
           <note from="Developer" annotates="general" priority="2"></note>
           <note from="Xliff Generator" annotates="general" priority="3">Table EQM Equipment Cue - Field Open Warranty Alerts - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Table 2297682612 - Field 3386438135 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Specifies the number of equipment records whose next maintenance date is before today. Equipment without a next maintenance date and lost or disposed equipment are not counted. Choose the number to see the equipment.</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table EQM Equipment Cue - Field Overdue Maintenance Equipment - Property ToolTip</note>
+        </trans-unit>
+        <trans-unit id="Table 2297682612 - Field 3386438135 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Overdue Maintenance Equipment</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table EQM Equipment Cue - Field Overdue Maintenance Equipment - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Table 2297682612 - Field 4138750977 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Specifies the next maintenance dates that count as overdue. It is set automatically.</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table EQM Equipment Cue - Field Overdue Maintenance Filter - Property ToolTip</note>
+        </trans-unit>
+        <trans-unit id="Table 2297682612 - Field 4138750977 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Overdue Maintenance Filter</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table EQM Equipment Cue - Field Overdue Maintenance Filter - Property Caption</note>
         </trans-unit>
         <trans-unit id="Table 2297682612 - Field 1663593181 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
           <source>Primary Key</source>
@@ -1763,6 +1783,11 @@
           <note from="Developer" annotates="general" priority="2"></note>
           <note from="Xliff Generator" annotates="general" priority="3">Page EQM Equipment Cues - Control MaintenanceCosts - Property Caption</note>
         </trans-unit>
+        <trans-unit id="Page 2077431605 - Control 3542843059 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Planned Maintenance</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page EQM Equipment Cues - Control PlannedMaintenance - Property Caption</note>
+        </trans-unit>
         <trans-unit id="Page 2077431605 - Control 1903978320 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
           <source>Warranty</source>
           <note from="Developer" annotates="general" priority="2"></note>
@@ -1774,7 +1799,7 @@
           <note from="Xliff Generator" annotates="general" priority="3">Page EQM Equipment Dashboard - Property AboutTitle</note>
         </trans-unit>
         <trans-unit id="Page 3818031089 - Property 247559172" size-unit="char" translate="yes" xml:space="preserve">
-          <source>The tiles count your equipment by status, show how many warranties are expiring within 30 days or have expired, how many warranty alerts are open, and show the total and average cost of posted maintenance. **Total Equipment** includes lost and disposed equipment; the warranty tiles do not. The charts show how your equipment is spread over categories and statuses, which categories cost the most in maintenance, and the ten pieces of equipment with the highest maintenance cost. Choose a tile or a chart segment to see the details. Choose **Refresh** to update the numbers.</source>
+          <source>The tiles count your equipment by status, show how many warranties are expiring within 30 days or have expired, how many warranty alerts are open, how many pieces of equipment are overdue for planned maintenance, and show the total and average cost of posted maintenance. **Total Equipment** includes lost and disposed equipment; the warranty and overdue maintenance tiles do not. **Overdue Maintenance Equipment** turns red when at least one piece of equipment has a next maintenance date before today. The charts show how your equipment is spread over categories and statuses, which categories cost the most in maintenance, and the ten pieces of equipment with the highest maintenance cost. Choose a tile or a chart segment to see the details. Choose **Refresh** to update the numbers.</source>
           <note from="Developer" annotates="general" priority="2"></note>
           <note from="Xliff Generator" annotates="general" priority="3">Page EQM Equipment Dashboard - Property AboutText</note>
         </trans-unit>
@@ -1784,7 +1809,7 @@
           <note from="Xliff Generator" annotates="general" priority="3">Page EQM Equipment Dashboard - Property Caption</note>
         </trans-unit>
         <trans-unit id="Page 3818031089 - Property 3863440606" size-unit="char" translate="yes" xml:space="preserve">
-          <source>equipment kpi, equipment overview, equipment chart, maintenance cost, maintenance kpi, warranty expiration, expiring warranties, warranty alerts</source>
+          <source>equipment kpi, equipment overview, equipment chart, maintenance cost, maintenance kpi, warranty expiration, expiring warranties, warranty alerts, overdue maintenance, maintenance due</source>
           <note from="Developer" annotates="general" priority="2"></note>
           <note from="Xliff Generator" annotates="general" priority="3">Page EQM Equipment Dashboard - Property AdditionalSearchTerms</note>
         </trans-unit>
@@ -1909,7 +1934,7 @@
           <note from="Xliff Generator" annotates="general" priority="3">Page EQM Equipment List - Property AboutTitle</note>
         </trans-unit>
         <trans-unit id="Page 2630064635 - Property 247559172" size-unit="char" translate="yes" xml:space="preserve">
-          <source>This list shows all your equipment. Use **Search** to find equipment by its number, serial number, or any other column you can see. To filter by category, status, or assigned employee, open the filter pane and add a filter on that field. You can also choose a status view at the top of the list. **Warranty Status** shows whether the warranty is active, expiring soon or expired; to find equipment by warranty, filter on **Warranty End Date** or choose a warranty tile on the dashboard. **Next Maintenance Date** shows when planned maintenance is due; to find equipment that is due in a period, filter on it with a date range. **Total Maintenance Cost** shows the cost of posted maintenance; to see the cost of one period, set **Date Filter** under **Filter totals by**.</source>
+          <source>This list shows all your equipment. Use **Search** to find equipment by its number, serial number, or any other column you can see. To filter by category, status, or assigned employee, open the filter pane and add a filter on that field. You can also choose a status view at the top of the list. **Warranty Status** shows whether the warranty is active, expiring soon or expired; to find equipment by warranty, filter on **Warranty End Date** or choose a warranty tile on the dashboard. **Next Maintenance Date** shows when planned maintenance is due and is highlighted when the maintenance is overdue; to find equipment that is due in a period, filter on it with a date range, or choose the **Overdue Maintenance Equipment** tile on the dashboard. **Total Maintenance Cost** shows the cost of posted maintenance; to see the cost of one period, set **Date Filter** under **Filter totals by**.</source>
           <note from="Developer" annotates="general" priority="2"></note>
           <note from="Xliff Generator" annotates="general" priority="3">Page EQM Equipment List - Property AboutText</note>
         </trans-unit>

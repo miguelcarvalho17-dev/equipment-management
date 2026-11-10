@@ -125,6 +125,19 @@ Source: "Manual sandbox checks" in `docs/plans/FR-019-planned-maintenance.md`.
 - [ ] PM-SB9 Non-SUPER Reader cannot change the fields; non-SUPER Manager can and can post; teaching tips show the new texts.
 - [ ] Record the results and update "Test status" in `docs/features/FR-019-planned-maintenance.md` and the TODO(verify) items in the help article.
 
+## FR-020 sandbox checks (not run; automated tests deferred, Q10, test codeunit 50174 reserved)
+Source: "Manual sandbox checks" in `docs/plans/FR-020-overdue-maintenance-monitoring.md`.
+- [ ] OM-SB1 Build with CodeCop, UICop and AppSourceCop; `.g.xlf` has the new texts and not the locked style labels (V3).
+- [ ] OM-SB2 Next Maintenance Date yesterday: red on list, card and Maintenance FactBox; today and tomorrow: not red.
+- [ ] OM-SB3 Dashboard and Role Center: tile in group Planned Maintenance between Warranty and Maintenance Costs; red when above 0, green at 0 (V1, V2).
+- [ ] OM-SB4 Drill-down opens the filtered Equipment List; record the filters shown (V5).
+- [ ] OM-SB5 Post a Preventive record for overdue equipment: highlight gone; Refresh lowers the tile.
+- [ ] OM-SB6 Dispose overdue equipment: no highlight, tile down by one.
+- [ ] OM-SB7 Change the work date a year earlier: highlight and tile unchanged (Q1).
+- [ ] OM-SB8 Card: lowering the frequency so the date moves into the past turns it red at once (V6).
+- [ ] OM-SB9 Non-SUPER Reader sees highlight and tile; teaching tips show the new texts; Tell Me finds the dashboard with "overdue maintenance".
+- [ ] Record the results and update "Test status" in `docs/features/FR-020-overdue-maintenance-monitoring.md` and the TODO(verify) items in the help article.
+
 ## Open design and fix items
 - [x] FR-007 known limitation (Employee read): addressed in code by NFR-002 (name blank without Employee read, `ReadPermission()` guard). Not verified in a sandbox (SB9).
 - [ ] **New companies:** default data and number series are created only in `OnInstallAppPerCompany`. In a company created later the setup record is missing, and equipment creation fails on `TestField("Equipment Nos.")`. Create the defaults on company initialization (subscribe to the company-initialize event) or give the user path working permissions. NFR-002: the Administrator path now has indirect No. Series rights (ri), but defaults are still created only on install or when an Administrator opens Setup. Readers and Managers get the setup-missing error. Not verified (SB8).

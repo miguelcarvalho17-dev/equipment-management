@@ -13,6 +13,7 @@ Status: describes the code as implemented. **Build is clean for the FR-009 files
 | Query | 50101 | EQM Equipment by Status | New, internal. Count of equipment grouped by Status. |
 | Codeunit | 50107 | EQM Dashboard Mgt. | New, internal. Chart data as lists and drill-down to the filtered Equipment list (see below). |
 | Page | 50106 | EQM Equipment Cues | New CardPart "Equipment Activities": cuegroup "Equipment" with the six tiles, each with `DrillDownPageId = "EQM Equipment List"`. `RefreshOnActivate`. `OnOpenPage` inserts the single row into the temporary table. |
+| Page | 50106 | EQM Equipment Cues | FR-020: cuegroup "Planned Maintenance" (after Warranty) with the tile "Overdue Maintenance Equipment" (table 50104 fields 50/51), styled Unfavorable above 0 and Favorable at 0, drill-down to the Equipment List. See FR-020 feature doc. |
 | Page | 50107 | EQM Equipment Category Chart | New CardPart with the System Application `BusinessChart` add-in: column chart, one column per category that has equipment. Own Refresh action. |
 | Page | 50108 | EQM Equipment Status Chart | New CardPart, `BusinessChart` add-in: pie chart, one segment per value of enum "EQM Equipment Status" (zero counts included, enum order). Own Refresh action. |
 | Page | 50109 | EQM Equipment Dashboard | New Card, `UsageCategory = ReportsAndAnalysis` (found through Tell Me), holds the three parts. Actions Refresh (promoted 'Process') and Equipment (promoted 'Navigate'). Teaching tip (`AboutTitle`/`AboutText`). |

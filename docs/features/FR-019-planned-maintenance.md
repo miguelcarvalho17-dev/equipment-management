@@ -40,7 +40,7 @@ Corrective, Inspection and Upgrade records do not change the dates unless a subs
 
 ### Pages
 - **Equipment Card (50101):** group Planned Maintenance with Last Maintenance Date, Maintenance Frequency (Months) (Promoted) and Next Maintenance Date (Promoted, read-only).
-- **Equipment List (50100):** Next Maintenance Date visible; Last Maintenance Date and Maintenance Frequency (Months) hidden by default (shown through personalization). No due or overdue status, style, view, tile, notification or job exists for planned maintenance.
+- **Equipment List (50100):** Next Maintenance Date visible; Last Maintenance Date and Maintenance Frequency (Months) hidden by default (shown through personalization). FR-020 later added the overdue highlight and tile (see FR-020 feature doc); no "due soon" status, view, notification or job exists.
 - **Maintenance FactBox (50115):** the calculated controls were renamed from 'Last Maintenance Date' / 'Last Maintenance Type' to 'Latest Record Date' / 'Latest Record Type' (most recent record of any type, open or posted) to avoid a clash with the new stored field. New control Next Maintenance Date (stored field, so it shows even for equipment without maintenance records).
 
 ## Setup

@@ -115,6 +115,20 @@ table 50104 "EQM Equipment Cue"
             ToolTip = 'Specifies the warranty end dates that count as expired. It is set automatically.';
             FieldClass = FlowFilter;
         }
+        field(50; "Overdue Maintenance Equipment"; Integer)
+        {
+            Caption = 'Overdue Maintenance Equipment';
+            ToolTip = 'Specifies the number of equipment records whose next maintenance date is before today. Equipment without a next maintenance date and lost or disposed equipment are not counted. Choose the number to see the equipment.';
+            FieldClass = FlowField;
+            CalcFormula = count("EQM Equipment" where("Next Maintenance Date" = field("Overdue Maintenance Filter"), Status = filter(<> Lost & <> Disposed)));
+            Editable = false;
+        }
+        field(51; "Overdue Maintenance Filter"; Date)
+        {
+            Caption = 'Overdue Maintenance Filter';
+            ToolTip = 'Specifies the next maintenance dates that count as overdue. It is set automatically.';
+            FieldClass = FlowFilter;
+        }
     }
 
     keys

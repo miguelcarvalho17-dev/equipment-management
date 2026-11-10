@@ -227,7 +227,7 @@ table 50100 "EQM Equipment"
         field(22; "Next Maintenance Date"; Date)
         {
             Caption = 'Next Maintenance Date';
-            ToolTip = 'Specifies when the next planned maintenance of the equipment is due. It is calculated as the last maintenance date plus the maintenance frequency in months, and is blank when either is missing.';
+            ToolTip = 'Specifies when the next planned maintenance of the equipment is due. It is calculated as the last maintenance date plus the maintenance frequency in months, and is blank when either is missing. When the date is before today, the maintenance is overdue and the date is highlighted, unless the equipment is lost or disposed.';
             Editable = false;
         }
         field(23; "Maintenance Frequency (Months)"; Integer)
@@ -702,6 +702,36 @@ table 50100 "EQM Equipment"
 
         Validate("Last Maintenance Date", MaintenanceRecord."Maintenance Date");
         Modify(true);
+    end;
+
+    /// <summary>
+    /// Returns whether the planned maintenance of the equipment is overdue on a given date: the next maintenance date is
+    /// filled in and before the reference date, and the equipment is not lost or disposed. Reads only; the record is not
+    /// changed.
+    /// </summary>
+    /// <param name="ReferenceDate">The date to check on. 0D means today.</param>
+    /// <returns>True when the planned maintenance is overdue.</returns>
+    internal procedure IsPlannedMaintenanceOverdue(ReferenceDate: Date): Boolean
+    begin
+        if ReferenceDate = 0D then
+            ReferenceDate := Today();
+        if "Next Maintenance Date" = 0D then
+            exit(false);
+        if IsFinalStatus(Status) then
+            exit(false);
+        exit("Next Maintenance Date" < ReferenceDate);
+    end;
+
+    /// <summary>
+    /// Returns the page style name used to show the next maintenance date: Unfavorable when the planned maintenance is
+    /// overdue today, otherwise Standard.
+    /// </summary>
+    /// <returns>The style name.</returns>
+    internal procedure GetNextMaintenanceDateStyle(): Text
+    begin
+        if IsPlannedMaintenanceOverdue(Today()) then
+            exit(UnfavorableStyleTok);
+        exit(StandardStyleTok);
     end;
 
     /// <summary>

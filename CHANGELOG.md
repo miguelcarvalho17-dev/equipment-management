@@ -1,6 +1,24 @@
 # Changelog
 Newest first. Grouped by Added / Changed / Fixed / Obsolete.
 
+## FR-020 Overdue Maintenance Monitoring (version stays 29.0.0.0, no bump)
+### Added
+- Equipment is overdue when Next Maintenance Date is before today (real date, not Work Date); due today is not overdue. Blank dates and Lost / Disposed equipment are never overdue. Nothing is stored.
+- Next Maintenance Date is shown in red on the Equipment List, the Equipment Card (refreshed on validate of the plan fields and status) and the Maintenance FactBox.
+- Table 50104 "EQM Equipment Cue": field 50 "Overdue Maintenance Equipment" (FlowField) and field 51 "Overdue Maintenance Filter" (FlowFilter). Page 50106: cue group Planned Maintenance with the tile (red above 0, green at 0), drill-down to the Equipment List.
+- Internal procedures: table 50100 `IsPlannedMaintenanceOverdue`, `GetNextMaintenanceDateStyle`; codeunit 50107 `SetPlannedMaintenanceCueFilters`, `GetOverdueMaintenanceCueStyle`.
+- Help article docs/help/FR-020-overdue-maintenance-monitoring.md.
+### Changed
+- ToolTip of Next Maintenance Date; AboutText of the Equipment List and the Equipment Dashboard; search terms of the dashboard ('overdue maintenance', 'maintenance due').
+### Fixed
+- None.
+### Obsolete
+- None.
+
+Release notes: Equipment whose next maintenance date is before today is now highlighted. The next maintenance date is shown in red on the Equipment list, the Equipment Card and the Maintenance FactBox, and the new tile Overdue Maintenance Equipment on the dashboard and Role Center counts the overdue equipment and opens the list of it. Lost and disposed equipment and equipment without a next maintenance date are not counted.
+
+Note: no new objects, no stored data, no upgrade code, no new event, no permission change. CodeCop and UICop compile clean. Automated tests are deferred (test ID 50174 reserved); sandbox checks OM-SB1 to OM-SB9 are not run.
+
 ## FR-019 Planned Maintenance (version stays 29.0.0.0, no bump)
 ### Added
 - Table 50100 "EQM Equipment": stored fields 21 "Last Maintenance Date", 22 "Next Maintenance Date" (not editable, calculated) and 23 "Maintenance Frequency (Months)" (0 to 120, 0 shown blank).
