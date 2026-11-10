@@ -26,7 +26,7 @@ Alerts are based on the **Warranty End Date** of the equipment, counted from tod
 ## See the alerts
 - Search for **Warranty Alerts**, or choose **Warranty Alerts** in the Equipment Manager Role Center.
 - On the **Equipment Card**, choose **Related** > **Equipment** > **Warranty Alerts** to see the alerts of that equipment. The action is available once the card is saved.
-- The **Open Warranty Alerts** tile in the Warranty group of the dashboard shows how many alerts are open. Choose it to open the open alerts.
+- The **Open Warranty Alerts** tile in the Warranty group of the dashboard shows how many alerts are open. Choose it to open the open alerts. The **Warranties Expiring in 90 Days** tile next to it counts the equipment whose warranty ends within the same 90 days (see the warranty dashboard help, FR-022).
 
 The list shows the equipment, the alert interval, the warranty end date, **Days Remaining** (negative after the end date), the warranty provider (the company to contact for a renewal or claim), the status and who acknowledged the alert. Use the views **Open**, **Acknowledged** and **Cancelled** to filter by status. Choose **Equipment** to open the equipment card.
 

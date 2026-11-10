@@ -98,21 +98,27 @@ codeunit 50107 "EQM Dashboard Mgt."
 
     /// <summary>
     /// Sets the date filters of the warranty tiles so that they count the same equipment as the warranty status:
-    /// expiring soon from the reference date to the end of the expiring period, expired before the reference date.
-    /// 0D means today.
+    /// active from the reference date on, expiring within 90 days and within the expiring period from the reference
+    /// date, expired before the reference date. 0D means today. The 90 days come from the 90 Days warranty alert
+    /// interval, so the tile and the alert window stay consistent.
     /// </summary>
     /// <param name="EquipmentCue">The cue record to set the filters on.</param>
     /// <param name="ReferenceDate">The date the tiles are calculated on.</param>
     internal procedure SetWarrantyCueFilters(var EquipmentCue: Record "EQM Equipment Cue"; ReferenceDate: Date)
     var
         Equipment: Record "EQM Equipment";
+        WarrantyAlertMgt: Codeunit "EQM Warranty Alert Mgt.";
         ExpiringSoonDays: Integer;
+        ExpiringWithin90Days: Integer;
     begin
         if ReferenceDate = 0D then
             ReferenceDate := Today();
         ExpiringSoonDays := Equipment.GetWarrantyExpiringSoonDays();
+        ExpiringWithin90Days := WarrantyAlertMgt.GetIntervalDays(Enum::"EQM Warranty Alert Interval"::"90 Days");
         EquipmentCue.SetRange("Warranty Expiring Filter", ReferenceDate, ReferenceDate + ExpiringSoonDays);
         EquipmentCue.SetFilter("Warranty Expired Filter", '<>%1&<%2', 0D, ReferenceDate);
+        EquipmentCue.SetFilter("Active Warranty Filter", '>=%1', ReferenceDate);
+        EquipmentCue.SetRange("Warranty 90 Days Filter", ReferenceDate, ReferenceDate + ExpiringWithin90Days);
     end;
 
     /// <summary>

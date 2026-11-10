@@ -1,6 +1,24 @@
 # Changelog
 Newest first. Grouped by Added / Changed / Fixed / Obsolete.
 
+## FR-022 Warranty Dashboard (version stays 29.0.0.0, no bump)
+### Added
+- Table 50104 "EQM Equipment Cue": field 33 "Active Warranties" (FlowField) with FlowFilter 42, field 34 "Warranties Expiring 90 Days" (FlowField) with FlowFilter 43. Nothing is stored.
+- Page 50106: tiles Active Warranties and Warranties Expiring in 90 Days at the start of the Warranty group, both with drill-down to the Equipment List. Shown on the dashboard and the Role Center.
+- Active Warranties: Warranty End Date today or later (includes warranties expiring soon). Warranties Expiring in 90 Days: end date from today to today + 90 (includes the 30-day tile). Lost and Disposed equipment and blank end dates are not counted; start date is ignored; real date, not Work Date. The 90 days come from the 90 Days warranty alert interval (FR-016).
+- Help article docs/help/FR-022-warranty-dashboard.md.
+### Changed
+- Captions of the existing tiles: "Warranty Expiring Soon" is now "Warranties Expiring in 30 Days", "Warranty Expired" is now "Expired Warranties" (field names unchanged; counting unchanged).
+- Codeunit 50107 `SetWarrantyCueFilters` also sets the two new filters (signature unchanged). AboutText and search terms of the Equipment Dashboard.
+### Fixed
+- None.
+### Obsolete
+- None.
+
+Release notes: The equipment dashboard and the Role Center now show four warranty numbers: Active Warranties, Warranties Expiring in 90 Days, Warranties Expiring in 30 Days and Expired Warranties. Choose a number to see the equipment behind it. The two existing warranty tiles were renamed to match; they count as before.
+
+Note: no new objects, no stored data, no upgrade code, no new event, no permission change. Review: APPROVE. CodeCop and UICop compile clean. Automated tests are deferred (test ID 50176 reserved); platform checks V1, V4 and V5 and sandbox checks WD-SB1 to WD-SB8 are not run.
+
 ## FR-021 Maintenance Dashboard (version stays 29.0.0.0, no bump)
 ### Added
 - Table 50104 "EQM Equipment Cue": field 22 "Total Maintenance Cost YTD" (FlowField) with FlowFilter 23, field 52 "Planned Maintenance This Month" (FlowField) with FlowFilter 53. Nothing is stored.

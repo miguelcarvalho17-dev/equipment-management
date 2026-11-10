@@ -96,7 +96,7 @@ table 50104 "EQM Equipment Cue"
         }
         field(30; "Warranty Expiring Soon"; Integer)
         {
-            Caption = 'Warranty Expiring Soon';
+            Caption = 'Warranties Expiring in 30 Days';
             ToolTip = 'Specifies the number of equipment records whose warranty ends within the next 30 days, today included. Lost and disposed equipment is not counted.';
             FieldClass = FlowField;
             CalcFormula = count("EQM Equipment" where("Warranty End Date" = field("Warranty Expiring Filter"), Status = filter(<> Lost & <> Disposed)));
@@ -104,7 +104,7 @@ table 50104 "EQM Equipment Cue"
         }
         field(31; "Warranty Expired"; Integer)
         {
-            Caption = 'Warranty Expired';
+            Caption = 'Expired Warranties';
             ToolTip = 'Specifies the number of equipment records whose warranty end date has passed. Lost and disposed equipment and equipment without a warranty end date are not counted.';
             FieldClass = FlowField;
             CalcFormula = count("EQM Equipment" where("Warranty End Date" = field("Warranty Expired Filter"), Status = filter(<> Lost & <> Disposed)));
@@ -118,6 +118,22 @@ table 50104 "EQM Equipment Cue"
             CalcFormula = count("EQM Warranty Alert" where(Status = const(Open)));
             Editable = false;
         }
+        field(33; "Active Warranties"; Integer)
+        {
+            Caption = 'Active Warranties';
+            ToolTip = 'Specifies the number of equipment records whose warranty is still in force: the warranty end date is today or later. Warranties that expire within the next 30 days are included. Lost and disposed equipment and equipment without a warranty end date are not counted. Choose the number to see the equipment.';
+            FieldClass = FlowField;
+            CalcFormula = count("EQM Equipment" where("Warranty End Date" = field("Active Warranty Filter"), Status = filter(<> Lost & <> Disposed)));
+            Editable = false;
+        }
+        field(34; "Warranties Expiring 90 Days"; Integer)
+        {
+            Caption = 'Warranties Expiring in 90 Days';
+            ToolTip = 'Specifies the number of equipment records whose warranty ends within the next 90 days, today included. Warranties that end within 30 days are included. Lost and disposed equipment is not counted. Choose the number to see the equipment.';
+            FieldClass = FlowField;
+            CalcFormula = count("EQM Equipment" where("Warranty End Date" = field("Warranty 90 Days Filter"), Status = filter(<> Lost & <> Disposed)));
+            Editable = false;
+        }
         field(40; "Warranty Expiring Filter"; Date)
         {
             Caption = 'Warranty Expiring Filter';
@@ -128,6 +144,18 @@ table 50104 "EQM Equipment Cue"
         {
             Caption = 'Warranty Expired Filter';
             ToolTip = 'Specifies the warranty end dates that count as expired. It is set automatically.';
+            FieldClass = FlowFilter;
+        }
+        field(42; "Active Warranty Filter"; Date)
+        {
+            Caption = 'Active Warranty Filter';
+            ToolTip = 'Specifies the warranty end dates that count as active. It is set automatically.';
+            FieldClass = FlowFilter;
+        }
+        field(43; "Warranty 90 Days Filter"; Date)
+        {
+            Caption = 'Warranty 90 Days Filter';
+            ToolTip = 'Specifies the warranty end dates that count as expiring within 90 days. It is set automatically.';
             FieldClass = FlowFilter;
         }
         field(50; "Overdue Maintenance Equipment"; Integer)

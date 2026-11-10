@@ -528,6 +528,26 @@
           <note from="Developer" annotates="general" priority="2"></note>
           <note from="Xliff Generator" annotates="general" priority="3">Table EQM Equipment Cue - Property Caption</note>
         </trans-unit>
+        <trans-unit id="Table 2297682612 - Field 3353222178 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Specifies the number of equipment records whose warranty is still in force: the warranty end date is today or later. Warranties that expire within the next 30 days are included. Lost and disposed equipment and equipment without a warranty end date are not counted. Choose the number to see the equipment.</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table EQM Equipment Cue - Field Active Warranties - Property ToolTip</note>
+        </trans-unit>
+        <trans-unit id="Table 2297682612 - Field 3353222178 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Active Warranties</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table EQM Equipment Cue - Field Active Warranties - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Table 2297682612 - Field 3085916156 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Specifies the warranty end dates that count as active. It is set automatically.</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table EQM Equipment Cue - Field Active Warranty Filter - Property ToolTip</note>
+        </trans-unit>
+        <trans-unit id="Table 2297682612 - Field 3085916156 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Active Warranty Filter</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table EQM Equipment Cue - Field Active Warranty Filter - Property Caption</note>
+        </trans-unit>
         <trans-unit id="Table 2297682612 - Field 1784929222 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
           <source>Specifies the number of equipment records that are assigned to an employee.</source>
           <note from="Developer" annotates="general" priority="2"></note>
@@ -683,13 +703,33 @@
           <note from="Developer" annotates="general" priority="2"></note>
           <note from="Xliff Generator" annotates="general" priority="3">Table EQM Equipment Cue - Field Total Maintenance Cost YTD - Property Caption</note>
         </trans-unit>
+        <trans-unit id="Table 2297682612 - Field 861444822 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Specifies the number of equipment records whose warranty ends within the next 90 days, today included. Warranties that end within 30 days are included. Lost and disposed equipment is not counted. Choose the number to see the equipment.</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table EQM Equipment Cue - Field Warranties Expiring 90 Days - Property ToolTip</note>
+        </trans-unit>
+        <trans-unit id="Table 2297682612 - Field 861444822 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Warranties Expiring in 90 Days</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table EQM Equipment Cue - Field Warranties Expiring 90 Days - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Table 2297682612 - Field 2198964046 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Specifies the warranty end dates that count as expiring within 90 days. It is set automatically.</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table EQM Equipment Cue - Field Warranty 90 Days Filter - Property ToolTip</note>
+        </trans-unit>
+        <trans-unit id="Table 2297682612 - Field 2198964046 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Warranty 90 Days Filter</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table EQM Equipment Cue - Field Warranty 90 Days Filter - Property Caption</note>
+        </trans-unit>
         <trans-unit id="Table 2297682612 - Field 732195245 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
           <source>Specifies the number of equipment records whose warranty end date has passed. Lost and disposed equipment and equipment without a warranty end date are not counted.</source>
           <note from="Developer" annotates="general" priority="2"></note>
           <note from="Xliff Generator" annotates="general" priority="3">Table EQM Equipment Cue - Field Warranty Expired - Property ToolTip</note>
         </trans-unit>
         <trans-unit id="Table 2297682612 - Field 732195245 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
-          <source>Warranty Expired</source>
+          <source>Expired Warranties</source>
           <note from="Developer" annotates="general" priority="2"></note>
           <note from="Xliff Generator" annotates="general" priority="3">Table EQM Equipment Cue - Field Warranty Expired - Property Caption</note>
         </trans-unit>
@@ -719,7 +759,7 @@
           <note from="Xliff Generator" annotates="general" priority="3">Table EQM Equipment Cue - Field Warranty Expiring Soon - Property ToolTip</note>
         </trans-unit>
         <trans-unit id="Table 2297682612 - Field 3768265657 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
-          <source>Warranty Expiring Soon</source>
+          <source>Warranties Expiring in 30 Days</source>
           <note from="Developer" annotates="general" priority="2"></note>
           <note from="Xliff Generator" annotates="general" priority="3">Table EQM Equipment Cue - Field Warranty Expiring Soon - Property Caption</note>
         </trans-unit>
@@ -1839,7 +1879,7 @@
           <note from="Xliff Generator" annotates="general" priority="3">Page EQM Equipment Dashboard - Property AboutTitle</note>
         </trans-unit>
         <trans-unit id="Page 3818031089 - Property 247559172" size-unit="char" translate="yes" xml:space="preserve">
-          <source>The tiles count your equipment by status, show how many warranties are expiring within 30 days or have expired, how many warranty alerts are open, how many pieces of equipment have planned maintenance due this month or overdue, and show the total cost of posted maintenance, this year's cost so far and the average cost. **Total Equipment** includes lost and disposed equipment; the warranty and planned maintenance tiles do not. **Overdue Maintenance Equipment** turns red when at least one piece of equipment has a next maintenance date before today. The charts show how your equipment is spread over categories and statuses, which categories cost the most in maintenance, and the ten pieces of equipment with the highest maintenance cost. Choose a tile or a chart segment to see the details. Choose **Refresh** to update the numbers.</source>
+          <source>The tiles count your equipment by status, show how many warranties are active, expire within 90 or 30 days or have expired, how many warranty alerts are open, how many pieces of equipment have planned maintenance due this month or overdue, and show the total cost of posted maintenance, this year's cost so far and the average cost. **Total Equipment** includes lost and disposed equipment; the warranty and planned maintenance tiles do not. **Active Warranties** includes the warranties that expire soon, and **Warranties Expiring in 90 Days** includes those that expire within 30 days. **Overdue Maintenance Equipment** turns red when at least one piece of equipment has a next maintenance date before today. The charts show how your equipment is spread over categories and statuses, which categories cost the most in maintenance, and the ten pieces of equipment with the highest maintenance cost. Choose a tile or a chart segment to see the details. Choose **Refresh** to update the numbers.</source>
           <note from="Developer" annotates="general" priority="2"></note>
           <note from="Xliff Generator" annotates="general" priority="3">Page EQM Equipment Dashboard - Property AboutText</note>
         </trans-unit>
@@ -1849,7 +1889,7 @@
           <note from="Xliff Generator" annotates="general" priority="3">Page EQM Equipment Dashboard - Property Caption</note>
         </trans-unit>
         <trans-unit id="Page 3818031089 - Property 3863440606" size-unit="char" translate="yes" xml:space="preserve">
-          <source>equipment kpi, equipment overview, equipment chart, maintenance cost, maintenance kpi, warranty expiration, expiring warranties, warranty alerts, overdue maintenance, maintenance due, maintenance dashboard, maintenance this month, maintenance cost ytd</source>
+          <source>equipment kpi, equipment overview, equipment chart, maintenance cost, maintenance kpi, warranty expiration, expiring warranties, warranty alerts, overdue maintenance, maintenance due, maintenance dashboard, maintenance this month, maintenance cost ytd, warranty dashboard, warranty kpi, active warranties, expired warranties</source>
           <note from="Developer" annotates="general" priority="2"></note>
           <note from="Xliff Generator" annotates="general" priority="3">Page EQM Equipment Dashboard - Property AdditionalSearchTerms</note>
         </trans-unit>
