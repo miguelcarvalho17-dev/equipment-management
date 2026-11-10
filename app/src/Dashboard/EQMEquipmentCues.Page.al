@@ -46,6 +46,14 @@ page 50106 "EQM Equipment Cues"
             {
                 Caption = 'Warranty';
 
+                field("Active Warranties"; Rec."Active Warranties")
+                {
+                    DrillDownPageId = "EQM Equipment List";
+                }
+                field("Warranties Expiring 90 Days"; Rec."Warranties Expiring 90 Days")
+                {
+                    DrillDownPageId = "EQM Equipment List";
+                }
                 field("Warranty Expiring Soon"; Rec."Warranty Expiring Soon")
                 {
                     DrillDownPageId = "EQM Equipment List";

@@ -18,6 +18,8 @@ Choose a tile to open the Equipment list showing only the equipment behind the n
 
 The **Overdue Maintenance Equipment** tile, in the group **Planned Maintenance**, counts equipment whose next maintenance date is before today (not lost or disposed equipment, not equipment without a date). It is red when at least one is overdue and green when none is. Choose it to open the Equipment list with only that equipment. See the overdue maintenance help (FR-020).
 
+The **Warranty** group shows Active Warranties, Warranties Expiring in 90 Days, Warranties Expiring in 30 Days and Expired Warranties (earlier called Warranty Expiring Soon and Warranty Expired). See the warranty dashboard help (FR-022).
+
 The **Maintenance Costs** tiles show **Total Maintenance Cost** and **Average Maintenance Cost** of all posted maintenance. Choose one to open the Maintenance History.
 
 ## Charts

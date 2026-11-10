@@ -180,3 +180,16 @@ Source: "Manual sandbox checks" in `docs/plans/FR-021-maintenance-dashboard.md`.
 - [ ] Nothing is committed yet. The repo has no commits.
 - [ ] Without a UI session (API, job queue) both confirmations default to Yes. Revisit this if the tables are ever exposed through an API.
 - [ ] Deleting an Employee with `RunTrigger = false` bypasses the delete guard. This is documented in the help.
+
+## FR-022 sandbox checks (not run; automated tests deferred, Q9, test codeunit 50176 reserved)
+Source: "Manual sandbox checks" in `docs/plans/FR-022-warranty-dashboard.md`.
+- [ ] V1 date FlowFilter `>=` ignores blank end dates; V4 new tiles calculate without explicit `CalcFields`; V5 drill-down applies the filters.
+- [ ] WD-SB1 Build with CodeCop, UICop and AppSourceCop; `.g.xlf` has the new captions, ToolTips, AboutText and search terms.
+- [ ] WD-SB2 Tile order and caption readability on dashboard and Role Center.
+- [ ] WD-SB3 Boundary days: today, today + 90, today + 91, today - 1.
+- [ ] WD-SB4 Drill-down from both new tiles opens the filtered list; record the filters shown.
+- [ ] WD-SB5 Dispose equipment with an active warranty: tiles go down after Refresh.
+- [ ] WD-SB6 Change the work date to last year: tiles do not change.
+- [ ] WD-SB7 Non-SUPER Reader sees the tiles and can drill down.
+- [ ] WD-SB8 Tell Me finds the dashboard with "warranty dashboard"; teaching tip shows the new text.
+- [ ] Record the results and update "Test status" in `docs/features/FR-022-warranty-dashboard.md` and the TODO(verify) items in the help article.

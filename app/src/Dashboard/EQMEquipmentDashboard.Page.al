@@ -4,11 +4,11 @@ page 50109 "EQM Equipment Dashboard"
 {
     Caption = 'Equipment Dashboard';
     AboutTitle = 'About the equipment dashboard';
-    AboutText = 'The tiles count your equipment by status, show how many warranties are expiring within 30 days or have expired, how many warranty alerts are open, how many pieces of equipment have planned maintenance due this month or overdue, and show the total cost of posted maintenance, this year''s cost so far and the average cost. **Total Equipment** includes lost and disposed equipment; the warranty and planned maintenance tiles do not. **Overdue Maintenance Equipment** turns red when at least one piece of equipment has a next maintenance date before today. The charts show how your equipment is spread over categories and statuses, which categories cost the most in maintenance, and the ten pieces of equipment with the highest maintenance cost. Choose a tile or a chart segment to see the details. Choose **Refresh** to update the numbers.';
+    AboutText = 'The tiles count your equipment by status, show how many warranties are active, expire within 90 or 30 days or have expired, how many warranty alerts are open, how many pieces of equipment have planned maintenance due this month or overdue, and show the total cost of posted maintenance, this year''s cost so far and the average cost. **Total Equipment** includes lost and disposed equipment; the warranty and planned maintenance tiles do not. **Active Warranties** includes the warranties that expire soon, and **Warranties Expiring in 90 Days** includes those that expire within 30 days. **Overdue Maintenance Equipment** turns red when at least one piece of equipment has a next maintenance date before today. The charts show how your equipment is spread over categories and statuses, which categories cost the most in maintenance, and the ten pieces of equipment with the highest maintenance cost. Choose a tile or a chart segment to see the details. Choose **Refresh** to update the numbers.';
     PageType = Card;
     ApplicationArea = All;
     UsageCategory = ReportsAndAnalysis;
-    AdditionalSearchTerms = 'equipment kpi, equipment overview, equipment chart, maintenance cost, maintenance kpi, warranty expiration, expiring warranties, warranty alerts, overdue maintenance, maintenance due, maintenance dashboard, maintenance this month, maintenance cost ytd';
+    AdditionalSearchTerms = 'equipment kpi, equipment overview, equipment chart, maintenance cost, maintenance kpi, warranty expiration, expiring warranties, warranty alerts, overdue maintenance, maintenance due, maintenance dashboard, maintenance this month, maintenance cost ytd, warranty dashboard, warranty kpi, active warranties, expired warranties';
     Editable = false;
 
     layout

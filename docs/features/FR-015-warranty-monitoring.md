@@ -10,7 +10,7 @@ Status: describes the code as implemented (uncommitted changes on branch `featur
 |---|---|---|---|
 | Enum | 50104 | EQM Warranty Status | New. Values 0 " " (blank), 1 Active, 2 "Expiring Soon", 3 Expired. `Extensible = false`. File `EQMWarrantyStatus.Enum.al`. |
 | Table | 50100 | EQM Equipment | New internal procedures `GetWarrantyExpiringSoonDays`, `CalcWarrantyStatus`, `GetWarrantyStatus`, `GetWarrantyStatusStyle`. ToolTip of field 18 "Warranty End Date" now explains the status. No new field. |
-| Table | 50104 | EQM Equipment Cue (temporary) | FlowFields 30 "Warranty Expiring Soon" and 31 "Warranty Expired"; FlowFilters 40 "Warranty Expiring Filter" and 41 "Warranty Expired Filter". |
+| Table | 50104 | EQM Equipment Cue (temporary) | FlowFields 30 "Warranty Expiring Soon" (caption "Warranties Expiring in 30 Days" since FR-022) and 31 "Warranty Expired" (caption "Expired Warranties" since FR-022); FlowFilters 40 "Warranty Expiring Filter" and 41 "Warranty Expired Filter". |
 | Codeunit | 50107 | EQM Dashboard Mgt. | New internal procedure `SetWarrantyCueFilters(var EquipmentCue; ReferenceDate)`. |
 | Page | 50106 | EQM Equipment Cues | New cue group `Warranty` (between Equipment and Maintenance Costs) with two tiles that drill down to the Equipment List. `OnOpenPage` calls `SetWarrantyCueFilters(Rec, Today())`. |
 | Page | 50101 | EQM Equipment Card | Field `WarrantyStatus` after Warranty End Date (not editable, Promoted, styled). `OnValidate` of Warranty End Date and `UpdateControls` call the local `UpdateWarrantyStatus`. |
@@ -33,7 +33,7 @@ Reference date D = Warranty End Date, T = today (`Today()`, not the work date).
 - **Style:** `GetWarrantyStatusStyle` returns Favorable (Active), Ambiguous (Expiring Soon), Unfavorable (Expired), Standard (blank), using the existing style labels.
 - **Card:** recalculated on `OnAfterGetRecord`, `OnNewRecord` (via `UpdateControls`) and when Warranty End Date is changed on the page. Changing the Warranty Start Date does not change it.
 - **List:** visible by default, calculated per row. Because the columns around it are hidden, it appears after Location Code.
-- **Tiles:** "Warranty Expiring Soon" counts equipment with an end date from T to T + 30; "Warranty Expired" counts equipment with a non-blank end date before T. Both exclude Status Lost and Disposed (`Status = filter(<> Lost & <> Disposed)`). The card and list still show the status for Lost and Disposed equipment. Filters are set once in `OnOpenPage`.
+- **Tiles:** (captions "Warranties Expiring in 30 Days" and "Expired Warranties" since FR-022; field names unchanged; see the FR-022 feature doc for the added Active and 90-day tiles) "Warranty Expiring Soon" counts equipment with an end date from T to T + 30; "Warranty Expired" counts equipment with a non-blank end date before T. Both exclude Status Lost and Disposed (`Status = filter(<> Lost & <> Disposed)`). The card and list still show the status for Lost and Disposed equipment. Filters are set once in `OnOpenPage`.
 - **Informational only:** the status blocks nothing (assign, return, maintenance and posting are unchanged).
 
 ## Setup

@@ -71,6 +71,8 @@ Sorted by Status, Warranty End Date; read-only (no insert, modify, delete). Page
 ### Telemetry
 `Session.LogMessage` event ID `EQM0001`, message 'Warranty alerts generated.', `Verbosity::Normal`, `DataClassification::SystemMetadata`, `TelemetryScope::All`, once per run. Dimensions: AlertsCreated, AlertsCancelled, ReferenceDate (format 9), Trigger (`JobQueue` or `Manual`). No equipment numbers or user names. `applicationInsightsConnectionString` is still missing in app.json (see docs/TODO.md); with scope All the signal reaches the environment's own Application Insights.
 
+Cross-reference (FR-022): the cue tile "Warranties Expiring in 90 Days" counts equipment with an end date from R to R + 90, taking the 90 from `GetIntervalDays` of the 90 Days interval of this codeunit, so the tile and the alert window use one definition.
+
 ## Setup (job queue entry)
 No code creates the job queue entry (plan Q6). An administrator creates it:
 1. Open **Job Queue Entries** > **New**.
