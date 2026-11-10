@@ -138,6 +138,19 @@ Source: "Manual sandbox checks" in `docs/plans/FR-020-overdue-maintenance-monito
 - [ ] OM-SB9 Non-SUPER Reader sees highlight and tile; teaching tips show the new texts; Tell Me finds the dashboard with "overdue maintenance".
 - [ ] Record the results and update "Test status" in `docs/features/FR-020-overdue-maintenance-monitoring.md` and the TODO(verify) items in the help article.
 
+## FR-021 sandbox checks (not run; automated tests deferred, Q9, test codeunit 50175 reserved)
+Source: "Manual sandbox checks" in `docs/plans/FR-021-maintenance-dashboard.md`.
+- [ ] V2 YTD sum FlowField respects the filter without `CalcFields`; V3 drill-down of the YTD tile applies the date range.
+- [ ] MD-SB1 Build with CodeCop, UICop and AppSourceCop; `.g.xlf` has the new texts and not the locked date formula labels.
+- [ ] MD-SB2 Tile order on dashboard and Role Center; YTD amount formatted as currency.
+- [ ] MD-SB3 Next dates on the 1st and last day of this month are counted; neighbouring days are not.
+- [ ] MD-SB4 Drill-down from both new tiles opens the filtered list; record the filters shown.
+- [ ] MD-SB5 Post a Preventive record for equipment due this month: month tile down, YTD up by the cost after Refresh.
+- [ ] MD-SB6 Change the work date to last year: tiles do not change.
+- [ ] MD-SB7 Non-SUPER Reader sees the tiles and can drill down.
+- [ ] MD-SB8 Tell Me finds the dashboard with "maintenance dashboard"; teaching tip shows the new text.
+- [ ] Record the results and update "Test status" in `docs/features/FR-021-maintenance-dashboard.md` and the TODO(verify) items in the help article.
+
 ## Open design and fix items
 - [x] FR-007 known limitation (Employee read): addressed in code by NFR-002 (name blank without Employee read, `ReadPermission()` guard). Not verified in a sandbox (SB9).
 - [ ] **New companies:** default data and number series are created only in `OnInstallAppPerCompany`. In a company created later the setup record is missing, and equipment creation fails on `TestField("Equipment Nos.")`. Create the defaults on company initialization (subscribe to the company-initialize event) or give the user path working permissions. NFR-002: the Administrator path now has indirect No. Series rights (ri), but defaults are still created only on install or when an Administrator opens Setup. Readers and Managers get the setup-missing error. Not verified (SB8).

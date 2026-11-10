@@ -79,6 +79,21 @@ table 50104 "EQM Equipment Cue"
             AutoFormatType = 1;
             Editable = false;
         }
+        field(22; "Total Maintenance Cost YTD"; Decimal)
+        {
+            Caption = 'Total Maintenance Cost YTD';
+            ToolTip = 'Specifies the total cost of the maintenance posted with a maintenance date from 1 January of the current year up to and including today, in local currency. Open maintenance records are not included until they are posted. Choose the amount to see the maintenance history.';
+            FieldClass = FlowField;
+            CalcFormula = sum("EQM Maintenance History Entry".Cost where("Maintenance Date" = field("Maint. Cost YTD Filter")));
+            AutoFormatType = 1;
+            Editable = false;
+        }
+        field(23; "Maint. Cost YTD Filter"; Date)
+        {
+            Caption = 'Maintenance Cost YTD Filter';
+            ToolTip = 'Specifies the maintenance dates that count for the year-to-date maintenance cost. It is set automatically.';
+            FieldClass = FlowFilter;
+        }
         field(30; "Warranty Expiring Soon"; Integer)
         {
             Caption = 'Warranty Expiring Soon';
@@ -127,6 +142,20 @@ table 50104 "EQM Equipment Cue"
         {
             Caption = 'Overdue Maintenance Filter';
             ToolTip = 'Specifies the next maintenance dates that count as overdue. It is set automatically.';
+            FieldClass = FlowFilter;
+        }
+        field(52; "Planned Maintenance This Month"; Integer)
+        {
+            Caption = 'Planned Maintenance This Month';
+            ToolTip = 'Specifies the number of equipment records whose next maintenance date is in the current month, including dates earlier this month that are already overdue. Lost and disposed equipment is not counted. When preventive maintenance is posted, the next maintenance date moves forward and the equipment is no longer counted. Choose the number to see the equipment.';
+            FieldClass = FlowField;
+            CalcFormula = count("EQM Equipment" where("Next Maintenance Date" = field("Planned Maint. Month Filter"), Status = filter(<> Lost & <> Disposed)));
+            Editable = false;
+        }
+        field(53; "Planned Maint. Month Filter"; Date)
+        {
+            Caption = 'Planned Maintenance Month Filter';
+            ToolTip = 'Specifies the next maintenance dates that count as planned this month. It is set automatically.';
             FieldClass = FlowFilter;
         }
     }

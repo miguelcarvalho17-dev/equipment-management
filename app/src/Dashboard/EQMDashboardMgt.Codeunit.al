@@ -10,6 +10,9 @@ codeunit 50107 "EQM Dashboard Mgt."
     var
         FavorableStyleTok: Label 'Favorable', Locked = true;
         UnfavorableStyleTok: Label 'Unfavorable', Locked = true;
+        StartOfMonthFormulaTok: Label '<-CM>', Locked = true;
+        EndOfMonthFormulaTok: Label '<CM>', Locked = true;
+        StartOfYearFormulaTok: Label '<-CY>', Locked = true;
 
     /// <summary>
     /// Counts the equipment per category, for every category that has at least one equipment record.
@@ -113,17 +116,32 @@ codeunit 50107 "EQM Dashboard Mgt."
     end;
 
     /// <summary>
-    /// Sets the date filter of the overdue maintenance tile so that it counts the same equipment as
-    /// IsPlannedMaintenanceOverdue on the equipment: a next maintenance date that is filled in and before the reference
-    /// date. 0D means today.
+    /// Sets the date filters of the planned maintenance tiles from a reference date. Overdue: a next maintenance date
+    /// that is filled in and before the reference date, the same rule as IsPlannedMaintenanceOverdue on the equipment.
+    /// Planned this month: a next maintenance date from the first to the last day of the reference date's month.
+    /// 0D means today.
     /// </summary>
-    /// <param name="EquipmentCue">The cue record to set the filter on.</param>
-    /// <param name="ReferenceDate">The date the tile is calculated on.</param>
+    /// <param name="EquipmentCue">The cue record to set the filters on.</param>
+    /// <param name="ReferenceDate">The date the tiles are calculated on.</param>
     internal procedure SetPlannedMaintenanceCueFilters(var EquipmentCue: Record "EQM Equipment Cue"; ReferenceDate: Date)
     begin
         if ReferenceDate = 0D then
             ReferenceDate := Today();
         EquipmentCue.SetFilter("Overdue Maintenance Filter", '<>%1&<%2', 0D, ReferenceDate);
+        EquipmentCue.SetRange("Planned Maint. Month Filter", CalcDate(StartOfMonthFormulaTok, ReferenceDate), CalcDate(EndOfMonthFormulaTok, ReferenceDate));
+    end;
+
+    /// <summary>
+    /// Sets the date filter of the year-to-date maintenance cost tile: maintenance dates from 1 January of the
+    /// reference date's year up to and including the reference date. 0D means today.
+    /// </summary>
+    /// <param name="EquipmentCue">The cue record to set the filter on.</param>
+    /// <param name="ReferenceDate">The date the tile is calculated on.</param>
+    internal procedure SetMaintenanceCostCueFilters(var EquipmentCue: Record "EQM Equipment Cue"; ReferenceDate: Date)
+    begin
+        if ReferenceDate = 0D then
+            ReferenceDate := Today();
+        EquipmentCue.SetRange("Maint. Cost YTD Filter", CalcDate(StartOfYearFormulaTok, ReferenceDate), ReferenceDate);
     end;
 
     /// <summary>

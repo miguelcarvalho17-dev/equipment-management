@@ -588,6 +588,16 @@
           <note from="Developer" annotates="general" priority="2"></note>
           <note from="Xliff Generator" annotates="general" priority="3">Table EQM Equipment Cue - Field Lost Equipment - Property Caption</note>
         </trans-unit>
+        <trans-unit id="Table 2297682612 - Field 3869296149 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Specifies the maintenance dates that count for the year-to-date maintenance cost. It is set automatically.</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table EQM Equipment Cue - Field Maint. Cost YTD Filter - Property ToolTip</note>
+        </trans-unit>
+        <trans-unit id="Table 2297682612 - Field 3869296149 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Maintenance Cost YTD Filter</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table EQM Equipment Cue - Field Maint. Cost YTD Filter - Property Caption</note>
+        </trans-unit>
         <trans-unit id="Table 2297682612 - Field 401514863 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
           <source>Specifies the number of warranty alerts that are open. An alert is created 90, 60 and 30 days before a warranty ends. Choose the number to see and acknowledge the alerts.</source>
           <note from="Developer" annotates="general" priority="2"></note>
@@ -618,6 +628,26 @@
           <note from="Developer" annotates="general" priority="2"></note>
           <note from="Xliff Generator" annotates="general" priority="3">Table EQM Equipment Cue - Field Overdue Maintenance Filter - Property Caption</note>
         </trans-unit>
+        <trans-unit id="Table 2297682612 - Field 505582167 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Specifies the next maintenance dates that count as planned this month. It is set automatically.</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table EQM Equipment Cue - Field Planned Maint. Month Filter - Property ToolTip</note>
+        </trans-unit>
+        <trans-unit id="Table 2297682612 - Field 505582167 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Planned Maintenance Month Filter</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table EQM Equipment Cue - Field Planned Maint. Month Filter - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Table 2297682612 - Field 1174350297 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Specifies the number of equipment records whose next maintenance date is in the current month, including dates earlier this month that are already overdue. Lost and disposed equipment is not counted. When preventive maintenance is posted, the next maintenance date moves forward and the equipment is no longer counted. Choose the number to see the equipment.</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table EQM Equipment Cue - Field Planned Maintenance This Month - Property ToolTip</note>
+        </trans-unit>
+        <trans-unit id="Table 2297682612 - Field 1174350297 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Planned Maintenance This Month</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table EQM Equipment Cue - Field Planned Maintenance This Month - Property Caption</note>
+        </trans-unit>
         <trans-unit id="Table 2297682612 - Field 1663593181 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
           <source>Primary Key</source>
           <note from="Developer" annotates="general" priority="2"></note>
@@ -642,6 +672,16 @@
           <source>Total Maintenance Cost</source>
           <note from="Developer" annotates="general" priority="2"></note>
           <note from="Xliff Generator" annotates="general" priority="3">Table EQM Equipment Cue - Field Total Maintenance Cost - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Table 2297682612 - Field 3666904583 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Specifies the total cost of the maintenance posted with a maintenance date from 1 January of the current year up to and including today, in local currency. Open maintenance records are not included until they are posted. Choose the amount to see the maintenance history.</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table EQM Equipment Cue - Field Total Maintenance Cost YTD - Property ToolTip</note>
+        </trans-unit>
+        <trans-unit id="Table 2297682612 - Field 3666904583 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Total Maintenance Cost YTD</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table EQM Equipment Cue - Field Total Maintenance Cost YTD - Property Caption</note>
         </trans-unit>
         <trans-unit id="Table 2297682612 - Field 732195245 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
           <source>Specifies the number of equipment records whose warranty end date has passed. Lost and disposed equipment and equipment without a warranty end date are not counted.</source>
@@ -1799,7 +1839,7 @@
           <note from="Xliff Generator" annotates="general" priority="3">Page EQM Equipment Dashboard - Property AboutTitle</note>
         </trans-unit>
         <trans-unit id="Page 3818031089 - Property 247559172" size-unit="char" translate="yes" xml:space="preserve">
-          <source>The tiles count your equipment by status, show how many warranties are expiring within 30 days or have expired, how many warranty alerts are open, how many pieces of equipment are overdue for planned maintenance, and show the total and average cost of posted maintenance. **Total Equipment** includes lost and disposed equipment; the warranty and overdue maintenance tiles do not. **Overdue Maintenance Equipment** turns red when at least one piece of equipment has a next maintenance date before today. The charts show how your equipment is spread over categories and statuses, which categories cost the most in maintenance, and the ten pieces of equipment with the highest maintenance cost. Choose a tile or a chart segment to see the details. Choose **Refresh** to update the numbers.</source>
+          <source>The tiles count your equipment by status, show how many warranties are expiring within 30 days or have expired, how many warranty alerts are open, how many pieces of equipment have planned maintenance due this month or overdue, and show the total cost of posted maintenance, this year's cost so far and the average cost. **Total Equipment** includes lost and disposed equipment; the warranty and planned maintenance tiles do not. **Overdue Maintenance Equipment** turns red when at least one piece of equipment has a next maintenance date before today. The charts show how your equipment is spread over categories and statuses, which categories cost the most in maintenance, and the ten pieces of equipment with the highest maintenance cost. Choose a tile or a chart segment to see the details. Choose **Refresh** to update the numbers.</source>
           <note from="Developer" annotates="general" priority="2"></note>
           <note from="Xliff Generator" annotates="general" priority="3">Page EQM Equipment Dashboard - Property AboutText</note>
         </trans-unit>
@@ -1809,7 +1849,7 @@
           <note from="Xliff Generator" annotates="general" priority="3">Page EQM Equipment Dashboard - Property Caption</note>
         </trans-unit>
         <trans-unit id="Page 3818031089 - Property 3863440606" size-unit="char" translate="yes" xml:space="preserve">
-          <source>equipment kpi, equipment overview, equipment chart, maintenance cost, maintenance kpi, warranty expiration, expiring warranties, warranty alerts, overdue maintenance, maintenance due</source>
+          <source>equipment kpi, equipment overview, equipment chart, maintenance cost, maintenance kpi, warranty expiration, expiring warranties, warranty alerts, overdue maintenance, maintenance due, maintenance dashboard, maintenance this month, maintenance cost ytd</source>
           <note from="Developer" annotates="general" priority="2"></note>
           <note from="Xliff Generator" annotates="general" priority="3">Page EQM Equipment Dashboard - Property AdditionalSearchTerms</note>
         </trans-unit>

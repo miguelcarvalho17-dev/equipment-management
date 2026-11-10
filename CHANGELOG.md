@@ -1,6 +1,24 @@
 # Changelog
 Newest first. Grouped by Added / Changed / Fixed / Obsolete.
 
+## FR-021 Maintenance Dashboard (version stays 29.0.0.0, no bump)
+### Added
+- Table 50104 "EQM Equipment Cue": field 22 "Total Maintenance Cost YTD" (FlowField) with FlowFilter 23, field 52 "Planned Maintenance This Month" (FlowField) with FlowFilter 53. Nothing is stored.
+- Page 50106: tile Planned Maintenance This Month (group Planned Maintenance, before Overdue Maintenance Equipment) and tile Total Maintenance Cost YTD (group Maintenance Costs, between Total and Average), both with drill-down. Shown on the dashboard and the Role Center.
+- Planned this month: Next Maintenance Date from the first to the last day of the current month, Lost and Disposed excluded; overdue dates earlier in the month are included, so the overdue tile can count the same equipment. Cost YTD: posted maintenance with Maintenance Date from 1 January to today. Both use the real date, not Work Date.
+- Internal procedure codeunit 50107 `SetMaintenanceCostCueFilters`.
+- Help article docs/help/FR-021-maintenance-dashboard.md.
+### Changed
+- Codeunit 50107 `SetPlannedMaintenanceCueFilters` also sets the month filter. AboutText and search terms of the Equipment Dashboard.
+### Fixed
+- None.
+### Obsolete
+- None.
+
+Release notes: The equipment dashboard and the Role Center have two new tiles. Planned Maintenance This Month counts the equipment whose next maintenance date falls in the current month, and Total Maintenance Cost YTD shows the cost of posted maintenance from 1 January to today. Both open the records behind the number.
+
+Note: no new objects in the app, no stored data, no upgrade code, no new event, no permission change. Review: APPROVE WITH COMMENTS, no blockers. CodeCop and UICop compile clean (0 errors, 0 warnings). Automated tests are deferred (test ID 50175 reserved); platform checks V2 and V3 and sandbox checks MD-SB1 to MD-SB8 are open.
+
 ## FR-020 Overdue Maintenance Monitoring (version stays 29.0.0.0, no bump)
 ### Added
 - Equipment is overdue when Next Maintenance Date is before today (real date, not Work Date); due today is not overdue. Blank dates and Lost / Disposed equipment are never overdue. Nothing is stored.

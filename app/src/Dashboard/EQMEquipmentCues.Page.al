@@ -63,6 +63,10 @@ page 50106 "EQM Equipment Cues"
             {
                 Caption = 'Planned Maintenance';
 
+                field("Planned Maintenance This Month"; Rec."Planned Maintenance This Month")
+                {
+                    DrillDownPageId = "EQM Equipment List";
+                }
                 field("Overdue Maintenance Equipment"; Rec."Overdue Maintenance Equipment")
                 {
                     DrillDownPageId = "EQM Equipment List";
@@ -74,6 +78,10 @@ page 50106 "EQM Equipment Cues"
                 Caption = 'Maintenance Costs';
 
                 field("Total Maintenance Cost"; Rec."Total Maintenance Cost")
+                {
+                    DrillDownPageId = "EQM Maintenance History";
+                }
+                field("Total Maintenance Cost YTD"; Rec."Total Maintenance Cost YTD")
                 {
                     DrillDownPageId = "EQM Maintenance History";
                 }
@@ -100,6 +108,7 @@ page 50106 "EQM Equipment Cues"
         end;
         DashboardMgt.SetWarrantyCueFilters(Rec, Today());
         DashboardMgt.SetPlannedMaintenanceCueFilters(Rec, Today());
+        DashboardMgt.SetMaintenanceCostCueFilters(Rec, Today());
         NotificationMgt.ShowRoleCenterNotifications();
     end;
 
