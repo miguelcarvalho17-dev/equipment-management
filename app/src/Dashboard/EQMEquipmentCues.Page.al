@@ -59,6 +59,16 @@ page 50106 "EQM Equipment Cues"
                     DrillDownPageId = "EQM Warranty Alerts";
                 }
             }
+            cuegroup(PlannedMaintenance)
+            {
+                Caption = 'Planned Maintenance';
+
+                field("Overdue Maintenance Equipment"; Rec."Overdue Maintenance Equipment")
+                {
+                    DrillDownPageId = "EQM Equipment List";
+                    StyleExpr = OverdueMaintenanceStyle;
+                }
+            }
             cuegroup(MaintenanceCosts)
             {
                 Caption = 'Maintenance Costs';
@@ -75,6 +85,9 @@ page 50106 "EQM Equipment Cues"
         }
     }
 
+    var
+        OverdueMaintenanceStyle: Text;
+
     trigger OnOpenPage()
     var
         DashboardMgt: Codeunit "EQM Dashboard Mgt.";
@@ -86,7 +99,16 @@ page 50106 "EQM Equipment Cues"
             Rec.Insert();
         end;
         DashboardMgt.SetWarrantyCueFilters(Rec, Today());
+        DashboardMgt.SetPlannedMaintenanceCueFilters(Rec, Today());
         NotificationMgt.ShowRoleCenterNotifications();
+    end;
+
+    trigger OnAfterGetRecord()
+    var
+        DashboardMgt: Codeunit "EQM Dashboard Mgt.";
+    begin
+        Rec.CalcFields("Overdue Maintenance Equipment");
+        OverdueMaintenanceStyle := DashboardMgt.GetOverdueMaintenanceCueStyle(Rec."Overdue Maintenance Equipment");
     end;
 
     /// <summary>

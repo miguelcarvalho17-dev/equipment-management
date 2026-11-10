@@ -7,6 +7,10 @@ codeunit 50107 "EQM Dashboard Mgt."
 {
     Access = Internal;
 
+    var
+        FavorableStyleTok: Label 'Favorable', Locked = true;
+        UnfavorableStyleTok: Label 'Unfavorable', Locked = true;
+
     /// <summary>
     /// Counts the equipment per category, for every category that has at least one equipment record.
     /// </summary>
@@ -106,6 +110,33 @@ codeunit 50107 "EQM Dashboard Mgt."
         ExpiringSoonDays := Equipment.GetWarrantyExpiringSoonDays();
         EquipmentCue.SetRange("Warranty Expiring Filter", ReferenceDate, ReferenceDate + ExpiringSoonDays);
         EquipmentCue.SetFilter("Warranty Expired Filter", '<>%1&<%2', 0D, ReferenceDate);
+    end;
+
+    /// <summary>
+    /// Sets the date filter of the overdue maintenance tile so that it counts the same equipment as
+    /// IsPlannedMaintenanceOverdue on the equipment: a next maintenance date that is filled in and before the reference
+    /// date. 0D means today.
+    /// </summary>
+    /// <param name="EquipmentCue">The cue record to set the filter on.</param>
+    /// <param name="ReferenceDate">The date the tile is calculated on.</param>
+    internal procedure SetPlannedMaintenanceCueFilters(var EquipmentCue: Record "EQM Equipment Cue"; ReferenceDate: Date)
+    begin
+        if ReferenceDate = 0D then
+            ReferenceDate := Today();
+        EquipmentCue.SetFilter("Overdue Maintenance Filter", '<>%1&<%2', 0D, ReferenceDate);
+    end;
+
+    /// <summary>
+    /// Returns the style of the overdue maintenance tile: Unfavorable when at least one equipment is overdue,
+    /// Favorable when none is.
+    /// </summary>
+    /// <param name="OverdueCount">The value of the tile.</param>
+    /// <returns>The style name.</returns>
+    internal procedure GetOverdueMaintenanceCueStyle(OverdueCount: Integer): Text
+    begin
+        if OverdueCount > 0 then
+            exit(UnfavorableStyleTok);
+        exit(FavorableStyleTok);
     end;
 
     /// <summary>

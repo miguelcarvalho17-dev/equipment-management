@@ -48,6 +48,7 @@ page 50115 "EQM Maintenance FactBox"
             }
             field("Next Maintenance Date"; Rec."Next Maintenance Date")
             {
+                StyleExpr = NextMaintenanceStyle;
             }
             field(TotalMaintenanceCost; Rec."Total Maintenance Cost")
             {
@@ -73,6 +74,7 @@ page 50115 "EQM Maintenance FactBox"
         LastMaintenanceType: Text;
         MaintenanceCostPct: Decimal;
         MaintenanceCostStyle: Text;
+        NextMaintenanceStyle: Text;
 
     trigger OnFindRecord(Which: Text): Boolean
     begin
@@ -83,6 +85,7 @@ page 50115 "EQM Maintenance FactBox"
     trigger OnAfterGetRecord()
     begin
         ClearFactBox();
+        NextMaintenanceStyle := Rec.GetNextMaintenanceDateStyle();
         UpdateFactBox();
     end;
 
@@ -94,6 +97,7 @@ page 50115 "EQM Maintenance FactBox"
         LastMaintenanceType := '';
         MaintenanceCostPct := 0;
         MaintenanceCostStyle := '';
+        NextMaintenanceStyle := '';
     end;
 
     local procedure UpdateFactBox()

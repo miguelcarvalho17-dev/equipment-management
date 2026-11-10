@@ -23,7 +23,7 @@ You can combine filters.
 The list shows **Total Maintenance Cost** for each piece of equipment. You can also show **No. of Posted Maintenances**, **Average Maintenance Cost** and **Maintenance Cost %**, and filter on the cost in the filter pane. To see the cost of one period, choose **Filter totals by** and set **Date Filter**. See the maintenance costs help (FR-013).
 
 ## See when maintenance is due
-The list shows **Next Maintenance Date**. Filter on it with a date range to find equipment that is due in a period. **Last Maintenance Date** and **Maintenance Frequency (Months)** are available as hidden columns; show them through personalization. See the planned maintenance help (FR-019).
+The list shows **Next Maintenance Date**. It is shown in red when the planned maintenance is overdue (before today; not for lost or disposed equipment). Filter on it with a date range to find equipment that is due in a period, or choose the **Overdue Maintenance Equipment** tile on the dashboard. **Last Maintenance Date** and **Maintenance Frequency (Months)** are available as hidden columns; show them through personalization. See the planned maintenance help (FR-019) and the overdue maintenance help (FR-020).
 
 ## See who has the equipment
 **Assigned Employee Name** shows the name of the employee the equipment is assigned to. It is blank when the equipment is not assigned. You cannot filter or search on the name. Filter on **Assigned Employee No.** instead; the employee lookup shows names.

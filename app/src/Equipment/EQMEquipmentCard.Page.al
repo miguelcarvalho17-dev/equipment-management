@@ -155,14 +155,24 @@ page 50101 "EQM Equipment Card"
 
                 field("Last Maintenance Date"; Rec."Last Maintenance Date")
                 {
+                    trigger OnValidate()
+                    begin
+                        UpdateNextMaintenanceStyle();
+                    end;
                 }
                 field("Maintenance Frequency (Months)"; Rec."Maintenance Frequency (Months)")
                 {
                     Importance = Promoted;
+
+                    trigger OnValidate()
+                    begin
+                        UpdateNextMaintenanceStyle();
+                    end;
                 }
                 field("Next Maintenance Date"; Rec."Next Maintenance Date")
                 {
                     Importance = Promoted;
+                    StyleExpr = NextMaintenanceStyle;
                 }
             }
             part(AssignmentHistory; "EQM Assignment History Part")
@@ -365,6 +375,7 @@ page 50101 "EQM Equipment Card"
         StatusStyle: Text;
         WarrantyStatus: Enum "EQM Warranty Status";
         WarrantyStatusStyle: Text;
+        NextMaintenanceStyle: Text;
         ActiveAssignmentDate: Date;
         ActiveAssignedBy: Code[50];
         CreatedByUserName: Code[50];
@@ -442,12 +453,18 @@ page 50101 "EQM Equipment Card"
         CreatedByUserName := GetUserName(Rec.SystemCreatedBy);
         ModifiedByUserName := GetUserName(Rec.SystemModifiedBy);
         UpdateWarrantyStatus();
+        UpdateNextMaintenanceStyle();
     end;
 
     local procedure UpdateWarrantyStatus()
     begin
         WarrantyStatus := Rec.GetWarrantyStatus();
         WarrantyStatusStyle := Rec.GetWarrantyStatusStyle(WarrantyStatus);
+    end;
+
+    local procedure UpdateNextMaintenanceStyle()
+    begin
+        NextMaintenanceStyle := Rec.GetNextMaintenanceDateStyle();
     end;
 
     local procedure GetUserName(UserSecurityId: Guid): Code[50]

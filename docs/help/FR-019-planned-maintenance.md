@@ -32,7 +32,7 @@ On the **Equipment** list, **Next Maintenance Date** is shown. Set a filter on i
 
 The Maintenance FactBox shows **Next Maintenance Date**. Its two other date and type fields are now called **Latest Record Date** and **Latest Record Type**: they show the most recent maintenance record of any type, open or posted, and are not the same as the planned last maintenance date.
 
-The app does not show a due or overdue status and sends no alert for planned maintenance.
+Equipment whose next maintenance date is before today is shown in red and counted on a dashboard tile; see Overdue maintenance monitoring. The app sends no alert for planned maintenance.
 
 ## Release notes
 Planned Maintenance: on the Equipment Card you can now enter a maintenance frequency in months and the date of the last maintenance, and the app calculates the next maintenance date. Posting a Preventive maintenance record moves the last maintenance date forward automatically. The Equipment list shows the next maintenance date, so you can filter for equipment that is due in a period. In the Maintenance FactBox, the fields for the most recent record are renamed Latest Record Date and Latest Record Type, and the next maintenance date is added.

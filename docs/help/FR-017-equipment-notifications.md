@@ -20,7 +20,7 @@ The Equipment Manager Role Center and the Equipment Dashboard show a summary, fo
 Alerts only exist after the daily job has run or a manager has chosen **Generate Alerts**. Without alerts, no warranty notification appears.
 
 ## Maintenance is overdue
-A maintenance record is overdue when it is still **Open** more than 14 days after its **Maintenance Date** (15 days or more). Posted records are never overdue.
+A maintenance record is overdue when it is still **Open** more than 14 days after its **Maintenance Date** (15 days or more). Posted records are never overdue. This is not the planned maintenance date: equipment whose **Next Maintenance Date** is before today is highlighted in red and counted on the **Overdue Maintenance Equipment** tile (see the overdue maintenance help, FR-020), without a notification.
 
 - On the **Equipment Card**: "Maintenance <number> for <equipment> <number> has been open for <n> days. Post it when the work is finished." If there are several, the oldest is named. Choose **Show open maintenance** to open the open records of the equipment.
 - On the **Maintenance Record Card** of an overdue open record: "Maintenance record <number> has been open for <n> days. Post it when the work is finished." The notice disappears after you post the record.

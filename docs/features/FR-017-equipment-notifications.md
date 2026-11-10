@@ -85,10 +85,10 @@ No stored field or upgrade code; one new secondary key on table 50105 (nothing r
 ## Known limitations
 - Notifications appear only when a user opens the page; there is no push to users who do not.
 - Warranty notifications need FR-016 alerts (job queue entry or Generate Alerts) and stop once the alert is acknowledged. Expired warranties get none.
-- "Overdue" is a fixed 14 days after the Maintenance Date; there is no maintenance schedule and no setup field.
+- "Overdue" here means an open record 14 days after the Maintenance Date (not the FR-020 planned-maintenance overdue, Next Maintenance Date before today); there is no maintenance schedule and no setup field.
 - `Today()` can differ from the user's date by a day in other time zones.
 - Up to two notifications show each time the Role Center or dashboard opens. A user can switch them off in My Notifications.
-- No notification on the Equipment List or Employee Card; no "Overdue Maintenance" tile.
+- No notification on the Equipment List or Employee Card; no "Overdue Maintenance" tile (FR-020 later added an Overdue Maintenance Equipment tile for planned maintenance, a different concept: Next Maintenance Date before today, not open records).
 - No automated tests.
 
 ## Not verified

@@ -6,7 +6,7 @@ page 50100 "EQM Equipment List"
 {
     Caption = 'Equipment';
     AboutTitle = 'About equipment';
-    AboutText = 'This list shows all your equipment. Use **Search** to find equipment by its number, serial number, or any other column you can see. To filter by category, status, or assigned employee, open the filter pane and add a filter on that field. You can also choose a status view at the top of the list. **Warranty Status** shows whether the warranty is active, expiring soon or expired; to find equipment by warranty, filter on **Warranty End Date** or choose a warranty tile on the dashboard. **Next Maintenance Date** shows when planned maintenance is due; to find equipment that is due in a period, filter on it with a date range. **Total Maintenance Cost** shows the cost of posted maintenance; to see the cost of one period, set **Date Filter** under **Filter totals by**.';
+    AboutText = 'This list shows all your equipment. Use **Search** to find equipment by its number, serial number, or any other column you can see. To filter by category, status, or assigned employee, open the filter pane and add a filter on that field. You can also choose a status view at the top of the list. **Warranty Status** shows whether the warranty is active, expiring soon or expired; to find equipment by warranty, filter on **Warranty End Date** or choose a warranty tile on the dashboard. **Next Maintenance Date** shows when planned maintenance is due and is highlighted when the maintenance is overdue; to find equipment that is due in a period, filter on it with a date range, or choose the **Overdue Maintenance Equipment** tile on the dashboard. **Total Maintenance Cost** shows the cost of posted maintenance; to see the cost of one period, set **Date Filter** under **Filter totals by**.';
     PageType = List;
     ApplicationArea = All;
     UsageCategory = Lists;
@@ -86,6 +86,7 @@ page 50100 "EQM Equipment List"
                 }
                 field("Next Maintenance Date"; Rec."Next Maintenance Date")
                 {
+                    StyleExpr = NextMaintenanceStyle;
                 }
                 field("Last Maintenance Date"; Rec."Last Maintenance Date")
                 {
@@ -255,6 +256,7 @@ page 50100 "EQM Equipment List"
         MaintenanceCostStyle: Text;
         WarrantyStatus: Enum "EQM Warranty Status";
         WarrantyStatusStyle: Text;
+        NextMaintenanceStyle: Text;
 
     trigger OnAfterGetRecord()
     var
@@ -265,6 +267,7 @@ page 50100 "EQM Equipment List"
         MaintenanceCostStyle := Rec.GetMaintenanceCostStyle(MaintenanceCostPct);
         WarrantyStatus := Rec.GetWarrantyStatus();
         WarrantyStatusStyle := Rec.GetWarrantyStatusStyle(WarrantyStatus);
+        NextMaintenanceStyle := Rec.GetNextMaintenanceDateStyle();
         AssignedEmployeeName := '';
         if (Rec."Assigned Employee No." <> '') and Employee.ReadPermission() then begin
             Employee.SetLoadFields("First Name", "Middle Name", "Last Name");

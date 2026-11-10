@@ -12,7 +12,7 @@ Search for **Equipment**, then open a piece of equipment from the list. The firs
 The **General** section holds the equipment details. **Status** is highlighted so you can see it at a glance.
 
 ## Planned Maintenance
-The **Planned Maintenance** section, after Warranty, holds **Last Maintenance Date**, **Maintenance Frequency (Months)** and the calculated **Next Maintenance Date**. See the planned maintenance help (FR-019).
+The **Planned Maintenance** section, after Warranty, holds **Last Maintenance Date**, **Maintenance Frequency (Months)** and the calculated **Next Maintenance Date**. The next maintenance date is shown in red when it is before today, unless the equipment is lost or disposed. See the planned maintenance help (FR-019) and the overdue maintenance help (FR-020).
 
 ## Assignment
 - **Assigned Employee No.** and **Assigned Employee Name**: who has the equipment now.
