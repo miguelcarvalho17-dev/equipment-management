@@ -79,6 +79,7 @@ The objective is to ensure that equipment remains operational, warranty coverage
 | Automated background processing, daily job queue entries for warranty alerts and overdue maintenance (FR-018) | Built, not yet verified in a Business Central sandbox |
 | Maintenance schedules, planned maintenance date and frequency on the equipment (FR-019) | Built, not yet verified in a Business Central sandbox |
 | Overdue maintenance monitoring, red next maintenance date and dashboard tile (FR-020) | Built, not yet verified in a Business Central sandbox |
+| Maintenance dashboard KPIs (FR-021) | Built, not yet verified in a Business Central sandbox |
 | Warranty tracking | Planned |
 | Automated notifications | Planned |
 | Lifecycle monitoring | Planned |
