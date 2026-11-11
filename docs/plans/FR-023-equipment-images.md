@@ -1,6 +1,6 @@
 # FR-023 Equipment Images
 
-> Status: **DRAFT, awaiting approval.** Revision 3: user decided Q1 = single picture with strict page 346 "Item Picture" behavior (every Import/Take replaces the existing picture after confirmation). The 10-picture maximum (Q2), add-to-set import, multi-picture zip export and "Number of Pictures" field are dropped. See Deviations.
+> Status: **APPROVED** Revision 3: user decided Q1 = single picture with strict page 346 "Item Picture" behavior (every Import/Take replaces the existing picture after confirmation). The 10-picture maximum (Q2), add-to-set import, multi-picture zip export and "Number of Pictures" field are dropped. See Deviations.
 > Source: GitHub issue #61. Branch `feature/FR-023-equipment-images`. No events report: only own objects (table 50100, pages 50100/50101, permission set 50100) and system codeunits are used; no standard behavior is hooked.
 > Scope: main app. New: 1 FactBox page, 1 codeunit. Changed: table 50100 (field + fieldgroup), pages 50100 and 50101, permission set 50100. No version bump (29.0.0.0, unreleased). No upgrade code. Tests deferred by default (Q4).
 
