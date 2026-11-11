@@ -288,6 +288,16 @@
           <note from="Developer" annotates="general" priority="2"></note>
           <note from="Xliff Generator" annotates="general" priority="3">Table EQM Equipment - Field No. Series - Property Caption</note>
         </trans-unit>
+        <trans-unit id="Table 4212454693 - Field 1594621544 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Specifies the picture of the equipment, such as a photo of the asset.</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table EQM Equipment - Field Picture - Property ToolTip</note>
+        </trans-unit>
+        <trans-unit id="Table 4212454693 - Field 1594621544 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Picture</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table EQM Equipment - Field Picture - Property Caption</note>
+        </trans-unit>
         <trans-unit id="Table 4212454693 - Field 2805819452 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
           <source>Specifies the purchase cost of the equipment.</source>
           <note from="Developer" annotates="general" priority="2"></note>
@@ -1393,6 +1403,36 @@
           <note from="Developer" annotates="general" priority="2">%1 = employee number</note>
           <note from="Xliff Generator" annotates="general" priority="3">Codeunit EQM Employee Subscribers - NamedType EmployeeHasAssignedEquipmentErr</note>
         </trans-unit>
+        <trans-unit id="Codeunit 1134106857 - NamedType 2865259996" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Are you sure you want to delete the picture?</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit EQM Equipment Picture Mgt. - NamedType DeleteImageQst</note>
+        </trans-unit>
+        <trans-unit id="Codeunit 1134106857 - NamedType 741987060" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Equipment %1 has no picture to export.</source>
+          <note from="Developer" annotates="general" priority="2">%1 = equipment number</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit EQM Equipment Picture Mgt. - NamedType NoPictureErr</note>
+        </trans-unit>
+        <trans-unit id="Codeunit 1134106857 - NamedType 1398852855" size-unit="char" translate="yes" xml:space="preserve">
+          <source>The existing picture will be replaced. Do you want to continue?</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit EQM Equipment Picture Mgt. - NamedType OverrideImageQst</note>
+        </trans-unit>
+        <trans-unit id="Codeunit 1134106857 - NamedType 2495462880" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Save the equipment before you add a picture.</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit EQM Equipment Picture Mgt. - NamedType SaveEquipmentFirstErr</note>
+        </trans-unit>
+        <trans-unit id="Codeunit 1134106857 - NamedType 881804384" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Select a picture to upload</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit EQM Equipment Picture Mgt. - NamedType SelectPictureTitleTxt</note>
+        </trans-unit>
+        <trans-unit id="Codeunit 1134106857 - NamedType 120455930" size-unit="char" translate="yes" xml:space="preserve">
+          <source>The file %1 is not a supported picture. Choose a JPG, PNG, GIF, BMP or TIFF file.</source>
+          <note from="Developer" annotates="general" priority="2">%1 = file name</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit EQM Equipment Picture Mgt. - NamedType UnsupportedFileErr</note>
+        </trans-unit>
         <trans-unit id="Codeunit 3359203152 - NamedType 2141140146" size-unit="char" translate="yes" xml:space="preserve">
           <source>Do you want to post maintenance record %1? It is copied to the maintenance history, and after that you cannot change it. If no other maintenance is open for the equipment, its status changes from In Maintenance to Available.</source>
           <note from="Developer" annotates="general" priority="2">%1 = maintenance record number</note>
@@ -1659,7 +1699,7 @@
           <note from="Xliff Generator" annotates="general" priority="3">Page EQM Equipment Card - Property AboutTitle</note>
         </trans-unit>
         <trans-unit id="Page 3574600233 - Property 247559172" size-unit="char" translate="yes" xml:space="preserve">
-          <source>Here you manage one piece of equipment. The first sections show its details, its current status and who it is assigned to, its purchase and warranty information, and its planned maintenance. Use **Assign to Employee** and **Return** to change the assignment, and **Register Maintenance** to record maintenance work. Further down, **Assignment History** lists every assignment, **Maintenance History** lists every posted maintenance, and **Audit** shows who created the record and who changed it last.</source>
+          <source>Here you manage one piece of equipment. The first sections show its details, its current status and who it is assigned to, its purchase and warranty information, and its planned maintenance. Use **Assign to Employee** and **Return** to change the assignment, and **Register Maintenance** to record maintenance work. Further down, **Assignment History** lists every assignment, **Maintenance History** lists every posted maintenance, and **Audit** shows who created the record and who changed it last. The **Picture** FactBox shows the picture of the equipment; use its actions to take, import, export or delete it.</source>
           <note from="Developer" annotates="general" priority="2"></note>
           <note from="Xliff Generator" annotates="general" priority="3">Page EQM Equipment Card - Property AboutText</note>
         </trans-unit>
@@ -2367,6 +2407,51 @@
           <source>Equipment Setup</source>
           <note from="Developer" annotates="general" priority="2"></note>
           <note from="Xliff Generator" annotates="general" priority="3">Page EQM Equipment Manager RC - Action EquipmentSetup - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Page 4236535089 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Picture</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page EQM Equipment Picture - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Page 4236535089 - Action 3119204463 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Delete the picture of the equipment.</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page EQM Equipment Picture - Action DeletePicture - Property ToolTip</note>
+        </trans-unit>
+        <trans-unit id="Page 4236535089 - Action 3119204463 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Delete</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page EQM Equipment Picture - Action DeletePicture - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Page 4236535089 - Action 2665042526 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Export the picture of the equipment to a file.</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page EQM Equipment Picture - Action ExportFile - Property ToolTip</note>
+        </trans-unit>
+        <trans-unit id="Page 4236535089 - Action 2665042526 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Export</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page EQM Equipment Picture - Action ExportFile - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Page 4236535089 - Action 2864777531 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Import a picture file for the equipment. An existing picture is replaced after you confirm.</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page EQM Equipment Picture - Action ImportPicture - Property ToolTip</note>
+        </trans-unit>
+        <trans-unit id="Page 4236535089 - Action 2864777531 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Import</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page EQM Equipment Picture - Action ImportPicture - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Page 4236535089 - Action 3051446377 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Activate the camera on the device to take a picture of the equipment.</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page EQM Equipment Picture - Action TakePicture - Property ToolTip</note>
+        </trans-unit>
+        <trans-unit id="Page 4236535089 - Action 3051446377 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Take</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page EQM Equipment Picture - Action TakePicture - Property Caption</note>
         </trans-unit>
         <trans-unit id="Page 1065098760 - Property 1064389655" size-unit="char" translate="yes" xml:space="preserve">
           <source>About equipment setup</source>

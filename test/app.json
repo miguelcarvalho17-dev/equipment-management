@@ -16,6 +16,18 @@
       "name": "Equipment Management",
       "publisher": "Miguel Carvalho",
       "version": "1.0.0.0"
+    },
+    {
+      "id": "dd0be2ea-f733-4d65-bb34-a28f4624fb14",
+      "name": "Library Assert",
+      "publisher": "Microsoft",
+      "version": "29.0.0.0"
+    },
+    {
+      "id": "5095f467-0a01-4b99-99d1-9ff1237d286f",
+      "name": "Tests-TestLibraries",
+      "publisher": "Microsoft",
+      "version": "29.0.0.0"
     }
   ],
   "screenshots": [],
@@ -24,7 +36,6 @@
   "idRanges": [
     { "from": 50150, "to": 50199 }
   ],
-  "test": "29.0.0.0",
   "runtime": "18.0",
   "target": "Cloud",
   "features": [ "NoImplicitWith" ]

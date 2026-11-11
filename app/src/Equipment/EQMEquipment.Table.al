@@ -243,6 +243,11 @@ table 50100 "EQM Equipment"
                 UpdateNextMaintenanceDate();
             end;
         }
+        field(24; Picture; MediaSet)
+        {
+            Caption = 'Picture';
+            ToolTip = 'Specifies the picture of the equipment, such as a photo of the asset.';
+        }
     }
 
     keys
@@ -267,7 +272,7 @@ table 50100 "EQM Equipment"
         fieldgroup(DropDown; "No.", Description, "Category Code", Status)
         {
         }
-        fieldgroup(Brick; "No.", Description, Status)
+        fieldgroup(Brick; "No.", Description, Status, Picture)
         {
         }
     }
