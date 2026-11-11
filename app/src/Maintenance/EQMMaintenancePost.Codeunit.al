@@ -19,6 +19,7 @@ codeunit 50109 "EQM Maintenance-Post"
     var
         StoredRecord: Record "EQM Maintenance Record";
         MaintenanceHistoryEntry: Record "EQM Maintenance History Entry";
+        MaintenanceLogMgt: Codeunit "EQM Maintenance Log Mgt.";
     begin
         StoredRecord.ReadIsolation := IsolationLevel::UpdLock;
         StoredRecord.SetLoadFields(Status);
@@ -38,6 +39,7 @@ codeunit 50109 "EQM Maintenance-Post"
         Rec.Modify(true);
 
         InsertHistoryEntry(Rec, MaintenanceHistoryEntry);
+        MaintenanceLogMgt.LogPosted(Rec);
         CompleteEquipmentMaintenance(Rec);
 
         OnAfterPostMaintenanceRecord(Rec, MaintenanceHistoryEntry);
