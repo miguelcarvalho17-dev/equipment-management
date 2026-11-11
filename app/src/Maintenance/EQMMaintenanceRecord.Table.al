@@ -8,7 +8,8 @@ using Microsoft.Purchases.Vendor;
 /// equipment. Registering a record sets the equipment status to In Maintenance; while the equipment has open records it
 /// cannot be assigned. Open records can be corrected. Posting freezes the record, writes a maintenance history entry
 /// and, when no other record is open, sets the equipment back to Available. Records are never deleted, so equipment
-/// that has maintenance records cannot be deleted either.
+/// that has maintenance records cannot be deleted either. Registering, correcting (old and new value per field) and
+/// posting are recorded in the maintenance log.
 /// </summary>
 table 50105 "EQM Maintenance Record"
 {
@@ -162,6 +163,7 @@ table 50105 "EQM Maintenance Record"
     var
         EquipmentSetup: Record "EQM Equipment Setup";
         Equipment: Record "EQM Equipment";
+        MaintenanceLogMgt: Codeunit "EQM Maintenance Log Mgt.";
         NoSeries: Codeunit "No. Series";
     begin
         if "No." = '' then begin
@@ -181,12 +183,20 @@ table 50105 "EQM Maintenance Record"
         Equipment.ReadIsolation := IsolationLevel::UpdLock;
         if Equipment.Get("Equipment No.") then
             Equipment.StartMaintenance(Rec);
+
+        MaintenanceLogMgt.LogRegistered(Rec);
     end;
 
     trigger OnModify()
+    var
+        StoredRecord: Record "EQM Maintenance Record";
+        MaintenanceLogMgt: Codeunit "EQM Maintenance Log Mgt.";
     begin
         CheckNotPosted();
         CheckMaintenanceConsistency(false);
+
+        if StoredRecord.Get("No.") then
+            MaintenanceLogMgt.LogChanges(StoredRecord, Rec);
     end;
 
     trigger OnDelete()

@@ -953,6 +953,121 @@
           <note from="Developer" annotates="general" priority="2"></note>
           <note from="Xliff Generator" annotates="general" priority="3">Table EQM Maintenance History Entry - Field Vendor No. - Property Caption</note>
         </trans-unit>
+        <trans-unit id="Table 1237679160 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Maintenance Log Entry</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table EQM Maintenance Log Entry - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Table 1237679160 - NamedType 658144035" size-unit="char" translate="yes" xml:space="preserve">
+          <source>You cannot delete maintenance log entry %1. The maintenance log is kept permanently.</source>
+          <note from="Developer" annotates="general" priority="2">%1 = entry number</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table EQM Maintenance Log Entry - NamedType DeleteNotAllowedErr</note>
+        </trans-unit>
+        <trans-unit id="Table 1237679160 - NamedType 1297145545" size-unit="char" translate="yes" xml:space="preserve">
+          <source>You cannot create maintenance log entries directly. Entries are created when you register, change or post a maintenance record.</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table EQM Maintenance Log Entry - NamedType InsertNotAllowedErr</note>
+        </trans-unit>
+        <trans-unit id="Table 1237679160 - NamedType 3659624548" size-unit="char" translate="yes" xml:space="preserve">
+          <source>You cannot change maintenance log entry %1. The maintenance log is read-only.</source>
+          <note from="Developer" annotates="general" priority="2">%1 = entry number</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table EQM Maintenance Log Entry - NamedType ModifyNotAllowedErr</note>
+        </trans-unit>
+        <trans-unit id="Table 1237679160 - NamedType 3435470116" size-unit="char" translate="yes" xml:space="preserve">
+          <source>You cannot change the number of maintenance log entry %1.</source>
+          <note from="Developer" annotates="general" priority="2">%1 = entry number</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table EQM Maintenance Log Entry - NamedType RenameNotAllowedErr</note>
+        </trans-unit>
+        <trans-unit id="Table 1237679160 - Field 2279323338 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Specifies the operation that was performed: Registered, Changed or Posted.</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table EQM Maintenance Log Entry - Field Action - Property ToolTip</note>
+        </trans-unit>
+        <trans-unit id="Table 1237679160 - Field 2279323338 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Action</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table EQM Maintenance Log Entry - Field Action - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Table 1237679160 - Field 883711285 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Specifies the number of the maintenance log entry.</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table EQM Maintenance Log Entry - Field Entry No. - Property ToolTip</note>
+        </trans-unit>
+        <trans-unit id="Table 1237679160 - Field 883711285 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Entry No.</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table EQM Maintenance Log Entry - Field Entry No. - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Table 1237679160 - Field 823559016 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Specifies the name of the field that was changed.</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table EQM Maintenance Log Entry - Field Field Caption - Property ToolTip</note>
+        </trans-unit>
+        <trans-unit id="Table 1237679160 - Field 823559016 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Field Caption</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table EQM Maintenance Log Entry - Field Field Caption - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Table 1237679160 - Field 3531868071 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Specifies the number of the field that was changed. It is 0 for Registered and Posted entries.</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table EQM Maintenance Log Entry - Field Field No. - Property ToolTip</note>
+        </trans-unit>
+        <trans-unit id="Table 1237679160 - Field 3531868071 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Field No.</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table EQM Maintenance Log Entry - Field Field No. - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Table 1237679160 - Field 3032596473 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Specifies the date and time when the operation was performed.</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table EQM Maintenance Log Entry - Field Logged At - Property ToolTip</note>
+        </trans-unit>
+        <trans-unit id="Table 1237679160 - Field 3032596473 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Logged At</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table EQM Maintenance Log Entry - Field Logged At - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Table 1237679160 - Field 804216390 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Specifies the number of the maintenance record that the operation was performed on.</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table EQM Maintenance Log Entry - Field Maintenance No. - Property ToolTip</note>
+        </trans-unit>
+        <trans-unit id="Table 1237679160 - Field 804216390 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Maintenance No.</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table EQM Maintenance Log Entry - Field Maintenance No. - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Table 1237679160 - Field 2432660905 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Specifies the value of the field after the change, in XML format.</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table EQM Maintenance Log Entry - Field New Value - Property ToolTip</note>
+        </trans-unit>
+        <trans-unit id="Table 1237679160 - Field 2432660905 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>New Value</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table EQM Maintenance Log Entry - Field New Value - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Table 1237679160 - Field 3205443024 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Specifies the value of the field before the change, in XML format.</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table EQM Maintenance Log Entry - Field Old Value - Property ToolTip</note>
+        </trans-unit>
+        <trans-unit id="Table 1237679160 - Field 3205443024 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Old Value</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table EQM Maintenance Log Entry - Field Old Value - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Table 1237679160 - Field 2708250016 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Specifies the user who performed the operation.</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table EQM Maintenance Log Entry - Field User ID - Property ToolTip</note>
+        </trans-unit>
+        <trans-unit id="Table 1237679160 - Field 2708250016 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>User ID</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table EQM Maintenance Log Entry - Field User ID - Property Caption</note>
+        </trans-unit>
         <trans-unit id="Table 3517502179 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
           <source>Maintenance Record</source>
           <note from="Developer" annotates="general" priority="2"></note>
@@ -2498,13 +2613,33 @@
           <note from="Developer" annotates="general" priority="2"></note>
           <note from="Xliff Generator" annotates="general" priority="3">Page EQM Maintenance History Part - Action ShowMaintenanceRecord - Property Caption</note>
         </trans-unit>
+        <trans-unit id="Page 1822869878 - Property 1064389655" size-unit="char" translate="yes" xml:space="preserve">
+          <source>About the maintenance log</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page EQM Maintenance Log Entries - Property AboutTitle</note>
+        </trans-unit>
+        <trans-unit id="Page 1822869878 - Property 247559172" size-unit="char" translate="yes" xml:space="preserve">
+          <source>This list shows who registered, changed and posted maintenance records, and when. For every changed field it shows the old and the new value. Entries cannot be changed or deleted.</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page EQM Maintenance Log Entries - Property AboutText</note>
+        </trans-unit>
+        <trans-unit id="Page 1822869878 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Maintenance Log Entries</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page EQM Maintenance Log Entries - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Page 1822869878 - Property 3863440606" size-unit="char" translate="yes" xml:space="preserve">
+          <source>maintenance audit, maintenance changes, maintenance log</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page EQM Maintenance Log Entries - Property AdditionalSearchTerms</note>
+        </trans-unit>
         <trans-unit id="Page 774058295 - Property 1064389655" size-unit="char" translate="yes" xml:space="preserve">
           <source>About maintenance records</source>
           <note from="Developer" annotates="general" priority="2"></note>
           <note from="Xliff Generator" annotates="general" priority="3">Page EQM Maintenance Record Card - Property AboutTitle</note>
         </trans-unit>
         <trans-unit id="Page 774058295 - Property 247559172" size-unit="char" translate="yes" xml:space="preserve">
-          <source>Register maintenance on equipment. Choose the equipment, the date and the type of maintenance, and add the vendor, the cost and who did the work. When you register the record, the equipment status changes to In Maintenance and the equipment cannot be assigned. You cannot register maintenance for lost or disposed equipment. You can correct the record until you choose **Post**. Posting copies it to the maintenance history, locks it and, when no other maintenance is open, makes the equipment Available again. Maintenance records can never be deleted.</source>
+          <source>Register maintenance on equipment. Choose the equipment, the date and the type of maintenance, and add the vendor, the cost and who did the work. When you register the record, the equipment status changes to In Maintenance and the equipment cannot be assigned. You cannot register maintenance for lost or disposed equipment. You can correct the record until you choose **Post**. Posting copies it to the maintenance history, locks it and, when no other maintenance is open, makes the equipment Available again. Maintenance records can never be deleted. Choose **Log Entries** to see who registered, changed and posted a record, and when.</source>
           <note from="Developer" annotates="general" priority="2"></note>
           <note from="Xliff Generator" annotates="general" priority="3">Page EQM Maintenance Record Card - Property AboutText</note>
         </trans-unit>
@@ -2553,6 +2688,16 @@
           <note from="Developer" annotates="general" priority="2"></note>
           <note from="Xliff Generator" annotates="general" priority="3">Page EQM Maintenance Record Card - Action HistoryEntry - Property Caption</note>
         </trans-unit>
+        <trans-unit id="Page 774058295 - Action 2316947810 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
+          <source>View who registered, changed and posted the maintenance record, with the old and new value of each changed field.</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page EQM Maintenance Record Card - Action LogEntries - Property ToolTip</note>
+        </trans-unit>
+        <trans-unit id="Page 774058295 - Action 2316947810 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Log Entries</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page EQM Maintenance Record Card - Action LogEntries - Property Caption</note>
+        </trans-unit>
         <trans-unit id="Page 774058295 - Action 1936001480 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
           <source>Open the vendor card.</source>
           <note from="Developer" annotates="general" priority="2"></note>
@@ -2589,7 +2734,7 @@
           <note from="Xliff Generator" annotates="general" priority="3">Page EQM Maintenance Records - Property AboutTitle</note>
         </trans-unit>
         <trans-unit id="Page 2177390062 - Property 247559172" size-unit="char" translate="yes" xml:space="preserve">
-          <source>This list shows the maintenance work on your equipment: when, what type, by whom and at what cost. Choose **New** to register maintenance. While a record is open, its equipment is In Maintenance and cannot be assigned. Choose **Post** when the work is done: the record is copied to the maintenance history and locked, and the equipment becomes Available when no other maintenance is open. No record can be deleted. Choose a view at the top to see one maintenance type, or only open or posted records.</source>
+          <source>This list shows the maintenance work on your equipment: when, what type, by whom and at what cost. Choose **New** to register maintenance. While a record is open, its equipment is In Maintenance and cannot be assigned. Choose **Post** when the work is done: the record is copied to the maintenance history and locked, and the equipment becomes Available when no other maintenance is open. No record can be deleted. Choose a view at the top to see one maintenance type, or only open or posted records. Choose **Log Entries** to see who registered, changed and posted a record, and when.</source>
           <note from="Developer" annotates="general" priority="2"></note>
           <note from="Xliff Generator" annotates="general" priority="3">Page EQM Maintenance Records - Property AboutText</note>
         </trans-unit>
@@ -2632,6 +2777,16 @@
           <source>History Entry</source>
           <note from="Developer" annotates="general" priority="2"></note>
           <note from="Xliff Generator" annotates="general" priority="3">Page EQM Maintenance Records - Action HistoryEntry - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Page 2177390062 - Action 2316947810 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
+          <source>View who registered, changed and posted the maintenance record, with the old and new value of each changed field.</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page EQM Maintenance Records - Action LogEntries - Property ToolTip</note>
+        </trans-unit>
+        <trans-unit id="Page 2177390062 - Action 2316947810 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Log Entries</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page EQM Maintenance Records - Action LogEntries - Property Caption</note>
         </trans-unit>
         <trans-unit id="Page 2177390062 - Action 1936001480 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
           <source>Open the vendor card.</source>
@@ -2902,6 +3057,26 @@
           <source>Lost</source>
           <note from="Developer" annotates="general" priority="2"></note>
           <note from="Xliff Generator" annotates="general" priority="3">Enum EQM Equipment Status - EnumValue Lost - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Enum 482436906 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Maintenance Log Action</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Enum EQM Maintenance Log Action - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Enum 482436906 - EnumValue 3720531126 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Changed</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Enum EQM Maintenance Log Action - EnumValue Changed - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Enum 482436906 - EnumValue 35450067 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Posted</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Enum EQM Maintenance Log Action - EnumValue Posted - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Enum 482436906 - EnumValue 856236780 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Registered</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Enum EQM Maintenance Log Action - EnumValue Registered - Property Caption</note>
         </trans-unit>
         <trans-unit id="Enum 2320914788 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
           <source>Maintenance Status</source>

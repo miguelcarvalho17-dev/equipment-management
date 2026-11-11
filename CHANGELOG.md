@@ -1,6 +1,23 @@
 # Changelog
 Newest first. Grouped by Added / Changed / Fixed / Obsolete.
 
+## NFR-005 Auditability (version stays 29.0.0.0, no bump)
+### Added
+- Enum 50107 "EQM Maintenance Log Action" (Registered, Changed, Posted); table 50108 "EQM Maintenance Log Entry" (append-only; modify, delete and rename always raise an error); codeunit 50116 "EQM Maintenance Log Mgt." (internal); page 50121 "EQM Maintenance Log Entries" (read-only list).
+- Logging: a Registered entry when a maintenance record is registered, one Changed entry per changed field (Maintenance Date, Maintenance Type, Vendor No., Cost, Description, Performed By) with old and new value in XML format, and a Posted entry when it is posted. User ID and Logged At are stored.
+- Action Log Entries on the Equipment Maintenance list and the Maintenance Record card. Permissions: EQM - Reader reads and executes; EQM - Manager has indirect insert. No role can delete records or log entries.
+- Help article docs/help/NFR-005-auditability.md.
+### Changed
+- Table 50105 `OnInsert`/`OnModify` and codeunit 50109 `OnRun` call the log (no signature or event change). AboutText of pages 50113 and 50114.
+### Fixed
+- None.
+### Obsolete
+- None.
+
+Release notes: Every maintenance record now has a permanent, read-only log of who registered, changed and posted it, and when, including the old and new value of each corrected field. Choose Log Entries on Equipment Maintenance or on the Maintenance Record card. Log entries cannot be changed or deleted.
+
+Note: no upgrade code, no new event. Review: APPROVE. CodeCop and UICop compile clean. Automated tests are deferred (test ID 50177 reserved); sandbox checks are not run, including the Field Caption FlowField for non-SUPER users and the XML format of Maintenance Type. Not logged: planned-maintenance fields on equipment, code running with RunTrigger = false.
+
 ## NFR-004 Automation (version stays 29.0.0.0, no bump)
 ### Added
 - Documentation only: docs/features/NFR-004-automation.md traces the requirement (monitoring fully automated through Job Queue) to FR-018 (codeunits 50111, 50114, 50115, 50104, page 50103) and lists the open gaps; help article docs/help/NFR-004-automation.md; section "NFR-004 sandbox checks" in docs/TODO.md.

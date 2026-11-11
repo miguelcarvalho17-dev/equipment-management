@@ -6,7 +6,7 @@ page 50113 "EQM Maintenance Records"
 {
     Caption = 'Equipment Maintenance';
     AboutTitle = 'About equipment maintenance';
-    AboutText = 'This list shows the maintenance work on your equipment: when, what type, by whom and at what cost. Choose **New** to register maintenance. While a record is open, its equipment is In Maintenance and cannot be assigned. Choose **Post** when the work is done: the record is copied to the maintenance history and locked, and the equipment becomes Available when no other maintenance is open. No record can be deleted. Choose a view at the top to see one maintenance type, or only open or posted records.';
+    AboutText = 'This list shows the maintenance work on your equipment: when, what type, by whom and at what cost. Choose **New** to register maintenance. While a record is open, its equipment is In Maintenance and cannot be assigned. Choose **Post** when the work is done: the record is copied to the maintenance history and locked, and the equipment becomes Available when no other maintenance is open. No record can be deleted. Choose a view at the top to see one maintenance type, or only open or posted records. Choose **Log Entries** to see who registered, changed and posted a record, and when.';
     PageType = List;
     ApplicationArea = All;
     UsageCategory = Lists;
@@ -123,6 +123,14 @@ page 50113 "EQM Maintenance Records"
                 RunObject = page "EQM Maintenance History";
                 RunPageLink = "Maintenance No." = field("No.");
             }
+            action(LogEntries)
+            {
+                Caption = 'Log Entries';
+                ToolTip = 'View who registered, changed and posted the maintenance record, with the old and new value of each changed field.';
+                Image = ChangeLog;
+                RunObject = page "EQM Maintenance Log Entries";
+                RunPageLink = "Maintenance No." = field("No.");
+            }
         }
         area(Promoted)
         {
@@ -145,6 +153,9 @@ page 50113 "EQM Maintenance Records"
                 {
                 }
                 actionref(HistoryEntry_Promoted; HistoryEntry)
+                {
+                }
+                actionref(LogEntries_Promoted; LogEntries)
                 {
                 }
             }

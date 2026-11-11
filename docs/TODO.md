@@ -205,3 +205,12 @@ Source: "Test scenarios" in `docs/plans/NFR-004-automation.md`. IDs and steps ar
 - [ ] BG-SB8 telemetry EQM0001 to EQM0004 appears.
 - [ ] Record the result in `docs/features/NFR-004-automation.md` ("Not verified").
 - Open gaps 1 to 3 (plan Q1): decide later whether to plan follow-up work.
+
+## NFR-005 sandbox checks (not run; automated tests deferred, Q3, test codeunit 50177 reserved)
+Source: "Test scenarios" 1 to 11 in `docs/plans/NFR-005-auditability.md`.
+- [ ] AU-SB1 (R2) a Reader and a Manager (not SUPER) see the Field Caption on Maintenance Log Entries.
+- [ ] AU-SB2 (Q4) Old/New Value for Maintenance Type: record the text `Format(enum, 0, 9)` shows.
+- [ ] AU-SB3 register, correct two fields, post: entries Registered, 2x Changed, Posted for the record; no Changed entry for Status.
+- [ ] AU-SB4 Modify without a change adds no entry; a failed registration or posting leaves no entry.
+- [ ] AU-SB5 Reader cannot create entries; no role can delete or edit entries or records.
+- [ ] Record the results in `docs/features/NFR-005-auditability.md` ("Not verified").

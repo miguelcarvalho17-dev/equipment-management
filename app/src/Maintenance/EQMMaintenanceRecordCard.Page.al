@@ -6,7 +6,7 @@ page 50114 "EQM Maintenance Record Card"
 {
     Caption = 'Maintenance Record';
     AboutTitle = 'About maintenance records';
-    AboutText = 'Register maintenance on equipment. Choose the equipment, the date and the type of maintenance, and add the vendor, the cost and who did the work. When you register the record, the equipment status changes to In Maintenance and the equipment cannot be assigned. You cannot register maintenance for lost or disposed equipment. You can correct the record until you choose **Post**. Posting copies it to the maintenance history, locks it and, when no other maintenance is open, makes the equipment Available again. Maintenance records can never be deleted.';
+    AboutText = 'Register maintenance on equipment. Choose the equipment, the date and the type of maintenance, and add the vendor, the cost and who did the work. When you register the record, the equipment status changes to In Maintenance and the equipment cannot be assigned. You cannot register maintenance for lost or disposed equipment. You can correct the record until you choose **Post**. Posting copies it to the maintenance history, locks it and, when no other maintenance is open, makes the equipment Available again. Maintenance records can never be deleted. Choose **Log Entries** to see who registered, changed and posted a record, and when.';
     PageType = Card;
     ApplicationArea = All;
     UsageCategory = None;
@@ -151,6 +151,14 @@ page 50114 "EQM Maintenance Record Card"
                 RunObject = page "EQM Maintenance History";
                 RunPageLink = "Maintenance No." = field("No.");
             }
+            action(LogEntries)
+            {
+                Caption = 'Log Entries';
+                ToolTip = 'View who registered, changed and posted the maintenance record, with the old and new value of each changed field.';
+                Image = ChangeLog;
+                RunObject = page "EQM Maintenance Log Entries";
+                RunPageLink = "Maintenance No." = field("No.");
+            }
         }
         area(Promoted)
         {
@@ -173,6 +181,9 @@ page 50114 "EQM Maintenance Record Card"
                 {
                 }
                 actionref(HistoryEntry_Promoted; HistoryEntry)
+                {
+                }
+                actionref(LogEntries_Promoted; LogEntries)
                 {
                 }
             }
