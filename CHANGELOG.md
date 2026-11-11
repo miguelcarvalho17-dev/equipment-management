@@ -1,6 +1,20 @@
 # Changelog
 Newest first. Grouped by Added / Changed / Fixed / Obsolete.
 
+## NFR-004 Automation (version stays 29.0.0.0, no bump)
+### Added
+- Documentation only: docs/features/NFR-004-automation.md traces the requirement (monitoring fully automated through Job Queue) to FR-018 (codeunits 50111, 50114, 50115, 50104, page 50103) and lists the open gaps; help article docs/help/NFR-004-automation.md; section "NFR-004 sandbox checks" in docs/TODO.md.
+### Changed
+- None.
+### Fixed
+- None.
+### Obsolete
+- None.
+
+Release notes: The daily monitoring of warranties and overdue maintenance runs through Business Central job queue entries that the app creates by itself. This version adds documentation only; there is no change in behavior.
+
+Note: no AL change, no new object, no upgrade code, no permission change, no tests. Met in code, not verified in a sandbox. Open gaps (not fixed): existing entries are never repaired, companies skipped at multi-company install need the action, no notification job.
+
 ## FR-022 Warranty Dashboard (version stays 29.0.0.0, no bump)
 ### Added
 - Table 50104 "EQM Equipment Cue": field 33 "Active Warranties" (FlowField) with FlowFilter 42, field 34 "Warranties Expiring 90 Days" (FlowField) with FlowFilter 43. Nothing is stored.

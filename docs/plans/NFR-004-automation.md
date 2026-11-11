@@ -1,6 +1,6 @@
 # NFR-004 Automation
 
-> Status: **DRAFT, waiting for user approval.**
+> Status: **APPROVED** (user, default answers: Q1 = no gap work, gaps 1-3 stay open and documented only; Q2 = yes).
 > Source: GitHub issue #44 (milestone V2). Branch: `feature/NFR-004-automation`.
 > Scope (chosen by the user): **verification only. No AL change, no new object, no table or permission change, no version bump, no upgrade logic.** Existing tests are not affected.
 > No events report: nothing is subscribed or published, no standard behavior is touched. al-event-finder is not needed.

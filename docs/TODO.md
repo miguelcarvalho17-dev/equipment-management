@@ -193,3 +193,15 @@ Source: "Manual sandbox checks" in `docs/plans/FR-022-warranty-dashboard.md`.
 - [ ] WD-SB7 Non-SUPER Reader sees the tiles and can drill down.
 - [ ] WD-SB8 Tell Me finds the dashboard with "warranty dashboard"; teaching tip shows the new text.
 - [ ] Record the results and update "Test status" in `docs/features/FR-022-warranty-dashboard.md` and the TODO(verify) items in the help article.
+
+## NFR-004 sandbox checks (not run; no code and no tests of its own)
+Source: "Test scenarios" in `docs/plans/NFR-004-automation.md`. IDs and steps are in "FR-018 sandbox checks" above; do not copy them. NFR-004 is "met in code, not verified" until the mandatory ones pass.
+- [ ] BG-SB1 build clean (CodeCop, UICop, AppSourceCop).
+- [ ] BG-SB2 (mandatory) Schedule Monitoring Jobs creates both entries in an existing company; none duplicated on a second run.
+- [ ] BG-SB3 new sandbox install: both entries and category EQM in every company (multi-company check).
+- [ ] BG-SB4 (mandatory) first run time recorded; the entries then run daily without user action.
+- [ ] BG-SB5 a failing job shows Error with a log entry and does not block the other entry.
+- [ ] BG-SB6 new company, non-SUPER Administrator: setup and entries created.
+- [ ] BG-SB8 telemetry EQM0001 to EQM0004 appears.
+- [ ] Record the result in `docs/features/NFR-004-automation.md` ("Not verified").
+- Open gaps 1 to 3 (plan Q1): decide later whether to plan follow-up work.
