@@ -3,6 +3,8 @@ namespace MiguelCarvalho.EquipmentManagement.Tests;
 using MiguelCarvalho.EquipmentManagement;
 using System.Environment;
 using System.Text;
+using System.TestLibraries.Security.AccessControl;
+using System.TestLibraries.Utilities;
 using System.Utilities;
 
 codeunit 50178 "EQM Equipment Picture Tests"
@@ -11,7 +13,7 @@ codeunit 50178 "EQM Equipment Picture Tests"
     TestPermissions = Disabled;
 
     var
-        Assert: Codeunit Assert;
+        Assert: Codeunit "Library Assert";
         PermissionsMock: Codeunit "Permissions Mock";
         PictureMgt: Codeunit "EQM Equipment Picture Mgt.";
         ConfirmReply: Boolean;
