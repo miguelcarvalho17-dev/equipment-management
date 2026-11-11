@@ -11,8 +11,8 @@ codeunit 50178 "EQM Equipment Picture Tests"
     TestPermissions = Disabled;
 
     var
-        Assert: Codeunit "Library Assert";
-        LibraryLowerPermissions: Codeunit "Library - Lower Permissions";
+        Assert: Codeunit Assert;
+        PermissionsMock: Codeunit "Permissions Mock";
         PictureMgt: Codeunit "EQM Equipment Picture Mgt.";
         ConfirmReply: Boolean;
         ConfirmCount: Integer;
@@ -364,8 +364,8 @@ codeunit 50178 "EQM Equipment Picture Tests"
         // [GIVEN] Equipment E with a picture, and the user lowered to the EQM - Reader permission set
         CreateEquipment(Equipment);
         SetPicture(Equipment, FileNameATok);
-        LibraryLowerPermissions.SetO365Basic();
-        LibraryLowerPermissions.AddPermissionSet('EQM - Reader');
+        PermissionsMock.Set('EQM - Reader');
+        PermissionsMock.Start();
 
         // [WHEN] The card is opened
         EquipmentCard.OpenView();
@@ -387,15 +387,15 @@ codeunit 50178 "EQM Equipment Picture Tests"
         // [SCENARIO 10b] (negative) A direct SetPicture as Reader raises a permission error
         // [GIVEN] Equipment E, and the user lowered to the EQM - Reader permission set
         CreateEquipment(Equipment);
-        LibraryLowerPermissions.SetO365Basic();
-        LibraryLowerPermissions.AddPermissionSet('EQM - Reader');
+        PermissionsMock.Set('EQM - Reader');
+        PermissionsMock.Start();
 
         // [WHEN] A picture is set
         asserterror SetPicture(Equipment, FileNameATok);
 
         // [THEN] A permission error is raised and the picture is not stored
         Assert.ExpectedError(PermissionErr);
-        LibraryLowerPermissions.SetOutsideO365Scope();
+        PermissionsMock.Stop();
         Equipment.Get(EquipmentNoTok);
         Assert.AreEqual(0, Equipment.Picture.Count(), 'No picture should be stored for a Reader');
     end;
