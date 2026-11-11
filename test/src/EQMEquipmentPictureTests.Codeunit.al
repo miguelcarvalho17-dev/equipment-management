@@ -10,7 +10,7 @@ using System.Utilities;
 codeunit 50178 "EQM Equipment Picture Tests"
 {
     Subtype = Test;
-    TestPermissions = Disabled;
+    TestPermissions = NonRestrictive;
 
     var
         Assert: Codeunit "Library Assert";
