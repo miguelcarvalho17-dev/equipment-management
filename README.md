@@ -2,7 +2,7 @@
 
 A Microsoft Dynamics 365 Business Central extension (AL) to register company equipment, track who uses it, and keep maintenance and warranty information in one place.
 
-> **Status:** V1 is built and V2 is in development. Nothing here is released yet.
+> **Status:** V1 and V2 are built (all V2 GitHub issues are closed) and V3 is planned (requirements written, issues FR-023 to FR-041 created). Nothing has been verified in a Business Central sandbox and nothing is released yet.
 
 ## The problem
 
@@ -71,23 +71,46 @@ The objective is to ensure that equipment remains operational, warranty coverage
 | **Automated notifications** | Managers are alerted to upcoming actions that need attention |
 | **Lifecycle monitoring** | Visibility of equipment across its life, from purchase to disposal |
 
-### V2 progress
+### V2 status
 
-| Capability | State |
-|---|---|
-| Maintenance registration, history, equipment status and cost tracking (FR-010 to FR-013) | Built, not yet verified in a Business Central sandbox |
-| Automated background processing, daily job queue entries for warranty alerts and overdue maintenance (FR-018) | Built, not yet verified in a Business Central sandbox |
-| Maintenance schedules, planned maintenance date and frequency on the equipment (FR-019) | Built, not yet verified in a Business Central sandbox |
-| Overdue maintenance monitoring, red next maintenance date and dashboard tile (FR-020) | Built, not yet verified in a Business Central sandbox |
-| Maintenance dashboard KPIs (FR-021) | Built, not yet verified in a Business Central sandbox |
-| Warranty dashboard KPIs (FR-022) | Built, not yet verified in a Business Central sandbox |
-| Warranty tracking | Planned |
-| Automated notifications | Planned |
-| Lifecycle monitoring | Planned |
+V2 is complete: all requirements in the V2 milestone are built and merged.
+
+| Capability | Requirements | State |
+|---|---|---|
+| Maintenance management (registration, history, equipment status, cost tracking, planned and overdue maintenance, maintenance dashboard) | FR-010 to FR-013, FR-019 to FR-021 | Built, not yet verified in a Business Central sandbox |
+| Warranty tracking (warranty information, monitoring, alerts, warranty dashboard) | FR-014 to FR-016, FR-022 | Built, not yet verified in a Business Central sandbox |
+| Automated notifications and background processing (Job Queue) | FR-017, FR-018, NFR-004 | Built, not yet verified in a Business Central sandbox |
+| Auditability (maintenance log entries) | NFR-005 | Built, not yet verified in a Business Central sandbox |
 
 Feature documentation is in `docs/features/`, user help in `docs/help/` and the change history in `CHANGELOG.md`.
 
-### Roadmap (after V2)
+## Version 3
+
+### Project objective
+
+The V3 release focuses on integration, extensibility, and user experience enhancements.
+
+The objective is to transform the Equipment Management solution into a connected enterprise application by providing document management, equipment images, API integrations, external system connectivity, approval processes, audit capabilities and advanced permissions.
+
+### Scope of V3
+
+| Area | Requirements | What it gives you |
+|---|---|---|
+| **Documents and images** | FR-023 Equipment Images, FR-024 Document Attachments, FR-025 Equipment Notes | Multiple pictures (MediaSet), documents (standard Document Attachment framework) and dated, user-stamped notes on each item of equipment |
+| **API layer** | FR-026 Equipment API, FR-027 Equipment Categories API, FR-028 Assignment History API | Business Central APIs (`/api/equipment/v1.0/...`) for equipment (GET, POST, PATCH, DELETE), categories and assignment history |
+| **Integration events** | FR-029 Business Events, FR-030 Event Subscribers | Published events (equipment created, assigned, returned, maintenance created, warranty expired) and subscribers that show event-driven design |
+| **Power Platform** | FR-031 Power Automate Support | Example flows, such as a Teams notification on assignment and an email reminder for expiring warranties |
+| **Approval management** | FR-032 Equipment Request Process, FR-033 Approval Workflow | Equipment requests (Open, Pending Approval, Approved, Rejected, Completed) that must be approved by a manager before assignment |
+| **Audit and compliance** | FR-034 Change Log Support, FR-035 Equipment Audit Trail | Change Log monitoring and a complete history of created, updated, assigned, returned, maintenance and disposed events |
+| **Security** | FR-036 Permission Sets | Equipment Reader, Equipment Manager, Equipment Administrator and API Consumer |
+| **User experience** | FR-037 FactBoxes, FR-038 Enhanced Role Center | Summary, statistics and attachments FactBoxes on the Equipment Card, and new Role Center KPIs (requests pending approval, warranties expiring this month, open maintenance, total assets value) |
+| **Reporting** | FR-039 Equipment Register Report, FR-040 Asset Utilization Report, FR-041 Maintenance Cost Analysis | Inventory register, utilization % (assigned / total equipment * 100) and maintenance cost by equipment, category, month and year |
+
+### V3 progress
+
+All 19 requirements (FR-023 to FR-041) are tracked as GitHub issues in the V3 milestone. None is built yet.
+
+### Roadmap (after V3)
 
 - Location tracking
 
