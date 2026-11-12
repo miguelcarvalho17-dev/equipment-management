@@ -1,5 +1,7 @@
 namespace MiguelCarvalho.EquipmentManagement;
 
+using Microsoft.Foundation.Attachment;
+
 permissionset 50101 "EQM - Manager"
 {
     Caption = 'Equipment Manager';
@@ -7,6 +9,7 @@ permissionset 50101 "EQM - Manager"
     IncludedPermissionSets = "EQM - Reader";
 
     Permissions =
+        tabledata "Document Attachment" = RIMD,
         tabledata "EQM Equipment" = RIM,
         tabledata "EQM Equipment Assignment" = Rim,
         tabledata "EQM Maintenance History Entry" = i,

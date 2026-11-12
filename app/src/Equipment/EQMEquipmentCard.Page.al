@@ -1,5 +1,6 @@
 namespace MiguelCarvalho.EquipmentManagement;
 
+using Microsoft.Foundation.Attachment;
 using Microsoft.HumanResources.Employee;
 using System.Security.AccessControl;
 
@@ -7,7 +8,7 @@ page 50101 "EQM Equipment Card"
 {
     Caption = 'Equipment Card';
     AboutTitle = 'About equipment details';
-    AboutText = 'Here you manage one piece of equipment. The first sections show its details, its current status and who it is assigned to, its purchase and warranty information, and its planned maintenance. Use **Assign to Employee** and **Return** to change the assignment, and **Register Maintenance** to record maintenance work. Further down, **Assignment History** lists every assignment, **Maintenance History** lists every posted maintenance, and **Audit** shows who created the record and who changed it last. The **Picture** FactBox shows the picture of the equipment; use its actions to take, import, export or delete it.';
+    AboutText = 'Here you manage one piece of equipment. The first sections show its details, its current status and who it is assigned to, its purchase and warranty information, and its planned maintenance. Use **Assign to Employee** and **Return** to change the assignment, and **Register Maintenance** to record maintenance work. Further down, **Assignment History** lists every assignment, **Maintenance History** lists every posted maintenance, and **Audit** shows who created the record and who changed it last. The **Picture** FactBox shows the picture of the equipment; use its actions to take, import, export or delete it. The **Attachments** FactBox lists the files attached to the equipment; use **Attachments** to add files and set their category.';
     PageType = Card;
     ApplicationArea = All;
     UsageCategory = None;
@@ -221,6 +222,11 @@ page 50101 "EQM Equipment Card"
             {
                 SubPageLink = "No." = field("No.");
             }
+            part(AttachedDocuments; "Doc. Attachment List Factbox")
+            {
+                Caption = 'Attachments';
+                SubPageLink = "Table ID" = const(Database::"EQM Equipment"), "No." = field("No.");
+            }
             part(EquipmentFactBox; "EQM Equipment FactBox")
             {
                 SubPageLink = "No." = field("No.");
@@ -319,6 +325,24 @@ page 50101 "EQM Equipment Card"
                     RunObject = page "EQM Maintenance History";
                     RunPageLink = "Equipment No." = field("No.");
                 }
+                action(Attachments)
+                {
+                    Caption = 'Attachments';
+                    ToolTip = 'Add a file, such as an invoice, manual or warranty certificate, to the equipment, or view and categorize the attached files.';
+                    Image = Attach;
+                    Enabled = IsSaved;
+
+                    trigger OnAction()
+                    var
+                        DocumentAttachmentDetails: Page "Document Attachment Details";
+                        RecRef: RecordRef;
+                    begin
+                        RecRef.GetTable(Rec);
+                        DocumentAttachmentDetails.OpenForRecRef(RecRef);
+                        DocumentAttachmentDetails.RunModal();
+                        CurrPage.Update(false);
+                    end;
+                }
                 action(WarrantyAlerts)
                 {
                     Caption = 'Warranty Alerts';
@@ -360,6 +384,9 @@ page 50101 "EQM Equipment Card"
                 {
                 }
                 actionref(WarrantyAlerts_Promoted; WarrantyAlerts)
+                {
+                }
+                actionref(Attachments_Promoted; Attachments)
                 {
                 }
             }

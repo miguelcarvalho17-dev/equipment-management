@@ -1,5 +1,6 @@
 namespace MiguelCarvalho.EquipmentManagement;
 
+using Microsoft.Foundation.Attachment;
 using Microsoft.Foundation.NoSeries;
 using Microsoft.HumanResources.Employee;
 using Microsoft.Inventory.Location;
@@ -344,6 +345,8 @@ table 50100 "EQM Equipment"
     var
         AssignmentMgt: Codeunit "EQM Assignment Mgt.";
         MaintenanceMgt: Codeunit "EQM Maintenance Mgt.";
+        DocumentAttachmentMgmt: Codeunit "Document Attachment Mgmt";
+        RecRef: RecordRef;
     begin
         if Status = Status::Assigned then
             Error(DeleteAssignedErr, "No.", "Assigned Employee No.");
@@ -351,6 +354,20 @@ table 50100 "EQM Equipment"
             Error(DeleteHistoryExistsErr, "No.", Format(Status::Disposed));
         if MaintenanceMgt.HasMaintenanceRecords("No.") then
             Error(DeleteMaintenanceExistsErr, "No.", Format(Status::Disposed));
+
+        RecRef.GetTable(Rec);
+        DocumentAttachmentMgmt.DeleteAttachedDocuments(RecRef);
+    end;
+
+    trigger OnRename()
+    var
+        DocumentAttachmentMgmt: Codeunit "Document Attachment Mgmt";
+        FromRecRef: RecordRef;
+        ToRecRef: RecordRef;
+    begin
+        FromRecRef.GetTable(xRec);
+        ToRecRef.GetTable(Rec);
+        DocumentAttachmentMgmt.MoveAttachmentsWithinSameRecordType(FromRecRef, ToRecRef);
     end;
 
     /// <summary>
