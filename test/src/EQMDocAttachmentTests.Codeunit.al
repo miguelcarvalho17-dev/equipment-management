@@ -120,12 +120,14 @@ codeunit 50179 "EQM Doc. Attachment Tests"
 
     [Test]
     [TransactionModel(TransactionModel::AutoRollback)]
-    procedure DeletingAssignedEquipmentIsRejectedAndKeepsAttachments()
+    procedure DeletingAssignedEquipmentIsRejected()
     var
         Equipment: Record "EQM Equipment";
-        DocumentAttachment: Record "Document Attachment";
     begin
-        // [SCENARIO 5] (negative) Assigned equipment cannot be deleted and its attachments stay
+        // [SCENARIO 5] (negative) Assigned equipment cannot be deleted
+        // The attachments are kept because the error is raised before DeleteAttachedDocuments and
+        // the failed delete is rolled back. A test cannot assert the row count afterwards: asserterror
+        // rolls back the test's own setup writes too.
         // [GIVEN] Assigned equipment E with 2 attachments
         CreateEquipment(Equipment, EquipmentNoTok);
         AttachFile(Equipment, 1);
@@ -135,10 +137,8 @@ codeunit 50179 "EQM Doc. Attachment Tests"
         // [WHEN] Delete is attempted
         asserterror Equipment.Delete(true);
 
-        // [THEN] The assigned error is raised and the attachments are unchanged
+        // [THEN] The assigned error is raised
         Assert.ExpectedError(StrSubstNo(DeleteAssignedErr, EquipmentNoTok, EmployeeNoTok));
-        FilterAttachments(DocumentAttachment, Database::"EQM Equipment", EquipmentNoTok);
-        Assert.RecordCount(DocumentAttachment, 2);
     end;
 
     [Test]
