@@ -1,6 +1,23 @@
 # Changelog
 Newest first. Grouped by Added / Changed / Fixed / Obsolete.
 
+## FR-026 Equipment API (version stays 29.0.0.0, no bump)
+### Added
+- Page 50123 "EQM Equipment API" (API v1.0, publisher `miguelCarvalho`, group `equipment`, entity `equipments`): GET, POST, PATCH, DELETE on table 50100, plus bound actions `assign(employeeNumber)` and `returnEquipment`. Not extensible. Sets the API conventions C1 to C10 for FR-027 and FR-028.
+- Test codeunit 50180 "EQM Equipment API Tests" (25 tests, NOT compiled, NOT run) and the Tests-TestLibraries dependency in `test/app.json` (app ID unverified).
+- Feature doc docs/features/FR-026-equipment-api.md and help docs/help/FR-026-equipment-api.md.
+### Changed
+- Permission set EQM - Reader: `page "EQM Equipment API" = X`. Writes depend on the existing tabledata rights (Manager cannot DELETE).
+- Via the API, final-status confirmations default to Yes, so Lost and Disposed apply without a prompt.
+### Fixed
+- None.
+### Obsolete
+- None.
+
+Release notes: Other systems can now read and maintain equipment through a new Business Central API (v1.0, publisher miguelCarvalho, group equipment). You can list, create, change and delete equipment, and assign or return it with the assign and returnEquipment actions. The same business rules as in the app apply. Equipment Reader can only read; Equipment Manager can change but not delete.
+
+Note: no event published, no upgrade code. The app compiles with CodeCop, UICop and AppSourceCop with no diagnostics from the new page (only the known manifest gaps of the demo app). Not verified: the 25 tests (not compiled, not run), enum encoding `In_x0020_Maintenance`, PATCH of a read-only field, Code[20] action parameter, Library - Graph Mgt signatures and base URL, the Tests-TestLibraries app ID, and the permission checks in a sandbox. At first AppSource release v1.0 becomes a frozen contract.
+
 ## FR-048 Automated Build Pipeline (version stays 29.0.0.0, no bump)
 ### Added
 - `.AL-Go/settings.json`: `enableCodeCop`, `enableUICop` and `enableAppSourceCop` set to true (AppSourceCop was already on through the AppSource App type; now explicit). Analyzers run on the main app only.

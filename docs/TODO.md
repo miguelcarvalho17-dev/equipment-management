@@ -174,12 +174,12 @@ Source: "Manual sandbox checks" in `docs/plans/FR-021-maintenance-dashboard.md`.
 - [ ] Every release after 29.0.0.0 needs an upgrade codeunit.
 
 ## Tests (deferred by decision)
-- [ ] Build the test app in `test/`: `test/app.json` needs the old `test` property removed and dependencies on Library Assert, Any and Tests-TestLibraries added (IDs from the symbols). Its dependency version on the main app should match the app's version.
+- [ ] Build the test app in `test/`: `test/app.json` needs the old `test` property removed and dependencies on Library Assert, Any and Tests-TestLibraries added (IDs from the symbols). The Tests-TestLibraries ID is unverified, see section FR-026 below. Its dependency version on the main app should match the app's version.
 - [ ] Implement the 57 scenarios in `docs/plans/FR-001-equipment-registration.md` (test codeunits 50150-50155). Answer the confirm dialogs with a `[ConfirmHandler]`.
 
 ## Housekeeping
 - [ ] Nothing is committed yet. The repo has no commits.
-- [ ] Without a UI session (API, job queue) both confirmations default to Yes. Revisit this if the tables are ever exposed through an API.
+- [x] Without a UI session (API, job queue) both confirmations default to Yes. Equipment is now exposed through the API (FR-026): accepted by decision (plan Q2), documented in `docs/features/FR-026-equipment-api.md`. Still applies to job queue.
 - [ ] Deleting an Employee with `RunTrigger = false` bypasses the delete guard. This is documented in the help.
 
 ## FR-022 sandbox checks (not run; automated tests deferred, Q9, test codeunit 50176 reserved)
@@ -227,3 +227,16 @@ Source: "Test scenarios" in `docs/plans/FR-023-equipment-images.md`. Reader test
 - [ ] Scenario 11 Take is not visible without a camera and visible in the mobile app.
 - [ ] Decide which languages to translate (only the generated `.g.xlf` exists).
 - [ ] Record the results in "Test status" of `docs/features/FR-023-equipment-images.md` and the TODO(verify) items in the help article.
+
+## FR-026 Equipment API (tests not compiled or run; sandbox checks not done)
+Source: "Test scenarios" in `docs/plans/FR-026-equipment-api.md`.
+- [ ] Confirm the Tests-TestLibraries app ID in `test/app.json`: `5d86850b-0d76-4eca-bd7b-951ad998e997` is UNVERIFIED (written from memory, no BC symbols available). Check it against the BC 29 symbols; do not guess a different one.
+- [ ] Compile and run test codeunit 50180 (25 tests, `test/src/EQMEquipmentAPITests.Codeunit.al`). Needs Library Assert and Tests-TestLibraries symbols and a sandbox. Check the Library - Graph Mgt procedure signatures and base URL used.
+- [ ] V1 enum encoding: `status` value for In Maintenance is `In_x0020_Maintenance` (GET, filter, PATCH).
+- [ ] V2 PATCH of a read-only field (`assignedEmployeeNumber`, scenario 11): record whether it fails or is ignored.
+- [ ] V3 bound action `assign` accepts `employeeNumber` as Code[20] (fallback: Text, then CopyStr).
+- [ ] Scenario 17 permissions in a sandbox (not SUPER): Reader GET ok, PATCH denied; Manager POST/PATCH/actions ok, DELETE denied; Administrator all.
+- [ ] Confirm ETag / If-Match behavior on PATCH and DELETE.
+- [ ] Follow-up: PATCH status Assigned returns an error that mentions the Equipment Card action; consider a message that points API clients to the `assign` action (table text, changes UI behavior too).
+- [ ] Follow-up: FR-027 (#65) and FR-028 (#66) must follow conventions C1 to C10 in `docs/features/FR-026-equipment-api.md`; merge order 026, 027, 028.
+- [ ] Follow-up: register the final APIPublisher and ID range before the first AppSource release; v1.0 is frozen from then on.
