@@ -1,6 +1,21 @@
 # Changelog
 Newest first. Grouped by Added / Changed / Fixed / Obsolete.
 
+## FR-048 Automated Build Pipeline (version stays 29.0.0.0, no bump)
+### Added
+- `.AL-Go/settings.json`: `enableCodeCop`, `enableUICop` and `enableAppSourceCop` set to true (AppSourceCop was already on through the AppSource App type; now explicit). Analyzers run on the main app only.
+- Feature doc docs/features/FR-048-automated-build-pipeline.md and contributor help docs/help/FR-048-automated-build-pipeline.md.
+### Changed
+- CI/CD, Pull Request Build, NextMajor and NextMinor now also run CodeCop and UICop. New warnings on the main app are possible; only errors fail the build.
+### Fixed
+- None.
+### Obsolete
+- None.
+
+Release notes: None (build tooling only, no change for end users).
+
+Note: no AL code, no tests added, no workflow YAML changed. Not verified: analyzer output in CI (needs a run after push), run history and branch protection, CreateRelease (never run; plan Q2 no). Artifact names are 1.0.<run>.0 while the .app is 29.0.x. `enableCodeAnalyzersOnTestApps` is not enabled (optional follow-up). Setting reference: https://aka.ms/ALGoSettings#enableappsourcecop
+
 ## FR-024 Document Attachments (version stays 29.0.0.0, no bump)
 ### Added
 - Enum 50108 "EQM Attachment Category" (extensible: Other, Purchase Invoice, Maintenance Report, Warranty Certificate, User Manual, Delivery Note).

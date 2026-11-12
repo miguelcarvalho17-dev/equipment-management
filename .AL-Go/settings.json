@@ -11,5 +11,8 @@
     "test"
   ],
   "bcptTestFolders": [],
-  "rulesetFile": ".AL-Go/equipment.ruleset.json"
+  "rulesetFile": ".AL-Go/equipment.ruleset.json",
+  "enableCodeCop": true,
+  "enableUICop": true,
+  "enableAppSourceCop": true
 }
