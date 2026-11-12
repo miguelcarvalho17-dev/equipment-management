@@ -7,7 +7,7 @@ Newest first. Grouped by Added / Changed / Fixed / Obsolete.
 - Page 50122 "EQM Equipment Picture" (CardPart FactBox) with actions Take, Import, Export, Delete; shown first in the FactBoxes of the Equipment Card (50101) and Equipment List (50100).
 - Codeunit 50117 "EQM Equipment Picture Mgt." (internal): set, import, take, export, delete.
 - One picture per equipment: Import and Take replace the existing picture after confirmation, as Item Picture does. Supported files: JPG, JPEG, PNG, GIF, BMP, TIF, TIFF (checked by file extension). Equipment must be saved first.
-- Test codeunit 50178 "EQM Equipment Picture Tests" (17 tests); `internalsVisibleTo` for the test app; test app depends on Library Assert and Tests-TestLibraries.
+- Test codeunits 50178 "EQM Equipment Picture Tests" (15 tests) and 50179 "EQM Picture Permission Tests" (1 test); `internalsVisibleTo` for the test app; test app depends on Library Assert and Permissions Mock; AL-Go CI now runs the test app.
 - Help article docs/help/FR-023-equipment-images.md.
 ### Changed
 - Permission set EQM - Reader: execute on page 50122 and codeunit 50117. AboutText of the Equipment Card.
@@ -18,7 +18,7 @@ Newest first. Grouped by Added / Changed / Fixed / Obsolete.
 
 Release notes: Each piece of equipment can now have a picture, shown in the Picture FactBox on the Equipment Card and the Equipment List. Use Take, Import, Export and Delete to manage it. A new picture replaces the existing one after you confirm. Only one picture per equipment is supported.
 
-Note: no upgrade code, no new event. Known gaps against issue #61 (user decision): multiple images per equipment (IM-R3) are not supported and picture types are not recorded. The 17 tests compile but have NOT been run (no sandbox). Not verified: media cleanup when a picture or equipment is deleted (V2), Reader export and Tenant Media access (V3), picture FactBox on Item List and Employee List (V4), upload, camera and download in a sandbox.
+Note: no upgrade code, no new event. Known gaps against issue #61 (user decision): multiple images per equipment (IM-R3) are not supported and picture types are not recorded. The tests run in AL-Go CI (15 in codeunit 50178 passed); media cleanup on delete (V2) is confirmed by them. Not verified: Reader export and Tenant Media access (V3), picture FactBox on Item List and Employee List (V4), upload, camera and download in a sandbox.
 
 ## NFR-005 Auditability (version stays 29.0.0.0, no bump)
 ### Added

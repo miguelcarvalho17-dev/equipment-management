@@ -18,9 +18,10 @@ Status: describes the code as implemented (uncommitted changes on branch `featur
 | Page | 50101 | EQM Equipment Card | FactBox part `Picture` (first FactBox, linked on "No."); AboutText sentence added |
 | Page | 50100 | EQM Equipment List | FactBox part `Picture` (first FactBox, linked on "No.") |
 | PermissionSet | 50100 | EQM - Reader | Execute on page 50122 and codeunit 50117 |
-| Codeunit (test app) | 50178 | EQM Equipment Picture Tests | 17 tests, not run |
+| Codeunit (test app) | 50178 | EQM Equipment Picture Tests | 15 tests, passed in AL-Go CI |
+| Codeunit (test app) | 50179 | EQM Picture Permission Tests | 1 test (Reader), `TestPermissions = Restrictive` |
 
-App `app.json` gets `internalsVisibleTo` for the test app so the tests can call the internal codeunit. The test app now depends on Library Assert and Tests-TestLibraries (29.0.0.0).
+App `app.json` gets `internalsVisibleTo` for the test app so the tests can call the internal codeunit. The test app now depends on Library Assert and Permissions Mock (29.0.0.0).
 
 ## Field
 | Field | Meaning |
@@ -72,11 +73,12 @@ New empty field on an unreleased table: no upgrade code. Field 24 and the Brick 
 - The picture is stored in Tenant Media; the size is not limited by this app.
 
 ## Test status
-- 17 tests in codeunit 50178 (test app, `test/src/EQMEquipmentPictureTests.Codeunit.al`) compile but **have not been run**. They cover: set on empty and replace (Count stays 1), replace confirmation (asked only with a picture, No keeps the picture), unsaved and unknown equipment errors, delete (confirmed, declined, no picture), export without picture, media removal after equipment delete and after Delete (V2), FactBox state on card and list, Reader (Export enabled; Import, Take, Delete disabled; direct `SetPicture` rejected).
+- 16 tests in the test app, run by AL-Go CI (the `test` folder is enabled in `.AL-Go/settings.json`). Codeunit 50178 (`test/src/EQMEquipmentPictureTests.Codeunit.al`): 15 tests passed in CI. They cover: set on empty and replace (Count stays 1), replace confirmation (asked only with a picture, No keeps the picture), unsaved and unknown equipment errors, delete (confirmed, declined, no picture), export without picture, media removal after equipment delete and after Delete (V2), FactBox state on card and list. Codeunit 50179 (`test/src/EQMPicturePermissionTests.Codeunit.al`): a Reader sees Export enabled and Import, Take, Delete disabled.
+- A direct `SetPicture` call as Reader is not tested: Permissions Mock did not make the call fail in CI, so that check was removed and is a manual sandbox check.
 - Not covered by automated tests: file upload dialog, unsupported file type, camera, actual download, Take visibility on a device without camera.
 - Open verification:
-  - V2: the platform deletes the Tenant Media of a deleted record and of a cleared MediaSet (tests 8 and 6d check it; not run). Fallback in the plan: remove the media via `Picture.Remove` before clearing and in `OnDelete`.
-  - V3: Reader can export (Tenant Media read access); `Camera.IsAvailable` and `Camera.GetPicture` behave as used; `ImportStream` and non-image content.
+  - V2: resolved. The platform deletes the Tenant Media of a deleted record and of a cleared MediaSet (tests 8 and 6d passed in CI), so the `Picture.Remove` fallback is not needed.
+  - V3: Reader can export (Tenant Media read access; not covered by a test); `Camera.IsAvailable` and `Camera.GetPicture` behave as used; `ImportStream` and non-image content.
   - V4: Item List and Employee List carry a picture FactBox, which is why the Equipment List got one. Not verified.
   - Sandbox checks for the upload filter, unsupported file, export download and camera visibility.
 

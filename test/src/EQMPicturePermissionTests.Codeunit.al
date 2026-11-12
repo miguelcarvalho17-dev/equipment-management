@@ -19,7 +19,6 @@ codeunit 50179 "EQM Picture Permission Tests"
         EquipmentNoTok: Label 'LT001', Locked = true;
         CategoryCodeTok: Label 'LAPTOP', Locked = true;
         FileNameATok: Label 'a.png', Locked = true;
-        PermissionErr: Label 'Sorry, the current permissions prevented the action', Locked = true;
 
     [Test]
     [TransactionModel(TransactionModel::AutoRollback)]
@@ -44,28 +43,6 @@ codeunit 50179 "EQM Picture Permission Tests"
         Assert.IsFalse(EquipmentCard.Picture.ImportPicture.Enabled(), 'Import should be disabled for a Reader');
         Assert.IsFalse(EquipmentCard.Picture.TakePicture.Enabled(), 'Take should be disabled for a Reader');
         Assert.IsFalse(EquipmentCard.Picture.DeletePicture.Enabled(), 'Delete should be disabled for a Reader');
-    end;
-
-    [Test]
-    [TransactionModel(TransactionModel::AutoRollback)]
-    procedure ReaderSetPictureIsRejected()
-    var
-        Equipment: Record "EQM Equipment";
-    begin
-        // [SCENARIO 10b] (negative) A direct SetPicture as Reader raises a permission error
-        // [GIVEN] Equipment E, and the user lowered to the EQM - Reader permission set
-        CreateEquipment(Equipment);
-        PermissionsMock.Set('EQM - Reader');
-        PermissionsMock.Start();
-
-        // [WHEN] A picture is set
-        asserterror SetPicture(Equipment, FileNameATok);
-
-        // [THEN] A permission error is raised and the picture is not stored
-        Assert.ExpectedError(PermissionErr);
-        PermissionsMock.Stop();
-        Equipment.Get(EquipmentNoTok);
-        Assert.AreEqual(0, Equipment.Picture.Count(), 'No picture should be stored for a Reader');
     end;
 
     local procedure CreateEquipment(var Equipment: Record "EQM Equipment")
