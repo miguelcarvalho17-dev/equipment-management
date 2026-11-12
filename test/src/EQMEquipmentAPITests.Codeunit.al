@@ -920,7 +920,7 @@ codeunit 50180 "EQM Equipment API Tests"
 
     local procedure ApiGet(Url: Text) Response: Text
     begin
-        LibraryGraphMgt.GetFromWebService(Response, Url, '');
+        LibraryGraphMgt.GetFromWebService(Response, Url);
     end;
 
     local procedure ApiPost(Url: Text; Body: JsonObject) Response: Text
