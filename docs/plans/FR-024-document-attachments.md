@@ -1,6 +1,6 @@
 # FR-024 Document Attachments
 
-> Status: **DRAFT**, awaiting approval. Source: GitHub issue #62. Branch `feature/FR-024-document-attachments`. Events: `docs/plans/FR-024-document-attachments-events.md` (factbox is page 1178; symbols in `app/.alpackages`).
+> Status: **APPROVED** (user approved the plan; category field via tableextension chosen by the user). Implemented, reviewed and documented; the 12 tests are compiled but not run. Source: GitHub issue #62. Branch `feature/FR-024-document-attachments`. Events: `docs/plans/FR-024-document-attachments-events.md` (factbox is page 1178; symbols in `app/.alpackages`).
 > User decision: classification through an EQM field on Document Attachment (1173) via tableextension, own enum (5 kinds + Other). Base enum "Attachment Document Type" (part of PK) is NOT extended. No version bump (29.0.0.0, unreleased). No upgrade code.
 
 ## Goal
