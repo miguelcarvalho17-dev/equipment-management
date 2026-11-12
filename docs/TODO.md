@@ -168,7 +168,8 @@ Source: "Manual sandbox checks" in `docs/plans/FR-021-maintenance-dashboard.md`.
 - [ ] The `description` in `app.json` mentions assigning to resources, which is not implemented. Reword it.
 - [ ] Register the publisher affix `EQM` and a real object ID range with Microsoft. 50100-50149 is a demo range and blocks a real submission.
 - [ ] Re-read Microsoft's current "Technical validation checklist - Business Central" (the skill copy is dated 2026-02-26).
-- [ ] Run Run-AlValidation (Windows with Docker) or AL-Go for GitHub CI. Neither runs on macOS.
+- [ ] Run Run-AlValidation (Windows with Docker). Does not run on macOS.
+- [ ] AL-Go for GitHub CI (FR-048): compile, tests, and CodeCop, UICop and AppSourceCop on the main app (not the test app) run on every PR into main and on pushes to main that are not markdown-only; analyzer output not yet verified in CI.
 - [ ] Digital signature and the match with the Partner Center offer (release steps).
 - [ ] Every release after 29.0.0.0 needs an upgrade codeunit.
 
