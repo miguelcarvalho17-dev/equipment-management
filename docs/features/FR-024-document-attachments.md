@@ -30,7 +30,7 @@ The base enum "Attachment Document Type" is not extended (it is part of the prim
 - **Action Attachments** (navigation group, promoted, Image Attach): enabled only when the equipment is saved (`IsSaved`). Opens "Document Attachment Details" modally via `OpenForRecRef`, then refreshes the card with `CurrPage.Update(false)`.
 - **Category column:** the page extension sets `EQMIsEquipmentView` in `OnOpenPage` through `IsEquipmentAttachmentView`, which checks whether the "Table ID" filter equals 50100 in filter groups 0, 2 and 4 and restores the original filter group. Customer, vendor and other record types do not show the column.
 - **Delete equipment:** after the three existing checks (assigned, assignment history, maintenance records), `OnDelete` calls `DeleteAttachedDocuments`. If a check raises an error the delete is rolled back with the attachments.
-- **Rename equipment:** `OnRename` calls `MoveAttachmentsWithinSameRecordType` so attachments follow the new "No.".
+- **Rename equipment:** `OnRename` renames the Document Attachment rows of the equipment directly (the number is part of their primary key) so attachments follow the new "No.". The standard `MoveAttachmentsWithinSameRecordType` was tried first and did not move them (test 6b failed).
 - **Status:** attachments are allowed in any status, including Lost and Disposed.
 
 ## Setup
@@ -70,7 +70,7 @@ New field on an unreleased app: no upgrade code. At first release, field 50100 o
 - Not covered by tests: Reader behavior (Permissions Mock did not lower rights in FR-023 CI), upload and download, FactBox count, drill-down.
 - Open verifications (all unverified):
   - V1: the two hooks suffice for filter, count and drill-down. Fallback: `OnAfterSetDocumentAttachmentFiltersForRecRef`, page 1178 `OnAfterGetRecRefFail`.
-  - V2: `MoveAttachmentsWithinSameRecordType` works for a custom table. Fallback: rename the 1173 rows directly in `OnRename`.
+  - V2: resolved by the fallback: `MoveAttachmentsWithinSameRecordType` did not move the rows for our table, so `OnRename` renames the 1173 rows directly. The direct rename is compiled but not yet re-run in tests.
   - V3: filter group used by `OpenForRecRef`; behavior of sales/purchase FlowFields and the default Document Type on page 1173 for this table.
   - V4: Tenant Media rights (see Permissions).
   - Plan scenario 10, sandbox: upload via FactBox and details, drill-down opens the file, FactBox count, Reader can see but not upload or delete.

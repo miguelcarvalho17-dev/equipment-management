@@ -361,13 +361,16 @@ table 50100 "EQM Equipment"
 
     trigger OnRename()
     var
-        DocumentAttachmentMgmt: Codeunit "Document Attachment Mgmt";
-        FromRecRef: RecordRef;
-        ToRecRef: RecordRef;
+        DocumentAttachment: Record "Document Attachment";
     begin
-        FromRecRef.GetTable(xRec);
-        ToRecRef.GetTable(Rec);
-        DocumentAttachmentMgmt.MoveAttachmentsWithinSameRecordType(FromRecRef, ToRecRef);
+        // The standard move helper did not carry the attachments over to the new number,
+        // so the attachment rows are renamed directly (the number is part of their primary key).
+        DocumentAttachment.SetRange("Table ID", Database::"EQM Equipment");
+        DocumentAttachment.SetRange("No.", xRec."No.");
+        while DocumentAttachment.FindFirst() do
+            DocumentAttachment.Rename(
+                DocumentAttachment."Table ID", Rec."No.", DocumentAttachment."Document Type",
+                DocumentAttachment."Line No.", DocumentAttachment.ID);
     end;
 
     /// <summary>

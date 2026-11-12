@@ -65,7 +65,7 @@ Setup: category LAPTOP, saved equipment E (LT001) without history.
 
 ## Risks and open questions
 - V1 Unverified (no base source/sandbox): the 2 hooks suffice for filter/count/drill-down. Fallback per events report: `OnAfterSetDocumentAttachmentFiltersForRecRef`, page 1178 `OnAfterGetRecRefFail`.
-- V2 `MoveAttachmentsWithinSameRecordType` behavior for custom tables (low). If scenario 6 fails: in OnRename, rename each 1173 row of Table ID 50100 / xRec."No." to the new No. directly.
+- V2 (RESOLVED: scenario 6b failed in a test run, fallback applied) `MoveAttachmentsWithinSameRecordType` behavior for custom tables (low). If scenario 6 fails: in OnRename, rename each 1173 row of Table ID 50100 / xRec."No." to the new No. directly.
 - V3 Filter group used by `OpenForRecRef` unknown; helper checks 0/2/4. Sales/Purchase "flow" fields on page 1173 for our table, and Document Type default (Quote), unverified/assumed harmless.
 - V4 Tenant Media rights for upload/download not granted (consistent with FR-023); if sandbox shows a permission error, add `tabledata "Tenant Media"` (Reader r, Manager rimd).
 - Assumed card only (no List FactBox) because the brief names the card. Assumed Other = ordinal 0 default because existing and newly uploaded rows need a neutral value. Assumed enum Extensible because AppSource partners may add kinds. Assumed attachments allowed on Lost/Disposed equipment because the requirement covers the whole lifecycle.
