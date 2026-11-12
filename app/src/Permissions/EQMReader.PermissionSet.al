@@ -1,11 +1,14 @@
 namespace MiguelCarvalho.EquipmentManagement;
 
+using Microsoft.Foundation.Attachment;
+
 permissionset 50100 "EQM - Reader"
 {
     Caption = 'Equipment Reader';
     Assignable = true;
 
     Permissions =
+        tabledata "Document Attachment" = R,
         tabledata "EQM Equipment" = R,
         tabledata "EQM Equipment Assignment" = R,
         tabledata "EQM Equipment Category" = R,
@@ -54,6 +57,7 @@ permissionset 50100 "EQM - Reader"
         codeunit "EQM Employee Subscribers" = X,
         codeunit "EQM Equipment Picture Mgt." = X,
         codeunit "EQM Default Data" = X,
+        codeunit "EQM Doc. Attachment Subscr." = X,
         codeunit "EQM Dashboard Mgt." = X,
         codeunit "EQM Maintenance Log Mgt." = X,
         codeunit "EQM Maintenance Mgt." = X,

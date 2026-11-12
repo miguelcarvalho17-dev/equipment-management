@@ -1699,7 +1699,7 @@
           <note from="Xliff Generator" annotates="general" priority="3">Page EQM Equipment Card - Property AboutTitle</note>
         </trans-unit>
         <trans-unit id="Page 3574600233 - Property 247559172" size-unit="char" translate="yes" xml:space="preserve">
-          <source>Here you manage one piece of equipment. The first sections show its details, its current status and who it is assigned to, its purchase and warranty information, and its planned maintenance. Use **Assign to Employee** and **Return** to change the assignment, and **Register Maintenance** to record maintenance work. Further down, **Assignment History** lists every assignment, **Maintenance History** lists every posted maintenance, and **Audit** shows who created the record and who changed it last. The **Picture** FactBox shows the picture of the equipment; use its actions to take, import, export or delete it.</source>
+          <source>Here you manage one piece of equipment. The first sections show its details, its current status and who it is assigned to, its purchase and warranty information, and its planned maintenance. Use **Assign to Employee** and **Return** to change the assignment, and **Register Maintenance** to record maintenance work. Further down, **Assignment History** lists every assignment, **Maintenance History** lists every posted maintenance, and **Audit** shows who created the record and who changed it last. The **Picture** FactBox shows the picture of the equipment; use its actions to take, import, export or delete it. The **Attachments** FactBox lists the files attached to the equipment; use **Attachments** to add files and set their category.</source>
           <note from="Developer" annotates="general" priority="2"></note>
           <note from="Xliff Generator" annotates="general" priority="3">Page EQM Equipment Card - Property AboutText</note>
         </trans-unit>
@@ -1833,6 +1833,11 @@
           <note from="Developer" annotates="general" priority="2"></note>
           <note from="Xliff Generator" annotates="general" priority="3">Page EQM Equipment Card - Control WarrantyStatus - Property Caption</note>
         </trans-unit>
+        <trans-unit id="Page 3574600233 - Control 3068089194 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Attachments</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page EQM Equipment Card - Control AttachedDocuments - Property Caption</note>
+        </trans-unit>
         <trans-unit id="Page 3574600233 - Action 794261815 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
           <source>Equipment</source>
           <note from="Developer" annotates="general" priority="2"></note>
@@ -1847,6 +1852,16 @@
           <source>Assignments</source>
           <note from="Developer" annotates="general" priority="2"></note>
           <note from="Xliff Generator" annotates="general" priority="3">Page EQM Equipment Card - Action Assignments - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Page 3574600233 - Action 1225782422 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Add a file, such as an invoice, manual or warranty certificate, to the equipment, or view and categorize the attached files.</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page EQM Equipment Card - Action Attachments - Property ToolTip</note>
+        </trans-unit>
+        <trans-unit id="Page 3574600233 - Action 1225782422 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Attachments</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page EQM Equipment Card - Action Attachments - Property Caption</note>
         </trans-unit>
         <trans-unit id="Page 3574600233 - Action 350249191 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
           <source>View the maintenance records of the equipment.</source>
@@ -3088,6 +3103,16 @@
           <note from="Developer" annotates="general" priority="2"></note>
           <note from="Xliff Generator" annotates="general" priority="3">PageExtension EQM Employee Card - Action EQMReturnEquipment - Property Caption</note>
         </trans-unit>
+        <trans-unit id="TableExtension 196171537 - Field 3730454692 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve" al-object-target="Table 282138634">
+          <source>Specifies the kind of document, such as a purchase invoice, maintenance report, warranty certificate, user manual or delivery note.</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">TableExtension EQM Document Attachment - Field EQM Attachment Category - Property ToolTip</note>
+        </trans-unit>
+        <trans-unit id="TableExtension 196171537 - Field 3730454692 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve" al-object-target="Table 282138634">
+          <source>Category</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">TableExtension EQM Document Attachment - Field EQM Attachment Category - Property Caption</note>
+        </trans-unit>
         <trans-unit id="Profile 595044692 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
           <source>Equipment Manager</source>
           <note from="Developer" annotates="general" priority="2"></note>
@@ -3112,6 +3137,41 @@
           <source>Closed</source>
           <note from="Developer" annotates="general" priority="2"></note>
           <note from="Xliff Generator" annotates="general" priority="3">Enum EQM Assignment Status - EnumValue Closed - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Enum 3730454692 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Attachment Category</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Enum EQM Attachment Category - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Enum 3730454692 - EnumValue 1979567696 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Delivery Note</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Enum EQM Attachment Category - EnumValue Delivery Note - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Enum 3730454692 - EnumValue 212953829 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Maintenance Report</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Enum EQM Attachment Category - EnumValue Maintenance Report - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Enum 3730454692 - EnumValue 3448339824 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Other</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Enum EQM Attachment Category - EnumValue Other - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Enum 3730454692 - EnumValue 2437096118 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Purchase Invoice</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Enum EQM Attachment Category - EnumValue Purchase Invoice - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Enum 3730454692 - EnumValue 2684695397 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>User Manual</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Enum EQM Attachment Category - EnumValue User Manual - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Enum 3730454692 - EnumValue 1288709307 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Warranty Certificate</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Enum EQM Attachment Category - EnumValue Warranty Certificate - Property Caption</note>
         </trans-unit>
         <trans-unit id="Enum 3069227753 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
           <source>Equipment Status</source>

@@ -1,5 +1,6 @@
 namespace MiguelCarvalho.EquipmentManagement;
 
+using Microsoft.Foundation.Attachment;
 using Microsoft.Foundation.NoSeries;
 using Microsoft.HumanResources.Employee;
 using Microsoft.Inventory.Location;
@@ -344,6 +345,8 @@ table 50100 "EQM Equipment"
     var
         AssignmentMgt: Codeunit "EQM Assignment Mgt.";
         MaintenanceMgt: Codeunit "EQM Maintenance Mgt.";
+        DocumentAttachmentMgmt: Codeunit "Document Attachment Mgmt";
+        RecRef: RecordRef;
     begin
         if Status = Status::Assigned then
             Error(DeleteAssignedErr, "No.", "Assigned Employee No.");
@@ -351,6 +354,23 @@ table 50100 "EQM Equipment"
             Error(DeleteHistoryExistsErr, "No.", Format(Status::Disposed));
         if MaintenanceMgt.HasMaintenanceRecords("No.") then
             Error(DeleteMaintenanceExistsErr, "No.", Format(Status::Disposed));
+
+        RecRef.GetTable(Rec);
+        DocumentAttachmentMgmt.DeleteAttachedDocuments(RecRef);
+    end;
+
+    trigger OnRename()
+    var
+        DocumentAttachment: Record "Document Attachment";
+    begin
+        // The standard move helper did not carry the attachments over to the new number,
+        // so the attachment rows are renamed directly (the number is part of their primary key).
+        DocumentAttachment.SetRange("Table ID", Database::"EQM Equipment");
+        DocumentAttachment.SetRange("No.", xRec."No.");
+        while DocumentAttachment.FindFirst() do
+            DocumentAttachment.Rename(
+                DocumentAttachment."Table ID", Rec."No.", DocumentAttachment."Document Type",
+                DocumentAttachment."Line No.", DocumentAttachment.ID);
     end;
 
     /// <summary>

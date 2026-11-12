@@ -1,6 +1,26 @@
 # Changelog
 Newest first. Grouped by Added / Changed / Fixed / Obsolete.
 
+## FR-024 Document Attachments (version stays 29.0.0.0, no bump)
+### Added
+- Enum 50108 "EQM Attachment Category" (extensible: Other, Purchase Invoice, Maintenance Report, Warranty Certificate, User Manual, Delivery Note).
+- TableExtension 50100 "EQM Document Attachment": field 50100 "EQM Attachment Category" on table 1173; PageExtension 50101 "EQM Doc. Attachment Details" shows it for equipment only.
+- Codeunit 50118 "EQM Doc. Attachment Subscr." (internal): subscribes to `OnAfterTableHasNumberFieldPrimaryKey` and `OnAfterGetRefTable` of codeunit 1173 "Document Attachment Mgmt".
+- Equipment Card (50101): "Attachments" FactBox and action "Attachments" (enabled once the equipment is saved).
+- Test codeunit 50179 "EQM Doc. Attachment Tests" (12 tests, compiled, NOT run).
+- Help article docs/help/FR-024-document-attachments.md.
+### Changed
+- Table 50100 "EQM Equipment": `OnDelete` deletes the attachments; new `OnRename` moves them to the new "No.".
+- Permission sets: EQM - Reader gets Document Attachment R and execute on codeunit 50118; EQM - Manager gets Document Attachment RIMD. AboutText of the Equipment Card.
+### Fixed
+- None.
+### Obsolete
+- None.
+
+Release notes: You can now attach files such as invoices, maintenance reports, warranty certificates, user manuals and delivery notes to a piece of equipment. The files appear in the Attachments FactBox on the Equipment Card. Choose Attachments to add files and set a category for each one. Attachments follow the equipment when you rename it and are deleted when you delete it.
+
+Note: no upgrade code, no event published. The 12 tests are compiled but NOT run (no BC sandbox). Not verified: plan items V1-V4 (the two event hooks suffice, rename via `MoveAttachmentsWithinSameRecordType`, filter group of `OpenForRecRef`, Tenant Media rights) and the sandbox checks (upload, drill-down, FactBox count, Reader). Pre-existing open AppSource items: app.json / AppSourceCop AS0051, AS0052, AS0054, AS0084.
+
 ## FR-023 Equipment Images (version stays 29.0.0.0, no bump)
 ### Added
 - Table 50100 "EQM Equipment": field 24 "Picture" (MediaSet); Picture added to fieldgroup Brick.
