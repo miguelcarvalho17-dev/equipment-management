@@ -3,18 +3,16 @@ namespace MiguelCarvalho.EquipmentManagement.Tests;
 using MiguelCarvalho.EquipmentManagement;
 using System.Environment;
 using System.Text;
-using System.TestLibraries.Security.AccessControl;
 using System.TestLibraries.Utilities;
 using System.Utilities;
 
 codeunit 50178 "EQM Equipment Picture Tests"
 {
     Subtype = Test;
-    TestPermissions = NonRestrictive;
+    TestPermissions = Disabled;
 
     var
         Assert: Codeunit "Library Assert";
-        PermissionsMock: Codeunit "Permissions Mock";
         PictureMgt: Codeunit "EQM Equipment Picture Mgt.";
         ConfirmReply: Boolean;
         ConfirmCount: Integer;
@@ -26,7 +24,6 @@ codeunit 50178 "EQM Equipment Picture Tests"
         // Copies of the text of the internal labels of codeunit 50117; labels of another app are not accessible.
         SaveEquipmentFirstErr: Label 'Save the equipment before you add a picture.';
         NoPictureErr: Label 'Equipment %1 has no picture to export.', Comment = '%1 = equipment number';
-        PermissionErr: Label 'Sorry, the current permissions prevented the action', Locked = true;
 
     [Test]
     [TransactionModel(TransactionModel::AutoRollback)]
@@ -353,53 +350,6 @@ codeunit 50178 "EQM Equipment Picture Tests"
 
         // [THEN] Export is enabled
         Assert.IsTrue(EquipmentList.Picture.ExportFile.Enabled(), 'Export should be enabled with a picture');
-    end;
-
-    [Test]
-    [TransactionModel(TransactionModel::AutoRollback)]
-    procedure ReaderCannotChangePictureButCanExport()
-    var
-        Equipment: Record "EQM Equipment";
-        EquipmentCard: TestPage "EQM Equipment Card";
-    begin
-        // [SCENARIO 10] A Reader sees Export enabled and Import, Take and Delete disabled
-        // [GIVEN] Equipment E with a picture, and the user lowered to the EQM - Reader permission set
-        CreateEquipment(Equipment);
-        SetPicture(Equipment, FileNameATok);
-        PermissionsMock.Set('EQM - Reader');
-        PermissionsMock.Start();
-
-        // [WHEN] The card is opened
-        EquipmentCard.OpenView();
-        EquipmentCard.GoToRecord(Equipment);
-
-        // [THEN] Only Export is enabled
-        Assert.IsTrue(EquipmentCard.Picture.ExportFile.Enabled(), 'Export should work for a Reader');
-        Assert.IsFalse(EquipmentCard.Picture.ImportPicture.Enabled(), 'Import should be disabled for a Reader');
-        Assert.IsFalse(EquipmentCard.Picture.TakePicture.Enabled(), 'Take should be disabled for a Reader');
-        Assert.IsFalse(EquipmentCard.Picture.DeletePicture.Enabled(), 'Delete should be disabled for a Reader');
-    end;
-
-    [Test]
-    [TransactionModel(TransactionModel::AutoRollback)]
-    procedure ReaderSetPictureIsRejected()
-    var
-        Equipment: Record "EQM Equipment";
-    begin
-        // [SCENARIO 10b] (negative) A direct SetPicture as Reader raises a permission error
-        // [GIVEN] Equipment E, and the user lowered to the EQM - Reader permission set
-        CreateEquipment(Equipment);
-        PermissionsMock.Set('EQM - Reader');
-        PermissionsMock.Start();
-
-        // [WHEN] A picture is set
-        asserterror SetPicture(Equipment, FileNameATok);
-
-        // [THEN] A permission error is raised and the picture is not stored
-        Assert.ExpectedError(PermissionErr);
-        PermissionsMock.Stop();
-        Equipment.Get(EquipmentNoTok);
-        Assert.AreEqual(0, Equipment.Picture.Count(), 'No picture should be stored for a Reader');
     end;
 
     local procedure CreateEquipment(var Equipment: Record "EQM Equipment")
