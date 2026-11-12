@@ -22,12 +22,6 @@
       "name": "Library Assert",
       "publisher": "Microsoft",
       "version": "29.0.0.0"
-    },
-    {
-      "id": "40860557-a18d-42ad-aecb-22b7dd80dc80",
-      "name": "Permissions Mock",
-      "publisher": "Microsoft",
-      "version": "29.0.0.0"
     }
   ],
   "screenshots": [],
