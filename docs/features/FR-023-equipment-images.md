@@ -3,7 +3,7 @@
 ## Purpose
 Each equipment record can hold one picture (GitHub issue #61). The picture is stored in a MediaSet field and shown in a "Picture" FactBox on the Equipment Card and the Equipment List. Users with edit rights can take, import, export and delete it; importing or taking a new picture replaces the existing one after confirmation, as Item Picture (page 346) does.
 
-Status: describes the code as implemented (uncommitted changes on branch `feature/FR-023-equipment-images`). **Build: not re-run by the documenter; no AL code line was changed by the documentation step.** **Tests: 17 test procedures exist in test codeunit 50178 and compile, but have NOT been run (no sandbox).** Sandbox checks and verification items V2 to V4 are open. App version stays 29.0.0.0. No upgrade codeunit, no event published or subscribed (no events report).
+Status: merged to `main` via PR #107. Review verdict: APPROVE. **Build: CodeCop and UICop clean; AL-Go CI green.** **Tests: 15 tests in test codeunit 50178 pass in AL-Go CI; Reader behavior has no automated test (see Test status).** Sandbox checks and verification items V3 and V4 are open (V2 is resolved by the tests). App version stays 29.0.0.0. No upgrade codeunit, no event published or subscribed (no events report).
 
 ## Known gaps against issue #61 (user decision)
 - IM-R3 "multiple images may be attached to a single equipment record" is **intentionally not met**: one picture per equipment, like Item, Employee and Vendor pictures. Importing or taking a picture replaces the existing one.
