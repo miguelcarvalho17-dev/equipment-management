@@ -108,7 +108,7 @@ The objective is to transform the Equipment Management solution into a connected
 
 ### V3 progress
 
-All 19 requirements (FR-023 to FR-041) are tracked as GitHub issues in the V3 milestone. None is built yet.
+All 19 requirements (FR-023 to FR-041) are tracked as GitHub issues in the V3 milestone. FR-023 Equipment Images is built and merged (one picture per equipment, like Item Picture; multiple pictures and picture types are not supported, by decision), with 15 automated tests running in CI; it is not yet verified in a Business Central sandbox. The other 18 are not built yet.
 
 ### Roadmap (after V3)
 

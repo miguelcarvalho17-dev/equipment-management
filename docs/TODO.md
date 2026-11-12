@@ -214,3 +214,15 @@ Source: "Test scenarios" 1 to 11 in `docs/plans/NFR-005-auditability.md`.
 - [ ] AU-SB4 Modify without a change adds no entry; a failed registration or posting leaves no entry.
 - [ ] AU-SB5 Reader cannot create entries; no role can delete or edit entries or records.
 - [ ] Record the results in `docs/features/NFR-005-auditability.md` ("Not verified").
+
+## FR-023 sandbox checks (not run; 15 automated tests pass in CI, test codeunit 50178)
+Source: "Test scenarios" in `docs/plans/FR-023-equipment-images.md`. Reader tests were removed because Permissions Mock did not lower rights in CI.
+- [ ] V3 a user with only EQM - Reader can Export (Tenant Media read access). If not, add `tabledata "Tenant Media" = r` to EQM - Reader.
+- [ ] V3 `ImportStream` rejects content that is not an image; `Camera.IsAvailable` and `Camera.GetPicture` behave as used.
+- [ ] V4 Item List and Employee List carry a picture FactBox (why the Equipment List got one); keep or remove it on the Equipment List.
+- [ ] Reader (not SUPER): Export enabled; Import, Take and Delete disabled; a direct modify is rejected.
+- [ ] Scenario 5 upload "manual.pdf": `UnsupportedFileErr` and no change.
+- [ ] Scenario 7 Export with a picture downloads one image file.
+- [ ] Scenario 11 Take is not visible without a camera and visible in the mobile app.
+- [ ] Decide which languages to translate (only the generated `.g.xlf` exists).
+- [ ] Record the results in "Test status" of `docs/features/FR-023-equipment-images.md` and the TODO(verify) items in the help article.
