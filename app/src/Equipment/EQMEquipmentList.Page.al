@@ -120,6 +120,10 @@ page 50100 "EQM Equipment List"
         }
         area(FactBoxes)
         {
+            part(Picture; "EQM Equipment Picture")
+            {
+                SubPageLink = "No." = field("No.");
+            }
             part(EquipmentFactBox; "EQM Equipment FactBox")
             {
                 SubPageLink = "No." = field("No.");

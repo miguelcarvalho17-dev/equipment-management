@@ -7,7 +7,7 @@ page 50101 "EQM Equipment Card"
 {
     Caption = 'Equipment Card';
     AboutTitle = 'About equipment details';
-    AboutText = 'Here you manage one piece of equipment. The first sections show its details, its current status and who it is assigned to, its purchase and warranty information, and its planned maintenance. Use **Assign to Employee** and **Return** to change the assignment, and **Register Maintenance** to record maintenance work. Further down, **Assignment History** lists every assignment, **Maintenance History** lists every posted maintenance, and **Audit** shows who created the record and who changed it last.';
+    AboutText = 'Here you manage one piece of equipment. The first sections show its details, its current status and who it is assigned to, its purchase and warranty information, and its planned maintenance. Use **Assign to Employee** and **Return** to change the assignment, and **Register Maintenance** to record maintenance work. Further down, **Assignment History** lists every assignment, **Maintenance History** lists every posted maintenance, and **Audit** shows who created the record and who changed it last. The **Picture** FactBox shows the picture of the equipment; use its actions to take, import, export or delete it.';
     PageType = Card;
     ApplicationArea = All;
     UsageCategory = None;
@@ -217,6 +217,10 @@ page 50101 "EQM Equipment Card"
         }
         area(FactBoxes)
         {
+            part(Picture; "EQM Equipment Picture")
+            {
+                SubPageLink = "No." = field("No.");
+            }
             part(EquipmentFactBox; "EQM Equipment FactBox")
             {
                 SubPageLink = "No." = field("No.");
