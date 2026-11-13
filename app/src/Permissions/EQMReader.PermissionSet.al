@@ -53,6 +53,7 @@ permissionset 50100 "EQM - Reader"
         page "EQM Maintenance History" = X,
         page "EQM Maintenance Log Entries" = X,
         page "EQM Warranty Alerts" = X,
+        page "EQM Equipment API" = X,
         codeunit "EQM Assignment Mgt." = X,
         codeunit "EQM Employee Subscribers" = X,
         codeunit "EQM Equipment Picture Mgt." = X,
