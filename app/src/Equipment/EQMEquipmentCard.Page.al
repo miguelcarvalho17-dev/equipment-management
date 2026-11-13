@@ -443,6 +443,7 @@ page 50101 "EQM Equipment Card"
 
     trigger OnAfterGetCurrRecord()
     begin
+        CurrPage.EquipmentNotes.Page.SetEquipmentNo(Rec."No.");
         if NotificationsChecked and (Rec."No." = NotifiedEquipmentNo) then
             exit;
 

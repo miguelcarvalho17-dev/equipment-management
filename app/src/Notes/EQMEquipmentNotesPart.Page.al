@@ -33,15 +33,21 @@ page 50130 "EQM Equipment Notes Part"
 
     var
         IsNewLine: Boolean;
+        CurrentEquipmentNo: Code[20];
+
+    /// <summary>
+    /// Sets the equipment that new note lines are created for. The Equipment Card calls this whenever its record changes.
+    /// </summary>
+    /// <param name="EquipmentNo">The number of the equipment shown on the card.</param>
+    procedure SetEquipmentNo(EquipmentNo: Code[20])
+    begin
+        CurrentEquipmentNo := EquipmentNo;
+    end;
 
     trigger OnNewRecord(BelowxRec: Boolean)
     begin
         IsNewLine := true;
-        // Take the equipment from the card's SubPageLink filter when it is a single value.
-        if Rec."Equipment No." = '' then
-            if Rec.GetFilter("Equipment No.") <> '' then
-                if Rec.GetRangeMin("Equipment No.") = Rec.GetRangeMax("Equipment No.") then
-                    Rec."Equipment No." := Rec.GetRangeMin("Equipment No.");
+        Rec."Equipment No." := CurrentEquipmentNo;
     end;
 
     trigger OnAfterGetCurrRecord()
