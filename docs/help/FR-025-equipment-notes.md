@@ -28,7 +28,7 @@ If you leave the comment empty you get an error and no note is created. You cann
 - Notes cannot be changed or deleted after they are saved. To correct a note, add a new one.
 - You can add notes to equipment with any status, including Lost and Disposed.
 - Equipment that has notes cannot be deleted. Set its status to Disposed instead.
-- Renaming the equipment number: TODO(verify) that the notes follow the equipment; this is not confirmed yet.
+- If the equipment number is renamed, the notes follow the equipment.
 - The standard **Notes** FactBox is separate. It is a free notepad that can be edited and deleted, and it is not controlled by the equipment roles. Use **Equipment Notes** when the record must be kept.
 - Equipment Notes is on the Equipment Card only, not on the Equipment List.
 
