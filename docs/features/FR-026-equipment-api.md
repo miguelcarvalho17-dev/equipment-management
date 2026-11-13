@@ -7,8 +7,10 @@ Status: implemented on branch `feature/FR-026-equipment-api`, uncommitted at the
 
 ## Verification status
 - **Build (app):** compiles with CodeCop, UICop and AppSourceCop with no diagnostics from the new page. The only compiler output is the known AppSource manifest gaps of the demo app (missing privacyStatement, EULA, help, logo, url, contextSensitiveHelpUrl; ID range 50100-50149 not valid for AppSource; AppSourceCop mandatory affix configuration; InternalsVisibleTo and Application Insights warnings). The documenter did not re-run the build; only existing `///` comments were checked and no AL line was changed.
-- **Tests:** 25 tests in codeunit 50180 (`test/src/EQMEquipmentAPITests.Codeunit.al`) are written but **NOT compiled and NOT run** (no Library Assert / Tests-TestLibraries symbols, no sandbox). The Tests-TestLibraries app ID in `test/app.json` is **unverified**.
-- **Unverified API behavior:** enum encoding (`In_x0020_Maintenance`); PATCH of a read-only field (plan scenario 11: fails or is ignored); Code[20] as bound action parameter; Library - Graph Mgt procedure signatures and base URL used by the tests.
+- **CI (commit 9dc8102):** the main app compiles with only the known AppSource manifest warnings; the test app compiled after the `GetFromWebService` call was fixed.
+- **Tests:** 35 table-level tests in codeunit 50180 (`test/src/EQMEquipmentAPITests.Codeunit.al`). They compile in CI but have **NOT been run in CI yet**; do not treat them as passing. The earlier 25 HTTP tests (Library - Graph Mgt) failed in CI with HTTP 401 and were replaced (see Test status).
+- **Not covered by automated tests, verified manually in the sandbox (not done yet):** GET list and the OData enum filter (plan scenarios 1, 2a/2b); PATCH of a read-only field at page level (scenario 11); URL and field naming; ETag / If-Match; permissions (scenario 17).
+- **Other unverified API behavior:** enum encoding (`In_x0020_Maintenance`); Code[20] as bound action parameter; assumed API publisher `miguelCarvalho`.
 - **Permissions** (plan scenario 17) are manual sandbox checks and have **not** been done.
 - Open items are in `docs/TODO.md`, section FR-026.
 
@@ -17,7 +19,7 @@ Status: implemented on branch `feature/FR-026-equipment-api`, uncommitted at the
 |---|---|---|---|
 | Page (API) | 50123 | EQM Equipment API | New, `app/src/API/EQMEquipmentAPI.Page.al`, SourceTable "EQM Equipment" |
 | PermissionSet | 50100 | EQM - Reader | `page "EQM Equipment API" = X` |
-| Codeunit (test app) | 50180 | EQM Equipment API Tests | New, 25 tests, not compiled, not run |
+| Codeunit (test app) | 50180 | EQM Equipment API Tests | New, 35 table-level tests, compiled in CI, not yet run in CI |
 
 ## Endpoint
 `/api/miguelCarvalho/equipment/v1.0/companies({companyId})/equipments` and `.../equipments({id})`, where `{id}` is the `id` (SystemId) field. `APIPublisher = 'miguelCarvalho'` is an assumption of the plan (the platform needs a publisher segment). TODO(verify): base URL in a sandbox.
@@ -102,8 +104,15 @@ Expected from the code and the existing permission sets; **not checked in a sand
 Additive: one new page and one permission line. **At first AppSource release v1.0 is a frozen public contract:** entity names, field names, types and actions must not change. A breaking change needs a new page with `APIVersion = 'v2.0'`; v1.0 is then marked Obsolete.
 
 ## Test status
-25 tests in codeunit 50180 (`TestPermissions = Disabled`), **not compiled, not run**. They call the API through Library - Graph Mgt web service helpers and cover plan scenarios 1 to 16: GET (list, single, enum filter), POST (series number, status Assigned/Disposed rejected, inactive and empty category, used serial), PATCH (description, warranty dates, Disposed, Lost clears the employee, Assigned to Available rejected, status Assigned rejected, assignedEmployeeNumber does not assign), `assign` (success, inactive employee, Lost, already assigned), `returnEquipment` (success, not assigned), DELETE (plain, with history, assigned) and explicit number with a non-manual series. Fallback if HTTP tests cannot run in CI: table-level calls plus sandbox checks (plan Q3).
+35 AutoRollback tests in codeunit 50180 (`TestPermissions = Disabled`), compiled in CI, **not yet run in CI**. They call the same table triggers (`Validate`, `Insert(true)`, `Modify(true)`, `Delete(true)`) and the `AssignEmployee` / `UnassignEmployee` procedures that the API page uses, in the field order of a request. No HTTP, no Tests-TestLibraries dependency: `test/app.json` depends on the main app and Library Assert only.
+
+Why: the first version used 25 HTTP tests through Library - Graph Mgt. They failed in CI with HTTP 401, because the AL-Go container uses UserPassword authentication and the library sends no credentials. The plan's Q3 fallback (table-level tests plus sandbox checks) was applied.
+
+Covered (plan scenarios 3 to 16): POST (series number and status Available, status Assigned/Disposed/Lost rejected also when set without Validate, inactive/unknown/empty category, used serial number), PATCH (description, own serial number kept, warranty end before/equal/after start, Disposed with and without confirmation, Disposed to Available rejected, Lost clears the employee and closes the entry, Assigned to Available rejected, status Assigned without employee rejected, employee on non-assigned equipment rejected), `AssignEmployee` (success, inactive employee, Lost, already assigned), `UnassignEmployee` (success, declined, not assigned), DELETE (plain, with history, assigned) and explicit number with a non-manual and a manual series.
+
+Not covered by automated tests, manual sandbox checks (not done): scenarios 1 and 2a/2b (GET, OData enum filter), scenario 11 at page level (the page marks `id`, `assignedEmployeeNumber`, `nextMaintenanceDate` and `lastModifiedDateTime` as not editable; only the table rule behind it is tested), URL and field naming, ETag / If-Match, scenario 17 (permissions).
 
 ## Discrepancies plan vs code
 - Plan scenario 10 names PATCH status `Available` on assigned equipment; the test file adds scenario 10b (PATCH status `Assigned`), which the plan did not list. The code behaves as described in Behavior.
+- Plan step 4 and Q3 (HTTP tests with Tests-TestLibraries) were not kept: the tests are table-level (Q3 fallback applied). The plan scenarios 1, 2 and 17 and the page-level part of 11 are manual checks, not automated.
 - Otherwise the page matches the plan (objects, fields, actions, permission line).

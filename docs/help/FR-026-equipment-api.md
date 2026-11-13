@@ -2,7 +2,7 @@
 
 The Equipment API lets other systems (inventory sync, CMDB, mobile apps, self-service tools) read and maintain your equipment in Business Central without opening the Equipment Card. The same rules apply as in the app: for example, equipment needs an active category, serial numbers must be unique, and equipment with history cannot be deleted.
 
-TODO(verify): this feature has not been tested in a sandbox. The automated tests are written but have not been run.
+TODO(verify): this feature has not been tested in a sandbox. The automated tests cover the business rules at table level only; they compile in CI but have not been run there yet. Reading data, filtering, URL and field names, ETag and permissions through the API are not covered by automated tests.
 
 ## Before you start: permissions
 - **Equipment Reader**: can only read equipment (GET). Cannot create, change or delete.

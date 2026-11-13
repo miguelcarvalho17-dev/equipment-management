@@ -174,7 +174,7 @@ Source: "Manual sandbox checks" in `docs/plans/FR-021-maintenance-dashboard.md`.
 - [ ] Every release after 29.0.0.0 needs an upgrade codeunit.
 
 ## Tests (deferred by decision)
-- [ ] Build the test app in `test/`: `test/app.json` needs the old `test` property removed and dependencies on Library Assert, Any and Tests-TestLibraries added (IDs from the symbols). The Tests-TestLibraries ID is unverified, see section FR-026 below. Its dependency version on the main app should match the app's version.
+- [ ] Build the test app in `test/`: `test/app.json` needs the old `test` property removed and dependencies on Library Assert and Any added (IDs from the symbols). FR-026 removed its Tests-TestLibraries dependency (see section FR-026 below). Its dependency version on the main app should match the app's version.
 - [ ] Implement the 57 scenarios in `docs/plans/FR-001-equipment-registration.md` (test codeunits 50150-50155). Answer the confirm dialogs with a `[ConfirmHandler]`.
 
 ## Housekeeping
@@ -228,12 +228,13 @@ Source: "Test scenarios" in `docs/plans/FR-023-equipment-images.md`. Reader test
 - [ ] Decide which languages to translate (only the generated `.g.xlf` exists).
 - [ ] Record the results in "Test status" of `docs/features/FR-023-equipment-images.md` and the TODO(verify) items in the help article.
 
-## FR-026 Equipment API (tests not compiled or run; sandbox checks not done)
+## FR-026 Equipment API (table-level tests compiled in CI, not yet run; sandbox checks not done)
 Source: "Test scenarios" in `docs/plans/FR-026-equipment-api.md`.
-- [ ] Confirm the Tests-TestLibraries app ID in `test/app.json`: `5d86850b-0d76-4eca-bd7b-951ad998e997` is UNVERIFIED (written from memory, no BC symbols available). Check it against the BC 29 symbols; do not guess a different one.
-- [ ] Compile and run test codeunit 50180 (25 tests, `test/src/EQMEquipmentAPITests.Codeunit.al`). Needs Library Assert and Tests-TestLibraries symbols and a sandbox. Check the Library - Graph Mgt procedure signatures and base URL used.
+- [x] Tests-TestLibraries ID question is obsolete: the dependency was removed from `test/app.json` (the HTTP tests failed in CI with HTTP 401, UserPassword authentication in the AL-Go container, so the tests are now table-level). For the record, CI confirmed that ID `5d86850b-0d76-4eca-bd7b-951ad998e997` resolves.
+- [ ] Run test codeunit 50180 (35 table-level tests, `test/src/EQMEquipmentAPITests.Codeunit.al`) in CI or a sandbox. It compiled in CI on commit 9dc8102 but has NOT been run.
+- [ ] Manual sandbox checks, not automated: GET list and OData enum filter (scenarios 1, 2a/2b), URL and field naming.
 - [ ] V1 enum encoding: `status` value for In Maintenance is `In_x0020_Maintenance` (GET, filter, PATCH).
-- [ ] V2 PATCH of a read-only field (`assignedEmployeeNumber`, scenario 11): record whether it fails or is ignored.
+- [ ] V2 PATCH of a read-only field (`assignedEmployeeNumber`, scenario 11) at page level: record whether it fails or is ignored (the table rule is covered by a test).
 - [ ] V3 bound action `assign` accepts `employeeNumber` as Code[20] (fallback: Text, then CopyStr).
 - [ ] Scenario 17 permissions in a sandbox (not SUPER): Reader GET ok, PATCH denied; Manager POST/PATCH/actions ok, DELETE denied; Administrator all.
 - [ ] Confirm ETag / If-Match behavior on PATCH and DELETE.
