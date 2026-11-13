@@ -48,6 +48,11 @@
           <note from="Developer" annotates="general" priority="2">%1 = equipment number, %2 = Disposed status caption</note>
           <note from="Xliff Generator" annotates="general" priority="3">Table EQM Equipment - NamedType DeleteMaintenanceExistsErr</note>
         </trans-unit>
+        <trans-unit id="Table 4212454693 - NamedType 415453288" size-unit="char" translate="yes" xml:space="preserve">
+          <source>You cannot delete equipment %1 because it has notes. To stop using the equipment, set its status to %2 instead.</source>
+          <note from="Developer" annotates="general" priority="2">%1 = equipment number, %2 = Disposed status caption</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table EQM Equipment - NamedType DeleteNotesExistErr</note>
+        </trans-unit>
         <trans-unit id="Table 4212454693 - NamedType 2695088842" size-unit="char" translate="yes" xml:space="preserve">
           <source>You cannot assign equipment to employee %1 because the employee status is %2.</source>
           <note from="Developer" annotates="general" priority="2">%1 = employee number, %2 = employee status</note>
@@ -772,6 +777,86 @@
           <source>Warranties Expiring in 30 Days</source>
           <note from="Developer" annotates="general" priority="2"></note>
           <note from="Xliff Generator" annotates="general" priority="3">Table EQM Equipment Cue - Field Warranty Expiring Soon - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Table 1552169445 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Equipment Note</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table EQM Equipment Note - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Table 1552169445 - NamedType 3521818249" size-unit="char" translate="yes" xml:space="preserve">
+          <source>You must enter a comment for the note.</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table EQM Equipment Note - NamedType CommentRequiredErr</note>
+        </trans-unit>
+        <trans-unit id="Table 1552169445 - NamedType 658144035" size-unit="char" translate="yes" xml:space="preserve">
+          <source>You cannot delete equipment note %1. Equipment notes are kept permanently.</source>
+          <note from="Developer" annotates="general" priority="2">%1 = entry number</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table EQM Equipment Note - NamedType DeleteNotAllowedErr</note>
+        </trans-unit>
+        <trans-unit id="Table 1552169445 - NamedType 3946311952" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Equipment %1 does not exist. You cannot add a note to equipment that does not exist.</source>
+          <note from="Developer" annotates="general" priority="2">%1 = equipment number</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table EQM Equipment Note - NamedType EquipmentNotFoundErr</note>
+        </trans-unit>
+        <trans-unit id="Table 1552169445 - NamedType 3659624548" size-unit="char" translate="yes" xml:space="preserve">
+          <source>You cannot change equipment note %1. Notes are kept as written. To correct a note, add a new note.</source>
+          <note from="Developer" annotates="general" priority="2">%1 = entry number</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table EQM Equipment Note - NamedType ModifyNotAllowedErr</note>
+        </trans-unit>
+        <trans-unit id="Table 1552169445 - NamedType 3435470116" size-unit="char" translate="yes" xml:space="preserve">
+          <source>You cannot change the number of equipment note %1.</source>
+          <note from="Developer" annotates="general" priority="2">%1 = entry number</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table EQM Equipment Note - NamedType RenameNotAllowedErr</note>
+        </trans-unit>
+        <trans-unit id="Table 1552169445 - Field 2790486453 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Specifies the note. A note cannot be changed or deleted after it is saved.</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table EQM Equipment Note - Field Comment - Property ToolTip</note>
+        </trans-unit>
+        <trans-unit id="Table 1552169445 - Field 2790486453 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Comment</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table EQM Equipment Note - Field Comment - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Table 1552169445 - Field 2570673311 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Specifies the date and time when the note was written. The system sets it.</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table EQM Equipment Note - Field Created At - Property ToolTip</note>
+        </trans-unit>
+        <trans-unit id="Table 1552169445 - Field 2570673311 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Created At</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table EQM Equipment Note - Field Created At - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Table 1552169445 - Field 883711285 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Specifies the number of the equipment note.</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table EQM Equipment Note - Field Entry No. - Property ToolTip</note>
+        </trans-unit>
+        <trans-unit id="Table 1552169445 - Field 883711285 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Entry No.</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table EQM Equipment Note - Field Entry No. - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Table 1552169445 - Field 1827518031 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Specifies the equipment the note is about.</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table EQM Equipment Note - Field Equipment No. - Property ToolTip</note>
+        </trans-unit>
+        <trans-unit id="Table 1552169445 - Field 1827518031 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Equipment No.</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table EQM Equipment Note - Field Equipment No. - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Table 1552169445 - Field 2708250016 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Specifies the user who wrote the note. The system sets it.</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table EQM Equipment Note - Field User ID - Property ToolTip</note>
+        </trans-unit>
+        <trans-unit id="Table 1552169445 - Field 2708250016 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>User ID</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table EQM Equipment Note - Field User ID - Property Caption</note>
         </trans-unit>
         <trans-unit id="Table 1065098760 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
           <source>Equipment Setup</source>
@@ -1814,7 +1899,7 @@
           <note from="Xliff Generator" annotates="general" priority="3">Page EQM Equipment Card - Property AboutTitle</note>
         </trans-unit>
         <trans-unit id="Page 3574600233 - Property 247559172" size-unit="char" translate="yes" xml:space="preserve">
-          <source>Here you manage one piece of equipment. The first sections show its details, its current status and who it is assigned to, its purchase and warranty information, and its planned maintenance. Use **Assign to Employee** and **Return** to change the assignment, and **Register Maintenance** to record maintenance work. Further down, **Assignment History** lists every assignment, **Maintenance History** lists every posted maintenance, and **Audit** shows who created the record and who changed it last. The **Picture** FactBox shows the picture of the equipment; use its actions to take, import, export or delete it. The **Attachments** FactBox lists the files attached to the equipment; use **Attachments** to add files and set their category.</source>
+          <source>Here you manage one piece of equipment. The first sections show its details, its current status and who it is assigned to, its purchase and warranty information, and its planned maintenance. Use **Assign to Employee** and **Return** to change the assignment, and **Register Maintenance** to record maintenance work. Further down, **Assignment History** lists every assignment, **Maintenance History** lists every posted maintenance, and **Audit** shows who created the record and who changed it last. The **Picture** FactBox shows the picture of the equipment; use its actions to take, import, export or delete it. The **Attachments** FactBox lists the files attached to the equipment; use **Attachments** to add files and set their category. **Equipment Notes** lists dated notes about the equipment; type a new line to add one. Notes cannot be changed or deleted.</source>
           <note from="Developer" annotates="general" priority="2"></note>
           <note from="Xliff Generator" annotates="general" priority="3">Page EQM Equipment Card - Property AboutText</note>
         </trans-unit>
@@ -1913,6 +1998,11 @@
           <note from="Developer" annotates="general" priority="2"></note>
           <note from="Xliff Generator" annotates="general" priority="3">Page EQM Equipment Card - Control LastModifiedDate - Property Caption</note>
         </trans-unit>
+        <trans-unit id="Page 3574600233 - Control 936620747 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Equipment Notes</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page EQM Equipment Card - Control EquipmentNotes - Property Caption</note>
+        </trans-unit>
         <trans-unit id="Page 3574600233 - Control 2445482498 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
           <source>General</source>
           <note from="Developer" annotates="general" priority="2"></note>
@@ -1987,6 +2077,16 @@
           <source>Maintenance</source>
           <note from="Developer" annotates="general" priority="2"></note>
           <note from="Xliff Generator" annotates="general" priority="3">Page EQM Equipment Card - Action Maintenance - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Page 3574600233 - Action 845189062 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
+          <source>View all notes recorded for the equipment.</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page EQM Equipment Card - Action ShowEquipmentNotes - Property ToolTip</note>
+        </trans-unit>
+        <trans-unit id="Page 3574600233 - Action 845189062 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Equipment Notes</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page EQM Equipment Card - Action ShowEquipmentNotes - Property Caption</note>
         </trans-unit>
         <trans-unit id="Page 3574600233 - Action 206564808 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
           <source>View the posted maintenance history of the equipment.</source>
@@ -2537,6 +2637,31 @@
           <source>Equipment Setup</source>
           <note from="Developer" annotates="general" priority="2"></note>
           <note from="Xliff Generator" annotates="general" priority="3">Page EQM Equipment Manager RC - Action EquipmentSetup - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Page 2262212636 - Property 1064389655" size-unit="char" translate="yes" xml:space="preserve">
+          <source>About equipment notes</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page EQM Equipment Notes - Property AboutTitle</note>
+        </trans-unit>
+        <trans-unit id="Page 2262212636 - Property 247559172" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Here you see the dated notes recorded for equipment, newest first. Notes cannot be changed or deleted. To add a note, open the equipment card and type on a new line in **Equipment Notes**.</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page EQM Equipment Notes - Property AboutText</note>
+        </trans-unit>
+        <trans-unit id="Page 2262212636 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Equipment Notes</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page EQM Equipment Notes - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Page 2262212636 - Property 3863440606" size-unit="char" translate="yes" xml:space="preserve">
+          <source>equipment notes, equipment comments, operational notes</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page EQM Equipment Notes - Property AdditionalSearchTerms</note>
+        </trans-unit>
+        <trans-unit id="Page 2318750841 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Equipment Notes</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page EQM Equipment Notes Part - Property Caption</note>
         </trans-unit>
         <trans-unit id="Page 4236535089 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
           <source>Picture</source>

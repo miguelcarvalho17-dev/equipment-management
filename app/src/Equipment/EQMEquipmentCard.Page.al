@@ -8,7 +8,7 @@ page 50101 "EQM Equipment Card"
 {
     Caption = 'Equipment Card';
     AboutTitle = 'About equipment details';
-    AboutText = 'Here you manage one piece of equipment. The first sections show its details, its current status and who it is assigned to, its purchase and warranty information, and its planned maintenance. Use **Assign to Employee** and **Return** to change the assignment, and **Register Maintenance** to record maintenance work. Further down, **Assignment History** lists every assignment, **Maintenance History** lists every posted maintenance, and **Audit** shows who created the record and who changed it last. The **Picture** FactBox shows the picture of the equipment; use its actions to take, import, export or delete it. The **Attachments** FactBox lists the files attached to the equipment; use **Attachments** to add files and set their category.';
+    AboutText = 'Here you manage one piece of equipment. The first sections show its details, its current status and who it is assigned to, its purchase and warranty information, and its planned maintenance. Use **Assign to Employee** and **Return** to change the assignment, and **Register Maintenance** to record maintenance work. Further down, **Assignment History** lists every assignment, **Maintenance History** lists every posted maintenance, and **Audit** shows who created the record and who changed it last. The **Picture** FactBox shows the picture of the equipment; use its actions to take, import, export or delete it. The **Attachments** FactBox lists the files attached to the equipment; use **Attachments** to add files and set their category. **Equipment Notes** lists dated notes about the equipment; type a new line to add one. Notes cannot be changed or deleted.';
     PageType = Card;
     ApplicationArea = All;
     UsageCategory = None;
@@ -186,6 +186,12 @@ page 50101 "EQM Equipment Card"
                 Caption = 'Maintenance History';
                 SubPageLink = "Equipment No." = field("No.");
             }
+            part(EquipmentNotes; "EQM Equipment Notes Part")
+            {
+                Caption = 'Equipment Notes';
+                Editable = IsSaved;
+                SubPageLink = "Equipment No." = field("No.");
+            }
             group(Audit)
             {
                 Caption = 'Audit';
@@ -325,6 +331,15 @@ page 50101 "EQM Equipment Card"
                     RunObject = page "EQM Maintenance History";
                     RunPageLink = "Equipment No." = field("No.");
                 }
+                action(ShowEquipmentNotes)
+                {
+                    Caption = 'Equipment Notes';
+                    ToolTip = 'View all notes recorded for the equipment.';
+                    Image = ViewComments;
+                    Enabled = IsSaved;
+                    RunObject = page "EQM Equipment Notes";
+                    RunPageLink = "Equipment No." = field("No.");
+                }
                 action(Attachments)
                 {
                     Caption = 'Attachments';
@@ -384,6 +399,9 @@ page 50101 "EQM Equipment Card"
                 {
                 }
                 actionref(WarrantyAlerts_Promoted; WarrantyAlerts)
+                {
+                }
+                actionref(ShowEquipmentNotes_Promoted; ShowEquipmentNotes)
                 {
                 }
                 actionref(Attachments_Promoted; Attachments)

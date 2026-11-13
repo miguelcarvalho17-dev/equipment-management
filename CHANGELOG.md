@@ -1,6 +1,25 @@
 # Changelog
 Newest first. Grouped by Added / Changed / Fixed / Obsolete.
 
+## FR-025 Equipment Notes (version stays 29.0.0.0, no bump)
+### Added
+- Table 50109 "EQM Equipment Note" (public, append-only): Entry No., Equipment No., Created At, User ID, Comment. The system sets Created At and User ID on insert; modify, delete and rename raise errors.
+- Page 50131 "EQM Equipment Notes" (read-only list) and page 50130 "EQM Equipment Notes Part" (insert-only ListPart, newest first).
+- Test codeunit 50183 "EQM Equipment Note Tests": 18 tests, compiled, NOT run (no sandbox).
+- Feature doc docs/features/FR-025-equipment-notes.md and help docs/help/FR-025-equipment-notes.md.
+### Changed
+- Equipment Card: part Equipment Notes, action ShowEquipmentNotes, AboutText sentence.
+- Table 50100 "EQM Equipment": equipment that has notes can no longer be deleted (public table, behavior change).
+- Permission sets: Reader gets read and execute on the new table and pages; Manager gets RI on the new table. No set can modify or delete notes.
+### Fixed
+- None.
+### Obsolete
+- None.
+
+Release notes: You can now record dated notes on a piece of equipment. Each note shows when it was written and by whom, appears newest first in Equipment Notes on the Equipment Card, and cannot be changed or deleted afterwards. Equipment that has notes can no longer be deleted; set its status to Disposed instead. Equipment Reader can see notes; Equipment Manager can also add them.
+
+Note: no event published, no upgrade code. Not verified: tests not run; V1 (rename of equipment with notes versus the immutable OnModify, and the Manager permission for the cascade); V2 (new-line editability of Comment); sandbox scenario 12 (permissions, Tell Me). At first AppSource release table 50109 becomes a frozen contract.
+
 ## FR-026 Equipment API (version stays 29.0.0.0, no bump)
 ### Added
 - Page 50123 "EQM Equipment API" (API v1.0, publisher `miguelCarvalho`, group `equipment`, entity `equipments`): GET, POST, PATCH, DELETE on table 50100, plus bound actions `assign(employeeNumber)` and `returnEquipment`. Not extensible. Sets the API conventions C1 to C10 for FR-027 and FR-028.
