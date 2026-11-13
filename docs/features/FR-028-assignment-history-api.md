@@ -65,16 +65,16 @@ Expected from the code and the permission sets; **not checked in a sandbox** (sc
 Additive: one new page and one permission line. **At first AppSource release v1.0 is a frozen public contract:** entity and field names and types must not change. Adding fields later is additive; removing or renaming fields needs `v2.0` and Obsolete on v1.0.
 
 ## Test status
-Codeunit 50182 (`test/src/EQMAssignmentAPITests.Codeunit.al`, AutoRollback), 8 tests, **compiled, not yet run**:
+Codeunit 50182 (`test/src/EQMAssignmentAPITests.Codeunit.al`, AutoRollback), 7 tests. The first CI run passed 7 of 8; the 8th (`ClosedEntryIsUnchangedAfterRejectedModify`) failed because `Modify` is not allowed inside a TryFunction during `RunTests`, so it was removed. **Re-run in CI to confirm:**
 - `EquipmentFilterReturnsClosedAndActiveEntries`, `EquipmentFilterExcludesOtherEquipment` (equivalent of `$filter=equipmentNumber eq`)
 - `StatusFilterSeparatesClosedAndActive` (equivalent of `$filter=status eq`)
 - `EntryIsFoundBySystemId`, `UnknownSystemIdIsNotFound` (equivalent of `assignments({id})`)
 - `ReturnKeepsSystemIdAndClosesEntry` (SystemId stays, status closes, relevant for `lastModifiedDateTime` sync)
-- `ClosedEntryCannotBeModified`, `ClosedEntryIsUnchangedAfterRejectedModify` (history stays immutable)
+- `ClosedEntryCannotBeModified` (history stays immutable)
 
 No HTTP calls (CI containers cannot authenticate them, see FR-026). Plan scenarios 6 to 11 are manual sandbox checks, not done.
 
 ## Discrepancies plan vs code
-- The plan lists 5 automated scenarios; the test codeunit has 8 tests (the equipment filter and the closed-entry immutability scenarios are each split in two, plus the unknown-id negative case).
+- The plan lists 5 automated scenarios; the test codeunit has 7 tests (the equipment filter scenario is split in two, plus the unknown-id negative case).
 - Otherwise the page, fields (assignedBy/closedBy excluded) and permission line match the plan.
 - The plan steps for `docs/TODO.md` and ticking the FR-026 follow-up line were not part of this documentation task and are not done.

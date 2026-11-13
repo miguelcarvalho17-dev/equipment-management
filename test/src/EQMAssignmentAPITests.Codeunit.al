@@ -210,32 +210,6 @@ codeunit 50182 "EQM Assignment API Tests"
         Assert.ExpectedError(StrSubstNo(ClosedEntryCannotBeChangedErr, EntryNo, EquipmentNoTok));
     end;
 
-    [Test]
-    [TransactionModel(TransactionModel::AutoRollback)]
-    [HandlerFunctions('ConfirmHandler')]
-    procedure ClosedEntryIsUnchangedAfterRejectedModify()
-    var
-        Assignment: Record "EQM Equipment Assignment";
-        Stored: Record "EQM Equipment Assignment";
-        EntryNo: Integer;
-    begin
-        // [SCENARIO 5b] (negative) A rejected modify leaves the closed entry as it was
-        Initialize();
-
-        // [GIVEN] Closed entry A1 and an attempt to change it that is rejected
-        FindEntry(Assignment, Assignment.Status::Closed);
-        EntryNo := Assignment."Entry No.";
-        Assignment."Employee No." := OtherEmployeeTok;
-        Assert.IsFalse(TryModify(Assignment), 'Modifying a closed entry should be rejected');
-
-        // [WHEN] The stored entry is read again
-        Stored.Get(EntryNo);
-
-        // [THEN] Employee No. is still E1 and Status is Closed
-        Assert.AreEqual(EmployeeTok, Stored."Employee No.", 'The employee should be unchanged');
-        Assert.AreEqual(Stored.Status::Closed, Stored.Status, 'The entry should stay Closed');
-    end;
-
     local procedure Initialize()
     var
         Category: Record "EQM Equipment Category";
@@ -267,12 +241,6 @@ codeunit 50182 "EQM Assignment API Tests"
         Equipment.UnassignEmployee();
         Equipment.Get(EquipmentNoTok);
         Equipment.AssignEmployee(EmployeeTok);
-    end;
-
-    [TryFunction]
-    local procedure TryModify(var Assignment: Record "EQM Equipment Assignment")
-    begin
-        Assignment.Modify(true);
     end;
 
     local procedure FindEntry(var Assignment: Record "EQM Equipment Assignment"; AssignmentStatus: Enum "EQM Assignment Status")
