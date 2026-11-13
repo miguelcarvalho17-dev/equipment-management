@@ -228,10 +228,10 @@ Source: "Test scenarios" in `docs/plans/FR-023-equipment-images.md`. Reader test
 - [ ] Decide which languages to translate (only the generated `.g.xlf` exists).
 - [ ] Record the results in "Test status" of `docs/features/FR-023-equipment-images.md` and the TODO(verify) items in the help article.
 
-## FR-026 Equipment API (table-level tests compiled in CI, not yet run; sandbox checks not done)
+## FR-026 Equipment API (35 table-level tests pass in CI; sandbox checks not done)
 Source: "Test scenarios" in `docs/plans/FR-026-equipment-api.md`.
 - [x] Tests-TestLibraries ID question is obsolete: the dependency was removed from `test/app.json` (the HTTP tests failed in CI with HTTP 401, UserPassword authentication in the AL-Go container, so the tests are now table-level). For the record, CI confirmed that ID `5d86850b-0d76-4eca-bd7b-951ad998e997` resolves.
-- [ ] Run test codeunit 50180 (35 table-level tests, `test/src/EQMEquipmentAPITests.Codeunit.al`) in CI or a sandbox. It compiled in CI on commit 9dc8102 but has NOT been run.
+- [x] Run test codeunit 50180 (35 table-level tests, `test/src/EQMEquipmentAPITests.Codeunit.al`): all 35 pass in AL-Go CI (PR #111, merge commit 0f9718f).
 - [ ] Manual sandbox checks, not automated: GET list and OData enum filter (scenarios 1, 2a/2b), URL and field naming.
 - [ ] V1 enum encoding: `status` value for In Maintenance is `In_x0020_Maintenance` (GET, filter, PATCH).
 - [ ] V2 PATCH of a read-only field (`assignedEmployeeNumber`, scenario 11) at page level: record whether it fails or is ignored (the table rule is covered by a test).
