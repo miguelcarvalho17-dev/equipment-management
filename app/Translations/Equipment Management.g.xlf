@@ -1668,6 +1668,61 @@
           <note from="Developer" annotates="general" priority="2"></note>
           <note from="Xliff Generator" annotates="general" priority="3">Page EQM Assigned Equipment FactBox - Property Caption</note>
         </trans-unit>
+        <trans-unit id="Page 579140454 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Assignment API</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page EQM Assignment API - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Page 579140454 - Property 3446740159" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Assignment</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page EQM Assignment API - Property EntityCaption</note>
+        </trans-unit>
+        <trans-unit id="Page 579140454 - Property 631549417" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Assignments</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page EQM Assignment API - Property EntitySetCaption</note>
+        </trans-unit>
+        <trans-unit id="Page 579140454 - Control 2459035849 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Assignment Date</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page EQM Assignment API - Control assignmentDate - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Page 579140454 - Control 2716502089 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Closing Date</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page EQM Assignment API - Control closingDate - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Page 579140454 - Control 783513395 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Employee No.</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page EQM Assignment API - Control employeeNumber - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Page 579140454 - Control 2190624577 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Entry No.</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page EQM Assignment API - Control entryNumber - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Page 579140454 - Control 2727952323 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Equipment No.</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page EQM Assignment API - Control equipmentNumber - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Page 579140454 - Control 2686962215 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Id</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page EQM Assignment API - Control id - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Page 579140454 - Control 2245436958 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Last Modified Date-Time</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page EQM Assignment API - Control lastModifiedDateTime - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Page 579140454 - Control 998393528 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Status</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page EQM Assignment API - Control status - Property Caption</note>
+        </trans-unit>
         <trans-unit id="Page 3400661137 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
           <source>Assignment History</source>
           <note from="Developer" annotates="general" priority="2"></note>
