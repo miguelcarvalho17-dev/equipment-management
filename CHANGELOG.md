@@ -5,7 +5,7 @@ Newest first. Grouped by Added / Changed / Fixed / Obsolete.
 ### Added
 - Table 50109 "EQM Equipment Note" (public, append-only): Entry No., Equipment No., Created At, User ID, Comment. The system sets Created At and User ID on insert; modify, delete and rename raise errors.
 - Page 50131 "EQM Equipment Notes" (read-only list) and page 50130 "EQM Equipment Notes Part" (insert-only ListPart, newest first).
-- Test codeunit 50183 "EQM Equipment Note Tests": 18 tests; CI: 17 passed, 1 (note typed on a new card part line) failed on a blank Equipment No. and was fixed in the part: the card passes the equipment number with SetEquipmentNo and the part uses it in OnNewRecord. This fix has not been re-run in CI yet.
+- Test codeunit 50183 "EQM Equipment Note Tests": 18 tests; all 18 passed in AL-Go CI (commit dc2149d), including the rename cascade and a note typed on a new card part line (the card passes the equipment number with SetEquipmentNo). Not checked in a sandbox: permissions per role, Tell Me, web client layout.
 - Feature doc docs/features/FR-025-equipment-notes.md and help docs/help/FR-025-equipment-notes.md.
 ### Changed
 - Equipment Card: part Equipment Notes, action ShowEquipmentNotes, AboutText sentence.
