@@ -1683,6 +1683,46 @@
           <note from="Developer" annotates="general" priority="2"></note>
           <note from="Xliff Generator" annotates="general" priority="3">Page EQM Assignment History Part - Control Employee Name - Property Caption</note>
         </trans-unit>
+        <trans-unit id="Page 1224058171 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Category API</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page EQM Category API - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Page 1224058171 - Property 3446740159" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Category</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page EQM Category API - Property EntityCaption</note>
+        </trans-unit>
+        <trans-unit id="Page 1224058171 - Property 631549417" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Categories</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page EQM Category API - Property EntitySetCaption</note>
+        </trans-unit>
+        <trans-unit id="Page 1224058171 - Control 641765680 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Active</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page EQM Category API - Control active - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Page 1224058171 - Control 707985127 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Code</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page EQM Category API - Control code - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Page 1224058171 - Control 4232699882 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Description</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page EQM Category API - Control description - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Page 1224058171 - Control 2686962215 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Id</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page EQM Category API - Control id - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Page 1224058171 - Control 2245436958 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Last Modified Date-Time</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page EQM Category API - Control lastModifiedDateTime - Property Caption</note>
+        </trans-unit>
         <trans-unit id="Page 651069626 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
           <source>Maintenance Cost by Category</source>
           <note from="Developer" annotates="general" priority="2"></note>

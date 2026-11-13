@@ -1,6 +1,22 @@
 # Changelog
 Newest first. Grouped by Added / Changed / Fixed / Obsolete.
 
+## FR-027 Equipment Categories API (version stays 29.0.0.0, no bump)
+### Added
+- Page 50124 "EQM Category API" (API v1.0, publisher `miguelCarvalho`, group `equipment`, entity `categories`): read-only GET on table 50101 with `id`, `code`, `description`, `active`, `lastModifiedDateTime`. Returns all categories; clients filter with `$filter=active eq true`. Not extensible.
+- Test codeunit 50181 "EQM Category API Tests": 6 table-level AutoRollback tests (compiled, not run yet).
+- Feature doc docs/features/FR-027-equipment-categories-api.md and help docs/help/FR-027-equipment-categories-api.md.
+### Changed
+- Permission set EQM - Reader: `page "EQM Category API" = X`. Manager and Administrator inherit it.
+### Fixed
+- None.
+### Obsolete
+- None.
+
+Release notes: Other systems can now read your equipment categories through the Business Central API (v1.0, publisher miguelCarvalho, group equipment, entity categories). The list includes the code, description and active flag of every category. The API is read-only. Equipment Reader, Manager and Administrator can use it.
+
+Note: no event published, no upgrade code. Both apps compile with CodeCop and UICop. Review verdict: APPROVE WITH COMMENTS. Not verified: the 6 tests were not run (no BC sandbox); sandbox scenarios 4 to 8 (GET list and by id, 404, equipment categoryCode lookup, permissions) and the HTTP status for rejected writes (V1). At first AppSource release v1.0 becomes a frozen contract.
+
 ## FR-025 Equipment Notes (version stays 29.0.0.0, no bump)
 ### Added
 - Table 50109 "EQM Equipment Note" (public, append-only): Entry No., Equipment No., Created At, User ID, Comment. The system sets Created At and User ID on insert; modify, delete and rename raise errors.
