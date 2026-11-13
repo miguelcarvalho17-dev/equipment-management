@@ -2,7 +2,7 @@
 
 The Equipment Categories API lets other systems read your equipment categories from Business Central. Use it to look up the category behind the `categoryCode` of an equipment record. It is read-only: you maintain categories in Business Central itself.
 
-TODO(verify): this feature has not been tested in a sandbox. Automated table-level tests exist but have not been run yet. Reading data, filtering, the address and permissions through the API are not verified.
+TODO(verify): this feature has not been tested in a sandbox. Automated table-level tests exist and pass in the build pipeline. Reading data, filtering, the address and permissions through the API are not verified.
 
 ## Before you start: permissions
 - **Equipment Reader, Equipment Manager and Administrator** can read categories (GET).

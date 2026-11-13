@@ -242,9 +242,9 @@ Source: "Test scenarios" in `docs/plans/FR-026-equipment-api.md`.
 - [x] Follow-up (FR-027 done, #65): FR-027 (#65) and FR-028 (#66) must follow conventions C1 to C10 in `docs/features/FR-026-equipment-api.md`; merge order 026, 027, 028.
 - [ ] Follow-up: register the final APIPublisher and ID range before the first AppSource release; v1.0 is frozen from then on.
 
-## FR-027 Equipment Categories API (6 table-level tests compiled, not run; sandbox checks not done)
+## FR-027 Equipment Categories API (6 table-level tests pass in CI; sandbox checks not done)
 Source: "Test scenarios" in `docs/plans/FR-027-equipment-categories-api.md`.
-- [ ] Run test codeunit 50181 (6 table-level tests, `test/src/EQMCategoryAPITests.Codeunit.al`) in CI or a sandbox; record the result in "Test status" of `docs/features/FR-027-equipment-categories-api.md`.
+- [x] Run test codeunit 50181 (6 table-level tests, `test/src/EQMCategoryAPITests.Codeunit.al`): all 6 pass in AL-Go CI (PR #115).
 - [ ] Manual sandbox checks, not automated: GET list and field names (scenario 4), GET by id and 404 for an unknown id (scenario 5).
 - [ ] V1 rejected writes (scenario 6): record the HTTP status for POST, PATCH and DELETE on the read-only page (expected 4xx).
 - [ ] `categoryCode` from `equipments` can be found in `categories`, including an inactive category (scenario 7).

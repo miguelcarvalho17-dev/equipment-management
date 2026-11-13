@@ -3,12 +3,12 @@
 ## Purpose
 Read-only Business Central API v1.0 entity `categories` on table 50101 "EQM Equipment Category" (FR-002), so external systems can list categories and resolve the `categoryCode` values returned by `equipments` (FR-026) (GitHub issue #65). It follows the API conventions C1 to C10 in `docs/features/FR-026-equipment-api.md`.
 
-Status: implemented on branch `feature/FR-027-equipment-categories-api`, uncommitted at the time of writing. App version stays 29.0.0.0. No new table, field, upgrade code or event.
+Status: implemented and merged to `main` via PR #115 (branch `feature/FR-027-equipment-categories-api`). App version stays 29.0.0.0. No new table, field, upgrade code or event.
 
 ## Verification status
 - **Build:** both apps compile cleanly (CodeCop, UICop), as reported by the caller. The documenter did not re-run the build; no AL line was changed.
 - **Review verdict:** APPROVE WITH COMMENTS.
-- **Tests:** 6 table-level tests in codeunit 50181 were compiled but **not run** (no BC sandbox available; not yet in CI).
+- **Tests:** 6 table-level tests in codeunit 50181 all pass in AL-Go CI (PR #115, codeunit 50181 Success). The API layer (HTTP) is not verified in a sandbox.
 - **Not verified (manual sandbox scenarios 4 to 8 of the plan):** GET list and GET by id, 404 for an unknown id, `categoryCode` lookup from `equipments`, permissions with a non-SUPER user, and the HTTP status for rejected writes (open point V1).
 - TODO(verify): base URL in a sandbox.
 
@@ -17,7 +17,7 @@ Status: implemented on branch `feature/FR-027-equipment-categories-api`, uncommi
 |---|---|---|---|
 | Page (API) | 50124 | EQM Category API | New, `app/src/API/EQMCategoryAPI.Page.al`, SourceTable "EQM Equipment Category" |
 | PermissionSet | 50100 | EQM - Reader | `page "EQM Category API" = X` |
-| Codeunit (test app) | 50181 | EQM Category API Tests | New, 6 table-level tests, not run |
+| Codeunit (test app) | 50181 | EQM Category API Tests | New, 6 table-level tests, pass in CI |
 
 ## Endpoint
 `/api/miguelCarvalho/equipment/v1.0/companies({companyId})/categories` and `.../categories({id})`, where `{id}` is the `id` (SystemId) field. Entity `category`, entity set `categories`, `ODataKeyFields = SystemId`.
@@ -59,7 +59,7 @@ Expected from the code and the permission sets; **not checked in a sandbox** (sc
 Additive: one new page and one permission line. **At first AppSource release v1.0 is a frozen public contract:** entity and field names and types must not change. Adding writes later is possible in v1.0 as an additive change; removing or renaming fields needs `v2.0` and Obsolete on v1.0.
 
 ## Test status
-Codeunit 50181 (`test/src/EQMCategoryAPITests.Codeunit.al`, `TestPermissions = Disabled`, AutoRollback), 6 tests, compiled, **not run**:
+Codeunit 50181 (`test/src/EQMCategoryAPITests.Codeunit.al`, `TestPermissions = Disabled`, AutoRollback), 6 tests, all pass in AL-Go CI (PR #115):
 - `ActiveFilterReturnsOnlyActiveCategories`, `InactiveFilterReturnsOnlyInactiveCategories` (equivalent of `$filter=active eq true`)
 - `CategoryIsFoundBySystemId`, `InactiveCategoryIsFoundBySystemId`, `UnknownSystemIdIsNotFound` (equivalent of `categories({id})`)
 - `SystemIdIsStableWhenDescriptionChanges`
