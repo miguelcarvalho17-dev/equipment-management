@@ -3,12 +3,12 @@
 ## Purpose
 Read-only Business Central API v1.0 entity `assignments` on table 50103 "EQM Equipment Assignment" (FR-004, FR-005, FR-006), so reporting and analytics platforms can read equipment movements (who had which equipment, from when to when) without database access (GitHub issue #66). It follows the API conventions C1 to C10 in `docs/features/FR-026-equipment-api.md`.
 
-Status: implemented on branch `feature/FR-028-assignment-history-api`, not yet merged. App version stays 29.0.0.0. No new table, field, upgrade code or event.
+Status: implemented and merged to `main` (PR #117, closes #66). App version stays 29.0.0.0. No new table, field, upgrade code or event.
 
 ## Verification status
 - **Build:** main app and test app compile with 0 errors and 0 warnings (CodeCop, UICop), as reported by the caller. The documenter did not re-run the build; no AL line was changed.
 - **Review verdict:** APPROVE WITH CHANGES (no blockers). The requested changes (regenerated `.g.xlf`, test codeunit) have since been added.
-- **Tests:** compiled, not yet run. The 8 tests in codeunit 50182 were not executed locally (no BC sandbox); run them in CI or a sandbox.
+- **Tests:** all 7 tests of codeunit 50182 pass in AL-Go CI (PR #117). Not run locally (no BC sandbox).
 - **Not verified (manual sandbox scenarios 6 to 11 of the plan):** GET list and by id, 404 for an unknown id, filters, rejected writes and their HTTP status (V1), join to `equipments`, permissions with a non-SUPER user.
 - TODO(verify): base URL in a sandbox.
 
@@ -17,7 +17,7 @@ Status: implemented on branch `feature/FR-028-assignment-history-api`, not yet m
 |---|---|---|---|
 | Page (API) | 50125 | EQM Assignment API | New, `app/src/API/EQMAssignmentAPI.Page.al`, SourceTable "EQM Equipment Assignment" |
 | PermissionSet | 50100 | EQM - Reader | `page "EQM Assignment API" = X` |
-| Codeunit (test app) | 50182 | EQM Assignment API Tests | New, 8 table-level tests, compiled, not yet run |
+| Codeunit (test app) | 50182 | EQM Assignment API Tests | New, 7 table-level tests, pass in AL-Go CI |
 
 ## Endpoint
 `/api/miguelCarvalho/equipment/v1.0/companies({companyId})/assignments` and `.../assignments({id})`, where `{id}` is the `id` (SystemId) field. Entity `assignment`, entity set `assignments`, `ODataKeyFields = SystemId`.
@@ -65,7 +65,7 @@ Expected from the code and the permission sets; **not checked in a sandbox** (sc
 Additive: one new page and one permission line. **At first AppSource release v1.0 is a frozen public contract:** entity and field names and types must not change. Adding fields later is additive; removing or renaming fields needs `v2.0` and Obsolete on v1.0.
 
 ## Test status
-Codeunit 50182 (`test/src/EQMAssignmentAPITests.Codeunit.al`, AutoRollback), 7 tests. The first CI run passed 7 of 8; the 8th (`ClosedEntryIsUnchangedAfterRejectedModify`) failed because `Modify` is not allowed inside a TryFunction during `RunTests`, so it was removed. **Re-run in CI to confirm:**
+Codeunit 50182 (`test/src/EQMAssignmentAPITests.Codeunit.al`, AutoRollback), 7 tests, **all pass in AL-Go CI (PR #117)**. The first CI run passed 7 of 8; the 8th (`ClosedEntryIsUnchangedAfterRejectedModify`) failed because `Modify` is not allowed inside a TryFunction during `RunTests`, so it was removed; the re-run was green:
 - `EquipmentFilterReturnsClosedAndActiveEntries`, `EquipmentFilterExcludesOtherEquipment` (equivalent of `$filter=equipmentNumber eq`)
 - `StatusFilterSeparatesClosedAndActive` (equivalent of `$filter=status eq`)
 - `EntryIsFoundBySystemId`, `UnknownSystemIdIsNotFound` (equivalent of `assignments({id})`)
