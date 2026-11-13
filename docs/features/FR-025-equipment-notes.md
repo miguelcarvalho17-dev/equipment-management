@@ -3,7 +3,7 @@
 ## Purpose
 Users record short operational notes on a piece of equipment (GitHub issue #63). Each note stores when it was written, who wrote it and the comment. Notes are listed newest first on the Equipment Card and can never be changed or deleted, so the history of the equipment stays traceable. The standard Notes FactBox (record links) is unchanged and remains a free notepad; it is not immutable and not controlled by EQM roles.
 
-Status: implemented, not committed at the time of writing. **Build: reported as compiled by earlier steps; the documenter changed no AL code and did not re-run the build.** **Tests: 18 test procedures in codeunit 50183 are compiled but NOT run (no BC sandbox, not run in CI).** Plan verifications V1 and V2 and manual scenario 12 are unverified. App version stays 29.0.0.0. No upgrade codeunit, no event published or subscribed.
+Status: implemented, not committed at the time of writing. **Build: reported as compiled by earlier steps; the documenter changed no AL code and did not re-run the build.** **Tests: CI on PR 113 ran codeunit 50183: 17 of 18 passed; the failing one (note typed on a new card part line) exposed a blank "Equipment No." on the new line, fixed by an OnNewRecord trigger in the part; not re-run yet.** Plan verification V1 is confirmed (RenamingEquipmentMovesItsNotes passes); V2 is partly verified; manual scenario 12 is unverified. App version stays 29.0.0.0. No upgrade codeunit, no event published or subscribed.
 
 ## Objects
 | Type | ID | Name | Change |
@@ -14,7 +14,7 @@ Status: implemented, not committed at the time of writing. **Build: reported as 
 | Table | 50100 | EQM Equipment | `OnDelete` blocks delete when notes exist |
 | Page | 50101 | EQM Equipment Card | Part `EquipmentNotes`, action `ShowEquipmentNotes`, AboutText sentence |
 | PermissionSet | 50100 / 50101 | EQM - Reader / Manager | See Permissions |
-| Codeunit (test app) | 50183 | EQM Equipment Note Tests | 18 tests, compiled, not run |
+| Codeunit (test app) | 50183 | EQM Equipment Note Tests | 18 tests; 17 passed in CI, 1 fixed and not re-run |
 
 ## Fields (table 50109)
 | Field | Meaning |
@@ -64,11 +64,11 @@ New table on an unreleased app: no upgrade code. The new delete guard on public 
 - A note cannot be corrected or removed; add a new note.
 
 ## Test status
-- 18 test procedures in codeunit 50183 (`test/src/EQMEquipmentNoteTests.Codeunit.al`, `TestPermissions = Disabled`, AutoRollback) are **compiled but NOT run**: no BC sandbox, not run in CI. No pass result exists. They cover: user and time set on insert; preset values overwritten; blank and spaces-only comment rejected; blank and unknown equipment rejected; modify, delete and rename of a note rejected; notes separated per equipment; delete of equipment with notes rejected and without notes succeeds; rename of equipment moves its notes; note on Lost equipment; card part newest first with existing lines locked; note typed on a new part line is saved; action opens the list filtered on the equipment; action disabled on a new card.
+- 18 test procedures in codeunit 50183 (`test/src/EQMEquipmentNoteTests.Codeunit.al`, `TestPermissions = Disabled`, AutoRollback) ran in CI on PR 113: **17 of 18 passed**. The failing test (note typed on a new part line) raised "Equipment No. must have a value" from the table TestField; the part now fills "Equipment No." in OnNewRecord from its single-value filter, and the fixed test has not been re-run. They cover: user and time set on insert; preset values overwritten; blank and spaces-only comment rejected; blank and unknown equipment rejected; modify, delete and rename of a note rejected; notes separated per equipment; delete of equipment with notes rejected and without notes succeeds; rename of equipment moves its notes; note on Lost equipment; card part newest first with existing lines locked; note typed on a new part line is saved; action opens the list filtered on the equipment; action disabled on a new card.
 - Not covered by tests: Reader and Manager rights.
 - Unverified:
-  - **V1:** whether renaming equipment cascades "Equipment No." into the notes despite the `OnModify` error, and whether it needs an indirect `m` right for the Manager. Test `RenamingEquipmentMovesItsNotes` has not run. Plan fallbacks (need approval): block rename when notes exist, or grant indirect `m` to Manager.
-  - **V2:** whether `Editable = IsNewLine` with `DelayedInsert` lets the user type on the new line and locks it after the insert. `OnModify` is the hard guard either way.
+  - **V1:** whether renaming equipment cascades "Equipment No." into the notes despite the `OnModify` error, and whether it needs an indirect `m` right for the Manager. **Confirmed by CI:** test `RenamingEquipmentMovesItsNotes` passes, so the rename cascades; no fallback needed. (Old text: plan fallbacks (need approval): block rename when notes exist, or grant indirect `m` to Manager.)
+  - **V2:** whether `Editable = IsNewLine` with `DelayedInsert` lets the user type on the new line and locks it after the insert. `OnModify` is the hard guard either way. Partly verified: the CI failure showed the new line did not carry "Equipment No." from the SubPageLink in the test page; the part now sets it in OnNewRecord. Typing on the real client is still to be checked in a sandbox.
   - **Manual scenario 12 (sandbox):** Reader sees notes and cannot insert; Manager adds a note; nobody can edit or delete; rename with notes as non-SUPER Manager and as Administrator; Tell Me finds "Equipment Notes".
 
 ## Discrepancies plan vs code

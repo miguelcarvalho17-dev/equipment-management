@@ -37,6 +37,11 @@ page 50130 "EQM Equipment Notes Part"
     trigger OnNewRecord(BelowxRec: Boolean)
     begin
         IsNewLine := true;
+        // Take the equipment from the card's SubPageLink filter when it is a single value.
+        if Rec."Equipment No." = '' then
+            if Rec.GetFilter("Equipment No.") <> '' then
+                if Rec.GetRangeMin("Equipment No.") = Rec.GetRangeMax("Equipment No.") then
+                    Rec."Equipment No." := Rec.GetRangeMin("Equipment No.");
     end;
 
     trigger OnAfterGetCurrRecord()

@@ -5,7 +5,7 @@ Newest first. Grouped by Added / Changed / Fixed / Obsolete.
 ### Added
 - Table 50109 "EQM Equipment Note" (public, append-only): Entry No., Equipment No., Created At, User ID, Comment. The system sets Created At and User ID on insert; modify, delete and rename raise errors.
 - Page 50131 "EQM Equipment Notes" (read-only list) and page 50130 "EQM Equipment Notes Part" (insert-only ListPart, newest first).
-- Test codeunit 50183 "EQM Equipment Note Tests": 18 tests, compiled, NOT run (no sandbox).
+- Test codeunit 50183 "EQM Equipment Note Tests": 18 tests; CI: 17 passed, 1 (note typed on a new card part line) failed on a blank Equipment No. and was fixed in the part (OnNewRecord), not re-run.
 - Feature doc docs/features/FR-025-equipment-notes.md and help docs/help/FR-025-equipment-notes.md.
 ### Changed
 - Equipment Card: part Equipment Notes, action ShowEquipmentNotes, AboutText sentence.
@@ -18,7 +18,7 @@ Newest first. Grouped by Added / Changed / Fixed / Obsolete.
 
 Release notes: You can now record dated notes on a piece of equipment. Each note shows when it was written and by whom, appears newest first in Equipment Notes on the Equipment Card, and cannot be changed or deleted afterwards. Equipment that has notes can no longer be deleted; set its status to Disposed instead. Equipment Reader can see notes; Equipment Manager can also add them.
 
-Note: no event published, no upgrade code. Not verified: tests not run; V1 (rename of equipment with notes versus the immutable OnModify, and the Manager permission for the cascade); V2 (new-line editability of Comment); sandbox scenario 12 (permissions, Tell Me). At first AppSource release table 50109 becomes a frozen contract.
+Note: no event published, no upgrade code. V1 (rename of equipment with notes) is confirmed by the passing CI test. Not verified: the fixed test has not been re-run; V2 (new-line editability of Comment) partly; sandbox scenario 12 (permissions, Tell Me). At first AppSource release table 50109 becomes a frozen contract.
 
 ## FR-026 Equipment API (version stays 29.0.0.0, no bump)
 ### Added
