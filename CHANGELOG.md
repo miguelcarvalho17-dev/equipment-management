@@ -1,6 +1,22 @@
 # Changelog
 Newest first. Grouped by Added / Changed / Fixed / Obsolete.
 
+## FR-028 Assignment History API (version stays 29.0.0.0, no bump)
+### Added
+- Page 50125 "EQM Assignment API" (API v1.0, publisher `miguelCarvalho`, group `equipment`, entity `assignments`): read-only GET on table 50103 with `id`, `entryNumber`, `equipmentNumber`, `employeeNumber`, `assignmentDate`, `status`, `closingDate`, `lastModifiedDateTime`. Returns active and closed entries; clients filter on `status`, `equipmentNumber` or `lastModifiedDateTime`. `assignedBy`/`closedBy` are deliberately excluded (personal data). Not extensible.
+- Test codeunit 50182 "EQM Assignment API Tests": 8 table-level AutoRollback tests (compiled, not yet run).
+- Feature doc docs/features/FR-028-assignment-history-api.md and help docs/help/FR-028-assignment-history-api.md.
+### Changed
+- Permission set EQM - Reader: `page "EQM Assignment API" = X`. Manager and Administrator inherit it.
+### Fixed
+- None.
+### Obsolete
+- None.
+
+Release notes: Other systems can now read the assignment history of your equipment through the Business Central API (v1.0, publisher miguelCarvalho, group equipment, entity assignments). Each entry shows the equipment, the employee, the assignment date, the status and the closing date, for current and past assignments. The API is read-only and does not include user names. Equipment Reader, Manager and Administrator can use it.
+
+Note: no event published, no upgrade code. Both apps compile with 0 errors and 0 warnings (CodeCop, UICop). Review verdict: APPROVE WITH CHANGES (no blockers; xlf regenerated and test codeunit added since). The 8 automated tests were not run locally; run them in CI or a sandbox. Not verified: sandbox scenarios 6 to 11 (GET list and by id, 404, filters, rejected writes and their HTTP status, equipment join, permissions). At first AppSource release v1.0 becomes a frozen contract.
+
 ## FR-027 Equipment Categories API (version stays 29.0.0.0, no bump)
 ### Added
 - Page 50124 "EQM Category API" (API v1.0, publisher `miguelCarvalho`, group `equipment`, entity `categories`): read-only GET on table 50101 with `id`, `code`, `description`, `active`, `lastModifiedDateTime`. Returns all categories; clients filter with `$filter=active eq true`. Not extensible.
