@@ -16,5 +16,8 @@ codeunit 50111 "EQM Warranty Alert Job"
         CancelledCount: Integer;
     begin
         WarrantyAlertMgt.GenerateAlerts(Today(), true, CreatedCount, CancelledCount);
+        // A failing partner subscriber of OnWarrantyExpired must not roll back the alerts that were just created.
+        Commit();
+        WarrantyAlertMgt.RaiseWarrantyExpiredEvents(Today());
     end;
 }
