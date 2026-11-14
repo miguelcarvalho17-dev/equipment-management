@@ -6,7 +6,7 @@ Newest first. Grouped by Added / Changed / Fixed / Obsolete.
 - Codeunit 50130 "EQM Power Automate Events" (public): external business events `equipmentAssigned` and `warrantyExpiring` (version '1.0', category Equipment Management). Publishers are internal; delivered by the platform after commit, only to subscribed flows.
 - Codeunit 50131 "EQM Power Automate Subscr." (internal): raises `equipmentAssigned` from `OnEquipmentAssigned` of codeunit 50119 and `warrantyExpiring` from `OnAfterInsertEvent` of table 50107 "EQM Warranty Alert".
 - Enum extension 50100 "EQM Event Category" (extends `EventCategory`): category "Equipment Management".
-- Test codeunits 50187 "EQM Power Automate Tests" (7 scenarios) and 50188 "EQM Power Automate Test Subscr".
+- Test codeunit 50187 "EQM Power Automate Tests" (3 smoke tests: the operations that fire the subscribers run without an error).
 - Feature doc docs/features/FR-031-power-automate-support.md and help docs/help/FR-031-power-automate-support.md (two example flows).
 ### Changed
 - Permission set EQM - Reader: execute on codeunits 50130 and 50131. Manager and Administrator inherit it.
@@ -17,7 +17,7 @@ Newest first. Grouped by Added / Changed / Fixed / Obsolete.
 
 Release notes: Equipment Management now offers two triggers for the "When a business event occurs" trigger of the Business Central connector in Power Automate, under the category Equipment Management. Equipment assigned starts a flow when equipment is assigned to an employee; Warranty expiring starts a flow when a 90, 60 or 30 day warranty alert is created. Events are sent only to flows that subscribe, and only after the operation is saved.
 
-Note: no upgrade code, no schema change, no setup switch. Both apps compile with 0 errors and 0 warnings. The 7 automated tests are not yet confirmed passing: the AL-Go CI run for PR #122 is pending. Not verified (Power Automate / sandbox scenario 8): event discovery under Equipment Management, Teams message and email flows, delivery after commit only, the BC permission needed to subscribe, Guid/Date rendering, translatability of the attribute strings. At first AppSource release the codeunit, event names, parameters and version become a frozen contract.
+Note: no upgrade code, no schema change, no setup switch. Both apps compile with 0 errors and 0 warnings. The platform does not call an AL subscriber for an external business event in the test runner (CI PR #122), so the raise count and payload are not tested automatically; the 3 smoke tests are not yet confirmed passing in CI. Not verified (sandbox, scenarios 1, 4 and 8): the events are raised once with the right payload, no event for a failed assignment, a return, a repeated alert run, a temporary or Insert(false) alert, an alert outside the window or disposed equipment; event discovery under Equipment Management, event discovery under Equipment Management, Teams message and email flows, delivery after commit only, the BC permission needed to subscribe, Guid/Date rendering, translatability of the attribute strings. At first AppSource release the codeunit, event names, parameters and version become a frozen contract.
 
 ## FR-030 Event Subscribers (version stays 29.0.0.0, no bump)
 ### Added

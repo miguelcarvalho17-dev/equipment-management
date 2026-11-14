@@ -2,7 +2,7 @@
 
 Equipment Management publishes two events that start a Power Automate flow: **Equipment assigned** and **Warranty expiring**. Use them to post a Teams message when equipment is handed out, or to email the responsible person before a warranty ends. Nothing is sent until you build a flow that subscribes, and an event is sent only after the operation has been saved. If the operation fails, nothing is sent.
 
-TODO(verify): this feature has not been tested in Power Automate or in a sandbox. Automated tests exist (7 scenarios; the build-pipeline run is pending). Screen names in Power Automate may differ from the steps below.
+TODO(verify): this feature has not been tested in Power Automate or in a sandbox. Automated tests only check that assigning equipment and creating a warranty alert run without an error; the events themselves are not tested automatically. Screen names in Power Automate may differ from the steps below.
 
 ## Before you start: permissions
 - The person who builds the flow needs a Business Central user with permission to subscribe to external business events (a Business Central permission, not part of the Equipment permission sets). TODO(verify): which permission set.

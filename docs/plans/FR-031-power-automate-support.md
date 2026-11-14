@@ -53,6 +53,7 @@ IDs in use (checked in `app/src`, `test/src`): codeunits 50103-50122 (50123-5012
 6. Documenter: `docs/features/FR-031-power-automate-support.md`; `docs/help/FR-031-power-automate-support.md` with both example flows step by step (trigger "When a business event occurs", category Equipment Management; Teams "Post message in a chat or channel"; Outlook "Send an email (V2)"; optional "Get record" through the FR-026 API or the standard employees API to add names), the required permissions, and the webhook alternative; CHANGELOG; `docs/TODO.md` sandbox section (scenario 8).
 
 ## Test scenarios
+**Status after CI (PR #122):** manual subscriber 50188 received no event in the test runner (platform-raised external business events do not call AL subscribers; likely, not proven in isolation). V2 applied: 50188 removed; 50187 keeps 3 smoke tests ("runs without an error") for scenarios 1, 4 and 6. Scenarios 1 to 7 as written below are sandbox-only for the raise count and payload.
 Setup: active category, active employee E1, Available equipment EQ with description and warranty provider; reference date R.
 1. Given EQ, when AssignEmployee(E1) runs, then EquipmentAssigned is raised once with EQ's SystemId, No., Description, EmployeeNo E1, and AssignmentId/AssignmentDate of the stored active entry.
 2. (neg) Given EQ with an open maintenance record, when AssignEmployee fails (asserterror), then EquipmentAssigned was not raised.
