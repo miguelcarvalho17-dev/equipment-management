@@ -1,6 +1,24 @@
 # Changelog
 Newest first. Grouped by Added / Changed / Fixed / Obsolete.
 
+## FR-031 Power Automate Support (version stays 29.0.0.0, no bump)
+### Added
+- Codeunit 50130 "EQM Power Automate Events" (public): external business events `equipmentAssigned` and `warrantyExpiring` (version '1.0', category Equipment Management). Publishers are internal; delivered by the platform after commit, only to subscribed flows.
+- Codeunit 50131 "EQM Power Automate Subscr." (internal): raises `equipmentAssigned` from `OnEquipmentAssigned` of codeunit 50119 and `warrantyExpiring` from `OnAfterInsertEvent` of table 50107 "EQM Warranty Alert".
+- Enum extension 50100 "EQM Event Category" (extends `EventCategory`): category "Equipment Management".
+- Test codeunits 50187 "EQM Power Automate Tests" (7 scenarios) and 50188 "EQM Power Automate Test Subscr".
+- Feature doc docs/features/FR-031-power-automate-support.md and help docs/help/FR-031-power-automate-support.md (two example flows).
+### Changed
+- Permission set EQM - Reader: execute on codeunits 50130 and 50131. Manager and Administrator inherit it.
+### Fixed
+- None.
+### Obsolete
+- None.
+
+Release notes: Equipment Management now offers two triggers for the "When a business event occurs" trigger of the Business Central connector in Power Automate, under the category Equipment Management. Equipment assigned starts a flow when equipment is assigned to an employee; Warranty expiring starts a flow when a 90, 60 or 30 day warranty alert is created. Events are sent only to flows that subscribe, and only after the operation is saved.
+
+Note: no upgrade code, no schema change, no setup switch. Both apps compile with 0 errors and 0 warnings. The 7 automated tests are not yet confirmed passing: the AL-Go CI run for PR #122 is pending. Not verified (Power Automate / sandbox scenario 8): event discovery under Equipment Management, Teams message and email flows, delivery after commit only, the BC permission needed to subscribe, Guid/Date rendering, translatability of the attribute strings. At first AppSource release the codeunit, event names, parameters and version become a frozen contract.
+
 ## FR-030 Event Subscribers (version stays 29.0.0.0, no bump)
 ### Added
 - Enum 50109 "EQM Integration Event Type" (not extensible) and table 50110 "EQM Integration Event Entry" (public): the outbox, one entry per business event, written in the same transaction. Entries can only be created and marked processed through codeunit 50122; only processed entries can be deleted. Extra fieldgroups DropDown and Brick on the table.

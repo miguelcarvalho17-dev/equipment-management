@@ -258,3 +258,12 @@ Source: "Test scenarios" in `docs/plans/FR-028-assignment-history-api.md`.
 - [ ] V1 rejected writes (scenario 9): record the HTTP status for POST, PATCH and DELETE on the read-only page (expected 4xx).
 - [ ] `equipmentNumber` from `assignments` is found in `equipments`; for an active entry it matches `assignedEmployeeNumber` (scenario 10).
 - [ ] Scenario 11 permissions in a sandbox (not SUPER): Reader GET ok; user without an EQM permission set denied.
+
+## FR-031 Power Automate Support (7 table-level tests compiled; CI for PR #122 pending; sandbox checks not done)
+Source: "Test scenarios" in `docs/plans/FR-031-power-automate-support.md`.
+- [ ] Confirm test codeunit 50187 (7 tests, `test/src/EQMPowerAutomateTests.Codeunit.al`) passes in AL-Go CI (PR #122).
+- [ ] Scenario 8, in a sandbox with Power Automate: both events appear under Equipment Management (display names, descriptions).
+- [ ] An assignment posts a Teams message; the warranty alert job sends an email.
+- [ ] A failed (rolled back) assignment sends nothing; note the delivery delay after commit.
+- [ ] A Reader user can create the flow; record the BC permission set needed to subscribe.
+- [ ] Check how Guid and Date parameters render in a flow, and whether the attribute strings are translatable.
