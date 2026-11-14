@@ -117,6 +117,32 @@ codeunit 50110 "EQM Warranty Alert Mgt."
         LogGenerationTelemetry(ReferenceDate, IsScheduled, CreatedCount, CancelledCount);
     end;
 
+    /// <summary>
+    /// Raises OnWarrantyExpired for each piece of equipment whose warranty ended the day before the reference date (the
+    /// first day the warranty status is Expired). Equipment with a final status is skipped.
+    /// </summary>
+    /// <param name="ReferenceDate">The reference date. 0D means today.</param>
+    /// <returns>The number of events raised.</returns>
+    internal procedure RaiseWarrantyExpiredEvents(ReferenceDate: Date): Integer
+    var
+        Equipment: Record "EQM Equipment";
+        BusinessEvents: Codeunit "EQM Business Events";
+        RaisedCount: Integer;
+    begin
+        if ReferenceDate = 0D then
+            ReferenceDate := Today();
+
+        Equipment.SetRange("Warranty End Date", ReferenceDate - 1);
+        if Equipment.FindSet() then
+            repeat
+                if not Equipment.IsFinalStatus(Equipment.Status) then begin
+                    BusinessEvents.OnWarrantyExpired(Equipment);
+                    RaisedCount += 1;
+                end;
+            until Equipment.Next() = 0;
+        exit(RaisedCount);
+    end;
+
     local procedure CancelStaleAlerts(): Integer
     var
         WarrantyAlert: Record "EQM Warranty Alert";

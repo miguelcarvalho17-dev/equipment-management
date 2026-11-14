@@ -106,6 +106,7 @@ codeunit 50106 "EQM Assignment Mgt."
     local procedure CreateAssignment(Equipment: Record "EQM Equipment")
     var
         EquipmentAssignment: Record "EQM Equipment Assignment";
+        BusinessEvents: Codeunit "EQM Business Events";
     begin
         CloseActiveAssignments(Equipment);
 
@@ -117,12 +118,14 @@ codeunit 50106 "EQM Assignment Mgt."
         EquipmentAssignment.Status := EquipmentAssignment.Status::Active;
         OnBeforeInsertAssignment(EquipmentAssignment, Equipment);
         EquipmentAssignment.Insert(true);
+        BusinessEvents.OnEquipmentAssigned(Equipment, EquipmentAssignment);
     end;
 
     local procedure CloseActiveAssignments(Equipment: Record "EQM Equipment")
     var
         ActiveAssignment: Record "EQM Equipment Assignment";
         EquipmentAssignment: Record "EQM Equipment Assignment";
+        BusinessEvents: Codeunit "EQM Business Events";
     begin
         ActiveAssignment.SetCurrentKey("Equipment No.", Status);
         ActiveAssignment.SetRange("Equipment No.", Equipment."No.");
@@ -135,6 +138,7 @@ codeunit 50106 "EQM Assignment Mgt."
                 EquipmentAssignment."Closed By" := CopyStr(UserId(), 1, MaxStrLen(EquipmentAssignment."Closed By"));
                 OnBeforeCloseAssignment(EquipmentAssignment, Equipment);
                 EquipmentAssignment.Modify(true);
+                BusinessEvents.OnEquipmentReturned(Equipment, EquipmentAssignment);
             until ActiveAssignment.Next() = 0;
     end;
 

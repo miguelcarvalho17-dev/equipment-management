@@ -1,6 +1,26 @@
 # Changelog
 Newest first. Grouped by Added / Changed / Fixed / Obsolete.
 
+## FR-029 Business Events (version stays 29.0.0.0, no bump)
+### Added
+- Codeunit 50119 "EQM Business Events" (public): five integration events `OnEquipmentCreated`, `OnEquipmentAssigned`, `OnEquipmentReturned`, `OnMaintenanceCreated`, `OnWarrantyExpired`. Publishers are internal: partners can subscribe, not raise. Notify only, no `IsHandled`.
+- Codeunit 50120 "EQM Business Event Subscr." (internal): raises the two created events after `Insert(true)` of equipment and maintenance records.
+- Procedure `RaiseWarrantyExpiredEvents` (internal) in codeunit 50110, called by the daily warranty job.
+- Test codeunits 50184 "EQM Business Events Tests" and 50185 "EQM Business Event Test Subscr.": 12 scenarios, all pass in AL-Go CI (105 tests in total, 0 failed).
+- Feature doc docs/features/FR-029-business-events.md and help docs/help/FR-029-business-events.md.
+### Changed
+- Codeunit 50106 raises assigned and returned (returned for every close: Return action, maintenance, Lost or Disposed, leftover entry on a new assignment).
+- Codeunit 50111 "EQM Warranty Alert Job": after generating alerts it now calls `Commit()` and then raises OnWarrantyExpired. A failing subscriber stops the remaining equipment and sets the job queue entry to Error; the alerts are kept.
+- Permission set EQM - Reader: execute on codeunits 50119 and 50120. Manager and Administrator inherit it.
+### Fixed
+- None.
+### Obsolete
+- None.
+
+Release notes: Partner extensions can now subscribe to five new events in Equipment Management: equipment created, equipment assigned, equipment returned, maintenance created and warranty expired. The events notify only and cannot change standard behavior. Assigned and returned are raised while the equipment is being saved, and the warranty event is raised once a day by the warranty job. Other extensions can subscribe to the events but cannot raise them.
+
+Note: no upgrade code, no schema change. Not verified: sandbox scenario 13 (scheduled warranty job run, `Commit()` behavior, event raised); permissions per role. At first AppSource release the codeunit, event names and parameters become a frozen contract. Optional later chore: a key on Warranty End Date.
+
 ## FR-028 Assignment History API (version stays 29.0.0.0, no bump)
 ### Added
 - Page 50125 "EQM Assignment API" (API v1.0, publisher `miguelCarvalho`, group `equipment`, entity `assignments`): read-only GET on table 50103 with `id`, `entryNumber`, `equipmentNumber`, `employeeNumber`, `assignmentDate`, `status`, `closingDate`, `lastModifiedDateTime`. Returns active and closed entries; clients filter on `status`, `equipmentNumber` or `lastModifiedDateTime`. `assignedBy`/`closedBy` are deliberately excluded (personal data). Not extensible.
