@@ -13,6 +13,7 @@ permissionset 50101 "EQM - Manager"
         tabledata "EQM Equipment" = RIM,
         tabledata "EQM Equipment Assignment" = Rim,
         tabledata "EQM Equipment Note" = RI,
+        tabledata "EQM Integration Event Entry" = i,
         tabledata "EQM Maintenance History Entry" = i,
         tabledata "EQM Maintenance Log Entry" = i,
         tabledata "EQM Maintenance Record" = RIM,

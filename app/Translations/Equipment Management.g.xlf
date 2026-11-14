@@ -873,6 +873,16 @@
           <note from="Developer" annotates="general" priority="2"></note>
           <note from="Xliff Generator" annotates="general" priority="3">Table EQM Equipment Setup - Field Equipment Nos. - Property Caption</note>
         </trans-unit>
+        <trans-unit id="Table 1065098760 - Field 3380540232 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Specifies that an integration event entry is written for each business event (equipment created, assigned or returned, maintenance created, warranty expired), so that external systems can read them through the API. Entries are written only when this is on.</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table EQM Equipment Setup - Field Integration Events Enabled - Property ToolTip</note>
+        </trans-unit>
+        <trans-unit id="Table 1065098760 - Field 3380540232 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Integration Events Enabled</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table EQM Equipment Setup - Field Integration Events Enabled - Property Caption</note>
+        </trans-unit>
         <trans-unit id="Table 1065098760 - Field 983963595 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
           <source>Specifies the number series used to assign numbers to new maintenance records.</source>
           <note from="Developer" annotates="general" priority="2"></note>
@@ -892,6 +902,111 @@
           <source>Primary Key</source>
           <note from="Developer" annotates="general" priority="2"></note>
           <note from="Xliff Generator" annotates="general" priority="3">Table EQM Equipment Setup - Field Primary Key - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Table 2527394721 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Integration Event Entry</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table EQM Integration Event Entry - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Table 2527394721 - NamedType 658144035" size-unit="char" translate="yes" xml:space="preserve">
+          <source>You cannot delete integration event entry %1 because it has not been processed yet.</source>
+          <note from="Developer" annotates="general" priority="2">%1 = entry number</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table EQM Integration Event Entry - NamedType DeleteNotAllowedErr</note>
+        </trans-unit>
+        <trans-unit id="Table 2527394721 - NamedType 1297145545" size-unit="char" translate="yes" xml:space="preserve">
+          <source>You cannot create integration event entries directly. Entries are created when equipment is created, assigned or returned, when maintenance is registered, or when a warranty expires.</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table EQM Integration Event Entry - NamedType InsertNotAllowedErr</note>
+        </trans-unit>
+        <trans-unit id="Table 2527394721 - NamedType 3659624548" size-unit="char" translate="yes" xml:space="preserve">
+          <source>You cannot change integration event entry %1. Entries can only be marked as processed.</source>
+          <note from="Developer" annotates="general" priority="2">%1 = entry number</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table EQM Integration Event Entry - NamedType ModifyNotAllowedErr</note>
+        </trans-unit>
+        <trans-unit id="Table 2527394721 - NamedType 3435470116" size-unit="char" translate="yes" xml:space="preserve">
+          <source>You cannot change the number of integration event entry %1.</source>
+          <note from="Developer" annotates="general" priority="2">%1 = entry number</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table EQM Integration Event Entry - NamedType RenameNotAllowedErr</note>
+        </trans-unit>
+        <trans-unit id="Table 2527394721 - Field 2582568164 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Specifies the number of the assignment entry that the event is about. It is 0 for events that are not about an assignment.</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table EQM Integration Event Entry - Field Assignment Entry No. - Property ToolTip</note>
+        </trans-unit>
+        <trans-unit id="Table 2527394721 - Field 2582568164 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Assignment Entry No.</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table EQM Integration Event Entry - Field Assignment Entry No. - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Table 2527394721 - Field 883711285 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Specifies the number of the integration event entry.</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table EQM Integration Event Entry - Field Entry No. - Property ToolTip</note>
+        </trans-unit>
+        <trans-unit id="Table 2527394721 - Field 883711285 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Entry No.</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table EQM Integration Event Entry - Field Entry No. - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Table 2527394721 - Field 1827518031 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Specifies the number of the equipment that the event is about.</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table EQM Integration Event Entry - Field Equipment No. - Property ToolTip</note>
+        </trans-unit>
+        <trans-unit id="Table 2527394721 - Field 1827518031 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Equipment No.</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table EQM Integration Event Entry - Field Equipment No. - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Table 2527394721 - Field 2868753802 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Specifies the status of the equipment when the event happened.</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table EQM Integration Event Entry - Field Equipment Status - Property ToolTip</note>
+        </trans-unit>
+        <trans-unit id="Table 2527394721 - Field 2868753802 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Equipment Status</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table EQM Integration Event Entry - Field Equipment Status - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Table 2527394721 - Field 1270596704 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Specifies the business event that the entry records.</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table EQM Integration Event Entry - Field Event Type - Property ToolTip</note>
+        </trans-unit>
+        <trans-unit id="Table 2527394721 - Field 1270596704 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Event Type</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table EQM Integration Event Entry - Field Event Type - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Table 2527394721 - Field 804216390 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Specifies the number of the maintenance record that was created. It is blank for other events.</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table EQM Integration Event Entry - Field Maintenance No. - Property ToolTip</note>
+        </trans-unit>
+        <trans-unit id="Table 2527394721 - Field 804216390 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Maintenance No.</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table EQM Integration Event Entry - Field Maintenance No. - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Table 2527394721 - Field 3208180638 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Specifies that the external system has processed the entry.</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table EQM Integration Event Entry - Field Processed - Property ToolTip</note>
+        </trans-unit>
+        <trans-unit id="Table 2527394721 - Field 3208180638 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Processed</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table EQM Integration Event Entry - Field Processed - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Table 2527394721 - Field 2446130881 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Specifies when the entry was marked as processed.</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table EQM Integration Event Entry - Field Processed At - Property ToolTip</note>
+        </trans-unit>
+        <trans-unit id="Table 2527394721 - Field 2446130881 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Processed At</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table EQM Integration Event Entry - Field Processed At - Property Caption</note>
         </trans-unit>
         <trans-unit id="Table 2773268350 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
           <source>Maintenance History Entry</source>
@@ -2809,7 +2924,7 @@
           <note from="Xliff Generator" annotates="general" priority="3">Page EQM Equipment Setup - Property AboutTitle</note>
         </trans-unit>
         <trans-unit id="Page 1065098760 - Property 247559172" size-unit="char" translate="yes" xml:space="preserve">
-          <source>Set the number series for equipment and maintenance records. The app runs its monitoring every day through job queue entries: one creates warranty alerts, one checks overdue maintenance. They are created automatically; if one is missing, choose **Schedule Monitoring Jobs**.</source>
+          <source>Set the number series for equipment and maintenance records. The app runs its monitoring every day through job queue entries: one creates warranty alerts, one checks overdue maintenance. They are created automatically; if one is missing, choose **Schedule Monitoring Jobs**. Turn on **Integration Events Enabled** to record business events for external systems.</source>
           <note from="Developer" annotates="general" priority="2"></note>
           <note from="Xliff Generator" annotates="general" priority="3">Page EQM Equipment Setup - Property AboutText</note>
         </trans-unit>
@@ -2819,7 +2934,7 @@
           <note from="Xliff Generator" annotates="general" priority="3">Page EQM Equipment Setup - Property Caption</note>
         </trans-unit>
         <trans-unit id="Page 1065098760 - Property 3863440606" size-unit="char" translate="yes" xml:space="preserve">
-          <source>equipment numbers, equipment number series, maintenance number series, equipment job queue, equipment monitoring</source>
+          <source>equipment numbers, equipment number series, maintenance number series, equipment job queue, equipment monitoring, integration events, outbox</source>
           <note from="Developer" annotates="general" priority="2"></note>
           <note from="Xliff Generator" annotates="general" priority="3">Page EQM Equipment Setup - Property AdditionalSearchTerms</note>
         </trans-unit>
@@ -2858,10 +2973,25 @@
           <note from="Developer" annotates="general" priority="2"></note>
           <note from="Xliff Generator" annotates="general" priority="3">Page EQM Equipment Setup - Control WarrantyJobStatus - Property Caption</note>
         </trans-unit>
+        <trans-unit id="Page 1065098760 - Control 2782249122 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Integration</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page EQM Equipment Setup - Control Integration - Property Caption</note>
+        </trans-unit>
         <trans-unit id="Page 1065098760 - Control 1532816877 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
           <source>Numbering</source>
           <note from="Developer" annotates="general" priority="2"></note>
           <note from="Xliff Generator" annotates="general" priority="3">Page EQM Equipment Setup - Control Numbering - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Page 1065098760 - Action 4093586628 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
+          <source>View the integration event entries that external systems read through the API.</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page EQM Equipment Setup - Action IntegrationEventEntries - Property ToolTip</note>
+        </trans-unit>
+        <trans-unit id="Page 1065098760 - Action 4093586628 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Integration Event Entries</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page EQM Equipment Setup - Action IntegrationEventEntries - Property Caption</note>
         </trans-unit>
         <trans-unit id="Page 1065098760 - Action 904281732 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
           <source>View the job queue entries that run the equipment monitoring, to see when they ran, change the time or restart them.</source>
@@ -2912,6 +3042,101 @@
           <source>Refresh</source>
           <note from="Developer" annotates="general" priority="2"></note>
           <note from="Xliff Generator" annotates="general" priority="3">Page EQM Equipment Status Chart - Action Refresh - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Page 3143175885 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Integration Event API</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page EQM Integration Event API - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Page 3143175885 - Property 3446740159" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Integration Event</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page EQM Integration Event API - Property EntityCaption</note>
+        </trans-unit>
+        <trans-unit id="Page 3143175885 - Property 631549417" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Integration Events</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page EQM Integration Event API - Property EntitySetCaption</note>
+        </trans-unit>
+        <trans-unit id="Page 3143175885 - Control 1055016064 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Assignment Entry No.</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page EQM Integration Event API - Control assignmentEntryNumber - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Page 3143175885 - Control 1363911307 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Created Date-Time</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page EQM Integration Event API - Control createdDateTime - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Page 3143175885 - Control 2190624577 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Entry No.</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page EQM Integration Event API - Control entryNumber - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Page 3143175885 - Control 2727952323 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Equipment No.</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page EQM Integration Event API - Control equipmentNumber - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Page 3143175885 - Control 400865618 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Equipment Status</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page EQM Integration Event API - Control equipmentStatus - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Page 3143175885 - Control 603619752 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Event Type</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page EQM Integration Event API - Control eventType - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Page 3143175885 - Control 2686962215 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Id</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page EQM Integration Event API - Control id - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Page 3143175885 - Control 2245436958 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Last Modified Date-Time</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page EQM Integration Event API - Control lastModifiedDateTime - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Page 3143175885 - Control 2337310258 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Maintenance No.</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page EQM Integration Event API - Control maintenanceNumber - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Page 3143175885 - Control 3339143102 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Processed</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page EQM Integration Event API - Control processed - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Page 3143175885 - Control 2852298397 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Processed Date-Time</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page EQM Integration Event API - Control processedDateTime - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Page 2225070107 - Property 1064389655" size-unit="char" translate="yes" xml:space="preserve">
+          <source>About integration event entries</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page EQM Integration Event Entries - Property AboutTitle</note>
+        </trans-unit>
+        <trans-unit id="Page 2225070107 - Property 247559172" size-unit="char" translate="yes" xml:space="preserve">
+          <source>This list is the outbox for external systems: one entry for each business event, written when the operation is saved. External systems read the pending entries through the API and mark them as processed. Only processed entries can be deleted.</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page EQM Integration Event Entries - Property AboutText</note>
+        </trans-unit>
+        <trans-unit id="Page 2225070107 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Integration Event Entries</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page EQM Integration Event Entries - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Page 2225070107 - Control 986080663 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Specifies when the entry was created.</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page EQM Integration Event Entries - Control CreatedAt - Property ToolTip</note>
+        </trans-unit>
+        <trans-unit id="Page 2225070107 - Control 986080663 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Created At</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page EQM Integration Event Entries - Control CreatedAt - Property Caption</note>
         </trans-unit>
         <trans-unit id="Page 1059192635 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
           <source>Maintenance</source>
@@ -3537,6 +3762,36 @@
           <source>Lost</source>
           <note from="Developer" annotates="general" priority="2"></note>
           <note from="Xliff Generator" annotates="general" priority="3">Enum EQM Equipment Status - EnumValue Lost - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Enum 3310705949 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Integration Event Type</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Enum EQM Integration Event Type - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Enum 3310705949 - EnumValue 4103589190 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Equipment Assigned</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Enum EQM Integration Event Type - EnumValue Equipment Assigned - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Enum 3310705949 - EnumValue 1845231214 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Equipment Created</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Enum EQM Integration Event Type - EnumValue Equipment Created - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Enum 3310705949 - EnumValue 1659809819 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Equipment Returned</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Enum EQM Integration Event Type - EnumValue Equipment Returned - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Enum 3310705949 - EnumValue 23166903 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Maintenance Created</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Enum EQM Integration Event Type - EnumValue Maintenance Created - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Enum 3310705949 - EnumValue 732195245 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Warranty Expired</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Enum EQM Integration Event Type - EnumValue Warranty Expired - Property Caption</note>
         </trans-unit>
         <trans-unit id="Enum 482436906 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
           <source>Maintenance Log Action</source>
