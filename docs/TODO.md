@@ -239,7 +239,7 @@ Source: "Test scenarios" in `docs/plans/FR-026-equipment-api.md`.
 - [ ] Scenario 17 permissions in a sandbox (not SUPER): Reader GET ok, PATCH denied; Manager POST/PATCH/actions ok, DELETE denied; Administrator all.
 - [ ] Confirm ETag / If-Match behavior on PATCH and DELETE.
 - [ ] Follow-up: PATCH status Assigned returns an error that mentions the Equipment Card action; consider a message that points API clients to the `assign` action (table text, changes UI behavior too).
-- [x] Follow-up (FR-027 done, #65): FR-027 (#65) and FR-028 (#66) must follow conventions C1 to C10 in `docs/features/FR-026-equipment-api.md`; merge order 026, 027, 028.
+- [x] Follow-up (FR-027 done, #65; FR-028 done, #66): FR-027 (#65) and FR-028 (#66) must follow conventions C1 to C10 in `docs/features/FR-026-equipment-api.md`; merge order 026, 027, 028.
 - [ ] Follow-up: register the final APIPublisher and ID range before the first AppSource release; v1.0 is frozen from then on.
 
 ## FR-027 Equipment Categories API (6 table-level tests pass in CI; sandbox checks not done)
@@ -249,3 +249,12 @@ Source: "Test scenarios" in `docs/plans/FR-027-equipment-categories-api.md`.
 - [ ] V1 rejected writes (scenario 6): record the HTTP status for POST, PATCH and DELETE on the read-only page (expected 4xx).
 - [ ] `categoryCode` from `equipments` can be found in `categories`, including an inactive category (scenario 7).
 - [ ] Scenario 8 permissions in a sandbox (not SUPER): Reader GET ok; user without an EQM permission set denied.
+
+## FR-028 Assignment History API (7 table-level tests pass in CI; sandbox checks not done)
+Source: "Test scenarios" in `docs/plans/FR-028-assignment-history-api.md`.
+- [x] Run test codeunit 50182 (7 table-level tests, `test/src/EQMAssignmentAPITests.Codeunit.al`): all 7 pass in AL-Go CI (PR #117).
+- [ ] Manual sandbox checks, not automated: GET list and field names, `status` values (scenario 6), GET by id and 404 for an unknown id (scenario 7).
+- [ ] Filters `employeeNumber eq` and `lastModifiedDateTime gt` return only matching entries (scenario 8).
+- [ ] V1 rejected writes (scenario 9): record the HTTP status for POST, PATCH and DELETE on the read-only page (expected 4xx).
+- [ ] `equipmentNumber` from `assignments` is found in `equipments`; for an active entry it matches `assignedEmployeeNumber` (scenario 10).
+- [ ] Scenario 11 permissions in a sandbox (not SUPER): Reader GET ok; user without an EQM permission set denied.
