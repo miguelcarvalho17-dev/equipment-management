@@ -258,3 +258,14 @@ Source: "Test scenarios" in `docs/plans/FR-028-assignment-history-api.md`.
 - [ ] V1 rejected writes (scenario 9): record the HTTP status for POST, PATCH and DELETE on the read-only page (expected 4xx).
 - [ ] `equipmentNumber` from `assignments` is found in `equipments`; for an active entry it matches `assignedEmployeeNumber` (scenario 10).
 - [ ] Scenario 11 permissions in a sandbox (not SUPER): Reader GET ok; user without an EQM permission set denied.
+
+## FR-031 Power Automate Support (3 smoke tests; event payload and raise count sandbox-only; sandbox checks not done)
+Source: "Test scenarios" in `docs/plans/FR-031-power-automate-support.md`.
+- [ ] Confirm test codeunit 50187 (3 smoke tests, `test/src/EQMPowerAutomateTests.Codeunit.al`) passes in AL-Go CI (PR #122).
+- [ ] Scenarios 1 and 4, sandbox only (an AL subscriber is not called for an external business event in the test runner): `equipmentAssigned` is raised once on assign with EQ's SystemId, No., Description, employee and the active entry's SystemId and date; `warrantyExpiring` is raised once for an alert with end R+20 (DaysRemaining 20, AlertIntervalDays 30).
+- [ ] Negative cases (plan scenarios 2, 3, 5, 6, 7), sandbox only: no `equipmentAssigned` for a failed assignment or a return; no `warrantyExpiring` for a second alert run, an Insert(false) alert, an end date beyond 90 days or disposed equipment.
+- [ ] Scenario 8, in a sandbox with Power Automate: both events appear under Equipment Management (display names, descriptions).
+- [ ] An assignment posts a Teams message; the warranty alert job sends an email.
+- [ ] A failed (rolled back) assignment sends nothing; note the delivery delay after commit.
+- [ ] A Reader user can create the flow; record the BC permission set needed to subscribe.
+- [ ] Check how Guid and Date parameters render in a flow, and whether the attribute strings are translatable.

@@ -3918,6 +3918,11 @@
           <note from="Developer" annotates="general" priority="2"></note>
           <note from="Xliff Generator" annotates="general" priority="3">Enum EQM Warranty Status - EnumValue Expiring Soon - Property Caption</note>
         </trans-unit>
+        <trans-unit id="EnumExtension 1733010983 - EnumValue 115321652 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve" al-object-target="Enum 1178123344">
+          <source>Equipment Management</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">EnumExtension EQM Event Category - EnumValue EQM Equipment Management - Property Caption</note>
+        </trans-unit>
         <trans-unit id="PermissionSet 630416289 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
           <source>Equipment Administrator</source>
           <note from="Developer" annotates="general" priority="2"></note>
