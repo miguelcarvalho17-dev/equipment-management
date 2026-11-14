@@ -2,7 +2,7 @@
 
 Integration Events let other systems learn what happens to your equipment without polling every record. When you turn the feature on, Equipment Management writes one entry for each business event: equipment created, assigned or returned, maintenance created, and warranty expired. The other system reads the pending entries through the Business Central API and marks each one as processed.
 
-TODO(verify): this feature has not been tested in a sandbox. Automated tests are written and compile, but have not been run yet. The API address, reading and marking entries, and permissions are not verified.
+TODO(verify): this feature has not been tested in a sandbox. The automated tests pass in the build pipeline. The API address, reading and marking entries, and permissions are not verified.
 
 ## Before you start: permissions
 - **Equipment Reader, Manager and Administrator** can read integration events (list and API).
