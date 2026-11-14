@@ -14,6 +14,7 @@ permissionset 50100 "EQM - Reader"
         tabledata "EQM Equipment Category" = R,
         tabledata "EQM Equipment Note" = R,
         tabledata "EQM Equipment Setup" = R,
+        tabledata "EQM Integration Event Entry" = R,
         tabledata "EQM Maintenance History Entry" = R,
         tabledata "EQM Maintenance Log Entry" = R,
         tabledata "EQM Maintenance Record" = R,
@@ -23,6 +24,7 @@ permissionset 50100 "EQM - Reader"
         table "EQM Equipment Category" = X,
         table "EQM Equipment Note" = X,
         table "EQM Equipment Setup" = X,
+        table "EQM Integration Event Entry" = X,
         table "EQM Maintenance History Entry" = X,
         table "EQM Maintenance Log Entry" = X,
         table "EQM Maintenance Record" = X,
@@ -58,6 +60,8 @@ permissionset 50100 "EQM - Reader"
         page "EQM Equipment API" = X,
         page "EQM Category API" = X,
         page "EQM Assignment API" = X,
+        page "EQM Integration Event API" = X,
+        page "EQM Integration Event Entries" = X,
         page "EQM Equipment Notes Part" = X,
         page "EQM Equipment Notes" = X,
         codeunit "EQM Assignment Mgt." = X,
@@ -76,5 +80,7 @@ permissionset 50100 "EQM - Reader"
         codeunit "EQM Maintenance Monitor Job" = X,
         codeunit "EQM Monitoring Job Mgt." = X,
         codeunit "EQM Business Events" = X,
-        codeunit "EQM Business Event Subscr." = X;
+        codeunit "EQM Business Event Subscr." = X,
+        codeunit "EQM Integration Event Subscr." = X,
+        codeunit "EQM Integration Event Mgt." = X;
 }

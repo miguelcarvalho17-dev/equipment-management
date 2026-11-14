@@ -1,6 +1,25 @@
 # Changelog
 Newest first. Grouped by Added / Changed / Fixed / Obsolete.
 
+## FR-030 Event Subscribers (version stays 29.0.0.0, no bump)
+### Added
+- Enum 50109 "EQM Integration Event Type" (not extensible) and table 50110 "EQM Integration Event Entry" (public): the outbox, one entry per business event, written in the same transaction. Entries can only be created and marked processed through codeunit 50122; only processed entries can be deleted. Extra fieldgroups DropDown and Brick on the table.
+- Codeunit 50121 "EQM Integration Event Subscr." (internal): subscribes to the five events of codeunit 50119. Codeunit 50122 "EQM Integration Event Mgt." (internal): `IsEnabled`, `RecordEvent`, `MarkProcessed`.
+- Page 50132 "EQM Integration Event Entries" (read-only list, delete of processed entries allowed) and API page 50126 "EQM Integration Event API" (v1.0, publisher `miguelCarvalho`, group `equipment`, entity `integrationEvents`, read-only, bound action `markProcessed`).
+- Test codeunit 50186 "EQM Integration Event Tests": 14 tests (compile; not executed yet).
+- Feature doc docs/features/FR-030-event-subscribers.md and help docs/help/FR-030-event-subscribers.md.
+### Changed
+- Table 50102 "EQM Equipment Setup": new field 4 "Integration Events Enabled" (off by default). Page 50103: group "Integration" and action "Integration Event Entries".
+- Permission sets: Reader gets read on table 50110 and execute on the new objects; Manager insert; Administrator modify and delete. Details in the feature doc.
+### Fixed
+- None.
+### Obsolete
+- None.
+
+Release notes: Other systems can now follow what happens to your equipment. Turn on Integration Events Enabled in Equipment Setup and Business Central records an entry each time equipment is created, assigned or returned, maintenance is created, or a warranty expires. External systems read the pending entries through the API (v1.0, publisher miguelCarvalho, group equipment, entity integrationEvents) and mark them as processed. The setting is off by default.
+
+Note: no upgrade code (the new setting defaults to off). The app compiles clean with CodeCop and UICop; AppSourceCop reports only the known manifest diagnostics. Not verified: the 14 tests have not been run (no local BC sandbox; CI is the first run); sandbox scenario 12 (API GET and markProcessed, Reader denied on markProcessed, scheduled warranty job writes entries); plan item V1 (bound action on an API page with ModifyAllowed = false). At first AppSource release the table, enum values and API v1.0 become a frozen contract.
+
 ## FR-029 Business Events (version stays 29.0.0.0, no bump)
 ### Added
 - Codeunit 50119 "EQM Business Events" (public): five integration events `OnEquipmentCreated`, `OnEquipmentAssigned`, `OnEquipmentReturned`, `OnMaintenanceCreated`, `OnWarrantyExpired`. Publishers are internal: partners can subscribe, not raise. Notify only, no `IsHandled`.

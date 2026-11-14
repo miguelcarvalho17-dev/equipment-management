@@ -27,6 +27,11 @@ table 50102 "EQM Equipment Setup"
             ToolTip = 'Specifies the number series used to assign numbers to new maintenance records.';
             TableRelation = "No. Series";
         }
+        field(4; "Integration Events Enabled"; Boolean)
+        {
+            Caption = 'Integration Events Enabled';
+            ToolTip = 'Specifies that an integration event entry is written for each business event (equipment created, assigned or returned, maintenance created, warranty expired), so that external systems can read them through the API. Entries are written only when this is on.';
+        }
     }
 
     keys
