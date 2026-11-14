@@ -7,7 +7,7 @@ Status: implemented on branch `feature/FR-030-event-subscribers`. App version st
 
 ## Verification status
 - **Build:** app compiles clean with CodeCop and UICop. AppSourceCop reports only the manifest diagnostics that were already known. The documenter did not rerun the build; no AL line was changed (the `///` comments were already present).
-- **Tests:** 14 tests in codeunit 50186 compile but have **NOT been executed**. There is no BC sandbox locally; AL-Go CI is the first run.
+- **Tests:** 14 tests in codeunit 50186 all pass in AL-Go CI (PR #120: 119 tests in total, 0 failed, 0 skipped). They were not run in a BC sandbox by a person.
 - **Not verified (sandbox only):**
   - Scenario 12: API GET with `$filter=processed eq false`; POST `markProcessed` sets `processed`; Reader can GET but `markProcessed` is denied; a scheduled warranty job run writes Warranty Expired entries.
   - Plan item V1: a bound action on an API page with `ModifyAllowed = false` that modifies the record through a codeunit. Fallback if it fails: `ModifyAllowed = true` with every field `Editable = false`.
@@ -100,7 +100,7 @@ No retention job. An Administrator deletes processed entries manually on page 50
 Additive. Adds field 4 to public table 50102 and changes page 50103 (additive); codeunit 50119 and its call sites are untouched. **Contract at the first AppSource release:** table 50110 field IDs and names, enum 50109 values, API v1.0 entity `integrationEvent` / `integrationEvents`, its fields and the `markProcessed` action. Later changes need Obsolete handling or API v2.0.
 
 ## Test status
-Codeunit 50186 (`test/src/EQMIntegrationEventTests.Codeunit.al`, AutoRollback): created, assigned, returned, maintenance (Returned then Maintenance Created), warranty expired, disabled setting, Insert(false) and temporary record, cancelled return, `MarkProcessed` (and second call), rejected direct insert, modify and rename, delete of pending (rejected) and processed (allowed) entries. 14 tests compile; **not executed yet**.
+Codeunit 50186 (`test/src/EQMIntegrationEventTests.Codeunit.al`, AutoRollback): created, assigned, returned, maintenance (Returned then Maintenance Created), warranty expired, disabled setting, Insert(false) and temporary record, cancelled return, `MarkProcessed` (and second call), rejected direct insert, modify and rename, delete of pending (rejected) and processed (allowed) entries. all 14 pass in AL-Go CI (PR #120).
 
 ## XML documentation
 Present on the enum, the table and its internal procedures, codeunits 50121 and 50122 and their procedures, and `markProcessed` on page 50126.
