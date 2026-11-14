@@ -261,7 +261,7 @@ Source: "Test scenarios" in `docs/plans/FR-028-assignment-history-api.md`.
 
 ## FR-031 Power Automate Support (3 smoke tests; event payload and raise count sandbox-only; sandbox checks not done)
 Source: "Test scenarios" in `docs/plans/FR-031-power-automate-support.md`.
-- [ ] Confirm test codeunit 50187 (3 smoke tests, `test/src/EQMPowerAutomateTests.Codeunit.al`) passes in AL-Go CI (PR #122).
+- [x] (done 2026-11-14) Test codeunit 50187 (3 smoke tests, `test/src/EQMPowerAutomateTests.Codeunit.al`) passes in AL-Go CI (PR #122: 122 tests, 0 failed, 0 skipped).
 - [ ] Scenarios 1 and 4, sandbox only (an AL subscriber is not called for an external business event in the test runner): `equipmentAssigned` is raised once on assign with EQ's SystemId, No., Description, employee and the active entry's SystemId and date; `warrantyExpiring` is raised once for an alert with end R+20 (DaysRemaining 20, AlertIntervalDays 30).
 - [ ] Negative cases (plan scenarios 2, 3, 5, 6, 7), sandbox only: no `equipmentAssigned` for a failed assignment or a return; no `warrantyExpiring` for a second alert run, an Insert(false) alert, an end date beyond 90 days or disposed equipment.
 - [ ] Scenario 8, in a sandbox with Power Automate: both events appear under Equipment Management (display names, descriptions).
