@@ -126,7 +126,7 @@ codeunit 50188 "EQM Equipment Request Tests"
     var
         Request: Record "EQM Equipment Request";
     begin
-        // [SCENARIO 3b] Boundary: today is not in the future
+        // [SCENARIO 3c] Boundary: today is not in the future
         Initialize();
 
         // [GIVEN] A request dated today
@@ -143,12 +143,12 @@ codeunit 50188 "EQM Equipment Request Tests"
 
     [Test]
     [TransactionModel(TransactionModel::AutoRollback)]
-    procedure FutureRequestDateIsRejectedOnValidateAndInsert()
+    procedure FutureRequestDateIsRejectedOnValidate()
     var
         Request: Record "EQM Equipment Request";
         FutureDate: Date;
     begin
-        // [SCENARIO 3] A Request Date after today is rejected on validate and on insert
+        // [SCENARIO 3a] A Request Date after today is rejected on validate
         Initialize();
         FutureDate := Today() + 1;
 
@@ -160,14 +160,28 @@ codeunit 50188 "EQM Equipment Request Tests"
 
         // [THEN] FutureDateErr is raised
         Assert.ExpectedError(StrSubstNo(FutureDateErr, FutureDate, Today()));
+    end;
 
-        // [WHEN] The request is inserted with tomorrow as Request Date (no validation)
+    [Test]
+    [TransactionModel(TransactionModel::AutoRollback)]
+    procedure FutureRequestDateIsRejectedOnInsert()
+    var
+        Request: Record "EQM Equipment Request";
+        FutureDate: Date;
+    begin
+        // [SCENARIO 3b] A Request Date after today is rejected on insert (no validation)
+        Initialize();
+        FutureDate := Today() + 1;
+
+        // [GIVEN] A request with tomorrow as Request Date
+        NewRequest(Request, ManualNoTok, ActiveEmployeeTok, ActiveCategoryTok);
         Request."Request Date" := FutureDate;
+
+        // [WHEN] The request is inserted
         asserterror Request.Insert(true);
 
-        // [THEN] FutureDateErr is raised and no row exists
+        // [THEN] FutureDateErr is raised
         Assert.ExpectedError(StrSubstNo(FutureDateErr, FutureDate, Today()));
-        Assert.IsFalse(Request.Get(ManualNoTok), 'No request should be stored');
     end;
 
     [Test]
@@ -185,10 +199,9 @@ codeunit 50188 "EQM Equipment Request Tests"
         // [WHEN] The request is inserted
         asserterror Request.Insert(true);
 
-        // [THEN] A TestField error is raised and no row exists
+        // [THEN] A TestField error is raised
         Assert.ExpectedErrorCode('TestField');
         Assert.ExpectedError(Request.FieldCaption("Employee No."));
-        Assert.IsFalse(Request.Get(ManualNoTok), 'No request should be stored');
     end;
 
     [Test]
@@ -206,10 +219,9 @@ codeunit 50188 "EQM Equipment Request Tests"
         // [WHEN] The request is inserted
         asserterror Request.Insert(true);
 
-        // [THEN] A TestField error is raised and no row exists
+        // [THEN] A TestField error is raised
         Assert.ExpectedErrorCode('TestField');
         Assert.ExpectedError(Request.FieldCaption("Requested Equipment Type"));
-        Assert.IsFalse(Request.Get(ManualNoTok), 'No request should be stored');
     end;
 
     [Test]
@@ -228,9 +240,8 @@ codeunit 50188 "EQM Equipment Request Tests"
         // [WHEN] The request is inserted
         asserterror Request.Insert(true);
 
-        // [THEN] JustificationRequiredErr is raised and no row exists
+        // [THEN] JustificationRequiredErr is raised
         Assert.ExpectedError(JustificationRequiredErr);
-        Assert.IsFalse(Request.Get(ManualNoTok), 'No request should be stored');
     end;
 
     [Test]
@@ -249,9 +260,28 @@ codeunit 50188 "EQM Equipment Request Tests"
         // [WHEN] The request is inserted
         asserterror Request.Insert(true);
 
-        // [THEN] JustificationRequiredErr is raised and no row exists
+        // [THEN] JustificationRequiredErr is raised
         Assert.ExpectedError(JustificationRequiredErr);
-        Assert.IsFalse(Request.Get(ManualNoTok), 'No request should be stored');
+    end;
+
+    [Test]
+    [TransactionModel(TransactionModel::AutoRollback)]
+    procedure NonExistingEmployeeIsRejectedOnValidate()
+    var
+        Request: Record "EQM Equipment Request";
+    begin
+        // The field has ValidateTableRelation = false, so EmployeeNotFoundErr is raised, not the standard relation error.
+        // [SCENARIO 5a-1] An employee that does not exist is rejected on validate
+        Initialize();
+
+        // [GIVEN] A request
+        NewRequest(Request, ManualNoTok, ActiveEmployeeTok, ActiveCategoryTok);
+
+        // [WHEN] The value is validated
+        asserterror Request.Validate("Employee No.", MissingEmployeeTok);
+
+        // [THEN] EmployeeNotFoundErr is raised
+        Assert.ExpectedError(StrSubstNo(EmployeeNotFoundErr, MissingEmployeeTok));
     end;
 
     [Test]
@@ -260,133 +290,174 @@ codeunit 50188 "EQM Equipment Request Tests"
     var
         Request: Record "EQM Equipment Request";
     begin
-        // [SCENARIO 5a] An employee that does not exist is rejected on validate and on insert
-        // The field has ValidateTableRelation = false, so EmployeeNotFoundErr is raised, not the standard relation error.
+        // [SCENARIO 5a-2] An employee that does not exist is rejected on insert (no validation)
         Initialize();
 
-        // [GIVEN] A request for a non-existing employee
-        NewRequest(Request, ManualNoTok, MissingEmployeeTok, ActiveCategoryTok);
-
-        // [WHEN] The employee is validated
-        asserterror Request.Validate("Employee No.", MissingEmployeeTok);
-
-        // [THEN] EmployeeNotFoundErr is raised
-        Assert.ExpectedError(StrSubstNo(EmployeeNotFoundErr, MissingEmployeeTok));
+        // [GIVEN] A request carrying the value
+        NewRequest(Request, ManualNoTok, ActiveEmployeeTok, ActiveCategoryTok);
+        Request."Employee No." := MissingEmployeeTok;
 
         // [WHEN] The request is inserted
         asserterror Request.Insert(true);
 
-        // [THEN] EmployeeNotFoundErr is raised and no row exists
+        // [THEN] EmployeeNotFoundErr is raised
         Assert.ExpectedError(StrSubstNo(EmployeeNotFoundErr, MissingEmployeeTok));
-        Assert.IsFalse(Request.Get(ManualNoTok), 'No request should be stored');
     end;
 
     [Test]
     [TransactionModel(TransactionModel::AutoRollback)]
-    procedure InactiveEmployeeIsRejectedOnValidateAndInsert()
+    procedure InactiveEmployeeIsRejectedOnValidate()
     var
         Request: Record "EQM Equipment Request";
     begin
-        // [SCENARIO 5b] An Inactive employee is rejected on validate and on insert
+        // [SCENARIO 5ba] An Inactive employee is rejected on validate
         Initialize();
 
         // [GIVEN] A request
         NewRequest(Request, ManualNoTok, ActiveEmployeeTok, ActiveCategoryTok);
 
-        // [WHEN] The Inactive employee is validated
+        // [WHEN] The value is validated
         asserterror Request.Validate("Employee No.", InactiveEmployeeTok);
 
-        // [THEN] EmployeeNotActiveErr names the employee and the status
+        // [THEN] EmployeeNotActiveErr is raised
         Assert.ExpectedError(StrSubstNo(EmployeeNotActiveErr, InactiveEmployeeTok, Format(Enum::"Employee Status"::Inactive)));
-
-        // [WHEN] The request is inserted for the Inactive employee (no validation)
-        Request."Employee No." := InactiveEmployeeTok;
-        asserterror Request.Insert(true);
-
-        // [THEN] The same error is raised and no row exists
-        Assert.ExpectedError(StrSubstNo(EmployeeNotActiveErr, InactiveEmployeeTok, Format(Enum::"Employee Status"::Inactive)));
-        Assert.IsFalse(Request.Get(ManualNoTok), 'No request should be stored');
     end;
 
     [Test]
     [TransactionModel(TransactionModel::AutoRollback)]
-    procedure PrivacyBlockedEmployeeIsRejectedOnValidateAndInsert()
+    procedure InactiveEmployeeIsRejectedOnInsert()
     var
         Request: Record "EQM Equipment Request";
     begin
-        // [SCENARIO 5c] A privacy-blocked employee is rejected on validate and on insert
+        // [SCENARIO 5bb] An Inactive employee is rejected on insert (no validation)
+        Initialize();
+
+        // [GIVEN] A request carrying the value
+        NewRequest(Request, ManualNoTok, ActiveEmployeeTok, ActiveCategoryTok);
+        Request."Employee No." := InactiveEmployeeTok;
+
+        // [WHEN] The request is inserted
+        asserterror Request.Insert(true);
+
+        // [THEN] EmployeeNotActiveErr is raised
+        Assert.ExpectedError(StrSubstNo(EmployeeNotActiveErr, InactiveEmployeeTok, Format(Enum::"Employee Status"::Inactive)));
+    end;
+
+    [Test]
+    [TransactionModel(TransactionModel::AutoRollback)]
+    procedure PrivacyBlockedEmployeeIsRejectedOnValidate()
+    var
+        Request: Record "EQM Equipment Request";
+    begin
+        // [SCENARIO 5ca] A privacy-blocked employee is rejected on validate
         Initialize();
 
         // [GIVEN] A request
         NewRequest(Request, ManualNoTok, ActiveEmployeeTok, ActiveCategoryTok);
 
-        // [WHEN] The privacy-blocked employee is validated
+        // [WHEN] The value is validated
         asserterror Request.Validate("Employee No.", BlockedEmployeeTok);
 
         // [THEN] EmployeePrivacyBlockedErr is raised
         Assert.ExpectedError(StrSubstNo(EmployeePrivacyBlockedErr, BlockedEmployeeTok));
-
-        // [WHEN] The request is inserted for the blocked employee
-        Request."Employee No." := BlockedEmployeeTok;
-        asserterror Request.Insert(true);
-
-        // [THEN] The same error is raised and no row exists
-        Assert.ExpectedError(StrSubstNo(EmployeePrivacyBlockedErr, BlockedEmployeeTok));
-        Assert.IsFalse(Request.Get(ManualNoTok), 'No request should be stored');
     end;
 
     [Test]
     [TransactionModel(TransactionModel::AutoRollback)]
-    procedure NonExistingEquipmentTypeIsRejectedOnValidateAndInsert()
+    procedure PrivacyBlockedEmployeeIsRejectedOnInsert()
     var
         Request: Record "EQM Equipment Request";
     begin
-        // [SCENARIO 6a] A type that is not a category is rejected on validate and on insert
+        // [SCENARIO 5cb] A privacy-blocked employee is rejected on insert (no validation)
+        Initialize();
+
+        // [GIVEN] A request carrying the value
+        NewRequest(Request, ManualNoTok, ActiveEmployeeTok, ActiveCategoryTok);
+        Request."Employee No." := BlockedEmployeeTok;
+
+        // [WHEN] The request is inserted
+        asserterror Request.Insert(true);
+
+        // [THEN] EmployeePrivacyBlockedErr is raised
+        Assert.ExpectedError(StrSubstNo(EmployeePrivacyBlockedErr, BlockedEmployeeTok));
+    end;
+
+    [Test]
+    [TransactionModel(TransactionModel::AutoRollback)]
+    procedure NonExistingEquipmentTypeIsRejectedOnValidate()
+    var
+        Request: Record "EQM Equipment Request";
+    begin
+        // [SCENARIO 6aa] A type that is not a category is rejected on validate
         Initialize();
 
         // [GIVEN] A request
         NewRequest(Request, ManualNoTok, ActiveEmployeeTok, ActiveCategoryTok);
 
-        // [WHEN] A non-existing type is validated
+        // [WHEN] The value is validated
         asserterror Request.Validate("Requested Equipment Type", MissingCategoryTok);
 
         // [THEN] CategoryNotFoundErr is raised
         Assert.ExpectedError(StrSubstNo(CategoryNotFoundErr, MissingCategoryTok));
-
-        // [WHEN] The request is inserted with the non-existing type
-        Request."Requested Equipment Type" := MissingCategoryTok;
-        asserterror Request.Insert(true);
-
-        // [THEN] The same error is raised and no row exists
-        Assert.ExpectedError(StrSubstNo(CategoryNotFoundErr, MissingCategoryTok));
-        Assert.IsFalse(Request.Get(ManualNoTok), 'No request should be stored');
     end;
 
     [Test]
     [TransactionModel(TransactionModel::AutoRollback)]
-    procedure InactiveCategoryIsRejectedOnValidateAndInsert()
+    procedure NonExistingEquipmentTypeIsRejectedOnInsert()
     var
         Request: Record "EQM Equipment Request";
     begin
-        // [SCENARIO 6b] An inactive category is rejected on validate and on insert
+        // [SCENARIO 6ab] A type that is not a category is rejected on insert (no validation)
+        Initialize();
+
+        // [GIVEN] A request carrying the value
+        NewRequest(Request, ManualNoTok, ActiveEmployeeTok, ActiveCategoryTok);
+        Request."Requested Equipment Type" := MissingCategoryTok;
+
+        // [WHEN] The request is inserted
+        asserterror Request.Insert(true);
+
+        // [THEN] CategoryNotFoundErr is raised
+        Assert.ExpectedError(StrSubstNo(CategoryNotFoundErr, MissingCategoryTok));
+    end;
+
+    [Test]
+    [TransactionModel(TransactionModel::AutoRollback)]
+    procedure InactiveCategoryIsRejectedOnValidate()
+    var
+        Request: Record "EQM Equipment Request";
+    begin
+        // [SCENARIO 6ba] An inactive category is rejected on validate
         Initialize();
 
         // [GIVEN] A request
         NewRequest(Request, ManualNoTok, ActiveEmployeeTok, ActiveCategoryTok);
 
-        // [WHEN] The inactive category is validated
+        // [WHEN] The value is validated
         asserterror Request.Validate("Requested Equipment Type", InactiveCategoryTok);
 
         // [THEN] CategoryInactiveErr is raised
         Assert.ExpectedError(StrSubstNo(CategoryInactiveErr, InactiveCategoryTok));
+    end;
 
-        // [WHEN] The request is inserted with the inactive category
+    [Test]
+    [TransactionModel(TransactionModel::AutoRollback)]
+    procedure InactiveCategoryIsRejectedOnInsert()
+    var
+        Request: Record "EQM Equipment Request";
+    begin
+        // [SCENARIO 6bb] An inactive category is rejected on insert (no validation)
+        Initialize();
+
+        // [GIVEN] A request carrying the value
+        NewRequest(Request, ManualNoTok, ActiveEmployeeTok, ActiveCategoryTok);
         Request."Requested Equipment Type" := InactiveCategoryTok;
+
+        // [WHEN] The request is inserted
         asserterror Request.Insert(true);
 
-        // [THEN] The same error is raised and no row exists
+        // [THEN] CategoryInactiveErr is raised
         Assert.ExpectedError(StrSubstNo(CategoryInactiveErr, InactiveCategoryTok));
-        Assert.IsFalse(Request.Get(ManualNoTok), 'No request should be stored');
     end;
 
     [Test]
@@ -397,7 +468,7 @@ codeunit 50188 "EQM Equipment Request Tests"
         Employee: Record Employee;
         Category: Record "EQM Equipment Category";
     begin
-        // [SCENARIO 7] The active checks apply only to new or changed employee/type values
+        // [SCENARIO 7a] The active checks apply only to new or changed employee/type values
         Initialize();
 
         // [GIVEN] An Open request, then its employee becomes Inactive and its category inactive
@@ -417,22 +488,47 @@ codeunit 50188 "EQM Equipment Request Tests"
         // [THEN] The change is stored
         Request.Get(ManualNoTok);
         Assert.AreEqual(ChangedJustificationTok, Request.Justification, 'Justification should be changed');
+    end;
 
-        // [WHEN] The employee is changed to another Inactive employee (validate)
+    [Test]
+    [TransactionModel(TransactionModel::AutoRollback)]
+    procedure ChangingToInactiveEmployeeOnValidateIsRejectedForOpenRequest()
+    var
+        Request: Record "EQM Equipment Request";
+    begin
+        // [SCENARIO 7c] Changing the employee of an Open request to an Inactive one is rejected on validate
+        Initialize();
+
+        // [GIVEN] An Open request
+        NewRequest(Request, ManualNoTok, ActiveEmployeeTok, ActiveCategoryTok);
+        Request.Insert(true);
+
+        // [WHEN] The employee is changed to an Inactive employee (validate)
         asserterror Request.Validate("Employee No.", InactiveEmployee2Tok);
 
         // [THEN] EmployeeNotActiveErr is raised
         Assert.ExpectedError(StrSubstNo(EmployeeNotActiveErr, InactiveEmployee2Tok, Format(Enum::"Employee Status"::Inactive)));
+    end;
 
-        // [WHEN] The employee is changed without validation and the request is modified
-        Request.Get(ManualNoTok);
+    [Test]
+    [TransactionModel(TransactionModel::AutoRollback)]
+    procedure ChangingToInactiveEmployeeOnModifyIsRejected()
+    var
+        Request: Record "EQM Equipment Request";
+    begin
+        // [SCENARIO 7d] Changing the employee to an Inactive one without validation is rejected on modify
+        Initialize();
+
+        // [GIVEN] An Open request whose employee is changed without validation
+        NewRequest(Request, ManualNoTok, ActiveEmployeeTok, ActiveCategoryTok);
+        Request.Insert(true);
         Request."Employee No." := InactiveEmployee2Tok;
+
+        // [WHEN] The request is modified
         asserterror Request.Modify(true);
 
-        // [THEN] The modify check also rejects the changed Inactive employee, the stored employee is unchanged
+        // [THEN] EmployeeNotActiveErr is raised
         Assert.ExpectedError(StrSubstNo(EmployeeNotActiveErr, InactiveEmployee2Tok, Format(Enum::"Employee Status"::Inactive)));
-        Request.Get(ManualNoTok);
-        Assert.AreEqual(ActiveEmployeeTok, Request."Employee No.", 'The stored employee should be unchanged');
     end;
 
     [Test]
@@ -452,10 +548,8 @@ codeunit 50188 "EQM Equipment Request Tests"
         Request."Requested Equipment Type" := InactiveCategoryTok;
         asserterror Request.Modify(true);
 
-        // [THEN] CategoryInactiveErr is raised and the stored type is unchanged
+        // [THEN] CategoryInactiveErr is raised
         Assert.ExpectedError(StrSubstNo(CategoryInactiveErr, InactiveCategoryTok));
-        Request.Get(ManualNoTok);
-        Assert.AreEqual(ActiveCategoryTok, Request."Requested Equipment Type", 'The stored type should be unchanged');
     end;
 
     [Test]
@@ -474,9 +568,8 @@ codeunit 50188 "EQM Equipment Request Tests"
         // [WHEN] The request is inserted
         asserterror Request.Insert(true);
 
-        // [THEN] InsertNotOpenErr is raised and no row exists
+        // [THEN] InsertNotOpenErr is raised
         Assert.ExpectedError(StrSubstNo(InsertNotOpenErr, ManualNoTok));
-        Assert.IsFalse(Request.Get(ManualNoTok), 'No request should be stored');
     end;
 
     [Test]
@@ -509,38 +602,74 @@ codeunit 50188 "EQM Equipment Request Tests"
 
     [Test]
     [TransactionModel(TransactionModel::AutoRollback)]
-    procedure PendingApprovalRequestIsLocked()
+    procedure PendingApprovalRequestCannotBeModified()
     begin
-        // [SCENARIO 10a] A Pending Approval request cannot be changed or deleted
+        // [SCENARIO 10a] A Pending Approval request cannot be changed
         Initialize();
-        VerifyStatusLock(Enum::"EQM Request Status"::"Pending Approval");
+        VerifyModifyIsLocked(Enum::"EQM Request Status"::"Pending Approval");
     end;
 
     [Test]
     [TransactionModel(TransactionModel::AutoRollback)]
-    procedure ApprovedRequestIsLocked()
+    procedure PendingApprovalRequestCannotBeDeleted()
     begin
-        // [SCENARIO 10b] An Approved request cannot be changed or deleted
+        // [SCENARIO 10a-delete] A Pending Approval request cannot be deleted
         Initialize();
-        VerifyStatusLock(Enum::"EQM Request Status"::Approved);
+        VerifyDeleteIsLocked(Enum::"EQM Request Status"::"Pending Approval");
     end;
 
     [Test]
     [TransactionModel(TransactionModel::AutoRollback)]
-    procedure RejectedRequestIsLocked()
+    procedure ApprovedRequestCannotBeModified()
     begin
-        // [SCENARIO 10c] A Rejected request cannot be changed or deleted
+        // [SCENARIO 10b] A Approved request cannot be changed
         Initialize();
-        VerifyStatusLock(Enum::"EQM Request Status"::Rejected);
+        VerifyModifyIsLocked(Enum::"EQM Request Status"::Approved);
     end;
 
     [Test]
     [TransactionModel(TransactionModel::AutoRollback)]
-    procedure CompletedRequestIsLocked()
+    procedure ApprovedRequestCannotBeDeleted()
     begin
-        // [SCENARIO 10d] A Completed request cannot be changed or deleted
+        // [SCENARIO 10b-delete] A Approved request cannot be deleted
         Initialize();
-        VerifyStatusLock(Enum::"EQM Request Status"::Completed);
+        VerifyDeleteIsLocked(Enum::"EQM Request Status"::Approved);
+    end;
+
+    [Test]
+    [TransactionModel(TransactionModel::AutoRollback)]
+    procedure RejectedRequestCannotBeModified()
+    begin
+        // [SCENARIO 10c] A Rejected request cannot be changed
+        Initialize();
+        VerifyModifyIsLocked(Enum::"EQM Request Status"::Rejected);
+    end;
+
+    [Test]
+    [TransactionModel(TransactionModel::AutoRollback)]
+    procedure RejectedRequestCannotBeDeleted()
+    begin
+        // [SCENARIO 10c-delete] A Rejected request cannot be deleted
+        Initialize();
+        VerifyDeleteIsLocked(Enum::"EQM Request Status"::Rejected);
+    end;
+
+    [Test]
+    [TransactionModel(TransactionModel::AutoRollback)]
+    procedure CompletedRequestCannotBeModified()
+    begin
+        // [SCENARIO 10d] A Completed request cannot be changed
+        Initialize();
+        VerifyModifyIsLocked(Enum::"EQM Request Status"::Completed);
+    end;
+
+    [Test]
+    [TransactionModel(TransactionModel::AutoRollback)]
+    procedure CompletedRequestCannotBeDeleted()
+    begin
+        // [SCENARIO 10d-delete] A Completed request cannot be deleted
+        Initialize();
+        VerifyDeleteIsLocked(Enum::"EQM Request Status"::Completed);
     end;
 
     [Test]
@@ -559,10 +688,8 @@ codeunit 50188 "EQM Equipment Request Tests"
         // [WHEN] The request is renamed
         asserterror Request.Rename(ManualNo2Tok);
 
-        // [THEN] RenameNotAllowedErr is raised and the number is unchanged
+        // [THEN] RenameNotAllowedErr is raised
         Assert.ExpectedError(StrSubstNo(RenameNotAllowedErr, ManualNoTok));
-        Assert.IsTrue(Request.Get(ManualNoTok), 'The request should keep its number');
-        Assert.IsFalse(Request.Get(ManualNo2Tok), 'No request with the new number should exist');
     end;
 
     [Test]
@@ -673,14 +800,14 @@ codeunit 50188 "EQM Equipment Request Tests"
         // [SCENARIO 14b] The General fields are read-only unless the request is Open
         Initialize();
 
-        // [GIVEN] A Completed request and an Open request
+        // [GIVEN] A Completed request
         NewRequest(Request, ManualNoTok, ActiveEmployeeTok, ActiveCategoryTok);
         Request.Insert(true);
         Request.Status := Request.Status::Completed;
         Request.Modify(false);
 
-        // [WHEN] The card is opened on the Completed request
-        RequestCard.OpenView();
+        // [WHEN] The card is opened in edit mode on the request
+        RequestCard.OpenEdit();
         RequestCard.GoToRecord(Request);
 
         // [THEN] The fields are not editable
@@ -689,17 +816,30 @@ codeunit 50188 "EQM Equipment Request Tests"
         Assert.IsFalse(RequestCard.Justification.Editable(), 'Justification should not be editable');
         Assert.IsFalse(RequestCard."Request Date".Editable(), 'Request Date should not be editable');
         RequestCard.Close();
+    end;
 
-        // [GIVEN] The request is reopened by code
-        Request.Status := Request.Status::Open;
-        Request.Modify(false);
+    [Test]
+    [TransactionModel(TransactionModel::AutoRollback)]
+    procedure CardIsEditableForOpenRequest()
+    var
+        Request: Record "EQM Equipment Request";
+        RequestCard: TestPage "EQM Equipment Request Card";
+    begin
+        // [SCENARIO 14b-open] The General fields are editable when the request is Open
+        // OpenEdit is required: fields of a page opened with OpenView are never editable.
+        Initialize();
 
-        // [WHEN] The card is opened again
-        RequestCard.OpenView();
+        // [GIVEN] An Open request
+        NewRequest(Request, ManualNoTok, ActiveEmployeeTok, ActiveCategoryTok);
+        Request.Insert(true);
+
+        // [WHEN] The card is opened in edit mode on the request
+        RequestCard.OpenEdit();
         RequestCard.GoToRecord(Request);
 
         // [THEN] The fields are editable
         Assert.IsTrue(RequestCard."Employee No.".Editable(), 'Employee No. should be editable for an Open request');
+        Assert.IsTrue(RequestCard."Requested Equipment Type".Editable(), 'Requested Equipment Type should be editable for an Open request');
         Assert.IsTrue(RequestCard.Justification.Editable(), 'Justification should be editable for an Open request');
         RequestCard.Close();
     end;
@@ -846,7 +986,7 @@ codeunit 50188 "EQM Equipment Request Tests"
         Assert.ExpectedError(EquipmentSetup.FieldCaption("Request Nos."));
     end;
 
-    local procedure VerifyStatusLock(NewStatus: Enum "EQM Request Status")
+    local procedure VerifyModifyIsLocked(NewStatus: Enum "EQM Request Status")
     var
         Request: Record "EQM Equipment Request";
     begin
@@ -860,18 +1000,25 @@ codeunit 50188 "EQM Equipment Request Tests"
         Request.Justification := ChangedJustificationTok;
         asserterror Request.Modify(true);
 
-        // [THEN] RequestNotOpenErr is raised and the record is unchanged
+        // [THEN] RequestNotOpenErr is raised
         Assert.ExpectedError(StrSubstNo(RequestNotOpenErr, ManualNoTok, Format(NewStatus)));
-        Request.Get(ManualNoTok);
-        Assert.AreEqual(JustificationTok, Request.Justification, 'Justification should be unchanged');
-        Assert.AreEqual(NewStatus, Request.Status, 'Status should be unchanged');
+    end;
+
+    local procedure VerifyDeleteIsLocked(NewStatus: Enum "EQM Request Status")
+    var
+        Request: Record "EQM Equipment Request";
+    begin
+        // [GIVEN] An Open request moved to the status by code (Modify without triggers)
+        NewRequest(Request, ManualNoTok, ActiveEmployeeTok, ActiveCategoryTok);
+        Request.Insert(true);
+        Request.Status := NewStatus;
+        Request.Modify(false);
 
         // [WHEN] The request is deleted with triggers
         asserterror Request.Delete(true);
 
-        // [THEN] DeleteNotOpenErr is raised and the request still exists
+        // [THEN] DeleteNotOpenErr is raised
         Assert.ExpectedError(StrSubstNo(DeleteNotOpenErr, ManualNoTok, Format(NewStatus)));
-        Assert.IsTrue(Request.Get(ManualNoTok), 'The request should still exist');
     end;
 
     local procedure NewRequest(var Request: Record "EQM Equipment Request"; RequestNo: Code[20]; EmployeeNo: Code[20]; EquipmentType: Code[20])

@@ -1,6 +1,6 @@
 # FR-032 Equipment Request Process
 
-> Status: **DRAFT, awaiting approval.** Source: GitHub issue #70 (milestone V3). Branch `feature/FR-032-equipment-request-process`. No events report: only this app's objects change, the only base touch is a UI action on the standard Employee Card page extension (as FR-004 D7). No version bump (29.0.0.0, unreleased), no upgrade code.
+> Status: **Approved** by the user. **Decisions:** Q1 **none** (Status read-only, no transitions), Q2 **manager** (only Manager and Administrator create and edit; Reader read-only); Q3 to Q5 deferred to FR-033. Source: GitHub issue #70 (milestone V3). Branch `feature/FR-032-equipment-request-process`. No events report: only this app's objects change, the only base touch is a UI action on the standard Employee Card page extension (as FR-004 D7). No version bump (29.0.0.0, unreleased), no upgrade code.
 > **Open questions (the plan uses the recommended default, so each answer can be one word):**
 > - **Q1 Status transitions.** **none** (recommended): FR-032 only stores requests; every new request is Open, Status is read-only, and the transitions (send, approve, reject, complete) belong to FR-033 Approval Workflow. **manual**: add actions Send for Approval / Approve / Reject / Complete / Reopen with a fixed transition table now (needs a replan; overlaps FR-033).
 > - **Q2 Who raises requests.** **manager** (recommended): EQM - Manager and Administrator; Reader stays read-only (NFR-002 "a Reader changes nothing"). **reader**: Reader may also raise requests (self-service; `RI` in Reader).

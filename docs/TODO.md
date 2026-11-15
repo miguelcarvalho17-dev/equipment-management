@@ -269,3 +269,13 @@ Source: "Test scenarios" in `docs/plans/FR-031-power-automate-support.md`.
 - [ ] A failed (rolled back) assignment sends nothing; note the delivery delay after commit.
 - [ ] A Reader user can create the flow; record the BC permission set needed to subscribe.
 - [ ] Check how Guid and Date parameters render in a flow, and whether the attribute strings are translatable.
+
+## FR-032 Equipment Request Process (automated tests: CI of PR #124; sandbox checks not done)
+Source: "Test scenarios" in `docs/plans/FR-032-equipment-request-process.md`.
+- [ ] Confirm test codeunit 50188 (`test/src/EQMEquipmentRequestTests.Codeunit.al`) passes in the CI run of PR #124, then update "Test status" in `docs/features/FR-032-equipment-request-process.md`.
+- [ ] Scenario 16, in a sandbox (not SUPER): a Reader sees requests but cannot insert.
+- [ ] A Manager raises, edits and deletes an Open request.
+- [ ] Tell Me finds "Equipment Requests"; the Role Center action and the Employee Card action work (the card action shows only that employee's requests).
+- [ ] A subscriber to `OnAfterCheckRequestConsistency` that raises an error blocks the save.
+- [ ] Existing company with a blank "Request Nos.": creating a request shows the TestField error; after choosing a series it works.
+- [ ] Record the results and clear the TODO(verify) items in the help article.

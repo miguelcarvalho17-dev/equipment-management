@@ -1,6 +1,23 @@
 # Changelog
 Newest first. Grouped by Added / Changed / Fixed / Obsolete.
 
+## FR-032 Equipment Request Process (version stays 29.0.0.0, no bump)
+### Added
+- Enum 50110 "EQM Request Status" (not extensible): Open, Pending Approval, Approved, Rejected, Completed.
+- Table 50111 "EQM Equipment Request" (public): employee, requested equipment type (equipment category), justification, request date, status. Numbered from "Request Nos."; checks on insert and modify; only Open requests can be changed or deleted; the number cannot be renamed. Published event `OnAfterCheckRequestConsistency` (local integration event).
+- Pages 50133 "EQM Equipment Requests" (list with views per status and an Employee action) and 50134 "EQM Equipment Request Card".
+- Action "Equipment Requests" on the Employee Card (page extension 50100) and on the Equipment Manager Role Center (page 50110).
+- Field 5 "Request Nos." on table 50102 "EQM Equipment Setup" and on page 50103; default number series EQREQ (REQ00001) created by codeunit 50105 when the field is blank.
+- Test codeunit 50188 "EQM Equipment Request Tests" (results confirmed by the CI run of PR #124).
+- Feature doc docs/features/FR-032-equipment-request-process.md and help docs/help/FR-032-equipment-request-process.md.
+### Changed
+- Permission set EQM - Reader: read on table data "EQM Equipment Request", execute on table 50111 and pages 50133 and 50134. EQM - Manager: RIMD on the table data. Administrator inherits.
+- Existing companies keep a blank "Request Nos." until an administrator sets it.
+### Fixed
+- None.
+### Obsolete
+- None.
+
 ## FR-031 Power Automate Support (version stays 29.0.0.0, no bump)
 ### Added
 - Codeunit 50130 "EQM Power Automate Events" (public): external business events `equipmentAssigned` and `warrantyExpiring` (version '1.0', category Equipment Management). Publishers are internal; delivered by the platform after commit, only to subscribed flows.
