@@ -32,6 +32,12 @@ table 50102 "EQM Equipment Setup"
             Caption = 'Integration Events Enabled';
             ToolTip = 'Specifies that an integration event entry is written for each business event (equipment created, assigned or returned, maintenance created, warranty expired), so that external systems can read them through the API. Entries are written only when this is on.';
         }
+        field(5; "Request Nos."; Code[20])
+        {
+            Caption = 'Request Nos.';
+            ToolTip = 'Specifies the number series used to assign numbers to new equipment requests.';
+            TableRelation = "No. Series";
+        }
     }
 
     keys

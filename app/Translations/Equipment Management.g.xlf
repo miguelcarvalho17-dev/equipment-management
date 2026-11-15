@@ -858,6 +858,146 @@
           <note from="Developer" annotates="general" priority="2"></note>
           <note from="Xliff Generator" annotates="general" priority="3">Table EQM Equipment Note - Field User ID - Property Caption</note>
         </trans-unit>
+        <trans-unit id="Table 142347878 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Equipment Request</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table EQM Equipment Request - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Table 142347878 - NamedType 4213876330" size-unit="char" translate="yes" xml:space="preserve">
+          <source>You cannot request equipment type %1 because the category is not active.</source>
+          <note from="Developer" annotates="general" priority="2">%1 = equipment category code</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table EQM Equipment Request - NamedType CategoryInactiveErr</note>
+        </trans-unit>
+        <trans-unit id="Table 142347878 - NamedType 2316592330" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Equipment type %1 does not exist. Choose a category from the Equipment Categories page.</source>
+          <note from="Developer" annotates="general" priority="2">%1 = equipment category code</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table EQM Equipment Request - NamedType CategoryNotFoundErr</note>
+        </trans-unit>
+        <trans-unit id="Table 142347878 - NamedType 504565695" size-unit="char" translate="yes" xml:space="preserve">
+          <source>You cannot delete equipment request %1 because its status is %2. Only open requests can be deleted.</source>
+          <note from="Developer" annotates="general" priority="2">%1 = request number, %2 = status</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table EQM Equipment Request - NamedType DeleteNotOpenErr</note>
+        </trans-unit>
+        <trans-unit id="Table 142347878 - NamedType 2695088842" size-unit="char" translate="yes" xml:space="preserve">
+          <source>You cannot raise an equipment request for employee %1 because the employee status is %2.</source>
+          <note from="Developer" annotates="general" priority="2">%1 = employee number, %2 = employee status</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table EQM Equipment Request - NamedType EmployeeNotActiveErr</note>
+        </trans-unit>
+        <trans-unit id="Table 142347878 - NamedType 3181639616" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Employee %1 does not exist.</source>
+          <note from="Developer" annotates="general" priority="2">%1 = employee number</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table EQM Equipment Request - NamedType EmployeeNotFoundErr</note>
+        </trans-unit>
+        <trans-unit id="Table 142347878 - NamedType 3068802027" size-unit="char" translate="yes" xml:space="preserve">
+          <source>You cannot raise an equipment request for employee %1 because the employee is blocked for privacy reasons.</source>
+          <note from="Developer" annotates="general" priority="2">%1 = employee number</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table EQM Equipment Request - NamedType EmployeePrivacyBlockedErr</note>
+        </trans-unit>
+        <trans-unit id="Table 142347878 - NamedType 1067498080" size-unit="char" translate="yes" xml:space="preserve">
+          <source>The request date %1 is in the future. Enter a date that is not later than today (%2).</source>
+          <note from="Developer" annotates="general" priority="2">%1 = request date, %2 = today's date</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table EQM Equipment Request - NamedType FutureDateErr</note>
+        </trans-unit>
+        <trans-unit id="Table 142347878 - NamedType 2661129293" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Equipment request %1 must be created with the status Open.</source>
+          <note from="Developer" annotates="general" priority="2">%1 = request number</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table EQM Equipment Request - NamedType InsertNotOpenErr</note>
+        </trans-unit>
+        <trans-unit id="Table 142347878 - NamedType 2535084544" size-unit="char" translate="yes" xml:space="preserve">
+          <source>You must enter a justification for the equipment request.</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table EQM Equipment Request - NamedType JustificationRequiredErr</note>
+        </trans-unit>
+        <trans-unit id="Table 142347878 - NamedType 3435470116" size-unit="char" translate="yes" xml:space="preserve">
+          <source>You cannot change the number of equipment request %1.</source>
+          <note from="Developer" annotates="general" priority="2">%1 = request number</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table EQM Equipment Request - NamedType RenameNotAllowedErr</note>
+        </trans-unit>
+        <trans-unit id="Table 142347878 - NamedType 1087708727" size-unit="char" translate="yes" xml:space="preserve">
+          <source>You cannot change equipment request %1 because its status is %2. Only open requests can be changed.</source>
+          <note from="Developer" annotates="general" priority="2">%1 = request number, %2 = status</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table EQM Equipment Request - NamedType RequestNotOpenErr</note>
+        </trans-unit>
+        <trans-unit id="Table 142347878 - Field 1964419135 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Specifies the employee the equipment is requested for. The employee must exist, be active and not be blocked for privacy reasons.</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table EQM Equipment Request - Field Employee No. - Property ToolTip</note>
+        </trans-unit>
+        <trans-unit id="Table 142347878 - Field 1964419135 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Employee No.</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table EQM Equipment Request - Field Employee No. - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Table 142347878 - Field 1003167288 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Specifies the description of the requested equipment type.</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table EQM Equipment Request - Field Equipment Type Description - Property ToolTip</note>
+        </trans-unit>
+        <trans-unit id="Table 142347878 - Field 1003167288 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Equipment Type Description</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table EQM Equipment Request - Field Equipment Type Description - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Table 142347878 - Field 1680889796 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Specifies why the equipment is needed. A justification is required.</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table EQM Equipment Request - Field Justification - Property ToolTip</note>
+        </trans-unit>
+        <trans-unit id="Table 142347878 - Field 1680889796 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Justification</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table EQM Equipment Request - Field Justification - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Table 142347878 - Field 4200184881 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Specifies the number of the equipment request. If you leave it blank, the next number from the Request Nos. series is used.</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table EQM Equipment Request - Field No. - Property ToolTip</note>
+        </trans-unit>
+        <trans-unit id="Table 142347878 - Field 4200184881 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>No.</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table EQM Equipment Request - Field No. - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Table 142347878 - Field 1351594800 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Specifies the number series from which the request number was assigned.</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table EQM Equipment Request - Field No. Series - Property ToolTip</note>
+        </trans-unit>
+        <trans-unit id="Table 142347878 - Field 1351594800 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>No. Series</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table EQM Equipment Request - Field No. Series - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Table 142347878 - Field 1438758551 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Specifies the date the equipment was requested. The date cannot be later than today. If you leave it blank, the work date is used.</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table EQM Equipment Request - Field Request Date - Property ToolTip</note>
+        </trans-unit>
+        <trans-unit id="Table 142347878 - Field 1438758551 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Request Date</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table EQM Equipment Request - Field Request Date - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Table 142347878 - Field 1815973246 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Specifies the type of equipment that is requested. Choose an active equipment category, for example Laptop or Monitor.</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table EQM Equipment Request - Field Requested Equipment Type - Property ToolTip</note>
+        </trans-unit>
+        <trans-unit id="Table 142347878 - Field 1815973246 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Requested Equipment Type</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table EQM Equipment Request - Field Requested Equipment Type - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Table 142347878 - Field 513339096 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Specifies the status of the request: Open, Pending Approval, Approved, Rejected or Completed. New requests are Open. Only open requests can be changed or deleted.</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table EQM Equipment Request - Field Status - Property ToolTip</note>
+        </trans-unit>
+        <trans-unit id="Table 142347878 - Field 513339096 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Status</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table EQM Equipment Request - Field Status - Property Caption</note>
+        </trans-unit>
         <trans-unit id="Table 1065098760 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
           <source>Equipment Setup</source>
           <note from="Developer" annotates="general" priority="2"></note>
@@ -902,6 +1042,16 @@
           <source>Primary Key</source>
           <note from="Developer" annotates="general" priority="2"></note>
           <note from="Xliff Generator" annotates="general" priority="3">Table EQM Equipment Setup - Field Primary Key - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Table 1065098760 - Field 3754232279 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Specifies the number series used to assign numbers to new equipment requests.</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table EQM Equipment Setup - Field Request Nos. - Property ToolTip</note>
+        </trans-unit>
+        <trans-unit id="Table 1065098760 - Field 3754232279 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Request Nos.</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table EQM Equipment Setup - Field Request Nos. - Property Caption</note>
         </trans-unit>
         <trans-unit id="Table 2527394721 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
           <source>Integration Event Entry</source>
@@ -1582,6 +1732,11 @@
           <source>Printer</source>
           <note from="Developer" annotates="general" priority="2"></note>
           <note from="Xliff Generator" annotates="general" priority="3">Codeunit EQM Default Data - NamedType PrinterDescriptionTxt</note>
+        </trans-unit>
+        <trans-unit id="Codeunit 55420158 - NamedType 381603600" maxwidth="100" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Equipment Requests</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit EQM Default Data - NamedType RequestSeriesDescriptionTxt</note>
         </trans-unit>
         <trans-unit id="Codeunit 55420158 - NamedType 2341049880" maxwidth="100" size-unit="char" translate="yes" xml:space="preserve">
           <source>Tablet</source>
@@ -2813,6 +2968,16 @@
           <note from="Developer" annotates="general" priority="2"></note>
           <note from="Xliff Generator" annotates="general" priority="3">Page EQM Equipment Manager RC - Action MaintenanceList - Property Caption</note>
         </trans-unit>
+        <trans-unit id="Page 4775459 - Action 2682255333 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Open the equipment requests.</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page EQM Equipment Manager RC - Action RequestList - Property ToolTip</note>
+        </trans-unit>
+        <trans-unit id="Page 4775459 - Action 2682255333 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Equipment Requests</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page EQM Equipment Manager RC - Action RequestList - Property Caption</note>
+        </trans-unit>
         <trans-unit id="Page 4775459 - Action 740495708 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
           <source>Open the warranty alerts of all equipment.</source>
           <note from="Developer" annotates="general" priority="2"></note>
@@ -2918,13 +3083,113 @@
           <note from="Developer" annotates="general" priority="2"></note>
           <note from="Xliff Generator" annotates="general" priority="3">Page EQM Equipment Picture - Action TakePicture - Property Caption</note>
         </trans-unit>
+        <trans-unit id="Page 614444226 - Property 1064389655" size-unit="char" translate="yes" xml:space="preserve">
+          <source>About equipment requests</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page EQM Equipment Request Card - Property AboutTitle</note>
+        </trans-unit>
+        <trans-unit id="Page 614444226 - Property 247559172" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Raise a request for equipment. Choose the employee who needs it, the type of equipment, and enter why it is needed. The request date is today unless you change it. New requests are Open. You can correct or delete a request while it is open.</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page EQM Equipment Request Card - Property AboutText</note>
+        </trans-unit>
+        <trans-unit id="Page 614444226 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Equipment Request</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page EQM Equipment Request Card - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Page 614444226 - Control 2445482498 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>General</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page EQM Equipment Request Card - Control General - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Page 614444226 - Control 1480804031 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Specifies the name of the employee.</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page EQM Equipment Request Card - Control Employee Name - Property ToolTip</note>
+        </trans-unit>
+        <trans-unit id="Page 614444226 - Control 1480804031 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Employee Name</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page EQM Equipment Request Card - Control Employee Name - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Page 2914995763 - Property 1064389655" size-unit="char" translate="yes" xml:space="preserve">
+          <source>About equipment requests</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page EQM Equipment Requests - Property AboutTitle</note>
+        </trans-unit>
+        <trans-unit id="Page 2914995763 - Property 247559172" size-unit="char" translate="yes" xml:space="preserve">
+          <source>This list shows the equipment requests raised for employees, newest first: who needs equipment, which type, why and when. Choose **New** to raise a request. Open requests can be corrected or deleted. Choose a view at the top to see requests with one status.</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page EQM Equipment Requests - Property AboutText</note>
+        </trans-unit>
+        <trans-unit id="Page 2914995763 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Equipment Requests</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page EQM Equipment Requests - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Page 2914995763 - Property 3863440606" size-unit="char" translate="yes" xml:space="preserve">
+          <source>equipment requests, request equipment, equipment request process</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page EQM Equipment Requests - Property AdditionalSearchTerms</note>
+        </trans-unit>
+        <trans-unit id="Page 2914995763 - Control 1480804031 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Specifies the name of the employee.</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page EQM Equipment Requests - Control Employee Name - Property ToolTip</note>
+        </trans-unit>
+        <trans-unit id="Page 2914995763 - Control 1480804031 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Employee Name</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page EQM Equipment Requests - Control Employee Name - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Page 2914995763 - Action 1498446062 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Open the employee card.</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page EQM Equipment Requests - Action Employee - Property ToolTip</note>
+        </trans-unit>
+        <trans-unit id="Page 2914995763 - Action 1498446062 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Employee</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page EQM Equipment Requests - Action Employee - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Page 2914995763 - Action 1587086413 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Navigate</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page EQM Equipment Requests - Action Category_Category4 - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Page 2914995763 - View 2913119229 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Approved</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page EQM Equipment Requests - View Approved - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Page 2914995763 - View 3665605423 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Completed</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page EQM Equipment Requests - View Completed - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Page 2914995763 - View 4067317666 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Open</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page EQM Equipment Requests - View OpenRequests - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Page 2914995763 - View 3552579732 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Pending Approval</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page EQM Equipment Requests - View PendingApproval - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Page 2914995763 - View 496445946 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Rejected</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page EQM Equipment Requests - View Rejected - Property Caption</note>
+        </trans-unit>
         <trans-unit id="Page 1065098760 - Property 1064389655" size-unit="char" translate="yes" xml:space="preserve">
           <source>About equipment setup</source>
           <note from="Developer" annotates="general" priority="2"></note>
           <note from="Xliff Generator" annotates="general" priority="3">Page EQM Equipment Setup - Property AboutTitle</note>
         </trans-unit>
         <trans-unit id="Page 1065098760 - Property 247559172" size-unit="char" translate="yes" xml:space="preserve">
-          <source>Set the number series for equipment and maintenance records. The app runs its monitoring every day through job queue entries: one creates warranty alerts, one checks overdue maintenance. They are created automatically; if one is missing, choose **Schedule Monitoring Jobs**. Turn on **Integration Events Enabled** to record business events for external systems.</source>
+          <source>Set the number series for equipment, maintenance records and equipment requests. The app runs its monitoring every day through job queue entries: one creates warranty alerts, one checks overdue maintenance. They are created automatically; if one is missing, choose **Schedule Monitoring Jobs**. Turn on **Integration Events Enabled** to record business events for external systems.</source>
           <note from="Developer" annotates="general" priority="2"></note>
           <note from="Xliff Generator" annotates="general" priority="3">Page EQM Equipment Setup - Property AboutText</note>
         </trans-unit>
@@ -2934,7 +3199,7 @@
           <note from="Xliff Generator" annotates="general" priority="3">Page EQM Equipment Setup - Property Caption</note>
         </trans-unit>
         <trans-unit id="Page 1065098760 - Property 3863440606" size-unit="char" translate="yes" xml:space="preserve">
-          <source>equipment numbers, equipment number series, maintenance number series, equipment job queue, equipment monitoring, integration events, outbox</source>
+          <source>equipment numbers, equipment number series, maintenance number series, equipment request numbers, equipment job queue, equipment monitoring, integration events, outbox</source>
           <note from="Developer" annotates="general" priority="2"></note>
           <note from="Xliff Generator" annotates="general" priority="3">Page EQM Equipment Setup - Property AdditionalSearchTerms</note>
         </trans-unit>
@@ -3653,6 +3918,16 @@
           <note from="Developer" annotates="general" priority="2"></note>
           <note from="Xliff Generator" annotates="general" priority="3">PageExtension EQM Employee Card - Action EQMEquipmentAssignments - Property Caption</note>
         </trans-unit>
+        <trans-unit id="PageExtension 2678929633 - Action 1830757219 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve" al-object-target="Page 866835530">
+          <source>View the equipment requests raised for the employee.</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">PageExtension EQM Employee Card - Action EQMEquipmentRequests - Property ToolTip</note>
+        </trans-unit>
+        <trans-unit id="PageExtension 2678929633 - Action 1830757219 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve" al-object-target="Page 866835530">
+          <source>Equipment Requests</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">PageExtension EQM Employee Card - Action EQMEquipmentRequests - Property Caption</note>
+        </trans-unit>
         <trans-unit id="PageExtension 2678929633 - Action 737125131 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve" al-object-target="Page 866835530">
           <source>Return equipment that is assigned to this employee. Choose the equipment in the list. Its status changes to Available and the assignment is closed.</source>
           <note from="Developer" annotates="general" priority="2"></note>
@@ -3852,6 +4127,36 @@
           <source>Upgrade</source>
           <note from="Developer" annotates="general" priority="2"></note>
           <note from="Xliff Generator" annotates="general" priority="3">Enum EQM Maintenance Type - EnumValue Upgrade - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Enum 3833034160 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Request Status</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Enum EQM Request Status - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Enum 3833034160 - EnumValue 2913119229 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Approved</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Enum EQM Request Status - EnumValue Approved - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Enum 3833034160 - EnumValue 3665605423 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Completed</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Enum EQM Request Status - EnumValue Completed - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Enum 3833034160 - EnumValue 4259830144 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Open</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Enum EQM Request Status - EnumValue Open - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Enum 3833034160 - EnumValue 1487485508 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Pending Approval</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Enum EQM Request Status - EnumValue Pending Approval - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Enum 3833034160 - EnumValue 496445946 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Rejected</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Enum EQM Request Status - EnumValue Rejected - Property Caption</note>
         </trans-unit>
         <trans-unit id="Enum 1049926840 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
           <source>Warranty Alert Interval</source>
