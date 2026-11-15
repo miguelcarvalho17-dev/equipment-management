@@ -44,6 +44,15 @@ pageextension 50100 "EQM Employee Card" extends "Employee Card"
                     RunObject = page "EQM Equipment List";
                     RunPageLink = "Assigned Employee No." = field("No.");
                 }
+                action(EQMEquipmentRequests)
+                {
+                    ApplicationArea = All;
+                    Caption = 'Equipment Requests';
+                    ToolTip = 'View the equipment requests raised for the employee.';
+                    Image = Document;
+                    RunObject = page "EQM Equipment Requests";
+                    RunPageLink = "Employee No." = field("No.");
+                }
             }
         }
         addlast(Processing)

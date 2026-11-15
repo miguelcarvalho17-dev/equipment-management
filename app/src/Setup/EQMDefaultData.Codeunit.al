@@ -24,6 +24,9 @@ codeunit 50105 "EQM Default Data"
         MaintenanceSeriesCodeTok: Label 'EQMAINT', Locked = true;
         MaintenanceSeriesStartTok: Label 'MNT00001', Locked = true;
         MaintenanceSeriesDescriptionTxt: Label 'Equipment Maintenance', MaxLength = 100;
+        RequestSeriesCodeTok: Label 'EQREQ', Locked = true;
+        RequestSeriesStartTok: Label 'REQ00001', Locked = true;
+        RequestSeriesDescriptionTxt: Label 'Equipment Requests', MaxLength = 100;
         LaptopCodeTok: Label 'LAPTOP', Locked = true;
         MonitorCodeTok: Label 'MONITOR', Locked = true;
         PhoneCodeTok: Label 'PHONE', Locked = true;
@@ -57,7 +60,7 @@ codeunit 50105 "EQM Default Data"
 
     /// <summary>
     /// Creates the setup record, number series EQUIP (if the setup has no Equipment Nos.), number series EQMAINT
-    /// (if the setup has no Maintenance Nos.) and the starter categories LAPTOP, MONITOR, PHONE, TABLET, PRINTER, VEHICLE and TOOL. Safe to run repeatedly: existing records are never changed.
+    /// (if the setup has no Maintenance Nos.), number series EQREQ (if the setup has no Request Nos.) and the starter categories LAPTOP, MONITOR, PHONE, TABLET, PRINTER, VEHICLE and TOOL. Safe to run repeatedly: existing records are never changed.
     /// </summary>
     procedure CreateDefaultData()
     var
@@ -74,6 +77,11 @@ codeunit 50105 "EQM Default Data"
         if EquipmentSetup."Maintenance Nos." = '' then begin
             EnsureNoSeries(MaintenanceSeriesCodeTok, MaintenanceSeriesStartTok, MaintenanceSeriesDescriptionTxt);
             EquipmentSetup."Maintenance Nos." := CopyStr(MaintenanceSeriesCodeTok, 1, MaxStrLen(EquipmentSetup."Maintenance Nos."));
+            SetupChanged := true;
+        end;
+        if EquipmentSetup."Request Nos." = '' then begin
+            EnsureNoSeries(RequestSeriesCodeTok, RequestSeriesStartTok, RequestSeriesDescriptionTxt);
+            EquipmentSetup."Request Nos." := CopyStr(RequestSeriesCodeTok, 1, MaxStrLen(EquipmentSetup."Request Nos."));
             SetupChanged := true;
         end;
         if SetupChanged then

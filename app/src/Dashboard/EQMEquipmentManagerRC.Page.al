@@ -44,6 +44,12 @@ page 50110 "EQM Equipment Manager RC"
                 ToolTip = 'Open the assignment history of all equipment.';
                 RunObject = page "EQM Equipment Assignments";
             }
+            action(RequestList)
+            {
+                Caption = 'Equipment Requests';
+                ToolTip = 'Open the equipment requests.';
+                RunObject = page "EQM Equipment Requests";
+            }
             action(MaintenanceList)
             {
                 Caption = 'Maintenance';

@@ -6,9 +6,9 @@ page 50103 "EQM Equipment Setup"
     PageType = Card;
     ApplicationArea = All;
     UsageCategory = Administration;
-    AdditionalSearchTerms = 'equipment numbers, equipment number series, maintenance number series, equipment job queue, equipment monitoring, integration events, outbox';
+    AdditionalSearchTerms = 'equipment numbers, equipment number series, maintenance number series, equipment request numbers, equipment job queue, equipment monitoring, integration events, outbox';
     AboutTitle = 'About equipment setup';
-    AboutText = 'Set the number series for equipment and maintenance records. The app runs its monitoring every day through job queue entries: one creates warranty alerts, one checks overdue maintenance. They are created automatically; if one is missing, choose **Schedule Monitoring Jobs**. Turn on **Integration Events Enabled** to record business events for external systems.';
+    AboutText = 'Set the number series for equipment, maintenance records and equipment requests. The app runs its monitoring every day through job queue entries: one creates warranty alerts, one checks overdue maintenance. They are created automatically; if one is missing, choose **Schedule Monitoring Jobs**. Turn on **Integration Events Enabled** to record business events for external systems.';
     SourceTable = "EQM Equipment Setup";
     InsertAllowed = false;
     DeleteAllowed = false;
@@ -25,6 +25,9 @@ page 50103 "EQM Equipment Setup"
                 {
                 }
                 field("Maintenance Nos."; Rec."Maintenance Nos.")
+                {
+                }
+                field("Request Nos."; Rec."Request Nos.")
                 {
                 }
             }
