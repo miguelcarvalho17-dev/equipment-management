@@ -3,11 +3,11 @@
 ## Purpose
 Two business moments are published as external business events, so a flow can start from them with the trigger "When a business event occurs" of the Business Central connector in Power Automate (GitHub issue #69): equipment assigned, and warranty expiring. The flows themselves are built by the customer in Power Automate. No existing business code changes. The only subscriptions are to this app's own publisher (codeunit 50119, FR-029) and to the platform trigger event of its own table 50107, so there is no events report.
 
-Status: implemented on branch `feature/FR-031-power-automate-support`. App version stays 29.0.0.0 (not released).
+Status: merged to `main` via PR #122. App version stays 29.0.0.0 (not released).
 
 ## Verification status
 - **Build:** both apps compile with 0 errors and 0 warnings. The documenter did not rerun the build; no AL line was changed (the `///` comments were already present).
-- **Tests:** 3 automated smoke tests in codeunit 50187 (scenarios 1, 4 and 6 of the plan, as "runs without an error" checks). CI (AL-Go) for PR #122 showed that the platform does not call an AL subscriber for an external business event in the test runner, so the raise count and the payload (scenarios 1 and 4) cannot be asserted automatically and are sandbox-only; the negative scenarios 2, 3, 5 and 7 were removed because they passed trivially. The 3 smoke tests are not yet confirmed passing in CI. Not run in a BC sandbox by a person.
+- **Tests:** 3 automated smoke tests in codeunit 50187 (scenarios 1, 4 and 6 of the plan, as "runs without an error" checks). CI (AL-Go) for PR #122 showed that the platform does not call an AL subscriber for an external business event in the test runner, so the raise count and the payload (scenarios 1 and 4) cannot be asserted automatically and are sandbox-only; the negative scenarios 2, 3, 5 and 7 were removed because they passed trivially. The 3 smoke tests pass in CI (AL-Go PR build of PR #122: 122 tests in total, 0 failed, 0 skipped). Not run in a BC sandbox by a person.
 - **Not verified (Power Automate / sandbox only), plan scenario 8:**
   - Both events appear in Power Automate under the category Equipment Management, with the display names and descriptions.
   - An assignment posts a Teams message; the warranty alert job sends an email.
@@ -80,7 +80,7 @@ Codeunit 50187 (`test/src/EQMPowerAutomateTests.Codeunit.al`, AutoRollback), 3 s
 
 Why no payload test: the first version used a manual subscriber (codeunit 50188) on the two events. In the CI run for PR #122 it saw 0 raises (2 positive tests failed, 5 negative tests passed trivially), while the same chain is proven in FR-029 (`OnEquipmentAssigned`, `OnAfterInsertEvent` of table 50107). The most likely cause is that the platform raises an external business event itself and does not invoke AL subscribers in the test runner; this was not proven in isolation. The raise count and payload (plan scenarios 1 and 4) and the negative cases (2, 3, 5, 6, 7) are therefore sandbox-only; see docs/TODO.md.
 
-Compiled with 0 errors and 0 warnings. The smoke tests are not yet confirmed passing in CI. Scenario 8 is sandbox-only (see Verification status).
+Compiled with 0 errors and 0 warnings. The 3 smoke tests pass in CI (122 tests in total, 0 failed, 0 skipped). Scenario 8 is sandbox-only (see Verification status).
 
 ## XML documentation
 Present on the enum extension, codeunit 50130 and both events with all parameters, and codeunit 50131. Checked, nothing added.
