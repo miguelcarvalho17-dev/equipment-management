@@ -1,6 +1,24 @@
 # Changelog
 Newest first. Grouped by Added / Changed / Fixed / Obsolete.
 
+## FR-034 Change Log Support (version stays 29.0.0.0, no bump)
+### Added
+- Codeunit 50133 "EQM Change Log Registration" (internal): registers table 50100 "EQM Equipment" in the standard Change Log setup (tables 403 and 404): Log Modification = Some Fields, with fields Category Code, Status, Assigned Employee No., Warranty Start Date, Warranty End Date, Warranty Provider and Warranty Reference No. Existing customer setup for the table is never overwritten. An upgrade tag (`MC-EQM-FR034-ChangeLogSetup-20261116`) makes it run once per company.
+- Codeunit 50134 "EQM Upgrade" (internal, `OnUpgradePerCompany`): calls the registration for existing installations at the next version bump.
+- Test codeunit 50191 "EQM Change Log Setup Tests" (7 tests). They pass in AL-Go CI (PR #128); not run in a BC sandbox.
+- Feature doc docs/features/FR-034-change-log-support.md and help docs/help/FR-034-change-log-support.md.
+### Changed
+- Codeunit 50104 "EQM Install": calls the registration after the default data.
+- docs/features/NFR-005-auditability.md and its help: the app now registers setup rows in the Change Log (it still does not activate it).
+### Fixed
+- None.
+### Obsolete
+- None.
+
+Release notes: Equipment changes can now be tracked in the standard Business Central Change Log. The app registers equipment category, status, assigned employee and the warranty fields; an administrator turns on Change Log Activated in Change Log Setup. Only changes are recorded.
+
+Note: decisions D1 off (Change Log Activated stays off), D2 and D3 no (tables 50101 and 50103 are not logged), D4 inputs (stored warranty fields 17-20; warranty status is calculated and not logged). No schema change. No new translatable text (the one new label is Locked), so `Equipment Management.g.xlf` does not change. Not verified: the manual sandbox checks (docs/TODO.md, FR-034, scenarios 8 and 9). The upgrade codeunit takes effect only at the next version bump.
+
 ## FR-033 Approval Workflow (version stays 29.0.0.0, no bump)
 ### Added
 - Codeunit 50132 "EQM Request Approval Mgt." (public, internal procedures): Send for Approval, Approve, Reject and Assign Equipment for equipment requests. Open > Pending Approval > Approved > Completed, and Pending Approval > Rejected. The sender cannot approve; a rejection needs a comment; Rejected and Completed are final. Published events `OnBeforeCheckApproverAllowed` (IsHandled skips only the self-approval check) and `OnAfterRequestStatusChanged` (local integration events).
