@@ -94,42 +94,44 @@ codeunit 50189 "EQM Request Approval Tests"
         // [WHEN] The request is sent for approval
         asserterror RequestApprovalMgt.SendForApproval(Request);
 
-        // [THEN] EmployeeNotActiveErr is raised and the request stays Open
+        // [THEN] EmployeeNotActiveErr is raised. An error rolls back the test transaction, so the stored request is not read afterwards.
         Assert.ExpectedError(StrSubstNo(EmployeeNotActiveErr, ActiveEmployeeTok, Format(Employee.Status::Inactive)));
-        Request.Get(RequestNoTok);
-        Assert.AreEqual(Request.Status::Open, Request.Status, 'The request should stay Open');
-        Assert.AreEqual('', Request."Sent for Approval By", 'No sender should be recorded');
     end;
 
     [Test]
     [TransactionModel(TransactionModel::AutoRollback)]
-    procedure SendForApprovalFailsWhenNotOpen()
-    var
-        Request: Record "EQM Equipment Request";
-        RequestApprovalMgt: Codeunit "EQM Request Approval Mgt.";
+    procedure SendForApprovalFailsWhenPending()
     begin
-        // [SCENARIO 3] Only an Open request can be sent for approval (Rejected has its own message)
-        Initialize();
+        // [SCENARIO 3a] A Pending Approval request cannot be sent for approval
+        // [GIVEN] / [WHEN] / [THEN] A Pending Approval request is sent for approval and the matching error is raised
+        VerifySendFails(Enum::"EQM Request Status"::"Pending Approval", StrSubstNo(NotOpenErr, RequestNoTok, Format(Enum::"EQM Request Status"::"Pending Approval")));
+    end;
 
-        // [GIVEN] A Pending request [WHEN] it is sent for approval [THEN] NotOpenErr
-        CreateRequest(Request, 'EQMAPR-S1', Request.Status::"Pending Approval", OtherUserTok);
-        asserterror RequestApprovalMgt.SendForApproval(Request);
-        Assert.ExpectedError(StrSubstNo(NotOpenErr, 'EQMAPR-S1', Format(Request.Status::"Pending Approval")));
+    [Test]
+    [TransactionModel(TransactionModel::AutoRollback)]
+    procedure SendForApprovalFailsWhenApproved()
+    begin
+        // [SCENARIO 3b] A Approved request cannot be sent for approval
+        // [GIVEN] / [WHEN] / [THEN] A Approved request is sent for approval and the matching error is raised
+        VerifySendFails(Enum::"EQM Request Status"::"Approved", StrSubstNo(NotOpenErr, RequestNoTok, Format(Enum::"EQM Request Status"::"Approved")));
+    end;
 
-        // [GIVEN] An Approved request [THEN] NotOpenErr
-        CreateRequest(Request, 'EQMAPR-S2', Request.Status::Approved, OtherUserTok);
-        asserterror RequestApprovalMgt.SendForApproval(Request);
-        Assert.ExpectedError(StrSubstNo(NotOpenErr, 'EQMAPR-S2', Format(Request.Status::Approved)));
+    [Test]
+    [TransactionModel(TransactionModel::AutoRollback)]
+    procedure SendForApprovalFailsWhenCompleted()
+    begin
+        // [SCENARIO 3c] A Completed request cannot be sent for approval
+        // [GIVEN] / [WHEN] / [THEN] A Completed request is sent for approval and the matching error is raised
+        VerifySendFails(Enum::"EQM Request Status"::"Completed", StrSubstNo(NotOpenErr, RequestNoTok, Format(Enum::"EQM Request Status"::"Completed")));
+    end;
 
-        // [GIVEN] A Completed request [THEN] NotOpenErr
-        CreateRequest(Request, 'EQMAPR-S3', Request.Status::Completed, OtherUserTok);
-        asserterror RequestApprovalMgt.SendForApproval(Request);
-        Assert.ExpectedError(StrSubstNo(NotOpenErr, 'EQMAPR-S3', Format(Request.Status::Completed)));
-
-        // [GIVEN] A Rejected request [THEN] RequestRejectedErr
-        CreateRequest(Request, 'EQMAPR-S4', Request.Status::Rejected, OtherUserTok);
-        asserterror RequestApprovalMgt.SendForApproval(Request);
-        Assert.ExpectedError(StrSubstNo(RequestRejectedErr, 'EQMAPR-S4'));
+    [Test]
+    [TransactionModel(TransactionModel::AutoRollback)]
+    procedure SendForApprovalFailsWhenRejected()
+    begin
+        // [SCENARIO 3d] A Rejected request cannot be sent for approval
+        // [GIVEN] / [WHEN] / [THEN] A Rejected request is sent for approval and the matching error is raised
+        VerifySendFails(Enum::"EQM Request Status"::"Rejected", StrSubstNo(RequestRejectedErr, RequestNoTok));
     end;
 
     [Test]
@@ -195,11 +197,8 @@ codeunit 50189 "EQM Request Approval Tests"
         // [WHEN] The same user approves it
         asserterror RequestApprovalMgt.Approve(Request, CommentTok);
 
-        // [THEN] SelfApprovalErr is raised and the request stays Pending with no decision
+        // [THEN] SelfApprovalErr is raised (the rollback after the error makes a stored-state check meaningless)
         Assert.ExpectedError(StrSubstNo(SelfApprovalErr, RequestNoTok));
-        Request.Get(RequestNoTok);
-        Assert.AreEqual(Request.Status::"Pending Approval", Request.Status, 'The request should stay Pending Approval');
-        Assert.AreEqual('', Request."Decided By", 'No decider should be recorded');
     end;
 
     [Test]
@@ -253,107 +252,325 @@ codeunit 50189 "EQM Request Approval Tests"
 
     [Test]
     [TransactionModel(TransactionModel::AutoRollback)]
-    procedure RejectRequiresComment()
+    procedure RejectRequiresCommentWhenEmpty()
     var
         Request: Record "EQM Equipment Request";
         RequestApprovalMgt: Codeunit "EQM Request Approval Mgt.";
     begin
-        // [SCENARIO 8] A blank or spaces-only comment cannot reject a request
+        // [SCENARIO 8a] An empty comment cannot reject a request
         Initialize();
 
         // [GIVEN] A Pending request
         CreateRequest(Request, RequestNoTok, Request.Status::"Pending Approval", OtherUserTok);
 
-        // [WHEN] Reject runs with an empty comment [THEN] RejectionCommentRequiredErr
+        // [WHEN] Reject runs with an empty comment
         asserterror RequestApprovalMgt.Reject(Request, '');
-        Assert.ExpectedError(StrSubstNo(RejectionCommentRequiredErr, RequestNoTok));
 
-        // [WHEN] Reject runs with spaces only [THEN] RejectionCommentRequiredErr
-        asserterror RequestApprovalMgt.Reject(Request, '    ');
+        // [THEN] RejectionCommentRequiredErr
         Assert.ExpectedError(StrSubstNo(RejectionCommentRequiredErr, RequestNoTok));
-
-        // [THEN] The request stays Pending
-        Request.Get(RequestNoTok);
-        Assert.AreEqual(Request.Status::"Pending Approval", Request.Status, 'The request should stay Pending Approval');
-        Assert.AreEqual('', Request."Decided By", 'No decider should be recorded');
     end;
 
     [Test]
     [TransactionModel(TransactionModel::AutoRollback)]
-    procedure DecisionFailsWhenNotPending()
+    procedure RejectRequiresCommentWhenSpaces()
     var
         Request: Record "EQM Equipment Request";
         RequestApprovalMgt: Codeunit "EQM Request Approval Mgt.";
     begin
-        // [SCENARIO 9] Approve and Reject need a Pending request (Rejected has its own message)
+        // [SCENARIO 8b] A spaces-only comment cannot reject a request
         Initialize();
 
-        // [GIVEN] An Open request [WHEN] Approve / Reject run [THEN] NotPendingErr
-        CreateRequest(Request, 'EQMAPR-D1', Request.Status::Open, '');
-        asserterror RequestApprovalMgt.Approve(Request, CommentTok);
-        Assert.ExpectedError(StrSubstNo(NotPendingErr, 'EQMAPR-D1', Format(Request.Status::Open)));
-        asserterror RequestApprovalMgt.Reject(Request, RejectCommentTok);
-        Assert.ExpectedError(StrSubstNo(NotPendingErr, 'EQMAPR-D1', Format(Request.Status::Open)));
+        // [GIVEN] A Pending request
+        CreateRequest(Request, RequestNoTok, Request.Status::"Pending Approval", OtherUserTok);
 
-        // [GIVEN] An Approved request [THEN] NotPendingErr
-        CreateRequest(Request, 'EQMAPR-D2', Request.Status::Approved, OtherUserTok);
-        asserterror RequestApprovalMgt.Approve(Request, CommentTok);
-        Assert.ExpectedError(StrSubstNo(NotPendingErr, 'EQMAPR-D2', Format(Request.Status::Approved)));
-        asserterror RequestApprovalMgt.Reject(Request, RejectCommentTok);
-        Assert.ExpectedError(StrSubstNo(NotPendingErr, 'EQMAPR-D2', Format(Request.Status::Approved)));
+        // [WHEN] Reject runs with spaces only
+        asserterror RequestApprovalMgt.Reject(Request, '    ');
 
-        // [GIVEN] A Completed request [THEN] NotPendingErr
-        CreateRequest(Request, 'EQMAPR-D3', Request.Status::Completed, OtherUserTok);
-        asserterror RequestApprovalMgt.Approve(Request, CommentTok);
-        Assert.ExpectedError(StrSubstNo(NotPendingErr, 'EQMAPR-D3', Format(Request.Status::Completed)));
-        asserterror RequestApprovalMgt.Reject(Request, RejectCommentTok);
-        Assert.ExpectedError(StrSubstNo(NotPendingErr, 'EQMAPR-D3', Format(Request.Status::Completed)));
-
-        // [GIVEN] A Rejected request [THEN] RequestRejectedErr
-        CreateRequest(Request, 'EQMAPR-D4', Request.Status::Rejected, OtherUserTok);
-        asserterror RequestApprovalMgt.Approve(Request, CommentTok);
-        Assert.ExpectedError(StrSubstNo(RequestRejectedErr, 'EQMAPR-D4'));
-        asserterror RequestApprovalMgt.Reject(Request, RejectCommentTok);
-        Assert.ExpectedError(StrSubstNo(RequestRejectedErr, 'EQMAPR-D4'));
+        // [THEN] RejectionCommentRequiredErr
+        Assert.ExpectedError(StrSubstNo(RejectionCommentRequiredErr, RequestNoTok));
     end;
 
     [Test]
     [TransactionModel(TransactionModel::AutoRollback)]
-    procedure RejectedRequestCannotBeReopened()
+    procedure ApproveFailsWhenOpen()
     var
         Request: Record "EQM Equipment Request";
-        Stored: Record "EQM Equipment Request";
         RequestApprovalMgt: Codeunit "EQM Request Approval Mgt.";
     begin
-        // [SCENARIO 10] A Rejected request is final: no transition, no change, no delete
+        // [SCENARIO 9] Approve needs a Pending request (Open is refused)
+        Initialize();
+
+        // [GIVEN] A Open request
+        CreateRequest(Request, RequestNoTok, Request.Status::"Open", OtherUserTok);
+
+        // [WHEN] Approve runs
+        asserterror RequestApprovalMgt.Approve(Request, CommentTok);
+
+        // [THEN] The matching error is raised
+        Assert.ExpectedError(StrSubstNo(NotPendingErr, RequestNoTok, Format(Enum::"EQM Request Status"::"Open")));
+    end;
+
+    [Test]
+    [TransactionModel(TransactionModel::AutoRollback)]
+    procedure RejectFailsWhenOpen()
+    var
+        Request: Record "EQM Equipment Request";
+        RequestApprovalMgt: Codeunit "EQM Request Approval Mgt.";
+    begin
+        // [SCENARIO 9] Reject needs a Pending request (Open is refused)
+        Initialize();
+
+        // [GIVEN] A Open request
+        CreateRequest(Request, RequestNoTok, Request.Status::"Open", OtherUserTok);
+
+        // [WHEN] Reject runs
+        asserterror RequestApprovalMgt.Reject(Request, RejectCommentTok);
+
+        // [THEN] The matching error is raised
+        Assert.ExpectedError(StrSubstNo(NotPendingErr, RequestNoTok, Format(Enum::"EQM Request Status"::"Open")));
+    end;
+
+    [Test]
+    [TransactionModel(TransactionModel::AutoRollback)]
+    procedure ApproveFailsWhenApproved()
+    var
+        Request: Record "EQM Equipment Request";
+        RequestApprovalMgt: Codeunit "EQM Request Approval Mgt.";
+    begin
+        // [SCENARIO 9] Approve needs a Pending request (Approved is refused)
+        Initialize();
+
+        // [GIVEN] A Approved request
+        CreateRequest(Request, RequestNoTok, Request.Status::"Approved", OtherUserTok);
+
+        // [WHEN] Approve runs
+        asserterror RequestApprovalMgt.Approve(Request, CommentTok);
+
+        // [THEN] The matching error is raised
+        Assert.ExpectedError(StrSubstNo(NotPendingErr, RequestNoTok, Format(Enum::"EQM Request Status"::"Approved")));
+    end;
+
+    [Test]
+    [TransactionModel(TransactionModel::AutoRollback)]
+    procedure RejectFailsWhenApproved()
+    var
+        Request: Record "EQM Equipment Request";
+        RequestApprovalMgt: Codeunit "EQM Request Approval Mgt.";
+    begin
+        // [SCENARIO 9] Reject needs a Pending request (Approved is refused)
+        Initialize();
+
+        // [GIVEN] A Approved request
+        CreateRequest(Request, RequestNoTok, Request.Status::"Approved", OtherUserTok);
+
+        // [WHEN] Reject runs
+        asserterror RequestApprovalMgt.Reject(Request, RejectCommentTok);
+
+        // [THEN] The matching error is raised
+        Assert.ExpectedError(StrSubstNo(NotPendingErr, RequestNoTok, Format(Enum::"EQM Request Status"::"Approved")));
+    end;
+
+    [Test]
+    [TransactionModel(TransactionModel::AutoRollback)]
+    procedure ApproveFailsWhenCompleted()
+    var
+        Request: Record "EQM Equipment Request";
+        RequestApprovalMgt: Codeunit "EQM Request Approval Mgt.";
+    begin
+        // [SCENARIO 9] Approve needs a Pending request (Completed is refused)
+        Initialize();
+
+        // [GIVEN] A Completed request
+        CreateRequest(Request, RequestNoTok, Request.Status::"Completed", OtherUserTok);
+
+        // [WHEN] Approve runs
+        asserterror RequestApprovalMgt.Approve(Request, CommentTok);
+
+        // [THEN] The matching error is raised
+        Assert.ExpectedError(StrSubstNo(NotPendingErr, RequestNoTok, Format(Enum::"EQM Request Status"::"Completed")));
+    end;
+
+    [Test]
+    [TransactionModel(TransactionModel::AutoRollback)]
+    procedure RejectFailsWhenCompleted()
+    var
+        Request: Record "EQM Equipment Request";
+        RequestApprovalMgt: Codeunit "EQM Request Approval Mgt.";
+    begin
+        // [SCENARIO 9] Reject needs a Pending request (Completed is refused)
+        Initialize();
+
+        // [GIVEN] A Completed request
+        CreateRequest(Request, RequestNoTok, Request.Status::"Completed", OtherUserTok);
+
+        // [WHEN] Reject runs
+        asserterror RequestApprovalMgt.Reject(Request, RejectCommentTok);
+
+        // [THEN] The matching error is raised
+        Assert.ExpectedError(StrSubstNo(NotPendingErr, RequestNoTok, Format(Enum::"EQM Request Status"::"Completed")));
+    end;
+
+    [Test]
+    [TransactionModel(TransactionModel::AutoRollback)]
+    procedure ApproveFailsWhenRejected()
+    var
+        Request: Record "EQM Equipment Request";
+        RequestApprovalMgt: Codeunit "EQM Request Approval Mgt.";
+    begin
+        // [SCENARIO 9] Approve needs a Pending request (Rejected is refused)
+        Initialize();
+
+        // [GIVEN] A Rejected request
+        CreateRequest(Request, RequestNoTok, Request.Status::"Rejected", OtherUserTok);
+
+        // [WHEN] Approve runs
+        asserterror RequestApprovalMgt.Approve(Request, CommentTok);
+
+        // [THEN] The matching error is raised
+        Assert.ExpectedError(StrSubstNo(RequestRejectedErr, RequestNoTok));
+    end;
+
+    [Test]
+    [TransactionModel(TransactionModel::AutoRollback)]
+    procedure RejectFailsWhenRejected()
+    var
+        Request: Record "EQM Equipment Request";
+        RequestApprovalMgt: Codeunit "EQM Request Approval Mgt.";
+    begin
+        // [SCENARIO 9] Reject needs a Pending request (Rejected is refused)
+        Initialize();
+
+        // [GIVEN] A Rejected request
+        CreateRequest(Request, RequestNoTok, Request.Status::"Rejected", OtherUserTok);
+
+        // [WHEN] Reject runs
+        asserterror RequestApprovalMgt.Reject(Request, RejectCommentTok);
+
+        // [THEN] The matching error is raised
+        Assert.ExpectedError(StrSubstNo(RequestRejectedErr, RequestNoTok));
+    end;
+
+    [Test]
+    [TransactionModel(TransactionModel::AutoRollback)]
+    procedure RejectedRequestCannotSendForApproval()
+    var
+        Request: Record "EQM Equipment Request";
+        RequestApprovalMgt: Codeunit "EQM Request Approval Mgt.";
+    begin
+        // [SCENARIO 10] A Rejected request is final: SendForApproval is refused
         Initialize();
         CreateEquipment(EquipmentNoTok, CategoryTok);
 
         // [GIVEN] A Rejected request
         CreateRequest(Request, RequestNoTok, Request.Status::Rejected, OtherUserTok);
 
-        // [WHEN] Each transition runs [THEN] RequestRejectedErr
+        // [WHEN] SendForApproval runs
         asserterror RequestApprovalMgt.SendForApproval(Request);
-        Assert.ExpectedError(StrSubstNo(RequestRejectedErr, RequestNoTok));
-        asserterror RequestApprovalMgt.Approve(Request, CommentTok);
-        Assert.ExpectedError(StrSubstNo(RequestRejectedErr, RequestNoTok));
-        asserterror RequestApprovalMgt.Reject(Request, RejectCommentTok);
-        Assert.ExpectedError(StrSubstNo(RequestRejectedErr, RequestNoTok));
-        asserterror RequestApprovalMgt.AssignEquipment(Request, EquipmentNoTok);
-        Assert.ExpectedError(StrSubstNo(RequestRejectedErr, RequestNoTok));
 
-        // [WHEN] The request is modified or deleted with triggers [THEN] the lock of the request table applies
+        // [THEN] RequestRejectedErr
+        Assert.ExpectedError(StrSubstNo(RequestRejectedErr, RequestNoTok));
+    end;
+
+    [Test]
+    [TransactionModel(TransactionModel::AutoRollback)]
+    procedure RejectedRequestCannotApprove()
+    var
+        Request: Record "EQM Equipment Request";
+        RequestApprovalMgt: Codeunit "EQM Request Approval Mgt.";
+    begin
+        // [SCENARIO 10] A Rejected request is final: Approve is refused
+        Initialize();
+        CreateEquipment(EquipmentNoTok, CategoryTok);
+
+        // [GIVEN] A Rejected request
+        CreateRequest(Request, RequestNoTok, Request.Status::Rejected, OtherUserTok);
+
+        // [WHEN] Approve runs
+        asserterror RequestApprovalMgt.Approve(Request, CommentTok);
+
+        // [THEN] RequestRejectedErr
+        Assert.ExpectedError(StrSubstNo(RequestRejectedErr, RequestNoTok));
+    end;
+
+    [Test]
+    [TransactionModel(TransactionModel::AutoRollback)]
+    procedure RejectedRequestCannotReject()
+    var
+        Request: Record "EQM Equipment Request";
+        RequestApprovalMgt: Codeunit "EQM Request Approval Mgt.";
+    begin
+        // [SCENARIO 10] A Rejected request is final: Reject is refused
+        Initialize();
+        CreateEquipment(EquipmentNoTok, CategoryTok);
+
+        // [GIVEN] A Rejected request
+        CreateRequest(Request, RequestNoTok, Request.Status::Rejected, OtherUserTok);
+
+        // [WHEN] Reject runs
+        asserterror RequestApprovalMgt.Reject(Request, RejectCommentTok);
+
+        // [THEN] RequestRejectedErr
+        Assert.ExpectedError(StrSubstNo(RequestRejectedErr, RequestNoTok));
+    end;
+
+    [Test]
+    [TransactionModel(TransactionModel::AutoRollback)]
+    procedure RejectedRequestCannotAssignEquipment()
+    var
+        Request: Record "EQM Equipment Request";
+        RequestApprovalMgt: Codeunit "EQM Request Approval Mgt.";
+    begin
+        // [SCENARIO 10] A Rejected request is final: AssignEquipment is refused
+        Initialize();
+        CreateEquipment(EquipmentNoTok, CategoryTok);
+
+        // [GIVEN] A Rejected request
+        CreateRequest(Request, RequestNoTok, Request.Status::Rejected, OtherUserTok);
+
+        // [WHEN] AssignEquipment runs
+        asserterror RequestApprovalMgt.AssignEquipment(Request, EquipmentNoTok);
+
+        // [THEN] RequestRejectedErr
+        Assert.ExpectedError(StrSubstNo(RequestRejectedErr, RequestNoTok));
+    end;
+
+    [Test]
+    [TransactionModel(TransactionModel::AutoRollback)]
+    procedure RejectedRequestCannotBeModified()
+    var
+        Request: Record "EQM Equipment Request";
+    begin
+        // [SCENARIO 10] A Rejected request cannot modified with triggers (lock of the request table)
+        Initialize();
+
+        // [GIVEN] A Rejected request
+        CreateRequest(Request, RequestNoTok, Request.Status::Rejected, OtherUserTok);
+
+        // [WHEN] The request is changed with triggers
         Request.Justification := 'Changed';
         asserterror Request.Modify(true);
-        Assert.ExpectedError(StrSubstNo(RequestNotOpenErr, RequestNoTok, Format(Request.Status::Rejected)));
-        asserterror Request.Delete(true);
-        Assert.ExpectedError(StrSubstNo(DeleteNotOpenErr, RequestNoTok, Format(Request.Status::Rejected)));
 
-        // [THEN] The stored request is unchanged
-        Stored.Get(RequestNoTok);
-        Assert.AreEqual(Stored.Status::Rejected, Stored.Status, 'The request should stay Rejected');
-        Assert.AreEqual(JustificationTok, Stored.Justification, 'The justification should be unchanged');
-        Assert.AreEqual('', Stored."Assigned Equipment No.", 'No equipment should be recorded');
+        // [THEN] RequestNotOpenErr
+        Assert.ExpectedError(StrSubstNo(RequestNotOpenErr, RequestNoTok, Format(Request.Status::Rejected)));
+    end;
+
+    [Test]
+    [TransactionModel(TransactionModel::AutoRollback)]
+    procedure RejectedRequestCannotBeDeleted()
+    var
+        Request: Record "EQM Equipment Request";
+    begin
+        // [SCENARIO 10] A Rejected request cannot deleted with triggers (lock of the request table)
+        Initialize();
+
+        // [GIVEN] A Rejected request
+        CreateRequest(Request, RequestNoTok, Request.Status::Rejected, OtherUserTok);
+
+        // [WHEN] The request is changed with triggers
+        asserterror Request.Delete(true);
+
+        // [THEN] DeleteNotOpenErr
+        Assert.ExpectedError(StrSubstNo(DeleteNotOpenErr, RequestNoTok, Format(Request.Status::Rejected)));
     end;
 
     [Test]
@@ -390,66 +607,89 @@ codeunit 50189 "EQM Request Approval Tests"
 
     [Test]
     [TransactionModel(TransactionModel::AutoRollback)]
-    procedure AssignEquipmentFailsBeforeApproval()
+    procedure AssignEquipmentFailsWhenOpen()
     var
         Request: Record "EQM Equipment Request";
-        Equipment: Record "EQM Equipment";
-        Assignment: Record "EQM Equipment Assignment";
         RequestApprovalMgt: Codeunit "EQM Request Approval Mgt.";
     begin
-        // [SCENARIO 12] Equipment cannot be assigned for a request that is not Approved
+        // [SCENARIO 12] Equipment cannot be assigned for a Open request
         Initialize();
         CreateEquipment(EquipmentNoTok, CategoryTok);
 
-        // [GIVEN] An Open request [WHEN] AssignEquipment runs [THEN] NotApprovedErr
-        CreateRequest(Request, 'EQMAPR-A1', Request.Status::Open, '');
-        asserterror RequestApprovalMgt.AssignEquipment(Request, EquipmentNoTok);
-        Assert.ExpectedError(StrSubstNo(NotApprovedErr, 'EQMAPR-A1', Format(Request.Status::Open)));
+        // [GIVEN] A Open request
+        CreateRequest(Request, RequestNoTok, Request.Status::"Open", OtherUserTok);
 
-        // [GIVEN] A Pending request [THEN] NotApprovedErr
-        CreateRequest(Request, 'EQMAPR-A2', Request.Status::"Pending Approval", OtherUserTok);
+        // [WHEN] AssignEquipment runs
         asserterror RequestApprovalMgt.AssignEquipment(Request, EquipmentNoTok);
-        Assert.ExpectedError(StrSubstNo(NotApprovedErr, 'EQMAPR-A2', Format(Request.Status::"Pending Approval")));
 
-        // [THEN] The equipment stays Available and no assignment entry exists
-        Equipment.Get(EquipmentNoTok);
-        Assert.AreEqual(Equipment.Status::Available, Equipment.Status, 'The equipment should stay Available');
-        Assignment.SetRange("Equipment No.", EquipmentNoTok);
-        Assert.RecordIsEmpty(Assignment);
+        // [THEN] NotApprovedErr
+        Assert.ExpectedError(StrSubstNo(NotApprovedErr, RequestNoTok, Format(Enum::"EQM Request Status"::"Open")));
     end;
 
     [Test]
     [TransactionModel(TransactionModel::AutoRollback)]
-    procedure AssignEquipmentRejectsWrongCategoryAndAssignedEquipment()
+    procedure AssignEquipmentFailsWhenPendingApproval()
+    var
+        Request: Record "EQM Equipment Request";
+        RequestApprovalMgt: Codeunit "EQM Request Approval Mgt.";
+    begin
+        // [SCENARIO 12] Equipment cannot be assigned for a Pending Approval request
+        Initialize();
+        CreateEquipment(EquipmentNoTok, CategoryTok);
+
+        // [GIVEN] A Pending Approval request
+        CreateRequest(Request, RequestNoTok, Request.Status::"Pending Approval", OtherUserTok);
+
+        // [WHEN] AssignEquipment runs
+        asserterror RequestApprovalMgt.AssignEquipment(Request, EquipmentNoTok);
+
+        // [THEN] NotApprovedErr
+        Assert.ExpectedError(StrSubstNo(NotApprovedErr, RequestNoTok, Format(Enum::"EQM Request Status"::"Pending Approval")));
+    end;
+
+    [Test]
+    [TransactionModel(TransactionModel::AutoRollback)]
+    procedure AssignEquipmentRejectsWrongCategory()
+    var
+        Request: Record "EQM Equipment Request";
+        RequestApprovalMgt: Codeunit "EQM Request Approval Mgt.";
+    begin
+        // [SCENARIO 13a] Equipment of another category is refused
+        Initialize();
+
+        // [GIVEN] An Approved request and Available equipment of another category
+        CreateRequest(Request, RequestNoTok, Request.Status::Approved, OtherUserTok);
+        CreateEquipment(OtherEquipmentNoTok, OtherCategoryTok);
+
+        // [WHEN] The equipment of another category is assigned
+        asserterror RequestApprovalMgt.AssignEquipment(Request, OtherEquipmentNoTok);
+
+        // [THEN] EquipmentTypeMismatchErr
+        Assert.ExpectedError(StrSubstNo(EquipmentTypeMismatchErr, OtherEquipmentNoTok, RequestNoTok, OtherCategoryTok, CategoryTok));
+    end;
+
+    [Test]
+    [TransactionModel(TransactionModel::AutoRollback)]
+    procedure AssignEquipmentRejectsAlreadyAssignedEquipment()
     var
         Request: Record "EQM Equipment Request";
         Equipment: Record "EQM Equipment";
         RequestApprovalMgt: Codeunit "EQM Request Approval Mgt.";
     begin
-        // [SCENARIO 13] Equipment of another category or already assigned equipment is refused
+        // [SCENARIO 13b] Equipment of the right category that is already assigned is refused
         Initialize();
 
-        // [GIVEN] An Approved request, equipment of another category and equipment of the right category that is already assigned
+        // [GIVEN] An Approved request and equipment of the right category that is already assigned
         CreateRequest(Request, RequestNoTok, Request.Status::Approved, OtherUserTok);
-        CreateEquipment(OtherEquipmentNoTok, OtherCategoryTok);
         CreateEquipment(EquipmentNo2Tok, CategoryTok);
         Equipment.Get(EquipmentNo2Tok);
         Equipment.AssignEmployee(ActiveEmployeeTok);
 
-        // [WHEN] The equipment of another category is assigned [THEN] EquipmentTypeMismatchErr
-        asserterror RequestApprovalMgt.AssignEquipment(Request, OtherEquipmentNoTok);
-        Assert.ExpectedError(StrSubstNo(EquipmentTypeMismatchErr, OtherEquipmentNoTok, RequestNoTok, OtherCategoryTok, CategoryTok));
-
-        // [WHEN] The already assigned equipment is assigned [THEN] AlreadyAssignedErr (FR-004)
+        // [WHEN] The already assigned equipment is assigned
         asserterror RequestApprovalMgt.AssignEquipment(Request, EquipmentNo2Tok);
-        Assert.ExpectedError(StrSubstNo(AlreadyAssignedErr, EquipmentNo2Tok, ActiveEmployeeTok));
 
-        // [THEN] The request stays Approved without equipment, and the other equipment stays Available
-        Request.Get(RequestNoTok);
-        Assert.AreEqual(Request.Status::Approved, Request.Status, 'The request should stay Approved');
-        Assert.AreEqual('', Request."Assigned Equipment No.", 'No equipment should be recorded');
-        Equipment.Get(OtherEquipmentNoTok);
-        Assert.AreEqual(Equipment.Status::Available, Equipment.Status, 'The equipment of another category should stay Available');
+        // [THEN] AlreadyAssignedErr (FR-004)
+        Assert.ExpectedError(StrSubstNo(AlreadyAssignedErr, EquipmentNo2Tok, ActiveEmployeeTok));
     end;
 
     [Test]
@@ -457,7 +697,6 @@ codeunit 50189 "EQM Request Approval Tests"
     procedure AssignEquipmentFailsForInactiveEmployee()
     var
         Request: Record "EQM Equipment Request";
-        Equipment: Record "EQM Equipment";
         Employee: Record Employee;
         RequestApprovalMgt: Codeunit "EQM Request Approval Mgt.";
     begin
@@ -474,13 +713,30 @@ codeunit 50189 "EQM Request Approval Tests"
         // [WHEN] The equipment is assigned from the request
         asserterror RequestApprovalMgt.AssignEquipment(Request, EquipmentNoTok);
 
-        // [THEN] An error is raised (FR-004 employee check), the request stays Approved and the equipment Available
+        // [THEN] An error is raised (FR-004 employee check); the rollback after the error makes a stored-state check meaningless
         Assert.ExpectedError(ActiveEmployeeTok);
-        Request.Get(RequestNoTok);
-        Assert.AreEqual(Request.Status::Approved, Request.Status, 'The request should stay Approved');
-        Assert.AreEqual('', Request."Assigned Equipment No.", 'No equipment should be recorded');
-        Equipment.Get(EquipmentNoTok);
-        Assert.AreEqual(Equipment.Status::Available, Equipment.Status, 'The equipment should stay Available');
+    end;
+
+    [Test]
+    [TransactionModel(TransactionModel::AutoRollback)]
+    procedure StatusChangedEventIsNotRaisedAfterFailedAction()
+    var
+        Request: Record "EQM Equipment Request";
+        Subscriber: Codeunit "EQM Request Appr. Test Subscr";
+        RequestApprovalMgt: Codeunit "EQM Request Approval Mgt.";
+    begin
+        // [SCENARIO 15a] OnAfterRequestStatusChanged is not raised after a failure
+        Initialize();
+
+        // [GIVEN] An Open request and a bound subscriber
+        CreateRequest(Request, RequestNoTok, Request.Status::Open, '');
+        BindSubscription(Subscriber);
+
+        // [WHEN] A failing action runs (Approve on an Open request)
+        asserterror RequestApprovalMgt.Approve(Request, CommentTok);
+
+        // [THEN] The event was not raised (the subscriber keeps its in-memory state)
+        Assert.AreEqual(0, Subscriber.GetStatusChangeCount(), 'No status change event should be raised after a failed action');
     end;
 
     [Test]
@@ -491,7 +747,7 @@ codeunit 50189 "EQM Request Approval Tests"
         Subscriber: Codeunit "EQM Request Appr. Test Subscr";
         RequestApprovalMgt: Codeunit "EQM Request Approval Mgt.";
     begin
-        // [SCENARIO 15] OnAfterRequestStatusChanged is raised after each successful transition, and not after a failure
+        // [SCENARIO 15] OnAfterRequestStatusChanged is raised after each successful transition
         Initialize();
 
         // [GIVEN] An Open request, Available equipment and a bound subscriber that also handles the approver check
@@ -500,14 +756,7 @@ codeunit 50189 "EQM Request Approval Tests"
         Subscriber.SetHandleApproverCheck(true);
         BindSubscription(Subscriber);
 
-        // [WHEN] A failing action runs (Approve on an Open request)
-        asserterror RequestApprovalMgt.Approve(Request, CommentTok);
-
-        // [THEN] The event was not raised
-        Assert.AreEqual(0, Subscriber.GetStatusChangeCount(), 'No status change event should be raised after a failed action');
-
         // [WHEN] The request goes Open > Pending > Approved > Completed
-        Request.Get(RequestNoTok);
         RequestApprovalMgt.SendForApproval(Request);
         RequestApprovalMgt.Approve(Request, CommentTok);
         RequestApprovalMgt.AssignEquipment(Request, EquipmentNoTok);
@@ -711,6 +960,17 @@ codeunit 50189 "EQM Request Approval Tests"
         Assert.AreEqual(EquipmentNoTok, Request."Assigned Equipment No.", 'The chosen equipment should be recorded');
         Equipment.Get(EquipmentNoTok);
         Assert.AreEqual(Equipment.Status::Assigned, Equipment.Status, 'The equipment should be Assigned');
+    end;
+
+    local procedure VerifySendFails(NewStatus: Enum "EQM Request Status"; ExpectedError: Text)
+    var
+        Request: Record "EQM Equipment Request";
+        RequestApprovalMgt: Codeunit "EQM Request Approval Mgt.";
+    begin
+        Initialize();
+        CreateRequest(Request, RequestNoTok, NewStatus, OtherUserTok);
+        asserterror RequestApprovalMgt.SendForApproval(Request);
+        Assert.ExpectedError(ExpectedError);
     end;
 
     local procedure CreateRequest(var Request: Record "EQM Equipment Request"; RequestNo: Code[20]; NewStatus: Enum "EQM Request Status"; SentBy: Code[50])
