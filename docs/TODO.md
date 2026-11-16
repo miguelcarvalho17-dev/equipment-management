@@ -270,9 +270,10 @@ Source: "Test scenarios" in `docs/plans/FR-031-power-automate-support.md`.
 - [ ] A Reader user can create the flow; record the BC permission set needed to subscribe.
 - [ ] Check how Guid and Date parameters render in a flow, and whether the attribute strings are translatable.
 
-## FR-032 Equipment Request Process (automated tests: CI of PR #124; sandbox checks not done)
+## FR-032 Equipment Request Process (46 tests pass in CI; sandbox checks not done)
 Source: "Test scenarios" in `docs/plans/FR-032-equipment-request-process.md`.
-- [ ] Confirm test codeunit 50188 (`test/src/EQMEquipmentRequestTests.Codeunit.al`) passes in the CI run of PR #124, then update "Test status" in `docs/features/FR-032-equipment-request-process.md`.
+- [x] (done 2026-11-16) Test codeunit 50188 (`test/src/EQMEquipmentRequestTests.Codeunit.al`, 46 tests) passes in AL-Go CI (PR #124: 168 tests, 0 failed, 0 skipped).
+- [ ] Check with a user who has only the EQM permission sets that creating a request works (the table reads Employee, which neither EQM set grants; if it fails add `tabledata Employee = R` to Reader) and that numbering through No. Series works as Manager (AppSource validator warnings 1 and 2).
 - [ ] Scenario 16, in a sandbox (not SUPER): a Reader sees requests but cannot insert.
 - [ ] A Manager raises, edits and deletes an Open request.
 - [ ] Tell Me finds "Equipment Requests"; the Role Center action and the Employee Card action work (the card action shows only that employee's requests).
