@@ -25,7 +25,7 @@ Nothing is logged for a change that leaves these fields as they were.
 - Maintenance records created before this version have no Registered entry.
 - Changes to the planned-maintenance dates and frequency on the equipment card are not part of this log.
 - If you opened a record by mistake, you still cannot delete it: post it with cost 0 and a describing text. The log shows both.
-- Business Central's own Change Log is separate. You can still turn it on for additional tracking.
+- Business Central's own Change Log is separate. The app prepares it for changes to equipment fields (see the help for Change Log support); an administrator turns it on. Maintenance records are not part of it.
 - TODO(verify): the field name column and the Maintenance Type values were not checked in a sandbox.
 
 ## Release notes

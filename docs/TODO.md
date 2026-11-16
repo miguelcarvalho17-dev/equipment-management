@@ -297,3 +297,11 @@ Source: "Test scenarios" in `docs/plans/FR-033-approval-workflow.md`. Decisions:
 - [ ] Single-user sandbox: confirm that approval is impossible without the subscriber (risk R1).
 - [ ] Review personal-data handling for fields 9, 10 and 12 (TODO(verify)).
 - [ ] Record the results and clear the TODO(verify) items in the help article.
+
+## FR-034 Change Log Support (7 automated tests pass in CI, test codeunit 50191; sandbox checks not done)
+Source: "Test scenarios" 8 and 9 in `docs/plans/FR-034-change-log-support.md`. Decisions: D1 off, D2 no, D3 no, D4 inputs.
+- [x] (AL-Go PR build #128, 0 failures) Run test codeunit 50191 (`test/src/EQMChangeLogSetupTests.Codeunit.al`, 7 tests). Not run in a BC sandbox.
+- [ ] Scenario 8 (manual, sandbox): turn on Change Log Activated and sign in again (the setup is cached per session). Assign, return, change category, set status to Lost, edit the warranty dates and provider. Change Log Entries show one entry per changed field with old and new value. Editing Description logs nothing. Confirms that "Some Fields" plus the 404 rows is the right semantics.
+- [ ] Scenario 9 (manual, sandbox): with the Change Log off, the same actions create no entries. On a fresh install in a new sandbox the 403/404 rows exist and the upgrade tag is set. Install as a non-SUPER administrator: record whether it succeeds or fails with a permission error (R1).
+- [ ] If entries are not written for the table, the fallback is codeunit 49 `OnAfterGetDatabaseTableTriggerSetup` (needs a replan, R3).
+- [ ] Record the results and clear the TODO(verify) items in the feature doc and the help article.
