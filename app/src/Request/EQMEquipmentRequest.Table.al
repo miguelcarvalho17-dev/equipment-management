@@ -2,11 +2,13 @@ namespace MiguelCarvalho.EquipmentManagement;
 
 using Microsoft.Foundation.NoSeries;
 using Microsoft.HumanResources.Employee;
+using System.Security.AccessControl;
 
 /// <summary>
 /// An equipment request raised for an employee: who needs equipment, which type (equipment category), why and when.
 /// Requests are numbered from the Request Nos. series of the equipment setup and start as Open. Open requests can be
-/// corrected and deleted; once another status is set (by a later feature), the request is locked.
+/// corrected and deleted; once another status is set, the request is locked. Status changes (approval process) are made only by
+/// codeunit "EQM Request Approval Mgt."; the fields "Sent for Approval By" to "Assigned Equipment No." record the approval.
 /// </summary>
 table 50111 "EQM Equipment Request"
 {
@@ -80,7 +82,7 @@ table 50111 "EQM Equipment Request"
         field(6; Status; Enum "EQM Request Status")
         {
             Caption = 'Status';
-            ToolTip = 'Specifies the status of the request: Open, Pending Approval, Approved, Rejected or Completed. New requests are Open. Only open requests can be changed or deleted.';
+            ToolTip = 'Specifies the status of the request: Open, Pending Approval, Approved, Rejected or Completed. New requests are Open. Send an open request for approval; another manager approves or rejects it. Approved requests are completed by assigning equipment. Rejected and completed requests are final. Only open requests can be changed or deleted.';
             Editable = false;
             InitValue = Open;
         }
@@ -97,6 +99,43 @@ table 50111 "EQM Equipment Request"
             ToolTip = 'Specifies the description of the requested equipment type.';
             FieldClass = FlowField;
             CalcFormula = lookup("EQM Equipment Category".Description where(Code = field("Requested Equipment Type")));
+            Editable = false;
+        }
+        field(9; "Sent for Approval By"; Code[50])
+        {
+            Caption = 'Sent for Approval By';
+            ToolTip = 'Specifies the user who sent the request for approval. This user cannot approve the request.';
+            DataClassification = EndUserIdentifiableInformation;
+            TableRelation = User."User Name";
+            ValidateTableRelation = false;
+            Editable = false;
+        }
+        field(10; "Decided By"; Code[50])
+        {
+            Caption = 'Decided By';
+            ToolTip = 'Specifies the user who approved or rejected the request.';
+            DataClassification = EndUserIdentifiableInformation;
+            TableRelation = User."User Name";
+            ValidateTableRelation = false;
+            Editable = false;
+        }
+        field(11; "Decision Date"; Date)
+        {
+            Caption = 'Decision Date';
+            ToolTip = 'Specifies the date the request was approved or rejected.';
+            Editable = false;
+        }
+        field(12; "Decision Comment"; Text[250])
+        {
+            Caption = 'Decision Comment';
+            ToolTip = 'Specifies the comment entered when the request was approved or rejected. A rejection requires a comment.';
+            Editable = false;
+        }
+        field(13; "Assigned Equipment No."; Code[20])
+        {
+            Caption = 'Assigned Equipment No.';
+            ToolTip = 'Specifies the equipment that was assigned to complete the request.';
+            TableRelation = "EQM Equipment"."No.";
             Editable = false;
         }
     }
@@ -324,6 +363,7 @@ table 50111 "EQM Equipment Request"
 
     /// <summary>
     /// Raised at the end of the consistency check on insert and modify, after all standard checks passed.
+    /// It is also raised when a request is sent for approval.
     /// </summary>
     /// <param name="EquipmentRequest">The request being saved (passed by value; changes are not kept). Raise an error to reject the save.</param>
     [IntegrationEvent(false, false)]

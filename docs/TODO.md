@@ -280,3 +280,20 @@ Source: "Test scenarios" in `docs/plans/FR-032-equipment-request-process.md`.
 - [ ] A subscriber to `OnAfterCheckRequestConsistency` that raises an error blocks the save.
 - [ ] Existing company with a blank "Request Nos.": creating a request shows the TestField error; after choosing a series it works.
 - [ ] Record the results and clear the TODO(verify) items in the help article.
+
+## FR-033 Approval Workflow (22 tests compile but have NOT been executed; sandbox checks not done)
+Source: "Test scenarios" in `docs/plans/FR-033-approval-workflow.md`. Decisions: Q1 own, Q2 noself, Q3 action, Q4 none, Q5 no.
+- [ ] Run test codeunit 50189 (`test/src/EQMRequestApprovalTests.Codeunit.al`, 22 tests, helper 50190) in a sandbox or CI; they have never been executed (no BC sandbox available). Record the result.
+- [ ] Scenario 17 (manual, sandbox, not SUPER), with two users who have EQM - Manager (A and B) and one with EQM - Reader:
+  - [ ] A sends an Open request for approval; A cannot approve it (self-approval error); A can see Sent for Approval By = A.
+  - [ ] B approves it (Decided By = B, date, comment recorded); then A chooses Assign Equipment, picks available equipment of the requested type; the equipment is Assigned, the request is Completed and Assigned Equipment No. is filled.
+  - [ ] The Reader sees the requests but Send for Approval, Approve, Reject and Assign Equipment fail with a permission error.
+  - [ ] B rejects another pending request with a comment; the Rejected view shows it; it cannot be sent, approved, changed or deleted again.
+- [ ] Reject with an empty comment is refused; Approve with an empty comment works.
+- [ ] Assign Equipment with no available equipment of the type shows the message and leaves the request Approved.
+- [ ] On the card only the action of the current status is enabled; on the list the actions are always enabled and show the status error.
+- [ ] Employee made Inactive after approval: Assign Equipment fails and the request stays Approved.
+- [ ] A subscriber to OnBeforeCheckApproverAllowed that sets IsHandled allows self-approval; OnAfterRequestStatusChanged fires once per transition.
+- [ ] Single-user sandbox: confirm that approval is impossible without the subscriber (risk R1).
+- [ ] Review personal-data handling for fields 9, 10 and 12 (TODO(verify)).
+- [ ] Record the results and clear the TODO(verify) items in the help article.

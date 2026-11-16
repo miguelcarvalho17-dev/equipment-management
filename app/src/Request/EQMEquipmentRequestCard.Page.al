@@ -6,7 +6,7 @@ page 50134 "EQM Equipment Request Card"
 {
     Caption = 'Equipment Request';
     AboutTitle = 'About equipment requests';
-    AboutText = 'Raise a request for equipment. Choose the employee who needs it, the type of equipment, and enter why it is needed. The request date is today unless you change it. New requests are Open. You can correct or delete a request while it is open.';
+    AboutText = 'Raise a request for equipment. Choose the employee who needs it, the type of equipment, and enter why it is needed. The request date is today unless you change it. New requests are Open. You can correct or delete a request while it is open. Send an open request for approval; another manager approves or rejects it, and approved requests are completed by assigning equipment.';
     PageType = Card;
     ApplicationArea = All;
     UsageCategory = None;
@@ -69,13 +69,117 @@ page 50134 "EQM Equipment Request Card"
                     StyleExpr = StatusStyle;
                 }
             }
+            group(Approval)
+            {
+                Caption = 'Approval';
+
+                field("Sent for Approval By"; Rec."Sent for Approval By")
+                {
+                }
+                field("Decided By"; Rec."Decided By")
+                {
+                }
+                field("Decision Date"; Rec."Decision Date")
+                {
+                }
+                field("Decision Comment"; Rec."Decision Comment")
+                {
+                    MultiLine = true;
+                }
+                field("Assigned Equipment No."; Rec."Assigned Equipment No.")
+                {
+                }
+            }
+        }
+    }
+
+    actions
+    {
+        area(Processing)
+        {
+            action(SendForApproval)
+            {
+                Caption = 'Send for Approval';
+                ToolTip = 'Send the open request for approval. Another manager then approves or rejects it.';
+                Image = SendApprovalRequest;
+                Enabled = CanSendForApproval;
+
+                trigger OnAction()
+                begin
+                    RequestApprovalMgt.SendForApproval(Rec);
+                    CurrPage.Update(false);
+                end;
+            }
+            action(Approve)
+            {
+                Caption = 'Approve';
+                ToolTip = 'Approve the request. You cannot approve a request that you sent for approval.';
+                Image = Approve;
+                Enabled = CanDecide;
+
+                trigger OnAction()
+                begin
+                    RequestApprovalMgt.ApproveWithDialog(Rec);
+                    CurrPage.Update(false);
+                end;
+            }
+            action(Reject)
+            {
+                Caption = 'Reject';
+                ToolTip = 'Reject the request. You must enter the reason. A rejected request cannot be reopened.';
+                Image = Reject;
+                Enabled = CanDecide;
+
+                trigger OnAction()
+                begin
+                    RequestApprovalMgt.RejectWithDialog(Rec);
+                    CurrPage.Update(false);
+                end;
+            }
+            action(AssignEquipment)
+            {
+                Caption = 'Assign Equipment';
+                ToolTip = 'Choose available equipment of the requested type and assign it to the employee. The request is then completed.';
+                Image = Allocate;
+                Enabled = CanAssignEquipment;
+
+                trigger OnAction()
+                begin
+                    RequestApprovalMgt.AssignEquipmentWithLookup(Rec);
+                    CurrPage.Update(false);
+                end;
+            }
+        }
+        area(Promoted)
+        {
+            group(Category_Process)
+            {
+                Caption = 'Process';
+
+                actionref(SendForApproval_Promoted; SendForApproval)
+                {
+                }
+                actionref(Approve_Promoted; Approve)
+                {
+                }
+                actionref(Reject_Promoted; Reject)
+                {
+                }
+                actionref(AssignEquipment_Promoted; AssignEquipment)
+                {
+                }
+            }
         }
     }
 
     var
+        RequestApprovalMgt: Codeunit "EQM Request Approval Mgt.";
         EmployeeName: Text[100];
         StatusStyle: Text;
         IsOpen: Boolean;
+        CanSendForApproval: Boolean;
+        CanDecide: Boolean;
+        CanAssignEquipment: Boolean;
 
     trigger OnAfterGetRecord()
     begin
@@ -89,12 +193,20 @@ page 50134 "EQM Equipment Request Card"
 
     trigger OnAfterGetCurrRecord()
     begin
+        UpdateActionStates();
+    end;
+
+    local procedure UpdateActionStates()
+    begin
         IsOpen := Rec.Status = Rec.Status::Open;
+        CanSendForApproval := IsOpen;
+        CanDecide := Rec.Status = Rec.Status::"Pending Approval";
+        CanAssignEquipment := Rec.Status = Rec.Status::Approved;
     end;
 
     local procedure UpdateControls()
     begin
-        IsOpen := Rec.Status = Rec.Status::Open;
+        UpdateActionStates();
         StatusStyle := Rec.GetStatusStyle();
         UpdateEmployeeName();
     end;

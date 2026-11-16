@@ -1,7 +1,7 @@
 namespace MiguelCarvalho.EquipmentManagement;
 
 /// <summary>
-/// Status of an equipment request; FR-032 creates requests as Open.
+/// Status of an equipment request. Open, then Pending Approval, then Approved or Rejected; Approved requests become Completed when equipment is assigned. Rejected and Completed are final.
 /// </summary>
 enum 50110 "EQM Request Status"
 {
