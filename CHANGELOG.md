@@ -8,7 +8,7 @@ Newest first. Grouped by Added / Changed / Fixed / Obsolete.
 - Pages 50133 "EQM Equipment Requests" (list with views per status and an Employee action) and 50134 "EQM Equipment Request Card".
 - Action "Equipment Requests" on the Employee Card (page extension 50100) and on the Equipment Manager Role Center (page 50110).
 - Field 5 "Request Nos." on table 50102 "EQM Equipment Setup" and on page 50103; default number series EQREQ (REQ00001) created by codeunit 50105 when the field is blank.
-- Test codeunit 50188 "EQM Equipment Request Tests" (results confirmed by the CI run of PR #124).
+- Test codeunit 50188 "EQM Equipment Request Tests": 46 tests, all pass in AL-Go CI (PR #124: 168 tests in total, 0 failed).
 - Feature doc docs/features/FR-032-equipment-request-process.md and help docs/help/FR-032-equipment-request-process.md.
 ### Changed
 - Permission set EQM - Reader: read on table data "EQM Equipment Request", execute on table 50111 and pages 50133 and 50134. EQM - Manager: RIMD on the table data. Administrator inherits.
