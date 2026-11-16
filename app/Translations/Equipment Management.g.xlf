@@ -918,6 +918,46 @@
           <note from="Developer" annotates="general" priority="2">%1 = request number, %2 = status</note>
           <note from="Xliff Generator" annotates="general" priority="3">Table EQM Equipment Request - NamedType RequestNotOpenErr</note>
         </trans-unit>
+        <trans-unit id="Table 142347878 - Field 3782510791 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Specifies the equipment that was assigned to complete the request.</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table EQM Equipment Request - Field Assigned Equipment No. - Property ToolTip</note>
+        </trans-unit>
+        <trans-unit id="Table 142347878 - Field 3782510791 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Assigned Equipment No.</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table EQM Equipment Request - Field Assigned Equipment No. - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Table 142347878 - Field 2680742207 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Specifies the user who approved or rejected the request.</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table EQM Equipment Request - Field Decided By - Property ToolTip</note>
+        </trans-unit>
+        <trans-unit id="Table 142347878 - Field 2680742207 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Decided By</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table EQM Equipment Request - Field Decided By - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Table 142347878 - Field 761615557 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Specifies the comment entered when the request was approved or rejected. A rejection requires a comment.</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table EQM Equipment Request - Field Decision Comment - Property ToolTip</note>
+        </trans-unit>
+        <trans-unit id="Table 142347878 - Field 761615557 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Decision Comment</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table EQM Equipment Request - Field Decision Comment - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Table 142347878 - Field 2297606448 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Specifies the date the request was approved or rejected.</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table EQM Equipment Request - Field Decision Date - Property ToolTip</note>
+        </trans-unit>
+        <trans-unit id="Table 142347878 - Field 2297606448 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Decision Date</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table EQM Equipment Request - Field Decision Date - Property Caption</note>
+        </trans-unit>
         <trans-unit id="Table 142347878 - Field 1964419135 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
           <source>Specifies the employee the equipment is requested for. The employee must exist, be active and not be blocked for privacy reasons.</source>
           <note from="Developer" annotates="general" priority="2"></note>
@@ -988,8 +1028,18 @@
           <note from="Developer" annotates="general" priority="2"></note>
           <note from="Xliff Generator" annotates="general" priority="3">Table EQM Equipment Request - Field Requested Equipment Type - Property Caption</note>
         </trans-unit>
+        <trans-unit id="Table 142347878 - Field 2480877445 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Specifies the user who sent the request for approval. This user cannot approve the request.</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table EQM Equipment Request - Field Sent for Approval By - Property ToolTip</note>
+        </trans-unit>
+        <trans-unit id="Table 142347878 - Field 2480877445 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Sent for Approval By</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table EQM Equipment Request - Field Sent for Approval By - Property Caption</note>
+        </trans-unit>
         <trans-unit id="Table 142347878 - Field 513339096 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
-          <source>Specifies the status of the request: Open, Pending Approval, Approved, Rejected or Completed. New requests are Open. Only open requests can be changed or deleted.</source>
+          <source>Specifies the status of the request: Open, Pending Approval, Approved, Rejected or Completed. New requests are Open. Send an open request for approval; another manager approves or rejects it. Approved requests are completed by assigning equipment. Rejected and completed requests are final. Only open requests can be changed or deleted.</source>
           <note from="Developer" annotates="general" priority="2"></note>
           <note from="Xliff Generator" annotates="general" priority="3">Table EQM Equipment Request - Field Status - Property ToolTip</note>
         </trans-unit>
@@ -1927,6 +1977,61 @@
           <source>Equipment warranty is expiring</source>
           <note from="Developer" annotates="general" priority="2"></note>
           <note from="Xliff Generator" annotates="general" priority="3">Codeunit EQM Notification Mgt. - NamedType WarrantyNotificationNameTxt</note>
+        </trans-unit>
+        <trans-unit id="Codeunit 2685812289 - NamedType 3038922825" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Enter an optional comment for the approval.</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit EQM Request Approval Mgt. - NamedType ApproveInstructionTxt</note>
+        </trans-unit>
+        <trans-unit id="Codeunit 2685812289 - NamedType 3946311952" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Equipment %1 does not exist.</source>
+          <note from="Developer" annotates="general" priority="2">%1 = equipment number</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit EQM Request Approval Mgt. - NamedType EquipmentNotFoundErr</note>
+        </trans-unit>
+        <trans-unit id="Codeunit 2685812289 - NamedType 2573352293" size-unit="char" translate="yes" xml:space="preserve">
+          <source>You cannot assign equipment %1 for request %2 because its category %3 is not the requested equipment type %4.</source>
+          <note from="Developer" annotates="general" priority="2">%1 = equipment number, %2 = request number, %3 = equipment category code, %4 = requested equipment type</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit EQM Request Approval Mgt. - NamedType EquipmentTypeMismatchErr</note>
+        </trans-unit>
+        <trans-unit id="Codeunit 2685812289 - NamedType 516031653" size-unit="char" translate="yes" xml:space="preserve">
+          <source>There is no available equipment of type %1.</source>
+          <note from="Developer" annotates="general" priority="2">%1 = requested equipment type</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit EQM Request Approval Mgt. - NamedType NoAvailableEquipmentMsg</note>
+        </trans-unit>
+        <trans-unit id="Codeunit 2685812289 - NamedType 2988167589" size-unit="char" translate="yes" xml:space="preserve">
+          <source>You cannot assign equipment for request %1 because its status is %2. The request must be approved first.</source>
+          <note from="Developer" annotates="general" priority="2">%1 = request number, %2 = status</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit EQM Request Approval Mgt. - NamedType NotApprovedErr</note>
+        </trans-unit>
+        <trans-unit id="Codeunit 2685812289 - NamedType 1425329136" size-unit="char" translate="yes" xml:space="preserve">
+          <source>You can only send equipment request %1 for approval when its status is Open. The current status is %2.</source>
+          <note from="Developer" annotates="general" priority="2">%1 = request number, %2 = status</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit EQM Request Approval Mgt. - NamedType NotOpenErr</note>
+        </trans-unit>
+        <trans-unit id="Codeunit 2685812289 - NamedType 2953227121" size-unit="char" translate="yes" xml:space="preserve">
+          <source>You can only approve or reject equipment request %1 when its status is Pending Approval. The current status is %2.</source>
+          <note from="Developer" annotates="general" priority="2">%1 = request number, %2 = status</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit EQM Request Approval Mgt. - NamedType NotPendingErr</note>
+        </trans-unit>
+        <trans-unit id="Codeunit 2685812289 - NamedType 256372233" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Enter the reason for the rejection.</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit EQM Request Approval Mgt. - NamedType RejectInstructionTxt</note>
+        </trans-unit>
+        <trans-unit id="Codeunit 2685812289 - NamedType 311945492" size-unit="char" translate="yes" xml:space="preserve">
+          <source>You must enter a comment to reject equipment request %1.</source>
+          <note from="Developer" annotates="general" priority="2">%1 = request number</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit EQM Request Approval Mgt. - NamedType RejectionCommentRequiredErr</note>
+        </trans-unit>
+        <trans-unit id="Codeunit 2685812289 - NamedType 2764288926" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Equipment request %1 was rejected. A rejected request cannot be reopened; raise a new request instead.</source>
+          <note from="Developer" annotates="general" priority="2">%1 = request number</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit EQM Request Approval Mgt. - NamedType RequestRejectedErr</note>
+        </trans-unit>
+        <trans-unit id="Codeunit 2685812289 - NamedType 1425378810" size-unit="char" translate="yes" xml:space="preserve">
+          <source>You cannot approve equipment request %1 because you sent it for approval. Another manager must approve it.</source>
+          <note from="Developer" annotates="general" priority="2">%1 = request number</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit EQM Request Approval Mgt. - NamedType SelfApprovalErr</note>
         </trans-unit>
         <trans-unit id="Codeunit 1013676421 - NamedType 1359352173" size-unit="char" translate="yes" xml:space="preserve">
           <source>The selected warranty alerts are already acknowledged or cancelled.</source>
@@ -3089,7 +3194,7 @@
           <note from="Xliff Generator" annotates="general" priority="3">Page EQM Equipment Request Card - Property AboutTitle</note>
         </trans-unit>
         <trans-unit id="Page 614444226 - Property 247559172" size-unit="char" translate="yes" xml:space="preserve">
-          <source>Raise a request for equipment. Choose the employee who needs it, the type of equipment, and enter why it is needed. The request date is today unless you change it. New requests are Open. You can correct or delete a request while it is open.</source>
+          <source>Raise a request for equipment. Choose the employee who needs it, the type of equipment, and enter why it is needed. The request date is today unless you change it. New requests are Open. You can correct or delete a request while it is open. Send an open request for approval; another manager approves or rejects it, and approved requests are completed by assigning equipment.</source>
           <note from="Developer" annotates="general" priority="2"></note>
           <note from="Xliff Generator" annotates="general" priority="3">Page EQM Equipment Request Card - Property AboutText</note>
         </trans-unit>
@@ -3097,6 +3202,11 @@
           <source>Equipment Request</source>
           <note from="Developer" annotates="general" priority="2"></note>
           <note from="Xliff Generator" annotates="general" priority="3">Page EQM Equipment Request Card - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Page 614444226 - Control 227370865 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Approval</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page EQM Equipment Request Card - Control Approval - Property Caption</note>
         </trans-unit>
         <trans-unit id="Page 614444226 - Control 2445482498 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
           <source>General</source>
@@ -3113,13 +3223,58 @@
           <note from="Developer" annotates="general" priority="2"></note>
           <note from="Xliff Generator" annotates="general" priority="3">Page EQM Equipment Request Card - Control Employee Name - Property Caption</note>
         </trans-unit>
+        <trans-unit id="Page 614444226 - Action 803889193 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Approve the request. You cannot approve a request that you sent for approval.</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page EQM Equipment Request Card - Action Approve - Property ToolTip</note>
+        </trans-unit>
+        <trans-unit id="Page 614444226 - Action 803889193 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Approve</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page EQM Equipment Request Card - Action Approve - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Page 614444226 - Action 2724682261 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Choose available equipment of the requested type and assign it to the employee. The request is then completed.</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page EQM Equipment Request Card - Action AssignEquipment - Property ToolTip</note>
+        </trans-unit>
+        <trans-unit id="Page 614444226 - Action 2724682261 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Assign Equipment</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page EQM Equipment Request Card - Action AssignEquipment - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Page 614444226 - Action 113888489 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Reject the request. You must enter the reason. A rejected request cannot be reopened.</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page EQM Equipment Request Card - Action Reject - Property ToolTip</note>
+        </trans-unit>
+        <trans-unit id="Page 614444226 - Action 113888489 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Reject</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page EQM Equipment Request Card - Action Reject - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Page 614444226 - Action 3345212148 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Send the open request for approval. Another manager then approves or rejects it.</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page EQM Equipment Request Card - Action SendForApproval - Property ToolTip</note>
+        </trans-unit>
+        <trans-unit id="Page 614444226 - Action 3345212148 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Send for Approval</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page EQM Equipment Request Card - Action SendForApproval - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Page 614444226 - Action 3383493608 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Process</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page EQM Equipment Request Card - Action Category_Process - Property Caption</note>
+        </trans-unit>
         <trans-unit id="Page 2914995763 - Property 1064389655" size-unit="char" translate="yes" xml:space="preserve">
           <source>About equipment requests</source>
           <note from="Developer" annotates="general" priority="2"></note>
           <note from="Xliff Generator" annotates="general" priority="3">Page EQM Equipment Requests - Property AboutTitle</note>
         </trans-unit>
         <trans-unit id="Page 2914995763 - Property 247559172" size-unit="char" translate="yes" xml:space="preserve">
-          <source>This list shows the equipment requests raised for employees, newest first: who needs equipment, which type, why and when. Choose **New** to raise a request. Open requests can be corrected or deleted. Choose a view at the top to see requests with one status.</source>
+          <source>This list shows the equipment requests raised for employees, newest first: who needs equipment, which type, why and when. Choose **New** to raise a request. Open requests can be corrected or deleted. Send an open request for approval, then approve or reject it, and assign equipment to an approved request. Choose a view at the top to see requests with one status.</source>
           <note from="Developer" annotates="general" priority="2"></note>
           <note from="Xliff Generator" annotates="general" priority="3">Page EQM Equipment Requests - Property AboutText</note>
         </trans-unit>
@@ -3153,10 +3308,55 @@
           <note from="Developer" annotates="general" priority="2"></note>
           <note from="Xliff Generator" annotates="general" priority="3">Page EQM Equipment Requests - Action Employee - Property Caption</note>
         </trans-unit>
+        <trans-unit id="Page 2914995763 - Action 803889193 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Approve the request. You cannot approve a request that you sent for approval.</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page EQM Equipment Requests - Action Approve - Property ToolTip</note>
+        </trans-unit>
+        <trans-unit id="Page 2914995763 - Action 803889193 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Approve</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page EQM Equipment Requests - Action Approve - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Page 2914995763 - Action 2724682261 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Choose available equipment of the requested type and assign it to the employee. The request is then completed.</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page EQM Equipment Requests - Action AssignEquipment - Property ToolTip</note>
+        </trans-unit>
+        <trans-unit id="Page 2914995763 - Action 2724682261 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Assign Equipment</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page EQM Equipment Requests - Action AssignEquipment - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Page 2914995763 - Action 113888489 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Reject the request. You must enter the reason. A rejected request cannot be reopened.</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page EQM Equipment Requests - Action Reject - Property ToolTip</note>
+        </trans-unit>
+        <trans-unit id="Page 2914995763 - Action 113888489 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Reject</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page EQM Equipment Requests - Action Reject - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Page 2914995763 - Action 3345212148 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Send the open request for approval. Another manager then approves or rejects it.</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page EQM Equipment Requests - Action SendForApproval - Property ToolTip</note>
+        </trans-unit>
+        <trans-unit id="Page 2914995763 - Action 3345212148 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Send for Approval</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page EQM Equipment Requests - Action SendForApproval - Property Caption</note>
+        </trans-unit>
         <trans-unit id="Page 2914995763 - Action 1587086413 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
           <source>Navigate</source>
           <note from="Developer" annotates="general" priority="2"></note>
           <note from="Xliff Generator" annotates="general" priority="3">Page EQM Equipment Requests - Action Category_Category4 - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Page 2914995763 - Action 3383493608 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Process</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page EQM Equipment Requests - Action Category_Process - Property Caption</note>
         </trans-unit>
         <trans-unit id="Page 2914995763 - View 2913119229 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
           <source>Approved</source>
@@ -3772,6 +3972,26 @@
           <source>Upgrade</source>
           <note from="Developer" annotates="general" priority="2"></note>
           <note from="Xliff Generator" annotates="general" priority="3">Page EQM Maintenance Records - View Upgrade - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Page 360641796 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Equipment Request Decision</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page EQM Request Decision - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Page 360641796 - Control 812271570 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Specifies a comment on the decision.</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page EQM Request Decision - Control CommentText - Property ToolTip</note>
+        </trans-unit>
+        <trans-unit id="Page 360641796 - Control 812271570 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Comment</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page EQM Request Decision - Control CommentText - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Page 360641796 - Control 1654013215 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Specifies what to enter in the comment.</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page EQM Request Decision - Control InstructionText - Property ToolTip</note>
         </trans-unit>
         <trans-unit id="Page 2717703876 - Property 1064389655" size-unit="char" translate="yes" xml:space="preserve">
           <source>About warranty alerts</source>

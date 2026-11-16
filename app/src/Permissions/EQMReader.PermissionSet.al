@@ -45,6 +45,7 @@ permissionset 50100 "EQM - Reader"
         page "EQM Equipment Categories" = X,
         page "EQM Equipment Requests" = X,
         page "EQM Equipment Request Card" = X,
+        page "EQM Request Decision" = X,
         page "EQM Equipment Setup" = X,
         page "EQM Equipment Picture" = X,
         page "EQM Equipment Cues" = X,
@@ -88,5 +89,6 @@ permissionset 50100 "EQM - Reader"
         codeunit "EQM Integration Event Subscr." = X,
         codeunit "EQM Integration Event Mgt." = X,
         codeunit "EQM Power Automate Events" = X,
-        codeunit "EQM Power Automate Subscr." = X;
+        codeunit "EQM Power Automate Subscr." = X,
+        codeunit "EQM Request Approval Mgt." = X;
 }

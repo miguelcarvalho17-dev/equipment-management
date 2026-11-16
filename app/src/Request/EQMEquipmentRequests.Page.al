@@ -6,7 +6,7 @@ page 50133 "EQM Equipment Requests"
 {
     Caption = 'Equipment Requests';
     AboutTitle = 'About equipment requests';
-    AboutText = 'This list shows the equipment requests raised for employees, newest first: who needs equipment, which type, why and when. Choose **New** to raise a request. Open requests can be corrected or deleted. Choose a view at the top to see requests with one status.';
+    AboutText = 'This list shows the equipment requests raised for employees, newest first: who needs equipment, which type, why and when. Choose **New** to raise a request. Open requests can be corrected or deleted. Send an open request for approval, then approve or reject it, and assign equipment to an approved request. Choose a view at the top to see requests with one status.';
     PageType = List;
     ApplicationArea = All;
     UsageCategory = Lists;
@@ -49,6 +49,17 @@ page 50133 "EQM Equipment Requests"
                 {
                     StyleExpr = StatusStyle;
                 }
+                field("Decided By"; Rec."Decided By")
+                {
+                    Visible = false;
+                }
+                field("Decision Date"; Rec."Decision Date")
+                {
+                    Visible = false;
+                }
+                field("Assigned Equipment No."; Rec."Assigned Equipment No.")
+                {
+                }
             }
         }
     }
@@ -66,8 +77,76 @@ page 50133 "EQM Equipment Requests"
                 RunPageLink = "No." = field("Employee No.");
             }
         }
+        area(Processing)
+        {
+            action(SendForApproval)
+            {
+                Caption = 'Send for Approval';
+                ToolTip = 'Send the open request for approval. Another manager then approves or rejects it.';
+                Image = SendApprovalRequest;
+
+                trigger OnAction()
+                begin
+                    RequestApprovalMgt.SendForApproval(Rec);
+                    CurrPage.Update(false);
+                end;
+            }
+            action(Approve)
+            {
+                Caption = 'Approve';
+                ToolTip = 'Approve the request. You cannot approve a request that you sent for approval.';
+                Image = Approve;
+
+                trigger OnAction()
+                begin
+                    RequestApprovalMgt.ApproveWithDialog(Rec);
+                    CurrPage.Update(false);
+                end;
+            }
+            action(Reject)
+            {
+                Caption = 'Reject';
+                ToolTip = 'Reject the request. You must enter the reason. A rejected request cannot be reopened.';
+                Image = Reject;
+
+                trigger OnAction()
+                begin
+                    RequestApprovalMgt.RejectWithDialog(Rec);
+                    CurrPage.Update(false);
+                end;
+            }
+            action(AssignEquipment)
+            {
+                Caption = 'Assign Equipment';
+                ToolTip = 'Choose available equipment of the requested type and assign it to the employee. The request is then completed.';
+                Image = Allocate;
+
+                trigger OnAction()
+                begin
+                    RequestApprovalMgt.AssignEquipmentWithLookup(Rec);
+                    CurrPage.Update(false);
+                end;
+            }
+        }
         area(Promoted)
         {
+            group(Category_Process)
+            {
+                Caption = 'Process';
+
+                actionref(SendForApproval_Promoted; SendForApproval)
+                {
+                }
+                actionref(Approve_Promoted; Approve)
+                {
+                }
+                actionref(Reject_Promoted; Reject)
+                {
+                }
+                actionref(AssignEquipment_Promoted; AssignEquipment)
+                {
+                }
+            }
             group(Category_Category4)
             {
                 Caption = 'Navigate';
@@ -109,6 +188,7 @@ page 50133 "EQM Equipment Requests"
     }
 
     var
+        RequestApprovalMgt: Codeunit "EQM Request Approval Mgt.";
         EmployeeName: Text[100];
         StatusStyle: Text;
 

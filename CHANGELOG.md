@@ -1,6 +1,26 @@
 # Changelog
 Newest first. Grouped by Added / Changed / Fixed / Obsolete.
 
+## FR-033 Approval Workflow (version stays 29.0.0.0, no bump)
+### Added
+- Codeunit 50132 "EQM Request Approval Mgt." (public, internal procedures): Send for Approval, Approve, Reject and Assign Equipment for equipment requests. Open > Pending Approval > Approved > Completed, and Pending Approval > Rejected. The sender cannot approve; a rejection needs a comment; Rejected and Completed are final. Published events `OnBeforeCheckApproverAllowed` (IsHandled skips only the self-approval check) and `OnAfterRequestStatusChanged` (local integration events).
+- Page 50135 "EQM Request Decision": comment dialog for approve and reject.
+- Fields 9-13 on table 50111 "EQM Equipment Request": "Sent for Approval By", "Decided By", "Decision Date", "Decision Comment", "Assigned Equipment No." (not editable).
+- Actions Send for Approval, Approve, Reject and Assign Equipment on pages 50134 and 50133; group Approval on the card.
+- Test codeunits 50189 "EQM Request Approval Tests" (22 tests) and 50190 "EQM Request Appr. Test Subscr". They compile but have NOT been run (no BC sandbox).
+- Feature doc docs/features/FR-033-approval-workflow.md and help docs/help/FR-033-approval-workflow.md.
+### Changed
+- Permission set EQM - Reader: execute on codeunit 50132 and page 50135. Manager and Administrator inherit.
+- Status ToolTip of table 50111, summaries of table 50111 and enum 50110, and About text of pages 50133 and 50134 describe the approval process.
+### Fixed
+- None.
+### Obsolete
+- None.
+
+Release notes: Equipment requests now have an approval process. A manager sends an open request for approval; another manager approves it or rejects it with a reason. Approved requests are completed with Assign Equipment, which assigns available equipment of the requested type to the employee. Rejected and completed requests cannot be changed.
+
+Note: decisions Q1 own approval (not BC Approvals Management), Q2 the sender cannot approve, Q3 assignment from the request is an action (direct assignment unchanged), Q4 no stock check at approval, Q5 employee deletion not blocked. No upgrade code, no schema change besides new fields. Not verified: the tests have not been executed and the manual sandbox checks (docs/TODO.md, FR-033, scenario 17) are not done. At the first AppSource release, codeunit 50132, its two event signatures and fields 9-13 become contracts.
+
 ## FR-032 Equipment Request Process (version stays 29.0.0.0, no bump)
 ### Added
 - Enum 50110 "EQM Request Status" (not extensible): Open, Pending Approval, Approved, Rejected, Completed.
