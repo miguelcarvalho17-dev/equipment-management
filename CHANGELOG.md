@@ -1,6 +1,28 @@
 # Changelog
 Newest first. Grouped by Added / Changed / Fixed / Obsolete.
 
+## FR-035 Equipment Audit Trail (version stays 29.0.0.0, no bump)
+### Added
+- Enum 50111 "EQM Audit Event Type" (not extensible): Created, Updated, Assigned, Returned, Sent to Maintenance, Disposed.
+- Table 50112 "EQM Equipment Audit Entry" (public, append-only): equipment, event type, status after, employee, assignment entry, maintenance record, user, date and time. Insert only through the audit trail codeunit; Modify, Delete and Rename raise an error.
+- Codeunit 50135 "EQM Audit Trail Mgt." and codeunit 50136 "EQM Audit Trail Subscr." (both internal). Created, Assigned and Returned come from the business events of codeunit 50119; Sent to Maintenance, Disposed and Updated come from `OnModify` of table 50100. No new published events.
+- Page 50136 "EQM Equipment Audit Trail": read-only list, newest first.
+- Action "Audit Trail" on page 50101 "EQM Equipment Card".
+- Test codeunits 50192 "EQM Audit Trail Tests" (21 test procedures) and 50193 "EQM Audit Trail Test Subscr". Written and compiled; not executed (no sandbox, not yet run in CI).
+- Feature doc docs/features/FR-035-equipment-audit-trail.md and help docs/help/FR-035-equipment-audit-trail.md.
+### Changed
+- Table 50100 "EQM Equipment": `OnModify` writes the audit entries; `StartMaintenance` passes the maintenance number (internal, no signature change).
+- Page 50101 "EQM Equipment Card": About text mentions Audit Trail.
+- Permission set EQM - Reader: read on table data 50112, execute on table 50112, page 50136 and codeunits 50135 and 50136. EQM - Manager: indirect insert on table data 50112. Administrator inherits.
+### Fixed
+- None.
+### Obsolete
+- None.
+
+Release notes: Every piece of equipment now has a read-only audit trail of its life: created, updated, assigned, returned, sent to maintenance and disposed, with the user, the time and the status afterwards. Open it with Audit Trail on the Equipment Card. Updated entries do not show field values; the standard Change Log shows those.
+
+Note: decisions D1 save (one Updated entry per save, no field names or values; the Equipment Card saves each edited field separately, so five edited fields give five Updated entries), D2 updated (status changes to Lost or back to Available log Updated with the new status), D3 keep (deleting equipment leaves its entries). Returned is logged before Sent to Maintenance and Disposed. Equipment created before this feature has no Created entry (no backfill). No upgrade code. Not verified: the tests have not been executed; sandbox scenarios 14 (rename cascade, Manager permission) and 15 (permissions) are open (docs/TODO.md).
+
 ## FR-034 Change Log Support (version stays 29.0.0.0, no bump)
 ### Added
 - Codeunit 50133 "EQM Change Log Registration" (internal): registers table 50100 "EQM Equipment" in the standard Change Log setup (tables 403 and 404): Log Modification = Some Fields, with fields Category Code, Status, Assigned Employee No., Warranty Start Date, Warranty End Date, Warranty Provider and Warranty Reference No. Existing customer setup for the table is never overwritten. An upgrade tag (`MC-EQM-FR034-ChangeLogSetup-20261116`) makes it run once per company.

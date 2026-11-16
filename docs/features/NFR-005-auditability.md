@@ -14,7 +14,7 @@ Requirement: every maintenance operation leaves a permanent, read-only record of
 - Values are stored with `Format(value, 0, 9)` (XML format, plan Q4): unambiguous, not regional, less readable (for example dates as `2026-03-15`).
 - Each entry stores User ID (`UserId()`) and Logged At (`CurrentDateTime()`). Old/New Value are truncated to 250 characters.
 - Entries are written in the same transaction as the operation: if registering or posting fails and rolls back, no entry remains.
-- Not a replacement for the base Change Log. Since FR-034 the app registers the equipment fields (category, status, assigned employee, warranty) in the Change Log setup, but it does not activate the Change Log and never changes the customer's own setup; maintenance records are not registered. The maintenance log stays always on. See `docs/features/FR-034-change-log-support.md`.
+- Not a replacement for the base Change Log. Since FR-034 the app registers the equipment fields (category, status, assigned employee, warranty) in the Change Log setup, but it does not activate the Change Log and never changes the customer's own setup; maintenance records are not registered. The maintenance log stays always on. See `docs/features/FR-034-change-log-support.md`. FR-035 adds a separate lifecycle timeline (table 50112); see `docs/features/FR-035-equipment-audit-trail.md`.
 
 ## Objects
 | Type | ID | Name | Purpose |

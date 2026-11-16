@@ -493,6 +493,121 @@
           <note from="Developer" annotates="general" priority="2"></note>
           <note from="Xliff Generator" annotates="general" priority="3">Table EQM Equipment Assignment - Field Status - Property Caption</note>
         </trans-unit>
+        <trans-unit id="Table 670252022 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Equipment Audit Entry</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table EQM Equipment Audit Entry - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Table 670252022 - NamedType 658144035" size-unit="char" translate="yes" xml:space="preserve">
+          <source>You cannot delete equipment audit entry %1. The audit trail is kept permanently.</source>
+          <note from="Developer" annotates="general" priority="2">%1 = entry number</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table EQM Equipment Audit Entry - NamedType DeleteNotAllowedErr</note>
+        </trans-unit>
+        <trans-unit id="Table 670252022 - NamedType 1297145545" size-unit="char" translate="yes" xml:space="preserve">
+          <source>You cannot create equipment audit entries directly. Entries are created when equipment is created, changed, assigned, returned, sent to maintenance or disposed.</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table EQM Equipment Audit Entry - NamedType InsertNotAllowedErr</note>
+        </trans-unit>
+        <trans-unit id="Table 670252022 - NamedType 3659624548" size-unit="char" translate="yes" xml:space="preserve">
+          <source>You cannot change equipment audit entry %1. The audit trail is read-only.</source>
+          <note from="Developer" annotates="general" priority="2">%1 = entry number</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table EQM Equipment Audit Entry - NamedType ModifyNotAllowedErr</note>
+        </trans-unit>
+        <trans-unit id="Table 670252022 - NamedType 3435470116" size-unit="char" translate="yes" xml:space="preserve">
+          <source>You cannot change the number of equipment audit entry %1.</source>
+          <note from="Developer" annotates="general" priority="2">%1 = entry number</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table EQM Equipment Audit Entry - NamedType RenameNotAllowedErr</note>
+        </trans-unit>
+        <trans-unit id="Table 670252022 - Field 2582568164 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Specifies the number of the assignment entry behind an Assigned or Returned event. It is 0 for other events.</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table EQM Equipment Audit Entry - Field Assignment Entry No. - Property ToolTip</note>
+        </trans-unit>
+        <trans-unit id="Table 670252022 - Field 2582568164 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Assignment Entry No.</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table EQM Equipment Audit Entry - Field Assignment Entry No. - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Table 670252022 - Field 1964419135 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Specifies the employee the equipment was assigned to or returned from. It is blank for other events.</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table EQM Equipment Audit Entry - Field Employee No. - Property ToolTip</note>
+        </trans-unit>
+        <trans-unit id="Table 670252022 - Field 1964419135 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Employee No.</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table EQM Equipment Audit Entry - Field Employee No. - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Table 670252022 - Field 883711285 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Specifies the number of the audit entry.</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table EQM Equipment Audit Entry - Field Entry No. - Property ToolTip</note>
+        </trans-unit>
+        <trans-unit id="Table 670252022 - Field 883711285 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Entry No.</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table EQM Equipment Audit Entry - Field Entry No. - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Table 670252022 - Field 1827518031 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Specifies the number of the equipment that the event happened to.</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table EQM Equipment Audit Entry - Field Equipment No. - Property ToolTip</note>
+        </trans-unit>
+        <trans-unit id="Table 670252022 - Field 1827518031 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Equipment No.</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table EQM Equipment Audit Entry - Field Equipment No. - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Table 670252022 - Field 1270596704 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Specifies what happened to the equipment: Created, Updated, Assigned, Returned, Sent to Maintenance or Disposed. Updated does not show which fields changed; the Change Log shows the old and new values when it is set up.</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table EQM Equipment Audit Entry - Field Event Type - Property ToolTip</note>
+        </trans-unit>
+        <trans-unit id="Table 670252022 - Field 1270596704 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Event Type</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table EQM Equipment Audit Entry - Field Event Type - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Table 670252022 - Field 3032596473 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Specifies the date and time when the event happened.</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table EQM Equipment Audit Entry - Field Logged At - Property ToolTip</note>
+        </trans-unit>
+        <trans-unit id="Table 670252022 - Field 3032596473 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Logged At</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table EQM Equipment Audit Entry - Field Logged At - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Table 670252022 - Field 804216390 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Specifies the maintenance record that sent the equipment to maintenance. It is blank when the status was changed manually and for other events.</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table EQM Equipment Audit Entry - Field Maintenance No. - Property ToolTip</note>
+        </trans-unit>
+        <trans-unit id="Table 670252022 - Field 804216390 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Maintenance No.</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table EQM Equipment Audit Entry - Field Maintenance No. - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Table 670252022 - Field 765244740 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Specifies the status of the equipment after the event.</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table EQM Equipment Audit Entry - Field Status After - Property ToolTip</note>
+        </trans-unit>
+        <trans-unit id="Table 670252022 - Field 765244740 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Status After</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table EQM Equipment Audit Entry - Field Status After - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Table 670252022 - Field 2708250016 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Specifies the user who caused the event.</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table EQM Equipment Audit Entry - Field User ID - Property ToolTip</note>
+        </trans-unit>
+        <trans-unit id="Table 670252022 - Field 2708250016 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>User ID</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table EQM Equipment Audit Entry - Field User ID - Property Caption</note>
+        </trans-unit>
         <trans-unit id="Table 3451510709 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
           <source>Equipment Category</source>
           <note from="Developer" annotates="general" priority="2"></note>
@@ -2363,13 +2478,33 @@
           <note from="Developer" annotates="general" priority="2"></note>
           <note from="Xliff Generator" annotates="general" priority="3">Page EQM Equipment Assignments - View Closed - Property Caption</note>
         </trans-unit>
+        <trans-unit id="Page 760711272 - Property 1064389655" size-unit="char" translate="yes" xml:space="preserve">
+          <source>About the equipment audit trail</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page EQM Equipment Audit Trail - Property AboutTitle</note>
+        </trans-unit>
+        <trans-unit id="Page 760711272 - Property 247559172" size-unit="char" translate="yes" xml:space="preserve">
+          <source>This list shows the life of the equipment: when it was created, changed, assigned, returned, sent to maintenance or disposed, who did it, and the status afterwards. Changed does not show field values; use the Change Log for that. Entries cannot be changed or deleted.</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page EQM Equipment Audit Trail - Property AboutText</note>
+        </trans-unit>
+        <trans-unit id="Page 760711272 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Equipment Audit Trail</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page EQM Equipment Audit Trail - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Page 760711272 - Property 3863440606" size-unit="char" translate="yes" xml:space="preserve">
+          <source>equipment history, equipment lifecycle, equipment audit</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page EQM Equipment Audit Trail - Property AdditionalSearchTerms</note>
+        </trans-unit>
         <trans-unit id="Page 3574600233 - Property 1064389655" size-unit="char" translate="yes" xml:space="preserve">
           <source>About equipment details</source>
           <note from="Developer" annotates="general" priority="2"></note>
           <note from="Xliff Generator" annotates="general" priority="3">Page EQM Equipment Card - Property AboutTitle</note>
         </trans-unit>
         <trans-unit id="Page 3574600233 - Property 247559172" size-unit="char" translate="yes" xml:space="preserve">
-          <source>Here you manage one piece of equipment. The first sections show its details, its current status and who it is assigned to, its purchase and warranty information, and its planned maintenance. Use **Assign to Employee** and **Return** to change the assignment, and **Register Maintenance** to record maintenance work. Further down, **Assignment History** lists every assignment, **Maintenance History** lists every posted maintenance, and **Audit** shows who created the record and who changed it last. The **Picture** FactBox shows the picture of the equipment; use its actions to take, import, export or delete it. The **Attachments** FactBox lists the files attached to the equipment; use **Attachments** to add files and set their category. **Equipment Notes** lists dated notes about the equipment; type a new line to add one. Notes cannot be changed or deleted.</source>
+          <source>Here you manage one piece of equipment. The first sections show its details, its current status and who it is assigned to, its purchase and warranty information, and its planned maintenance. Use **Assign to Employee** and **Return** to change the assignment, and **Register Maintenance** to record maintenance work. Further down, **Assignment History** lists every assignment, **Maintenance History** lists every posted maintenance, and **Audit** shows who created the record and who changed it last. The **Picture** FactBox shows the picture of the equipment; use its actions to take, import, export or delete it. The **Attachments** FactBox lists the files attached to the equipment; use **Attachments** to add files and set their category. **Equipment Notes** lists dated notes about the equipment; type a new line to add one. Notes cannot be changed or deleted. **Audit Trail** shows the lifecycle of the equipment: created, changed, assigned, returned, sent to maintenance and disposed.</source>
           <note from="Developer" annotates="general" priority="2"></note>
           <note from="Xliff Generator" annotates="general" priority="3">Page EQM Equipment Card - Property AboutText</note>
         </trans-unit>
@@ -2537,6 +2672,16 @@
           <source>Attachments</source>
           <note from="Developer" annotates="general" priority="2"></note>
           <note from="Xliff Generator" annotates="general" priority="3">Page EQM Equipment Card - Action Attachments - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Page 3574600233 - Action 4224691649 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
+          <source>View the lifecycle timeline of the equipment: when it was created, changed, assigned, returned, sent to maintenance or disposed.</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page EQM Equipment Card - Action AuditTrail - Property ToolTip</note>
+        </trans-unit>
+        <trans-unit id="Page 3574600233 - Action 4224691649 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Audit Trail</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page EQM Equipment Card - Action AuditTrail - Property Caption</note>
         </trans-unit>
         <trans-unit id="Page 3574600233 - Action 350249191 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
           <source>View the maintenance records of the equipment.</source>
@@ -4227,6 +4372,41 @@
           <source>Warranty Certificate</source>
           <note from="Developer" annotates="general" priority="2"></note>
           <note from="Xliff Generator" annotates="general" priority="3">Enum EQM Attachment Category - EnumValue Warranty Certificate - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Enum 1996161804 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Audit Event Type</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Enum EQM Audit Event Type - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Enum 1996161804 - EnumValue 1005746868 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Assigned</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Enum EQM Audit Event Type - EnumValue Assigned - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Enum 1996161804 - EnumValue 1249475212 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Created</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Enum EQM Audit Event Type - EnumValue Created - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Enum 1996161804 - EnumValue 528908997 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Disposed</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Enum EQM Audit Event Type - EnumValue Disposed - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Enum 1996161804 - EnumValue 3687201325 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Returned</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Enum EQM Audit Event Type - EnumValue Returned - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Enum 1996161804 - EnumValue 1670583726 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Sent to Maintenance</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Enum EQM Audit Event Type - EnumValue Sent to Maintenance - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Enum 1996161804 - EnumValue 2339977023 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Updated</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Enum EQM Audit Event Type - EnumValue Updated - Property Caption</note>
         </trans-unit>
         <trans-unit id="Enum 3069227753 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
           <source>Equipment Status</source>

@@ -305,3 +305,10 @@ Source: "Test scenarios" 8 and 9 in `docs/plans/FR-034-change-log-support.md`. D
 - [ ] Scenario 9 (manual, sandbox): with the Change Log off, the same actions create no entries. On a fresh install in a new sandbox the 403/404 rows exist and the upgrade tag is set. Install as a non-SUPER administrator: record whether it succeeds or fails with a permission error (R1).
 - [ ] If entries are not written for the table, the fallback is codeunit 49 `OnAfterGetDatabaseTableTriggerSetup` (needs a replan, R3).
 - [ ] Record the results and clear the TODO(verify) items in the feature doc and the help article.
+
+## FR-035 Equipment Audit Trail (21 test procedures written in test codeunit 50192, not executed; sandbox checks not done)
+Source: "Test scenarios" 14 and 15 in `docs/plans/FR-035-equipment-audit-trail.md`. Decisions: D1 save, D2 updated, D3 keep.
+- [ ] Run test codeunit 50192 (`test/src/EQMAuditTrailTests.Codeunit.al`, 21 test procedures in the file) in a sandbox or AL-Go CI. Written and compiled, never executed.
+- [ ] Scenario 14 (manual, sandbox): as a Manager (not SUPER), run the card actions (assign, return, register maintenance, change status) and check the Audit Trail page; as a Reader, the page opens read-only. Rename equipment with entries and record whether the entries follow the new number and whether a permission error appears (as HS-SB9, risk R2; fallback needs approval).
+- [ ] Scenario 15 (manual, sandbox): with integration events off, entries are still written; deleting equipment without history leaves its entries (D3).
+- [ ] Record the results and clear the TODO(verify) items in the feature doc and the help article.
