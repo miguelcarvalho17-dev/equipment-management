@@ -281,9 +281,9 @@ Source: "Test scenarios" in `docs/plans/FR-032-equipment-request-process.md`.
 - [ ] Existing company with a blank "Request Nos.": creating a request shows the TestField error; after choosing a series it works.
 - [ ] Record the results and clear the TODO(verify) items in the help article.
 
-## FR-033 Approval Workflow (22 tests compile but have NOT been executed; sandbox checks not done)
+## FR-033 Approval Workflow (41 automated tests pass in CI, test codeunit 50189; sandbox checks not done)
 Source: "Test scenarios" in `docs/plans/FR-033-approval-workflow.md`. Decisions: Q1 own, Q2 noself, Q3 action, Q4 none, Q5 no.
-- [ ] Run test codeunit 50189 (`test/src/EQMRequestApprovalTests.Codeunit.al`, 22 tests, helper 50190) in a sandbox or CI; they have never been executed (no BC sandbox available). Record the result.
+- [x] (done 2026-11-16, AL-Go PR build #126, 0 failures) Run test codeunit 50189 (`test/src/EQMRequestApprovalTests.Codeunit.al`, 41 tests, helper 50190). Not run in a BC sandbox.
 - [ ] Scenario 17 (manual, sandbox, not SUPER), with two users who have EQM - Manager (A and B) and one with EQM - Reader:
   - [ ] A sends an Open request for approval; A cannot approve it (self-approval error); A can see Sent for Approval By = A.
   - [ ] B approves it (Decided By = B, date, comment recorded); then A chooses Assign Equipment, picks available equipment of the requested type; the equipment is Assigned, the request is Completed and Assigned Equipment No. is filled.
