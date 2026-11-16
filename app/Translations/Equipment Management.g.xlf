@@ -4633,6 +4633,11 @@
           <note from="Developer" annotates="general" priority="2"></note>
           <note from="Xliff Generator" annotates="general" priority="3">PermissionSet EQM - Administrator - Property Caption</note>
         </trans-unit>
+        <trans-unit id="PermissionSet 3902054422 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Equipment API Consumer</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">PermissionSet EQM - API Consumer - Property Caption</note>
+        </trans-unit>
         <trans-unit id="PermissionSet 2896812369 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
           <source>Equipment Manager</source>
           <note from="Developer" annotates="general" priority="2"></note>
