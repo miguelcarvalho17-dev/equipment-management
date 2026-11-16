@@ -58,7 +58,8 @@ codeunit 50192 "EQM Audit Trail Tests"
         Assert.AreEqual(Equipment.Status::Available, AuditEntry."Status After", 'Status After should be Available');
         Assert.AreEqual(CopyStr(UserId(), 1, MaxStrLen(AuditEntry."User ID")), AuditEntry."User ID", 'User ID should be the current user');
         Assert.AreNotEqual(0DT, AuditEntry."Logged At", 'Logged At should be filled');
-        Assert.IsTrue((AuditEntry."Logged At" >= LoggedBefore) and (AuditEntry."Logged At" <= LoggedAfter), 'Logged At should be the time of the insert');
+        // The database may round a DateTime by a few milliseconds, so allow one second either side.
+        Assert.IsTrue((AuditEntry."Logged At" >= LoggedBefore - 1000) and (AuditEntry."Logged At" <= LoggedAfter + 1000), 'Logged At should be the time of the insert');
         Assert.AreEqual('', AuditEntry."Employee No.", 'Employee No. should be blank for Created');
         Assert.AreEqual(0, AuditEntry."Assignment Entry No.", 'Assignment Entry No. should be 0 for Created');
         Assert.AreEqual('', AuditEntry."Maintenance No.", 'Maintenance No. should be blank for Created');
