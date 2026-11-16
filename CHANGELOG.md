@@ -1,6 +1,22 @@
 # Changelog
 Newest first. Grouped by Added / Changed / Fixed / Obsolete.
 
+## FR-036 Permission Sets (version stays 29.0.0.0, no bump)
+### Added
+- Permission set 50104 "EQM - API Consumer" (caption "Equipment API Consumer", assignable, includes no other set): data access through the four API pages only. Read and write on equipment (no delete), assignments and integration events (indirect, for `assign`, `returnEquipment`, `markProcessed`), read on categories, setup and maintenance records, indirect insert on audit entries. Execute on the 4 API pages, 7 tables and 10 codeunits of the write path; no UI page, no query. Assign together with D365 BASIC.
+- Test codeunit 50162 "EQM Role Permission Tests" (14 test procedures): structural checks of all four sets. Written and compiled; not executed (no sandbox).
+- Feature doc docs/features/FR-036-permission-sets.md (matrix and audit of the existing sets) and help docs/help/FR-036-permission-sets.md.
+### Changed
+- Nothing. Equipment Reader, Manager and Administrator were audited and left unchanged.
+### Fixed
+- None.
+### Obsolete
+- None.
+
+Release notes: A new Equipment API Consumer permission set lets an external system use the Equipment API through a Microsoft Entra application without opening any page and without the right to delete equipment. Equipment Reader, Manager and Administrator are unchanged. Assign D365 BASIC together with any of them.
+
+Note: decisions D1 full (API Consumer includes all API writes), D2 no (no DELETE on equipment). The Role ID "EQM - API Consumer" becomes a contract at the first AppSource release. Not verified: test codeunit 50162 not executed; sandbox scenarios S1 to S4 open (docs/TODO.md).
+
 ## FR-035 Equipment Audit Trail (version stays 29.0.0.0, no bump)
 ### Added
 - Enum 50111 "EQM Audit Event Type" (not extensible): Created, Updated, Assigned, Returned, Sent to Maintenance, Disposed.

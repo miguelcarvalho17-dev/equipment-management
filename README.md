@@ -102,7 +102,7 @@ The objective is to transform the Equipment Management solution into a connected
 | **Power Platform** | FR-031 Power Automate Support | Example flows, such as a Teams notification on assignment and an email reminder for expiring warranties |
 | **Approval management** | FR-032 Equipment Request Process, FR-033 Approval Workflow | Equipment requests (Open, Pending Approval, Approved, Rejected, Completed) that must be approved by a manager before assignment |
 | **Audit and compliance** | FR-034 Change Log Support, FR-035 Equipment Audit Trail | Change Log monitoring and a complete history of created, updated, assigned, returned, maintenance and disposed events |
-| **Security** | FR-036 Permission Sets | Equipment Reader, Equipment Manager, Equipment Administrator and API Consumer |
+| **Security** | FR-036 Permission Sets | Equipment Reader, Equipment Manager, Equipment Administrator and API Consumer (built: API Consumer added, the other three audited; tests not run, not sandbox-verified) |
 | **User experience** | FR-037 FactBoxes, FR-038 Enhanced Role Center | Summary, statistics and attachments FactBoxes on the Equipment Card, and new Role Center KPIs (requests pending approval, warranties expiring this month, open maintenance, total assets value) |
 | **Reporting** | FR-039 Equipment Register Report, FR-040 Asset Utilization Report, FR-041 Maintenance Cost Analysis | Inventory register, utilization % (assigned / total equipment * 100) and maintenance cost by equipment, category, month and year |
 

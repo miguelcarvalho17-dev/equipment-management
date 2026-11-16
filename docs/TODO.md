@@ -312,3 +312,13 @@ Source: "Test scenarios" 14 and 15 in `docs/plans/FR-035-equipment-audit-trail.m
 - [ ] Scenario 14 (manual, sandbox): as a Manager (not SUPER), run the card actions (assign, return, register maintenance, change status) and check the Audit Trail page; as a Reader, the page opens read-only. Rename equipment with entries and record whether the entries follow the new number and whether a permission error appears (as HS-SB9, risk R2; fallback needs approval).
 - [ ] Scenario 15 (manual, sandbox): with integration events off, entries are still written; deleting equipment without history leaves its entries (D3).
 - [ ] Record the results and clear the TODO(verify) items in the feature doc and the help article.
+
+## FR-036 Permission Sets (14 test procedures written in test codeunit 50162, not executed; sandbox checks not done)
+Source: "Test scenarios" S1 to S4 in `docs/plans/FR-036-permission-sets.md`. Decisions: D1 full, D2 no.
+- [ ] Run test codeunit 50162 (`test/src/EQMRolePermissionTests.Codeunit.al`, 14 test procedures) in a sandbox or AL-Go CI. Written and compiled, never executed. Also confirm that the platform tables and fields it reads ("Expanded Permission", "Metadata Permission Set", "Metadata Permission Set Rel.") behave as assumed in BC 29.
+- [ ] S1 (manual, sandbox): a Microsoft Entra application with EQM - API Consumer + D365 BASIC can GET equipments, categories, assignments and integrationEvents, POST equipment with a blank number, PATCH it, call `assign`, `returnEquipment` and `markProcessed`, with no permission error. Audit and assignment entries are written.
+- [ ] S2 (manual, sandbox, negative): DELETE equipment fails with a permission error (D2); PATCH on categories is rejected.
+- [ ] S3 (manual, sandbox, negative): a user with only API Consumer + D365 BASIC who opens Equipment List or Equipment Card in the web client gets a permission error.
+- [ ] S4 (manual, sandbox): GET `/companies` (standard API) works for that application. If not, record the extra permission set needed.
+- [ ] Number series use for POST with a blank number by a non-SUPER caller (NFR-002 R3).
+- [ ] Record the results and clear the TODO(verify) items in the feature doc and the help article.
