@@ -1,6 +1,6 @@
 # FR-035 Equipment Audit Trail
 
-> Status: **Draft, awaiting approval.** Source: GitHub issue #73. Branch `feature/FR-035-equipment-audit-trail`. No events report: only this app's own objects are hooked (business events of codeunit 50119, table 50100 triggers). No version bump (29.0.0.0, unreleased). No upgrade code.
+> Status: **Approved.** The user approved D1 save, D2 updated, D3 keep. Source: GitHub issue #73. Branch `feature/FR-035-equipment-audit-trail`. No events report: only this app's own objects are hooked (business events of codeunit 50119, table 50100 triggers). No version bump (29.0.0.0, unreleased). No upgrade code.
 > **Open decisions (the plan uses the recommended default, so each answer can be one word):**
 > - **D1 "Updated" detail.** **save** (recommended): one Updated entry per save that changed at least one tracked field, with no field names or values. Field-level old/new values stay in the standard Change Log (FR-034 rejected an own field-change log). **fields**: one Updated entry per changed field, with Field No. and a Field Caption FlowField, still without values.
 > - **D2 Status changes the issue does not name** (Available/In Maintenance to Lost, In Maintenance to Available after posting, extension statuses). **updated** (recommended): logged as Updated; "Status After" shows the new status. **own**: add enum values Lost and Maintenance Completed.
