@@ -280,6 +280,7 @@ table 50100 "EQM Equipment"
 
     var
         ReturnInProgress: Boolean;
+        MaintenanceNoInProgress: Code[20];
         SerialNoAlreadyUsedErr: Label 'Serial No. %1 is already used by equipment %2.', Comment = '%1 = serial number, %2 = equipment number';
         EmployeeOnlyWhenAssignedErr: Label 'You can only fill in %1 when the status is %2.', Comment = '%1 = Assigned Employee No. field caption, %2 = Assigned status caption';
         AssignedEmployeeRequiredErr: Label 'You must fill in %1 for equipment %2 because its status is %3. On the equipment card, use the Assign to Employee action.', Comment = '%1 = field caption, %2 = equipment number, %3 = status caption';
@@ -336,10 +337,13 @@ table 50100 "EQM Equipment"
     trigger OnModify()
     var
         AssignmentMgt: Codeunit "EQM Assignment Mgt.";
+        AuditTrailMgt: Codeunit "EQM Audit Trail Mgt.";
     begin
         UpdateNextMaintenanceDate();
         CheckEquipmentConsistency(false);
         AssignmentMgt.UpdateAssignmentOnSave(Rec);
+        if not IsTemporary() then
+            AuditTrailMgt.LogEquipmentChanges(Rec, MaintenanceNoInProgress);
     end;
 
     trigger OnDelete()
@@ -449,7 +453,8 @@ table 50100 "EQM Equipment"
     /// Sets the status to In Maintenance and saves the record with triggers. Called when a maintenance record is
     /// registered. Does nothing when the status is already In Maintenance, Lost or Disposed. For assigned equipment the user
     /// is asked to confirm (Yes without a UI session); the equipment is then returned from the employee and the assignment
-    /// is closed. Raises an empty error when the user answers No.
+    /// is closed. Raises an empty error when the user answers No. The maintenance record number is passed to the audit
+    /// trail entry Sent to Maintenance.
     /// </summary>
     /// <param name="MaintenanceRecord">The maintenance record being registered (passed by value). Used for the event.</param>
     internal procedure StartMaintenance(MaintenanceRecord: Record "EQM Maintenance Record")
@@ -469,7 +474,9 @@ table 50100 "EQM Equipment"
 
         Status := Status::"In Maintenance";
         OnBeforeStartMaintenance(Rec, MaintenanceRecord);
+        MaintenanceNoInProgress := MaintenanceRecord."No.";
         Modify(true);
+        MaintenanceNoInProgress := '';
     end;
 
     /// <summary>

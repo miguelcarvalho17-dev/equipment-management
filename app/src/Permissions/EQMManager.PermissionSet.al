@@ -12,6 +12,7 @@ permissionset 50101 "EQM - Manager"
         tabledata "Document Attachment" = RIMD,
         tabledata "EQM Equipment" = RIM,
         tabledata "EQM Equipment Assignment" = Rim,
+        tabledata "EQM Equipment Audit Entry" = i,
         tabledata "EQM Equipment Note" = RI,
         tabledata "EQM Equipment Request" = RIMD,
         tabledata "EQM Integration Event Entry" = i,

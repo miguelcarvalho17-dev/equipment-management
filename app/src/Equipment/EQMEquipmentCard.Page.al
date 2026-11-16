@@ -8,7 +8,7 @@ page 50101 "EQM Equipment Card"
 {
     Caption = 'Equipment Card';
     AboutTitle = 'About equipment details';
-    AboutText = 'Here you manage one piece of equipment. The first sections show its details, its current status and who it is assigned to, its purchase and warranty information, and its planned maintenance. Use **Assign to Employee** and **Return** to change the assignment, and **Register Maintenance** to record maintenance work. Further down, **Assignment History** lists every assignment, **Maintenance History** lists every posted maintenance, and **Audit** shows who created the record and who changed it last. The **Picture** FactBox shows the picture of the equipment; use its actions to take, import, export or delete it. The **Attachments** FactBox lists the files attached to the equipment; use **Attachments** to add files and set their category. **Equipment Notes** lists dated notes about the equipment; type a new line to add one. Notes cannot be changed or deleted.';
+    AboutText = 'Here you manage one piece of equipment. The first sections show its details, its current status and who it is assigned to, its purchase and warranty information, and its planned maintenance. Use **Assign to Employee** and **Return** to change the assignment, and **Register Maintenance** to record maintenance work. Further down, **Assignment History** lists every assignment, **Maintenance History** lists every posted maintenance, and **Audit** shows who created the record and who changed it last. The **Picture** FactBox shows the picture of the equipment; use its actions to take, import, export or delete it. The **Attachments** FactBox lists the files attached to the equipment; use **Attachments** to add files and set their category. **Equipment Notes** lists dated notes about the equipment; type a new line to add one. Notes cannot be changed or deleted. **Audit Trail** shows the lifecycle of the equipment: created, changed, assigned, returned, sent to maintenance and disposed.';
     PageType = Card;
     ApplicationArea = All;
     UsageCategory = None;
@@ -313,6 +313,15 @@ page 50101 "EQM Equipment Card"
                     RunObject = page "EQM Equipment Assignments";
                     RunPageLink = "Equipment No." = field("No.");
                 }
+                action(AuditTrail)
+                {
+                    Caption = 'Audit Trail';
+                    ToolTip = 'View the lifecycle timeline of the equipment: when it was created, changed, assigned, returned, sent to maintenance or disposed.';
+                    Image = History;
+                    Enabled = IsSaved;
+                    RunObject = page "EQM Equipment Audit Trail";
+                    RunPageLink = "Equipment No." = field("No.");
+                }
                 action(Maintenance)
                 {
                     Caption = 'Maintenance';
@@ -390,6 +399,9 @@ page 50101 "EQM Equipment Card"
                 Caption = 'Equipment';
 
                 actionref(Assignments_Promoted; Assignments)
+                {
+                }
+                actionref(AuditTrail_Promoted; AuditTrail)
                 {
                 }
                 actionref(Maintenance_Promoted; Maintenance)
