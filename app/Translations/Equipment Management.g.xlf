@@ -748,6 +748,16 @@
           <note from="Developer" annotates="general" priority="2"></note>
           <note from="Xliff Generator" annotates="general" priority="3">Table EQM Equipment Cue - Field Maint. Cost YTD Filter - Property Caption</note>
         </trans-unit>
+        <trans-unit id="Table 2297682612 - Field 1589706726 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Specifies the number of maintenance records that are registered but not yet posted. While a record is open, its equipment is in maintenance and cannot be assigned. Choose the number to see the open maintenance records.</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table EQM Equipment Cue - Field Open Maintenance Activities - Property ToolTip</note>
+        </trans-unit>
+        <trans-unit id="Table 2297682612 - Field 1589706726 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Open Maintenance Activities</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table EQM Equipment Cue - Field Open Maintenance Activities - Property Caption</note>
+        </trans-unit>
         <trans-unit id="Table 2297682612 - Field 401514863 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
           <source>Specifies the number of warranty alerts that are open. An alert is created 90, 60 and 30 days before a warranty ends. Choose the number to see and acknowledge the alerts.</source>
           <note from="Developer" annotates="general" priority="2"></note>
@@ -803,6 +813,26 @@
           <note from="Developer" annotates="general" priority="2"></note>
           <note from="Xliff Generator" annotates="general" priority="3">Table EQM Equipment Cue - Field Primary Key - Property Caption</note>
         </trans-unit>
+        <trans-unit id="Table 2297682612 - Field 2245208590 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Specifies the number of equipment requests that are waiting for approval. Choose the number to see the requests.</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table EQM Equipment Cue - Field Requests Pending Approval - Property ToolTip</note>
+        </trans-unit>
+        <trans-unit id="Table 2297682612 - Field 2245208590 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Requests Pending Approval</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table EQM Equipment Cue - Field Requests Pending Approval - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Table 2297682612 - Field 1991395022 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Specifies the total purchase cost of the equipment that is not lost or disposed of, in local currency. Equipment without a purchase cost counts as zero, and depreciation is not taken into account. Choose the amount to see the equipment.</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table EQM Equipment Cue - Field Total Assets Value - Property ToolTip</note>
+        </trans-unit>
+        <trans-unit id="Table 2297682612 - Field 1991395022 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Total Assets Value</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table EQM Equipment Cue - Field Total Assets Value - Property Caption</note>
+        </trans-unit>
         <trans-unit id="Table 2297682612 - Field 1515026028 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
           <source>Specifies the number of equipment records, whatever their status.</source>
           <note from="Developer" annotates="general" priority="2"></note>
@@ -842,6 +872,16 @@
           <source>Warranties Expiring in 90 Days</source>
           <note from="Developer" annotates="general" priority="2"></note>
           <note from="Xliff Generator" annotates="general" priority="3">Table EQM Equipment Cue - Field Warranties Expiring 90 Days - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Table 2297682612 - Field 3774402534 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Specifies the number of equipment records whose warranty ends from today up to and including the last day of the current month. Warranties that ended earlier this month are counted as expired warranties. Lost and disposed equipment and equipment without a warranty end date are not counted. Choose the number to see the equipment.</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table EQM Equipment Cue - Field Warranties Expiring This Month - Property ToolTip</note>
+        </trans-unit>
+        <trans-unit id="Table 2297682612 - Field 3774402534 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Warranties Expiring This Month</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table EQM Equipment Cue - Field Warranties Expiring This Month - Property Caption</note>
         </trans-unit>
         <trans-unit id="Table 2297682612 - Field 2198964046 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
           <source>Specifies the warranty end dates that count as expiring within 90 days. It is set automatically.</source>
@@ -892,6 +932,16 @@
           <source>Warranties Expiring in 30 Days</source>
           <note from="Developer" annotates="general" priority="2"></note>
           <note from="Xliff Generator" annotates="general" priority="3">Table EQM Equipment Cue - Field Warranty Expiring Soon - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Table 2297682612 - Field 3113532808 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Specifies the warranty end dates that count as expiring this month. It is set automatically.</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table EQM Equipment Cue - Field Warranty Month Filter - Property ToolTip</note>
+        </trans-unit>
+        <trans-unit id="Table 2297682612 - Field 3113532808 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Warranty This Month Filter</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table EQM Equipment Cue - Field Warranty Month Filter - Property Caption</note>
         </trans-unit>
         <trans-unit id="Table 1552169445 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
           <source>Equipment Note</source>
@@ -2888,6 +2938,11 @@
           <note from="Developer" annotates="general" priority="2"></note>
           <note from="Xliff Generator" annotates="general" priority="3">Page EQM Equipment Cues - Control MaintenanceCosts - Property Caption</note>
         </trans-unit>
+        <trans-unit id="Page 2077431605 - Control 3759218710 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Operational Indicators</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page EQM Equipment Cues - Control OperationalIndicators - Property Caption</note>
+        </trans-unit>
         <trans-unit id="Page 2077431605 - Control 3542843059 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
           <source>Planned Maintenance</source>
           <note from="Developer" annotates="general" priority="2"></note>
@@ -2904,7 +2959,7 @@
           <note from="Xliff Generator" annotates="general" priority="3">Page EQM Equipment Dashboard - Property AboutTitle</note>
         </trans-unit>
         <trans-unit id="Page 3818031089 - Property 247559172" size-unit="char" translate="yes" xml:space="preserve">
-          <source>The tiles count your equipment by status, show how many warranties are active, expire within 90 or 30 days or have expired, how many warranty alerts are open, how many pieces of equipment have planned maintenance due this month or overdue, and show the total cost of posted maintenance, this year's cost so far and the average cost. **Total Equipment** includes lost and disposed equipment; the warranty and planned maintenance tiles do not. **Active Warranties** includes the warranties that expire soon, and **Warranties Expiring in 90 Days** includes those that expire within 30 days. **Overdue Maintenance Equipment** turns red when at least one piece of equipment has a next maintenance date before today. The charts show how your equipment is spread over categories and statuses, which categories cost the most in maintenance, and the ten pieces of equipment with the highest maintenance cost. Choose a tile or a chart segment to see the details. Choose **Refresh** to update the numbers.</source>
+          <source>The tiles count your equipment by status, show how many warranties are active, expire within 90 or 30 days or have expired, how many warranty alerts are open, how many pieces of equipment have planned maintenance due this month or overdue, and show the total cost of posted maintenance, this year's cost so far and the average cost. The **Operational Indicators** tiles show how many equipment requests are waiting for approval, how many warranties expire from today to the end of this month, how many maintenance records are open and not yet posted, and the total purchase cost of the equipment that is not lost or disposed of. **Total Equipment** includes lost and disposed equipment; the warranty and planned maintenance tiles do not. **Active Warranties** includes the warranties that expire soon, and **Warranties Expiring in 90 Days** includes those that expire within 30 days. **Overdue Maintenance Equipment** turns red when at least one piece of equipment has a next maintenance date before today. The charts show how your equipment is spread over categories and statuses, which categories cost the most in maintenance, and the ten pieces of equipment with the highest maintenance cost. Choose a tile or a chart segment to see the details. Choose **Refresh** to update the numbers.</source>
           <note from="Developer" annotates="general" priority="2"></note>
           <note from="Xliff Generator" annotates="general" priority="3">Page EQM Equipment Dashboard - Property AboutText</note>
         </trans-unit>
