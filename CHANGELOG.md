@@ -1,7 +1,7 @@
 # Changelog
 Newest first. Grouped by Added / Changed / Fixed / Obsolete.
 
-## Unreleased: FR-038 Enhanced Role Center (version stays 29.0.0.0, no bump)
+## FR-038 Enhanced Role Center (version stays 29.0.0.0, no bump)
 ### Added
 - Operational Indicators group on the Equipment Manager Role Center and the equipment dashboard, with four tiles: Requests Pending Approval (drill-down to the pending requests), Warranties Expiring This Month (warranties that end from today to the end of the month, drill-down to the equipment list), Open Maintenance Activities (open maintenance records) and Total Assets Value (purchase cost of equipment that is not lost or disposed of, in local currency).
 - Test codeunit "EQM Dashboard Tests" (12 test procedures). Written and compiled; not executed (no CLI runner, no sandbox).
