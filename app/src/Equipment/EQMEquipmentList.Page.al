@@ -206,6 +206,13 @@ page 50100 "EQM Equipment List"
                 Image = Report;
                 RunObject = report "EQM Equipment Register";
             }
+            action(AssetUtilization)
+            {
+                Caption = 'Asset Utilization';
+                ToolTip = 'Print the asset utilization: total, assigned, available and in-maintenance equipment and the utilization percentage. Lost and disposed equipment is not counted. You can filter by category and location.';
+                Image = Report;
+                RunObject = report "EQM Asset Utilization";
+            }
         }
         area(Promoted)
         {
@@ -228,6 +235,9 @@ page 50100 "EQM Equipment List"
                 {
                 }
                 actionref(EquipmentRegister_Promoted; EquipmentRegister)
+                {
+                }
+                actionref(AssetUtilization_Promoted; AssetUtilization)
                 {
                 }
             }

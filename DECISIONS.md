@@ -42,3 +42,13 @@ A decision that applies to all future work (not just one task) belongs in the "S
 - 2026-11-17 | FR-039 Equipment Register Report | Chose to extend test 50162 so reports are part of the "Reader has Execute on every object" check | Reversible: yes
 - 2026-11-17 | FR-039 build | The AL MCP could not load symbols, so app/ and test/ were compiled with the extension's alc.dll directly with /generatereportlayout+ (analyzers on app/, none on test/) | Reversible: yes
 - 2026-11-17 | FR-039 tests | Added always-true AreNotEqual anchor assertions in positive/negative test pairs over dropping the unused variables (reviewer MINOR m1, left open) | Reversible: yes
+- 2026-11-17 | FR-040 Asset Utilization Report | Chose Total = equipment not Lost and not Disposed (extension statuses included) over all statuses as in the dashboard Total Equipment tile, because final statuses can never be assigned | Reversible: yes
+- 2026-11-17 | FR-040 Asset Utilization Report | Chose to add an In Maintenance column next to the issue's four metrics, so Total reconciles | Reversible: no (dataset columns are a contract; can only be added)
+- 2026-11-17 | FR-040 Asset Utilization Report | Chose one summary row for the filtered set (request filters Category Code, Location Code) over a per-category breakdown; the breakdown is phase 2 | Reversible: yes
+- 2026-11-17 | FR-040 Asset Utilization Report | Chose the calculation in two new internal procedures on "EQM Dashboard Mgt." over a new codeunit or new cue FlowFields, because Reader already has Execute on it | Reversible: yes
+- 2026-11-17 | FR-040 Asset Utilization Report | Chose a filtered Count() per status in filter group 10 (user filters in group 0 still apply) over looping the records or a new query | Reversible: yes
+- 2026-11-17 | FR-040 Asset Utilization Report | Chose Utilization % rounded to 0.01, and 0 when Total = 0 | Reversible: yes
+- 2026-11-17 | FR-040 Asset Utilization Report | Chose a single compiler-generated Excel layout and the FR-039 entry points (Tell Me, Equipment List Report group, Role Center Reporting area) | Reversible: no (published actions cannot be removed, AS0031)
+- 2026-11-17 | FR-040 Asset Utilization Report | Chose report ID 50101 and test codeunit 50196 (MCP ID tool unavailable, IDs from a source scan) | Reversible: yes
+- 2026-11-17 | FR-040 build | The AL MCP could not load symbols, so app/ and test/ were compiled with the extension's alc.dll directly (analyzers on app/, none on test/) | Reversible: yes
+- 2026-11-17 | FR-040 report | Added `using System.Utilities;` for the Integer data item, as the compiler required | Reversible: yes

@@ -3198,6 +3198,16 @@
           <note from="Developer" annotates="general" priority="2"></note>
           <note from="Xliff Generator" annotates="general" priority="3">Page EQM Equipment List - Action Category_Report - Property Caption</note>
         </trans-unit>
+        <trans-unit id="Page 2630064635 - Action 2102478966 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Print the asset utilization: total, assigned, available and in-maintenance equipment and the utilization percentage. Lost and disposed equipment is not counted. You can filter by category and location.</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page EQM Equipment List - Action AssetUtilization - Property ToolTip</note>
+        </trans-unit>
+        <trans-unit id="Page 2630064635 - Action 2102478966 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Asset Utilization</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page EQM Equipment List - Action AssetUtilization - Property Caption</note>
+        </trans-unit>
         <trans-unit id="Page 2630064635 - Action 4169195256 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
           <source>Open the equipment dashboard with key figures and charts.</source>
           <note from="Developer" annotates="general" priority="2"></note>
@@ -3327,6 +3337,16 @@
           <source>Warranty Alerts</source>
           <note from="Developer" annotates="general" priority="2"></note>
           <note from="Xliff Generator" annotates="general" priority="3">Page EQM Equipment Manager RC - Action WarrantyAlertList - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Page 4775459 - Action 2102478966 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Print the asset utilization: total, assigned, available and in-maintenance equipment and the utilization percentage. Lost and disposed equipment is not counted. You can filter by category and location.</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page EQM Equipment Manager RC - Action AssetUtilization - Property ToolTip</note>
+        </trans-unit>
+        <trans-unit id="Page 4775459 - Action 2102478966 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Asset Utilization</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page EQM Equipment Manager RC - Action AssetUtilization - Property Caption</note>
         </trans-unit>
         <trans-unit id="Page 4775459 - Action 4083427813 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
           <source>Print the equipment register: a list of equipment with category, status, assigned employee and purchase data. You can filter by category, status, employee and purchase date.</source>
@@ -4377,6 +4397,26 @@
           <source>Open</source>
           <note from="Developer" annotates="general" priority="2"></note>
           <note from="Xliff Generator" annotates="general" priority="3">Page EQM Warranty Alerts - View OpenAlerts - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Report 2946818741 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Asset Utilization</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Report EQM Asset Utilization - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Report 2946818741 - Property 3863440606" size-unit="char" translate="yes" xml:space="preserve">
+          <source>equipment utilization, utilisation, asset usage, assigned equipment percentage</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Report EQM Asset Utilization - Property AdditionalSearchTerms</note>
+        </trans-unit>
+        <trans-unit id="Report 2946818741 - ReportLayout 3927085111 - Property 2166945456" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Shows total, assigned, available and in-maintenance equipment and the utilization percentage (assigned divided by total, times 100) for the equipment that matches your filters. Lost and disposed equipment is not counted.</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Report EQM Asset Utilization - ReportLayout AssetUtilizationExcel - Property Summary</note>
+        </trans-unit>
+        <trans-unit id="Report 2946818741 - ReportLayout 3927085111 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Asset Utilization (Excel)</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Report EQM Asset Utilization - ReportLayout AssetUtilizationExcel - Property Caption</note>
         </trans-unit>
         <trans-unit id="Report 4213436734 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
           <source>Equipment Register</source>

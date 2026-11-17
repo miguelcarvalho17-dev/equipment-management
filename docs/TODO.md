@@ -349,3 +349,13 @@ Source: "Manual sandbox checks" in `docs/plans/FR-039-equipment-register-report.
 - [ ] S4 (manual, sandbox): a user with only EQM - Reader can run it. A user without read permission on Employee gets blank names in the Assigned Employee Name column and no error.
 - [ ] S5 (manual, sandbox): the action works from the Equipment List (Report group) and from the Equipment Manager Role Center (Reporting area).
 - [ ] Record the results and clear the TODO(verify) items in `docs/features/FR-039-equipment-register-report.md` and `docs/help/FR-039-equipment-register-report.md`.
+
+## FR-040 sandbox checks (not run; 10 test procedures written in test codeunit "EQM Asset Utilization Tests" 50196, not executed)
+Source: "Manual sandbox checks" in `docs/plans/FR-040-asset-utilization-report.md`. Test codeunit 50162 (Reader execute on every report, API Consumer none) is also not executed. Build of `app/` and `test/` reported with 0 errors and 0 warnings from this change. No separate AppSource validation ran.
+- [ ] Run the test codeunit "EQM Asset Utilization Tests" (`test/src/EQMAssetUtilizationTests.Codeunit.al`) and "EQM Role Permission Tests" (`test/src/EQMRolePermissionTests.Codeunit.al`) with AL Test Runner in a sandbox. Written, never executed.
+- [ ] S1 (manual, sandbox): Tell Me "Asset Utilization" opens the request page with Category Code and Location Code.
+- [ ] S2 (manual, sandbox): with no filter, the figures reconcile with the dashboard tiles: Total = Available + Assigned + In Maintenance tiles, and Utilization % = Assigned / Total * 100. Expect a difference only when lost or disposed equipment exists, because the report total leaves them out.
+- [ ] S3 (manual, sandbox): run with a Category filter. The Excel Data sheet has one row, and the hidden ReportFilterValues sheet shows the filter.
+- [ ] S4 (manual, sandbox): a user with only EQM - Reader can run it.
+- [ ] S5 (manual, sandbox): the action works from the Equipment List (Report group) and from the Equipment Manager Role Center (Reporting area).
+- [ ] Record the results and clear the TODO(verify) items in `docs/features/FR-040-asset-utilization-report.md` and `docs/help/FR-040-asset-utilization-report.md`.

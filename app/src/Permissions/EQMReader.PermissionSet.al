@@ -39,6 +39,7 @@ permissionset 50100 "EQM - Reader"
         query "EQM Maint. Cost by Category" = X,
         query "EQM Maint. Cost by Equipment" = X,
         report "EQM Equipment Register" = X,
+        report "EQM Asset Utilization" = X,
         page "EQM Equipment List" = X,
         page "EQM Equipment Card" = X,
         page "EQM Equipment Assignments" = X,
