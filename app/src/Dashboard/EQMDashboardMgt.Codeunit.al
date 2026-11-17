@@ -232,4 +232,45 @@ codeunit 50107 "EQM Dashboard Mgt."
         MaintenanceHistoryEntry.SetRange("Equipment No.", EquipmentNo);
         Page.Run(Page::"EQM Maintenance History", MaintenanceHistoryEntry);
     end;
+
+    /// <summary>
+    /// Counts the equipment for the asset utilization within the filters of the given record. Lost and disposed
+    /// equipment is never counted. Total counts every other status, including statuses added by extensions.
+    /// The filters on the given record are not changed.
+    /// </summary>
+    /// <param name="Equipment">The equipment record carrying the filters to apply.</param>
+    /// <param name="TotalEquipment">Returns the equipment that is not lost or disposed.</param>
+    /// <param name="AssignedEquipment">Returns the equipment with status Assigned.</param>
+    /// <param name="AvailableEquipment">Returns the equipment with status Available.</param>
+    /// <param name="InMaintenanceEquipment">Returns the equipment with status In Maintenance.</param>
+    internal procedure CalcAssetUtilization(var Equipment: Record "EQM Equipment"; var TotalEquipment: Integer; var AssignedEquipment: Integer; var AvailableEquipment: Integer; var InMaintenanceEquipment: Integer)
+    var
+        FilteredEquipment: Record "EQM Equipment";
+    begin
+        FilteredEquipment.CopyFilters(Equipment);
+        // Filter group 10 is outside the groups the platform uses (0-7), so a user filter on Status in group 0 still applies
+        FilteredEquipment.FilterGroup(10);
+        FilteredEquipment.SetFilter(Status, '<>%1&<>%2', FilteredEquipment.Status::Lost, FilteredEquipment.Status::Disposed);
+        TotalEquipment := FilteredEquipment.Count();
+        FilteredEquipment.SetRange(Status, FilteredEquipment.Status::Assigned);
+        AssignedEquipment := FilteredEquipment.Count();
+        FilteredEquipment.SetRange(Status, FilteredEquipment.Status::Available);
+        AvailableEquipment := FilteredEquipment.Count();
+        FilteredEquipment.SetRange(Status, FilteredEquipment.Status::"In Maintenance");
+        InMaintenanceEquipment := FilteredEquipment.Count();
+    end;
+
+    /// <summary>
+    /// Returns the utilization percentage: assigned equipment divided by total equipment, times 100, rounded to two decimals.
+    /// Zero when there is no equipment.
+    /// </summary>
+    /// <param name="AssignedEquipment">The number of assigned equipment.</param>
+    /// <param name="TotalEquipment">The total number of equipment.</param>
+    /// <returns>The utilization percentage.</returns>
+    internal procedure CalcUtilizationPct(AssignedEquipment: Integer; TotalEquipment: Integer): Decimal
+    begin
+        if TotalEquipment <= 0 then
+            exit(0);
+        exit(Round(AssignedEquipment * 100 / TotalEquipment, 0.01));
+    end;
 }

@@ -117,6 +117,13 @@ page 50110 "EQM Equipment Manager RC"
                 Image = Report;
                 RunObject = report "EQM Equipment Register";
             }
+            action(AssetUtilization)
+            {
+                Caption = 'Asset Utilization';
+                ToolTip = 'Print the asset utilization: total, assigned, available and in-maintenance equipment and the utilization percentage. Lost and disposed equipment is not counted. You can filter by category and location.';
+                Image = Report;
+                RunObject = report "EQM Asset Utilization";
+            }
         }
     }
 }
