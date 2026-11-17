@@ -330,3 +330,11 @@ Source: "Manual sandbox checks" in `docs/plans/FR-037-factboxes.md`. Build repor
 - [ ] S2 (manual, sandbox): drill down on each attachment number; each opens Document Attachment Details. The counts refresh after an attachment is deleted. Drill-down on Assignment Count, Maintenance Count and Total Maintenance Cost opens the expected page.
 - [ ] S3 (manual, sandbox, not SUPER): a user with EQM - Reader and D365 BASIC sees all three new FactBoxes on the Equipment Card without a permission error.
 - [ ] Record the results and clear the TODO(verify) items in `docs/features/FR-037-factboxes.md` and `docs/help/FR-037-factboxes.md`.
+
+## FR-038 sandbox checks (not run; 12 test procedures written in test codeunit "EQM Dashboard Tests" 50161, not executed)
+Source: "Manual sandbox checks" in `docs/plans/FR-038-enhanced-role-center.md`. Build of `app/` and `test/` reported with 0 errors (reviewer, `alc`). No separate AppSource validation ran.
+- [ ] S1 (manual, sandbox): open the Equipment Manager Role Center. The **Operational Indicators** group shows four tiles between Equipment and Warranty; Total Assets Value is formatted as an amount.
+- [ ] S2 (manual, sandbox): drill down on each tile. The list opens with the tile's filter and the record count matches the tile.
+- [ ] S3 (manual, sandbox): send a request for approval, then choose Refresh on the dashboard. Requests Pending Approval goes up by 1.
+- [ ] Run the test codeunit "EQM Dashboard Tests" (`test/src/EQMDashboardTests.Codeunit.al`) with AL Test Runner in a sandbox. Written and compiled, never executed. Reviewer MINOR: test 12 compares the rounded page value with the unrounded cue value; consider `Round(..., 0.01)`.
+- [ ] Record the results and clear the TODO(verify) items in `docs/features/FR-038-enhanced-role-center.md` and `docs/help/FR-038-enhanced-role-center.md`.

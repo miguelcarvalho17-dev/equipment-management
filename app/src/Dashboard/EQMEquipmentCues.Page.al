@@ -42,6 +42,27 @@ page 50106 "EQM Equipment Cues"
                     DrillDownPageId = "EQM Equipment List";
                 }
             }
+            cuegroup(OperationalIndicators)
+            {
+                Caption = 'Operational Indicators';
+
+                field("Requests Pending Approval"; Rec."Requests Pending Approval")
+                {
+                    DrillDownPageId = "EQM Equipment Requests";
+                }
+                field("Warranties Expiring This Month"; Rec."Warranties Expiring This Month")
+                {
+                    DrillDownPageId = "EQM Equipment List";
+                }
+                field("Open Maintenance Activities"; Rec."Open Maintenance Activities")
+                {
+                    DrillDownPageId = "EQM Maintenance Records";
+                }
+                field("Total Assets Value"; Rec."Total Assets Value")
+                {
+                    DrillDownPageId = "EQM Equipment List";
+                }
+            }
             cuegroup(Warranty)
             {
                 Caption = 'Warranty';

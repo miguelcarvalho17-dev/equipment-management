@@ -61,6 +61,15 @@ table 50104 "EQM Equipment Cue"
             CalcFormula = count("EQM Equipment" where(Status = const(Disposed)));
             Editable = false;
         }
+        field(16; "Total Assets Value"; Decimal)
+        {
+            Caption = 'Total Assets Value';
+            ToolTip = 'Specifies the total purchase cost of the equipment that is not lost or disposed of, in local currency. Equipment without a purchase cost counts as zero, and depreciation is not taken into account. Choose the amount to see the equipment.';
+            FieldClass = FlowField;
+            CalcFormula = sum("EQM Equipment"."Purchase Cost" where(Status = filter(<> Lost & <> Disposed)));
+            AutoFormatType = 1;
+            Editable = false;
+        }
         field(20; "Total Maintenance Cost"; Decimal)
         {
             Caption = 'Total Maintenance Cost';
@@ -134,6 +143,14 @@ table 50104 "EQM Equipment Cue"
             CalcFormula = count("EQM Equipment" where("Warranty End Date" = field("Warranty 90 Days Filter"), Status = filter(<> Lost & <> Disposed)));
             Editable = false;
         }
+        field(35; "Warranties Expiring This Month"; Integer)
+        {
+            Caption = 'Warranties Expiring This Month';
+            ToolTip = 'Specifies the number of equipment records whose warranty ends from today up to and including the last day of the current month. Warranties that ended earlier this month are counted as expired warranties. Lost and disposed equipment and equipment without a warranty end date are not counted. Choose the number to see the equipment.';
+            FieldClass = FlowField;
+            CalcFormula = count("EQM Equipment" where("Warranty End Date" = field("Warranty Month Filter"), Status = filter(<> Lost & <> Disposed)));
+            Editable = false;
+        }
         field(40; "Warranty Expiring Filter"; Date)
         {
             Caption = 'Warranty Expiring Filter';
@@ -156,6 +173,12 @@ table 50104 "EQM Equipment Cue"
         {
             Caption = 'Warranty 90 Days Filter';
             ToolTip = 'Specifies the warranty end dates that count as expiring within 90 days. It is set automatically.';
+            FieldClass = FlowFilter;
+        }
+        field(44; "Warranty Month Filter"; Date)
+        {
+            Caption = 'Warranty This Month Filter';
+            ToolTip = 'Specifies the warranty end dates that count as expiring this month. It is set automatically.';
             FieldClass = FlowFilter;
         }
         field(50; "Overdue Maintenance Equipment"; Integer)
@@ -185,6 +208,22 @@ table 50104 "EQM Equipment Cue"
             Caption = 'Planned Maintenance Month Filter';
             ToolTip = 'Specifies the next maintenance dates that count as planned this month. It is set automatically.';
             FieldClass = FlowFilter;
+        }
+        field(54; "Open Maintenance Activities"; Integer)
+        {
+            Caption = 'Open Maintenance Activities';
+            ToolTip = 'Specifies the number of maintenance records that are registered but not yet posted. While a record is open, its equipment is in maintenance and cannot be assigned. Choose the number to see the open maintenance records.';
+            FieldClass = FlowField;
+            CalcFormula = count("EQM Maintenance Record" where(Status = const(Open)));
+            Editable = false;
+        }
+        field(60; "Requests Pending Approval"; Integer)
+        {
+            Caption = 'Requests Pending Approval';
+            ToolTip = 'Specifies the number of equipment requests that are waiting for approval. Choose the number to see the requests.';
+            FieldClass = FlowField;
+            CalcFormula = count("EQM Equipment Request" where(Status = const("Pending Approval")));
+            Editable = false;
         }
     }
 

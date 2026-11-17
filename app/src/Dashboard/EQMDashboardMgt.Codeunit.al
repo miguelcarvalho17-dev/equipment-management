@@ -99,7 +99,9 @@ codeunit 50107 "EQM Dashboard Mgt."
     /// <summary>
     /// Sets the date filters of the warranty tiles so that they count the same equipment as the warranty status:
     /// active from the reference date on, expiring within 90 days and within the expiring period from the reference
-    /// date, expired before the reference date. 0D means today. The 90 days come from the 90 Days warranty alert
+    /// date, expired before the reference date. Expiring this month: from the reference date up to and including the
+    /// last day of the reference date's month, so warranties that ended earlier in the month count as expired, not as
+    /// expiring. 0D means today. The 90 days come from the 90 Days warranty alert
     /// interval, so the tile and the alert window stay consistent.
     /// </summary>
     /// <param name="EquipmentCue">The cue record to set the filters on.</param>
@@ -119,6 +121,7 @@ codeunit 50107 "EQM Dashboard Mgt."
         EquipmentCue.SetFilter("Warranty Expired Filter", '<>%1&<%2', 0D, ReferenceDate);
         EquipmentCue.SetFilter("Active Warranty Filter", '>=%1', ReferenceDate);
         EquipmentCue.SetRange("Warranty 90 Days Filter", ReferenceDate, ReferenceDate + ExpiringWithin90Days);
+        EquipmentCue.SetRange("Warranty Month Filter", ReferenceDate, CalcDate(EndOfMonthFormulaTok, ReferenceDate));
     end;
 
     /// <summary>
