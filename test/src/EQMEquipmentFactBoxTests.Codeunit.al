@@ -21,6 +21,8 @@ codeunit 50194 "EQM Equipment FactBox Tests"
         LastNameTok: Label 'Fblast', Locked = true;
         CategoryCodeTok: Label 'FBCAT', Locked = true;
         MaintenanceNoTok: Label 'FBMNT1', Locked = true;
+        HistoryMaintenanceNoTok: Label 'FBHIS%1', Locked = true;
+        HistoryCounter: Integer;
         FileNameTok: Label 'fbfile%1.dat', Locked = true;
         TextFileNameTok: Label 'fbfile1.txt', Locked = true;
 
@@ -436,7 +438,9 @@ codeunit 50194 "EQM Equipment FactBox Tests"
     var
         HistoryEntry: Record "EQM Maintenance History Entry";
     begin
+        HistoryCounter += 1;
         HistoryEntry.Init();
+        HistoryEntry."Maintenance No." := CopyStr(StrSubstNo(HistoryMaintenanceNoTok, HistoryCounter), 1, MaxStrLen(HistoryEntry."Maintenance No."));
         HistoryEntry."Equipment No." := EquipmentNo;
         HistoryEntry."Maintenance Date" := Today();
         HistoryEntry.Cost := Cost;
