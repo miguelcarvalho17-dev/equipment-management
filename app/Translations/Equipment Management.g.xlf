@@ -1373,6 +1373,56 @@
           <note from="Developer" annotates="general" priority="2"></note>
           <note from="Xliff Generator" annotates="general" priority="3">Table EQM Integration Event Entry - Field Processed At - Property Caption</note>
         </trans-unit>
+        <trans-unit id="Table 173049965 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Maintenance Cost Buffer</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table EQM Maint. Cost Buffer - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Table 173049965 - Field 3877927551 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Category Code</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table EQM Maint. Cost Buffer - Field Category Code - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Table 173049965 - Field 59712786 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Category Description</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table EQM Maint. Cost Buffer - Field Category Description - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Table 173049965 - Field 1750483101 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Month</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table EQM Maint. Cost Buffer - Field Cost Month - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Table 173049965 - Field 3112279968 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Year</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table EQM Maint. Cost Buffer - Field Cost Year - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Table 173049965 - Field 446225960 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Equipment Description</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table EQM Maint. Cost Buffer - Field Equipment Description - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Table 173049965 - Field 1827518031 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Equipment No.</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table EQM Maint. Cost Buffer - Field Equipment No. - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Table 173049965 - Field 3416414484 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>No. of Maintenances</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table EQM Maint. Cost Buffer - Field No. of Maintenances - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Table 173049965 - Field 2082466019 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Period Start Date</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table EQM Maint. Cost Buffer - Field Period Start Date - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Table 173049965 - Field 3996842083 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Total Cost</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table EQM Maint. Cost Buffer - Field Total Cost - Property Caption</note>
+        </trans-unit>
         <trans-unit id="Table 2773268350 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
           <source>Maintenance History Entry</source>
           <note from="Developer" annotates="general" priority="2"></note>
@@ -3228,6 +3278,16 @@
           <note from="Developer" annotates="general" priority="2"></note>
           <note from="Xliff Generator" annotates="general" priority="3">Page EQM Equipment List - Action EquipmentRegister - Property Caption</note>
         </trans-unit>
+        <trans-unit id="Page 2630064635 - Action 275923992 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Print the maintenance cost analysis: posted maintenance cost and number of maintenances per category, equipment, year and month. Open maintenance is not included. You can filter by equipment, category, maintenance date and maintenance type.</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page EQM Equipment List - Action MaintenanceCostAnalysis - Property ToolTip</note>
+        </trans-unit>
+        <trans-unit id="Page 2630064635 - Action 275923992 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Maintenance Cost Analysis</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page EQM Equipment List - Action MaintenanceCostAnalysis - Property Caption</note>
+        </trans-unit>
         <trans-unit id="Page 2630064635 - View 1005746868 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
           <source>Assigned</source>
           <note from="Developer" annotates="general" priority="2"></note>
@@ -3357,6 +3417,16 @@
           <source>Equipment Register</source>
           <note from="Developer" annotates="general" priority="2"></note>
           <note from="Xliff Generator" annotates="general" priority="3">Page EQM Equipment Manager RC - Action EquipmentRegister - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Page 4775459 - Action 275923992 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Print the maintenance cost analysis: posted maintenance cost and number of maintenances per category, equipment, year and month. Open maintenance is not included. You can filter by equipment, category, maintenance date and maintenance type.</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page EQM Equipment Manager RC - Action MaintenanceCostAnalysis - Property ToolTip</note>
+        </trans-unit>
+        <trans-unit id="Page 4775459 - Action 275923992 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Maintenance Cost Analysis</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page EQM Equipment Manager RC - Action MaintenanceCostAnalysis - Property Caption</note>
         </trans-unit>
         <trans-unit id="Page 4775459 - Action 1514883969 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
           <source>Setup</source>
@@ -4437,6 +4507,31 @@
           <source>Equipment Register (Excel)</source>
           <note from="Developer" annotates="general" priority="2"></note>
           <note from="Xliff Generator" annotates="general" priority="3">Report EQM Equipment Register - ReportLayout EquipmentRegisterExcel - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Report 3197072147 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Maintenance Cost Analysis</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Report EQM Maint. Cost Analysis - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Report 3197072147 - Property 3863440606" size-unit="char" translate="yes" xml:space="preserve">
+          <source>maintenance cost report, maintenance spend, repair cost per equipment, maintenance cost by month</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Report EQM Maint. Cost Analysis - Property AdditionalSearchTerms</note>
+        </trans-unit>
+        <trans-unit id="Report 3197072147 - ReportDataItem 1951286970 - Property 1806354803" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Posted Maintenance</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Report EQM Maint. Cost Analysis - ReportDataItem HistoryEntry - Property RequestFilterHeading</note>
+        </trans-unit>
+        <trans-unit id="Report 3197072147 - ReportLayout 1763227179 - Property 2166945456" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Shows the posted maintenance cost and the number of maintenances per category, equipment, year and month for the equipment and maintenance that match your filters, in an Excel workbook that you can total and pivot. Open maintenance records are not included.</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Report EQM Maint. Cost Analysis - ReportLayout MaintCostAnalysisExcel - Property Summary</note>
+        </trans-unit>
+        <trans-unit id="Report 3197072147 - ReportLayout 1763227179 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Maintenance Cost Analysis (Excel)</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Report EQM Maint. Cost Analysis - ReportLayout MaintCostAnalysisExcel - Property Caption</note>
         </trans-unit>
         <trans-unit id="Query 611850204 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
           <source>Equipment by Category</source>

@@ -213,6 +213,13 @@ page 50100 "EQM Equipment List"
                 Image = Report;
                 RunObject = report "EQM Asset Utilization";
             }
+            action(MaintenanceCostAnalysis)
+            {
+                Caption = 'Maintenance Cost Analysis';
+                ToolTip = 'Print the maintenance cost analysis: posted maintenance cost and number of maintenances per category, equipment, year and month. Open maintenance is not included. You can filter by equipment, category, maintenance date and maintenance type.';
+                Image = Report;
+                RunObject = report "EQM Maint. Cost Analysis";
+            }
         }
         area(Promoted)
         {
@@ -238,6 +245,9 @@ page 50100 "EQM Equipment List"
                 {
                 }
                 actionref(AssetUtilization_Promoted; AssetUtilization)
+                {
+                }
+                actionref(MaintenanceCostAnalysis_Promoted; MaintenanceCostAnalysis)
                 {
                 }
             }

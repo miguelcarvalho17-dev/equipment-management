@@ -273,4 +273,93 @@ codeunit 50107 "EQM Dashboard Mgt."
             exit(0);
         exit(Round(AssignedEquipment * 100 / TotalEquipment, 0.01));
     end;
+
+    /// <summary>
+    /// Fills the maintenance cost buffer with the posted maintenance cost per category, equipment, year and month.
+    /// Only maintenance history entries (posted maintenance) are included. Equipment is taken within the filters of the
+    /// given equipment record, and entries within the filters of the given history entry record. The filters of both
+    /// records are not changed. The current category of the equipment is used. The buffer is emptied first.
+    /// </summary>
+    /// <param name="Equipment">The equipment record carrying the filters to apply.</param>
+    /// <param name="MaintenanceHistoryEntry">The history entry record carrying the filters to apply.</param>
+    /// <param name="TempMaintCostBuffer">Returns the cost per category, equipment, year and month.</param>
+    internal procedure BuildMaintenanceCostBuffer(var Equipment: Record "EQM Equipment"; var MaintenanceHistoryEntry: Record "EQM Maintenance History Entry"; var TempMaintCostBuffer: Record "EQM Maint. Cost Buffer" temporary)
+    var
+        FilteredEquipment: Record "EQM Equipment";
+        FilteredHistoryEntry: Record "EQM Maintenance History Entry";
+        EquipmentCategories: Dictionary of [Code[20], Code[20]];
+        EquipmentDescriptions: Dictionary of [Code[20], Text];
+        CategoryDescriptions: Dictionary of [Code[20], Text];
+        CategoryCode: Code[20];
+    begin
+        TempMaintCostBuffer.Reset();
+        TempMaintCostBuffer.DeleteAll();
+
+        FilteredEquipment.CopyFilters(Equipment);
+        FilteredEquipment.SetLoadFields("No.", Description, "Category Code");
+        if not FilteredEquipment.FindSet() then
+            exit;
+        repeat
+            EquipmentCategories.Add(FilteredEquipment."No.", FilteredEquipment."Category Code");
+            EquipmentDescriptions.Add(FilteredEquipment."No.", FilteredEquipment.Description);
+        until FilteredEquipment.Next() = 0;
+
+        FilteredHistoryEntry.CopyFilters(MaintenanceHistoryEntry);
+        FilteredHistoryEntry.SetLoadFields("Equipment No.", "Maintenance Date", Cost);
+        if not FilteredHistoryEntry.FindSet() then
+            exit;
+        repeat
+            // Entries of equipment outside the equipment filters are skipped
+            if EquipmentCategories.Get(FilteredHistoryEntry."Equipment No.", CategoryCode) then
+                AddToMaintCostBuffer(TempMaintCostBuffer, CategoryCode, FilteredHistoryEntry."Equipment No.", FilteredHistoryEntry."Maintenance Date", FilteredHistoryEntry.Cost, EquipmentDescriptions.Get(FilteredHistoryEntry."Equipment No."), CategoryDescriptions);
+        until FilteredHistoryEntry.Next() = 0;
+    end;
+
+    local procedure AddToMaintCostBuffer(var TempMaintCostBuffer: Record "EQM Maint. Cost Buffer" temporary; CategoryCode: Code[20]; EquipmentNo: Code[20]; MaintenanceDate: Date; Cost: Decimal; EquipmentDescription: Text; var CategoryDescriptions: Dictionary of [Code[20], Text])
+    var
+        CostYear: Integer;
+        CostMonth: Integer;
+    begin
+        // Posting always sets a maintenance date; a blank date is grouped under year 0, month 0 instead of raising an error
+        if MaintenanceDate <> 0D then begin
+            CostYear := Date2DMY(MaintenanceDate, 3);
+            CostMonth := Date2DMY(MaintenanceDate, 2);
+        end;
+
+        if TempMaintCostBuffer.Get(CategoryCode, EquipmentNo, CostYear, CostMonth) then begin
+            TempMaintCostBuffer."Total Cost" += Cost;
+            TempMaintCostBuffer."No. of Maintenances" += 1;
+            TempMaintCostBuffer.Modify();
+            exit;
+        end;
+
+        TempMaintCostBuffer.Init();
+        TempMaintCostBuffer."Category Code" := CategoryCode;
+        TempMaintCostBuffer."Equipment No." := EquipmentNo;
+        TempMaintCostBuffer."Cost Year" := CostYear;
+        TempMaintCostBuffer."Cost Month" := CostMonth;
+        if CostYear <> 0 then
+            TempMaintCostBuffer."Period Start Date" := DMY2Date(1, CostMonth, CostYear);
+        TempMaintCostBuffer."Category Description" := CopyStr(GetCategoryDescription(CategoryCode, CategoryDescriptions), 1, MaxStrLen(TempMaintCostBuffer."Category Description"));
+        TempMaintCostBuffer."Equipment Description" := CopyStr(EquipmentDescription, 1, MaxStrLen(TempMaintCostBuffer."Equipment Description"));
+        TempMaintCostBuffer."Total Cost" := Cost;
+        TempMaintCostBuffer."No. of Maintenances" := 1;
+        TempMaintCostBuffer.Insert();
+    end;
+
+    local procedure GetCategoryDescription(CategoryCode: Code[20]; var CategoryDescriptions: Dictionary of [Code[20], Text]): Text
+    var
+        EquipmentCategory: Record "EQM Equipment Category";
+        CategoryDescription: Text;
+    begin
+        if CategoryCode = '' then
+            exit('');
+        if CategoryDescriptions.Get(CategoryCode, CategoryDescription) then
+            exit(CategoryDescription);
+        EquipmentCategory.SetLoadFields(Description);
+        if EquipmentCategory.Get(CategoryCode) then
+            CategoryDescription := EquipmentCategory.Description;
+        CategoryDescriptions.Add(CategoryCode, CategoryDescription);
+        exit(CategoryDescription);
+    end;
 }
