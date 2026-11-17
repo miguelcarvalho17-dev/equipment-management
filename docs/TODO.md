@@ -162,14 +162,14 @@ Source: "Manual sandbox checks" in `docs/plans/FR-021-maintenance-dashboard.md`.
 
 ## AppSource FAILs (validator verdict: NOT READY)
 - [ ] **Translations:** add `TranslationFile` to `features` in `app/app.json`, build to generate `Translations/Equipment Management.g.xlf`, and add an xlf per supported language.
-- [ ] **Marketplace properties in `app/app.json`:** set `privacyStatement`, `EULA`, `help`, `url` and `logo` (needs real URLs and a logo file; publish `docs/help/FR-001-equipment-registration.md` somewhere linkable).
-- [ ] `supportedLocales` and `applicationInsightsConnectionString` are missing.
+- [ ] **Marketplace properties in `app/app.json`:** set `privacyStatement`, `EULA`, `help`, `url` and `logo` (needs real URLs and a logo file; publish `docs/help/FR-001-equipment-registration.md` somewhere linkable). FR-061 exception register: AS0051, AS0052 and AS0092 stay until this phase (Phase 3).
+- [ ] `supportedLocales` and `applicationInsightsConnectionString` are missing. Also FR-061 (AS0092, Phase 3).
 - [ ] Review `resourceExposurePolicy` (debugging, source download and source in symbols are all `true`).
 - [ ] The `description` in `app.json` mentions assigning to resources, which is not implemented. Reword it.
-- [ ] Register the publisher affix `EQM` and a real object ID range with Microsoft. 50100-50149 is a demo range and blocks a real submission.
+- [ ] Register the publisher affix `EQM` and a real object ID range with Microsoft. 50100-50149 is a demo range and blocks a real submission. FR-061 exception register: AS0084 stays until this step (Phase 4). AS0081 (`internalsVisibleTo`) and AS0015 (`TranslationFile` for the test app, Phase 4 or the escalation path) are also open. Remove the ruleset before submission.
 - [ ] Re-read Microsoft's current "Technical validation checklist - Business Central" (the skill copy is dated 2026-02-26).
 - [ ] Run Run-AlValidation (Windows with Docker). Does not run on macOS.
-- [ ] AL-Go for GitHub CI (FR-048): compile, tests, and CodeCop, UICop and AppSourceCop on the main app (not the test app) run on every PR into main and on pushes to main that are not markdown-only; analyzer output not yet verified in CI.
+- [ ] AL-Go for GitHub CI (FR-048, FR-061): compile, tests, and CodeCop, UICop and AppSourceCop on the main app run on every PR into main and on pushes to main that are not markdown-only. FR-061 adds CodeCop and UICop on the test app (`enableCodeAnalyzersOnTestApps`). Not yet verified in CI (FR-061, V4): the analyzer lines for both apps, whether AppSourceCop also runs on the test app, and whether AS0015 turns the build red (then the user decides on `TranslationFile` in `test/app.json`). Local result: 0 errors on both apps. See `docs/features/FR-061-code-quality-compliance.md`.
 - [ ] Digital signature and the match with the Partner Center offer (release steps).
 - [ ] Every release after 29.0.0.0 needs an upgrade codeunit.
 

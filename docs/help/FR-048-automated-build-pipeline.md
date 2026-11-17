@@ -5,17 +5,17 @@ This article is for people who change this repository. It is not an end-user art
 ## What runs
 | When | What happens |
 |---|---|
-| You open or update a pull request into `main` | "Pull Request Build" compiles the app and test app, runs CodeCop, UICop and AppSourceCop on the app, and runs the tests. "Repo checks" validates object IDs, plan header and feature files. |
+| You open or update a pull request into `main` | "Pull Request Build" compiles the app and test app, runs CodeCop, UICop and AppSourceCop on the app, runs CodeCop and UICop on the test app, and runs the tests. "Repo checks" validates object IDs, plan header and feature files. |
 | You push to `main`, `release/*` or `feature/*` | CI/CD runs the same build. It is skipped for pushes that only change markdown files or workflow files other than `CICD.yaml`. |
 
-The analyzers run on the main app only, not on the test app.
+The main app runs CodeCop, UICop and AppSourceCop. The test app runs CodeCop and UICop. Whether AppSourceCop also runs on the test app in CI is not verified yet (FR-061). See `docs/help/FR-061-code-quality-compliance.md`.
 
 ## Check the result
 1. Open the pull request and read the checks at the bottom. "Pull Request Status Check" and "Repo checks" should be green.
 2. For details, open the run under the **Actions** tab and read the build log. Compiler and analyzer warnings are listed there; treat them as defects.
 3. A compile error, an analyzer error or a failing test turns the build red. Warnings alone do not (AS0051, AS0052 and AS0084 are lowered to warnings in `.AL-Go/equipment.ruleset.json`).
 
-TODO(verify): analyzer output in CI has not been checked yet.
+TODO(verify): analyzer output in CI has not been checked yet for the FR-061 change (test app analysis and AppSourceCop on the test app).
 
 ## Download the build output
 Open the run and download the artifacts: Apps, TestApps, TestResults and BuildOutput. Artifact names end in `1.0.<run>.0`. The `.app` inside keeps the version from `app.json` (29.0.x).
