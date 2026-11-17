@@ -1,9 +1,7 @@
-> **Request (verbatim, GitHub issue #77):**
-> FR-039 Equipment Register Report
-> The system shall provide an inventory register.
-> Filters: Category, Status, Employee, Purchase Date
+# FR-039 Equipment Register Report — Plan
 
-STATUS: PLAN
+> Request (verbatim): "FR-039 Equipment Register Report. The system shall provide an inventory register. Filters: Category, Status, Employee, Purchase Date" (GitHub issue #77)
+> Status: **approved**
 
 ## Request
 Add an equipment inventory register: a report that lists equipment with its main data. On the request page the user can filter by Category, Status, Employee and Purchase Date. Source: GitHub issue #77 (FR-039).
