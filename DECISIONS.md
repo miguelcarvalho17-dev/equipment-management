@@ -52,3 +52,13 @@ A decision that applies to all future work (not just one task) belongs in the "S
 - 2026-11-17 | FR-040 Asset Utilization Report | Chose report ID 50101 and test codeunit 50196 (MCP ID tool unavailable, IDs from a source scan) | Reversible: yes
 - 2026-11-17 | FR-040 build | The AL MCP could not load symbols, so app/ and test/ were compiled with the extension's alc.dll directly (analyzers on app/, none on test/) | Reversible: yes
 - 2026-11-17 | FR-040 report | Added `using System.Utilities;` for the Integer data item, as the compiler required | Reversible: yes
+- 2026-11-17 | FR-041 Maintenance Cost Analysis | Chose an aggregated dataset (one row per category, equipment, year, month) filled into a TableType=Temporary buffer table over one row per history entry, because the issue asks for a breakdown and it stays pivotable in Excel | Reversible: no (dataset columns are a contract once released; can only be added)
+- 2026-11-17 | FR-041 Maintenance Cost Analysis | Chose to aggregate in AL (filtered FindSet + Dictionary + temporary buffer) over a query with Year/Month date methods, because a query cannot take the report's request-page views | Reversible: yes
+- 2026-11-17 | FR-041 Maintenance Cost Analysis | Chose the procedure on "EQM Dashboard Mgt." over a new codeunit, same reasoning as FR-040 | Reversible: yes
+- 2026-11-17 | FR-041 Maintenance Cost Analysis | Chose posted maintenance (history entries) only, and the equipment's current category, consistent with FR-013/FR-037 and query 50102 | Reversible: yes
+- 2026-11-17 | FR-041 Maintenance Cost Analysis | Chose request filters Equipment: No., Category Code and Posted Maintenance: Maintenance Date, Maintenance Type | Reversible: yes
+- 2026-11-17 | FR-041 Maintenance Cost Analysis | Chose zero-cost entries counted in No. of Maintenances | Reversible: yes
+- 2026-11-17 | FR-041 Maintenance Cost Analysis | Chose a single compiler-generated Excel layout and the FR-039/040 entry points (Tell Me, Equipment List Report group, Role Center Reporting area) | Reversible: no (published actions cannot be removed, AS0031)
+- 2026-11-17 | FR-041 Maintenance Cost Analysis | Chose report 50102, table 50113 and test codeunit 50197 (MCP ID tool unavailable, IDs from a source scan) | Reversible: yes
+- 2026-11-17 | FR-041 build | The AL MCP had no project loaded, so app/ and test/ were compiled with the extension's alc compiler directly | Reversible: yes
+- 2026-11-17 | FR-041 tests | Passed the category description dictionary as var over by value, to make the shared cache explicit | Reversible: yes

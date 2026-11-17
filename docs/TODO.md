@@ -359,3 +359,14 @@ Source: "Manual sandbox checks" in `docs/plans/FR-040-asset-utilization-report.m
 - [ ] S4 (manual, sandbox): a user with only EQM - Reader can run it.
 - [ ] S5 (manual, sandbox): the action works from the Equipment List (Report group) and from the Equipment Manager Role Center (Reporting area).
 - [ ] Record the results and clear the TODO(verify) items in `docs/features/FR-040-asset-utilization-report.md` and `docs/help/FR-040-asset-utilization-report.md`.
+
+## FR-041 sandbox checks (not run; 12 test procedures written in test codeunit "EQM Maint. Cost Analysis Tests" 50197, not executed; CI result pending)
+Source: "Manual sandbox checks" in `docs/plans/FR-041-maintenance-cost-analysis.md`. Test codeunit 50162 (Reader execute on every report, API Consumer none) is also not executed. Build of `app/` and `test/` not recorded here. No separate AppSource validation ran.
+- [ ] Run the test codeunit "EQM Maint. Cost Analysis Tests" (`test/src/EQMMaintCostAnalysisTests.Codeunit.al`) and "EQM Role Permission Tests" (`test/src/EQMRolePermissionTests.Codeunit.al`) in AL-Go CI or with AL Test Runner in a sandbox. Written, never executed.
+- [ ] S1 (manual, sandbox): Tell Me "Maintenance Cost Analysis" shows exactly two tabs: Equipment (No., Category Code) and Posted Maintenance (Maintenance Date, Maintenance Type).
+- [ ] S2 (manual, sandbox): with no filter, the sum of TotalCost in Excel equals the dashboard total maintenance cost. Note: the dashboard tile Total Maintenance Cost YTD only matches for dates from 1 January to today, so compare with a matching Maintenance Date filter or with the all-time total.
+- [ ] S3 (manual, sandbox): the Excel Data sheet has one row per category, equipment, year and month, and a PivotTable by CategoryCode and CostYear works. Check that the hidden filter sheet (ReportFilterValues) shows the filters.
+- [ ] S4 (manual, sandbox): a user with only EQM - Reader can run it.
+- [ ] S5 (manual, sandbox): the action works from the Equipment List (Report group) and from the Equipment Manager Role Center (Reporting area).
+- [ ] S6 (manual, sandbox): run with a filter that matches nothing. Note what the platform shows (an empty workbook or a message) and record it in `docs/help/FR-041-maintenance-cost-analysis.md`.
+- [ ] Record the results and clear the TODO(verify) items in `docs/features/FR-041-maintenance-cost-analysis.md` and `docs/help/FR-041-maintenance-cost-analysis.md`.
