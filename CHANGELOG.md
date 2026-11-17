@@ -1,6 +1,24 @@
 # Changelog
 Newest first. Grouped by Added / Changed / Fixed / Obsolete.
 
+## FR-037 FactBoxes (version stays 29.0.0.0, no bump)
+### Added
+- Three read-only FactBoxes on the Equipment Card: Equipment Summary (status, assigned employee, warranty status), Equipment Statistics (assignment count, maintenance count, total posted maintenance cost) and Attachment Summary (document count, image count). Choose a number to open the matching list.
+- Internal codeunit "EQM Equipment Attachment Mgt." (counts and shows the attachments of equipment).
+- Test codeunit "EQM Equipment FactBox Tests" (16 test procedures). Written and compiled; not executed (no CLI runner, no sandbox).
+- Feature doc docs/features/FR-037-factboxes.md and help docs/help/FR-037-factboxes.md.
+### Changed
+- Equipment Card: the three FactBoxes sit after the Picture FactBox. The About text describes them. The existing FactBoxes stay visible.
+- Permission set EQM - Reader: execute on the three FactBox pages and the attachment codeunit. Manager and Administrator inherit it. API Consumer is unchanged.
+### Fixed
+- None.
+### Obsolete
+- None.
+
+Release notes: The Equipment Card has three new FactBoxes. Equipment Summary shows the status, the assigned employee and the warranty status. Equipment Statistics shows how often the equipment was assigned, how many maintenance records were posted and their total cost. Attachment Summary counts the attached documents and images. Choose a number to open the matching list. Images and documents are counted as recognized by Business Central.
+
+Note: no upgrade code, no event, no schema change. Review: APPROVED (round 2). The app and test app were reported to compile with 0 errors and 0 warnings in the VS Code build; this was not independently verified. Not verified: the tests have not been executed (no CLI runner); no separate AppSource validation ran; sandbox checks S1 to S3 are open (docs/TODO.md, section "FR-037 sandbox checks").
+
 ## FR-036 Permission Sets (version stays 29.0.0.0, no bump)
 ### Added
 - Permission set 50104 "EQM - API Consumer" (caption "Equipment API Consumer", assignable, includes no other set): data access through the four API pages only. Read and write on equipment (no delete), assignments and integration events (indirect, for `assign`, `returnEquipment`, `markProcessed`), read on categories, setup and maintenance records, indirect insert on audit entries. Execute on the 4 API pages, 7 tables and 10 codeunits of the write path; no UI page, no query. Assign together with D365 BASIC.
