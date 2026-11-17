@@ -3208,6 +3208,16 @@
           <note from="Developer" annotates="general" priority="2"></note>
           <note from="Xliff Generator" annotates="general" priority="3">Page EQM Equipment List - Action Dashboard - Property Caption</note>
         </trans-unit>
+        <trans-unit id="Page 2630064635 - Action 4083427813 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Print the equipment register: a list of equipment with category, status, assigned employee and purchase data. You can filter by category, status, employee and purchase date.</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page EQM Equipment List - Action EquipmentRegister - Property ToolTip</note>
+        </trans-unit>
+        <trans-unit id="Page 2630064635 - Action 4083427813 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Equipment Register</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page EQM Equipment List - Action EquipmentRegister - Property Caption</note>
+        </trans-unit>
         <trans-unit id="Page 2630064635 - View 1005746868 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
           <source>Assigned</source>
           <note from="Developer" annotates="general" priority="2"></note>
@@ -3317,6 +3327,16 @@
           <source>Warranty Alerts</source>
           <note from="Developer" annotates="general" priority="2"></note>
           <note from="Xliff Generator" annotates="general" priority="3">Page EQM Equipment Manager RC - Action WarrantyAlertList - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Page 4775459 - Action 4083427813 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Print the equipment register: a list of equipment with category, status, assigned employee and purchase data. You can filter by category, status, employee and purchase date.</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page EQM Equipment Manager RC - Action EquipmentRegister - Property ToolTip</note>
+        </trans-unit>
+        <trans-unit id="Page 4775459 - Action 4083427813 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Equipment Register</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page EQM Equipment Manager RC - Action EquipmentRegister - Property Caption</note>
         </trans-unit>
         <trans-unit id="Page 4775459 - Action 1514883969 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
           <source>Setup</source>
@@ -4357,6 +4377,26 @@
           <source>Open</source>
           <note from="Developer" annotates="general" priority="2"></note>
           <note from="Xliff Generator" annotates="general" priority="3">Page EQM Warranty Alerts - View OpenAlerts - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Report 4213436734 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Equipment Register</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Report EQM Equipment Register - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Report 4213436734 - Property 3863440606" size-unit="char" translate="yes" xml:space="preserve">
+          <source>equipment inventory, asset register, equipment report</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Report EQM Equipment Register - Property AdditionalSearchTerms</note>
+        </trans-unit>
+        <trans-unit id="Report 4213436734 - ReportLayout 2127176496 - Property 2166945456" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Lists the equipment that matches your filters, one row per equipment, in an Excel workbook that you can sort, filter and total.</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Report EQM Equipment Register - ReportLayout EquipmentRegisterExcel - Property Summary</note>
+        </trans-unit>
+        <trans-unit id="Report 4213436734 - ReportLayout 2127176496 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Equipment Register (Excel)</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Report EQM Equipment Register - ReportLayout EquipmentRegisterExcel - Property Caption</note>
         </trans-unit>
         <trans-unit id="Query 611850204 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
           <source>Equipment by Category</source>

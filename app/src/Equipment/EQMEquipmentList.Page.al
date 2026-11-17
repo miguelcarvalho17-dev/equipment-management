@@ -199,6 +199,13 @@ page 50100 "EQM Equipment List"
                 Image = BarChart;
                 RunObject = page "EQM Equipment Dashboard";
             }
+            action(EquipmentRegister)
+            {
+                Caption = 'Equipment Register';
+                ToolTip = 'Print the equipment register: a list of equipment with category, status, assigned employee and purchase data. You can filter by category, status, employee and purchase date.';
+                Image = Report;
+                RunObject = report "EQM Equipment Register";
+            }
         }
         area(Promoted)
         {
@@ -218,6 +225,9 @@ page 50100 "EQM Equipment List"
                 Caption = 'Report';
 
                 actionref(Dashboard_Promoted; Dashboard)
+                {
+                }
+                actionref(EquipmentRegister_Promoted; EquipmentRegister)
                 {
                 }
             }
