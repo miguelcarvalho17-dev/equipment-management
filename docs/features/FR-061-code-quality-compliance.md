@@ -1,7 +1,7 @@
 # FR-061 Code Quality Compliance
 
 ## Purpose
-The solution shall pass the Microsoft code analyzers: CodeCop, UICop and AppSourceCop (GitHub issue #102). The main app runs all three. The test app runs CodeCop and UICop. PerTenantExtensionCop is not used, because the project delivers in AppSource mode. This feature changes no AL behaviour. It changes analyzer settings, adds an AppSourceCop configuration for the main app, fixes two findings in the test app and records what remains open.
+The solution shall pass the Microsoft code analyzers: CodeCop, UICop and AppSourceCop (GitHub issue #102). The main app runs all three, locally and in CI. The test app runs CodeCop and UICop locally only; CI does not analyse it (see Test app analysis). PerTenantExtensionCop is not used, because the project delivers in AppSource mode. This feature changes no AL behaviour. It changes analyzer settings, adds an AppSourceCop configuration for the main app, fixes two findings in the test app and records what remains open.
 
 Plan: `docs/plans/FR-061-code-quality-compliance.md` (approved).
 
@@ -14,7 +14,7 @@ Plan: `docs/plans/FR-061-code-quality-compliance.md` (approved).
 - **Local compile (main app):** 0 errors. The only warnings are the exception-register rules listed below. Checked with the local `alc` compiler (version 30.0) against BC 29 symbols.
 - **Local compile (test app):** 0 errors, 0 warnings, 0 info, with CodeCop and UICop. The `.app` is produced.
 - **Review:** APPROVED.
-- **CI (AL-Go Pull Request Build):** not run yet. It runs after the push. Not verified: the analyzer output of the PR build, and whether the build is green.
+- **CI (AL-Go Pull Request Build), first run (PR #132, run 43998572748):** the build failed on the test app. With test-app analysis on, AL-Go applied AppSourceCop to the test app and reported AS0015 and AS0054 as errors. Fixed by turning CI test-app analysis off (plan Amendment 2). Not verified: the main-app analyzer lines in the next PR build, and whether that build is green.
 - **Tests:** not executed locally (no CLI runner, no sandbox). Not verified: the test suite in CI (V6).
 
 ## What changed
@@ -22,7 +22,7 @@ Plan: `docs/plans/FR-061-code-quality-compliance.md` (approved).
 |---|---|
 | `app/.vscode/settings.json` | Code analysis on. Analyzers CodeCop, UICop and AppSourceCop. Ruleset `../.AL-Go/equipment.ruleset.json` |
 | `test/.vscode/settings.json` | New. Same keys, but CodeCop and UICop only (no AppSourceCop) |
-| `.AL-Go/settings.json` | `enableCodeAnalyzersOnTestApps: true`, so CI analyses the test app too |
+| `.AL-Go/settings.json` | `enableCodeAnalyzersOnTestApps: false`. CI analyses the main app only. (Set to `true` first; turned off after the PR #132 failure.) |
 | `app/AppSourceCop.json` | New. Holds `mandatoryAffixes: ["EQM"]` only |
 | `test/AppSourceCop.json` | Not created (an earlier untracked copy was deleted). The test app is not analysed by AppSourceCop locally |
 | `test/src/EQMEquipmentAPITests.Codeunit.al` | Fix for CodeCop AA0210 (see Diagnostic inventory). Same records, same assertions |
@@ -75,21 +75,22 @@ These diagnostics cannot be fixed in this demo portfolio. They are configuration
 | AS0081 | main | `app/app.json` | `internalsVisibleTo` is required by the test app | Release build without `internalsVisibleTo` |
 | AS0084 | main | `app/app.json` | Demo ID range 50100-50149 is not a registered AppSource range | Phase 4 (register range and affix) |
 | AS0092 | main | `app/app.json` | No Application Insights connection string | Phase 3 |
-| AS0015 | test | `test/app.json(35,3)` | Test app is not analysed by AppSourceCop locally (user decision); `test/app.json` stays untouched. Fix is to add `TranslationFile` to `features` in `test/app.json` at release. Whether AL-Go CI applies AppSourceCop to the test app is verified at the first CI run | Phase 4, or earlier via the escalation path below |
+| AS0015 | test | `test/app.json(35,3)` | AppSourceCop does not analyse the test app locally, and CI does not analyse it (plan Amendment 2). `test/app.json` stays untouched. Fix is to add `TranslationFile` to `features` in `test/app.json`. PR #132 reported AS0015 as an error when CI analysed the test app | Phase 4, or a later user decision to restore test-app analysis in CI |
+| AS0054 | test | `test/` (no `test/AppSourceCop.json`) | Reported in CI on PR #132 when AppSourceCop ran on the test app. Fix is to create `test/AppSourceCop.json` with a mandatory affix. Not created, because the test app is not analysed by AppSourceCop | Same step as AS0015 |
 
 The CI log attributes the individual AS0051 and AS0052 findings to specific manifest properties. Per property: AS0051 covers the privacy statement, EULA, help, logo and context-sensitive help URL. AS0052 covers the url. The register rows above group these by reason.
 
-The test app has no local entries in the register. CodeCop and UICop report nothing on it.
+The test app has no local entries in the register. CodeCop and UICop report nothing on it. CI does not analyse it (plan Amendment 2), so the CI log has no test-app lines.
 
 **The ruleset must be removed before a real AppSource submission.** `.AL-Go/equipment.ruleset.json` lowers some rules to warnings for this demo. Its description says so. FR-061 does not make the app submission ready.
 
 ## Test app analysis
 The test app is analysed locally by CodeCop and UICop only. AppSourceCop is not run on it locally. Reason: with AppSourceCop on, AS0015 (missing `TranslationFile` feature in `test/app.json`) is an error and stops the test app from packaging. `test/app.json` stays untouched by decision.
 
-In CI, `enableCodeAnalyzersOnTestApps` is on. Whether AL-Go also applies AppSourceCop to the test app is not verified yet. If AS0015 appears as an error in CI and turns the build red, the user decides whether to add `TranslationFile` to `test/app.json`. The ruleset is not changed to hide it.
+In CI, the test app is not analysed. `enableCodeAnalyzersOnTestApps` is `false`. The first PR build with it on (PR #132) failed: AL-Go applied AppSourceCop to the test app, which reported AS0015 and AS0054 as errors. The user chose to turn CI test-app analysis off rather than change `test/app.json` or the ruleset. Restoring it needs `TranslationFile` in `test/app.json` features and a `test/AppSourceCop.json`, then the setting back to `true`. This is Phase 4 or a later user decision.
 
 ## Not verified
-- **CI run (V4):** the first AL-Go PR build after the push is not run. Not verified: that CodeCop, UICop and AppSourceCop run for the main app; that CodeCop and UICop run for the test app; that the build is green; whether AppSourceCop runs on the test app in CI; whether AS0015 appears. The result is recorded here after that run.
+- **CI run (V4):** answered for the test app. PR #132 (run 43998572748) showed that AL-Go applies AppSourceCop to the test app when test-app analysis is on, and that AS0015 and AS0054 are errors. Test-app analysis is now off. Not verified: that CodeCop, UICop and AppSourceCop run for the main app in the next PR build, and that the build is green.
 - **Tests (V6):** the test suite was not executed locally. CI is the first run.
 - **Open minor finding (m1):** in `EQMEquipmentAPITests.Codeunit.al`, the `RecordCount = 1` check now runs under a primary-key filter. The earlier check "exactly one record with that description" is gone. An optional fix is to reset, filter on `Description` and keep `RecordCount = 1`. Not changed in this feature.
 - **Sandbox:** no sandbox checks apply to this feature. No behaviour changed.

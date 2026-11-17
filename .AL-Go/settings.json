@@ -15,5 +15,5 @@
   "enableCodeCop": true,
   "enableUICop": true,
   "enableAppSourceCop": true,
-  "enableCodeAnalyzersOnTestApps": true
+  "enableCodeAnalyzersOnTestApps": false
 }

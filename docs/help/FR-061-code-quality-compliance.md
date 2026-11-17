@@ -6,11 +6,13 @@ This article is for people who change this repository. It is not an end-user art
 | Folder | Local (VS Code) | CI (AL-Go, Pull Request Build) |
 |---|---|---|
 | `app` (main app) | CodeCop, UICop, AppSourceCop | CodeCop, UICop, AppSourceCop |
-| `test` (test app) | CodeCop, UICop | CodeCop, UICop. Whether AppSourceCop also runs in CI is not verified yet |
+| `test` (test app) | CodeCop, UICop | Not analysed in CI |
 
-The settings are in `app/.vscode/settings.json` and `test/.vscode/settings.json`. Both point at the ruleset `.AL-Go/equipment.ruleset.json`. The CI setting is `enableCodeAnalyzersOnTestApps` in `.AL-Go/settings.json`. The AppSourceCop check for the EQM affix is in `app/AppSourceCop.json`.
+The settings are in `app/.vscode/settings.json` and `test/.vscode/settings.json`. Both point at the ruleset `.AL-Go/equipment.ruleset.json`. The CI setting is `enableCodeAnalyzersOnTestApps` in `.AL-Go/settings.json`. It is `false`, so CI does not analyse the test app. The AppSourceCop check for the EQM affix is in `app/AppSourceCop.json`.
 
 Do not add `${AppSourceCop}` to `test/.vscode/settings.json`. With it on, the test app does not produce a `.app` because `test/app.json` lacks the `TranslationFile` feature (AS0015).
+
+Do not set `enableCodeAnalyzersOnTestApps` to `true` until `test/app.json` has the `TranslationFile` feature and `test/AppSourceCop.json` exists. Otherwise the CI build fails on the test app (AS0015 and AS0054, as in PR #132).
 
 ## What a clean result looks like
 - No errors.
@@ -35,12 +37,12 @@ The ruleset `.AL-Go/equipment.ruleset.json` lowers some of these to warnings. It
 
 ## Check the result
 1. Open the pull request and read the "Pull Request Build" log under the **Actions** tab.
-2. Check that the analyzers ran for both apps, and that only the known warnings appear.
-3. If AS0015 appears as an error, the build is red. Do not change the ruleset. Tell the maintainer; they decide whether to add `TranslationFile` to `test/app.json`.
+2. Check that the analyzers ran for the main app, and that only the known warnings appear.
+3. If AS0015 or AS0054 appears as an error, the build is red. Do not change the ruleset. Tell the maintainer; they decide whether to restore test-app analysis (see the feature doc).
 
-TODO(verify): the first CI run after the push has not been checked. Record the result in the feature doc.
+TODO(verify): the first CI run after the fix has not been checked. Record the result in the feature doc.
 
 ## Test app
-The test app runs CodeCop and UICop. Test code must follow the same rules as the app code. Two findings were fixed in the test app: a `using` order and a filter on a field without a key. Neither changed what the tests check.
+The test app runs CodeCop and UICop locally only. CI does not analyse it. Test code must follow the same rules as the app code. Two findings were fixed in the test app: a `using` order and a filter on a field without a key. Neither changed what the tests check.
 
 Open minor item: one API test now checks the record count under a primary-key filter. This is not an analyzer warning and is not changed here.
