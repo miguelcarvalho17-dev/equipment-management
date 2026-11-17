@@ -1,0 +1,8 @@
+{
+    "al.enableCodeAnalysis": true,
+    "al.codeAnalyzers": [
+        "${CodeCop}",
+        "${UICop}"
+    ],
+    "al.ruleSetPath": "../.AL-Go/equipment.ruleset.json"
+}

@@ -13,6 +13,7 @@ File `.AL-Go/settings.json`, after `rulesetFile`:
 | `enableCodeCop` | `true` | Runs CodeCop on the main app (default is false). |
 | `enableUICop` | `true` | Runs UICop on the main app (default is false). CLAUDE.md requires it. |
 | `enableAppSourceCop` | `true` | Makes AppSourceCop explicit. It was already on through `type` "AppSource App". |
+| `enableCodeAnalyzersOnTestApps` | `false` | Added by FR-061 as `true`, then set to `false` after PR #132 failed on the test app (AS0015 and AS0054). CI does not analyse the test app. Restoring it needs `TranslationFile` in `test/app.json` and `test/AppSourceCop.json` (see Pipeline overview). |
 
 Setting reference: https://aka.ms/ALGoSettings#enableappsourcecop
 
@@ -24,7 +25,7 @@ Taken from the repository files, not from run logs.
 | Checkout | `actions/checkout` in every job | |
 | Restore dependencies | `_BuildALGoProject.yaml` (artifact URL, project dependencies) | `artifact` is not pinned: the latest `us` sandbox for application 29.0.0.0. When a newer major ships, CI may move to it. |
 | Compile | RunPipeline, `appFolders` [app], `testFolders` [test] | |
-| Analyzers | CodeCop, UICop, AppSourceCop | Main app only. `enableCodeAnalyzersOnTestApps` is not enabled. |
+| Analyzers | CodeCop, UICop, AppSourceCop on the main app. The test app is not analysed in CI | Since FR-061, `enableCodeAnalyzersOnTestApps` is `false` (plan Amendment 2). With it `true`, AL-Go applied AppSourceCop to the test app and failed the build on AS0015 and AS0054 (PR #132). Scope and exception register: `docs/features/FR-061-code-quality-compliance.md`. |
 | Tests | Test app (codeunits 50178 and 50179) | A failing test fails the build. |
 | Artifacts | Apps, TestApps, TestResults, BuildOutput | |
 
@@ -47,9 +48,9 @@ Ruleset `.AL-Go/equipment.ruleset.json` lowers AS0051, AS0052 and AS0084 to warn
 None subscribed or published.
 
 ## Not verified
-- Analyzer output in CI. The first run after the push may add CodeCop/UICop warnings on the main app. Fix them in a follow-up `chore/` branch unless they are errors. TODO(verify): confirm the log shows all three analyzers active and AS0051/AS0084 only as warnings.
+- Analyzer output in CI. Local analysis under FR-061 shows 0 errors on both apps, and the main app has only the exception-register warnings. TODO(verify): the next PR build after the fix must show CodeCop, UICop and AppSourceCop for the main app, with only the exception-register warnings, and a green build (FR-061, V4).
 - Run history and branch protection (required checks "Pull Request Status Check" and "Repo checks"). TODO(verify). If they are missing, the user adds them in the GitHub settings.
 - No tests added: no AL code changed, so the tester was skipped.
 - No release run: CreateRelease was not executed (plan Q2: no), so release attachment is untested.
-- Analyzers do not cover the test app. Optional follow-up: enable `enableCodeAnalyzersOnTestApps` (AppSourceCop there would likely go red).
+- Test app analysis (FR-061): not run in CI. The first PR build with it on (PR #132, run 43998572748) failed on the test app: AL-Go applied AppSourceCop, and AS0015 and AS0054 were errors. The user turned the setting off. The ruleset and `test/app.json` were not changed. CodeCop and UICop still run on the test app locally.
 - FR-024's 12 tests in codeunit 50179 were noted as not run in the CHANGELOG. Their CI result is not confirmed here.

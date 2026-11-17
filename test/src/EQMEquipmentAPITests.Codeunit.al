@@ -80,10 +80,10 @@ codeunit 50180 "EQM Equipment API Tests"
         Equipment.Insert(true);
 
         // [THEN] The record has the first number of the series, the series code and status Available
-        Equipment.SetRange(Description, NewDescriptionTok);
+        Equipment.SetRange("No.", SeriesStartTok);
         Assert.RecordCount(Equipment, 1);
         Equipment.FindFirst();
-        Assert.AreEqual(SeriesStartTok, Equipment."No.", 'The number should come from the number series');
+        Assert.AreEqual(NewDescriptionTok, Equipment.Description, 'The description should be stored on the record');
         Assert.AreEqual(TestNoSeriesCode, Equipment."No. Series", 'The number series should be stored on the record');
         Assert.AreEqual(Equipment.Status::Available, Equipment.Status, 'New equipment should be Available');
         Assert.AreEqual('', Equipment."Assigned Employee No.", 'New equipment should have no employee');

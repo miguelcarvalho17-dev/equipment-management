@@ -2,8 +2,8 @@ namespace MiguelCarvalho.EquipmentManagement.Tests;
 
 using MiguelCarvalho.EquipmentManagement;
 using System.Environment;
-using System.Text;
 using System.TestLibraries.Utilities;
+using System.Text;
 using System.Utilities;
 
 codeunit 50178 "EQM Equipment Picture Tests"

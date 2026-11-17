@@ -14,5 +14,6 @@
   "rulesetFile": ".AL-Go/equipment.ruleset.json",
   "enableCodeCop": true,
   "enableUICop": true,
-  "enableAppSourceCop": true
+  "enableAppSourceCop": true,
+  "enableCodeAnalyzersOnTestApps": false
 }
