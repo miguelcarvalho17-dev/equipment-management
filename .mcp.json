@@ -1,0 +1,12 @@
+{
+  "mcpServers": {
+    "al": {
+      "command": "/Users/miguelcarvalho/.local/bin/al-mcp",
+      "args": []
+    },
+    "microsoft-learn": {
+      "type": "http",
+      "url": "https://learn.microsoft.com/api/mcp"
+    }
+  }
+}

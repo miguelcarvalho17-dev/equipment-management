@@ -2228,6 +2228,31 @@
           <note from="Developer" annotates="general" priority="2"></note>
           <note from="Xliff Generator" annotates="general" priority="3">Page EQM Assignment History Part - Control Employee Name - Property Caption</note>
         </trans-unit>
+        <trans-unit id="Page 1937526210 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Attachment Summary</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page EQM Attachment Count FactBox - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Page 1937526210 - Control 742073448 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Specifies how many of the files attached to the equipment are documents, such as PDF, Word or Excel files. Images are counted separately. Choose the number to see the attachments.</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page EQM Attachment Count FactBox - Control NoOfDocuments - Property ToolTip</note>
+        </trans-unit>
+        <trans-unit id="Page 1937526210 - Control 742073448 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Document Count</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page EQM Attachment Count FactBox - Control NoOfDocuments - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Page 1937526210 - Control 1864615688 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Specifies how many of the files attached to the equipment are images, such as JPG or PNG files. The equipment picture is not included. Choose the number to see the attachments.</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page EQM Attachment Count FactBox - Control NoOfImages - Property ToolTip</note>
+        </trans-unit>
+        <trans-unit id="Page 1937526210 - Control 1864615688 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Image Count</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page EQM Attachment Count FactBox - Control NoOfImages - Property Caption</note>
+        </trans-unit>
         <trans-unit id="Page 1224058171 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
           <source>Category API</source>
           <note from="Developer" annotates="general" priority="2"></note>
@@ -2504,7 +2529,7 @@
           <note from="Xliff Generator" annotates="general" priority="3">Page EQM Equipment Card - Property AboutTitle</note>
         </trans-unit>
         <trans-unit id="Page 3574600233 - Property 247559172" size-unit="char" translate="yes" xml:space="preserve">
-          <source>Here you manage one piece of equipment. The first sections show its details, its current status and who it is assigned to, its purchase and warranty information, and its planned maintenance. Use **Assign to Employee** and **Return** to change the assignment, and **Register Maintenance** to record maintenance work. Further down, **Assignment History** lists every assignment, **Maintenance History** lists every posted maintenance, and **Audit** shows who created the record and who changed it last. The **Picture** FactBox shows the picture of the equipment; use its actions to take, import, export or delete it. The **Attachments** FactBox lists the files attached to the equipment; use **Attachments** to add files and set their category. **Equipment Notes** lists dated notes about the equipment; type a new line to add one. Notes cannot be changed or deleted. **Audit Trail** shows the lifecycle of the equipment: created, changed, assigned, returned, sent to maintenance and disposed.</source>
+          <source>Here you manage one piece of equipment. The first sections show its details, its current status and who it is assigned to, its purchase and warranty information, and its planned maintenance. Use **Assign to Employee** and **Return** to change the assignment, and **Register Maintenance** to record maintenance work. Further down, **Assignment History** lists every assignment, **Maintenance History** lists every posted maintenance, and **Audit** shows who created the record and who changed it last. The **Picture** FactBox shows the picture of the equipment; use its actions to take, import, export or delete it. The **Equipment Summary** FactBox shows the status, the assigned employee and the warranty status. **Equipment Statistics** shows how many times the equipment was assigned, how many maintenance records were posted and their total cost. **Attachment Summary** counts the attached documents and images. The **Attachments** FactBox lists the files attached to the equipment; use **Attachments** to add files and set their category. **Equipment Notes** lists dated notes about the equipment; type a new line to add one. Notes cannot be changed or deleted. **Audit Trail** shows the lifecycle of the equipment: created, changed, assigned, returned, sent to maintenance and disposed.</source>
           <note from="Developer" annotates="general" priority="2"></note>
           <note from="Xliff Generator" annotates="general" priority="3">Page EQM Equipment Card - Property AboutText</note>
         </trans-unit>
@@ -3628,6 +3653,31 @@
           <note from="Developer" annotates="general" priority="2"></note>
           <note from="Xliff Generator" annotates="general" priority="3">Page EQM Equipment Setup - Action Category_Process - Property Caption</note>
         </trans-unit>
+        <trans-unit id="Page 59222003 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Equipment Statistics</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page EQM Equipment Stats. FactBox - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Page 59222003 - Control 958875716 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Specifies how many times the equipment has been assigned, including the current assignment. Choose the number to see the assignment history.</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page EQM Equipment Stats. FactBox - Control NoOfAssignments - Property ToolTip</note>
+        </trans-unit>
+        <trans-unit id="Page 59222003 - Control 958875716 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Assignment Count</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page EQM Equipment Stats. FactBox - Control NoOfAssignments - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Page 59222003 - Control 1812683457 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Specifies how many maintenance records of the equipment have been posted. Open maintenance records are counted when they are posted. Choose the number to see the maintenance history.</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page EQM Equipment Stats. FactBox - Control NoOfPostedMaintenances - Property ToolTip</note>
+        </trans-unit>
+        <trans-unit id="Page 59222003 - Control 1812683457 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Maintenance Count</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page EQM Equipment Stats. FactBox - Control NoOfPostedMaintenances - Property Caption</note>
+        </trans-unit>
         <trans-unit id="Page 4026658645 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
           <source>Equipment by Status</source>
           <note from="Developer" annotates="general" priority="2"></note>
@@ -3652,6 +3702,31 @@
           <source>Refresh</source>
           <note from="Developer" annotates="general" priority="2"></note>
           <note from="Xliff Generator" annotates="general" priority="3">Page EQM Equipment Status Chart - Action Refresh - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Page 1865277702 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Equipment Summary</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page EQM Equipment Summary FactBox - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Page 1865277702 - Control 3434267879 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Specifies the name of the employee the equipment is assigned to. It is blank when the equipment is not assigned.</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page EQM Equipment Summary FactBox - Control EmployeeName - Property ToolTip</note>
+        </trans-unit>
+        <trans-unit id="Page 1865277702 - Control 3434267879 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Assigned Employee Name</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page EQM Equipment Summary FactBox - Control EmployeeName - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Page 1865277702 - Control 3258932812 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Specifies whether the warranty is Active, Expiring Soon (it ends within 30 days) or Expired (the end date has passed). It is calculated from the warranty end date and today's date, and is blank when no warranty end date is filled in.</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page EQM Equipment Summary FactBox - Control WarrantyStatus - Property ToolTip</note>
+        </trans-unit>
+        <trans-unit id="Page 1865277702 - Control 3258932812 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Warranty Status</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page EQM Equipment Summary FactBox - Control WarrantyStatus - Property Caption</note>
         </trans-unit>
         <trans-unit id="Page 3143175885 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
           <source>Integration Event API</source>

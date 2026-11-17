@@ -8,7 +8,7 @@ page 50101 "EQM Equipment Card"
 {
     Caption = 'Equipment Card';
     AboutTitle = 'About equipment details';
-    AboutText = 'Here you manage one piece of equipment. The first sections show its details, its current status and who it is assigned to, its purchase and warranty information, and its planned maintenance. Use **Assign to Employee** and **Return** to change the assignment, and **Register Maintenance** to record maintenance work. Further down, **Assignment History** lists every assignment, **Maintenance History** lists every posted maintenance, and **Audit** shows who created the record and who changed it last. The **Picture** FactBox shows the picture of the equipment; use its actions to take, import, export or delete it. The **Attachments** FactBox lists the files attached to the equipment; use **Attachments** to add files and set their category. **Equipment Notes** lists dated notes about the equipment; type a new line to add one. Notes cannot be changed or deleted. **Audit Trail** shows the lifecycle of the equipment: created, changed, assigned, returned, sent to maintenance and disposed.';
+    AboutText = 'Here you manage one piece of equipment. The first sections show its details, its current status and who it is assigned to, its purchase and warranty information, and its planned maintenance. Use **Assign to Employee** and **Return** to change the assignment, and **Register Maintenance** to record maintenance work. Further down, **Assignment History** lists every assignment, **Maintenance History** lists every posted maintenance, and **Audit** shows who created the record and who changed it last. The **Picture** FactBox shows the picture of the equipment; use its actions to take, import, export or delete it. The **Equipment Summary** FactBox shows the status, the assigned employee and the warranty status. **Equipment Statistics** shows how many times the equipment was assigned, how many maintenance records were posted and their total cost. **Attachment Summary** counts the attached documents and images. The **Attachments** FactBox lists the files attached to the equipment; use **Attachments** to add files and set their category. **Equipment Notes** lists dated notes about the equipment; type a new line to add one. Notes cannot be changed or deleted. **Audit Trail** shows the lifecycle of the equipment: created, changed, assigned, returned, sent to maintenance and disposed.';
     PageType = Card;
     ApplicationArea = All;
     UsageCategory = None;
@@ -225,6 +225,18 @@ page 50101 "EQM Equipment Card"
         area(FactBoxes)
         {
             part(Picture; "EQM Equipment Picture")
+            {
+                SubPageLink = "No." = field("No.");
+            }
+            part(EquipmentSummary; "EQM Equipment Summary FactBox")
+            {
+                SubPageLink = "No." = field("No.");
+            }
+            part(EquipmentStatistics; "EQM Equipment Stats. FactBox")
+            {
+                SubPageLink = "No." = field("No.");
+            }
+            part(AttachmentSummary; "EQM Attachment Count FactBox")
             {
                 SubPageLink = "No." = field("No.");
             }

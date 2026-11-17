@@ -322,3 +322,11 @@ Source: "Test scenarios" S1 to S4 in `docs/plans/FR-036-permission-sets.md`. Dec
 - [ ] S4 (manual, sandbox): GET `/companies` (standard API) works for that application. If not, record the extra permission set needed.
 - [ ] Number series use for POST with a blank number by a non-SUPER caller (NFR-002 R3).
 - [ ] Record the results and clear the TODO(verify) items in the feature doc and the help article.
+
+## FR-037 sandbox checks (not run; 16 test procedures written in test codeunit "EQM Equipment FactBox Tests", not executed)
+Source: "Manual sandbox checks" in `docs/plans/FR-037-factboxes.md`. Build reported clean in the VS Code build; not independently verified.
+- [ ] Run the test codeunit "EQM Equipment FactBox Tests" (`test/src/EQMEquipmentFactBoxTests.Codeunit.al`) with AL Test Runner in a sandbox. Written and compiled, never executed.
+- [ ] S1 (manual, sandbox): upload a .png and a .pdf through Attachments on one equipment. Image Count = 1 and Document Count = 1. This confirms the standard file type mapping for uploads (also which extensions Business Central treats as images).
+- [ ] S2 (manual, sandbox): drill down on each attachment number; each opens Document Attachment Details. The counts refresh after an attachment is deleted. Drill-down on Assignment Count, Maintenance Count and Total Maintenance Cost opens the expected page.
+- [ ] S3 (manual, sandbox, not SUPER): a user with EQM - Reader and D365 BASIC sees all three new FactBoxes on the Equipment Card without a permission error.
+- [ ] Record the results and clear the TODO(verify) items in `docs/features/FR-037-factboxes.md` and `docs/help/FR-037-factboxes.md`.
