@@ -338,3 +338,14 @@ Source: "Manual sandbox checks" in `docs/plans/FR-038-enhanced-role-center.md`. 
 - [ ] S3 (manual, sandbox): send a request for approval, then choose Refresh on the dashboard. Requests Pending Approval goes up by 1.
 - [ ] Run the test codeunit "EQM Dashboard Tests" (`test/src/EQMDashboardTests.Codeunit.al`) with AL Test Runner in a sandbox. Written and compiled, never executed. Reviewer MINOR: test 12 compares the rounded page value with the unrounded cue value; consider `Round(..., 0.01)`.
 - [ ] Record the results and clear the TODO(verify) items in `docs/features/FR-038-enhanced-role-center.md` and `docs/help/FR-038-enhanced-role-center.md`.
+
+## FR-039 sandbox checks (not run; 11 test procedures written in test codeunit "EQM Equipment Register Tests" 50195, not executed)
+Source: "Manual sandbox checks" in `docs/plans/FR-039-equipment-register-report.md`. Test codeunit 50162 (Reader execute on every report, API Consumer none) is also not executed. No separate AppSource validation ran.
+- [ ] Run the test codeunit "EQM Equipment Register Tests" (`test/src/EQMEquipmentRegisterTests.Codeunit.al`) and "EQM Role Permission Tests" (`test/src/EQMRolePermissionTests.Codeunit.al`) with AL Test Runner in a sandbox. Written, never executed.
+- [ ] Reviewer MINOR, open: some assertions in the register tests only check that a value is not blank, which is always true (for example `Assert.AreNotEqual('', EquipmentNo, ...)` in scenarios 3 to 8). The scenario checks themselves still run. Replace them with a check that can fail, or remove them, when the tests are run.
+- [ ] S1 (manual, sandbox): Tell Me "Equipment Register" opens the request page with the four filter fields in the issue's order: Category Code, Status, Assigned Employee No., Purchase Date.
+- [ ] S2 (manual, sandbox): run with a Category filter. The Excel data sheet lists only that category, and the hidden filter sheet (ReportFilterValues) shows the filter.
+- [ ] S3 (manual, sandbox): run with a filter that matches nothing. Note what the platform shows (message, empty sheet or error).
+- [ ] S4 (manual, sandbox): a user with only EQM - Reader can run it. A user without read permission on Employee gets blank names in the Assigned Employee Name column and no error.
+- [ ] S5 (manual, sandbox): the action works from the Equipment List (Report group) and from the Equipment Manager Role Center (Reporting area).
+- [ ] Record the results and clear the TODO(verify) items in `docs/features/FR-039-equipment-register-report.md` and `docs/help/FR-039-equipment-register-report.md`.

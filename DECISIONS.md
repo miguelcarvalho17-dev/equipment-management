@@ -30,3 +30,15 @@ A decision that applies to all future work (not just one task) belongs in the "S
 - 2026-11-17 | FR-038 Enhanced Role Center | Chose test codeunit ID 50161 (reserved by FR-009 for "EQM Dashboard Tests") over the next free 50195 | Reversible: yes
 - 2026-11-17 | FR-038 tests | Used a single Counter for equipment, request and maintenance numbers in Locked Tok labels over fixed numbers, so tests that insert several records never collide | Reversible: yes
 - 2026-11-17 | FR-038 build | The AL MCP could not load symbols, so app/ and test/ were compiled with the extension's alc.dll directly (analyzers on app/, none on test/) | Reversible: yes
+- 2026-11-17 | FR-039 Equipment Register Report | Chose a single compiler-generated Excel layout over an RDLC or Word layout; a printable Word layout is phase 2 | Reversible: yes
+- 2026-11-17 | FR-039 Equipment Register Report | Chose RequestFilterFields ("Category Code", Status, "Assigned Employee No.", "Purchase Date") on one data item over custom request-page fields | Reversible: yes
+- 2026-11-17 | FR-039 Equipment Register Report | Chose the Employee filter on the current "Assigned Employee No." over a filter on assignment history | Reversible: yes
+- 2026-11-17 | FR-039 Equipment Register Report | Chose to list all statuses by default, including Lost and Disposed, over excluding final statuses as the dashboard tiles do | Reversible: yes
+- 2026-11-17 | FR-039 Equipment Register Report | Chose category description and employee name as report variables with a Dictionary cache over new FlowFields on table 50100 (same reasoning as FR-037) | Reversible: yes
+- 2026-11-17 | FR-039 Equipment Register Report | Chose not to set DataAccessIntent = ReadOnly | Reversible: yes
+- 2026-11-17 | FR-039 Equipment Register Report | Chose entry points Tell Me + Equipment List Report group + Role Center Reporting area over the list page only | Reversible: no (published actions cannot be removed, AS0031; they can be obsoleted)
+- 2026-11-17 | FR-039 Equipment Register Report | Chose report ID 50100 and test codeunit 50195 (MCP ID tool unavailable, IDs from a source scan) | Reversible: yes
+- 2026-11-17 | FR-039 Equipment Register Report | Chose testing via Report.SaveAs to XML with text Contains checks over "Library - Report Dataset" (would need a test-app dependency) | Reversible: yes
+- 2026-11-17 | FR-039 Equipment Register Report | Chose to extend test 50162 so reports are part of the "Reader has Execute on every object" check | Reversible: yes
+- 2026-11-17 | FR-039 build | The AL MCP could not load symbols, so app/ and test/ were compiled with the extension's alc.dll directly with /generatereportlayout+ (analyzers on app/, none on test/) | Reversible: yes
+- 2026-11-17 | FR-039 tests | Added always-true AreNotEqual anchor assertions in positive/negative test pairs over dropping the unused variables (reviewer MINOR m1, left open) | Reversible: yes

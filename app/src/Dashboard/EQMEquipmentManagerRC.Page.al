@@ -108,5 +108,15 @@ page 50110 "EQM Equipment Manager RC"
                 RunPageMode = Create;
             }
         }
+        area(Reporting)
+        {
+            action(EquipmentRegister)
+            {
+                Caption = 'Equipment Register';
+                ToolTip = 'Print the equipment register: a list of equipment with category, status, assigned employee and purchase data. You can filter by category, status, employee and purchase date.';
+                Image = Report;
+                RunObject = report "EQM Equipment Register";
+            }
+        }
     }
 }

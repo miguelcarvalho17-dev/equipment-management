@@ -197,6 +197,7 @@ codeunit 50162 "EQM Role Permission Tests"
         Assert.AreEqual(0, CountEntries(ApiConsumerRoleTok, 9), StrSubstNo(ObjectCountErr, 'query', 9, ApiConsumerRoleTok));
         AssertNoEntry(ApiConsumerRoleTok, 5, Codeunit::"EQM Employee Subscribers");
         AssertNoEntry(ApiConsumerRoleTok, 5, Codeunit::"EQM Default Data");
+        AssertNoEntry(ApiConsumerRoleTok, 3, Report::"EQM Equipment Register");
     end;
 
     [Test]
@@ -293,13 +294,13 @@ codeunit 50162 "EQM Role Permission Tests"
         ExcludedCodeunits: List of [Integer];
         ObjectType: Integer;
     begin
-        // [SCENARIO 8] Every table, page, query and codeunit in 50100-50149 except codeunits 50104, 50133, 50134 has Execute in Reader
+        // [SCENARIO 8] Every table, report, page, query and codeunit in 50100-50149 except codeunits 50104, 50133, 50134 has Execute in Reader
         // [GIVEN] The install, change log registration and upgrade codeunits are the only exceptions
         ExcludedCodeunits.Add(Codeunit::"EQM Install");
         ExcludedCodeunits.Add(Codeunit::"EQM Change Log Registration");
         ExcludedCodeunits.Add(Codeunit::"EQM Upgrade");
 
-        // [WHEN] All objects of the four types in the range are looked up in the effective permissions of Reader
+        // [WHEN] All objects of the five types in the range are looked up in the effective permissions of Reader
         // [THEN] Each has Execute (direct)
         foreach ObjectType in ObjectTypesToCheck() do
             AssertReaderExecuteForType(ObjectType, ExcludedCodeunits);
@@ -319,8 +320,9 @@ codeunit 50162 "EQM Role Permission Tests"
 
     local procedure ObjectTypesToCheck() ObjectTypes: List of [Integer]
     begin
-        // Platform object type numbers: 1 = Table, 5 = Codeunit, 8 = Page, 9 = Query
+        // Platform object type numbers: 1 = Table, 3 = Report, 5 = Codeunit, 8 = Page, 9 = Query
         ObjectTypes.Add(1);
+        ObjectTypes.Add(3);
         ObjectTypes.Add(5);
         ObjectTypes.Add(8);
         ObjectTypes.Add(9);
