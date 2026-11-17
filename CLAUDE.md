@@ -41,8 +41,10 @@ If the Target row is still a placeholder or holds anything other than `AppSource
 ## Commands
 
 - **Compile:** `al_compile` then `al_getdiagnostics` (AL MCP server). Run per folder: `app/` first, then `test/`.
-- **Run tests:** there is no command-line test runner in this project. The user runs the test codeunits of `test/` with AL Test Runner in VS Code against a sandbox. Agents write and compile tests but report them as `Not verified: tests not executed (no CLI runner)`. Never claim tests passed, and do not treat the missing runner as a pre-existing failure.
-  The AL MCP server has no test runner either.
+- **Run tests:** agents cannot run tests locally (no CLI runner on macOS, and the AL MCP server has none). Tests run in CI through AL-Go for GitHub (`CI/CD` on `main`, `Pull Request Build` on PRs). Agents write and compile tests; the reviewer and the main agent read the real result from CI after the branch is pushed:
+  - `gh pr checks <pr>` for pass/fail per check, then `gh run view <run-id> --log | grep -E "tests,|passed"` for the counts (AL-Go prints `<app>, N tests, N passed, N failed, N skipped`).
+  - Before a push there is no CI result: report `Not verified: tests not executed locally, CI result pending`. Never claim tests passed without a CI log or a local run from this session, and do not treat the missing local runner as a pre-existing failure.
+  - The user can still run the test codeunits with AL Test Runner in VS Code against a sandbox.
 - **Never call** `al_publish`, `al_auth_login`, `al_auth_logout`. They are also denied in `.claude/settings.json`.
 - Analyzers on: CodeCop, UICop, AppSourceCop.
 
