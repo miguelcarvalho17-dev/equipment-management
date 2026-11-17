@@ -2,7 +2,7 @@
 
 A Microsoft Dynamics 365 Business Central extension (AL) to register company equipment, track who uses it, and keep maintenance and warranty information in one place.
 
-> **Status:** V1 and V2 are built (all V2 GitHub issues are closed) and V3 is planned (requirements written, issues FR-023 to FR-041 created). Nothing has been verified in a Business Central sandbox and nothing is released yet.
+> **Status:** V1, V2 and V3 are built (all V3 GitHub issues, FR-023 to FR-041, are closed) and V4 is in progress (FR-042 to FR-065; 2 of 24 requirements done). Nothing has been verified in a Business Central sandbox and nothing is released yet.
 
 ## The problem
 
@@ -106,11 +106,35 @@ The objective is to transform the Equipment Management solution into a connected
 | **User experience** | FR-037 FactBoxes, FR-038 Enhanced Role Center | Summary, statistics and attachments FactBoxes on the Equipment Card (built: tests written, not run; not sandbox-verified), and new Role Center KPIs (requests pending approval, warranties expiring this month, open maintenance, total assets value) (built: tests written, not run; not sandbox-verified) |
 | **Reporting** | FR-039 Equipment Register Report, FR-040 Asset Utilization Report, FR-041 Maintenance Cost Analysis | Inventory register, utilization % (assigned / total equipment * 100) and maintenance cost by equipment, category, month and year |
 
-### V3 progress
+### V3 status
 
-All 19 requirements (FR-023 to FR-041) are tracked as GitHub issues in the V3 milestone. FR-023 Equipment Images is built and merged (one picture per equipment, like Item Picture; multiple pictures and picture types are not supported, by decision), with 15 automated tests running in CI; it is not yet verified in a Business Central sandbox. The other 18 are not built yet.
+V3 is complete: all 19 requirements (FR-023 to FR-041) in the V3 milestone are built and merged, and their GitHub issues are closed. FR-023 Equipment Images keeps one picture per equipment, like Item Picture; multiple pictures and picture types are not supported, by decision. Automated tests run in CI; where a feature's tests were only written and compiled, its feature document says so. Nothing in V3 is verified in a Business Central sandbox yet.
 
-### Roadmap (after V3)
+## Version 4
+
+### Project objective
+
+The V4 release focuses on production readiness: configuration, upgrade safety, automated testing and release pipelines, telemetry, performance, localization, security review, documentation and a cleaner architecture.
+
+### Scope of V4
+
+| Area | Requirements | What it gives you |
+|---|---|---|
+| **Configuration and upgrade** | FR-042 Feature Management, FR-043 Application Setup, FR-044 Data Upgrade Support | Features that can be switched on or off without code changes, a central setup, and safe data upgrades between versions |
+| **Testing** | FR-045 Automated Unit Tests, FR-046 Integration Tests, FR-047 Test Coverage Targets | A full automated test suite with coverage targets |
+| **Build and release** | FR-048 Automated Build Pipeline, FR-049 Release Management, FR-062 Breaking Change Validation | GitHub Actions validation (build, analyzers, tests), versioned releases and checks against breaking changes |
+| **Observability** | FR-050 Application Telemetry, FR-051 Error Logging, FR-052 Usage Analytics | Telemetry, error logging and usage insight |
+| **Performance** | FR-053 Large Dataset Support, FR-054 Background Processing Optimization | Responsiveness with large data volumes and efficient background jobs |
+| **Localization** | FR-055 Multi-Language Support, FR-056 Regional Settings | Translations and regional formats |
+| **Security and compliance** | FR-057 Permission Review, FR-058 Data Classification | Reviewed permissions and classified data |
+| **Documentation** | FR-059 User Documentation, FR-060 Developer Documentation | Complete user help and developer documentation |
+| **Quality and architecture** | FR-061 Code Quality Compliance, FR-063 Dependency Management, FR-064 Feature Interfaces, FR-065 Dependency Inversion | Analyzer compliance, managed dependencies and interface-based, decoupled features |
+
+### V4 progress
+
+All 24 requirements (FR-042 to FR-065) are tracked as GitHub issues in the V4 milestone. Two are done: FR-048 Automated Build Pipeline and FR-061 Code Quality Compliance. The other 22 are not built yet.
+
+### Roadmap (after V4)
 
 - Location tracking
 
