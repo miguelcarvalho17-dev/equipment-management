@@ -1,6 +1,21 @@
 # Changelog
 Newest first. Grouped by Added / Changed / Fixed / Obsolete.
 
+## FR-044 Data Upgrade Support (version stays 29.0.0.0, no bump)
+### Added
+- None.
+### Changed
+- Equipment Setup: an existing setup with a blank Default Warranty Alert Days now shows 90 days, the value the app already used. Values you set are kept. Equipment, assignments, maintenance records and warranty alerts are not changed.
+- Permission set EQM - Reader: execute on the internal upgrade helper codeunit. Manager and Administrator inherit it.
+### Fixed
+- None.
+### Obsolete
+- None.
+
+Release notes: existing Equipment Setup records now show 90 in Default Warranty Alert Days when the field was blank. Values you have set are kept. The upgrade runs once per company when the new version is installed.
+
+Note: the upgrade runs in each company once and is recorded per company. Install code now runs the same step, so a fresh install and a reinstall also set the value. No event, no app.json change, no version bump. Review: APPROVED (one MINOR: no test for the positive tag path and the tag subscriber; sandbox checks SB1 and SB4 cover it). Not verified: the tests have not been executed (no CLI runner, no sandbox; CI pending); no separate AppSource validation ran; sandbox checks SB1 to SB5 are open (docs/TODO.md, section "FR-044 sandbox checks").
+
 ## FR-043 Application Setup (version stays 29.0.0.0, no bump)
 ### Added
 - Equipment Setup: group Defaults with Default Warranty Alert Days (1 to 90, 90 by default: how early warranty alerts start) and Default Maintenance Frequency (Months) (0 to 120: the frequency new equipment gets on the Equipment Card).

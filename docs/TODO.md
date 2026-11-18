@@ -207,7 +207,7 @@ Source: "Test scenarios" in `docs/plans/NFR-004-automation.md`. IDs and steps ar
 - [ ] Record the result in `docs/features/NFR-004-automation.md` ("Not verified").
 - Open gaps 1 to 3 (plan Q1): decide later whether to plan follow-up work.
 
-## NFR-005 sandbox checks (not run; automated tests deferred, Q3, test codeunit 50177 reserved)
+## NFR-005 sandbox checks (not run; automated tests deferred, Q3; test codeunit 50177 now belongs to FR-044, so a future NFR-005 test codeunit needs a new ID)
 Source: "Test scenarios" 1 to 11 in `docs/plans/NFR-005-auditability.md`.
 - [ ] AU-SB1 (R2) a Reader and a Manager (not SUPER) see the Field Caption on Maintenance Log Entries.
 - [ ] AU-SB2 (Q4) Old/New Value for Maintenance Type: record the text `Format(enum, 0, 9)` shows.
@@ -397,3 +397,13 @@ Source: "Manual sandbox checks" in `docs/plans/FR-043-application-setup.md`. No 
 - [ ] S8 (manual, sandbox): Default Maintenance Frequency = 6. A new equipment card shows 6. Open a new card and close it without input: no record is created.
 - [ ] S9 (manual, sandbox): two companies have independent settings.
 - [ ] Record the results and clear the TODO(verify) items in `docs/features/FR-043-application-setup.md` and `docs/help/FR-043-application-setup.md`.
+
+## FR-044 sandbox checks (not run; 6 test procedures written in test codeunit "EQM Upgrade Tests" 50177, not executed locally; CI result pending)
+Source: "Manual sandbox checks" in `docs/plans/FR-044-data-upgrade-support.md`. The reviewer's MINOR finding (no test for the positive tag path or the tag subscriber) is covered by SB1 and SB4. No separate AppSource validation ran.
+- [ ] SB1 (manual, sandbox): fresh install in a new sandbox. Equipment Setup shows Default Warranty Alert Days 90, and table 9999 "Upgrade Tags" (`?table=9999`) has `MC-EQM-FR044-DefaultWarrantyAlertDays-20261118` for each company.
+- [ ] SB2 (manual, sandbox): upgrade path. Install a CI build from before FR-043 and open Equipment Setup. Then install an FR-044 CI build with a higher build number. Default Warranty Alert Days is 90, and the number series and Integration Events Enabled are unchanged. Check the artifact versions in CI first: the upgrade runs only when the version is higher.
+- [ ] SB3 (manual, sandbox): a user value survives. Set alert days to 30, then upgrade to a newer build. It stays 30.
+- [ ] SB4 (manual, sandbox): create a new company after install. The tag exists (Company Initialize calls SetAllUpgradeTags), and the setup created later shows 90.
+- [ ] SB5 (manual, sandbox): uninstall with data kept, then reinstall the same version. No error, and the values are unchanged.
+- [ ] Run the test codeunit "EQM Upgrade Tests" (`test/src/EQMUpgradeTests.Codeunit.al`) with AL Test Runner in a sandbox, or read the result in AL-Go CI. Written, not executed locally. The compile result is not recorded here; confirm it before the pull request.
+- [ ] Record the results and clear the TODO(verify) items in `docs/features/FR-044-data-upgrade-support.md` and `docs/help/FR-044-data-upgrade-support.md`.

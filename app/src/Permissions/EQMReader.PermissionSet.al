@@ -88,6 +88,7 @@ permissionset 50100 "EQM - Reader"
         codeunit "EQM Employee Subscribers" = X,
         codeunit "EQM Equipment Picture Mgt." = X,
         codeunit "EQM Default Data" = X,
+        codeunit "EQM Upgrade Mgt." = X,
         codeunit "EQM Feature Mgt." = X,
         codeunit "EQM Doc. Attachment Subscr." = X,
         codeunit "EQM Equipment Attachment Mgt." = X,
