@@ -29,4 +29,8 @@ enum 50112 "EQM Feature"
     {
         Caption = 'Maintenance Planning';
     }
+    value(5; Notifications)
+    {
+        Caption = 'Notifications';
+    }
 }

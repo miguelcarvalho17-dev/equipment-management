@@ -4,7 +4,8 @@ using System.Environment.Configuration;
 
 /// <summary>
 /// Shows Business Central notifications about expiring warranties, overdue maintenance and equipment that is back
-/// from maintenance, and handles their actions.
+/// from maintenance, and handles their actions. Nothing is shown when the Notifications feature is turned off in the
+/// company.
 /// </summary>
 codeunit 50112 "EQM Notification Mgt."
 {
@@ -87,6 +88,8 @@ codeunit 50112 "EQM Notification Mgt."
         RecallNotification(GetOverdueMaintenanceNotificationId());
         if not GuiAllowed() then
             exit;
+        if not FeatureMgt.IsEnabled("EQM Feature"::Notifications) then
+            exit;
         if Equipment.SystemCreatedAt = 0DT then
             exit;
 
@@ -159,6 +162,8 @@ codeunit 50112 "EQM Notification Mgt."
         RecallNotification(GetOverdueMaintenanceNotificationId());
         if not GuiAllowed() then
             exit;
+        if not FeatureMgt.IsEnabled("EQM Feature"::Notifications) then
+            exit;
         if MaintenanceRecord.SystemCreatedAt = 0DT then
             exit;
         if not IsNotificationEnabled(GetOverdueMaintenanceNotificationId()) then
@@ -179,6 +184,8 @@ codeunit 50112 "EQM Notification Mgt."
     internal procedure ShowRoleCenterNotifications()
     begin
         if not GuiAllowed() then
+            exit;
+        if not FeatureMgt.IsEnabled("EQM Feature"::Notifications) then
             exit;
 
         SendOpenWarrantyAlertsNotification();
@@ -243,6 +250,8 @@ codeunit 50112 "EQM Notification Mgt."
         Notification: Notification;
     begin
         if not GuiAllowed() then
+            exit;
+        if not FeatureMgt.IsEnabled("EQM Feature"::Notifications) then
             exit;
         if not IsNotificationEnabled(GetReturnedFromMaintenanceNotificationId()) then
             exit;

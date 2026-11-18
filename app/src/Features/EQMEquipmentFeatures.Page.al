@@ -8,7 +8,7 @@ page 50140 "EQM Equipment Features"
     UsageCategory = Administration;
     AdditionalSearchTerms = 'feature management, feature activation, turn on equipment features, turn off equipment features, enable features, disable features';
     AboutTitle = 'About equipment features';
-    AboutText = 'Turn the optional parts of Equipment Management on or off for this company: equipment images, warranty alerts, approval workflows, API integration and maintenance planning. When a feature is off, its pages, fields, actions and tiles are hidden, and pages that belong only to that feature show an error when they are opened. No data is deleted, and turning the feature on again shows everything as before. Users see a change the next time they open a page.';
+    AboutText = 'Turn the optional parts of Equipment Management on or off for this company: equipment images, warranty alerts, approval workflows, API integration, maintenance planning and notifications. When a feature is off, its pages, fields, actions and tiles are hidden, and pages that belong only to that feature show an error when they are opened. No data is deleted, and turning the feature on again shows everything as before. Users see a change the next time they open a page.';
     SourceTable = "EQM Feature Setup";
     InsertAllowed = false;
     DeleteAllowed = false;

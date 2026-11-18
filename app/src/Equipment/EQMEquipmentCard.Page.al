@@ -480,6 +480,7 @@ page 50101 "EQM Equipment Card"
 
     trigger OnNewRecord(BelowxRec: Boolean)
     begin
+        Rec.ApplySetupDefaults();
         UpdateControls();
     end;
 

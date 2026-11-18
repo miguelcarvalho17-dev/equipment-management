@@ -405,6 +405,25 @@ table 50100 "EQM Equipment"
     end;
 
     /// <summary>
+    /// Fills in setup defaults on a new equipment record that is not saved yet: the maintenance frequency gets Default
+    /// Maintenance Frequency (Months) from the equipment setup when it is still 0. Does nothing when the setup is missing,
+    /// the user cannot read it, or the default is 0. The record is not saved.
+    /// </summary>
+    internal procedure ApplySetupDefaults()
+    var
+        EquipmentSetup: Record "EQM Equipment Setup";
+    begin
+        if "Maintenance Frequency (Months)" <> 0 then
+            exit;
+        if not EquipmentSetup.ReadPermission() then
+            exit;
+        EquipmentSetup.SetLoadFields("Default Maint. Freq. (Months)");
+        if not EquipmentSetup.Get() then
+            exit;
+        "Maintenance Frequency (Months)" := EquipmentSetup."Default Maint. Freq. (Months)";
+    end;
+
+    /// <summary>
     /// Sets the status to Assigned, assigns the employee and saves the record with triggers.
     /// Only saved, Available equipment can be assigned. An active assignment entry with the work date and the current user
     /// is created. Raises an error when the equipment is already assigned, or when the status is not Available (Lost and

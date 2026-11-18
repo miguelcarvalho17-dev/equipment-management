@@ -384,3 +384,16 @@ Source: "Manual sandbox checks" in `docs/plans/FR-042-feature-management.md`, wi
 - [ ] S9 (manual, sandbox): two companies. Turning a feature off in one does not affect the other.
 - [ ] S10 (manual, sandbox): a page that is already open keeps its state until it is reopened. Confirm the help text in `docs/help/FR-042-feature-management.md` matches.
 - [ ] Record the results and clear the TODO(verify) items in `docs/features/FR-042-feature-management.md` and `docs/help/FR-042-feature-management.md`.
+
+## FR-043 sandbox checks (not run; 20 test procedures written in test codeunit "EQM Application Setup Tests" 50199, not executed locally; CI result pending)
+Source: "Manual sandbox checks" in `docs/plans/FR-043-application-setup.md`. No separate AppSource validation ran.
+- [ ] S1 (manual, sandbox): an administrator sees the Defaults and Features groups on Equipment Setup. A user with only EQM - Reader sees them read-only.
+- [ ] S2 (manual, sandbox): the three switches and the Equipment Features page stay in sync in both directions. Enable Equipment Requests = Approval Workflows, Enable APIs = API Integration, Enable Notifications = Notifications.
+- [ ] S3 (manual, sandbox): turn Enable Notifications off. No notification on the equipment card, the maintenance record card, the Role Center or after posting maintenance that returns equipment. Turn it on: they come back. My Notifications still works per user.
+- [ ] S4 (manual, sandbox): Enable Equipment Requests off behaves like Approval Workflows off (FR-042 S2 and S3).
+- [ ] S5 (manual, sandbox): Enable APIs off, then GET on `equipments` returns an error.
+- [ ] S6 (manual, sandbox): Default Warranty Alert Days = 30. The warranty alert job creates only alerts within 30 days.
+- [ ] S7 (manual, sandbox): in a tenant upgraded from an earlier version, Default Warranty Alert Days shows blank and alerts still start at 90 days. Record what the page shows.
+- [ ] S8 (manual, sandbox): Default Maintenance Frequency = 6. A new equipment card shows 6. Open a new card and close it without input: no record is created.
+- [ ] S9 (manual, sandbox): two companies have independent settings.
+- [ ] Record the results and clear the TODO(verify) items in `docs/features/FR-043-application-setup.md` and `docs/help/FR-043-application-setup.md`.
