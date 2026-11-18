@@ -9,7 +9,7 @@ using System.Threading;
 
 /// <summary>
 /// Tests for FR-036 Permission Sets: structural checks of the four assignable roles (Reader, Manager, Administrator
-/// and the new API Consumer), scenarios 1 to 8 of the plan. They read the effective permissions from the platform
+/// and the new API Consumer), scenarios 1 to 9 of the plan. They read the effective permissions from the platform
 /// tables "Expanded Permission" (effective rights after inclusion), "Metadata Permission Set" and
 /// "Metadata Permission Set Rel." (assignable flag and includes), "Page Metadata" and "AllObjWithCaption" (object lists).
 /// Nothing is written, so there is nothing to roll back. Permission enforcement itself (scenarios S1 to S4) is a
@@ -90,13 +90,14 @@ codeunit 50162 "EQM Role Permission Tests"
         AssertTableDataRights(ApiConsumerRoleTok, Database::"EQM Maintenance Record", 'Y----');
         AssertTableDataRights(ApiConsumerRoleTok, Database::"EQM Integration Event Entry", 'YII--');
         AssertTableDataRights(ApiConsumerRoleTok, Database::"EQM Equipment Audit Entry", 'II---');
-        Assert.AreEqual(7, CountEntries(ApiConsumerRoleTok, 0), StrSubstNo(ObjectCountErr, 'tabledata', 0, ApiConsumerRoleTok));
+        AssertTableDataRights(ApiConsumerRoleTok, Database::"EQM Feature Setup", 'Y----');
+        Assert.AreEqual(8, CountEntries(ApiConsumerRoleTok, 0), StrSubstNo(ObjectCountErr, 'tabledata', 0, ApiConsumerRoleTok));
     end;
 
     [Test]
     procedure ApiConsumerExecuteMatchesMatrix()
     begin
-        // [SCENARIO 2] API Consumer object Execute rights equal the matrix: 7 tables, 4 API pages, 10 codeunits, no query
+        // [SCENARIO 2] API Consumer object Execute rights equal the matrix: 8 tables, 4 API pages, 11 codeunits, no query
         // [GIVEN] The object lists of the plan
         // [WHEN] The effective permissions of EQM - API Consumer are expanded
         // [THEN] Each listed object has Execute, and the counts per type match exactly (no more, no fewer)
@@ -107,7 +108,8 @@ codeunit 50162 "EQM Role Permission Tests"
         AssertExecute(ApiConsumerRoleTok, 1, Database::"EQM Maintenance Record");
         AssertExecute(ApiConsumerRoleTok, 1, Database::"EQM Integration Event Entry");
         AssertExecute(ApiConsumerRoleTok, 1, Database::"EQM Equipment Audit Entry");
-        Assert.AreEqual(7, CountEntries(ApiConsumerRoleTok, 1), StrSubstNo(ObjectCountErr, 'table', 1, ApiConsumerRoleTok));
+        AssertExecute(ApiConsumerRoleTok, 1, Database::"EQM Feature Setup");
+        Assert.AreEqual(8, CountEntries(ApiConsumerRoleTok, 1), StrSubstNo(ObjectCountErr, 'table', 1, ApiConsumerRoleTok));
 
         AssertExecute(ApiConsumerRoleTok, 8, Page::"EQM Equipment API");
         AssertExecute(ApiConsumerRoleTok, 8, Page::"EQM Category API");
@@ -125,7 +127,8 @@ codeunit 50162 "EQM Role Permission Tests"
         AssertExecute(ApiConsumerRoleTok, 5, Codeunit::"EQM Power Automate Subscr.");
         AssertExecute(ApiConsumerRoleTok, 5, Codeunit::"EQM Audit Trail Mgt.");
         AssertExecute(ApiConsumerRoleTok, 5, Codeunit::"EQM Audit Trail Subscr.");
-        Assert.AreEqual(10, CountEntries(ApiConsumerRoleTok, 5), StrSubstNo(ObjectCountErr, 'codeunit', 5, ApiConsumerRoleTok));
+        AssertExecute(ApiConsumerRoleTok, 5, Codeunit::"EQM Feature Mgt.");
+        Assert.AreEqual(11, CountEntries(ApiConsumerRoleTok, 5), StrSubstNo(ObjectCountErr, 'codeunit', 5, ApiConsumerRoleTok));
 
         Assert.AreEqual(0, CountEntries(ApiConsumerRoleTok, 9), StrSubstNo(ObjectCountErr, 'query', 9, ApiConsumerRoleTok));
     end;
@@ -156,6 +159,7 @@ codeunit 50162 "EQM Role Permission Tests"
         AssertNoWriteRights(ApiConsumerRoleTok, Database::"EQM Equipment Category");
         AssertNoWriteRights(ApiConsumerRoleTok, Database::"EQM Equipment Setup");
         AssertNoWriteRights(ApiConsumerRoleTok, Database::"EQM Maintenance Record");
+        AssertNoWriteRights(ApiConsumerRoleTok, Database::"EQM Feature Setup");
     end;
 
     [Test]
@@ -163,7 +167,7 @@ codeunit 50162 "EQM Role Permission Tests"
     begin
         // [SCENARIO 3] (negative, boundary) D2: API Consumer cannot delete on any of its tables
         // [GIVEN] The effective permissions of EQM - API Consumer
-        // [WHEN] The rights on its seven tables are read
+        // [WHEN] The rights on its eight tables are read
         // [THEN] Delete is none on each
         AssertNoDelete(ApiConsumerRoleTok, Database::"EQM Equipment");
         AssertNoDelete(ApiConsumerRoleTok, Database::"EQM Equipment Assignment");
@@ -172,6 +176,7 @@ codeunit 50162 "EQM Role Permission Tests"
         AssertNoDelete(ApiConsumerRoleTok, Database::"EQM Equipment Category");
         AssertNoDelete(ApiConsumerRoleTok, Database::"EQM Equipment Setup");
         AssertNoDelete(ApiConsumerRoleTok, Database::"EQM Maintenance Record");
+        AssertNoDelete(ApiConsumerRoleTok, Database::"EQM Feature Setup");
     end;
 
     [Test]
@@ -288,6 +293,18 @@ codeunit 50162 "EQM Role Permission Tests"
         AssertNoDelete(ManagerRoleTok, Database::"EQM Equipment");
         AssertNoDelete(ManagerRoleTok, Database::"EQM Equipment Category");
         AssertNoDelete(ManagerRoleTok, Database::"EQM Equipment Setup");
+    end;
+
+    [Test]
+    procedure OnlyAdministratorCanChangeFeatures()
+    begin
+        // [SCENARIO 9] (negative) Only the Administrator can write the equipment feature setup; Manager and Reader cannot
+        // [GIVEN] The effective permissions of EQM - Administrator, EQM - Manager and EQM - Reader
+        // [WHEN] The rights on table 50114 are read
+        // [THEN] Administrator has Read, Insert, Modify and Delete; Manager and Reader have no write rights
+        AssertTableDataRights(AdministratorRoleTok, Database::"EQM Feature Setup", 'YYYY-');
+        AssertNoWriteRights(ManagerRoleTok, Database::"EQM Feature Setup");
+        AssertNoWriteRights(ReaderRoleTok, Database::"EQM Feature Setup");
     end;
 
     [Test]

@@ -48,6 +48,7 @@ page 50106 "EQM Equipment Cues"
 
                 field("Requests Pending Approval"; Rec."Requests Pending Approval")
                 {
+                    Visible = ApprovalWorkflowsEnabled;
                     DrillDownPageId = "EQM Equipment Requests";
                 }
                 field("Warranties Expiring This Month"; Rec."Warranties Expiring This Month")
@@ -85,19 +86,23 @@ page 50106 "EQM Equipment Cues"
                 }
                 field("Open Warranty Alerts"; Rec."Open Warranty Alerts")
                 {
+                    Visible = WarrantyAlertsEnabled;
                     DrillDownPageId = "EQM Warranty Alerts";
                 }
             }
             cuegroup(PlannedMaintenance)
             {
                 Caption = 'Planned Maintenance';
+                Visible = MaintenancePlanningEnabled;
 
                 field("Planned Maintenance This Month"; Rec."Planned Maintenance This Month")
                 {
+                    Visible = MaintenancePlanningEnabled;
                     DrillDownPageId = "EQM Equipment List";
                 }
                 field("Overdue Maintenance Equipment"; Rec."Overdue Maintenance Equipment")
                 {
+                    Visible = MaintenancePlanningEnabled;
                     DrillDownPageId = "EQM Equipment List";
                     StyleExpr = OverdueMaintenanceStyle;
                 }
@@ -123,6 +128,10 @@ page 50106 "EQM Equipment Cues"
     }
 
     var
+        FeatureMgt: Codeunit "EQM Feature Mgt.";
+        ApprovalWorkflowsEnabled: Boolean;
+        WarrantyAlertsEnabled: Boolean;
+        MaintenancePlanningEnabled: Boolean;
         OverdueMaintenanceStyle: Text;
 
     trigger OnOpenPage()
@@ -130,6 +139,9 @@ page 50106 "EQM Equipment Cues"
         DashboardMgt: Codeunit "EQM Dashboard Mgt.";
         NotificationMgt: Codeunit "EQM Notification Mgt.";
     begin
+        ApprovalWorkflowsEnabled := FeatureMgt.IsEnabled("EQM Feature"::"Approval Workflows");
+        WarrantyAlertsEnabled := FeatureMgt.IsEnabled("EQM Feature"::"Warranty Alerts");
+        MaintenancePlanningEnabled := FeatureMgt.IsEnabled("EQM Feature"::"Maintenance Planning");
         Rec.Reset();
         if not Rec.Get() then begin
             Rec.Init();

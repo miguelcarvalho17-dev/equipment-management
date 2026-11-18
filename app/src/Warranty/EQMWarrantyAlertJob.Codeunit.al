@@ -12,12 +12,16 @@ codeunit 50111 "EQM Warranty Alert Job"
     trigger OnRun()
     var
         WarrantyAlertMgt: Codeunit "EQM Warranty Alert Mgt.";
+        FeatureMgt: Codeunit "EQM Feature Mgt.";
         CreatedCount: Integer;
         CancelledCount: Integer;
     begin
-        WarrantyAlertMgt.GenerateAlerts(Today(), true, CreatedCount, CancelledCount);
-        // A failing partner subscriber of OnWarrantyExpired must not roll back the alerts that were just created.
-        Commit();
+        // Warranty Alerts turned off: no alerts are created. The warranty-expired business event is not part of the feature.
+        if FeatureMgt.IsEnabled("EQM Feature"::"Warranty Alerts") then begin
+            WarrantyAlertMgt.GenerateAlerts(Today(), true, CreatedCount, CancelledCount);
+            // A failing partner subscriber of OnWarrantyExpired must not roll back the alerts that were just created.
+            Commit();
+        end;
         WarrantyAlertMgt.RaiseWarrantyExpiredEvents(Today());
     end;
 }

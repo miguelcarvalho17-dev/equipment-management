@@ -13,6 +13,7 @@ codeunit 50112 "EQM Notification Mgt."
     var
         MaintenanceMgt: Codeunit "EQM Maintenance Mgt.";
         WarrantyAlertMgt: Codeunit "EQM Warranty Alert Mgt.";
+        FeatureMgt: Codeunit "EQM Feature Mgt.";
         WarrantyNotificationIdTok: Label '6F3B9C2E-8A41-4D7B-9E15-2C7A0B5D3F01', Locked = true;
         OverdueMaintNotificationIdTok: Label 'A82D4F6B-1C93-4E58-B7A0-5D9E3C1F7A02', Locked = true;
         ReturnedNotificationIdTok: Label 'D14E7A9C-3B65-4F2D-8C1E-9A6F0B2D5E03', Locked = true;
@@ -99,6 +100,8 @@ codeunit 50112 "EQM Notification Mgt."
         DaysRemaining: Integer;
     begin
         if not IsNotificationEnabled(GetWarrantyNotificationId()) then
+            exit;
+        if not FeatureMgt.IsEnabled("EQM Feature"::"Warranty Alerts") then
             exit;
         if Equipment."Warranty End Date" = 0D then
             exit;
@@ -188,6 +191,8 @@ codeunit 50112 "EQM Notification Mgt."
         AlertCount: Integer;
     begin
         if not IsNotificationEnabled(GetWarrantyNotificationId()) then
+            exit;
+        if not FeatureMgt.IsEnabled("EQM Feature"::"Warranty Alerts") then
             exit;
         AlertCount := WarrantyAlertMgt.CountOpenAlerts();
         if AlertCount = 0 then

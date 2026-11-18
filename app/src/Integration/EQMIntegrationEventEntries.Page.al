@@ -53,4 +53,11 @@ page 50132 "EQM Integration Event Entries"
             }
         }
     }
+
+    trigger OnOpenPage()
+    var
+        FeatureMgt: Codeunit "EQM Feature Mgt.";
+    begin
+        FeatureMgt.CheckEnabled("EQM Feature"::"API Integration");
+    end;
 }

@@ -50,6 +50,7 @@ pageextension 50100 "EQM Employee Card" extends "Employee Card"
                     Caption = 'Equipment Requests';
                     ToolTip = 'View the equipment requests raised for the employee.';
                     Image = Document;
+                    Visible = EQMApprovalWorkflowsEnabled;
                     RunObject = page "EQM Equipment Requests";
                     RunPageLink = "Employee No." = field("No.");
                 }
@@ -73,7 +74,9 @@ pageextension 50100 "EQM Employee Card" extends "Employee Card"
     }
 
     var
+        EQMFeatureMgt: Codeunit "EQM Feature Mgt.";
         EQMShowEquipmentFactBox: Boolean;
+        EQMApprovalWorkflowsEnabled: Boolean;
         NoAssignedEquipmentMsg: Label 'No equipment is assigned to employee %1.', Comment = '%1 = employee number';
         EquipmentNoLongerAssignedErr: Label 'Equipment %1 is no longer assigned to employee %2.', Comment = '%1 = equipment number, %2 = employee number';
 
@@ -82,6 +85,10 @@ pageextension 50100 "EQM Employee Card" extends "Employee Card"
         Equipment: Record "EQM Equipment";
     begin
         EQMShowEquipmentFactBox := Equipment.ReadPermission();
+        // Users without equipment permissions keep today's behaviour and never call the feature codeunit
+        EQMApprovalWorkflowsEnabled := true;
+        if EQMShowEquipmentFactBox then
+            EQMApprovalWorkflowsEnabled := EQMFeatureMgt.IsEnabled("EQM Feature"::"Approval Workflows");
     end;
 
     local procedure ReturnAssignedEquipment()

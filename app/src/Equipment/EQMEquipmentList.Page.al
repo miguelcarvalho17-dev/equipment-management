@@ -86,6 +86,7 @@ page 50100 "EQM Equipment List"
                 }
                 field("Next Maintenance Date"; Rec."Next Maintenance Date")
                 {
+                    Visible = MaintenancePlanningEnabled;
                     StyleExpr = NextMaintenanceStyle;
                 }
                 field("Last Maintenance Date"; Rec."Last Maintenance Date")
@@ -122,6 +123,7 @@ page 50100 "EQM Equipment List"
         {
             part(Picture; "EQM Equipment Picture")
             {
+                Visible = ImagesEnabled;
                 SubPageLink = "No." = field("No.");
             }
             part(EquipmentFactBox; "EQM Equipment FactBox")
@@ -284,6 +286,9 @@ page 50100 "EQM Equipment List"
     }
 
     var
+        FeatureMgt: Codeunit "EQM Feature Mgt.";
+        ImagesEnabled: Boolean;
+        MaintenancePlanningEnabled: Boolean;
         StatusStyle: Text;
         AssignedEmployeeName: Text[100];
         MaintenanceCostPct: Decimal;
@@ -291,6 +296,12 @@ page 50100 "EQM Equipment List"
         WarrantyStatus: Enum "EQM Warranty Status";
         WarrantyStatusStyle: Text;
         NextMaintenanceStyle: Text;
+
+    trigger OnOpenPage()
+    begin
+        ImagesEnabled := FeatureMgt.IsEnabled("EQM Feature"::"Equipment Images");
+        MaintenancePlanningEnabled := FeatureMgt.IsEnabled("EQM Feature"::"Maintenance Planning");
+    end;
 
     trigger OnAfterGetRecord()
     var

@@ -181,6 +181,13 @@ page 50134 "EQM Equipment Request Card"
         CanDecide: Boolean;
         CanAssignEquipment: Boolean;
 
+    trigger OnOpenPage()
+    var
+        FeatureMgt: Codeunit "EQM Feature Mgt.";
+    begin
+        FeatureMgt.CheckEnabled("EQM Feature"::"Approval Workflows");
+    end;
+
     trigger OnAfterGetRecord()
     begin
         UpdateControls();

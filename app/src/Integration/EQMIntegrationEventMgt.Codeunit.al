@@ -9,13 +9,16 @@ codeunit 50122 "EQM Integration Event Mgt."
     Permissions = tabledata "EQM Integration Event Entry" = rim;
 
     /// <summary>
-    /// Checks whether integration events are switched on in the equipment setup.
+    /// Checks whether the API Integration feature is on and Integration Events Enabled is switched on in the equipment setup.
     /// </summary>
-    /// <returns>True when the setup exists and Integration Events Enabled is on.</returns>
+    /// <returns>True when the feature is on, the setup exists and Integration Events Enabled is on.</returns>
     internal procedure IsEnabled(): Boolean
     var
         EquipmentSetup: Record "EQM Equipment Setup";
+        FeatureMgt: Codeunit "EQM Feature Mgt.";
     begin
+        if not FeatureMgt.IsEnabled("EQM Feature"::"API Integration") then
+            exit(false);
         EquipmentSetup.SetLoadFields("Integration Events Enabled");
         if not EquipmentSetup.Get() then
             exit(false);

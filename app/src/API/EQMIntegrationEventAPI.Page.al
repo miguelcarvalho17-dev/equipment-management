@@ -74,6 +74,13 @@ page 50126 "EQM Integration Event API"
         }
     }
 
+    trigger OnOpenPage()
+    var
+        FeatureMgt: Codeunit "EQM Feature Mgt.";
+    begin
+        FeatureMgt.CheckEnabled("EQM Feature"::"API Integration");
+    end;
+
     /// <summary>
     /// Bound action: marks the entry as processed. Calling it again on a processed entry changes nothing.
     /// </summary>

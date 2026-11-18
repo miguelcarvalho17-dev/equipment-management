@@ -192,6 +192,13 @@ page 50133 "EQM Equipment Requests"
         EmployeeName: Text[100];
         StatusStyle: Text;
 
+    trigger OnOpenPage()
+    var
+        FeatureMgt: Codeunit "EQM Feature Mgt.";
+    begin
+        FeatureMgt.CheckEnabled("EQM Feature"::"Approval Workflows");
+    end;
+
     trigger OnAfterGetRecord()
     var
         EmployeeRec: Record Employee;

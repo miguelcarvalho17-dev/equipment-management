@@ -153,9 +153,12 @@ page 50101 "EQM Equipment Card"
             group(PlannedMaintenance)
             {
                 Caption = 'Planned Maintenance';
+                Visible = MaintenancePlanningEnabled;
 
                 field("Last Maintenance Date"; Rec."Last Maintenance Date")
                 {
+                    Visible = MaintenancePlanningEnabled;
+
                     trigger OnValidate()
                     begin
                         UpdateNextMaintenanceStyle();
@@ -164,6 +167,7 @@ page 50101 "EQM Equipment Card"
                 field("Maintenance Frequency (Months)"; Rec."Maintenance Frequency (Months)")
                 {
                     Importance = Promoted;
+                    Visible = MaintenancePlanningEnabled;
 
                     trigger OnValidate()
                     begin
@@ -173,6 +177,7 @@ page 50101 "EQM Equipment Card"
                 field("Next Maintenance Date"; Rec."Next Maintenance Date")
                 {
                     Importance = Promoted;
+                    Visible = MaintenancePlanningEnabled;
                     StyleExpr = NextMaintenanceStyle;
                 }
             }
@@ -226,6 +231,7 @@ page 50101 "EQM Equipment Card"
         {
             part(Picture; "EQM Equipment Picture")
             {
+                Visible = ImagesEnabled;
                 SubPageLink = "No." = field("No.");
             }
             part(EquipmentSummary; "EQM Equipment Summary FactBox")
@@ -385,6 +391,7 @@ page 50101 "EQM Equipment Card"
                     ToolTip = 'View the warranty alerts of the equipment. An alert is created 90, 60 and 30 days before the warranty ends.';
                     Image = Alerts;
                     Enabled = IsSaved;
+                    Visible = WarrantyAlertsEnabled;
                     RunObject = page "EQM Warranty Alerts";
                     RunPageLink = "Equipment No." = field("No.");
                 }
@@ -437,6 +444,10 @@ page 50101 "EQM Equipment Card"
 
     var
         NotificationMgt: Codeunit "EQM Notification Mgt.";
+        FeatureMgt: Codeunit "EQM Feature Mgt.";
+        ImagesEnabled: Boolean;
+        WarrantyAlertsEnabled: Boolean;
+        MaintenancePlanningEnabled: Boolean;
         NotifiedEquipmentNo: Code[20];
         NotificationsChecked: Boolean;
         AssignedEmployeeName: Text[100];
@@ -454,6 +465,13 @@ page 50101 "EQM Equipment Card"
         CreatedByUserName: Code[50];
         ModifiedByUserName: Code[50];
         UseAssignActionErr: Label 'To assign equipment, use the Assign to Employee action.';
+
+    trigger OnOpenPage()
+    begin
+        ImagesEnabled := FeatureMgt.IsEnabled("EQM Feature"::"Equipment Images");
+        WarrantyAlertsEnabled := FeatureMgt.IsEnabled("EQM Feature"::"Warranty Alerts");
+        MaintenancePlanningEnabled := FeatureMgt.IsEnabled("EQM Feature"::"Maintenance Planning");
+    end;
 
     trigger OnAfterGetRecord()
     begin
