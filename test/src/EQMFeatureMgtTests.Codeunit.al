@@ -378,13 +378,12 @@ codeunit 50198 "EQM Feature Mgt. Tests"
 
     [Test]
     [TransactionModel(TransactionModel::AutoRollback)]
-    procedure RequestPagesRefuseToOpenWhenApprovalWorkflowsIsOff()
+    procedure RequestListRefusesToOpenWhenApprovalWorkflowsIsOff()
     var
         RequestList: TestPage "EQM Equipment Requests";
-        RequestCard: TestPage "EQM Equipment Request Card";
     begin
         Initialize();
-        // [SCENARIO 17] The request list and the request card refuse to open when Approval Workflows is off
+        // [SCENARIO 17] The request list refuses to open when Approval Workflows is off
         // [GIVEN] Approval Workflows is off
         FeatureMgt.SetFeatureEnabled(Enum::"EQM Feature"::"Approval Workflows", false);
 
@@ -393,9 +392,21 @@ codeunit 50198 "EQM Feature Mgt. Tests"
 
         // [THEN] The feature-off error is raised
         AssertFeatureDisabledError(Enum::"EQM Feature"::"Approval Workflows");
+    end;
 
-        // [WHEN] The card is opened
-        asserterror RequestCard.OpenView();
+    [Test]
+    [TransactionModel(TransactionModel::AutoRollback)]
+    procedure RequestCardRefusesToOpenWhenApprovalWorkflowsIsOff()
+    var
+        RequestCard: TestPage "EQM Equipment Request Card";
+    begin
+        Initialize();
+        // [SCENARIO 17b] The request card refuses to open when Approval Workflows is off
+        // [GIVEN] Approval Workflows is off
+        FeatureMgt.SetFeatureEnabled(Enum::"EQM Feature"::"Approval Workflows", false);
+
+        // [WHEN] The card is opened for editing, as the other request tests do
+        asserterror RequestCard.OpenEdit();
 
         // [THEN] The feature-off error is raised
         AssertFeatureDisabledError(Enum::"EQM Feature"::"Approval Workflows");
