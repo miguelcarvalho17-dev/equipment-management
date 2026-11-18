@@ -1,6 +1,20 @@
 # Changelog
 Newest first. Grouped by Added / Changed / Fixed / Obsolete.
 
+## FR-045 Automated Unit Tests (version stays 29.0.0.0, no bump)
+### Added
+- Automated tests for equipment creation, assignment, status changes, maintenance processing and warranty calculation: 52 test procedures in 5 test codeunits in the test app. Written and compiled; not executed locally. CI result pending.
+### Changed
+- None.
+### Fixed
+- None.
+### Obsolete
+- None.
+
+Release notes: no change for users. The release adds automated tests for the equipment, assignment, status, maintenance and warranty rules.
+
+Note: test app only. No change to `app/`, `app.json`, permission sets, captions or translations. Not verified: the tests have not been executed (no CLI runner, no sandbox; CI pending); no separate AppSource validation ran. Plan deviations and open MINORs are in `docs/plans/FR-045-automated-unit-tests.md`.
+
 ## FR-044 Data Upgrade Support (version stays 29.0.0.0, no bump)
 ### Added
 - None.

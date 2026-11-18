@@ -52,7 +52,7 @@ From code reading, not a sandbox run (WS-SB7).
 Four new stored fields: schema sync adds nullable columns with blank values, which are valid. No upgrade codeunit, no key change; no destructive change expected, TODO(verify) in WS-SB2. Nothing is released, so no Obsolete handling. Public surface that becomes a contract at release: fields 17-20 on table 50100 and the event signature. Existing code paths (assign, return, status change, maintenance) cannot fail on the new rule, because existing equipment has blank dates.
 
 ## Test status
-No test objects; test codeunit 50168 "EQM Warranty Tests" is reserved (plan Q8). Scenarios W1 to W26 in docs/plans/FR-014-warranty-information.md are a reference only. Sandbox checks WS-SB1 to WS-SB8 are listed in docs/TODO.md and are **not run**.
+Test codeunit 50168 "EQM Warranty Tests" (FR-045, 16 tests) covers the warranty status, days remaining and alert rules. Written, not executed locally; CI result pending. Scenarios W1 to W26 in docs/plans/FR-014-warranty-information.md are a reference only. Sandbox checks WS-SB1 to WS-SB8 are listed in docs/TODO.md and are **not run**.
 
 TODO(verify) in a sandbox:
 - Publish over existing data without schema sync error.

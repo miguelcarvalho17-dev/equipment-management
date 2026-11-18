@@ -173,9 +173,11 @@ Source: "Manual sandbox checks" in `docs/plans/FR-021-maintenance-dashboard.md`.
 - [ ] Digital signature and the match with the Partner Center offer (release steps).
 - [ ] Every release after 29.0.0.0 needs an upgrade codeunit.
 
-## Tests (deferred by decision)
-- [ ] Build the test app in `test/`: `test/app.json` needs the old `test` property removed and dependencies on Library Assert and Any added (IDs from the symbols). FR-026 removed its Tests-TestLibraries dependency (see section FR-026 below). Its dependency version on the main app should match the app's version.
-- [ ] Implement the 57 scenarios in `docs/plans/FR-001-equipment-registration.md` (test codeunits 50150-50155). Answer the confirm dialogs with a `[ConfirmHandler]`.
+## Tests
+- [x] Test app built in `test/`: `test/app.json` depends on the main app and on Library Assert, range 50150..50199 (FR-026 removed its Tests-TestLibraries dependency, see section FR-026 below).
+- [ ] (FR-045, written 2026-11-18) Five test codeunits and 52 tests added: 50150, 50156, 50157, 50164, 50168. Written and compiled with alc; not executed locally. CI result pending: check `gh pr checks <pr>` and the AL-Go log (`tests, N passed`) before the merge. See section "FR-045 checks".
+- [ ] Audit the 57 scenarios in `docs/plans/FR-001-equipment-registration.md` (test codeunits 50150-50155) against the existing tests. Not audited: which scenarios are still uncovered. The coverage inventory is in `docs/plans/FR-045-automated-unit-tests.md`.
+- [ ] Chore: 5 AA0073 warnings in `test/src/EQMDashboardTests.Codeunit.al`, pre-existing and not part of FR-045. Fix them (warnings are defects).
 
 ## Housekeeping
 - [ ] Nothing is committed yet. The repo has no commits.
@@ -407,3 +409,13 @@ Source: "Manual sandbox checks" in `docs/plans/FR-044-data-upgrade-support.md`. 
 - [ ] SB5 (manual, sandbox): uninstall with data kept, then reinstall the same version. No error, and the values are unchanged.
 - [ ] Run the test codeunit "EQM Upgrade Tests" (`test/src/EQMUpgradeTests.Codeunit.al`) with AL Test Runner in a sandbox, or read the result in AL-Go CI. Written, not executed locally. The compile result is not recorded here; confirm it before the pull request.
 - [ ] Record the results and clear the TODO(verify) items in `docs/features/FR-044-data-upgrade-support.md` and `docs/help/FR-044-data-upgrade-support.md`.
+
+## FR-045 checks (tests not executed; CI result pending)
+Source: `docs/plans/FR-045-automated-unit-tests.md`. No manual sandbox step. No separate AppSource validation ran.
+- [ ] CI: the test app runs the five new codeunits. The total test count rises by 52 compared with the last green `main` run. Record the counts from `gh run view <run-id> --log`.
+- [ ] Any failing test: decide whether the test or the app is wrong. A failing test may show an app defect; changes to `app/` need a separate plan.
+- [ ] Optional: run the five codeunits with AL Test Runner in a sandbox.
+- [ ] Minor, open: W1 to W4 use `Today()` as the reference date, while A1, A5 and A6 use WorkDate().
+- [ ] Minor, open: Employee First Name literals in 3 test files.
+- [ ] Minor, open: A3 cannot distinguish the two error sources. It asserts the employee number only.
+- [ ] Record the results and clear the items in `docs/features/FR-045-automated-unit-tests.md`.
