@@ -85,3 +85,12 @@ A decision that applies to all future work (not just one task) belongs in the "S
 - 2026-11-18 | FR-043 Application Setup | Chose to hide each default field when its feature (Warranty Alerts / Maintenance Planning) is off, consistent with FR-042 gating | Reversible: yes
 - 2026-11-18 | FR-043 Application Setup | Chose test codeunit 50199 (MCP ID tool unavailable, IDs from a source scan), the last free ID in the test range | Reversible: yes
 - 2026-11-18 | FR-043 build | The AL MCP had no project loaded, so app/ and test/ were compiled with the extension's alc compiler directly, and the new app.app was copied into test/.alpackages (gitignored) | Reversible: yes
+- 2026-11-18 | FR-044 Data Upgrade Support | Chose a new internal codeunit "EQM Upgrade Mgt." holding the steps, tags and tag subscriber, called from Install and Upgrade, over putting the logic in the Upgrade-subtype codeunit, because upgrade codeunits cannot be run (AA0243) and tests need to call the steps | Reversible: no (object ID becomes permanent at release)
+- 2026-11-18 | FR-044 Data Upgrade Support | Chose to have Install run the same steps (each safe on fresh-install data) over only setting the tags, so a reinstall over retained data with blank values is also fixed | Reversible: yes
+- 2026-11-18 | FR-044 Data Upgrade Support | Chose to register the tag through OnGetPerCompanyUpgradeTags so new companies count as upgraded, and to leave the FR-034 change log tag unregistered | Reversible: yes
+- 2026-11-18 | FR-044 Data Upgrade Support | Chose to initialize only field 6 "Default Warranty Alert Days" (0 -> 90) over a generic InitValue sweep, because it is the only field whose blank stands for a default | Reversible: yes
+- 2026-11-18 | FR-044 Data Upgrade Support | Chose to keep the GetWarrantyAlertDays 0 -> 90 fallback as a safety net after the upgrade step | Reversible: yes
+- 2026-11-18 | FR-044 Data Upgrade Support | Chose X in EQM - Reader for codeunit 50139 over the test 50162 exclusion list, because its subscriber runs in normal user sessions | Reversible: yes
+- 2026-11-18 | FR-044 Data Upgrade Support | Chose no version bump and no precondition or validation triggers in phase 1 | Reversible: yes
+- 2026-11-18 | FR-044 Data Upgrade Support | Chose test codeunit 50177 (reusing the NFR-005 reservation) over widening test/app.json idRanges, on the user's answer | Reversible: yes
+- 2026-11-18 | FR-044 build | The AL MCP had no project loaded, so app/ and test/ were compiled with the extension's alc compiler directly | Reversible: yes
