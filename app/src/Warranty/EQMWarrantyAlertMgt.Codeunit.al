@@ -47,6 +47,22 @@ codeunit 50110 "EQM Warranty Alert Mgt."
     end;
 
     /// <summary>
+    /// Returns how many days before the warranty end date warranty alerts start to be created: Default Warranty Alert Days
+    /// from the equipment setup, or the longest interval (90) when the setup is missing or the field is blank or out of range.
+    /// </summary>
+    /// <returns>The number of days.</returns>
+    internal procedure GetWarrantyAlertDays(): Integer
+    var
+        EquipmentSetup: Record "EQM Equipment Setup";
+    begin
+        EquipmentSetup.SetLoadFields("Default Warranty Alert Days");
+        if EquipmentSetup.Get() then
+            if (EquipmentSetup."Default Warranty Alert Days" >= 1) and (EquipmentSetup."Default Warranty Alert Days" <= GetLongestIntervalDays()) then
+                exit(EquipmentSetup."Default Warranty Alert Days");
+        exit(GetLongestIntervalDays());
+    end;
+
+    /// <summary>
     /// Finds the most urgent interval that is due for the number of days left. False when the warranty has ended or is
     /// more than 90 days away.
     /// </summary>
@@ -75,7 +91,7 @@ codeunit 50110 "EQM Warranty Alert Mgt."
 
     /// <summary>
     /// Cancels open alerts that no longer apply and creates the due alert for each piece of equipment whose warranty
-    /// ends within 90 days of the reference date. Each interval is created once per equipment and warranty end date. 0D
+    /// ends within the warranty alert days of the setup (90 by default) of the reference date. Each interval is created once per equipment and warranty end date. 0D
     /// means today.
     /// </summary>
     /// <param name="ReferenceDate">The date the days remaining are counted from. 0D means today.</param>
@@ -88,11 +104,13 @@ codeunit 50110 "EQM Warranty Alert Mgt."
         Equipment: Record "EQM Equipment";
         AlertInterval: Enum "EQM Warranty Alert Interval";
         WarrantyStatus: Enum "EQM Warranty Status";
+        AlertDays: Integer;
     begin
         CreatedCount := 0;
         CancelledCount := 0;
         if ReferenceDate = 0D then
             ReferenceDate := Today();
+        AlertDays := GetWarrantyAlertDays();
 
         // Reduces concurrent runs (job queue and manual) creating the same alert twice. It does not fully prevent it:
         // on the first run there may be no rows to lock yet, so a residual duplicate risk remains (plan R5).
@@ -100,7 +118,7 @@ codeunit 50110 "EQM Warranty Alert Mgt."
         CancelledCount := CancelStaleAlerts();
 
         Equipment.SetLoadFields("No.", "Warranty End Date", Status);
-        Equipment.SetRange("Warranty End Date", ReferenceDate, ReferenceDate + GetLongestIntervalDays());
+        Equipment.SetRange("Warranty End Date", ReferenceDate, ReferenceDate + AlertDays);
         if Equipment.FindSet() then
             repeat
                 if not Equipment.IsFinalStatus(Equipment.Status) then begin

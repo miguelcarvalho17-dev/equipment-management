@@ -1218,6 +1218,31 @@
           <note from="Developer" annotates="general" priority="2"></note>
           <note from="Xliff Generator" annotates="general" priority="3">Table EQM Equipment Setup - Property Caption</note>
         </trans-unit>
+        <trans-unit id="Table 1065098760 - NamedType 1406255906" size-unit="char" translate="yes" xml:space="preserve">
+          <source>%1 must be between %2 and %3. You entered %4.</source>
+          <note from="Developer" annotates="general" priority="2">%1 = field caption, %2 = lowest allowed value, %3 = highest allowed value, %4 = the value that was entered</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table EQM Equipment Setup - NamedType ValueOutOfRangeErr</note>
+        </trans-unit>
+        <trans-unit id="Table 1065098760 - Field 4269951946 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Specifies the maintenance frequency, in months, that new equipment gets when you create it on the equipment card, from 0 to 120. You can change the frequency on each piece of equipment. Leave the field blank when new equipment has no planned maintenance by default. Existing equipment, and equipment created through the API or by import, is not changed.</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table EQM Equipment Setup - Field Default Maint. Freq. (Months) - Property ToolTip</note>
+        </trans-unit>
+        <trans-unit id="Table 1065098760 - Field 4269951946 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Default Maintenance Frequency (Months)</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table EQM Equipment Setup - Field Default Maint. Freq. (Months) - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Table 1065098760 - Field 3069470650 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Specifies how many days before the warranty end date warranty alerts start to be created, from 1 to 90. Alerts are created 90, 60 and 30 days before the end date, as far as these fall within this number of days; for example, with 30 only the 30-day alert is created. When the field is blank, 90 days is used. Alerts that are already open are kept when you lower the number.</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table EQM Equipment Setup - Field Default Warranty Alert Days - Property ToolTip</note>
+        </trans-unit>
+        <trans-unit id="Table 1065098760 - Field 3069470650 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Default Warranty Alert Days</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table EQM Equipment Setup - Field Default Warranty Alert Days - Property Caption</note>
+        </trans-unit>
         <trans-unit id="Table 1065098760 - Field 3955986674 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
           <source>Specifies the number series used to assign numbers to new equipment.</source>
           <note from="Developer" annotates="general" priority="2"></note>
@@ -2102,6 +2127,11 @@
           <source>Shows the planned maintenance fields (last maintenance date, maintenance frequency and next maintenance date) and the planned maintenance tiles. The next maintenance date is still calculated when the feature is off.</source>
           <note from="Developer" annotates="general" priority="2"></note>
           <note from="Xliff Generator" annotates="general" priority="3">Codeunit EQM Feature Mgt. - NamedType MaintenancePlanningDescTxt</note>
+        </trans-unit>
+        <trans-unit id="Codeunit 1415679247 - NamedType 3539429457" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Shows the equipment notifications to the users of this company: expiring warranties, overdue maintenance and equipment that is back from maintenance. Each user can still turn single notifications off in My Notifications. When the feature is off, no equipment notification is shown.</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit EQM Feature Mgt. - NamedType NotificationsDescTxt</note>
         </trans-unit>
         <trans-unit id="Codeunit 1415679247 - NamedType 1610546652" size-unit="char" translate="yes" xml:space="preserve">
           <source>Open the page where administrators turn equipment features on or off.</source>
@@ -3209,7 +3239,7 @@
           <note from="Xliff Generator" annotates="general" priority="3">Page EQM Equipment Features - Property AboutTitle</note>
         </trans-unit>
         <trans-unit id="Page 589403216 - Property 247559172" size-unit="char" translate="yes" xml:space="preserve">
-          <source>Turn the optional parts of Equipment Management on or off for this company: equipment images, warranty alerts, approval workflows, API integration and maintenance planning. When a feature is off, its pages, fields, actions and tiles are hidden, and pages that belong only to that feature show an error when they are opened. No data is deleted, and turning the feature on again shows everything as before. Users see a change the next time they open a page.</source>
+          <source>Turn the optional parts of Equipment Management on or off for this company: equipment images, warranty alerts, approval workflows, API integration, maintenance planning and notifications. When a feature is off, its pages, fields, actions and tiles are hidden, and pages that belong only to that feature show an error when they are opened. No data is deleted, and turning the feature on again shows everything as before. Users see a change the next time they open a page.</source>
           <note from="Developer" annotates="general" priority="2"></note>
           <note from="Xliff Generator" annotates="general" priority="3">Page EQM Equipment Features - Property AboutText</note>
         </trans-unit>
@@ -3829,7 +3859,7 @@
           <note from="Xliff Generator" annotates="general" priority="3">Page EQM Equipment Setup - Property AboutTitle</note>
         </trans-unit>
         <trans-unit id="Page 1065098760 - Property 247559172" size-unit="char" translate="yes" xml:space="preserve">
-          <source>Set the number series for equipment, maintenance records and equipment requests. The app runs its monitoring every day through job queue entries: one creates warranty alerts, one checks overdue maintenance. They are created automatically; if one is missing, choose **Schedule Monitoring Jobs**. Turn on **Integration Events Enabled** to record business events for external systems.</source>
+          <source>Set the number series for equipment, maintenance records and equipment requests, the default warranty alert days and maintenance frequency, and turn notifications, equipment requests and the APIs on or off for this company. The app runs its monitoring every day through job queue entries: one creates warranty alerts, one checks overdue maintenance. They are created automatically; if one is missing, choose **Schedule Monitoring Jobs**. Turn on **Integration Events Enabled** to record business events for external systems. Users see a change to a feature the next time they open a page.</source>
           <note from="Developer" annotates="general" priority="2"></note>
           <note from="Xliff Generator" annotates="general" priority="3">Page EQM Equipment Setup - Property AboutText</note>
         </trans-unit>
@@ -3839,7 +3869,7 @@
           <note from="Xliff Generator" annotates="general" priority="3">Page EQM Equipment Setup - Property Caption</note>
         </trans-unit>
         <trans-unit id="Page 1065098760 - Property 3863440606" size-unit="char" translate="yes" xml:space="preserve">
-          <source>equipment numbers, equipment number series, maintenance number series, equipment request numbers, equipment job queue, equipment monitoring, integration events, outbox, feature management, turn features on or off</source>
+          <source>equipment numbers, equipment number series, maintenance number series, equipment request numbers, equipment job queue, equipment monitoring, integration events, outbox, feature management, turn features on or off, application setup, default warranty alert days, default maintenance frequency, enable notifications, enable equipment requests, enable APIs</source>
           <note from="Developer" annotates="general" priority="2"></note>
           <note from="Xliff Generator" annotates="general" priority="3">Page EQM Equipment Setup - Property AdditionalSearchTerms</note>
         </trans-unit>
@@ -3878,6 +3908,46 @@
           <note from="Developer" annotates="general" priority="2"></note>
           <note from="Xliff Generator" annotates="general" priority="3">Page EQM Equipment Setup - Control WarrantyJobStatus - Property Caption</note>
         </trans-unit>
+        <trans-unit id="Page 1065098760 - Control 1100141636 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Defaults</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page EQM Equipment Setup - Control Defaults - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Page 1065098760 - Control 3650642145 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Features</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page EQM Equipment Setup - Control Features - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Page 1065098760 - Control 4208728350 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Specifies whether external systems can use the equipment APIs. When it is off, the APIs return an error, the integration settings are hidden and no integration event entries are written. This is the API Integration feature on the Equipment Features page. Users see the change the next time they open a page.</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page EQM Equipment Setup - Control EnableApis - Property ToolTip</note>
+        </trans-unit>
+        <trans-unit id="Page 1065098760 - Control 4208728350 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Enable APIs</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page EQM Equipment Setup - Control EnableApis - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Page 1065098760 - Control 4205739995 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Specifies whether employees can request equipment and approvers can approve or reject the requests. When it is off, the Equipment Requests pages, actions and tile are hidden and existing requests are kept. This is the Approval Workflows feature on the Equipment Features page. Users see the change the next time they open a page.</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page EQM Equipment Setup - Control EnableEquipmentRequests - Property ToolTip</note>
+        </trans-unit>
+        <trans-unit id="Page 1065098760 - Control 4205739995 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Enable Equipment Requests</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page EQM Equipment Setup - Control EnableEquipmentRequests - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Page 1065098760 - Control 3052387081 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Specifies whether users in this company see equipment notifications about expiring warranties, overdue maintenance and equipment that is back from maintenance. When it is off, no equipment notification is shown; when it is on, each user can still turn single notifications off in My Notifications. This is the Notifications feature on the Equipment Features page.</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page EQM Equipment Setup - Control EnableNotifications - Property ToolTip</note>
+        </trans-unit>
+        <trans-unit id="Page 1065098760 - Control 3052387081 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Enable Notifications</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page EQM Equipment Setup - Control EnableNotifications - Property Caption</note>
+        </trans-unit>
         <trans-unit id="Page 1065098760 - Control 2782249122 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
           <source>Integration</source>
           <note from="Developer" annotates="general" priority="2"></note>
@@ -3889,7 +3959,7 @@
           <note from="Xliff Generator" annotates="general" priority="3">Page EQM Equipment Setup - Control Numbering - Property Caption</note>
         </trans-unit>
         <trans-unit id="Page 1065098760 - Action 2194982647 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
-          <source>Turn the optional equipment features on or off for this company: images, warranty alerts, approval workflows, API integration and maintenance planning.</source>
+          <source>Turn the optional equipment features on or off for this company: images, warranty alerts, approval workflows, API integration, maintenance planning and notifications.</source>
           <note from="Developer" annotates="general" priority="2"></note>
           <note from="Xliff Generator" annotates="general" priority="3">Page EQM Equipment Setup - Action EquipmentFeatures - Property ToolTip</note>
         </trans-unit>
@@ -4882,6 +4952,11 @@
           <source>Maintenance Planning</source>
           <note from="Developer" annotates="general" priority="2"></note>
           <note from="Xliff Generator" annotates="general" priority="3">Enum EQM Feature - EnumValue Maintenance Planning - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Enum 3548392231 - EnumValue 2061428202 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Notifications</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Enum EQM Feature - EnumValue Notifications - Property Caption</note>
         </trans-unit>
         <trans-unit id="Enum 3548392231 - EnumValue 1483625339 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
           <source>Warranty Alerts</source>

@@ -17,6 +17,7 @@ codeunit 50138 "EQM Feature Mgt."
         ApprovalWorkflowsDescTxt: Label 'Shows the equipment request process: the Equipment Requests pages, the approval actions and the Requests Pending Approval tile. Requests must be approved before equipment is assigned, so the requests are hidden when the feature is off.';
         ApiIntegrationDescTxt: Label 'Lets external systems use the equipment APIs and shows the integration event settings and entries. When the feature is off, the APIs return an error and no integration event entries are written.';
         MaintenancePlanningDescTxt: Label 'Shows the planned maintenance fields (last maintenance date, maintenance frequency and next maintenance date) and the planned maintenance tiles. The next maintenance date is still calculated when the feature is off.';
+        NotificationsDescTxt: Label 'Shows the equipment notifications to the users of this company: expiring warranties, overdue maintenance and equipment that is back from maintenance. Each user can still turn single notifications off in My Notifications. When the feature is off, no equipment notification is shown.';
 
     /// <summary>Returns whether the feature is turned on in the current company.</summary>
     /// <param name="Feature">The feature.</param>
@@ -99,6 +100,8 @@ codeunit 50138 "EQM Feature Mgt."
                 exit(ApiIntegrationDescTxt);
             Feature::"Maintenance Planning":
                 exit(MaintenancePlanningDescTxt);
+            Feature::Notifications:
+                exit(NotificationsDescTxt);
         end;
         exit('');
     end;

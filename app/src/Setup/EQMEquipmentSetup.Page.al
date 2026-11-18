@@ -6,9 +6,9 @@ page 50103 "EQM Equipment Setup"
     PageType = Card;
     ApplicationArea = All;
     UsageCategory = Administration;
-    AdditionalSearchTerms = 'equipment numbers, equipment number series, maintenance number series, equipment request numbers, equipment job queue, equipment monitoring, integration events, outbox, feature management, turn features on or off';
+    AdditionalSearchTerms = 'equipment numbers, equipment number series, maintenance number series, equipment request numbers, equipment job queue, equipment monitoring, integration events, outbox, feature management, turn features on or off, application setup, default warranty alert days, default maintenance frequency, enable notifications, enable equipment requests, enable APIs';
     AboutTitle = 'About equipment setup';
-    AboutText = 'Set the number series for equipment, maintenance records and equipment requests. The app runs its monitoring every day through job queue entries: one creates warranty alerts, one checks overdue maintenance. They are created automatically; if one is missing, choose **Schedule Monitoring Jobs**. Turn on **Integration Events Enabled** to record business events for external systems.';
+    AboutText = 'Set the number series for equipment, maintenance records and equipment requests, the default warranty alert days and maintenance frequency, and turn notifications, equipment requests and the APIs on or off for this company. The app runs its monitoring every day through job queue entries: one creates warranty alerts, one checks overdue maintenance. They are created automatically; if one is missing, choose **Schedule Monitoring Jobs**. Turn on **Integration Events Enabled** to record business events for external systems. Users see a change to a feature the next time they open a page.';
     SourceTable = "EQM Equipment Setup";
     InsertAllowed = false;
     DeleteAllowed = false;
@@ -29,6 +29,54 @@ page 50103 "EQM Equipment Setup"
                 }
                 field("Request Nos."; Rec."Request Nos.")
                 {
+                }
+            }
+            group(Defaults)
+            {
+                Caption = 'Defaults';
+
+                field("Default Warranty Alert Days"; Rec."Default Warranty Alert Days")
+                {
+                    Visible = WarrantyAlertsEnabled;
+                }
+                field("Default Maint. Freq. (Months)"; Rec."Default Maint. Freq. (Months)")
+                {
+                    Visible = MaintenancePlanningEnabled;
+                }
+            }
+            group(Features)
+            {
+                Caption = 'Features';
+
+                field(EnableNotifications; EnableNotifications)
+                {
+                    Caption = 'Enable Notifications';
+                    ToolTip = 'Specifies whether users in this company see equipment notifications about expiring warranties, overdue maintenance and equipment that is back from maintenance. When it is off, no equipment notification is shown; when it is on, each user can still turn single notifications off in My Notifications. This is the Notifications feature on the Equipment Features page.';
+
+                    trigger OnValidate()
+                    begin
+                        FeatureMgt.SetFeatureEnabled("EQM Feature"::Notifications, EnableNotifications);
+                    end;
+                }
+                field(EnableEquipmentRequests; EnableEquipmentRequests)
+                {
+                    Caption = 'Enable Equipment Requests';
+                    ToolTip = 'Specifies whether employees can request equipment and approvers can approve or reject the requests. When it is off, the Equipment Requests pages, actions and tile are hidden and existing requests are kept. This is the Approval Workflows feature on the Equipment Features page. Users see the change the next time they open a page.';
+
+                    trigger OnValidate()
+                    begin
+                        FeatureMgt.SetFeatureEnabled("EQM Feature"::"Approval Workflows", EnableEquipmentRequests);
+                    end;
+                }
+                field(EnableApis; EnableApis)
+                {
+                    Caption = 'Enable APIs';
+                    ToolTip = 'Specifies whether external systems can use the equipment APIs. When it is off, the APIs return an error, the integration settings are hidden and no integration event entries are written. This is the API Integration feature on the Equipment Features page. Users see the change the next time they open a page.';
+
+                    trigger OnValidate()
+                    begin
+                        FeatureMgt.SetFeatureEnabled("EQM Feature"::"API Integration", EnableApis);
+                    end;
                 }
             }
             group(Integration)
@@ -108,7 +156,7 @@ page 50103 "EQM Equipment Setup"
             action(EquipmentFeatures)
             {
                 Caption = 'Equipment Features';
-                ToolTip = 'Turn the optional equipment features on or off for this company: images, warranty alerts, approval workflows, API integration and maintenance planning.';
+                ToolTip = 'Turn the optional equipment features on or off for this company: images, warranty alerts, approval workflows, API integration, maintenance planning and notifications.';
                 Image = Setup;
                 RunObject = page "EQM Equipment Features";
             }
@@ -131,6 +179,10 @@ page 50103 "EQM Equipment Setup"
         FeatureMgt: Codeunit "EQM Feature Mgt.";
         ApiIntegrationEnabled: Boolean;
         WarrantyAlertsEnabled: Boolean;
+        MaintenancePlanningEnabled: Boolean;
+        EnableNotifications: Boolean;
+        EnableEquipmentRequests: Boolean;
+        EnableApis: Boolean;
         CanManage: Boolean;
         WarrantyJobStatus: Text;
         MaintenanceJobStatus: Text;
@@ -143,6 +195,7 @@ page 50103 "EQM Equipment Setup"
     begin
         ApiIntegrationEnabled := FeatureMgt.IsEnabled("EQM Feature"::"API Integration");
         WarrantyAlertsEnabled := FeatureMgt.IsEnabled("EQM Feature"::"Warranty Alerts");
+        MaintenancePlanningEnabled := FeatureMgt.IsEnabled("EQM Feature"::"Maintenance Planning");
         if not Rec.Get() then begin
             if not Rec.WritePermission() then
                 Error(SetupMissingErr);
@@ -151,6 +204,9 @@ page 50103 "EQM Equipment Setup"
             Rec.Get();
         end;
         CanManage := Rec.WritePermission();
+        EnableNotifications := FeatureMgt.IsEnabled("EQM Feature"::Notifications);
+        EnableEquipmentRequests := FeatureMgt.IsEnabled("EQM Feature"::"Approval Workflows");
+        EnableApis := ApiIntegrationEnabled;
         if not CanManage then
             CurrPage.Editable := false;
     end;
