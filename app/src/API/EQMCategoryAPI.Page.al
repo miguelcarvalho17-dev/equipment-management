@@ -50,4 +50,11 @@ page 50124 "EQM Category API"
             }
         }
     }
+
+    trigger OnOpenPage()
+    var
+        FeatureMgt: Codeunit "EQM Feature Mgt.";
+    begin
+        FeatureMgt.CheckEnabled("EQM Feature"::"API Integration");
+    end;
 }

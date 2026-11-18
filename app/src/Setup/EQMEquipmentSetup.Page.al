@@ -6,7 +6,7 @@ page 50103 "EQM Equipment Setup"
     PageType = Card;
     ApplicationArea = All;
     UsageCategory = Administration;
-    AdditionalSearchTerms = 'equipment numbers, equipment number series, maintenance number series, equipment request numbers, equipment job queue, equipment monitoring, integration events, outbox';
+    AdditionalSearchTerms = 'equipment numbers, equipment number series, maintenance number series, equipment request numbers, equipment job queue, equipment monitoring, integration events, outbox, feature management, turn features on or off';
     AboutTitle = 'About equipment setup';
     AboutText = 'Set the number series for equipment, maintenance records and equipment requests. The app runs its monitoring every day through job queue entries: one creates warranty alerts, one checks overdue maintenance. They are created automatically; if one is missing, choose **Schedule Monitoring Jobs**. Turn on **Integration Events Enabled** to record business events for external systems.';
     SourceTable = "EQM Equipment Setup";
@@ -34,9 +34,11 @@ page 50103 "EQM Equipment Setup"
             group(Integration)
             {
                 Caption = 'Integration';
+                Visible = ApiIntegrationEnabled;
 
                 field("Integration Events Enabled"; Rec."Integration Events Enabled")
                 {
+                    Visible = ApiIntegrationEnabled;
                 }
             }
             group(BackgroundMonitoring)
@@ -47,6 +49,7 @@ page 50103 "EQM Equipment Setup"
                 {
                     Caption = 'Warranty Alert Job';
                     Editable = false;
+                    Visible = WarrantyAlertsEnabled;
                     ToolTip = 'Specifies the status of the job queue entry that creates warranty alerts every day. Not scheduled means that no entry exists; choose Schedule Monitoring Jobs to create it.';
                 }
                 field(MaintenanceJobStatus; MaintenanceJobStatus)
@@ -99,7 +102,15 @@ page 50103 "EQM Equipment Setup"
                 Caption = 'Integration Event Entries';
                 ToolTip = 'View the integration event entries that external systems read through the API.';
                 Image = Log;
+                Visible = ApiIntegrationEnabled;
                 RunObject = page "EQM Integration Event Entries";
+            }
+            action(EquipmentFeatures)
+            {
+                Caption = 'Equipment Features';
+                ToolTip = 'Turn the optional equipment features on or off for this company: images, warranty alerts, approval workflows, API integration and maintenance planning.';
+                Image = Setup;
+                RunObject = page "EQM Equipment Features";
             }
         }
         area(Promoted)
@@ -117,6 +128,9 @@ page 50103 "EQM Equipment Setup"
 
     var
         MonitoringJobMgt: Codeunit "EQM Monitoring Job Mgt.";
+        FeatureMgt: Codeunit "EQM Feature Mgt.";
+        ApiIntegrationEnabled: Boolean;
+        WarrantyAlertsEnabled: Boolean;
         CanManage: Boolean;
         WarrantyJobStatus: Text;
         MaintenanceJobStatus: Text;
@@ -127,6 +141,8 @@ page 50103 "EQM Equipment Setup"
     var
         DefaultData: Codeunit "EQM Default Data";
     begin
+        ApiIntegrationEnabled := FeatureMgt.IsEnabled("EQM Feature"::"API Integration");
+        WarrantyAlertsEnabled := FeatureMgt.IsEnabled("EQM Feature"::"Warranty Alerts");
         if not Rec.Get() then begin
             if not Rec.WritePermission() then
                 Error(SetupMissingErr);

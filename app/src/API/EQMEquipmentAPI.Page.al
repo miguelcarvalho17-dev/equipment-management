@@ -110,6 +110,13 @@ page 50123 "EQM Equipment API"
         }
     }
 
+    trigger OnOpenPage()
+    var
+        FeatureMgt: Codeunit "EQM Feature Mgt.";
+    begin
+        FeatureMgt.CheckEnabled("EQM Feature"::"API Integration");
+    end;
+
     /// <summary>
     /// Bound action: assigns the equipment to an employee through the same procedure as the UI.
     /// </summary>

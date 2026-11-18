@@ -48,6 +48,7 @@ page 50115 "EQM Maintenance FactBox"
             }
             field("Next Maintenance Date"; Rec."Next Maintenance Date")
             {
+                Visible = MaintenancePlanningEnabled;
                 StyleExpr = NextMaintenanceStyle;
             }
             field(TotalMaintenanceCost; Rec."Total Maintenance Cost")
@@ -68,6 +69,8 @@ page 50115 "EQM Maintenance FactBox"
     }
 
     var
+        FeatureMgt: Codeunit "EQM Feature Mgt.";
+        MaintenancePlanningEnabled: Boolean;
         NoOfMaintenanceRecords: Integer;
         NoOfOpenMaintenanceRecords: Integer;
         LastMaintenanceDate: Date;
@@ -75,6 +78,11 @@ page 50115 "EQM Maintenance FactBox"
         MaintenanceCostPct: Decimal;
         MaintenanceCostStyle: Text;
         NextMaintenanceStyle: Text;
+
+    trigger OnOpenPage()
+    begin
+        MaintenancePlanningEnabled := FeatureMgt.IsEnabled("EQM Feature"::"Maintenance Planning");
+    end;
 
     trigger OnFindRecord(Which: Text): Boolean
     begin

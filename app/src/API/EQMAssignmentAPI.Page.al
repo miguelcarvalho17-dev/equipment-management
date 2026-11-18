@@ -62,4 +62,11 @@ page 50125 "EQM Assignment API"
             }
         }
     }
+
+    trigger OnOpenPage()
+    var
+        FeatureMgt: Codeunit "EQM Feature Mgt.";
+    begin
+        FeatureMgt.CheckEnabled("EQM Feature"::"API Integration");
+    end;
 }

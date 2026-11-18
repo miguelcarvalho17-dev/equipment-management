@@ -1268,6 +1268,31 @@
           <note from="Developer" annotates="general" priority="2"></note>
           <note from="Xliff Generator" annotates="general" priority="3">Table EQM Equipment Setup - Field Request Nos. - Property Caption</note>
         </trans-unit>
+        <trans-unit id="Table 294973366 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Equipment Feature Setup</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table EQM Feature Setup - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Table 294973366 - Field 2891538263 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Specifies whether the feature is turned on in this company. When it is off, its pages, fields, actions and tiles are hidden, and pages that belong only to this feature show an error when they are opened. No data is deleted. Users see the change the next time they open a page.</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table EQM Feature Setup - Field Enabled - Property ToolTip</note>
+        </trans-unit>
+        <trans-unit id="Table 294973366 - Field 2891538263 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Enabled</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table EQM Feature Setup - Field Enabled - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Table 294973366 - Field 1241377248 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Specifies the optional part of Equipment Management that you can turn on or off.</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table EQM Feature Setup - Field Feature - Property ToolTip</note>
+        </trans-unit>
+        <trans-unit id="Table 294973366 - Field 1241377248 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Feature</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table EQM Feature Setup - Field Feature - Property Caption</note>
+        </trans-unit>
         <trans-unit id="Table 2527394721 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
           <source>Integration Event Entry</source>
           <note from="Developer" annotates="general" priority="2"></note>
@@ -2052,6 +2077,46 @@
           <source>The file %1 is not a supported picture. Choose a JPG, PNG, GIF, BMP or TIFF file.</source>
           <note from="Developer" annotates="general" priority="2">%1 = file name</note>
           <note from="Xliff Generator" annotates="general" priority="3">Codeunit EQM Equipment Picture Mgt. - NamedType UnsupportedFileErr</note>
+        </trans-unit>
+        <trans-unit id="Codeunit 1415679247 - NamedType 1156163033" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Lets external systems use the equipment APIs and shows the integration event settings and entries. When the feature is off, the APIs return an error and no integration event entries are written.</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit EQM Feature Mgt. - NamedType ApiIntegrationDescTxt</note>
+        </trans-unit>
+        <trans-unit id="Codeunit 1415679247 - NamedType 4057334138" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Shows the equipment request process: the Equipment Requests pages, the approval actions and the Requests Pending Approval tile. Requests must be approved before equipment is assigned, so the requests are hidden when the feature is off.</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit EQM Feature Mgt. - NamedType ApprovalWorkflowsDescTxt</note>
+        </trans-unit>
+        <trans-unit id="Codeunit 1415679247 - NamedType 490965913" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Shows the Picture FactBox on the equipment card and list, where users take, import, export and delete equipment pictures. Pictures that are already stored are kept when the feature is off.</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit EQM Feature Mgt. - NamedType EquipmentImagesDescTxt</note>
+        </trans-unit>
+        <trans-unit id="Codeunit 1415679247 - NamedType 33623699" size-unit="char" translate="yes" xml:space="preserve">
+          <source>The %1 feature is turned off in this company. To use it, ask an administrator to turn it on in the Equipment Features page.</source>
+          <note from="Developer" annotates="general" priority="2">%1 = feature name, for example Warranty Alerts</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit EQM Feature Mgt. - NamedType FeatureDisabledErr</note>
+        </trans-unit>
+        <trans-unit id="Codeunit 1415679247 - NamedType 675824555" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Shows the planned maintenance fields (last maintenance date, maintenance frequency and next maintenance date) and the planned maintenance tiles. The next maintenance date is still calculated when the feature is off.</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit EQM Feature Mgt. - NamedType MaintenancePlanningDescTxt</note>
+        </trans-unit>
+        <trans-unit id="Codeunit 1415679247 - NamedType 1610546652" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Open the page where administrators turn equipment features on or off.</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit EQM Feature Mgt. - NamedType OpenFeaturesDescLbl</note>
+        </trans-unit>
+        <trans-unit id="Codeunit 1415679247 - NamedType 1444174419" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Open Equipment Features</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit EQM Feature Mgt. - NamedType OpenFeaturesLbl</note>
+        </trans-unit>
+        <trans-unit id="Codeunit 1415679247 - NamedType 4130507636" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Shows the Warranty Alerts page, its actions, tile and notifications, and lets the daily job create warranty alerts. Warranty dates and the warranty status stay visible when the feature is off.</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit EQM Feature Mgt. - NamedType WarrantyAlertsDescTxt</note>
         </trans-unit>
         <trans-unit id="Codeunit 3359203152 - NamedType 2141140146" size-unit="char" translate="yes" xml:space="preserve">
           <source>Do you want to post maintenance record %1? It is copied to the maintenance history, and after that you cannot change it. If no other maintenance is open for the equipment, its status changes from In Maintenance to Available.</source>
@@ -3138,6 +3203,36 @@
           <note from="Developer" annotates="general" priority="2"></note>
           <note from="Xliff Generator" annotates="general" priority="3">Page EQM Equipment FactBox - Control NoOfAssignments - Property Caption</note>
         </trans-unit>
+        <trans-unit id="Page 589403216 - Property 1064389655" size-unit="char" translate="yes" xml:space="preserve">
+          <source>About equipment features</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page EQM Equipment Features - Property AboutTitle</note>
+        </trans-unit>
+        <trans-unit id="Page 589403216 - Property 247559172" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Turn the optional parts of Equipment Management on or off for this company: equipment images, warranty alerts, approval workflows, API integration and maintenance planning. When a feature is off, its pages, fields, actions and tiles are hidden, and pages that belong only to that feature show an error when they are opened. No data is deleted, and turning the feature on again shows everything as before. Users see a change the next time they open a page.</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page EQM Equipment Features - Property AboutText</note>
+        </trans-unit>
+        <trans-unit id="Page 589403216 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Equipment Features</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page EQM Equipment Features - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Page 589403216 - Property 3863440606" size-unit="char" translate="yes" xml:space="preserve">
+          <source>feature management, feature activation, turn on equipment features, turn off equipment features, enable features, disable features</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page EQM Equipment Features - Property AdditionalSearchTerms</note>
+        </trans-unit>
+        <trans-unit id="Page 589403216 - Control 3461834954 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Specifies what the feature shows and what happens when it is turned off.</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page EQM Equipment Features - Control Description - Property ToolTip</note>
+        </trans-unit>
+        <trans-unit id="Page 589403216 - Control 3461834954 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Description</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page EQM Equipment Features - Control Description - Property Caption</note>
+        </trans-unit>
         <trans-unit id="Page 2630064635 - Property 1064389655" size-unit="char" translate="yes" xml:space="preserve">
           <source>About equipment</source>
           <note from="Developer" annotates="general" priority="2"></note>
@@ -3443,6 +3538,16 @@
           <note from="Developer" annotates="general" priority="2"></note>
           <note from="Xliff Generator" annotates="general" priority="3">Page EQM Equipment Manager RC - Action EquipmentCategories - Property Caption</note>
         </trans-unit>
+        <trans-unit id="Page 4775459 - Action 2194982647 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Turn the optional equipment features on or off for this company.</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page EQM Equipment Manager RC - Action EquipmentFeatures - Property ToolTip</note>
+        </trans-unit>
+        <trans-unit id="Page 4775459 - Action 2194982647 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Equipment Features</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page EQM Equipment Manager RC - Action EquipmentFeatures - Property Caption</note>
+        </trans-unit>
         <trans-unit id="Page 4775459 - Action 313566759 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
           <source>Open the equipment setup.</source>
           <note from="Developer" annotates="general" priority="2"></note>
@@ -3734,7 +3839,7 @@
           <note from="Xliff Generator" annotates="general" priority="3">Page EQM Equipment Setup - Property Caption</note>
         </trans-unit>
         <trans-unit id="Page 1065098760 - Property 3863440606" size-unit="char" translate="yes" xml:space="preserve">
-          <source>equipment numbers, equipment number series, maintenance number series, equipment request numbers, equipment job queue, equipment monitoring, integration events, outbox</source>
+          <source>equipment numbers, equipment number series, maintenance number series, equipment request numbers, equipment job queue, equipment monitoring, integration events, outbox, feature management, turn features on or off</source>
           <note from="Developer" annotates="general" priority="2"></note>
           <note from="Xliff Generator" annotates="general" priority="3">Page EQM Equipment Setup - Property AdditionalSearchTerms</note>
         </trans-unit>
@@ -3782,6 +3887,16 @@
           <source>Numbering</source>
           <note from="Developer" annotates="general" priority="2"></note>
           <note from="Xliff Generator" annotates="general" priority="3">Page EQM Equipment Setup - Control Numbering - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Page 1065098760 - Action 2194982647 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Turn the optional equipment features on or off for this company: images, warranty alerts, approval workflows, API integration and maintenance planning.</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page EQM Equipment Setup - Action EquipmentFeatures - Property ToolTip</note>
+        </trans-unit>
+        <trans-unit id="Page 1065098760 - Action 2194982647 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Equipment Features</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page EQM Equipment Setup - Action EquipmentFeatures - Property Caption</note>
         </trans-unit>
         <trans-unit id="Page 1065098760 - Action 4093586628 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
           <source>View the integration event entries that external systems read through the API.</source>
@@ -4742,6 +4857,36 @@
           <source>Lost</source>
           <note from="Developer" annotates="general" priority="2"></note>
           <note from="Xliff Generator" annotates="general" priority="3">Enum EQM Equipment Status - EnumValue Lost - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Enum 3548392231 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Equipment Feature</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Enum EQM Feature - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Enum 3548392231 - EnumValue 2779383290 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>API Integration</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Enum EQM Feature - EnumValue API Integration - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Enum 3548392231 - EnumValue 2734306649 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Approval Workflows</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Enum EQM Feature - EnumValue Approval Workflows - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Enum 3548392231 - EnumValue 2713262010 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Equipment Images</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Enum EQM Feature - EnumValue Equipment Images - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Enum 3548392231 - EnumValue 504629828 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Maintenance Planning</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Enum EQM Feature - EnumValue Maintenance Planning - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Enum 3548392231 - EnumValue 1483625339 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Warranty Alerts</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Enum EQM Feature - EnumValue Warranty Alerts - Property Caption</note>
         </trans-unit>
         <trans-unit id="Enum 3310705949 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
           <source>Integration Event Type</source>

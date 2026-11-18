@@ -370,3 +370,17 @@ Source: "Manual sandbox checks" in `docs/plans/FR-041-maintenance-cost-analysis.
 - [ ] S5 (manual, sandbox): the action works from the Equipment List (Report group) and from the Equipment Manager Role Center (Reporting area).
 - [ ] S6 (manual, sandbox): run with a filter that matches nothing. Note what the platform shows (an empty workbook or a message) and record it in `docs/help/FR-041-maintenance-cost-analysis.md`.
 - [ ] Record the results and clear the TODO(verify) items in `docs/features/FR-041-maintenance-cost-analysis.md` and `docs/help/FR-041-maintenance-cost-analysis.md`.
+
+## FR-042 sandbox checks (not run; 21 test procedures written in test codeunit "EQM Feature Mgt. Tests" 50198, 1 new and 4 changed in "EQM Role Permission Tests" 50162; not executed locally; CI result pending)
+Source: "Manual sandbox checks" in `docs/plans/FR-042-feature-management.md`, with two corrections: the Role Center actions are not gated (S7), and the list fills on the first administrator open (S1). No separate AppSource validation ran.
+- [ ] S1 (manual, sandbox): an administrator opens Equipment Features from Tell Me. It shows five rows, all Enabled. Before that first open, a user with only EQM - Reader sees an empty list (record it). After it, the Reader sees the five rows read-only. A missing row still means enabled.
+- [ ] S2 (manual, sandbox): turn each feature off, then reopen the Equipment Card, Equipment List, dashboard, Role Center, Equipment Setup and Employee Card. Confirm the controls of that feature are hidden (see the table in `docs/help/FR-042-feature-management.md`). Turn it on again and confirm they come back.
+- [ ] S3 (manual, sandbox): turn Warranty Alerts or Approval Workflows off and find the page in Tell Me. Opening it shows the feature error with **Open Equipment Features**, and the action opens page Equipment Features. Record that Tell Me still lists the page.
+- [ ] S4 (manual, sandbox): with API Integration off, run GET on `equipments` and the POST `markProcessed` action. Record the HTTP status and message. With the feature on, both work.
+- [ ] S5 (manual, sandbox): with Warranty Alerts off, run the Warranty Alert job. No new alerts and no Power Automate "warranty expiring" flow. Turn it on and run again: the due alerts are created.
+- [ ] S6 (manual, sandbox): with API Integration off and Integration Events Enabled on, assign equipment. No integration event entry is written.
+- [ ] S7 (manual, sandbox): the Role Center actions Equipment Requests and Warranty Alerts are NOT hidden when their features are off. The Role Center page cannot have triggers (compiler error AL0378), so the actions stay visible. Confirm that each stays visible, and that opening it shows the feature error with **Open Equipment Features**. Also confirm that the Requests Pending Approval and Open Warranty Alerts tiles are hidden, and that the Equipment Features action appears in the Setup section (and that no other Role Center action changed).
+- [ ] S8 (manual, sandbox): an HR user without EQM permission sets opens the Employee Card without error.
+- [ ] S9 (manual, sandbox): two companies. Turning a feature off in one does not affect the other.
+- [ ] S10 (manual, sandbox): a page that is already open keeps its state until it is reopened. Confirm the help text in `docs/help/FR-042-feature-management.md` matches.
+- [ ] Record the results and clear the TODO(verify) items in `docs/features/FR-042-feature-management.md` and `docs/help/FR-042-feature-management.md`.

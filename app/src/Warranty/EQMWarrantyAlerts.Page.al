@@ -167,7 +167,10 @@ page 50120 "EQM Warranty Alerts"
         AlertsGeneratedMsg: Label '%1 warranty alerts were created and %2 alerts that no longer apply were cancelled.', Comment = '%1 = number of new alerts, %2 = number of cancelled alerts';
 
     trigger OnOpenPage()
+    var
+        FeatureMgt: Codeunit "EQM Feature Mgt.";
     begin
+        FeatureMgt.CheckEnabled("EQM Feature"::"Warranty Alerts");
         CanManage := Rec.WritePermission();
     end;
 

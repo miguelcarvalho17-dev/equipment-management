@@ -81,6 +81,12 @@ page 50110 "EQM Equipment Manager RC"
                     ToolTip = 'Open the equipment setup.';
                     RunObject = page "EQM Equipment Setup";
                 }
+                action(EquipmentFeatures)
+                {
+                    Caption = 'Equipment Features';
+                    ToolTip = 'Turn the optional equipment features on or off for this company.';
+                    RunObject = page "EQM Equipment Features";
+                }
                 action(EquipmentCategories)
                 {
                     Caption = 'Equipment Categories';
