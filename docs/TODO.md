@@ -419,3 +419,13 @@ Source: `docs/plans/FR-045-automated-unit-tests.md`. No manual sandbox step. No 
 - [ ] Minor, open: Employee First Name literals in 3 test files.
 - [ ] Minor, open: A3 cannot distinguish the two error sources. It asserts the employee number only.
 - [ ] Record the results and clear the items in `docs/features/FR-045-automated-unit-tests.md`.
+
+## FR-046 checks (tests not executed; CI result pending)
+Source: `docs/features/FR-046-integration-tests.md`. Test codeunit 50158 "EQM Process Integration Tests" (21 tests). No separate AppSource validation ran.
+- [ ] CI: the test app runs codeunit 50158. The total test count rises by 21 compared with the last green `main` run. Record the counts from `gh run view <run-id> --log`.
+- [ ] Not verified: tests not executed locally, CI result pending. Any failing test: decide whether the test or the app is wrong. A failing test may show an app defect; changes to `app/` need a separate plan.
+- [ ] GuiAllowed assumption: the ConfirmHandler tests and NF1, NF4 and NF6 need a GUI session in CI. If they fail with no confirm or no notification, check the CI log for test 50199 `NotificationIsSentWhenNotificationsAreOn` (shares the dependency).
+- [ ] NF7 (overdue boundary) uses `Today()`. A run across midnight could flip it. Re-run if it fails once at midnight.
+- [ ] Optional: run codeunit 50158 with AL Test Runner in a sandbox.
+- [ ] Later phases, not planned yet: (2) TestPage flows (Equipment Card and Request Card actions); (3) Role Center summary notifications, maintenance-card notification and notification action handlers; (4) job-queue-driven flows (warranty job, overdue check), Power Automate and API flows.
+- [ ] Record the results and clear the items in `docs/features/FR-046-integration-tests.md`.
