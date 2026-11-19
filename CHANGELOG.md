@@ -1,6 +1,21 @@
 # Changelog
 Newest first. Grouped by Added / Changed / Fixed / Obsolete.
 
+## FR-055 Multi-Language Support (version stays 29.0.0.0, no bump)
+### Added
+- Portuguese (Portugal) and Spanish (Spain) texts for the app. Captions, ToolTips, messages, error messages and teaching tips show in the language chosen in My Settings. Other languages show English. Feature doc docs/features/FR-055-multi-language-support.md. Help docs/help/FR-055-multi-language-support.md.
+- Translation tool `.github/scripts/xlf_sync.py` and check 7 "Language files" in Repo checks. A pull request that adds or changes texts fails until the language files are complete.
+### Changed
+- None.
+### Fixed
+- None.
+### Obsolete
+- None.
+
+Release notes: Equipment Management is available in Portuguese (Portugal) and Spanish (Spain). Choose the language in My Settings and sign in again. Your data is not translated, and the date and number format still follows your Region.
+
+Note: no `app.json` change (TranslationFile was already on), no object, field, permission or event change, version stays 29.0.0.0. Default categories and number series keep the language they were created in. Not verified: tests not executed locally, CI result pending (test codeunit 50153, T1 to T8); the translations are not reviewed by a native speaker; pt-BR is not covered; no separate AppSource validation ran. The feature doc is docs/features/FR-055-multi-language-support.md.
+
 ## FR-056 Regional Settings (version stays 29.0.0.0, no bump)
 ### Added
 - Maintenance Log Entries: the Old Value and New Value columns show the value of a Changed entry in your regional format: dates, costs (with the regional separators) and maintenance types by name. Feature doc docs/features/FR-056-regional-settings.md (includes the audit of the other areas). Help docs/help/FR-056-regional-settings.md.

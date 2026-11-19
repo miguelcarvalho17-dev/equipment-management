@@ -9,6 +9,7 @@ Checks:
   5. Test coverage register (FR-047): integrity errors fail; below-target procedure reach and rule coverage
      only warn while "enforce" is false (see coverage_check.py).
   6. App version policy (FR-049): see version_check.py.
+  7. Language files (FR-055): see xlf_sync.py.
 
 Usage: repo_checks.py [--base <git ref>] [--branch <head branch name>]
 Without --base, only the checks that need no diff run (1, and 2 when --branch is given).
@@ -24,6 +25,7 @@ from pathlib import Path
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 import coverage_check  # noqa: E402
 import version_check  # noqa: E402
+import xlf_sync  # noqa: E402
 
 ROOT = Path(__file__).resolve().parents[2]
 OBJECT_RE = re.compile(
@@ -107,7 +109,9 @@ def check_translations(files):
     xlf_changed = any(f.startswith("app/Translations/") and f.endswith(".g.xlf") for f in files)
     if al_changed and not xlf_changed:
         warning("AL code changed but app/Translations/*.g.xlf was not updated. "
-                "If captions, tooltips or labels changed, build in VS Code and commit the regenerated file.")
+                "If captions, tooltips or labels changed, run al_build on app/, then "
+                "python3 .github/scripts/xlf_sync.py sync, translate the pending units (export/import) "
+                "and commit all .xlf files.")
 
 
 def check_coverage():
@@ -139,6 +143,18 @@ def check_versions(base):
         print("Version policy: OK")
 
 
+def check_language_files():
+    language_errors, language_warnings, summary = xlf_sync.run(ROOT)
+    for line in summary:
+        print(line)
+    for msg in language_warnings:
+        warning(msg)
+    for msg in language_errors:
+        error(msg)
+    if not language_errors:
+        print("Language files: OK")
+
+
 def main():
     parser = argparse.ArgumentParser()
     parser.add_argument("--base")
@@ -147,6 +163,7 @@ def main():
     check_object_ids()
     check_coverage()
     check_versions(args.base)
+    check_language_files()
     check_feature_files(args.branch)
     if args.base:
         files = changed_files(args.base)
