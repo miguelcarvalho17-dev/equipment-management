@@ -1,6 +1,20 @@
 # Changelog
 Newest first. Grouped by Added / Changed / Fixed / Obsolete.
 
+## FR-056 Regional Settings (version stays 29.0.0.0, no bump)
+### Added
+- Maintenance Log Entries: the Old Value and New Value columns show the value of a Changed entry in your regional format: dates, costs (with the regional separators) and maintenance types by name. Feature doc docs/features/FR-056-regional-settings.md (includes the audit of the other areas). Help docs/help/FR-056-regional-settings.md.
+### Changed
+- Maintenance Log Entries: the stored XML columns are hidden and captioned Old Value (XML Format) and New Value (XML Format). Show them with personalization.
+### Fixed
+- None.
+### Obsolete
+- None.
+
+Release notes: The maintenance log shows dates, costs and maintenance types of changes in your regional format (My Settings > Region). The stored values are not changed. The XML values stay available through personalization.
+
+Note: display only. No change to the stored log format (NFR-005 Q4), no table field, no event, no telemetry, no business logic, no API, no permission set, no app.json change, no upgrade code. Values that cannot be converted are shown as stored. Not verified: tests not executed locally, CI result pending; the AppSourceCop baseline is not configured, so no breaking-change comparison ran; no separate AppSource validation ran. The feature doc is docs/features/FR-056-regional-settings.md.
+
 ## FR-050 Application Telemetry (version stays 29.0.0.0, no bump)
 ### Added
 - Five usage signals, sent to the environment's Application Insights when telemetry is turned on: equipment created (EQM0005), equipment assigned (EQM0006), equipment returned (EQM0007), maintenance registered (EQM0008) and warranty expired (EQM0009). An administrator can see how the equipment is used and when warranties expire. Catalog and sample queries in docs/features/FR-050-application-telemetry.md. Setup and the meaning of each signal in docs/help/FR-050-application-telemetry.md.

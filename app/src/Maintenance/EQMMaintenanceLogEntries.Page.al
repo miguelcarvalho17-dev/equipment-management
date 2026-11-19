@@ -38,11 +38,25 @@ page 50121 "EQM Maintenance Log Entries"
                 field("Field Caption"; Rec."Field Caption")
                 {
                 }
+                field(OldValueLocal; Rec.GetLocalOldValue())
+                {
+                    Caption = 'Old Value';
+                    ToolTip = 'Specifies the value of the field before the change, shown in the format of your region.';
+                }
+                field(NewValueLocal; Rec.GetLocalNewValue())
+                {
+                    Caption = 'New Value';
+                    ToolTip = 'Specifies the value of the field after the change, shown in the format of your region.';
+                }
                 field("Old Value"; Rec."Old Value")
                 {
+                    Caption = 'Old Value (XML Format)';
+                    Visible = false;
                 }
                 field("New Value"; Rec."New Value")
                 {
+                    Caption = 'New Value (XML Format)';
+                    Visible = false;
                 }
                 field("User ID"; Rec."User ID")
                 {

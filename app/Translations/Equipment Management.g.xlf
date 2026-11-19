@@ -4328,6 +4328,36 @@
           <note from="Developer" annotates="general" priority="2"></note>
           <note from="Xliff Generator" annotates="general" priority="3">Page EQM Maintenance Log Entries - Property AdditionalSearchTerms</note>
         </trans-unit>
+        <trans-unit id="Page 1822869878 - Control 2432660905 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>New Value (XML Format)</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page EQM Maintenance Log Entries - Control New Value - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Page 1822869878 - Control 1588182102 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Specifies the value of the field after the change, shown in the format of your region.</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page EQM Maintenance Log Entries - Control NewValueLocal - Property ToolTip</note>
+        </trans-unit>
+        <trans-unit id="Page 1822869878 - Control 1588182102 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>New Value</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page EQM Maintenance Log Entries - Control NewValueLocal - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Page 1822869878 - Control 3205443024 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Old Value (XML Format)</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page EQM Maintenance Log Entries - Control Old Value - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Page 1822869878 - Control 2303850459 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Specifies the value of the field before the change, shown in the format of your region.</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page EQM Maintenance Log Entries - Control OldValueLocal - Property ToolTip</note>
+        </trans-unit>
+        <trans-unit id="Page 1822869878 - Control 2303850459 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Old Value</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page EQM Maintenance Log Entries - Control OldValueLocal - Property Caption</note>
+        </trans-unit>
         <trans-unit id="Page 774058295 - Property 1064389655" size-unit="char" translate="yes" xml:space="preserve">
           <source>About maintenance records</source>
           <note from="Developer" annotates="general" priority="2"></note>

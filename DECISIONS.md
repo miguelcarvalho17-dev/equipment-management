@@ -142,3 +142,12 @@ A decision that applies to all future work (not just one task) belongs in the "S
 - 2026-11-19 | FR-050 Application Telemetry | Chose X for both codeunits in Reader and API Consumer (Manager and Administrator inherit), following FR-036/FR-044 | Reversible: yes
 - 2026-11-19 | FR-050 Application Telemetry | Left OnAfterLogUsageTelemetry out of the coverage register, because the checker skips publishers and would fail on it | Reversible: yes
 - 2026-11-19 | FR-050 build | AL MCP had no project loaded, so app/ and test/ were compiled with the extension's alc on scratchpad copies; test/.alpackages app symbol refreshed (gitignored) | Reversible: yes
+- 2026-11-19 | FR-056 Regional Settings | Chose display-time conversion of maintenance log values (new page columns via FormatLogValueForDisplay) over changing the stored format, because storage was decided in NFR-005 Q4 and changing it would need data migration (stop list) | Reversible: yes
+- 2026-11-19 | FR-056 Regional Settings | Chose new page controls OldValueLocal/NewValueLocal plus hiding and recaptioning the raw controls over changing the existing controls' source, so no published control changes meaning | Reversible: no
+- 2026-11-19 | FR-056 Regional Settings | Chose plain Format(Decimal) for the logged Cost over LCY decimal places via the Auto Format codeunit (symbol not verifiable then); LCY precision is phase 2 | Reversible: yes
+- 2026-11-19 | FR-056 Regional Settings | Chose to show a value that cannot be converted as stored over an error or blank, so the audit view never fails or hides data | Reversible: yes
+- 2026-11-19 | FR-056 Regional Settings | Chose internal for the three new procedures over public API on table 50108 | Reversible: yes
+- 2026-11-19 | FR-056 Regional Settings | Chose to add tests to existing codeunit 50164 over a new test codeunit, because free test IDs are reserved and widening test/app.json is on the stop list | Reversible: yes
+- 2026-11-19 | FR-056 Regional Settings | Changed nothing else after the audit (amount fields AutoFormatType 1, typed dates, invariant telemetry/events/API) | Reversible: yes
+- 2026-11-19 | FR-056 tests | Cost test values are 1000 or more so the regional thousands separator differs from the XML format under en-US; dates are in the past; page test uses OpenView + GoToRecord | Reversible: yes
+- 2026-11-19 | FR-056 build | al_addproject loaded app/ and test/ into the AL MCP; al_build regenerated the .g.xlf (al_compile does not) | Reversible: yes
