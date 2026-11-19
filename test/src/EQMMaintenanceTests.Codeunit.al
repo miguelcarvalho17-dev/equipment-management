@@ -10,6 +10,8 @@ using System.TestLibraries.Utilities;
 /// read-only rules. The tests post with Codeunit.Run on codeunit 50109, never with the confirmation of PostWithConfirmation.
 /// A failed statement (asserterror) rolls back the whole test transaction, so each test that expects an error has
 /// exactly one asserterror, as its last action, and only checks the error text afterwards.
+/// FR-056 Regional Settings: the maintenance log entries show old and new values in the regional format of the user, while
+/// the stored values stay in XML format. Expected values use Format in the same session, so they hold under any region.
 /// </summary>
 codeunit 50164 "EQM Maintenance Tests"
 {
@@ -18,6 +20,7 @@ codeunit 50164 "EQM Maintenance Tests"
 
     var
         Assert: Codeunit "Library Assert";
+        MaintenanceLogMgt: Codeunit "EQM Maintenance Log Mgt.";
         Counter: Integer;
         EquipmentNoTok: Label 'EQMMNT%1X', Locked = true;
         CategoryCodeTok: Label 'EQMMNTC%1', Locked = true;
@@ -449,6 +452,228 @@ codeunit 50164 "EQM Maintenance Tests"
         Assert.ExpectedError(StrSubstNo(DeleteMaintenanceExistsErr, Equipment."No.", Format(Equipment.Status::Disposed)));
     end;
 
+    [Test]
+    [TransactionModel(TransactionModel::AutoRollback)]
+    procedure LogShowsChangedCostInRegionalFormat()
+    var
+        Equipment: Record "EQM Equipment";
+        MaintenanceRecord: Record "EQM Maintenance Record";
+        LogEntry: Record "EQM Maintenance Log Entry";
+        OldCost: Decimal;
+        NewCost: Decimal;
+        StoredCost: Decimal;
+    begin
+        // [SCENARIO R1] A changed cost is shown in the regional format; the stored value stays in XML format
+        // [GIVEN] An open maintenance record with cost C1
+        OldCost := 1000 + Random(1000) + 0.5;
+        NewCost := OldCost + 1000 + Random(1000) + 0.25;
+        CreateEquipment(Equipment);
+        InitMaintenance(MaintenanceRecord, Equipment."No.");
+        MaintenanceRecord.Cost := OldCost;
+        MaintenanceRecord.Insert(true);
+        MaintenanceRecord.Get(MaintenanceRecord."No.");
+
+        // [WHEN] The cost is changed to C2
+        MaintenanceRecord.Cost := NewCost;
+        MaintenanceRecord.Modify(true);
+
+        // [THEN] The local values are Format(C1) and Format(C2), and the stored old value still evaluates to C1
+        FindChangedLogEntry(MaintenanceRecord."No.", MaintenanceRecord.FieldNo(Cost), LogEntry);
+        Assert.AreEqual(Format(OldCost), LogEntry.GetLocalOldValue(), 'Local old cost');
+        Assert.AreNotEqual(LogEntry."Old Value", LogEntry.GetLocalOldValue(), 'Local old cost should differ from the stored XML value');
+        Assert.AreEqual(Format(NewCost), LogEntry.GetLocalNewValue(), 'Local new cost');
+        Evaluate(StoredCost, LogEntry."Old Value", 9);
+        Assert.AreEqual(OldCost, StoredCost, 'Stored old cost should stay in XML format');
+    end;
+
+    [Test]
+    [TransactionModel(TransactionModel::AutoRollback)]
+    procedure LogShowsChangedDateInRegionalFormat()
+    var
+        Equipment: Record "EQM Equipment";
+        MaintenanceRecord: Record "EQM Maintenance Record";
+        LogEntry: Record "EQM Maintenance Log Entry";
+        OldDate: Date;
+        NewDate: Date;
+    begin
+        // [SCENARIO R2] A changed maintenance date is shown in the regional format
+        // [GIVEN] An open maintenance record dated D1
+        OldDate := Today() - 1 - Random(100);
+        NewDate := OldDate - 1 - Random(100);
+        CreateEquipment(Equipment);
+        InitMaintenance(MaintenanceRecord, Equipment."No.");
+        MaintenanceRecord."Maintenance Date" := OldDate;
+        MaintenanceRecord.Insert(true);
+        MaintenanceRecord.Get(MaintenanceRecord."No.");
+
+        // [WHEN] The date is changed to D2
+        MaintenanceRecord."Maintenance Date" := NewDate;
+        MaintenanceRecord.Modify(true);
+
+        // [THEN] The local values are Format(D1) and Format(D2)
+        FindChangedLogEntry(MaintenanceRecord."No.", MaintenanceRecord.FieldNo("Maintenance Date"), LogEntry);
+        Assert.AreEqual(Format(OldDate), LogEntry.GetLocalOldValue(), 'Local old date');
+        Assert.AreEqual(Format(NewDate), LogEntry.GetLocalNewValue(), 'Local new date');
+    end;
+
+    [Test]
+    [TransactionModel(TransactionModel::AutoRollback)]
+    procedure LogShowsChangedTypeAsCaption()
+    var
+        Equipment: Record "EQM Equipment";
+        MaintenanceRecord: Record "EQM Maintenance Record";
+        LogEntry: Record "EQM Maintenance Log Entry";
+    begin
+        // [SCENARIO R3] A changed maintenance type is shown as the enum caption, not as the stored ordinal
+        // [GIVEN] An open Preventive maintenance record
+        CreateEquipment(Equipment);
+        InitMaintenance(MaintenanceRecord, Equipment."No.");
+        MaintenanceRecord."Maintenance Type" := MaintenanceRecord."Maintenance Type"::Preventive;
+        MaintenanceRecord.Insert(true);
+        MaintenanceRecord.Get(MaintenanceRecord."No.");
+
+        // [WHEN] The type is changed to Inspection
+        MaintenanceRecord."Maintenance Type" := MaintenanceRecord."Maintenance Type"::Inspection;
+        MaintenanceRecord.Modify(true);
+
+        // [THEN] The local values are the enum captions and differ from the stored ordinals
+        FindChangedLogEntry(MaintenanceRecord."No.", MaintenanceRecord.FieldNo("Maintenance Type"), LogEntry);
+        Assert.AreEqual(Format(MaintenanceRecord."Maintenance Type"::Preventive), LogEntry.GetLocalOldValue(), 'Local old type');
+        Assert.AreEqual(Format(MaintenanceRecord."Maintenance Type"::Inspection), LogEntry.GetLocalNewValue(), 'Local new type');
+        Assert.AreNotEqual(LogEntry."Old Value", LogEntry.GetLocalOldValue(), 'Local old type should differ from the stored ordinal');
+        Assert.AreNotEqual(LogEntry."New Value", LogEntry.GetLocalNewValue(), 'Local new type should differ from the stored ordinal');
+    end;
+
+    [Test]
+    [TransactionModel(TransactionModel::AutoRollback)]
+    procedure LogShowsChangedDescriptionAsStored()
+    var
+        Equipment: Record "EQM Equipment";
+        MaintenanceRecord: Record "EQM Maintenance Record";
+        LogEntry: Record "EQM Maintenance Log Entry";
+    begin
+        // [SCENARIO R4] A changed description is shown exactly as stored
+        // [GIVEN] An open maintenance record
+        CreateEquipment(Equipment);
+        InitMaintenance(MaintenanceRecord, Equipment."No.");
+        MaintenanceRecord.Insert(true);
+        MaintenanceRecord.Get(MaintenanceRecord."No.");
+
+        // [WHEN] The description is changed
+        MaintenanceRecord.Description := CopyStr(StrSubstNo(MaintenanceNoTok, NextId()), 1, MaxStrLen(MaintenanceRecord.Description));
+        MaintenanceRecord.Modify(true);
+
+        // [THEN] The local values equal the stored values
+        FindChangedLogEntry(MaintenanceRecord."No.", MaintenanceRecord.FieldNo(Description), LogEntry);
+        Assert.AreEqual(LogEntry."Old Value", LogEntry.GetLocalOldValue(), 'Local old description');
+        Assert.AreEqual(LogEntry."New Value", LogEntry.GetLocalNewValue(), 'Local new description');
+    end;
+
+    [Test]
+    [TransactionModel(TransactionModel::AutoRollback)]
+    procedure LogPageShowsRegionalColumns()
+    var
+        Equipment: Record "EQM Equipment";
+        MaintenanceRecord: Record "EQM Maintenance Record";
+        LogEntry: Record "EQM Maintenance Log Entry";
+        LogEntries: TestPage "EQM Maintenance Log Entries";
+        OldCost: Decimal;
+        NewCost: Decimal;
+    begin
+        // [SCENARIO R5] The log page shows the regional columns
+        // [GIVEN] A maintenance record whose cost changed from C1 to C2
+        OldCost := 1000 + Random(1000) + 0.5;
+        NewCost := OldCost + 1000 + Random(1000) + 0.25;
+        CreateEquipment(Equipment);
+        InitMaintenance(MaintenanceRecord, Equipment."No.");
+        MaintenanceRecord.Cost := OldCost;
+        MaintenanceRecord.Insert(true);
+        MaintenanceRecord.Get(MaintenanceRecord."No.");
+        MaintenanceRecord.Cost := NewCost;
+        MaintenanceRecord.Modify(true);
+        FindChangedLogEntry(MaintenanceRecord."No.", MaintenanceRecord.FieldNo(Cost), LogEntry);
+
+        // [WHEN] The log page is opened on the entry
+        LogEntries.OpenView();
+        LogEntries.GoToRecord(LogEntry);
+
+        // [THEN] The regional columns show Format(C1) and Format(C2)
+        Assert.AreEqual(Format(OldCost), LogEntries.OldValueLocal.Value(), 'Old value column');
+        Assert.AreEqual(Format(NewCost), LogEntries.NewValueLocal.Value(), 'New value column');
+    end;
+
+    [Test]
+    [TransactionModel(TransactionModel::AutoRollback)]
+    procedure UnparsableStoredCostIsShownAsStored()
+    var
+        MaintenanceRecord: Record "EQM Maintenance Record";
+        StoredValue: Text;
+    begin
+        // [SCENARIO N1] (negative) A stored cost that is not a number is returned as stored, without an error
+        // [GIVEN] A stored value that is not a number
+        StoredValue := CopyStr(StrSubstNo(MaintenanceNoTok, NextId()), 1, 30);
+
+        // [WHEN] The value is formatted for display
+        // [THEN] It is returned unchanged
+        Assert.AreEqual(StoredValue, MaintenanceLogMgt.FormatLogValueForDisplay(MaintenanceRecord.FieldNo(Cost), StoredValue), 'Unparsable cost');
+    end;
+
+    [Test]
+    [TransactionModel(TransactionModel::AutoRollback)]
+    procedure UnparsableStoredDateIsShownAsStored()
+    var
+        MaintenanceRecord: Record "EQM Maintenance Record";
+        StoredValue: Text;
+    begin
+        // [SCENARIO N2] (negative) A stored date that is not a date is returned as stored, without an error
+        // [GIVEN] A stored value that is not a date
+        StoredValue := CopyStr(StrSubstNo(MaintenanceNoTok, NextId()), 1, 30);
+
+        // [WHEN] The value is formatted for display
+        // [THEN] It is returned unchanged
+        Assert.AreEqual(StoredValue, MaintenanceLogMgt.FormatLogValueForDisplay(MaintenanceRecord.FieldNo("Maintenance Date"), StoredValue), 'Unparsable date');
+    end;
+
+    [Test]
+    [TransactionModel(TransactionModel::AutoRollback)]
+    procedure UnknownTypeOrdinalIsShownAsStored()
+    var
+        MaintenanceRecord: Record "EQM Maintenance Record";
+        StoredValue: Text;
+    begin
+        // [SCENARIO N3] (negative) A stored enum ordinal that is not installed is returned as stored, without an error
+        // [GIVEN] An ordinal that no maintenance type has
+        StoredValue := Format(100000 + Random(1000), 0, 9);
+
+        // [WHEN] The value is formatted for display
+        // [THEN] It is returned unchanged
+        Assert.AreEqual(StoredValue, MaintenanceLogMgt.FormatLogValueForDisplay(MaintenanceRecord.FieldNo("Maintenance Type"), StoredValue), 'Unknown ordinal');
+    end;
+
+    [Test]
+    [TransactionModel(TransactionModel::AutoRollback)]
+    procedure RegisteredEntryHasBlankLocalValues()
+    var
+        Equipment: Record "EQM Equipment";
+        MaintenanceRecord: Record "EQM Maintenance Record";
+        LogEntry: Record "EQM Maintenance Log Entry";
+    begin
+        // [SCENARIO N4] (negative) A Registered entry has blank regional values
+        // [GIVEN] A newly registered maintenance record
+        CreateEquipment(Equipment);
+        InitMaintenance(MaintenanceRecord, Equipment."No.");
+        MaintenanceRecord.Insert(true);
+
+        // [WHEN] The Registered log entry is read
+        LogEntry.SetRange("Maintenance No.", MaintenanceRecord."No.");
+        LogEntry.SetRange("Action", LogEntry."Action"::Registered);
+        LogEntry.FindFirst();
+
+        // [THEN] Both regional values are blank
+        Assert.AreEqual('', LogEntry.GetLocalOldValue(), 'Local old value');
+        Assert.AreEqual('', LogEntry.GetLocalNewValue(), 'Local new value');
+    end;
+
     local procedure NextId(): Text
     begin
         Counter += 1;
@@ -470,6 +695,14 @@ codeunit 50164 "EQM Maintenance Tests"
         Equipment.Description := Equipment."No.";
         Equipment."Category Code" := Category.Code;
         Equipment.Insert(true);
+    end;
+
+    local procedure FindChangedLogEntry(MaintenanceNo: Code[20]; FieldNo: Integer; var LogEntry: Record "EQM Maintenance Log Entry")
+    begin
+        LogEntry.SetRange("Maintenance No.", MaintenanceNo);
+        LogEntry.SetRange("Action", LogEntry."Action"::Changed);
+        LogEntry.SetRange("Field No.", FieldNo);
+        LogEntry.FindFirst();
     end;
 
     local procedure CreateEquipmentWithPlan(var Equipment: Record "EQM Equipment"; LastMaintenanceDate: Date)

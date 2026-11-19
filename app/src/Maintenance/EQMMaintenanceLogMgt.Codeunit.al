@@ -49,6 +49,42 @@ codeunit 50116 "EQM Maintenance Log Mgt."
         InsertEntry(MaintenanceRecord."No.", "EQM Maintenance Log Action"::Posted, 0, '', '');
     end;
 
+    /// <summary>
+    /// Converts a stored log value (XML format) into the regional format of the user. Display only: the stored value is
+    /// never changed. A value that cannot be converted is returned as stored.
+    /// </summary>
+    /// <param name="FieldNo">The number of the maintenance record field that the value belongs to.</param>
+    /// <param name="StoredValue">The value as stored in the log, in XML format.</param>
+    /// <returns>The value in the regional format, or the stored value when it cannot be converted.</returns>
+    internal procedure FormatLogValueForDisplay(FieldNo: Integer; StoredValue: Text): Text
+    var
+        MaintenanceRecord: Record "EQM Maintenance Record";
+        MaintenanceType: Enum "EQM Maintenance Type";
+        DateValue: Date;
+        DecimalValue: Decimal;
+        Ordinal: Integer;
+    begin
+        if StoredValue = '' then
+            exit('');
+
+        case FieldNo of
+            MaintenanceRecord.FieldNo("Maintenance Date"):
+                if Evaluate(DateValue, StoredValue, 9) then
+                    exit(Format(DateValue));
+            MaintenanceRecord.FieldNo(Cost):
+                if Evaluate(DecimalValue, StoredValue, 9) then
+                    exit(Format(DecimalValue));
+            MaintenanceRecord.FieldNo("Maintenance Type"):
+                if Evaluate(Ordinal, StoredValue, 9) then
+                    if MaintenanceType.Ordinals().Contains(Ordinal) then begin
+                        MaintenanceType := Enum::"EQM Maintenance Type".FromInteger(Ordinal);
+                        exit(Format(MaintenanceType));
+                    end;
+        end;
+
+        exit(StoredValue);
+    end;
+
     local procedure InsertChange(MaintenanceNo: Code[20]; FieldNo: Integer; OldValue: Text; NewValue: Text)
     begin
         InsertEntry(MaintenanceNo, "EQM Maintenance Log Action"::Changed, FieldNo, OldValue, NewValue);

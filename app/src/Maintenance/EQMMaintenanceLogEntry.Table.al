@@ -139,4 +139,26 @@ table 50108 "EQM Maintenance Log Entry"
     begin
         InsertAllowed := true;
     end;
+
+    /// <summary>
+    /// Returns the old value in the regional format of the user. Display only: the stored value is unchanged.
+    /// </summary>
+    /// <returns>The old value in the regional format, or as stored when it cannot be converted.</returns>
+    internal procedure GetLocalOldValue(): Text
+    var
+        MaintenanceLogMgt: Codeunit "EQM Maintenance Log Mgt.";
+    begin
+        exit(MaintenanceLogMgt.FormatLogValueForDisplay(Rec."Field No.", Rec."Old Value"));
+    end;
+
+    /// <summary>
+    /// Returns the new value in the regional format of the user. Display only: the stored value is unchanged.
+    /// </summary>
+    /// <returns>The new value in the regional format, or as stored when it cannot be converted.</returns>
+    internal procedure GetLocalNewValue(): Text
+    var
+        MaintenanceLogMgt: Codeunit "EQM Maintenance Log Mgt.";
+    begin
+        exit(MaintenanceLogMgt.FormatLogValueForDisplay(Rec."Field No.", Rec."New Value"));
+    end;
 }
