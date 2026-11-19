@@ -1,6 +1,23 @@
 # Changelog
 Newest first. Grouped by Added / Changed / Fixed / Obsolete.
 
+## FR-049 Release Management (version stays 29.0.0.0, no bump)
+### Added
+- Version policy for the app: Major and Minor come from the app, Build and Revision come from each CI/CD run. Documented in docs/features/FR-049-release-management.md, with the release procedure and the FR-044 upgrade checklist.
+- Check `version_check.py`, run by Repo checks on every pull request as check 6. It validates the app version, the AL-Go settings and the test app dependency (VER1 to VER7). It warns when the Major or Minor version is raised.
+- Contributor help docs/help/FR-049-release-management.md (which version a build has, how to create a release, how to raise the version, what each VER message means).
+### Changed
+- Build artifacts are named with the app's Major.Minor: `equipment-management-main-Apps-29.0.<run>.0` instead of `1.0.<run>.0`. The `.app` inside already used 29.0.
+- `.AL-Go/settings.json` sets `repoVersion` to 29.0 and `versioningStrategy` to 0 explicitly.
+### Fixed
+- None.
+### Obsolete
+- None.
+
+Release notes: None (build tooling only).
+
+Note: no AL code, no `app.json` change, no permission set change, no translation change, no AL-Go system workflow change. The app stays at 29.0.0.0. Verification gate: the AL-Go v10.0 settings and the IncrementVersionNumber script were checked before the change; findings are in the feature doc. Not verified: the Repo checks result and the new artifact names are pending the push; the reviewer's MINOR m1 (the version check fails on JSON that is not an object) is open. No separate AppSource validation ran. The feature doc is docs/features/FR-049-release-management.md.
+
 ## FR-047 Test Coverage Targets (version stays 29.0.0.0, no bump)
 ### Added
 - Coverage targets for the test suite: Business Logic 80%, APIs 80% and Critical Processes 100%. A coverage register in `.github/coverage/` lists the rules of the six critical processes and the traces to tests.

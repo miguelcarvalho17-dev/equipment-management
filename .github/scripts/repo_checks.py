@@ -8,6 +8,7 @@ Checks:
   4. Warning only: AL code under app/src changed but the .g.xlf translation file did not.
   5. Test coverage register (FR-047): integrity errors fail; below-target procedure reach and rule coverage
      only warn while "enforce" is false (see coverage_check.py).
+  6. App version policy (FR-049): see version_check.py.
 
 Usage: repo_checks.py [--base <git ref>] [--branch <head branch name>]
 Without --base, only the checks that need no diff run (1, and 2 when --branch is given).
@@ -22,6 +23,7 @@ from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 import coverage_check  # noqa: E402
+import version_check  # noqa: E402
 
 ROOT = Path(__file__).resolve().parents[2]
 OBJECT_RE = re.compile(
@@ -120,6 +122,23 @@ def check_coverage():
         print("Coverage register: OK")
 
 
+def check_versions(base):
+    base_text = None
+    if base:
+        result = subprocess.run(
+            ["git", "show", f"{base}:app/app.json"], cwd=ROOT, capture_output=True, text=True, check=False)
+        base_text = result.stdout if result.returncode == 0 else None
+    version_errors, version_warnings, summary = version_check.run(ROOT, base_text)
+    for line in summary:
+        print(line)
+    for msg in version_warnings:
+        warning(msg)
+    for msg in version_errors:
+        error(msg)
+    if not version_errors:
+        print("Version policy: OK")
+
+
 def main():
     parser = argparse.ArgumentParser()
     parser.add_argument("--base")
@@ -127,6 +146,7 @@ def main():
     args = parser.parse_args()
     check_object_ids()
     check_coverage()
+    check_versions(args.base)
     check_feature_files(args.branch)
     if args.base:
         files = changed_files(args.base)
