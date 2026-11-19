@@ -5,7 +5,7 @@ FR-011 update: records now have a Status (Open or Posted). Corrections are possi
 
 Users register each maintenance activity done on a piece of equipment (preventive, corrective, inspection, upgrade) with date, vendor, cost and who did the work. Records form the maintenance history of the equipment, are shown on the Equipment List and Card, and cannot be deleted.
 
-Status: describes the code as implemented. **Build is clean under CodeCop and UICop. No automated tests (deferred, plan decision Q10; test codeunit ID 50164 is reserved and unused). Sandbox checks MT-SB0 to MT-SB11 are NOT yet run.** App version stays 29.0.0.0. Namespace `MiguelCarvalho.EquipmentManagement`. New stored table and one new field on "EQM Equipment Setup"; no upgrade codeunit.
+Status: describes the code as implemented. **Build is clean under CodeCop and UICop. Automated tests for the registration and posting rules: test codeunit 50164 "EQM Maintenance Tests" (FR-045, 17 tests; written, not executed locally, CI result pending). Sandbox checks MT-SB0 to MT-SB11 are NOT yet run.** App version stays 29.0.0.0. Namespace `MiguelCarvalho.EquipmentManagement`. New stored table and one new field on "EQM Equipment Setup"; no upgrade codeunit.
 
 ## Objects
 | Type | ID | Name | Change |
@@ -74,7 +74,7 @@ The publisher is `local`, so it can be subscribed to only from inside this app. 
 Additive: new table, enum, codeunit, pages, one new setup field, extra checks on equipment delete. No upgrade codeunit and no Obsolete handling. Existing companies need Maintenance Nos. set (see Setup). Depends on the Vendor table (`Microsoft.Purchases.Vendor`) and No. Series (`Microsoft.Foundation.NoSeries`).
 
 ## Test status
-No test objects; test ID 50164 reserved. Sandbox checks MT-SB0 to MT-SB11 in docs/plans/FR-010-maintenance-registration.md are all open: setup in existing company (SB0), build/translations (SB1), Tell Me and teaching tips (SB2), Register Maintenance from card (SB3), delete blocked (SB4), non-SUPER Manager numbering (SB5), Reader read-only (SB6), future date and negative cost (SB7), Role Center (SB8), equipment rename (SB9), vendor name and action (SB10), Lost/Disposed behavior (SB11).
+Test codeunit 50164 "EQM Maintenance Tests" (FR-045, 17 tests) covers the registration and posting rules. Written, not executed locally; CI result pending. Sandbox checks MT-SB0 to MT-SB11 in docs/plans/FR-010-maintenance-registration.md are all open: setup in existing company (SB0), build/translations (SB1), Tell Me and teaching tips (SB2), Register Maintenance from card (SB3), delete blocked (SB4), non-SUPER Manager numbering (SB5), Reader read-only (SB6), future date and negative cost (SB7), Role Center (SB8), equipment rename (SB9), vendor name and action (SB10), Lost/Disposed behavior (SB11).
 
 ## Discrepancies plan vs code
 - Register Maintenance uses image `ServiceLedger` instead of `Maintenance` (AL0482).

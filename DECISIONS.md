@@ -94,3 +94,9 @@ A decision that applies to all future work (not just one task) belongs in the "S
 - 2026-11-18 | FR-044 Data Upgrade Support | Chose no version bump and no precondition or validation triggers in phase 1 | Reversible: yes
 - 2026-11-18 | FR-044 Data Upgrade Support | Chose test codeunit 50177 (reusing the NFR-005 reservation) over widening test/app.json idRanges, on the user's answer | Reversible: yes
 - 2026-11-18 | FR-044 build | The AL MCP had no project loaded, so app/ and test/ were compiled with the extension's alc compiler directly | Reversible: yes
+- 2026-11-18 | FR-045 Automated Unit Tests | Chose to reuse the reserved, never-built test IDs 50150, 50156, 50157, 50164 and 50168 over widening test/app.json idRanges (stop list); IDs came from a source scan because the MCP had no project loaded | Reversible: yes
+- 2026-11-18 | FR-045 Automated Unit Tests | Chose one new test codeunit per area (5) over adding to existing codeunits such as 50180 | Reversible: yes
+- 2026-11-18 | FR-045 Automated Unit Tests | Chose local helpers per codeunit over a shared test library codeunit | Reversible: yes
+- 2026-11-18 | FR-045 Automated Unit Tests | Chose to keep NFR-005 log, FR-020 overdue, FR-018 jobs and FR-017 notifications out of phase 1 | Reversible: yes
+- 2026-11-18 | FR-045 Automated Unit Tests | Chose a dedicated end-to-end test A1 for the issue example over relying on test 50180 | Reversible: yes
+- 2026-11-18 | FR-045 build | Compiled app/ from a scratchpad copy and test/ in place with alc, so no .g.xlf was regenerated in app/; M2/W12 set Lost/Disposed directly with Modify(false); M13 uses direct assignment plus Modify(true) | Reversible: yes
