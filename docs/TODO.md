@@ -161,7 +161,7 @@ Source: "Manual sandbox checks" in `docs/plans/FR-021-maintenance-dashboard.md`.
 - [ ] Shared internal helper for the guarded employee full name, now repeated in five pages (NFR-003 R5).
 
 ## AppSource FAILs (validator verdict: NOT READY)
-- [ ] **Translations:** add `TranslationFile` to `features` in `app/app.json`, build to generate `Translations/Equipment Management.g.xlf`, and add an xlf per supported language.
+- [x] **Translations (FR-055, done in code 2026-11-19):** `TranslationFile` was already in `features`, so the old "add it" step is out of date. The `.g.xlf` is regenerated, and pt-PT and es-ES language files are added. Native-speaker review and CI are open, see "FR-055 checks". The AppSource validator was not re-run.
 - [ ] **Marketplace properties in `app/app.json`:** set `privacyStatement`, `EULA`, `help`, `url` and `logo` (needs real URLs and a logo file; publish `docs/help/FR-001-equipment-registration.md` somewhere linkable). FR-061 exception register: AS0051, AS0052 and AS0092 stay until this phase (Phase 3).
 - [ ] `supportedLocales` and `applicationInsightsConnectionString` are missing. Also FR-061 (AS0092, Phase 3).
 - [ ] Review `resourceExposurePolicy` (debugging, source download and source in symbols are all `true`).
@@ -227,7 +227,7 @@ Source: "Test scenarios" in `docs/plans/FR-023-equipment-images.md`. Reader test
 - [ ] Scenario 5 upload "manual.pdf": `UnsupportedFileErr` and no change.
 - [ ] Scenario 7 Export with a picture downloads one image file.
 - [ ] Scenario 11 Take is not visible without a camera and visible in the mobile app.
-- [ ] Decide which languages to translate (only the generated `.g.xlf` exists).
+- [x] Decide which languages to translate: Portuguese (Portugal) and Spanish (Spain) in FR-055. pt-BR and es-MX are open (see "FR-055 checks").
 - [ ] Record the results in "Test status" of `docs/features/FR-023-equipment-images.md` and the TODO(verify) items in the help article.
 
 ## FR-026 Equipment API (35 table-level tests pass in CI; sandbox checks not done)
@@ -458,3 +458,18 @@ Source: `docs/features/FR-050-application-telemetry.md`, `docs/plans/FR-050-appl
 - [ ] Sandbox check: the sample KQL queries in `docs/features/FR-050-application-telemetry.md` run without error in Application Insights.
 - [ ] Record the results in "Verification status" of `docs/features/FR-050-application-telemetry.md` and clear its open items.
 - [ ] Decision (user): the FR-029 help article and the doc comment on the business events advise against telemetry in event subscribers. FR-050 logs inside the transaction (DECISIONS in the plan). Accept as is, or ask for a one-line clarification in those two places.
+
+## FR-055 checks (translations written, not native-speaker reviewed; tests not executed; CI result pending)
+Source: `docs/features/FR-055-multi-language-support.md`, `docs/plans/FR-055-multi-language-support.md`. No separate AppSource validation ran.
+- [ ] CI: the Pull Request Build runs test codeunit 50153 "EQM Translation Tests" (8 tests, T1 to T8) and the tests pass. Record the counts from `gh run view <run-id> --log`. Not verified until the push.
+- [ ] Native-speaker review of pt-PT and es-ES (1040 units each). Start with error messages, ToolTips and enum captions, against the glossary in the plan.
+- [ ] Sandbox: set My Settings > Language to Portuguese (Portugal), then Spanish (Spain), sign in again. Check the Equipment list caption, the "In Maintenance" status and the category error text. Check a German session shows English.
+- [ ] Sandbox: the Allowed Languages page must list Portuguese (Portugal) and Spanish (Spain) before users can pick them. Record whether they appear by default.
+- [ ] Open: pt-BR needs its own file (it does not fall back to pt-PT). es-MX uses the es-ES texts by the platform fallback, not tested.
+- [ ] Phase 2: `PictureFilterTxt` is `Locked = true` and stays English (`app/src/Equipment/EQMEquipmentPictureMgt.Codeunit.al`).
+- [ ] Excel report column headers are not translated (dataset names).
+- [ ] Reviewer MINOR, open: `xlf_sync.py` `_load_existing` swallows errors from a malformed language file, so `sync` would overwrite it. Report the error and stop instead.
+- [ ] Reviewer MINOR, open: `import` silently ignores an unknown `"id"` in an entry. Report it as an `IMPORT:` error instead.
+- [ ] Reviewer MINOR, open: the es-ES translations of the number-series captions are the same as the "No." captions. Check whether a more specific Spanish term is needed.
+- [ ] Reviewer MINOR, open (English source, AL change, needs a plan): the assignment "Active" view caption is singular, while "Closed" is plural. Do not fix it in a translation file.
+- [ ] Record the results in `docs/features/FR-055-multi-language-support.md` ("Verification status") and clear the items above.

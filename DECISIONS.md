@@ -151,3 +151,14 @@ A decision that applies to all future work (not just one task) belongs in the "S
 - 2026-11-19 | FR-056 Regional Settings | Changed nothing else after the audit (amount fields AutoFormatType 1, typed dates, invariant telemetry/events/API) | Reversible: yes
 - 2026-11-19 | FR-056 tests | Cost test values are 1000 or more so the regional thousands separator differs from the XML format under en-US; dates are in the past; page test uses OpenView + GoToRecord | Reversible: yes
 - 2026-11-19 | FR-056 build | al_addproject loaded app/ and test/ into the AL MCP; al_build regenerated the .g.xlf (al_compile does not) | Reversible: yes
+- 2026-11-19 | FR-055 Multi-Language Support | Chose pt-PT and es-ES over pt-BR/es-MX because they are base cultures (es-MX falls back to es-ES); more variants are one file each later | Reversible: yes
+- 2026-11-19 | FR-055 Multi-Language Support | Chose a stdlib Python tool .github/scripts/xlf_sync.py (sync/export/import/check) over a VS Code extension or hand-editing, because agents cannot run VS Code commands | Reversible: yes
+- 2026-11-19 | FR-055 Multi-Language Support | Chose incomplete or invalid language files as a repo-check error (check 7) over a warning, so every later PR that adds UI text must translate it | Reversible: yes
+- 2026-11-19 | FR-055 Multi-Language Support | Chose sentence-case captions, formal imperatives and the plan glossary as the terminology standard for both languages | Reversible: yes
+- 2026-11-19 | FR-055 Multi-Language Support | Chose one translation per English source string (translation memory) with per-ID override for consistency; enum value captions need per-ID checks for gender/number | Reversible: yes
+- 2026-11-19 | FR-055 Multi-Language Support | Chose test codeunit 50153 (superseded FR-001 reservation) over widening test/app.json | Reversible: yes
+- 2026-11-19 | FR-055 Multi-Language Support | Chose run-time GlobalLanguage tests (captions, enum, error) plus Python file checks for ToolTips and completeness | Reversible: yes
+- 2026-11-19 | FR-055 Multi-Language Support | Left locked PictureFilterTxt and Excel layout headers untranslated in phase 1 | Reversible: yes
+- 2026-11-19 | FR-055 build | Ran alc in place on app/ and compiled test/ against a scratchpad package cache because the AL MCP had no project loaded | Reversible: yes
+- 2026-11-19 | FR-055 terminology | Register maintenance = Criar/Crear mantenimiento (distinct from Post); Registered = Criado; Features = Funcionalidades/Características; Laptop = Portátil | Reversible: yes
+- 2026-11-19 | FR-055 target form | Kept " " as translation of the blank enum caption so TR8 holds for every unit | Reversible: yes
