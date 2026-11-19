@@ -1,0 +1,1673 @@
+{
+  "enforce": false,
+  "targets": {
+    "businessLogic": 80,
+    "criticalProcesses": 100,
+    "apis": 80
+  },
+  "scope": {
+    "businessLogic": {
+      "tables": [
+        50100,
+        50102,
+        50103,
+        50105,
+        50106,
+        50108,
+        50110,
+        50111,
+        50112
+      ],
+      "codeunits": [
+        50103,
+        50105,
+        50106,
+        50107,
+        50108,
+        50109,
+        50110,
+        50111,
+        50112,
+        50113,
+        50114,
+        50115,
+        50116,
+        50117,
+        50118,
+        50119,
+        50120,
+        50121,
+        50122,
+        50130,
+        50131,
+        50132,
+        50133,
+        50135,
+        50136,
+        50137,
+        50138,
+        50139
+      ]
+    },
+    "apis": {
+      "pages": [
+        50123,
+        50124,
+        50125,
+        50126
+      ]
+    },
+    "excluded": [
+      {
+        "type": "codeunit",
+        "id": 50104,
+        "reason": "EQM Install: Install subtype that tests cannot run (AA0243); its logic is in codeunit 50139."
+      },
+      {
+        "type": "codeunit",
+        "id": 50134,
+        "reason": "EQM Upgrade: Upgrade subtype that tests cannot run (AA0243); its logic is in codeunit 50139."
+      },
+      {
+        "type": "page",
+        "scope": "all non-API pages",
+        "reason": "Not Business Logic."
+      },
+      {
+        "type": "report",
+        "scope": "reports 50100-50102",
+        "reason": "Not Business Logic."
+      },
+      {
+        "type": "query",
+        "scope": "queries 50100-50103",
+        "reason": "Not Business Logic."
+      }
+    ]
+  },
+  "criticalProcesses": [
+    {
+      "id": "CP1",
+      "name": "Equipment registration",
+      "rules": [
+        {
+          "file": "app/src/Equipment/EQMEquipment.Table.al",
+          "procedure": "OnInsert",
+          "key": "TestField:Equipment Nos.",
+          "positive": [
+            {
+              "codeunit": 50180,
+              "test": "InsertGivesSeriesNumberAndAvailableStatus"
+            }
+          ],
+          "negative": [
+            {
+              "codeunit": 50150,
+              "test": "InsertWithoutNumberAndWithoutSeriesIsRejected"
+            }
+          ]
+        },
+        {
+          "file": "app/src/Equipment/EQMEquipment.Table.al",
+          "procedure": "AssistEdit",
+          "key": "TestField:Equipment Nos.",
+          "positive": [],
+          "negative": [],
+          "gap": true
+        },
+        {
+          "file": "app/src/Equipment/EQMEquipment.Table.al",
+          "procedure": "CheckEquipmentConsistency",
+          "key": "AlreadyAssignedErr",
+          "positive": [
+            {
+              "codeunit": 50180,
+              "test": "InsertGivesSeriesNumberAndAvailableStatus"
+            }
+          ],
+          "negative": [
+            {
+              "codeunit": 50156,
+              "test": "EmployeeOfAssignedEquipmentCannotBeChangedDirectly"
+            }
+          ]
+        },
+        {
+          "file": "app/src/Equipment/EQMEquipment.Table.al",
+          "procedure": "CheckEquipmentConsistency",
+          "key": "AssignedEmployeeRequiredErr",
+          "positive": [
+            {
+              "codeunit": 50180,
+              "test": "InsertGivesSeriesNumberAndAvailableStatus"
+            }
+          ],
+          "negative": [
+            {
+              "codeunit": 50180,
+              "test": "PatchStatusAssignedWithoutEmployeeIsRejected"
+            }
+          ]
+        },
+        {
+          "file": "app/src/Equipment/EQMEquipment.Table.al",
+          "procedure": "CheckEquipmentConsistency",
+          "key": "NewEquipmentAssignedErr",
+          "positive": [
+            {
+              "codeunit": 50180,
+              "test": "InsertGivesSeriesNumberAndAvailableStatus"
+            }
+          ],
+          "negative": [
+            {
+              "codeunit": 50180,
+              "test": "InsertWithAssignedStatusSetWithoutValidateIsRejected"
+            }
+          ]
+        },
+        {
+          "file": "app/src/Equipment/EQMEquipment.Table.al",
+          "procedure": "CheckEquipmentConsistency",
+          "key": "NewEquipmentFinalStatusErr",
+          "positive": [
+            {
+              "codeunit": 50180,
+              "test": "InsertGivesSeriesNumberAndAvailableStatus"
+            }
+          ],
+          "negative": [
+            {
+              "codeunit": 50180,
+              "test": "InsertWithLostStatusSetWithoutValidateIsRejected"
+            }
+          ]
+        },
+        {
+          "file": "app/src/Equipment/EQMEquipment.Table.al",
+          "procedure": "CheckEquipmentConsistency",
+          "key": "TestField:Category Code",
+          "positive": [
+            {
+              "codeunit": 50180,
+              "test": "InsertGivesSeriesNumberAndAvailableStatus"
+            }
+          ],
+          "negative": [
+            {
+              "codeunit": 50180,
+              "test": "InsertWithoutCategoryIsRejected"
+            }
+          ]
+        },
+        {
+          "file": "app/src/Equipment/EQMEquipment.Table.al",
+          "procedure": "CheckCategoryAllowed",
+          "key": "CategoryInactiveErr",
+          "positive": [
+            {
+              "codeunit": 50180,
+              "test": "InsertGivesSeriesNumberAndAvailableStatus"
+            }
+          ],
+          "negative": [
+            {
+              "codeunit": 50180,
+              "test": "InsertWithInactiveCategoryIsRejected"
+            }
+          ]
+        },
+        {
+          "file": "app/src/Equipment/EQMEquipment.Table.al",
+          "procedure": "CheckCategoryAllowed",
+          "key": "CategoryNotFoundErr",
+          "positive": [
+            {
+              "codeunit": 50180,
+              "test": "InsertGivesSeriesNumberAndAvailableStatus"
+            }
+          ],
+          "negative": [
+            {
+              "codeunit": 50180,
+              "test": "InsertWithUnknownCategoryIsRejected"
+            }
+          ]
+        },
+        {
+          "file": "app/src/Equipment/EQMEquipment.Table.al",
+          "procedure": "CheckSerialNoIsUnique",
+          "key": "SerialNoAlreadyUsedErr",
+          "positive": [
+            {
+              "codeunit": 50180,
+              "test": "PatchKeepsOwnSerialNumber"
+            }
+          ],
+          "negative": [
+            {
+              "codeunit": 50180,
+              "test": "InsertWithUsedSerialNumberIsRejected"
+            }
+          ]
+        },
+        {
+          "file": "app/src/Equipment/EQMEquipment.Table.al",
+          "procedure": "CheckWarrantyDates",
+          "key": "WarrantyEndDateErr",
+          "positive": [
+            {
+              "codeunit": 50180,
+              "test": "PatchWarrantyEndAfterStartIsSaved"
+            }
+          ],
+          "negative": [
+            {
+              "codeunit": 50150,
+              "test": "InsertWithWarrantyEndNotAfterStartIsRejected"
+            },
+            {
+              "codeunit": 50180,
+              "test": "PatchWarrantyEndBeforeStartIsRejected"
+            }
+          ]
+        },
+        {
+          "file": "app/src/Equipment/EQMEquipment.Table.al",
+          "procedure": "CheckLastMaintenanceDate",
+          "key": "LastMaintenanceDateFutureErr",
+          "positive": [
+            {
+              "codeunit": 50150,
+              "test": "InsertCalculatesNextMaintenanceDate"
+            }
+          ],
+          "negative": [
+            {
+              "codeunit": 50150,
+              "test": "InsertWithFutureLastMaintenanceDateIsRejected"
+            }
+          ]
+        },
+        {
+          "file": "app/src/Equipment/EQMEquipment.Table.al",
+          "procedure": "OnDelete",
+          "key": "DeleteAssignedErr",
+          "positive": [
+            {
+              "codeunit": 50180,
+              "test": "DeleteRemovesEquipmentWithoutHistory"
+            }
+          ],
+          "negative": [
+            {
+              "codeunit": 50180,
+              "test": "DeleteIsRejectedForAssignedEquipment"
+            }
+          ]
+        },
+        {
+          "file": "app/src/Equipment/EQMEquipment.Table.al",
+          "procedure": "OnDelete",
+          "key": "DeleteHistoryExistsErr",
+          "positive": [
+            {
+              "codeunit": 50180,
+              "test": "DeleteRemovesEquipmentWithoutHistory"
+            }
+          ],
+          "negative": [
+            {
+              "codeunit": 50180,
+              "test": "DeleteIsRejectedForEquipmentWithAssignmentHistory"
+            }
+          ]
+        },
+        {
+          "file": "app/src/Equipment/EQMEquipment.Table.al",
+          "procedure": "OnDelete",
+          "key": "DeleteMaintenanceExistsErr",
+          "positive": [
+            {
+              "codeunit": 50180,
+              "test": "DeleteRemovesEquipmentWithoutHistory"
+            }
+          ],
+          "negative": [
+            {
+              "codeunit": 50164,
+              "test": "EquipmentWithMaintenanceRecordsCannotBeDeleted"
+            }
+          ]
+        },
+        {
+          "file": "app/src/Equipment/EQMEquipment.Table.al",
+          "procedure": "OnDelete",
+          "key": "DeleteNotesExistErr",
+          "positive": [
+            {
+              "codeunit": 50183,
+              "test": "DeletingEquipmentWithoutNotesSucceeds"
+            }
+          ],
+          "negative": [
+            {
+              "codeunit": 50183,
+              "test": "DeletingEquipmentWithNotesIsRejected"
+            }
+          ]
+        }
+      ],
+      "objects": [
+        {
+          "type": "table",
+          "id": 50100
+        }
+      ]
+    },
+    {
+      "id": "CP2",
+      "name": "Assignment and return",
+      "rules": [
+        {
+          "file": "app/src/Equipment/EQMEquipment.Table.al",
+          "procedure": "AssignEmployee",
+          "key": "CannotAssignFinalStatusErr",
+          "positive": [
+            {
+              "codeunit": 50180,
+              "test": "AssignActionAssignsEquipmentToEmployee"
+            }
+          ],
+          "negative": [
+            {
+              "codeunit": 50180,
+              "test": "AssignActionRejectsLostEquipment"
+            }
+          ]
+        },
+        {
+          "file": "app/src/Equipment/EQMEquipment.Table.al",
+          "procedure": "AssignEmployee",
+          "key": "AlreadyAssignedErr",
+          "positive": [
+            {
+              "codeunit": 50180,
+              "test": "AssignActionAssignsEquipmentToEmployee"
+            }
+          ],
+          "negative": [
+            {
+              "codeunit": 50180,
+              "test": "AssignActionRejectsAlreadyAssignedEquipment"
+            }
+          ]
+        },
+        {
+          "file": "app/src/Equipment/EQMEquipment.Table.al",
+          "procedure": "UnassignEmployee",
+          "key": "NotAssignedErr",
+          "positive": [
+            {
+              "codeunit": 50180,
+              "test": "ReturnActionMakesEquipmentAvailableAndClosesEntry"
+            }
+          ],
+          "negative": [
+            {
+              "codeunit": 50180,
+              "test": "ReturnActionRejectsEquipmentThatIsNotAssigned"
+            }
+          ]
+        },
+        {
+          "file": "app/src/Equipment/EQMEquipment.Table.al",
+          "procedure": "CheckAssignedEmployeeAllowed",
+          "key": "EmployeeOnlyWhenAssignedErr",
+          "positive": [
+            {
+              "codeunit": 50180,
+              "test": "AssignActionAssignsEquipmentToEmployee"
+            }
+          ],
+          "negative": [
+            {
+              "codeunit": 50180,
+              "test": "EmployeeCannotBeSetOnAvailableEquipment"
+            }
+          ]
+        },
+        {
+          "file": "app/src/Equipment/EQMEquipment.Table.al",
+          "procedure": "CheckAssignedEmployeeAllowed",
+          "key": "EmployeeNotFoundErr",
+          "positive": [
+            {
+              "codeunit": 50180,
+              "test": "AssignActionAssignsEquipmentToEmployee"
+            }
+          ],
+          "negative": [],
+          "note": "No test asserts this label: UnknownEmployeeCannotBeAssigned (50156) asserts only the employee number."
+        },
+        {
+          "file": "app/src/Equipment/EQMEquipment.Table.al",
+          "procedure": "CheckAssignedEmployeeAllowed",
+          "key": "EmployeePrivacyBlockedErr",
+          "positive": [
+            {
+              "codeunit": 50180,
+              "test": "AssignActionAssignsEquipmentToEmployee"
+            }
+          ],
+          "negative": [
+            {
+              "codeunit": 50156,
+              "test": "PrivacyBlockedEmployeeCannotBeAssigned"
+            }
+          ]
+        },
+        {
+          "file": "app/src/Equipment/EQMEquipment.Table.al",
+          "procedure": "CheckAssignedEmployeeAllowed",
+          "key": "EmployeeNotActiveErr",
+          "positive": [
+            {
+              "codeunit": 50180,
+              "test": "AssignActionAssignsEquipmentToEmployee"
+            }
+          ],
+          "negative": [
+            {
+              "codeunit": 50180,
+              "test": "AssignActionRejectsInactiveEmployee"
+            }
+          ]
+        },
+        {
+          "file": "app/src/Employee/EQMEmployeeSubscribers.Codeunit.al",
+          "procedure": "CheckNoAssignedEquipmentOnBeforeDeleteEmployee",
+          "key": "EmployeeHasAssignedEquipmentErr",
+          "positive": [
+            {
+              "codeunit": 50158,
+              "test": "EmployeeCanBeDeletedAfterTheEquipmentIsReturned"
+            }
+          ],
+          "negative": [
+            {
+              "codeunit": 50158,
+              "test": "EmployeeWithAssignedEquipmentCannotBeDeleted"
+            }
+          ]
+        }
+      ],
+      "objects": [
+        {
+          "type": "codeunit",
+          "id": 50103
+        },
+        {
+          "type": "codeunit",
+          "id": 50106
+        }
+      ]
+    },
+    {
+      "id": "CP3",
+      "name": "Status transitions",
+      "rules": [
+        {
+          "file": "app/src/Equipment/EQMEquipment.Table.al",
+          "procedure": "Status.OnValidate",
+          "key": "NewEquipmentFinalStatusErr",
+          "positive": [
+            {
+              "codeunit": 50180,
+              "test": "PatchStatusDisposedIsApplied"
+            }
+          ],
+          "negative": [
+            {
+              "codeunit": 50180,
+              "test": "InsertWithDisposedStatusIsRejected"
+            }
+          ]
+        },
+        {
+          "file": "app/src/Equipment/EQMEquipment.Table.al",
+          "procedure": "Status.OnValidate",
+          "key": "NewEquipmentAssignedErr",
+          "positive": [
+            {
+              "codeunit": 50180,
+              "test": "PatchStatusDisposedIsApplied"
+            }
+          ],
+          "negative": [
+            {
+              "codeunit": 50180,
+              "test": "InsertWithAssignedStatusIsRejected"
+            }
+          ]
+        },
+        {
+          "file": "app/src/Equipment/EQMEquipment.Table.al",
+          "procedure": "Status.OnValidate",
+          "key": "UseReturnActionErr",
+          "positive": [
+            {
+              "codeunit": 50180,
+              "test": "PatchStatusDisposedIsApplied"
+            }
+          ],
+          "negative": [
+            {
+              "codeunit": 50180,
+              "test": "PatchAssignedEquipmentToAvailableIsRejected"
+            }
+          ]
+        },
+        {
+          "file": "app/src/Equipment/EQMEquipment.Table.al",
+          "procedure": "Status.OnValidate",
+          "key": "''",
+          "positive": [
+            {
+              "codeunit": 50180,
+              "test": "PatchStatusDisposedIsApplied"
+            }
+          ],
+          "negative": [
+            {
+              "codeunit": 50180,
+              "test": "PatchStatusDisposedDeclinedKeepsStatus"
+            }
+          ],
+          "note": "First confirm: final status declined."
+        },
+        {
+          "file": "app/src/Equipment/EQMEquipment.Table.al",
+          "procedure": "Status.OnValidate",
+          "key": "''#2",
+          "positive": [
+            {
+              "codeunit": 50157,
+              "test": "ManualInMaintenanceOnAssignedEquipmentReturnsIt"
+            }
+          ],
+          "negative": [
+            {
+              "codeunit": 50157,
+              "test": "DecliningTheConfirmationStopsTheStatusChange"
+            }
+          ],
+          "note": "Second confirm: employee removal declined."
+        },
+        {
+          "file": "app/src/Equipment/EQMEquipment.Table.al",
+          "procedure": "CheckStatusTransitionAllowed",
+          "key": "CannotAssignFinalStatusErr",
+          "positive": [
+            {
+              "codeunit": 50157,
+              "test": "InMaintenanceWithoutOpenRecordsCanBecomeAvailable"
+            },
+            {
+              "codeunit": 50180,
+              "test": "PatchStatusDisposedIsApplied"
+            }
+          ],
+          "negative": [],
+          "note": "Only reachable by Validate(Status, Assigned) on final equipment; AssignEmployee raises its own copy first."
+        },
+        {
+          "file": "app/src/Equipment/EQMEquipment.Table.al",
+          "procedure": "CheckStatusTransitionAllowed",
+          "key": "MaintenanceOpenAssignErr",
+          "positive": [
+            {
+              "codeunit": 50157,
+              "test": "InMaintenanceWithoutOpenRecordsCanBecomeAvailable"
+            },
+            {
+              "codeunit": 50180,
+              "test": "PatchStatusDisposedIsApplied"
+            }
+          ],
+          "negative": [
+            {
+              "codeunit": 50156,
+              "test": "EquipmentWithOpenMaintenanceCannotBeAssigned"
+            }
+          ]
+        },
+        {
+          "file": "app/src/Equipment/EQMEquipment.Table.al",
+          "procedure": "CheckStatusTransitionAllowed",
+          "key": "MaintenanceOpenStatusErr",
+          "positive": [
+            {
+              "codeunit": 50157,
+              "test": "InMaintenanceWithoutOpenRecordsCanBecomeAvailable"
+            },
+            {
+              "codeunit": 50180,
+              "test": "PatchStatusDisposedIsApplied"
+            }
+          ],
+          "negative": [
+            {
+              "codeunit": 50157,
+              "test": "OpenMaintenanceBlocksLeavingInMaintenance"
+            }
+          ]
+        },
+        {
+          "file": "app/src/Equipment/EQMEquipment.Table.al",
+          "procedure": "CheckStatusTransitionAllowed",
+          "key": "StatusIsFinalErr",
+          "positive": [
+            {
+              "codeunit": 50157,
+              "test": "InMaintenanceWithoutOpenRecordsCanBecomeAvailable"
+            },
+            {
+              "codeunit": 50180,
+              "test": "PatchStatusDisposedIsApplied"
+            }
+          ],
+          "negative": [
+            {
+              "codeunit": 50157,
+              "test": "LostIsAFinalStatus"
+            },
+            {
+              "codeunit": 50180,
+              "test": "PatchDisposedEquipmentToAvailableIsRejected"
+            }
+          ]
+        },
+        {
+          "file": "app/src/Equipment/EQMEquipment.Table.al",
+          "procedure": "CheckStatusTransitionAllowed",
+          "key": "NotAvailableForAssignmentErr",
+          "positive": [
+            {
+              "codeunit": 50157,
+              "test": "InMaintenanceWithoutOpenRecordsCanBecomeAvailable"
+            },
+            {
+              "codeunit": 50180,
+              "test": "PatchStatusDisposedIsApplied"
+            }
+          ],
+          "negative": []
+        }
+      ],
+      "objects": []
+    },
+    {
+      "id": "CP4",
+      "name": "Maintenance",
+      "rules": [
+        {
+          "file": "app/src/Equipment/EQMEquipment.Table.al",
+          "procedure": "StartMaintenance",
+          "key": "''",
+          "positive": [
+            {
+              "codeunit": 50164,
+              "test": "RegisteringMaintenanceSetsEquipmentInMaintenance"
+            }
+          ],
+          "negative": [
+            {
+              "codeunit": 50164,
+              "test": "DecliningTheConfirmationRegistersNoMaintenance"
+            }
+          ]
+        },
+        {
+          "file": "app/src/Maintenance/EQMMaintenanceRecord.Table.al",
+          "procedure": "AssistEdit",
+          "key": "TestField:Maintenance Nos.",
+          "positive": [],
+          "negative": [],
+          "gap": true
+        },
+        {
+          "file": "app/src/Maintenance/EQMMaintenanceRecord.Table.al",
+          "procedure": "CheckEquipmentAllowsMaintenance",
+          "key": "EquipmentFinalStatusErr",
+          "positive": [
+            {
+              "codeunit": 50164,
+              "test": "RegisteringMaintenanceSetsEquipmentInMaintenance"
+            }
+          ],
+          "negative": [
+            {
+              "codeunit": 50164,
+              "test": "LostEquipmentCannotGetMaintenance"
+            }
+          ]
+        },
+        {
+          "file": "app/src/Maintenance/EQMMaintenanceRecord.Table.al",
+          "procedure": "CheckMaintenanceConsistency",
+          "key": "EquipmentCannotChangeErr",
+          "positive": [
+            {
+              "codeunit": 50164,
+              "test": "RegisteringMaintenanceSetsEquipmentInMaintenance"
+            }
+          ],
+          "negative": [
+            {
+              "codeunit": 50164,
+              "test": "EquipmentOfASavedRecordCannotChange"
+            }
+          ]
+        },
+        {
+          "file": "app/src/Maintenance/EQMMaintenanceRecord.Table.al",
+          "procedure": "CheckMaintenanceConsistency",
+          "key": "EquipmentNotFoundErr",
+          "positive": [
+            {
+              "codeunit": 50164,
+              "test": "RegisteringMaintenanceSetsEquipmentInMaintenance"
+            }
+          ],
+          "negative": [
+            {
+              "codeunit": 50164,
+              "test": "UnknownEquipmentCannotGetMaintenance"
+            }
+          ]
+        },
+        {
+          "file": "app/src/Maintenance/EQMMaintenanceRecord.Table.al",
+          "procedure": "CheckMaintenanceConsistency",
+          "key": "NegativeCostErr",
+          "positive": [
+            {
+              "codeunit": 50164,
+              "test": "RegisteringMaintenanceSetsEquipmentInMaintenance"
+            }
+          ],
+          "negative": [
+            {
+              "codeunit": 50164,
+              "test": "NegativeCostIsRejected"
+            }
+          ]
+        },
+        {
+          "file": "app/src/Maintenance/EQMMaintenanceRecord.Table.al",
+          "procedure": "CheckMaintenanceConsistency",
+          "key": "TestField:Equipment No.",
+          "positive": [
+            {
+              "codeunit": 50164,
+              "test": "RegisteringMaintenanceSetsEquipmentInMaintenance"
+            }
+          ],
+          "negative": []
+        },
+        {
+          "file": "app/src/Maintenance/EQMMaintenanceRecord.Table.al",
+          "procedure": "CheckMaintenanceConsistency",
+          "key": "TestField:Maintenance Date",
+          "positive": [
+            {
+              "codeunit": 50164,
+              "test": "RegisteringMaintenanceSetsEquipmentInMaintenance"
+            }
+          ],
+          "negative": []
+        },
+        {
+          "file": "app/src/Maintenance/EQMMaintenanceRecord.Table.al",
+          "procedure": "CheckMaintenanceDate",
+          "key": "FutureDateErr",
+          "positive": [
+            {
+              "codeunit": 50164,
+              "test": "RegisteringMaintenanceSetsEquipmentInMaintenance"
+            }
+          ],
+          "negative": [
+            {
+              "codeunit": 50164,
+              "test": "FutureMaintenanceDateIsRejected"
+            }
+          ]
+        },
+        {
+          "file": "app/src/Maintenance/EQMMaintenanceRecord.Table.al",
+          "procedure": "CheckNotPosted",
+          "key": "PostedRecordCannotBeChangedErr",
+          "positive": [
+            {
+              "codeunit": 50158,
+              "test": "CorrectionBeforePostingIsLoggedAndReachesTheHistory"
+            }
+          ],
+          "negative": [
+            {
+              "codeunit": 50164,
+              "test": "PostedRecordIsReadOnly"
+            }
+          ]
+        },
+        {
+          "file": "app/src/Maintenance/EQMMaintenanceRecord.Table.al",
+          "procedure": "Equipment No..OnValidate",
+          "key": "EquipmentCannotChangeErr",
+          "positive": [],
+          "negative": [],
+          "gap": true,
+          "note": "EquipmentOfASavedRecordCannotChange (50164) assigns the field directly and reaches the consistency check, not this OnValidate trigger."
+        },
+        {
+          "file": "app/src/Maintenance/EQMMaintenanceRecord.Table.al",
+          "procedure": "OnDelete",
+          "key": "MaintenanceCannotBeDeletedErr",
+          "positive": [],
+          "negative": [
+            {
+              "codeunit": 50164,
+              "test": "MaintenanceRecordCannotBeDeleted"
+            }
+          ],
+          "positiveNotApplicable": true,
+          "note": "Unconditional rule: deleting is always rejected, so there is no success path."
+        },
+        {
+          "file": "app/src/Maintenance/EQMMaintenanceRecord.Table.al",
+          "procedure": "OnInsert",
+          "key": "InsertPostedErr",
+          "positive": [
+            {
+              "codeunit": 50164,
+              "test": "RegisteringMaintenanceSetsEquipmentInMaintenance"
+            }
+          ],
+          "negative": []
+        },
+        {
+          "file": "app/src/Maintenance/EQMMaintenanceRecord.Table.al",
+          "procedure": "OnInsert",
+          "key": "TestField:Maintenance Nos.",
+          "positive": [
+            {
+              "codeunit": 50164,
+              "test": "RegisteringMaintenanceSetsEquipmentInMaintenance"
+            }
+          ],
+          "negative": []
+        },
+        {
+          "file": "app/src/Maintenance/EQMMaintenanceRecord.Table.al",
+          "procedure": "OnRename",
+          "key": "RenameNotAllowedErr",
+          "positive": [],
+          "negative": [],
+          "positiveNotApplicable": true,
+          "note": "Unconditional rule: renaming is always rejected, so there is no success path."
+        },
+        {
+          "file": "app/src/Maintenance/EQMMaintenancePost.Codeunit.al",
+          "procedure": "OnRun",
+          "key": "AlreadyPostedErr",
+          "positive": [
+            {
+              "codeunit": 50164,
+              "test": "PostingWritesTheHistoryEntryAndMakesEquipmentAvailable"
+            }
+          ],
+          "negative": [
+            {
+              "codeunit": 50164,
+              "test": "PostedRecordCannotBePostedAgain"
+            }
+          ]
+        },
+        {
+          "file": "app/src/Maintenance/EQMMaintenancePost.Codeunit.al",
+          "procedure": "OnRun",
+          "key": "RecordNotSavedErr",
+          "positive": [
+            {
+              "codeunit": 50164,
+              "test": "PostingWritesTheHistoryEntryAndMakesEquipmentAvailable"
+            }
+          ],
+          "negative": []
+        },
+        {
+          "file": "app/src/Maintenance/EQMMaintenancePost.Codeunit.al",
+          "procedure": "OnRun",
+          "key": "AlreadyPostedErr#2",
+          "positive": [
+            {
+              "codeunit": 50164,
+              "test": "PostingWritesTheHistoryEntryAndMakesEquipmentAvailable"
+            }
+          ],
+          "negative": [],
+          "gap": true,
+          "note": "History entry exists while status is not Posted; no test."
+        }
+      ],
+      "objects": [
+        {
+          "type": "table",
+          "id": 50105
+        },
+        {
+          "type": "codeunit",
+          "id": 50108
+        },
+        {
+          "type": "codeunit",
+          "id": 50109
+        }
+      ]
+    },
+    {
+      "id": "CP5",
+      "name": "Request approval",
+      "rules": [
+        {
+          "file": "app/src/Request/EQMEquipmentRequest.Table.al",
+          "procedure": "AssistEdit",
+          "key": "TestField:Request Nos.",
+          "positive": [],
+          "negative": [],
+          "gap": true
+        },
+        {
+          "file": "app/src/Request/EQMEquipmentRequest.Table.al",
+          "procedure": "CheckEmployeeEligible",
+          "key": "EmployeeNotActiveErr",
+          "positive": [
+            {
+              "codeunit": 50188,
+              "test": "InsertTakesNumberFromSeriesAndStartsOpen"
+            }
+          ],
+          "negative": [
+            {
+              "codeunit": 50188,
+              "test": "InactiveEmployeeIsRejectedOnValidate"
+            }
+          ]
+        },
+        {
+          "file": "app/src/Request/EQMEquipmentRequest.Table.al",
+          "procedure": "CheckEmployeeEligible",
+          "key": "EmployeeNotFoundErr",
+          "positive": [
+            {
+              "codeunit": 50188,
+              "test": "InsertTakesNumberFromSeriesAndStartsOpen"
+            }
+          ],
+          "negative": [
+            {
+              "codeunit": 50188,
+              "test": "NonExistingEmployeeIsRejectedOnValidate"
+            }
+          ]
+        },
+        {
+          "file": "app/src/Request/EQMEquipmentRequest.Table.al",
+          "procedure": "CheckEmployeeEligible",
+          "key": "EmployeePrivacyBlockedErr",
+          "positive": [
+            {
+              "codeunit": 50188,
+              "test": "InsertTakesNumberFromSeriesAndStartsOpen"
+            }
+          ],
+          "negative": [
+            {
+              "codeunit": 50188,
+              "test": "PrivacyBlockedEmployeeIsRejectedOnValidate"
+            }
+          ]
+        },
+        {
+          "file": "app/src/Request/EQMEquipmentRequest.Table.al",
+          "procedure": "CheckEquipmentTypeAllowed",
+          "key": "CategoryInactiveErr",
+          "positive": [
+            {
+              "codeunit": 50188,
+              "test": "InsertTakesNumberFromSeriesAndStartsOpen"
+            }
+          ],
+          "negative": [
+            {
+              "codeunit": 50188,
+              "test": "InactiveCategoryIsRejectedOnValidate"
+            }
+          ]
+        },
+        {
+          "file": "app/src/Request/EQMEquipmentRequest.Table.al",
+          "procedure": "CheckEquipmentTypeAllowed",
+          "key": "CategoryNotFoundErr",
+          "positive": [
+            {
+              "codeunit": 50188,
+              "test": "InsertTakesNumberFromSeriesAndStartsOpen"
+            }
+          ],
+          "negative": [
+            {
+              "codeunit": 50188,
+              "test": "NonExistingEquipmentTypeIsRejectedOnValidate"
+            }
+          ]
+        },
+        {
+          "file": "app/src/Request/EQMEquipmentRequest.Table.al",
+          "procedure": "CheckRequestConsistency",
+          "key": "CategoryNotFoundErr",
+          "positive": [
+            {
+              "codeunit": 50188,
+              "test": "InsertTakesNumberFromSeriesAndStartsOpen"
+            }
+          ],
+          "negative": [
+            {
+              "codeunit": 50188,
+              "test": "NonExistingEquipmentTypeIsRejectedOnInsert"
+            }
+          ]
+        },
+        {
+          "file": "app/src/Request/EQMEquipmentRequest.Table.al",
+          "procedure": "CheckRequestConsistency",
+          "key": "EmployeeNotFoundErr",
+          "positive": [
+            {
+              "codeunit": 50188,
+              "test": "InsertTakesNumberFromSeriesAndStartsOpen"
+            }
+          ],
+          "negative": [
+            {
+              "codeunit": 50188,
+              "test": "NonExistingEmployeeIsRejectedOnInsert"
+            }
+          ]
+        },
+        {
+          "file": "app/src/Request/EQMEquipmentRequest.Table.al",
+          "procedure": "CheckRequestConsistency",
+          "key": "JustificationRequiredErr",
+          "positive": [
+            {
+              "codeunit": 50188,
+              "test": "InsertTakesNumberFromSeriesAndStartsOpen"
+            }
+          ],
+          "negative": [
+            {
+              "codeunit": 50188,
+              "test": "BlankJustificationIsRejected"
+            }
+          ]
+        },
+        {
+          "file": "app/src/Request/EQMEquipmentRequest.Table.al",
+          "procedure": "CheckRequestConsistency",
+          "key": "TestField:Employee No.",
+          "positive": [
+            {
+              "codeunit": 50188,
+              "test": "InsertTakesNumberFromSeriesAndStartsOpen"
+            }
+          ],
+          "negative": [
+            {
+              "codeunit": 50188,
+              "test": "BlankEmployeeIsRejected"
+            }
+          ]
+        },
+        {
+          "file": "app/src/Request/EQMEquipmentRequest.Table.al",
+          "procedure": "CheckRequestConsistency",
+          "key": "TestField:Request Date",
+          "positive": [
+            {
+              "codeunit": 50188,
+              "test": "InsertTakesNumberFromSeriesAndStartsOpen"
+            }
+          ],
+          "negative": []
+        },
+        {
+          "file": "app/src/Request/EQMEquipmentRequest.Table.al",
+          "procedure": "CheckRequestConsistency",
+          "key": "TestField:Requested Equipment Type",
+          "positive": [
+            {
+              "codeunit": 50188,
+              "test": "InsertTakesNumberFromSeriesAndStartsOpen"
+            }
+          ],
+          "negative": [
+            {
+              "codeunit": 50188,
+              "test": "BlankEquipmentTypeIsRejected"
+            }
+          ]
+        },
+        {
+          "file": "app/src/Request/EQMEquipmentRequest.Table.al",
+          "procedure": "CheckRequestDate",
+          "key": "FutureDateErr",
+          "positive": [
+            {
+              "codeunit": 50188,
+              "test": "PastRequestDateIsKept"
+            },
+            {
+              "codeunit": 50188,
+              "test": "TodayRequestDateIsAccepted"
+            }
+          ],
+          "negative": [
+            {
+              "codeunit": 50188,
+              "test": "FutureRequestDateIsRejectedOnValidate"
+            }
+          ]
+        },
+        {
+          "file": "app/src/Request/EQMEquipmentRequest.Table.al",
+          "procedure": "OnDelete",
+          "key": "DeleteNotOpenErr",
+          "positive": [
+            {
+              "codeunit": 50188,
+              "test": "OpenRequestCanBeModifiedAndDeleted"
+            }
+          ],
+          "negative": [
+            {
+              "codeunit": 50188,
+              "test": "PendingApprovalRequestCannotBeDeleted"
+            }
+          ]
+        },
+        {
+          "file": "app/src/Request/EQMEquipmentRequest.Table.al",
+          "procedure": "OnInsert",
+          "key": "InsertNotOpenErr",
+          "positive": [
+            {
+              "codeunit": 50188,
+              "test": "InsertTakesNumberFromSeriesAndStartsOpen"
+            }
+          ],
+          "negative": [
+            {
+              "codeunit": 50188,
+              "test": "InsertWithStatusOtherThanOpenIsRejected"
+            }
+          ]
+        },
+        {
+          "file": "app/src/Request/EQMEquipmentRequest.Table.al",
+          "procedure": "OnInsert",
+          "key": "TestField:Request Nos.",
+          "positive": [
+            {
+              "codeunit": 50188,
+              "test": "InsertTakesNumberFromSeriesAndStartsOpen"
+            }
+          ],
+          "negative": [
+            {
+              "codeunit": 50188,
+              "test": "InsertWithoutRequestNosFailsOnSetupField"
+            }
+          ]
+        },
+        {
+          "file": "app/src/Request/EQMEquipmentRequest.Table.al",
+          "procedure": "OnModify",
+          "key": "RequestNotOpenErr",
+          "positive": [
+            {
+              "codeunit": 50188,
+              "test": "OpenRequestCanBeModifiedAndDeleted"
+            }
+          ],
+          "negative": [
+            {
+              "codeunit": 50188,
+              "test": "PendingApprovalRequestCannotBeModified"
+            }
+          ]
+        },
+        {
+          "file": "app/src/Request/EQMEquipmentRequest.Table.al",
+          "procedure": "OnRename",
+          "key": "RenameNotAllowedErr",
+          "positive": [],
+          "negative": [
+            {
+              "codeunit": 50188,
+              "test": "RenameIsNotAllowed"
+            }
+          ],
+          "positiveNotApplicable": true,
+          "note": "Unconditional rule: renaming is always rejected, so there is no success path."
+        },
+        {
+          "file": "app/src/Request/EQMRequestApprovalMgt.Codeunit.al",
+          "procedure": "AssignEquipment",
+          "key": "EquipmentNotFoundErr",
+          "positive": [
+            {
+              "codeunit": 50189,
+              "test": "AssignEquipmentCompletesApprovedRequest"
+            }
+          ],
+          "negative": []
+        },
+        {
+          "file": "app/src/Request/EQMRequestApprovalMgt.Codeunit.al",
+          "procedure": "AssignEquipment",
+          "key": "EquipmentTypeMismatchErr",
+          "positive": [
+            {
+              "codeunit": 50189,
+              "test": "AssignEquipmentCompletesApprovedRequest"
+            }
+          ],
+          "negative": [
+            {
+              "codeunit": 50189,
+              "test": "AssignEquipmentRejectsWrongCategory"
+            }
+          ]
+        },
+        {
+          "file": "app/src/Request/EQMRequestApprovalMgt.Codeunit.al",
+          "procedure": "CheckApproved",
+          "key": "NotApprovedErr",
+          "positive": [
+            {
+              "codeunit": 50189,
+              "test": "AssignEquipmentCompletesApprovedRequest"
+            }
+          ],
+          "negative": [
+            {
+              "codeunit": 50189,
+              "test": "AssignEquipmentFailsWhenOpen"
+            }
+          ]
+        },
+        {
+          "file": "app/src/Request/EQMRequestApprovalMgt.Codeunit.al",
+          "procedure": "CheckApproverAllowed",
+          "key": "SelfApprovalErr",
+          "positive": [
+            {
+              "codeunit": 50189,
+              "test": "ApproveRecordsDecision"
+            }
+          ],
+          "negative": [
+            {
+              "codeunit": 50189,
+              "test": "SelfApprovalIsRejected"
+            }
+          ]
+        },
+        {
+          "file": "app/src/Request/EQMRequestApprovalMgt.Codeunit.al",
+          "procedure": "CheckNotRejected",
+          "key": "RequestRejectedErr",
+          "positive": [
+            {
+              "codeunit": 50189,
+              "test": "SendForApprovalMakesRequestPending"
+            }
+          ],
+          "negative": [
+            {
+              "codeunit": 50189,
+              "test": "RejectedRequestCannotApprove"
+            }
+          ]
+        },
+        {
+          "file": "app/src/Request/EQMRequestApprovalMgt.Codeunit.al",
+          "procedure": "CheckPending",
+          "key": "NotPendingErr",
+          "positive": [
+            {
+              "codeunit": 50189,
+              "test": "ApproveRecordsDecision"
+            }
+          ],
+          "negative": [
+            {
+              "codeunit": 50189,
+              "test": "ApproveFailsWhenOpen"
+            }
+          ]
+        },
+        {
+          "file": "app/src/Request/EQMRequestApprovalMgt.Codeunit.al",
+          "procedure": "Reject",
+          "key": "RejectionCommentRequiredErr",
+          "positive": [
+            {
+              "codeunit": 50189,
+              "test": "SenderCanRejectOwnRequest"
+            }
+          ],
+          "negative": [
+            {
+              "codeunit": 50189,
+              "test": "RejectRequiresCommentWhenEmpty"
+            }
+          ]
+        },
+        {
+          "file": "app/src/Request/EQMRequestApprovalMgt.Codeunit.al",
+          "procedure": "SendForApproval",
+          "key": "NotOpenErr",
+          "positive": [
+            {
+              "codeunit": 50189,
+              "test": "SendForApprovalMakesRequestPending"
+            }
+          ],
+          "negative": [
+            {
+              "codeunit": 50189,
+              "test": "SendForApprovalFailsWhenPending"
+            }
+          ]
+        }
+      ],
+      "objects": [
+        {
+          "type": "table",
+          "id": 50111
+        },
+        {
+          "type": "codeunit",
+          "id": 50132
+        }
+      ]
+    },
+    {
+      "id": "CP6",
+      "name": "Data upgrade",
+      "rules": [
+        {
+          "file": "app/src/Install/EQMUpgradeMgt.Codeunit.al",
+          "procedure": "UpgradePerCompany",
+          "key": "upgrade",
+          "positive": [],
+          "negative": [],
+          "gap": true,
+          "note": "No test calls UpgradePerCompany."
+        },
+        {
+          "file": "app/src/Install/EQMUpgradeMgt.Codeunit.al",
+          "procedure": "UpgradeDefaultWarrantyAlertDays",
+          "key": "upgrade",
+          "positive": [],
+          "negative": [
+            {
+              "codeunit": 50177,
+              "test": "UpgradeTagStopsSecondRun"
+            }
+          ],
+          "note": "No test runs the step with the tag unset."
+        },
+        {
+          "file": "app/src/Install/EQMUpgradeMgt.Codeunit.al",
+          "procedure": "InitDefaultWarrantyAlertDays",
+          "key": "upgrade",
+          "positive": [
+            {
+              "codeunit": 50177,
+              "test": "BlankAlertDaysAreInitialized"
+            }
+          ],
+          "negative": [
+            {
+              "codeunit": 50177,
+              "test": "UserValueIsKept"
+            }
+          ]
+        }
+      ],
+      "objects": []
+    }
+  ],
+  "traces": [
+    {
+      "type": "codeunit",
+      "id": 50136,
+      "member": "LogCreated",
+      "tests": [
+        {
+          "codeunit": 50192,
+          "test": "CreatedEntryWrittenOnInsert"
+        }
+      ],
+      "note": "Subscriber: a test whose WHEN raises the subscribed event."
+    },
+    {
+      "type": "codeunit",
+      "id": 50136,
+      "member": "LogAssigned",
+      "tests": [
+        {
+          "codeunit": 50192,
+          "test": "AssignedEntryWrittenOnAssign"
+        }
+      ],
+      "note": "Subscriber: a test whose WHEN raises the subscribed event."
+    },
+    {
+      "type": "codeunit",
+      "id": 50136,
+      "member": "LogReturned",
+      "tests": [
+        {
+          "codeunit": 50192,
+          "test": "ReturnedEntryWrittenOnUnassign"
+        }
+      ],
+      "note": "Subscriber: a test whose WHEN raises the subscribed event."
+    },
+    {
+      "type": "codeunit",
+      "id": 50121,
+      "member": "RecordEquipmentCreated",
+      "tests": [
+        {
+          "codeunit": 50186,
+          "test": "EquipmentCreatedWritesEntry"
+        }
+      ],
+      "note": "Subscriber: a test whose WHEN raises the subscribed event."
+    },
+    {
+      "type": "codeunit",
+      "id": 50121,
+      "member": "RecordEquipmentAssigned",
+      "tests": [
+        {
+          "codeunit": 50186,
+          "test": "EquipmentAssignedWritesEntry"
+        }
+      ],
+      "note": "Subscriber: a test whose WHEN raises the subscribed event."
+    },
+    {
+      "type": "codeunit",
+      "id": 50121,
+      "member": "RecordEquipmentReturned",
+      "tests": [
+        {
+          "codeunit": 50186,
+          "test": "EquipmentReturnedWritesEntry"
+        }
+      ],
+      "note": "Subscriber: a test whose WHEN raises the subscribed event."
+    },
+    {
+      "type": "codeunit",
+      "id": 50121,
+      "member": "RecordMaintenanceCreated",
+      "tests": [
+        {
+          "codeunit": 50186,
+          "test": "MaintenanceWritesReturnedAndMaintenanceEntries"
+        }
+      ],
+      "note": "Subscriber: a test whose WHEN raises the subscribed event."
+    },
+    {
+      "type": "codeunit",
+      "id": 50121,
+      "member": "RecordWarrantyExpired",
+      "tests": [
+        {
+          "codeunit": 50186,
+          "test": "WarrantyExpiredWritesEntry"
+        }
+      ],
+      "note": "Subscriber: a test whose WHEN raises the subscribed event."
+    },
+    {
+      "type": "codeunit",
+      "id": 50120,
+      "member": "RaiseEquipmentCreated",
+      "tests": [
+        {
+          "codeunit": 50184,
+          "test": "EquipmentCreatedRaisedAfterInsert"
+        }
+      ],
+      "note": "Subscriber: a test whose WHEN raises the subscribed event."
+    },
+    {
+      "type": "codeunit",
+      "id": 50120,
+      "member": "RaiseMaintenanceCreated",
+      "tests": [
+        {
+          "codeunit": 50184,
+          "test": "EquipmentReturnedAndMaintenanceCreatedRaisedOnMaintenance"
+        }
+      ],
+      "note": "Subscriber: a test whose WHEN raises the subscribed event."
+    },
+    {
+      "type": "codeunit",
+      "id": 50131,
+      "member": "RaiseEquipmentAssigned",
+      "tests": [
+        {
+          "codeunit": 50187,
+          "test": "AssignRunsSubscriberWithoutError"
+        }
+      ],
+      "note": "Subscriber: a test whose WHEN raises the subscribed event."
+    },
+    {
+      "type": "codeunit",
+      "id": 50131,
+      "member": "RaiseWarrantyExpiring",
+      "tests": [
+        {
+          "codeunit": 50187,
+          "test": "GenerateAlertsRunsSubscriberWithoutError"
+        }
+      ],
+      "note": "Subscriber: a test whose WHEN raises the subscribed event."
+    },
+    {
+      "type": "codeunit",
+      "id": 50118,
+      "member": "OnAfterTableHasNumberFieldPrimaryKey",
+      "tests": [
+        {
+          "codeunit": 50179,
+          "test": "SavedAttachmentIsLinkedToEquipmentWithCategoryOther"
+        }
+      ],
+      "note": "Subscriber: a test whose WHEN raises the subscribed event. SaveAttachmentFromStream with a RecordRef of the equipment; reviewer to confirm against the Document Attachment source."
+    },
+    {
+      "type": "codeunit",
+      "id": 50103,
+      "member": "CheckNoAssignedEquipmentOnBeforeDeleteEmployee",
+      "tests": [
+        {
+          "codeunit": 50158,
+          "test": "EmployeeWithAssignedEquipmentCannotBeDeleted"
+        }
+      ],
+      "note": "Subscriber: a test whose WHEN raises the subscribed event."
+    },
+    {
+      "type": "table",
+      "id": 50111,
+      "member": "GetStatusStyle",
+      "tests": [
+        {
+          "codeunit": 50188,
+          "test": "StatusStyleMatchesStatus"
+        }
+      ],
+      "note": "Ambiguous name: the test calls this object, not the same-named member of another object or test helper."
+    },
+    {
+      "type": "codeunit",
+      "id": 50117,
+      "member": "SetPicture",
+      "tests": [
+        {
+          "codeunit": 50178,
+          "test": "SetPictureOnEquipmentWithoutPicture"
+        }
+      ],
+      "note": "Ambiguous name: the test calls this object, not the same-named member of another object or test helper. The call goes through the test helper SetPicture."
+    },
+    {
+      "type": "codeunit",
+      "id": 50138,
+      "member": "IsEnabled",
+      "tests": [
+        {
+          "codeunit": 50198,
+          "test": "WithoutConfigurationEveryFeatureIsEnabled"
+        }
+      ],
+      "note": "Ambiguous name: the test calls this object, not the same-named member of another object or test helper."
+    }
+  ]
+}
