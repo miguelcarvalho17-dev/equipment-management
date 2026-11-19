@@ -440,3 +440,12 @@ Source: `docs/features/FR-047-test-coverage-targets.md`, `docs/plans/FR-047-test
 - [ ] Phase 2: when all targets are met, set `"enforce": true` in `.github/coverage/coverage-register.json`.
 - [ ] Each new Error or TestField in a critical process object needs a rule entry in the same change (see `docs/help/FR-047-test-coverage-targets.md`).
 - [ ] Later: revisit measured coverage when AL-Go or BcContainerHelper supports it; diff-based reach for pull requests.
+
+## FR-049 checks (no AL change; Repo checks and CI result pending)
+Source: `docs/features/FR-049-release-management.md`, `docs/plans/FR-049-release-management.md`. No separate AppSource validation ran.
+- [ ] CI: the pull request's "Repo checks" log shows `App version: 29.0.0.0` and `Version policy: OK`. Check with `gh pr checks <pr>`. Not verified until the push.
+- [ ] Re-run `python3 .github/scripts/test_version_check.py` after any change to `version_check.py`. Last local run: 22 tests OK, Python 3.9.6, in this session.
+- [ ] After the merge: the main CI/CD artifacts are named `equipment-management-main-Apps-29.0.<run>.0`. Record one run number here.
+- [ ] On the first version-bump pull request: VER3 passes and the checks run. If no checks start, close and reopen the pull request.
+- [ ] Reviewer MINOR m1, open: `version_check.py` fails with a traceback when `app.json` is valid JSON but not an object (for example `[]`). Fix it with a unit test in `test_version_check.py`.
+- [ ] First release = phase 2 of FR-049 (user decision). Run it only after a green `main` run with the 29.0 artifact names, or pass an explicit `buildVersion`.

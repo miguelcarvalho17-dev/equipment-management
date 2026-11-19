@@ -18,7 +18,7 @@ The main app runs CodeCop, UICop and AppSourceCop. The test app is not analysed 
 TODO(verify): analyzer output for the main app in CI has not been checked yet after the FR-061 fix. The next PR build must be green.
 
 ## Download the build output
-Open the run and download the artifacts: Apps, TestApps, TestResults and BuildOutput. Artifact names end in `1.0.<run>.0`. The `.app` inside keeps the version from `app.json` (29.0.x).
+Open the run and download the artifacts: Apps, TestApps, TestResults and BuildOutput. Artifact names end in `<Major>.<Minor>.<run>.0` (29.0.<run>.0 since FR-049), the same Major.Minor as the `.app` inside. See docs/help/FR-049-release-management.md.
 
 ## Create a release
 Run the **Create release** workflow manually from the Actions tab and give it a version tag. It attaches the artifacts of the latest green CI/CD run on `main` to a GitHub release and does not rebuild. Make sure that run is green first.

@@ -1,6 +1,8 @@
 {
   "$schema": "https://raw.githubusercontent.com/microsoft/AL-Go-Actions/v10.0/.Modules/settings.schema.json",
   "country": "us",
+  "repoVersion": "29.0",
+  "versioningStrategy": 0,
   "appSourceCopMandatoryAffixes": [
     "EQM"
   ],
