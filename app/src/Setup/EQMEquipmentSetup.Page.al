@@ -131,6 +131,32 @@ page 50103 "EQM Equipment Setup"
                     CurrPage.Update(false);
                 end;
             }
+            action(CreateDemoData)
+            {
+                Caption = 'Create Demo Data';
+                ToolTip = 'Create sample employees, equipment, assignments and maintenance records in this company so that you can try out the app. Existing records are not changed, and running it again only adds what is missing.';
+                Image = Import;
+                Enabled = CanManage;
+
+                trigger OnAction()
+                begin
+                    DemoDataMgt.CreateDemoDataWithConfirmation();
+                    CurrPage.Update(false);
+                end;
+            }
+            action(DeleteDemoData)
+            {
+                Caption = 'Delete Demo Data';
+                ToolTip = 'Delete the demo data that Create Demo Data added to this company. Records that users created, and demo records that users added data to, are kept.';
+                Image = Delete;
+                Enabled = CanManage;
+
+                trigger OnAction()
+                begin
+                    DemoDataMgt.DeleteDemoDataWithConfirmation();
+                    CurrPage.Update(false);
+                end;
+            }
         }
         area(Navigation)
         {
@@ -177,6 +203,7 @@ page 50103 "EQM Equipment Setup"
     var
         MonitoringJobMgt: Codeunit "EQM Monitoring Job Mgt.";
         FeatureMgt: Codeunit "EQM Feature Mgt.";
+        DemoDataMgt: Codeunit "EQM Demo Data Mgt.";
         ApiIntegrationEnabled: Boolean;
         WarrantyAlertsEnabled: Boolean;
         MaintenancePlanningEnabled: Boolean;

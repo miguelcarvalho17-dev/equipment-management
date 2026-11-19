@@ -1,6 +1,20 @@
 # Changelog
 Newest first. Grouped by Added / Changed / Fixed / Obsolete.
 
+## FR-066 Demo Data (version stays 29.0.0.0, no bump)
+### Added
+- Equipment Setup: the actions Create Demo Data and Delete Demo Data. Create adds sample employees, equipment, assignments and maintenance records to the company so that you can try out the app. Delete removes that demo data again. Records that you created are not deleted, and demo records that you added notes, attachments, pictures, requests or your own maintenance to are kept. Feature doc docs/features/FR-066-demo-data.md. Help docs/help/FR-066-demo-data.md.
+### Changed
+- Permission set EQM - Administrator can delete the records that the demo data uses, and EQM - Reader can run the demo data. EQM - Manager gets no new rights. The demo data needs the permission to edit employees.
+### Fixed
+- None.
+### Obsolete
+- None.
+
+Release notes: Administrators can create sample data in a new company with Create Demo Data on the Equipment Setup page, and remove it again with Delete Demo Data. Create asks for confirmation and does not change existing records. Demo data is not created on install or upgrade.
+
+Note: no install or upgrade code, no app.json change, no change to existing business logic, events or fields. Demo data goes through the app's own logic, so Power Automate events, the Change Log and telemetry react to it as they do to user actions. Not verified: tests not executed locally, CI result pending (test codeunit 50176 and new tests in 50162); the permission-denied path and the Employee behaviour are not checked in a sandbox; no separate AppSource validation ran. The feature doc is docs/features/FR-066-demo-data.md.
+
 ## FR-053 Large Dataset Support (version stays 29.0.0.0, no bump)
 ### Added
 - None.
