@@ -297,6 +297,7 @@ codeunit 50158 "EQM Process Integration Tests"
         Expected: List of [Text];
         FirstCost: Decimal;
         SecondCost: Decimal;
+        LoggedCost: Decimal;
     begin
         // [SCENARIO] A correction before posting is logged and reaches the maintenance history
         Initialize();
@@ -325,8 +326,10 @@ codeunit 50158 "EQM Process Integration Tests"
         LogEntry.SetRange("Action", LogEntry."Action"::Changed);
         LogEntry.FindFirst();
         Assert.AreEqual(MaintenanceRecord.FieldNo(Cost), LogEntry."Field No.", 'The Changed entry should be for the cost field');
-        Assert.AreEqual(Format(FirstCost, 0, 9), LogEntry."Old Value", 'The Changed entry should have the old cost');
-        Assert.AreEqual(Format(SecondCost, 0, 9), LogEntry."New Value", 'The Changed entry should have the new cost');
+        Assert.IsTrue(Evaluate(LoggedCost, LogEntry."Old Value", 9), 'The old value should be a valid decimal');
+        Assert.AreEqual(FirstCost, LoggedCost, 'The Changed entry should have the old cost');
+        Assert.IsTrue(Evaluate(LoggedCost, LogEntry."New Value", 9), 'The new value should be a valid decimal');
+        Assert.AreEqual(SecondCost, LoggedCost, 'The Changed entry should have the new cost');
         Assert.AreEqual(CopyStr(UserId(), 1, MaxStrLen(LogEntry."User ID")), LogEntry."User ID", 'The Changed entry should have the current user');
 
         // [THEN] The history entry has the corrected cost
