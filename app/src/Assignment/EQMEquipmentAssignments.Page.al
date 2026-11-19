@@ -114,25 +114,43 @@ page 50104 "EQM Equipment Assignments"
     }
 
     var
+        EmployeeNames: Dictionary of [Code[20], Text];
         EmployeeName: Text[100];
+        CanReadEmployees: Boolean;
         StatusStyle: Text;
         FavorableStyleTok: Label 'Favorable', Locked = true;
         SubordinateStyleTok: Label 'Subordinate', Locked = true;
 
-    trigger OnAfterGetRecord()
+    trigger OnOpenPage()
     var
         EmployeeRec: Record Employee;
     begin
-        EmployeeName := '';
-        if EmployeeRec.ReadPermission() then begin
-            EmployeeRec.SetLoadFields("First Name", "Middle Name", "Last Name");
-            if EmployeeRec.Get(Rec."Employee No.") then
-                EmployeeName := EmployeeRec.FullName();
-        end;
+        CanReadEmployees := EmployeeRec.ReadPermission();
+    end;
+
+    trigger OnAfterGetRecord()
+    begin
+        EmployeeName := GetEmployeeName(Rec."Employee No.");
 
         if Rec.Status = Rec.Status::Active then
             StatusStyle := FavorableStyleTok
         else
             StatusStyle := SubordinateStyleTok;
+    end;
+
+    local procedure GetEmployeeName(EmployeeNo: Code[20]): Text[100]
+    var
+        EmployeeRec: Record Employee;
+        CachedName: Text;
+    begin
+        if (EmployeeNo = '') or not CanReadEmployees then
+            exit('');
+        if EmployeeNames.Get(EmployeeNo, CachedName) then
+            exit(CopyStr(CachedName, 1, MaxStrLen(EmployeeName)));
+        EmployeeRec.SetLoadFields("First Name", "Middle Name", "Last Name");
+        if EmployeeRec.Get(EmployeeNo) then
+            CachedName := EmployeeRec.FullName();
+        EmployeeNames.Add(EmployeeNo, CachedName);
+        exit(CopyStr(CachedName, 1, MaxStrLen(EmployeeName)));
     end;
 }

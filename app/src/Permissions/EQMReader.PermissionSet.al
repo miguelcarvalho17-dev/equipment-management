@@ -41,6 +41,7 @@ permissionset 50100 "EQM - Reader"
         query "EQM Equipment by Status" = X,
         query "EQM Maint. Cost by Category" = X,
         query "EQM Maint. Cost by Equipment" = X,
+        query "EQM Open Warranty Alerts" = X,
         report "EQM Equipment Register" = X,
         report "EQM Asset Utilization" = X,
         report "EQM Maint. Cost Analysis" = X,

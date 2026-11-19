@@ -276,6 +276,12 @@ table 50100 "EQM Equipment"
         key(NextMaintenanceDate; "Next Maintenance Date", Status)
         {
         }
+        key(CategoryStatus; "Category Code", Status)
+        {
+        }
+        key(SystemModified; SystemModifiedAt)
+        {
+        }
     }
 
     fieldgroups

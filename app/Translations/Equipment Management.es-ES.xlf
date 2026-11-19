@@ -5721,6 +5721,12 @@
           <note from="Developer" annotates="general" priority="2"></note>
           <note from="Xliff Generator" annotates="general" priority="3">Query EQM Maint. Cost by Equipment - Property Caption</note>
         </trans-unit>
+        <trans-unit id="Query 2773090352 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Open Warranty Alerts</source>
+          <target state="translated">Alertas de garantía abiertas</target>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Query EQM Open Warranty Alerts - Property Caption</note>
+        </trans-unit>
         <trans-unit id="PageExtension 2678929633 - NamedType 3362745869" size-unit="char" translate="yes" xml:space="preserve" al-object-target="PageExtension 2678929633">
           <source>Equipment %1 is no longer assigned to employee %2.</source>
           <target state="translated">El equipo %1 ya no está asignado al empleado %2.</target>

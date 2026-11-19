@@ -93,6 +93,9 @@ table 50103 "EQM Equipment Assignment"
         key(EmployeeStatus; "Employee No.", Status)
         {
         }
+        key(SystemModified; SystemModifiedAt)
+        {
+        }
     }
 
     fieldgroups
