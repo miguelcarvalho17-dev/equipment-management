@@ -1,6 +1,20 @@
 # Changelog
 Newest first. Grouped by Added / Changed / Fixed / Obsolete.
 
+## FR-046 Integration Tests (version stays 29.0.0.0, no bump)
+### Added
+- Integration tests for four business processes: equipment assignment, maintenance, equipment request approval and notifications. 21 test procedures in one test codeunit in the test app. Each test runs several steps in sequence and checks the history, audit trail, outbox, maintenance log, requests and notifications together. Written; not executed locally. CI result pending.
+### Changed
+- None.
+### Fixed
+- None.
+### Obsolete
+- None.
+
+Release notes: no change for users. The release adds integration tests for the assignment, maintenance, equipment request approval and notification processes.
+
+Note: test app only. No change to `app/`, `app.json`, permission sets, captions or translations. Not verified: tests not executed locally, CI result pending; no separate AppSource validation ran. The feature doc is `docs/features/FR-046-integration-tests.md`.
+
 ## FR-045 Automated Unit Tests (version stays 29.0.0.0, no bump)
 ### Added
 - Automated tests for equipment creation, assignment, status changes, maintenance processing and warranty calculation: 52 test procedures in 5 test codeunits in the test app. Written and compiled; not executed locally. CI result pending.

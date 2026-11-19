@@ -66,7 +66,7 @@ No EQM set can delete entries. Everyone with Equipment Reader can see the histor
 Entries keep employee numbers and user names. Because entries are immutable and equipment with history cannot be deleted, there is no in-app way to remove or anonymise them. Ties to the open TODO on personal-data classification.
 
 ## Test status
-No test objects. Scenarios H1-H25 are in docs/plans/FR-006-assignment-history-tracking.md as a reference; test codeunit ID 50158 is reserved and unused. Manual sandbox checks are in docs/TODO.md.
+No test objects of its own. Scenarios H1-H25 are in docs/plans/FR-006-assignment-history-tracking.md as a reference. Test codeunit ID 50158 was reserved for them and is now used by FR-046 (`EQM Process Integration Tests`), which checks the assignment history together with the audit trail and the outbox (see docs/features/FR-046-integration-tests.md). Manual sandbox checks are in docs/TODO.md.
 
 ## Discrepancies plan vs code
 None found. The XML doc comments required by the plan are present in the code; no AL changes were made by the documenter.
