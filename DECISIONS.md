@@ -162,6 +162,19 @@ A decision that applies to all future work (not just one task) belongs in the "S
 - 2026-11-19 | FR-055 build | Ran alc in place on app/ and compiled test/ against a scratchpad package cache because the AL MCP had no project loaded | Reversible: yes
 - 2026-11-19 | FR-055 terminology | Register maintenance = Criar/Crear mantenimiento (distinct from Post); Registered = Criado; Features = Funcionalidades/Características; Laptop = Portátil | Reversible: yes
 - 2026-11-19 | FR-055 target form | Kept " " as translation of the blank enum caption so TR8 holds for every unit | Reversible: yes
+- 2026-11-19 | FR-053 keys | Chose SystemModified (SystemModifiedAt) keys on tables 50100 and 50103 over no index, because API delta reads (lastModifiedDateTime gt) would scan all 1M assignments on every sync | Reversible: no
+- 2026-11-19 | FR-053 keys | Chose a new key ("Category Code", Status) on 50100 over the CategoryCode key with a residual Status filter; CategoryCode stays (published, used by SetCurrentKey in table 50101) | Reversible: no
+- 2026-11-19 | FR-053 keys | Chose no Status or "Assignment Date" key on 50103, because views read the clustered index backward with a row goal and each extra index costs on every write | Reversible: yes
+- 2026-11-19 | FR-053 FlowFields | Kept plain covering indexes (no SIFT, no columnstore) at 100k, confirming NFR-001 | Reversible: yes
+- 2026-11-19 | FR-053 Query | Chose new internal Query 50104 (alerts left-joined to equipment) for CancelStaleAlerts over a Dictionary cache or the N+1, because it is one read while the alert table is locked | Reversible: no
+- 2026-11-19 | FR-053 Query | Collect stale entry numbers first and modify after Close, with a Status = Open re-check after Get | Reversible: yes
+- 2026-11-19 | FR-053 cache | Employee-name cache on page 50104 only, because only it lists the 1M-row table | Reversible: yes
+- 2026-11-19 | FR-053 cache | Named the page's local record EmployeeRec instead of Employee to avoid AA0202 (clash with the Employee action) | Reversible: yes
+- 2026-11-19 | FR-053 tests | Added tests to existing codeunit 50159 over a new codeunit, because free test IDs are reserved and widening test/app.json is on the stop list | Reversible: yes
+- 2026-11-19 | FR-053 tests | CI-sized datasets (20k assignments, 10k equipment, 1k alerts) with the 3,000 ms budget; full 100k/1M is a manual sandbox check | Reversible: yes
+- 2026-11-19 | FR-053 scope | Deferred OptimizeForTextSearch to phase 2, because it changes list search from substring to word-prefix | Reversible: yes
+- 2026-11-19 | FR-053 IDs | Chose query ID 50104 from a source scan (AL MCP had no project loaded); reviewer confirmed it is unique | Reversible: yes
+- 2026-11-19 | FR-053 build | Compiled with the extension's alc.dll via dotnet and overwrote the gitignored test/.alpackages app copies, because the AL MCP had no project loaded | Reversible: yes
 - 2026-11-19 | FR-066 Demo Data | Chose user-triggered Create/Delete Demo Data actions on the setup page over seeding on install (install codeunit is on the stop list and would run in customer tenants) or a Contoso-style library (new dependency) | Reversible: yes
 - 2026-11-19 | FR-066 Demo Data | Chose a tracking table (table ID + number + SystemId) with deterministic `EQMDEMO-` numbers over the prefix alone, so Delete only removes rows the demo inserted and finds renamed records | Reversible: no
 - 2026-11-19 | FR-066 Demo Data | Chose to create through the app logic (Equipment Insert(true), Maintenance Insert(true) + "EQM Maintenance-Post", Equipment.AssignEmployee, Status + Modify(true) for Lost/Disposed) over direct inserts, so rules, audit, log and history are real | Reversible: yes
