@@ -3,6 +3,61 @@
   <file datatype="xml" source-language="en-US" target-language="en-US" original="Equipment Management">
     <body>
       <group id="body">
+        <trans-unit id="Table 1486205162 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Equipment Demo Data Entry</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table EQM Demo Data Entry - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Table 1486205162 - Field 2570673311 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Specifies when the demo record was created.</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table EQM Demo Data Entry - Field Created At - Property ToolTip</note>
+        </trans-unit>
+        <trans-unit id="Table 1486205162 - Field 2570673311 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Created At</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table EQM Demo Data Entry - Field Created At - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Table 1486205162 - Field 2369664869 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Specifies the user who created the demo data.</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table EQM Demo Data Entry - Field Created By - Property ToolTip</note>
+        </trans-unit>
+        <trans-unit id="Table 1486205162 - Field 2369664869 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Created By</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table EQM Demo Data Entry - Field Created By - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Table 1486205162 - Field 485252710 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Specifies the number of the record when the demo data created it.</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table EQM Demo Data Entry - Field Record No. - Property ToolTip</note>
+        </trans-unit>
+        <trans-unit id="Table 1486205162 - Field 485252710 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Record No.</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table EQM Demo Data Entry - Field Record No. - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Table 1486205162 - Field 762990935 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Specifies the system ID of the record that the demo data created. It identifies the record even after it is renamed.</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table EQM Demo Data Entry - Field Record System Id - Property ToolTip</note>
+        </trans-unit>
+        <trans-unit id="Table 1486205162 - Field 762990935 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Record System ID</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table EQM Demo Data Entry - Field Record System Id - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Table 1486205162 - Field 3135334477 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Specifies the table of the record that the demo data created.</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table EQM Demo Data Entry - Field Table ID - Property ToolTip</note>
+        </trans-unit>
+        <trans-unit id="Table 1486205162 - Field 3135334477 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Table ID</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table EQM Demo Data Entry - Field Table ID - Property Caption</note>
+        </trans-unit>
         <trans-unit id="Table 4212454693 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
           <source>Equipment</source>
           <note from="Developer" annotates="general" priority="2"></note>
@@ -2068,6 +2123,106 @@
           <note from="Developer" annotates="general" priority="2"></note>
           <note from="Xliff Generator" annotates="general" priority="3">Codeunit EQM Default Data - NamedType VehicleDescriptionTxt</note>
         </trans-unit>
+        <trans-unit id="Codeunit 1124738670 - NamedType 1271507707" size-unit="char" translate="yes" xml:space="preserve">
+          <source>This creates sample employees, equipment, assignments and maintenance records in company %1 so that you can try out the app. Existing records are not changed. Do you want to continue?</source>
+          <note from="Developer" annotates="general" priority="2">%1 = company name</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit EQM Demo Data Mgt. - NamedType CreateDemoDataQst</note>
+        </trans-unit>
+        <trans-unit id="Codeunit 1124738670 - NamedType 6224741" size-unit="char" translate="yes" xml:space="preserve">
+          <source>You cannot create demo data because you do not have permission to change the equipment setup and to create and delete employees. Ask an administrator to assign you the Equipment Administrator permission set and a permission set that lets you edit employees.</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit EQM Demo Data Mgt. - NamedType CreateNoPermissionErr</note>
+        </trans-unit>
+        <trans-unit id="Codeunit 1124738670 - NamedType 1030500336" size-unit="char" translate="yes" xml:space="preserve">
+          <source>This deletes the demo data that Create Demo Data added to company %1, including its assignment history, maintenance history, maintenance log, audit trail and warranty alerts. Records that users created are not deleted, and demo records that users added notes, attachments, pictures, requests or other data to are kept. Do you want to continue?</source>
+          <note from="Developer" annotates="general" priority="2">%1 = company name</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit EQM Demo Data Mgt. - NamedType DeleteDemoDataQst</note>
+        </trans-unit>
+        <trans-unit id="Codeunit 1124738670 - NamedType 3168920650" size-unit="char" translate="yes" xml:space="preserve">
+          <source>You cannot delete demo data because you do not have permission to change the equipment setup and to create and delete employees. Ask an administrator to assign you the Equipment Administrator permission set and a permission set that lets you edit employees.</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit EQM Demo Data Mgt. - NamedType DeleteNoPermissionErr</note>
+        </trans-unit>
+        <trans-unit id="Codeunit 1124738670 - NamedType 2571518238" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Demo data was created: %1 employees, %2 equipment, %3 assignments and %4 maintenance records. %5 items were skipped because their number was already used or their category is missing or inactive.</source>
+          <note from="Developer" annotates="general" priority="2">%1 = number of employees, %2 = number of equipment, %3 = number of assignments, %4 = number of maintenance records, %5 = number of skipped items</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit EQM Demo Data Mgt. - NamedType DemoDataCreatedMsg</note>
+        </trans-unit>
+        <trans-unit id="Codeunit 1124738670 - NamedType 294972953" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Demo data was deleted: %1 equipment and %2 employees. %3 equipment and %4 employees were kept because users added data to them.</source>
+          <note from="Developer" annotates="general" priority="2">%1 = number of equipment deleted, %2 = number of employees deleted, %3 = number of equipment kept, %4 = number of employees kept</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit EQM Demo Data Mgt. - NamedType DemoDataDeletedMsg</note>
+        </trans-unit>
+        <trans-unit id="Codeunit 1124738670 - NamedType 1767240080" maxwidth="100" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Annual inspection and cleaning</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit EQM Demo Data Mgt. - NamedType M01Txt</note>
+        </trans-unit>
+        <trans-unit id="Codeunit 1124738670 - NamedType 1062445009" maxwidth="100" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Battery replacement</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit EQM Demo Data Mgt. - NamedType M02Txt</note>
+        </trans-unit>
+        <trans-unit id="Codeunit 1124738670 - NamedType 78113362" maxwidth="100" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Keyboard repair</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit EQM Demo Data Mgt. - NamedType M03Txt</note>
+        </trans-unit>
+        <trans-unit id="Codeunit 1124738670 - NamedType 3915943955" maxwidth="100" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Safety inspection</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit EQM Demo Data Mgt. - NamedType M04Txt</note>
+        </trans-unit>
+        <trans-unit id="Codeunit 1124738670 - NamedType 2137503316" maxwidth="100" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Storage upgrade</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit EQM Demo Data Mgt. - NamedType M05Txt</note>
+        </trans-unit>
+        <trans-unit id="Codeunit 1124738670 - NamedType 2195442197" maxwidth="100" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Toner and roller replacement</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit EQM Demo Data Mgt. - NamedType M06Txt</note>
+        </trans-unit>
+        <trans-unit id="Codeunit 1124738670 - NamedType 3881313751" maxwidth="100" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Scheduled service</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit EQM Demo Data Mgt. - NamedType M08Txt</note>
+        </trans-unit>
+        <trans-unit id="Codeunit 1124738670 - NamedType 3239268760" maxwidth="100" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Brake pad replacement</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit EQM Demo Data Mgt. - NamedType M09Txt</note>
+        </trans-unit>
+        <trans-unit id="Codeunit 1124738670 - NamedType 3786085128" maxwidth="100" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Calibration check</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit EQM Demo Data Mgt. - NamedType M10Txt</note>
+        </trans-unit>
+        <trans-unit id="Codeunit 1124738670 - NamedType 875493447" maxwidth="100" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Screen replacement</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit EQM Demo Data Mgt. - NamedType M11Txt</note>
+        </trans-unit>
+        <trans-unit id="Codeunit 1124738670 - NamedType 2096958410" maxwidth="100" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Firmware update</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit EQM Demo Data Mgt. - NamedType M12Txt</note>
+        </trans-unit>
+        <trans-unit id="Codeunit 1124738670 - NamedType 916559165" size-unit="char" translate="yes" xml:space="preserve">
+          <source>There is no demo data to delete in this company.</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit EQM Demo Data Mgt. - NamedType NoDemoDataMsg</note>
+        </trans-unit>
+        <trans-unit id="Codeunit 1124738670 - NamedType 3083451624" size-unit="char" translate="yes" xml:space="preserve">
+          <source>No demo data was created. The demo records already exist, or their numbers or categories are not available.</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit EQM Demo Data Mgt. - NamedType NothingCreatedMsg</note>
+        </trans-unit>
+        <trans-unit id="Codeunit 1124738670 - NamedType 1746163189" maxwidth="100" size-unit="char" translate="yes" xml:space="preserve">
+          <source>IT service desk</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit EQM Demo Data Mgt. - NamedType PerformedByTxt</note>
+        </trans-unit>
         <trans-unit id="Codeunit 250301630 - NamedType 2701412617" size-unit="char" translate="yes" xml:space="preserve">
           <source>You cannot delete employee %1 because one or more equipment records are assigned to the employee.</source>
           <note from="Developer" annotates="general" priority="2">%1 = employee number</note>
@@ -3987,6 +4142,26 @@
           <source>Monitoring Job Queue Entries</source>
           <note from="Developer" annotates="general" priority="2"></note>
           <note from="Xliff Generator" annotates="general" priority="3">Page EQM Equipment Setup - Action MonitoringJobQueueEntries - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Page 1065098760 - Action 3029919729 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Create sample employees, equipment, assignments and maintenance records in this company so that you can try out the app. Existing records are not changed, and running it again only adds what is missing.</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page EQM Equipment Setup - Action CreateDemoData - Property ToolTip</note>
+        </trans-unit>
+        <trans-unit id="Page 1065098760 - Action 3029919729 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Create Demo Data</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page EQM Equipment Setup - Action CreateDemoData - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Page 1065098760 - Action 3284951430 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Delete the demo data that Create Demo Data added to this company. Records that users created, and demo records that users added data to, are kept.</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page EQM Equipment Setup - Action DeleteDemoData - Property ToolTip</note>
+        </trans-unit>
+        <trans-unit id="Page 1065098760 - Action 3284951430 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Delete Demo Data</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page EQM Equipment Setup - Action DeleteDemoData - Property Caption</note>
         </trans-unit>
         <trans-unit id="Page 1065098760 - Action 1063323679 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
           <source>Create the job queue entries that run the equipment monitoring every day, if they do not exist. Existing entries are not changed.</source>

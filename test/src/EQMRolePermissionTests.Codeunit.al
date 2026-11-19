@@ -38,6 +38,7 @@ codeunit 50162 "EQM Role Permission Tests"
         ExecuteMissingErr: Label '%1 should have Execute on object type %2, ID %3.', Comment = '%1 = role ID, %2 = object type number, %3 = object ID';
         UnexpectedEntryErr: Label '%1 should have no permission entry on object type %2, ID %3.', Comment = '%1 = role ID, %2 = object type number, %3 = object ID';
         UnexpectedRightErr: Label '%1 should have no Insert, Modify or Delete on table %2.', Comment = '%1 = role ID, %2 = table ID';
+        IndirectDeleteErr: Label '%1 should have indirect Delete on table %2.', Comment = '%1 = role ID, %2 = table ID';
         NoDeleteErr: Label '%1 should have no Delete on table %2.', Comment = '%1 = role ID, %2 = table ID';
         NothingCheckedErr: Label 'No objects of type %1 were found in 50100-50149, so the check would pass for no reason.', Comment = '%1 = object type number';
         NotAtLeastAdminErr: Label 'Administrator should have equal or stronger rights than API Consumer on object type %1, ID %2 (API Consumer %3, Administrator %4).', Comment = '%1 = object type number, %2 = object ID, %3 = rights of API Consumer, %4 = rights of Administrator';
@@ -298,6 +299,36 @@ codeunit 50162 "EQM Role Permission Tests"
     end;
 
     [Test]
+    procedure AdministratorCanDeleteDemoDependentsIndirectly()
+    begin
+        // [SCENARIO 10] Administrator has indirect Delete on the six tables that Delete Demo Data cleans, and indirect Read, Insert, Modify and Delete on the tracking table
+        // [GIVEN] The effective permissions of EQM - Administrator
+        // [WHEN] The rights on tables 50103, 50105, 50106, 50107, 50108, 50112 and 50149 are read
+        // [THEN] Delete is indirect on the six tables, and the tracking table has indirect Read, Insert, Modify and Delete
+        AssertIndirectDelete(AdministratorRoleTok, Database::"EQM Equipment Assignment");
+        AssertIndirectDelete(AdministratorRoleTok, Database::"EQM Maintenance Record");
+        AssertIndirectDelete(AdministratorRoleTok, Database::"EQM Maintenance History Entry");
+        AssertIndirectDelete(AdministratorRoleTok, Database::"EQM Warranty Alert");
+        AssertIndirectDelete(AdministratorRoleTok, Database::"EQM Maintenance Log Entry");
+        AssertIndirectDelete(AdministratorRoleTok, Database::"EQM Equipment Audit Entry");
+        AssertTableDataRights(AdministratorRoleTok, Database::"EQM Demo Data Entry", 'IIII-');
+    end;
+
+    [Test]
+    procedure ManagerCannotDeleteDemoDependents()
+    begin
+        // [SCENARIO 10] (negative) Manager has no Delete on the tables that only Delete Demo Data may clean
+        // [GIVEN] The effective permissions of EQM - Manager
+        // [WHEN] The rights on tables 50103, 50105, 50106, 50108 and 50112 are read
+        // [THEN] Delete is none (direct and indirect)
+        AssertNoDelete(ManagerRoleTok, Database::"EQM Equipment Assignment");
+        AssertNoDelete(ManagerRoleTok, Database::"EQM Maintenance Record");
+        AssertNoDelete(ManagerRoleTok, Database::"EQM Maintenance History Entry");
+        AssertNoDelete(ManagerRoleTok, Database::"EQM Maintenance Log Entry");
+        AssertNoDelete(ManagerRoleTok, Database::"EQM Equipment Audit Entry");
+    end;
+
+    [Test]
     procedure OnlyAdministratorCanChangeFeatures()
     begin
         // [SCENARIO 9] (negative) Only the Administrator can write the equipment feature setup; Manager and Reader cannot
@@ -472,6 +503,11 @@ codeunit 50162 "EQM Role Permission Tests"
     local procedure AssertNoWriteRights(RoleId: Code[30]; TableId: Integer)
     begin
         Assert.AreEqual('---', CopyStr(RightsOf(RoleId, 0, TableId), 2, 3), StrSubstNo(UnexpectedRightErr, RoleId, TableId));
+    end;
+
+    local procedure AssertIndirectDelete(RoleId: Code[30]; TableId: Integer)
+    begin
+        Assert.AreEqual('I', CopyStr(RightsOf(RoleId, 0, TableId), 4, 1), StrSubstNo(IndirectDeleteErr, RoleId, TableId));
     end;
 
     local procedure AssertNoDelete(RoleId: Code[30]; TableId: Integer)
