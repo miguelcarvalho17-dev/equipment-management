@@ -97,7 +97,7 @@ codeunit 50162 "EQM Role Permission Tests"
     [Test]
     procedure ApiConsumerExecuteMatchesMatrix()
     begin
-        // [SCENARIO 2] API Consumer object Execute rights equal the matrix: 8 tables, 4 API pages, 11 codeunits, no query
+        // [SCENARIO 2] API Consumer object Execute rights equal the matrix: 8 tables, 4 API pages, 13 codeunits, no query
         // [GIVEN] The object lists of the plan
         // [WHEN] The effective permissions of EQM - API Consumer are expanded
         // [THEN] Each listed object has Execute, and the counts per type match exactly (no more, no fewer)
@@ -128,7 +128,9 @@ codeunit 50162 "EQM Role Permission Tests"
         AssertExecute(ApiConsumerRoleTok, 5, Codeunit::"EQM Audit Trail Mgt.");
         AssertExecute(ApiConsumerRoleTok, 5, Codeunit::"EQM Audit Trail Subscr.");
         AssertExecute(ApiConsumerRoleTok, 5, Codeunit::"EQM Feature Mgt.");
-        Assert.AreEqual(11, CountEntries(ApiConsumerRoleTok, 5), StrSubstNo(ObjectCountErr, 'codeunit', 5, ApiConsumerRoleTok));
+        AssertExecute(ApiConsumerRoleTok, 5, Codeunit::"EQM Telemetry Mgt.");
+        AssertExecute(ApiConsumerRoleTok, 5, Codeunit::"EQM Telemetry Subscr.");
+        Assert.AreEqual(13, CountEntries(ApiConsumerRoleTok, 5), StrSubstNo(ObjectCountErr, 'codeunit', 5, ApiConsumerRoleTok));
 
         Assert.AreEqual(0, CountEntries(ApiConsumerRoleTok, 9), StrSubstNo(ObjectCountErr, 'query', 9, ApiConsumerRoleTok));
     end;

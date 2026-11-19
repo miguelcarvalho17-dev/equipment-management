@@ -108,5 +108,7 @@ permissionset 50100 "EQM - Reader"
         codeunit "EQM Integration Event Mgt." = X,
         codeunit "EQM Power Automate Events" = X,
         codeunit "EQM Power Automate Subscr." = X,
-        codeunit "EQM Request Approval Mgt." = X;
+        codeunit "EQM Request Approval Mgt." = X,
+        codeunit "EQM Telemetry Mgt." = X,
+        codeunit "EQM Telemetry Subscr." = X;
 }

@@ -36,5 +36,7 @@ permissionset 50104 "EQM - API Consumer"
         codeunit "EQM Power Automate Events" = X,
         codeunit "EQM Power Automate Subscr." = X,
         codeunit "EQM Audit Trail Mgt." = X,
-        codeunit "EQM Audit Trail Subscr." = X;
+        codeunit "EQM Audit Trail Subscr." = X,
+        codeunit "EQM Telemetry Mgt." = X,
+        codeunit "EQM Telemetry Subscr." = X;
 }

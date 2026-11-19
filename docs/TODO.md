@@ -449,3 +449,12 @@ Source: `docs/features/FR-049-release-management.md`, `docs/plans/FR-049-release
 - [ ] On the first version-bump pull request: VER3 passes and the checks run. If no checks start, close and reopen the pull request.
 - [ ] Reviewer MINOR m1, open: `version_check.py` fails with a traceback when `app.json` is valid JSON but not an object (for example `[]`). Fix it with a unit test in `test_version_check.py`.
 - [ ] First release = phase 2 of FR-049 (user decision). Run it only after a green `main` run with the 29.0 artifact names, or pass an explicit `buildVersion`.
+
+## FR-050 checks (tests not executed; sandbox check pending)
+Source: `docs/features/FR-050-application-telemetry.md`, `docs/plans/FR-050-application-telemetry.md`. No separate AppSource validation ran.
+- [ ] CI: test codeunits 50151 "EQM Telemetry Tests" and 50152 "EQM Telemetry Test Subscr" pass, and test 50162 `ApiConsumerExecuteMatchesMatrix` passes with 13 codeunits for API Consumer. Record the counts from `gh run view <run-id> --log`. Not verified until the push.
+- [ ] Sandbox check (plan, "Sandbox"): with environment telemetry on, run each action once: create equipment, assign it, return it, register maintenance, and run the warranty alert job (Job Queue) for equipment whose warranty ended the day before. Then run `traces | where customDimensions.eventId in ("ALEQM0005","ALEQM0006","ALEQM0007","ALEQM0008","ALEQM0009")`. Expect one row per action with `alEquipmentStatus`, `alMaintenanceType` and `alAssignmentDays` as described in the feature doc.
+- [ ] Sandbox check: confirm the caveat in the feature doc ("Counts can be slightly high"). A save that fails after a signal is raised leaves that signal in telemetry.
+- [ ] Sandbox check: the sample KQL queries in `docs/features/FR-050-application-telemetry.md` run without error in Application Insights.
+- [ ] Record the results in "Verification status" of `docs/features/FR-050-application-telemetry.md` and clear its open items.
+- [ ] Decision (user): the FR-029 help article and the doc comment on the business events advise against telemetry in event subscribers. FR-050 logs inside the transaction (DECISIONS in the plan). Accept as is, or ask for a one-line clarification in those two places.

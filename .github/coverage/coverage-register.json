@@ -46,7 +46,9 @@
         50136,
         50137,
         50138,
-        50139
+        50139,
+        50140,
+        50141
       ]
     },
     "apis": {
@@ -1668,6 +1670,126 @@
         }
       ],
       "note": "Ambiguous name: the test calls this object, not the same-named member of another object or test helper."
+    },
+    {
+      "type": "codeunit",
+      "id": 50141,
+      "member": "EmitEquipmentCreated",
+      "tests": [
+        {
+          "codeunit": 50151,
+          "test": "EquipmentCreatedLogsEQM0005"
+        }
+      ],
+      "note": "Subscriber: a test whose WHEN raises the subscribed event."
+    },
+    {
+      "type": "codeunit",
+      "id": 50141,
+      "member": "EmitEquipmentAssigned",
+      "tests": [
+        {
+          "codeunit": 50151,
+          "test": "EquipmentAssignedLogsEQM0006"
+        }
+      ],
+      "note": "Subscriber: a test whose WHEN raises the subscribed event."
+    },
+    {
+      "type": "codeunit",
+      "id": 50141,
+      "member": "EmitEquipmentReturned",
+      "tests": [
+        {
+          "codeunit": 50151,
+          "test": "EquipmentReturnedLogsEQM0007"
+        }
+      ],
+      "note": "Subscriber: a test whose WHEN raises the subscribed event."
+    },
+    {
+      "type": "codeunit",
+      "id": 50141,
+      "member": "EmitMaintenanceRegistered",
+      "tests": [
+        {
+          "codeunit": 50151,
+          "test": "MaintenanceOnAssignedLogsEQM0007AndEQM0008"
+        }
+      ],
+      "note": "Subscriber: a test whose WHEN raises the subscribed event."
+    },
+    {
+      "type": "codeunit",
+      "id": 50141,
+      "member": "EmitWarrantyExpired",
+      "tests": [
+        {
+          "codeunit": 50151,
+          "test": "WarrantyExpiredLogsEQM0009"
+        }
+      ],
+      "note": "Subscriber: a test whose WHEN raises the subscribed event."
+    },
+    {
+      "type": "codeunit",
+      "id": 50140,
+      "member": "LogEquipmentCreated",
+      "tests": [
+        {
+          "codeunit": 50151,
+          "test": "EquipmentCreatedLogsEQM0005"
+        }
+      ],
+      "note": "Reached only through the business event subscriber."
+    },
+    {
+      "type": "codeunit",
+      "id": 50140,
+      "member": "LogEquipmentAssigned",
+      "tests": [
+        {
+          "codeunit": 50151,
+          "test": "EquipmentAssignedLogsEQM0006"
+        }
+      ],
+      "note": "Reached only through the business event subscriber."
+    },
+    {
+      "type": "codeunit",
+      "id": 50140,
+      "member": "LogEquipmentReturned",
+      "tests": [
+        {
+          "codeunit": 50151,
+          "test": "EquipmentReturnedLogsEQM0007"
+        }
+      ],
+      "note": "Reached only through the business event subscriber."
+    },
+    {
+      "type": "codeunit",
+      "id": 50140,
+      "member": "LogMaintenanceRegistered",
+      "tests": [
+        {
+          "codeunit": 50151,
+          "test": "MaintenanceOnAssignedLogsEQM0007AndEQM0008"
+        }
+      ],
+      "note": "Reached only through the business event subscriber."
+    },
+    {
+      "type": "codeunit",
+      "id": 50140,
+      "member": "LogWarrantyExpired",
+      "tests": [
+        {
+          "codeunit": 50151,
+          "test": "WarrantyExpiredLogsEQM0009"
+        }
+      ],
+      "note": "Reached only through the business event subscriber."
     }
   ]
 }
