@@ -296,16 +296,19 @@ page 50100 "EQM Equipment List"
         WarrantyStatus: Enum "EQM Warranty Status";
         WarrantyStatusStyle: Text;
         NextMaintenanceStyle: Text;
+        EmployeeNames: Dictionary of [Code[20], Text];
+        CanReadEmployees: Boolean;
 
     trigger OnOpenPage()
+    var
+        Employee: Record Employee;
     begin
         ImagesEnabled := FeatureMgt.IsEnabled("EQM Feature"::"Equipment Images");
         MaintenancePlanningEnabled := FeatureMgt.IsEnabled("EQM Feature"::"Maintenance Planning");
+        CanReadEmployees := Employee.ReadPermission();
     end;
 
     trigger OnAfterGetRecord()
-    var
-        Employee: Record Employee;
     begin
         StatusStyle := Rec.GetStatusStyle();
         MaintenanceCostPct := Rec.GetMaintenanceCostPercentage();
@@ -313,11 +316,22 @@ page 50100 "EQM Equipment List"
         WarrantyStatus := Rec.GetWarrantyStatus();
         WarrantyStatusStyle := Rec.GetWarrantyStatusStyle(WarrantyStatus);
         NextMaintenanceStyle := Rec.GetNextMaintenanceDateStyle();
-        AssignedEmployeeName := '';
-        if (Rec."Assigned Employee No." <> '') and Employee.ReadPermission() then begin
-            Employee.SetLoadFields("First Name", "Middle Name", "Last Name");
-            if Employee.Get(Rec."Assigned Employee No.") then
-                AssignedEmployeeName := Employee.FullName();
-        end;
+        AssignedEmployeeName := GetAssignedEmployeeName(Rec."Assigned Employee No.");
+    end;
+
+    local procedure GetAssignedEmployeeName(EmployeeNo: Code[20]): Text[100]
+    var
+        Employee: Record Employee;
+        EmployeeName: Text;
+    begin
+        if (EmployeeNo = '') or not CanReadEmployees then
+            exit('');
+        if EmployeeNames.Get(EmployeeNo, EmployeeName) then
+            exit(CopyStr(EmployeeName, 1, MaxStrLen(AssignedEmployeeName)));
+        Employee.SetLoadFields("First Name", "Middle Name", "Last Name");
+        if Employee.Get(EmployeeNo) then
+            EmployeeName := Employee.FullName();
+        EmployeeNames.Add(EmployeeNo, EmployeeName);
+        exit(CopyStr(EmployeeName, 1, MaxStrLen(AssignedEmployeeName)));
     end;
 }
