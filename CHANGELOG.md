@@ -1,6 +1,21 @@
 # Changelog
 Newest first. Grouped by Added / Changed / Fixed / Obsolete.
 
+## NFR-001 Performance (version stays 29.0.0.0, no bump)
+### Added
+- None.
+### Changed
+- Equipment list and dashboard stay responsive with 10,000 equipment records. Status views, status drill-downs and the dashboard tiles that filter on status, warranty end date or next maintenance date use new indexes on the equipment table. Help article docs/help/NFR-001-performance.md (including the tip on calculating only visible FlowFields).
+- Equipment list: the Assigned Employee Name is looked up once for each employee on the page, not once for each row. Names are kept while the list is open, so a rename shows after the list is reopened.
+### Fixed
+- None.
+### Obsolete
+- None.
+
+Release notes: The equipment list and the dashboard respond faster with a large number of equipment records. The list shows the same employee names as before. The target is a list that opens in less than 3 seconds for up to 10,000 records; this is not yet measured.
+
+Note: no upgrade code, no install code, no event, no field, caption, ToolTip or permission change, no app.json change, version stays 29.0.0.0. Three new indexes are created on the equipment table when the version is installed; no data changes. Not verified: the performance tests have not been executed locally, CI result pending; the 3-second target is not measured in a sandbox; no separate AppSource validation ran. AppSourceCop baseline was compared by hand (no AS0009, AS0010, AS0038 or AS0042). The feature doc is docs/features/NFR-001-performance.md.
+
 ## FR-049 Release Management (version stays 29.0.0.0, no bump)
 ### Added
 - Version policy for the app: Major and Minor come from the app, Build and Revision come from each CI/CD run. Documented in docs/features/FR-049-release-management.md, with the release procedure and the FR-044 upgrade checklist.

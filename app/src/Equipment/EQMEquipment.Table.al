@@ -266,6 +266,16 @@ table 50100 "EQM Equipment"
         key(AssignedEmployee; "Assigned Employee No.", Status)
         {
         }
+        key(Status; Status)
+        {
+            IncludedFields = "Purchase Cost";
+        }
+        key(WarrantyEndDate; "Warranty End Date", Status)
+        {
+        }
+        key(NextMaintenanceDate; "Next Maintenance Date", Status)
+        {
+        }
     }
 
     fieldgroups
