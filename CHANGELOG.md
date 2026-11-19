@@ -1,6 +1,22 @@
 # Changelog
 Newest first. Grouped by Added / Changed / Fixed / Obsolete.
 
+## FR-047 Test Coverage Targets (version stays 29.0.0.0, no bump)
+### Added
+- Coverage targets for the test suite: Business Logic 80%, APIs 80% and Critical Processes 100%. A coverage register in `.github/coverage/` lists the rules of the six critical processes and the traces to tests.
+- Check `coverage_check.py`, run by Repo checks on every pull request. It reports procedure reach for Business Logic and APIs and rule coverage for the critical processes. It fails the pull request when the register is inconsistent. Below target is a warning only in this phase.
+- Feature doc docs/features/FR-047-test-coverage-targets.md (metric, scope, manual Test Explorer coverage run) and contributor help docs/help/FR-047-test-coverage-targets.md.
+### Changed
+- None.
+### Fixed
+- None.
+### Obsolete
+- None.
+
+Release notes: None (build tooling only, no change for end users).
+
+Note: no AL code, no tests added, no `app.json` change, no permission set change, no translation change. The metric is procedure reach, not line coverage: a procedure counts as reached when a test calls it by name or a register trace names a test. Measured line coverage is not in CI, because the BcContainerHelper test run has no coverage option. Baseline (2026-11-19): Business Logic 44.0% (target 80), APIs 0.0% (target 80), Critical Processes rule coverage 77.8% (target 100). Not verified: the first CI Repo checks result is pending the push; the manual VS Code Test Explorer coverage run is not done; the AL tests are not executed locally. No separate AppSource validation ran. The feature doc is docs/features/FR-047-test-coverage-targets.md.
+
 ## FR-046 Integration Tests (version stays 29.0.0.0, no bump)
 ### Added
 - Integration tests for four business processes: equipment assignment, maintenance, equipment request approval and notifications. 21 test procedures in one test codeunit in the test app. Each test runs several steps in sequence and checks the history, audit trail, outbox, maintenance log, requests and notifications together. Written; not executed locally. CI result pending.

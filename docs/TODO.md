@@ -429,3 +429,14 @@ Source: `docs/features/FR-046-integration-tests.md`. Test codeunit 50158 "EQM Pr
 - [ ] Optional: run codeunit 50158 with AL Test Runner in a sandbox.
 - [ ] Later phases, not planned yet: (2) TestPage flows (Equipment Card and Request Card actions); (3) Role Center summary notifications, maintenance-card notification and notification action handlers; (4) job-queue-driven flows (warranty job, overdue check), Power Automate and API flows.
 - [ ] Record the results and clear the items in `docs/features/FR-046-integration-tests.md`.
+
+## FR-047 checks (no AL change; Repo checks and manual coverage run pending)
+Source: `docs/features/FR-047-test-coverage-targets.md`, `docs/plans/FR-047-test-coverage-targets.md`. Baseline recorded 2026-11-19 by `coverage_check.py`: Business Logic procedure reach 44.0% (73/166, target 80), API 0.0% (0/7, target 80), Critical Process rule coverage 77.8% (63/81, target 100). Report-only (`enforce` is false). No separate AppSource validation ran.
+- [ ] CI: the first Repo checks run on the pull request passes (integrity check) and its coverage summary lines are recorded. Check with `gh pr checks <pr>`. Not verified until the push.
+- [ ] Run `python3 .github/scripts/test_coverage_check.py` locally. Not run by al-docs.
+- [ ] Manual: run all tests with the "Coverage (Procedure)" profile in Test Explorer, against a BC 28+ sandbox. Record the date, result and CodeLens differences in the table "Manual coverage runs" in `docs/features/FR-047-test-coverage-targets.md`.
+- [ ] Phase 2: close the 18 Critical Process gaps. CP1: 50100 AssistEdit Equipment Nos. CP2: 50100 EmployeeNotFoundErr. CP3: 50100 CannotAssignFinalStatusErr and NotAvailableForAssignmentErr. CP4: 50105 AssistEdit Maintenance Nos., Equipment No. and Maintenance Date checks, Equipment No. OnValidate, OnInsert InsertPostedErr and Maintenance Nos., OnRename; 50109 OnRun RecordNotSavedErr and AlreadyPostedErr#2. CP5: 50111 AssistEdit Request Nos., Request Date check; 50132 AssignEquipment EquipmentNotFoundErr. CP6: 50139 UpgradePerCompany, and a positive test for UpgradeDefaultWarrantyAlertDays. Use new test IDs from `al_getnextobjectid`.
+- [ ] Phase 2: add API page tests for the 7 uncovered API members (50123 OnOpenPage, assign, returnEquipment; 50124 OnOpenPage; 50125 OnOpenPage; 50126 OnOpenPage, markProcessed). Check in a sandbox whether a test can drive the bound actions through the page. Document any exclusion.
+- [ ] Phase 2: when all targets are met, set `"enforce": true` in `.github/coverage/coverage-register.json`.
+- [ ] Each new Error or TestField in a critical process object needs a rule entry in the same change (see `docs/help/FR-047-test-coverage-targets.md`).
+- [ ] Later: revisit measured coverage when AL-Go or BcContainerHelper supports it; diff-based reach for pull requests.

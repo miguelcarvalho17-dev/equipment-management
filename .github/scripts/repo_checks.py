@@ -6,6 +6,8 @@ Checks:
   2. Feature branches (feature/FR-NNN-*): plan, feature doc, help article and CHANGELOG entry exist.
   3. Plans changed in the PR no longer say DRAFT / waiting for approval in their status header.
   4. Warning only: AL code under app/src changed but the .g.xlf translation file did not.
+  5. Test coverage register (FR-047): integrity errors fail; below-target procedure reach and rule coverage
+     only warn while "enforce" is false (see coverage_check.py).
 
 Usage: repo_checks.py [--base <git ref>] [--branch <head branch name>]
 Without --base, only the checks that need no diff run (1, and 2 when --branch is given).
@@ -17,6 +19,9 @@ import re
 import subprocess
 import sys
 from pathlib import Path
+
+sys.path.insert(0, str(Path(__file__).resolve().parent))
+import coverage_check  # noqa: E402
 
 ROOT = Path(__file__).resolve().parents[2]
 OBJECT_RE = re.compile(
@@ -103,12 +108,25 @@ def check_translations(files):
                 "If captions, tooltips or labels changed, build in VS Code and commit the regenerated file.")
 
 
+def check_coverage():
+    coverage_errors, coverage_warnings, summary = coverage_check.run(ROOT)
+    for line in summary:
+        print(line)
+    for msg in coverage_warnings:
+        warning(msg)
+    for msg in coverage_errors:
+        error(msg)
+    if not coverage_errors:
+        print("Coverage register: OK")
+
+
 def main():
     parser = argparse.ArgumentParser()
     parser.add_argument("--base")
     parser.add_argument("--branch")
     args = parser.parse_args()
     check_object_ids()
+    check_coverage()
     check_feature_files(args.branch)
     if args.base:
         files = changed_files(args.base)
