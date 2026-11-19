@@ -163,34 +163,41 @@ codeunit 50110 "EQM Warranty Alert Mgt."
 
     local procedure CancelStaleAlerts(): Integer
     var
-        WarrantyAlert: Record "EQM Warranty Alert";
         WarrantyAlertToCancel: Record "EQM Warranty Alert";
-        Equipment: Record "EQM Equipment";
+        OpenWarrantyAlerts: Query "EQM Open Warranty Alerts";
+        StaleEntryNos: List of [Integer];
+        EntryNo: Integer;
         CancelledCount: Integer;
     begin
-        Equipment.SetLoadFields("Warranty End Date", Status);
-        WarrantyAlert.SetLoadFields("Entry No.", "Equipment No.", "Warranty End Date", Status);
-        WarrantyAlert.SetRange(Status, WarrantyAlert.Status::Open);
-        if WarrantyAlert.FindSet() then
-            repeat
-                if IsAlertStale(WarrantyAlert, Equipment) then begin
-                    WarrantyAlertToCancel.Get(WarrantyAlert."Entry No.");
+        // One read of the open alerts joined to their equipment, instead of one equipment read per alert (FR-053)
+        OpenWarrantyAlerts.Open();
+        while OpenWarrantyAlerts.Read() do
+            if IsAlertStale(OpenWarrantyAlerts.EquipmentNo, OpenWarrantyAlerts.AlertWarrantyEndDate, OpenWarrantyAlerts.EquipmentWarrantyEndDate, OpenWarrantyAlerts.EquipmentStatus) then
+                StaleEntryNos.Add(OpenWarrantyAlerts.EntryNo);
+        OpenWarrantyAlerts.Close();
+
+        foreach EntryNo in StaleEntryNos do
+            if WarrantyAlertToCancel.Get(EntryNo) then
+                // Re-checked after the read: another session may have acknowledged the alert in between
+                if WarrantyAlertToCancel.Status = WarrantyAlertToCancel.Status::Open then begin
                     WarrantyAlertToCancel.Status := WarrantyAlertToCancel.Status::Cancelled;
                     WarrantyAlertToCancel."Cancelled At" := CurrentDateTime();
                     WarrantyAlertToCancel.Modify(false);
                     CancelledCount += 1;
                 end;
-            until WarrantyAlert.Next() = 0;
         exit(CancelledCount);
     end;
 
-    local procedure IsAlertStale(WarrantyAlert: Record "EQM Warranty Alert"; var Equipment: Record "EQM Equipment"): Boolean
+    local procedure IsAlertStale(EquipmentNo: Code[20]; AlertWarrantyEndDate: Date; EquipmentWarrantyEndDate: Date; EquipmentStatus: Enum "EQM Equipment Status"): Boolean
+    var
+        Equipment: Record "EQM Equipment";
     begin
-        if not Equipment.Get(WarrantyAlert."Equipment No.") then
+        // A blank number means the outer join found no equipment: it was deleted
+        if EquipmentNo = '' then
             exit(true);
-        if Equipment."Warranty End Date" <> WarrantyAlert."Warranty End Date" then
+        if EquipmentWarrantyEndDate <> AlertWarrantyEndDate then
             exit(true);
-        exit(Equipment.IsFinalStatus(Equipment.Status));
+        exit(Equipment.IsFinalStatus(EquipmentStatus));
     end;
 
     local procedure AlertExists(EquipmentNo: Code[20]; WarrantyEndDate: Date; AlertInterval: Enum "EQM Warranty Alert Interval"): Boolean

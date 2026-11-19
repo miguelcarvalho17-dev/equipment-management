@@ -1,6 +1,23 @@
 # Changelog
 Newest first. Grouped by Added / Changed / Fixed / Obsolete.
 
+## FR-053 Large Dataset Support (version stays 29.0.0.0, no bump)
+### Added
+- None.
+### Changed
+- Large registers: equipment filters on status and category, and API reads of records changed since the last read, use new indexes. Built for 100,000+ equipment and 1,000,000+ assignment records. Feature doc docs/features/FR-053-large-dataset-support.md. Help docs/help/FR-053-large-dataset-support.md.
+- Equipment Assignments list: the employee name is looked up once for each employee, not for each row. The names shown are the same.
+- The daily warranty job reads its open alerts in one pass when it cancels stale alerts. The same alerts are cancelled.
+- Permission set EQM - Reader: execute on the new open warranty alerts query. Manager and Administrator inherit it. API Consumer is unchanged.
+### Fixed
+- None.
+### Obsolete
+- None.
+
+Release notes: Equipment Management stays responsive with large numbers of equipment and assignment records. Filter on status, category, employee and serial number to narrow a large list. The Equipment Assignments list shows the same employee names as before. Integrations can read only the records changed since their last read with a last modified filter. The daily warranty job cancels the same alerts, faster.
+
+Note: no upgrade code, no install code, no event, no field, no app.json change, version stays 29.0.0.0. Three new indexes are built when the version is installed (two on equipment, one on assignments); no data changes. The upgrade may take longer on a large register. The caption "Open Warranty Alerts" is translated in Portuguese (Portugal) and Spanish (Spain). Not verified: tests not executed locally, CI result pending (test codeunit 50159 and the regression codeunits); the full-volume figures (100,000 equipment, 1,000,000 assignments) are not measured in a sandbox; no separate AppSource validation ran. The feature doc is docs/features/FR-053-large-dataset-support.md.
+
 ## FR-055 Multi-Language Support (version stays 29.0.0.0, no bump)
 ### Added
 - Portuguese (Portugal) and Spanish (Spain) texts for the app. Captions, ToolTips, messages, error messages and teaching tips show in the language chosen in My Settings. Other languages show English. Feature doc docs/features/FR-055-multi-language-support.md. Help docs/help/FR-055-multi-language-support.md.
