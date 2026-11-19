@@ -1,6 +1,20 @@
 # Changelog
 Newest first. Grouped by Added / Changed / Fixed / Obsolete.
 
+## FR-050 Application Telemetry (version stays 29.0.0.0, no bump)
+### Added
+- Five usage signals, sent to the environment's Application Insights when telemetry is turned on: equipment created (EQM0005), equipment assigned (EQM0006), equipment returned (EQM0007), maintenance registered (EQM0008) and warranty expired (EQM0009). An administrator can see how the equipment is used and when warranties expire. Catalog and sample queries in docs/features/FR-050-application-telemetry.md. Setup and the meaning of each signal in docs/help/FR-050-application-telemetry.md.
+### Changed
+- Permission sets EQM - Reader and EQM - API Consumer can run the new telemetry codeunits. EQM - Manager and EQM - Administrator inherit it from Reader.
+### Fixed
+- None.
+### Obsolete
+- None.
+
+Release notes: Administrators can turn on telemetry for the environment and see five new usage signals: equipment created, assigned and returned, maintenance registered, and warranty expired. The signals contain no customer data: no equipment, employee, maintenance or user numbers.
+
+Note: no business logic, business event, field, caption, ToolTip or upgrade change. No `app.json` change; no connection string is added to the app. Signals are sent inside the save transaction, so a save that fails after the signal leaves that signal and counts can be slightly high. Not verified: tests not executed locally, CI result pending; the signals have not been checked in a sandbox; no separate AppSource validation ran. The feature doc is docs/features/FR-050-application-telemetry.md.
+
 ## NFR-001 Performance (version stays 29.0.0.0, no bump)
 ### Added
 - None.
