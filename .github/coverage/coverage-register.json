@@ -16,7 +16,8 @@
         50108,
         50110,
         50111,
-        50112
+        50112,
+        50115
       ],
       "codeunits": [
         50103,
@@ -49,6 +50,8 @@
         50139,
         50140,
         50141,
+        50142,
+        50143,
         50149
       ]
     },
@@ -1791,6 +1794,74 @@
         }
       ],
       "note": "Reached only through the business event subscriber."
+    },
+    {
+      "type": "table",
+      "id": 50115,
+      "member": "AllowInsertFromErrorLog",
+      "tests": [
+        {
+          "codeunit": 50154,
+          "test": "LogErrorStoresAllFields"
+        }
+      ],
+      "note": "Reached only through the error log codeunit."
+    },
+    {
+      "type": "codeunit",
+      "id": 50142,
+      "member": "SetPendingEntry",
+      "tests": [
+        {
+          "codeunit": 50154,
+          "test": "LogErrorStoresAllFields"
+        }
+      ]
+    },
+    {
+      "type": "codeunit",
+      "id": 50142,
+      "member": "OnRun",
+      "tests": [
+        {
+          "codeunit": 50155,
+          "test": "MonitorJobFailureIsLoggedAndJobStillFails"
+        }
+      ],
+      "note": "The isolated write of the entry runs through OnRun."
+    },
+    {
+      "type": "codeunit",
+      "id": 50143,
+      "member": "RunJob",
+      "tests": [
+        {
+          "codeunit": 50155,
+          "test": "MonitorJobFailureIsLoggedAndJobStillFails"
+        }
+      ]
+    },
+    {
+      "type": "codeunit",
+      "id": 50143,
+      "member": "SetJob",
+      "tests": [
+        {
+          "codeunit": 50155,
+          "test": "MonitorJobFailureIsLoggedAndJobStillFails"
+        }
+      ]
+    },
+    {
+      "type": "codeunit",
+      "id": 50143,
+      "member": "OnRun",
+      "tests": [
+        {
+          "codeunit": 50155,
+          "test": "MonitorJobFailureIsLoggedAndJobStillFails"
+        }
+      ]
     }
   ]
 }

@@ -370,6 +370,28 @@ codeunit 50162 "EQM Role Permission Tests"
         AssertNoEntry(ReaderRoleTok, 5, Codeunit::"EQM Upgrade");
     end;
 
+    [Test]
+    procedure AdministratorCanReadAndDeleteErrorLog()
+    begin
+        // [SCENARIO 11] (FR-051) Administrator can read and delete error log entries, and cannot insert or modify them directly
+        // [GIVEN] The effective permissions of EQM - Administrator
+        // [WHEN] The rights on table 50115 are read
+        // [THEN] Read and Delete are direct; Insert and Modify are none (entries are written through the inherent permission of the log codeunit)
+        AssertTableDataRights(AdministratorRoleTok, Database::"EQM Error Log Entry", 'Y--Y-');
+    end;
+
+    [Test]
+    procedure OtherRolesCannotReadErrorLog()
+    begin
+        // [SCENARIO 11] (FR-051, negative) Manager, Reader and API Consumer have no tabledata entry on the error log
+        // [GIVEN] The effective permissions of the three other roles
+        // [WHEN] The rights on table 50115 are read
+        // [THEN] There is no right at all, because the error message can contain customer data
+        AssertTableDataRights(ManagerRoleTok, Database::"EQM Error Log Entry", '-----');
+        AssertTableDataRights(ReaderRoleTok, Database::"EQM Error Log Entry", '-----');
+        AssertTableDataRights(ApiConsumerRoleTok, Database::"EQM Error Log Entry", '-----');
+    end;
+
     local procedure ObjectTypesToCheck() ObjectTypes: List of [Integer]
     begin
         // Platform object type numbers: 1 = Table, 3 = Report, 5 = Codeunit, 8 = Page, 9 = Query

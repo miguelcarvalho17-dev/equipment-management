@@ -473,3 +473,15 @@ Source: `docs/features/FR-055-multi-language-support.md`, `docs/plans/FR-055-mul
 - [ ] Reviewer MINOR, open: the es-ES translations of the number-series captions are the same as the "No." captions. Check whether a more specific Spanish term is needed.
 - [ ] Reviewer MINOR, open (English source, AL change, needs a plan): the assignment "Active" view caption is singular, while "Closed" is plural. Do not fix it in a translation file.
 - [ ] Record the results in `docs/features/FR-055-multi-language-support.md` ("Verification status") and clear the items above.
+
+## FR-051 sandbox checks (tests not executed; CI result pending)
+Source: `docs/features/FR-051-error-logging.md`, `docs/plans/FR-051-error-logging.md`. No separate AppSource validation ran.
+- [ ] CI: test codeunits "EQM Error Log Tests" and "EQM Error Log Isolation Tests" pass, and the two new tests in "EQM Role Permission Tests" pass. Record the counts from `gh run view <run-id> --log`. Not verified until the push.
+- [ ] ER-SB1 (mandatory, job queue isolation): make the warranty alert job fail in a sandbox and record how. Run the job from Job Queue Entries as a user with only EQM - Reader. Expect the job queue entry in state Error with the same message, and one "Warranty Alert Job" entry in the Equipment Error Log with that user, the message and a call stack. This also proves that the inherent insert permission works. Confirm that the Job Queue starts the job outside a write transaction: if no entry is written, the job ran inside a write transaction. Record that and report it, because the logging does not work then.
+- [ ] ER-SB2 (scheduling failure): make scheduling fail with reason Error and record how. Run Schedule Monitoring Jobs. Expect one "Schedule Monitoring Jobs" entry, and telemetry EQM0004 with reason Error. Equipment Setup still opens. No automated test covers this path, so this check is the only one.
+- [ ] ER-SB3 Reader and Manager (not SUPER) do not see the Error Log action on Equipment Setup. Opening the page from Tell Me gives a read-permission error.
+- [ ] ER-SB4 Administrator (not SUPER) can delete entries. No user can insert or change an entry from the page.
+- [ ] ER-SB5 pt-PT and es-ES: the page caption, the Operation values, the Error Log action and Show Details show in the translated language.
+- [ ] Reviewer MINOR, open: the XML summary of `LogError` in `app/src/ErrorLog/EQMErrorLogMgt.Codeunit.al` needs clearer wording (not changed).
+- [ ] Reviewer MINOR, open: no unit test for the scheduling case where a write transaction is open (no entry is expected).
+- [ ] Record the results in `docs/features/FR-051-error-logging.md` ("Verification status") and clear the items above.

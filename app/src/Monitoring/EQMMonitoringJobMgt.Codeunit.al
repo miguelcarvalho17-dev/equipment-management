@@ -84,14 +84,15 @@ codeunit 50115 "EQM Monitoring Job Mgt."
 
     /// <summary>
     /// Creates the missing monitoring job queue entries without raising an error. Returns false and logs telemetry
-    /// when they cannot be created, for example when the user cannot schedule tasks. Call it only when no write
-    /// transaction is open.
+    /// when they cannot be created, for example when the user cannot schedule tasks. An error while creating them is
+    /// also written to the equipment error log. Call it only when no write transaction is open.
     /// </summary>
     /// <param name="TriggerTok">The trigger name for telemetry.</param>
     /// <returns>True when the entries exist afterwards; false when they could not be created.</returns>
     internal procedure TryEnsureMonitoringJobs(TriggerTok: Text): Boolean
     var
         MonitoringJobMgt: Codeunit "EQM Monitoring Job Mgt.";
+        ErrorLogMgt: Codeunit "EQM Error Log Mgt.";
     begin
         if Database.IsInWriteTransaction() then begin
             LogNotScheduled(TriggerTok, WriteTransactionReasonTok, '');
@@ -106,6 +107,7 @@ codeunit 50115 "EQM Monitoring Job Mgt."
         if MonitoringJobMgt.Run() then
             exit(true);
         LogNotScheduled(TriggerTok, ErrorReasonTok, GetLastErrorCode());
+        ErrorLogMgt.LogLastError("EQM Error Operation"::"Schedule Monitoring Jobs", Codeunit::"EQM Monitoring Job Mgt.");
         exit(false);
     end;
 

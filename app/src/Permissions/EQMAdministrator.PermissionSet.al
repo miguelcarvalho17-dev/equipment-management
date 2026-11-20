@@ -16,6 +16,7 @@ permissionset 50102 "EQM - Administrator"
         tabledata "EQM Equipment Audit Entry" = id,
         tabledata "EQM Equipment Category" = RIMD,
         tabledata "EQM Equipment Setup" = RIMD,
+        tabledata "EQM Error Log Entry" = RD,
         tabledata "EQM Feature Setup" = RIMD,
         tabledata "EQM Integration Event Entry" = mD,
         tabledata "EQM Maintenance History Entry" = id,

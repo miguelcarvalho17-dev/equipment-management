@@ -1348,6 +1348,106 @@
           <note from="Developer" annotates="general" priority="2"></note>
           <note from="Xliff Generator" annotates="general" priority="3">Table EQM Equipment Setup - Field Request Nos. - Property Caption</note>
         </trans-unit>
+        <trans-unit id="Table 238517515 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Error Log Entry</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table EQM Error Log Entry - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Table 238517515 - NamedType 1297145545" size-unit="char" translate="yes" xml:space="preserve">
+          <source>You cannot create error log entries directly. Entries are created when a monitoring job fails.</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table EQM Error Log Entry - NamedType InsertNotAllowedErr</note>
+        </trans-unit>
+        <trans-unit id="Table 238517515 - NamedType 3659624548" size-unit="char" translate="yes" xml:space="preserve">
+          <source>You cannot change error log entry %1. The error log is read-only.</source>
+          <note from="Developer" annotates="general" priority="2">%1 = entry number</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table EQM Error Log Entry - NamedType ModifyNotAllowedErr</note>
+        </trans-unit>
+        <trans-unit id="Table 238517515 - NamedType 3435470116" size-unit="char" translate="yes" xml:space="preserve">
+          <source>You cannot change the number of error log entry %1.</source>
+          <note from="Developer" annotates="general" priority="2">%1 = entry number</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table EQM Error Log Entry - NamedType RenameNotAllowedErr</note>
+        </trans-unit>
+        <trans-unit id="Table 238517515 - Field 883711285 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Specifies the number of the error log entry.</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table EQM Error Log Entry - Field Entry No. - Property ToolTip</note>
+        </trans-unit>
+        <trans-unit id="Table 238517515 - Field 883711285 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Entry No.</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table EQM Error Log Entry - Field Entry No. - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Table 238517515 - Field 3446276168 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Specifies the AL call stack at the moment of the error, for support.</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table EQM Error Log Entry - Field Error Call Stack - Property ToolTip</note>
+        </trans-unit>
+        <trans-unit id="Table 238517515 - Field 3446276168 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Error Call Stack</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table EQM Error Log Entry - Field Error Call Stack - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Table 238517515 - Field 3676003639 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Specifies the classification of the error that the platform returned, for support.</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table EQM Error Log Entry - Field Error Code - Property ToolTip</note>
+        </trans-unit>
+        <trans-unit id="Table 238517515 - Field 3676003639 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Error Code</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table EQM Error Log Entry - Field Error Code - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Table 238517515 - Field 2852966117 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Specifies the error message. It can contain data from the records that were processed.</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table EQM Error Log Entry - Field Error Message - Property ToolTip</note>
+        </trans-unit>
+        <trans-unit id="Table 238517515 - Field 2852966117 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Error Message</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table EQM Error Log Entry - Field Error Message - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Table 238517515 - Field 3032596473 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Specifies the date and time when the error happened.</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table EQM Error Log Entry - Field Logged At - Property ToolTip</note>
+        </trans-unit>
+        <trans-unit id="Table 238517515 - Field 3032596473 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Logged At</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table EQM Error Log Entry - Field Logged At - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Table 238517515 - Field 3711240756 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Specifies the ID of the codeunit that ran the process that failed.</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table EQM Error Log Entry - Field Object ID - Property ToolTip</note>
+        </trans-unit>
+        <trans-unit id="Table 238517515 - Field 3711240756 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Object ID</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table EQM Error Log Entry - Field Object ID - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Table 238517515 - Field 3108107879 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Specifies the process that failed: the warranty alert job, the overdue maintenance job, or the scheduling of these jobs.</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table EQM Error Log Entry - Field Operation - Property ToolTip</note>
+        </trans-unit>
+        <trans-unit id="Table 238517515 - Field 3108107879 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Operation</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table EQM Error Log Entry - Field Operation - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Table 238517515 - Field 2708250016 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Specifies the user who ran the process that failed. For a job queue entry, this is the user that the job runs as.</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table EQM Error Log Entry - Field User ID - Property ToolTip</note>
+        </trans-unit>
+        <trans-unit id="Table 238517515 - Field 2708250016 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>User ID</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table EQM Error Log Entry - Field User ID - Property Caption</note>
+        </trans-unit>
         <trans-unit id="Table 294973366 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
           <source>Equipment Feature Setup</source>
           <note from="Developer" annotates="general" priority="2"></note>
@@ -4123,6 +4223,16 @@
           <note from="Developer" annotates="general" priority="2"></note>
           <note from="Xliff Generator" annotates="general" priority="3">Page EQM Equipment Setup - Action EquipmentFeatures - Property Caption</note>
         </trans-unit>
+        <trans-unit id="Page 1065098760 - Action 1418398776 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
+          <source>View the errors that stopped the daily monitoring jobs or the scheduling of these jobs.</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page EQM Equipment Setup - Action ErrorLog - Property ToolTip</note>
+        </trans-unit>
+        <trans-unit id="Page 1065098760 - Action 1418398776 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Error Log</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page EQM Equipment Setup - Action ErrorLog - Property Caption</note>
+        </trans-unit>
         <trans-unit id="Page 1065098760 - Action 4093586628 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
           <source>View the integration event entries that external systems read through the API.</source>
           <note from="Developer" annotates="general" priority="2"></note>
@@ -4252,6 +4362,46 @@
           <source>Warranty Status</source>
           <note from="Developer" annotates="general" priority="2"></note>
           <note from="Xliff Generator" annotates="general" priority="3">Page EQM Equipment Summary FactBox - Control WarrantyStatus - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Page 1064208071 - Property 1064389655" size-unit="char" translate="yes" xml:space="preserve">
+          <source>About the equipment error log</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page EQM Error Log - Property AboutTitle</note>
+        </trans-unit>
+        <trans-unit id="Page 1064208071 - Property 247559172" size-unit="char" translate="yes" xml:space="preserve">
+          <source>This list shows the errors that stopped the daily monitoring jobs of the equipment app, and the scheduling of those jobs: when it happened, which process failed, the error message and the user. Choose **Show Details** to read the error message and the call stack. Entries cannot be changed. Delete entries that you no longer need.</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page EQM Error Log - Property AboutText</note>
+        </trans-unit>
+        <trans-unit id="Page 1064208071 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Equipment Error Log</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page EQM Error Log - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Page 1064208071 - Property 3863440606" size-unit="char" translate="yes" xml:space="preserve">
+          <source>equipment errors, equipment error log, monitoring job errors, job failures</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page EQM Error Log - Property AdditionalSearchTerms</note>
+        </trans-unit>
+        <trans-unit id="Page 1064208071 - NamedType 2964473141" size-unit="char" translate="yes" xml:space="preserve">
+          <source>%1\\Call stack:\%2</source>
+          <note from="Developer" annotates="general" priority="2">%1 = error message, %2 = AL call stack</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page EQM Error Log - NamedType ErrorDetailsMsg</note>
+        </trans-unit>
+        <trans-unit id="Page 1064208071 - Action 3461750827 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Show the full error message and the call stack of the selected entry.</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page EQM Error Log - Action ShowDetails - Property ToolTip</note>
+        </trans-unit>
+        <trans-unit id="Page 1064208071 - Action 3461750827 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Show Details</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page EQM Error Log - Action ShowDetails - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Page 1064208071 - Action 3383493608 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Process</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page EQM Error Log - Action Category_Process - Property Caption</note>
         </trans-unit>
         <trans-unit id="Page 3143175885 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
           <source>Integration Event API</source>
@@ -5137,6 +5287,31 @@
           <source>Lost</source>
           <note from="Developer" annotates="general" priority="2"></note>
           <note from="Xliff Generator" annotates="general" priority="3">Enum EQM Equipment Status - EnumValue Lost - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Enum 2906464000 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Error Operation</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Enum EQM Error Operation - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Enum 2906464000 - EnumValue 1371923692 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source> </source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Enum EQM Error Operation - EnumValue   - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Enum 2906464000 - EnumValue 1869595980 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Overdue Maintenance Job</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Enum EQM Error Operation - EnumValue Overdue Maintenance Job - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Enum 2906464000 - EnumValue 1419862975 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Schedule Monitoring Jobs</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Enum EQM Error Operation - EnumValue Schedule Monitoring Jobs - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Enum 2906464000 - EnumValue 2709752327 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Warranty Alert Job</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Enum EQM Error Operation - EnumValue Warranty Alert Job - Property Caption</note>
         </trans-unit>
         <trans-unit id="Enum 3548392231 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
           <source>Equipment Feature</source>

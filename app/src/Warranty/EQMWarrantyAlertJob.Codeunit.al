@@ -4,6 +4,7 @@ using System.Threading;
 
 /// <summary>
 /// Runs from a job queue entry and creates the warranty alerts for today. Schedule it once a day.
+/// An error that stops the job is written to the equipment error log.
 /// </summary>
 codeunit 50111 "EQM Warranty Alert Job"
 {
@@ -11,17 +12,8 @@ codeunit 50111 "EQM Warranty Alert Job"
 
     trigger OnRun()
     var
-        WarrantyAlertMgt: Codeunit "EQM Warranty Alert Mgt.";
-        FeatureMgt: Codeunit "EQM Feature Mgt.";
-        CreatedCount: Integer;
-        CancelledCount: Integer;
+        JobRunner: Codeunit "EQM Monitoring Job Runner";
     begin
-        // Warranty Alerts turned off: no alerts are created. The warranty-expired business event is not part of the feature.
-        if FeatureMgt.IsEnabled("EQM Feature"::"Warranty Alerts") then begin
-            WarrantyAlertMgt.GenerateAlerts(Today(), true, CreatedCount, CancelledCount);
-            // A failing partner subscriber of OnWarrantyExpired must not roll back the alerts that were just created.
-            Commit();
-        end;
-        WarrantyAlertMgt.RaiseWarrantyExpiredEvents(Today());
+        JobRunner.RunJob(Codeunit::"EQM Warranty Alert Job", "EQM Error Operation"::"Warranty Alert Job");
     end;
 }
