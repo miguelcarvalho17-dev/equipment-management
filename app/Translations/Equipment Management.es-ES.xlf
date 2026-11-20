@@ -1714,8 +1714,8 @@
           <note from="Xliff Generator" annotates="general" priority="3">Table EQM Error Log Entry - Field Object ID - Property Caption</note>
         </trans-unit>
         <trans-unit id="Table 238517515 - Field 3108107879 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
-          <source>Specifies the process that failed: the warranty alert job, the overdue maintenance job, or the scheduling of these jobs.</source>
-          <target state="translated">Especifica el proceso que falló: la tarea de alertas de garantía, la tarea de mantenimiento vencido o la programación de estas tareas.</target>
+          <source>Specifies the process that failed: the warranty alert job, the overdue maintenance job, the maintenance calculation job, or the scheduling of these jobs.</source>
+          <target state="translated">Especifica el proceso que falló: la tarea de alertas de garantía, la tarea de mantenimiento vencido, la tarea de cálculo de mantenimiento o la programación de estas tareas.</target>
           <note from="Developer" annotates="general" priority="2"></note>
           <note from="Xliff Generator" annotates="general" priority="3">Table EQM Error Log Entry - Field Operation - Property ToolTip</note>
         </trans-unit>
@@ -2990,6 +2990,12 @@
           <target state="translated">Gestión de equipo</target>
           <note from="Developer" annotates="general" priority="2"></note>
           <note from="Xliff Generator" annotates="general" priority="3">Codeunit EQM Monitoring Job Mgt. - NamedType JobQueueCategoryDescTxt</note>
+        </trans-unit>
+        <trans-unit id="Codeunit 3191281590 - NamedType 4111375578" maxwidth="250" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Equipment Management: recalculate planned maintenance dates</source>
+          <target state="translated">Gestión de equipo: recalcular fechas de mantenimiento planificadas</target>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit EQM Monitoring Job Mgt. - NamedType MaintenanceCalcJobDescTxt</note>
         </trans-unit>
         <trans-unit id="Codeunit 3191281590 - NamedType 1302444453" maxwidth="250" size-unit="char" translate="yes" xml:space="preserve">
           <source>Equipment Management: check overdue maintenance</source>
@@ -5068,8 +5074,8 @@
           <note from="Xliff Generator" annotates="general" priority="3">Page EQM Equipment Setup - Property AboutTitle</note>
         </trans-unit>
         <trans-unit id="Page 1065098760 - Property 247559172" size-unit="char" translate="yes" xml:space="preserve">
-          <source>Set the number series for equipment, maintenance records and equipment requests, the default warranty alert days and maintenance frequency, and turn notifications, equipment requests and the APIs on or off for this company. The app runs its monitoring every day through job queue entries: one creates warranty alerts, one checks overdue maintenance. They are created automatically; if one is missing, choose **Schedule Monitoring Jobs**. Turn on **Integration Events Enabled** to record business events for external systems. Users see a change to a feature the next time they open a page.</source>
-          <target state="translated">Establezca las series numéricas para equipo, registros de mantenimiento y solicitudes de equipo, los días de alerta de garantía y la frecuencia de mantenimiento predeterminados, y active o desactive las notificaciones, las solicitudes de equipo y las API para esta empresa. La aplicación ejecuta su supervisión todos los días mediante movimientos de la cola de proyectos: uno crea alertas de garantía y otro comprueba el mantenimiento atrasado. Se crean automáticamente; si falta alguno, elija **Programar trabajos de supervisión**. Active **Eventos de integración habilitados** para registrar eventos de negocio para sistemas externos. Los usuarios ven un cambio en una característica la próxima vez que abren una página.</target>
+          <source>Set the number series for equipment, maintenance records and equipment requests, the default warranty alert days and maintenance frequency, and turn notifications, equipment requests and the APIs on or off for this company. The app runs its monitoring every day through job queue entries: one creates warranty alerts, one checks overdue maintenance and one recalculates the next maintenance dates. They are created automatically; if one is missing, choose **Schedule Monitoring Jobs**. Turn on **Integration Events Enabled** to record business events for external systems. Users see a change to a feature the next time they open a page.</source>
+          <target state="translated">Establezca las series numéricas para equipo, registros de mantenimiento y solicitudes de equipo, los días de alerta de garantía y la frecuencia de mantenimiento predeterminados, y active o desactive las notificaciones, las solicitudes de equipo y las API para esta empresa. La aplicación ejecuta su supervisión todos los días mediante movimientos de la cola de proyectos: uno crea alertas de garantía, otro comprueba el mantenimiento atrasado y otro recalcula las próximas fechas de mantenimiento. Se crean automáticamente; si falta alguno, elija **Programar trabajos de supervisión**. Active **Eventos de integración habilitados** para registrar eventos de negocio para sistemas externos. Los usuarios ven un cambio en una característica la próxima vez que abren una página.</target>
           <note from="Developer" annotates="general" priority="2"></note>
           <note from="Xliff Generator" annotates="general" priority="3">Page EQM Equipment Setup - Property AboutText</note>
         </trans-unit>
@@ -5102,6 +5108,18 @@
           <target state="translated">Supervisión en segundo plano</target>
           <note from="Developer" annotates="general" priority="2"></note>
           <note from="Xliff Generator" annotates="general" priority="3">Page EQM Equipment Setup - Control BackgroundMonitoring - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Page 1065098760 - Control 44334885 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Specifies the status of the job queue entry that recalculates the next maintenance date of the equipment every day. Not scheduled means that no entry exists; choose Schedule Monitoring Jobs to create it.</source>
+          <target state="translated">Especifica el estado del movimiento de la cola de proyectos que recalcula todos los días la próxima fecha de mantenimiento del equipo. No programado significa que no existe ningún movimiento; elija Programar trabajos de supervisión para crearlo.</target>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page EQM Equipment Setup - Control MaintenanceCalcJobStatus - Property ToolTip</note>
+        </trans-unit>
+        <trans-unit id="Page 1065098760 - Control 44334885 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Maintenance Calculation Job</source>
+          <target state="translated">Trabajo de cálculo de mantenimiento</target>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page EQM Equipment Setup - Control MaintenanceCalcJobStatus - Property Caption</note>
         </trans-unit>
         <trans-unit id="Page 1065098760 - Control 4165820242 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
           <source>Specifies the status of the job queue entry that checks overdue maintenance every day. Not scheduled means that no entry exists; choose Schedule Monitoring Jobs to create it.</source>
@@ -6548,6 +6566,12 @@
           <target state="translated"> </target>
           <note from="Developer" annotates="general" priority="2"></note>
           <note from="Xliff Generator" annotates="general" priority="3">Enum EQM Error Operation - EnumValue   - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Enum 2906464000 - EnumValue 1280791381 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Maintenance Calculation Job</source>
+          <target state="translated">Trabajo de cálculo de mantenimiento</target>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Enum EQM Error Operation - EnumValue Maintenance Calculation Job - Property Caption</note>
         </trans-unit>
         <trans-unit id="Enum 2906464000 - EnumValue 1869595980 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
           <source>Overdue Maintenance Job</source>

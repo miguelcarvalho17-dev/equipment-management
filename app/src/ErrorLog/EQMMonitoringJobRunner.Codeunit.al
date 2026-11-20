@@ -16,6 +16,8 @@ codeunit 50143 "EQM Monitoring Job Runner"
                 RunWarrantyAlertJob();
             Codeunit::"EQM Maintenance Monitor Job":
                 RunMaintenanceMonitorJob();
+            Codeunit::"EQM Maintenance Calc. Job":
+                RunMaintenanceCalculationJob();
         end;
     end;
 
@@ -27,7 +29,7 @@ codeunit 50143 "EQM Monitoring Job Runner"
     /// Runs the job body. When it fails, the error is written to the error log and raised again with the same text.
     /// When a write transaction is already open, the job runs as before: not isolated and not logged.
     /// </summary>
-    /// <param name="JobCodeunitIdToRun">The ID of the job codeunit: 50111 or 50114.</param>
+    /// <param name="JobCodeunitIdToRun">The ID of the job codeunit: 50111, 50114 or 50145.</param>
     /// <param name="Operation">The operation that the error log entry gets.</param>
     internal procedure RunJob(JobCodeunitIdToRun: Integer; Operation: Enum "EQM Error Operation")
     var
@@ -51,7 +53,7 @@ codeunit 50143 "EQM Monitoring Job Runner"
     /// <summary>
     /// Sets the job that the next Run of this codeunit instance runs.
     /// </summary>
-    /// <param name="JobCodeunitIdToRun">The ID of the job codeunit: 50111 or 50114.</param>
+    /// <param name="JobCodeunitIdToRun">The ID of the job codeunit: 50111, 50114 or 50145.</param>
     internal procedure SetJob(JobCodeunitIdToRun: Integer)
     begin
         JobCodeunitId := JobCodeunitIdToRun;
@@ -87,5 +89,20 @@ codeunit 50143 "EQM Monitoring Job Runner"
         MaintenanceMgt: Codeunit "EQM Maintenance Mgt.";
     begin
         MaintenanceMgt.CheckOverdueMaintenance(Today(), true);
+    end;
+
+    local procedure RunMaintenanceCalculationJob()
+    var
+        MaintenanceMgt: Codeunit "EQM Maintenance Mgt.";
+        FeatureMgt: Codeunit "EQM Feature Mgt.";
+        CheckedCount: Integer;
+        UpdatedCount: Integer;
+        PlannedOverdueCount: Integer;
+    begin
+        // Maintenance Planning turned off: the planned dates are not recalculated.
+        if not FeatureMgt.IsEnabled("EQM Feature"::"Maintenance Planning") then
+            exit;
+        // Commits per batch only when the job runs isolated; a transaction that a caller opened is never committed.
+        MaintenanceMgt.RecalculateNextMaintenanceDates(Today(), true, not Database.IsInWriteTransaction(), CheckedCount, UpdatedCount, PlannedOverdueCount);
     end;
 }

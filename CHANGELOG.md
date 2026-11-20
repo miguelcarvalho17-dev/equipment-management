@@ -1,6 +1,24 @@
 # Changelog
 Newest first. Grouped by Added / Changed / Fixed / Obsolete.
 
+## FR-054 Background Processing Optimization (version stays 29.0.0.0, no bump)
+### Added
+- Maintenance Calculation Job: a third daily job, at 05:00, that recalculates the stored next maintenance date of every equipment that is not lost or disposed. It runs only when Maintenance Planning is on and corrects only dates that are out of date. Schedule Monitoring Jobs creates it. Its failures appear in the Equipment Error Log. Feature doc docs/features/FR-054-background-processing-optimization.md.
+- Retention policies for three equipment tables: the Equipment Error Log, closed warranty alerts and processed integration event entries. An administrator creates and turns on the policies; nothing is deleted before that. Open warranty alerts and unprocessed integration event entries are protected by locked filters. Help docs/help/FR-054-background-processing-optimization.md.
+### Changed
+- Equipment Setup: shows the status of the Maintenance Calculation Job when Maintenance Planning is on. The two existing jobs keep their 06:00 start and are not changed.
+- The daily warranty alert job reads its existing alerts once, not once per equipment. The same alerts are created.
+- Permission set EQM - Reader can run the Maintenance Calculation Job.
+- The Equipment Error Log describes the new job in the Operation field.
+### Fixed
+- None.
+### Obsolete
+- None.
+
+Release notes: Equipment Management recalculates the planned maintenance dates every morning at 05:00, so the overdue checks use the current dates. Administrators can delete old entries automatically with standard retention policies for the equipment error log, closed warranty alerts and processed integration event entries. Nothing is deleted until a policy is created and turned on. Open alerts and unprocessed integration event entries are not selected by these policies.
+
+Note: one upgrade step registers the three tables for retention policies once per company, at the next install or upgrade. No `app.json` change, no install code change, version stays 29.0.0.0. The warranty job still creates the same alerts. Not verified: tests not executed locally, CI result pending (test codeunits EQM Background Process. Tests, EQM Error Log Isolation Tests and EQM Upgrade Tests); the 05:00 run, the locked filters and the retention deletes are not checked in a sandbox yet (docs/TODO.md, section FR-054 sandbox checks); no separate AppSource validation ran. The feature doc is docs/features/FR-054-background-processing-optimization.md.
+
 ## FR-052 Usage Analytics (version stays 29.0.0.0, no bump)
 ### Added
 - Usage Analytics report: one Excel workbook for a period of up to 120 months, with four sheets. Most Assigned Categories shows the assignments per category with their share. Maintenance Trends shows the number and cost of posted maintenance per month. Equipment Growth shows the new and total equipment per month. Active Users shows the number of active users per month, without user names. The period defaults to the last 12 months. Open it from the Equipment List (Reporting area and Report group), from the Equipment Manager Role Center (Reporting area) or from Tell Me. Feature doc docs/features/FR-052-usage-analytics.md. Help docs/help/FR-052-usage-analytics.md.

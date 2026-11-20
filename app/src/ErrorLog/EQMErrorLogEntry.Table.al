@@ -38,7 +38,7 @@ table 50115 "EQM Error Log Entry"
         field(4; Operation; Enum "EQM Error Operation")
         {
             Caption = 'Operation';
-            ToolTip = 'Specifies the process that failed: the warranty alert job, the overdue maintenance job, or the scheduling of these jobs.';
+            ToolTip = 'Specifies the process that failed: the warranty alert job, the overdue maintenance job, the maintenance calculation job, or the scheduling of these jobs.';
             DataClassification = SystemMetadata;
             Editable = false;
         }

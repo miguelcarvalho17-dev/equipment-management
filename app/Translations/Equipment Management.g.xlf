@@ -1429,7 +1429,7 @@
           <note from="Xliff Generator" annotates="general" priority="3">Table EQM Error Log Entry - Field Object ID - Property Caption</note>
         </trans-unit>
         <trans-unit id="Table 238517515 - Field 3108107879 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
-          <source>Specifies the process that failed: the warranty alert job, the overdue maintenance job, or the scheduling of these jobs.</source>
+          <source>Specifies the process that failed: the warranty alert job, the overdue maintenance job, the maintenance calculation job, or the scheduling of these jobs.</source>
           <note from="Developer" annotates="general" priority="2"></note>
           <note from="Xliff Generator" annotates="general" priority="3">Table EQM Error Log Entry - Field Operation - Property ToolTip</note>
         </trans-unit>
@@ -2492,6 +2492,11 @@
           <source>Equipment Management</source>
           <note from="Developer" annotates="general" priority="2"></note>
           <note from="Xliff Generator" annotates="general" priority="3">Codeunit EQM Monitoring Job Mgt. - NamedType JobQueueCategoryDescTxt</note>
+        </trans-unit>
+        <trans-unit id="Codeunit 3191281590 - NamedType 4111375578" maxwidth="250" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Equipment Management: recalculate planned maintenance dates</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit EQM Monitoring Job Mgt. - NamedType MaintenanceCalcJobDescTxt</note>
         </trans-unit>
         <trans-unit id="Codeunit 3191281590 - NamedType 1302444453" maxwidth="250" size-unit="char" translate="yes" xml:space="preserve">
           <source>Equipment Management: check overdue maintenance</source>
@@ -4224,7 +4229,7 @@
           <note from="Xliff Generator" annotates="general" priority="3">Page EQM Equipment Setup - Property AboutTitle</note>
         </trans-unit>
         <trans-unit id="Page 1065098760 - Property 247559172" size-unit="char" translate="yes" xml:space="preserve">
-          <source>Set the number series for equipment, maintenance records and equipment requests, the default warranty alert days and maintenance frequency, and turn notifications, equipment requests and the APIs on or off for this company. The app runs its monitoring every day through job queue entries: one creates warranty alerts, one checks overdue maintenance. They are created automatically; if one is missing, choose **Schedule Monitoring Jobs**. Turn on **Integration Events Enabled** to record business events for external systems. Users see a change to a feature the next time they open a page.</source>
+          <source>Set the number series for equipment, maintenance records and equipment requests, the default warranty alert days and maintenance frequency, and turn notifications, equipment requests and the APIs on or off for this company. The app runs its monitoring every day through job queue entries: one creates warranty alerts, one checks overdue maintenance and one recalculates the next maintenance dates. They are created automatically; if one is missing, choose **Schedule Monitoring Jobs**. Turn on **Integration Events Enabled** to record business events for external systems. Users see a change to a feature the next time they open a page.</source>
           <note from="Developer" annotates="general" priority="2"></note>
           <note from="Xliff Generator" annotates="general" priority="3">Page EQM Equipment Setup - Property AboutText</note>
         </trans-unit>
@@ -4252,6 +4257,16 @@
           <source>Background Monitoring</source>
           <note from="Developer" annotates="general" priority="2"></note>
           <note from="Xliff Generator" annotates="general" priority="3">Page EQM Equipment Setup - Control BackgroundMonitoring - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Page 1065098760 - Control 44334885 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Specifies the status of the job queue entry that recalculates the next maintenance date of the equipment every day. Not scheduled means that no entry exists; choose Schedule Monitoring Jobs to create it.</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page EQM Equipment Setup - Control MaintenanceCalcJobStatus - Property ToolTip</note>
+        </trans-unit>
+        <trans-unit id="Page 1065098760 - Control 44334885 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Maintenance Calculation Job</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page EQM Equipment Setup - Control MaintenanceCalcJobStatus - Property Caption</note>
         </trans-unit>
         <trans-unit id="Page 1065098760 - Control 4165820242 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
           <source>Specifies the status of the job queue entry that checks overdue maintenance every day. Not scheduled means that no entry exists; choose Schedule Monitoring Jobs to create it.</source>
@@ -5457,6 +5472,11 @@
           <source> </source>
           <note from="Developer" annotates="general" priority="2"></note>
           <note from="Xliff Generator" annotates="general" priority="3">Enum EQM Error Operation - EnumValue   - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Enum 2906464000 - EnumValue 1280791381 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Maintenance Calculation Job</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Enum EQM Error Operation - EnumValue Maintenance Calculation Job - Property Caption</note>
         </trans-unit>
         <trans-unit id="Enum 2906464000 - EnumValue 1869595980 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
           <source>Overdue Maintenance Job</source>
