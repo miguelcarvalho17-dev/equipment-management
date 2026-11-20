@@ -1,6 +1,20 @@
 # Changelog
 Newest first. Grouped by Added / Changed / Fixed / Obsolete.
 
+## FR-052 Usage Analytics (version stays 29.0.0.0, no bump)
+### Added
+- Usage Analytics report: one Excel workbook for a period of up to 120 months, with four sheets. Most Assigned Categories shows the assignments per category with their share. Maintenance Trends shows the number and cost of posted maintenance per month. Equipment Growth shows the new and total equipment per month. Active Users shows the number of active users per month, without user names. The period defaults to the last 12 months. Open it from the Equipment List (Reporting area and Report group), from the Equipment Manager Role Center (Reporting area) or from Tell Me. Feature doc docs/features/FR-052-usage-analytics.md. Help docs/help/FR-052-usage-analytics.md.
+### Changed
+- Permission set EQM - Reader can run the report and the objects it uses. EQM - Manager and EQM - Administrator inherit it. EQM - API Consumer gets no new rights.
+### Fixed
+- None.
+### Obsolete
+- None.
+
+Release notes: Managers can see how the equipment register is used over a period in the new Usage Analytics report. Choose a starting and an ending date; the period can be up to 120 months. The report shows the most assigned categories, the maintenance cost per month, the growth of the register per month and the active users per month. It shows counts only, not user names. Nothing is saved; run the report again to see changes.
+
+Note: no stored table or field, no upgrade code, no install code, no event, no app.json change, version stays 29.0.0.0. The report calculates its figures when it runs and writes nothing to the database. Month boundaries follow the time zone of the session that runs the report. Not verified: tests not executed locally, CI result pending (test codeunit EQM Usage Analytics Tests, 17 tests, and one new assert in EQM Role Permission Tests); the figures and the period checks in a sandbox, the run time on a large register and the translations are not checked yet (docs/TODO.md, section FR-052 sandbox checks); no separate AppSource validation ran. The feature doc is docs/features/FR-052-usage-analytics.md.
+
 ## FR-051 Error Logging (version stays 29.0.0.0, no bump)
 ### Added
 - Equipment Error Log: a list of the errors that stopped the daily warranty alert job, the overdue maintenance job, or the scheduling of these jobs. Each entry shows when the error happened, the user, the process, the error message, the error code and the call stack. Open it from Equipment Setup (Navigation > Error Log) or from Tell Me. Feature doc docs/features/FR-051-error-logging.md. Help docs/help/FR-051-error-logging.md.
