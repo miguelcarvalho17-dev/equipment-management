@@ -222,6 +222,13 @@ page 50100 "EQM Equipment List"
                 Image = Report;
                 RunObject = report "EQM Maint. Cost Analysis";
             }
+            action(UsageAnalytics)
+            {
+                Caption = 'Usage Analytics';
+                ToolTip = 'Open the usage analytics: the most assigned categories, maintenance trends, equipment growth and active users for a period, in an Excel workbook with one sheet per metric.';
+                Image = Report;
+                RunObject = report "EQM Usage Analytics";
+            }
         }
         area(Promoted)
         {
@@ -250,6 +257,9 @@ page 50100 "EQM Equipment List"
                 {
                 }
                 actionref(MaintenanceCostAnalysis_Promoted; MaintenanceCostAnalysis)
+                {
+                }
+                actionref(UsageAnalytics_Promoted; UsageAnalytics)
                 {
                 }
             }

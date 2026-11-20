@@ -213,3 +213,24 @@ A decision that applies to all future work (not just one task) belongs in the "S
 - 2026-11-20 | FR-051 implementation | pt-PT "entrada da fila de trabalhos" and es-ES "movimiento de la cola de proyectos" for job queue entry, matching existing terms | Reversible: yes
 - 2026-11-20 | FR-051 implementation | Test write transaction opened by inserting an `EQM Equipment Category` with a GUID code, because the test app only depends on Library Assert | Reversible: yes
 - 2026-11-20 | FR-051 review | Left minors open: LogError XML summary wording (claims it never raises, untrue inside a write transaction); no unit test for the WriteTransaction schedule case | Reversible: yes
+
+## 2026-11-20 — FR-052 Usage Analytics
+
+- FR-052 Usage Analytics | Chose calculating the metrics from existing data on demand, over a snapshot table filled by a job queue entry, because every metric already has a dated source and a job needs install/upgrade registration (stop list) | Reversible: yes
+- FR-052 Usage Analytics | Chose one Excel report with four root data items and `ExcelLayoutMultipleDataSheets = true`, over a page with four parts or four reports, because it follows the FR-039/040/041 pattern | Reversible: no (dataset columns are a contract once released)
+- FR-052 Usage Analytics | Chose a new internal codeunit "EQM Usage Analytics Mgt." over more procedures on "EQM Dashboard Mgt.", for one responsibility per codeunit | Reversible: yes
+- FR-052 Usage Analytics | Chose a grouped query (LeftOuterJoin, Count) for Most Assigned Categories over an AL loop, because assignments reach 1M rows (FR-053) | Reversible: yes
+- FR-052 Usage Analytics | Chose per-month Count/CalcSums for trends and growth, and one filtered FindSet with Dictionary de-duplication for active users, over query Year/Month methods, because query date methods group in UTC | Reversible: yes
+- FR-052 Usage Analytics | Chose SystemCreatedAt for Equipment Growth over Purchase Date | Reversible: yes
+- FR-052 Usage Analytics | Chose Active Users = distinct audit "User ID" + history "Posted By" per month, counts only, over listing user IDs | Reversible: yes
+- FR-052 Usage Analytics | Chose current category, all assignment statuses, and a "Without category" row | Reversible: yes
+- FR-052 Usage Analytics | Chose a request period (default last 12 months, maximum 120, actionable ErrorInfo errors) over request filter fields | Reversible: yes
+- FR-052 Usage Analytics | Chose entry points Tell Me, Equipment List Reporting area (promoted) and Role Center Reporting area, as FR-039-041 | Reversible: no (published actions can only be obsoleted)
+- FR-052 Usage Analytics | Chose no new keys on published tables 50103/50112, accepting a filtered scan on an on-demand report, consistent with FR-053 | Reversible: yes
+- FR-052 Usage Analytics | IDs: table 50116, query 50105, report 50103, codeunit 50144, test codeunit 50169 (FR-015 reservation, superseded by 50168) | Reversible: yes
+- FR-052 build | Compiled app/ and test/ with the extension's alc.dll because the AL MCP had no project loaded | Reversible: yes
+- FR-052 query | Put `Count` on the Assignment data item (the plan's fallback) over the child Equipment, because the compiler accepted it and it counts assignments | Reversible: yes
+- FR-052 codeunit | Merged the blank-category and unknown-equipment groups in AL, because SQL groups NULL and '' separately | Reversible: yes
+- FR-052 report | Named data items after the sheets (MostAssignedCategories, MaintenanceTrends, EquipmentGrowth, ActiveUsers) | Reversible: no (sheet names are a layout contract)
+- FR-052 report | Named the Active Users column `ActiveUsersCount` over `ActiveUsers`, to avoid AL0589 | Reversible: no (dataset columns are a contract once released)
+- FR-052 tests | Equipment growth tests use the current month with deltas, because SystemCreatedAt cannot be backdated | Reversible: yes

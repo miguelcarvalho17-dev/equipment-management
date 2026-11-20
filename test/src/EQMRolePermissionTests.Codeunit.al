@@ -208,6 +208,7 @@ codeunit 50162 "EQM Role Permission Tests"
         AssertNoEntry(ApiConsumerRoleTok, 3, Report::"EQM Equipment Register");
         AssertNoEntry(ApiConsumerRoleTok, 3, Report::"EQM Asset Utilization");
         AssertNoEntry(ApiConsumerRoleTok, 3, Report::"EQM Maint. Cost Analysis");
+        AssertNoEntry(ApiConsumerRoleTok, 3, Report::"EQM Usage Analytics");
     end;
 
     [Test]

@@ -68,7 +68,7 @@ Nothing is stored, so there is no schema change and no upgrade codeunit. Existin
 - No notification, email, job, tile styles or list views for warranties.
 
 ## Test status
-No test objects; test codeunit 50169 "EQM Warranty Status Tests" is reserved. Scenarios WS1 to WS29 in docs/plans/FR-015-warranty-monitoring.md are a reference only. Sandbox checks WM-SB1 to WM-SB10 are **not run**.
+No test objects; test codeunit 50169 "EQM Warranty Status Tests" was reserved. Scenarios WS1 to WS29 in docs/plans/FR-015-warranty-monitoring.md are a reference only. Sandbox checks WM-SB1 to WM-SB10 are **not run**. The ID 50169 was reused by FR-052 (test codeunit "EQM Usage Analytics Tests"), and the FR-015 scenarios are covered by test codeunit 50168 "EQM Warranty Tests" (FR-045).
 
 TODO(verify) in a sandbox:
 - Tile drill-down opens the Equipment List with the date and Status filters applied (WM-SB4); the `Status = filter(<> Lost & <> Disposed)` formula is counted correctly (the compiler accepts it; the fallback was not needed to compile, WM-SB8).

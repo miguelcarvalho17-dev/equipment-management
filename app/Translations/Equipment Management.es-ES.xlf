@@ -2469,6 +2469,90 @@
           <note from="Developer" annotates="general" priority="2"></note>
           <note from="Xliff Generator" annotates="general" priority="3">Table EQM Maintenance Record - Field Vendor No. - Property Caption</note>
         </trans-unit>
+        <trans-unit id="Table 3688869718 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Usage Analytics Buffer</source>
+          <target state="translated">Búfer de análisis de uso</target>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table EQM Usage Analytics Buffer - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Table 3688869718 - Field 2866242394 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Active Users</source>
+          <target state="translated">Usuarios activos</target>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table EQM Usage Analytics Buffer - Field Active Users - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Table 3688869718 - Field 1610189125 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Share of Assignments %</source>
+          <target state="translated">Porcentaje de asignaciones</target>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table EQM Usage Analytics Buffer - Field Assignment Share % - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Table 3688869718 - Field 3877927551 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Category Code</source>
+          <target state="translated">Código de categoría</target>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table EQM Usage Analytics Buffer - Field Category Code - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Table 3688869718 - Field 59712786 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Category Description</source>
+          <target state="translated">Descripción de la categoría</target>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table EQM Usage Analytics Buffer - Field Category Description - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Table 3688869718 - Field 3320823955 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Line No.</source>
+          <target state="translated">N.º línea</target>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table EQM Usage Analytics Buffer - Field Line No. - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Table 3688869718 - Field 2394916122 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Maintenance Cost</source>
+          <target state="translated">Coste de mantenimiento</target>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table EQM Usage Analytics Buffer - Field Maintenance Cost - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Table 3688869718 - Field 3187422890 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>New Equipment</source>
+          <target state="translated">Equipo nuevo</target>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table EQM Usage Analytics Buffer - Field New Equipment - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Table 3688869718 - Field 2803005298 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>No. of Assignments</source>
+          <target state="translated">N.º de asignaciones</target>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table EQM Usage Analytics Buffer - Field No. of Assignments - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Table 3688869718 - Field 3416414484 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>No. of Maintenances</source>
+          <target state="translated">N.º de mantenimientos</target>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table EQM Usage Analytics Buffer - Field No. of Maintenances - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Table 3688869718 - Field 2615791210 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Period End Date</source>
+          <target state="translated">Fecha final del período</target>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table EQM Usage Analytics Buffer - Field Period End Date - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Table 3688869718 - Field 2082466019 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Period Start Date</source>
+          <target state="translated">Fecha de inicio del período</target>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table EQM Usage Analytics Buffer - Field Period Start Date - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Table 3688869718 - Field 1018677426 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Rank</source>
+          <target state="translated">Posición</target>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table EQM Usage Analytics Buffer - Field Rank - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Table 3688869718 - Field 1515026028 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Total Equipment</source>
+          <target state="translated">Total de equipo</target>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table EQM Usage Analytics Buffer - Field Total Equipment - Property Caption</note>
+        </trans-unit>
         <trans-unit id="Table 2395741581 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
           <source>Warranty Alert</source>
           <target state="translated">Alerta de garantía</target>
@@ -3116,6 +3200,30 @@
           <target state="translated">No puede aprobar la solicitud de equipo %1 porque la envió para su aprobación. Debe aprobarla otro responsable.</target>
           <note from="Developer" annotates="general" priority="2">%1 = request number</note>
           <note from="Xliff Generator" annotates="general" priority="3">Codeunit EQM Request Approval Mgt. - NamedType SelfApprovalErr</note>
+        </trans-unit>
+        <trans-unit id="Codeunit 2824149062 - NamedType 1549374824" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Enter both a starting date and an ending date for the usage analytics.</source>
+          <target state="translated">Introduzca una fecha inicial y una fecha final para el análisis de uso.</target>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit EQM Usage Analytics Mgt. - NamedType PeriodMissingErr</note>
+        </trans-unit>
+        <trans-unit id="Codeunit 2824149062 - NamedType 2757571056" size-unit="char" translate="yes" xml:space="preserve">
+          <source>The starting date %1 is after the ending date %2. Enter a starting date that is on or before the ending date.</source>
+          <target state="translated">La fecha inicial %1 es posterior a la fecha final %2. Introduzca una fecha inicial igual o anterior a la fecha final.</target>
+          <note from="Developer" annotates="general" priority="2">%1 = starting date, %2 = ending date</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit EQM Usage Analytics Mgt. - NamedType PeriodReversedErr</note>
+        </trans-unit>
+        <trans-unit id="Codeunit 2824149062 - NamedType 1830806762" size-unit="char" translate="yes" xml:space="preserve">
+          <source>The period from %1 to %2 covers %3 months. Choose a period of at most %4 months.</source>
+          <target state="translated">El período de %1 a %2 abarca %3 meses. Elija un período de %4 meses como máximo.</target>
+          <note from="Developer" annotates="general" priority="2">%1 = starting date, %2 = ending date, %3 = number of months in the period, %4 = the longest allowed period in months</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit EQM Usage Analytics Mgt. - NamedType PeriodTooLongErr</note>
+        </trans-unit>
+        <trans-unit id="Codeunit 2824149062 - NamedType 1814279162" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Without category</source>
+          <target state="translated">Sin categoría</target>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit EQM Usage Analytics Mgt. - NamedType WithoutCategoryLbl</note>
         </trans-unit>
         <trans-unit id="Codeunit 1013676421 - NamedType 1359352173" size-unit="char" translate="yes" xml:space="preserve">
           <source>The selected warranty alerts are already acknowledged or cancelled.</source>
@@ -4401,6 +4509,18 @@
           <note from="Developer" annotates="general" priority="2"></note>
           <note from="Xliff Generator" annotates="general" priority="3">Page EQM Equipment List - Action MaintenanceCostAnalysis - Property Caption</note>
         </trans-unit>
+        <trans-unit id="Page 2630064635 - Action 4063393485 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Open the usage analytics: the most assigned categories, maintenance trends, equipment growth and active users for a period, in an Excel workbook with one sheet per metric.</source>
+          <target state="translated">Abre el análisis de uso: categorías más asignadas, tendencias de mantenimiento, crecimiento del equipo y usuarios activos de un período, en un libro de Excel con una hoja por métrica.</target>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page EQM Equipment List - Action UsageAnalytics - Property ToolTip</note>
+        </trans-unit>
+        <trans-unit id="Page 2630064635 - Action 4063393485 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Usage Analytics</source>
+          <target state="translated">Análisis de uso</target>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page EQM Equipment List - Action UsageAnalytics - Property Caption</note>
+        </trans-unit>
         <trans-unit id="Page 2630064635 - View 1005746868 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
           <source>Assigned</source>
           <target state="translated">Asignado</target>
@@ -4568,6 +4688,18 @@
           <target state="translated">Análisis de costes de mantenimiento</target>
           <note from="Developer" annotates="general" priority="2"></note>
           <note from="Xliff Generator" annotates="general" priority="3">Page EQM Equipment Manager RC - Action MaintenanceCostAnalysis - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Page 4775459 - Action 4063393485 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Open the usage analytics: the most assigned categories, maintenance trends, equipment growth and active users for a period, in an Excel workbook with one sheet per metric.</source>
+          <target state="translated">Abre el análisis de uso: categorías más asignadas, tendencias de mantenimiento, crecimiento del equipo y usuarios activos de un período, en un libro de Excel con una hoja por métrica.</target>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page EQM Equipment Manager RC - Action UsageAnalytics - Property ToolTip</note>
+        </trans-unit>
+        <trans-unit id="Page 4775459 - Action 4063393485 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Usage Analytics</source>
+          <target state="translated">Análisis de uso</target>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page EQM Equipment Manager RC - Action UsageAnalytics - Property Caption</note>
         </trans-unit>
         <trans-unit id="Page 4775459 - Action 1514883969 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
           <source>Setup</source>
@@ -6086,6 +6218,66 @@
           <target state="translated">Análisis de costes de mantenimiento (Excel)</target>
           <note from="Developer" annotates="general" priority="2"></note>
           <note from="Xliff Generator" annotates="general" priority="3">Report EQM Maint. Cost Analysis - ReportLayout MaintCostAnalysisExcel - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Report 121410886 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Usage Analytics</source>
+          <target state="translated">Análisis de uso</target>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Report EQM Usage Analytics - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Report 121410886 - Property 3863440606" size-unit="char" translate="yes" xml:space="preserve">
+          <source>usage analytics, most assigned categories, maintenance trends, equipment growth, active users, statistics</source>
+          <target state="translated">análisis de uso, categorías más asignadas, tendencias de mantenimiento, crecimiento del equipo, usuarios activos, estadísticas</target>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Report EQM Usage Analytics - Property AdditionalSearchTerms</note>
+        </trans-unit>
+        <trans-unit id="Report 121410886 - Control 912261439 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Period</source>
+          <target state="translated">Período</target>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Report EQM Usage Analytics - Control Period - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Report 121410886 - Control 1845839555 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Specifies the last day of the period that the statistics cover. The default is the work date. It cannot be before the starting date.</source>
+          <target state="translated">Especifica el último día del período que abarcan las estadísticas. De forma predeterminada, es la fecha de trabajo. No puede ser anterior a la fecha inicial.</target>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Report EQM Usage Analytics - Control EndingDateField - Property ToolTip</note>
+        </trans-unit>
+        <trans-unit id="Report 121410886 - Control 1845839555 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Ending Date</source>
+          <target state="translated">Fecha final</target>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Report EQM Usage Analytics - Control EndingDateField - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Report 121410886 - Control 3617584994 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Specifies the first day of the period that the statistics cover. The default is the first day of the month 11 months before the work date, so that the period is 12 calendar months. The period can be at most 120 months.</source>
+          <target state="translated">Especifica el primer día del período que abarcan las estadísticas. De forma predeterminada, es el primer día del mes 11 meses antes de la fecha de trabajo, por lo que el período es de 12 meses naturales. El período puede tener 120 meses como máximo.</target>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Report EQM Usage Analytics - Control StartingDateField - Property ToolTip</note>
+        </trans-unit>
+        <trans-unit id="Report 121410886 - Control 3617584994 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Starting Date</source>
+          <target state="translated">Fecha inicial</target>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Report EQM Usage Analytics - Control StartingDateField - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Report 121410886 - ReportLayout 622365176 - Property 2166945456" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Shows operational statistics for a period in an Excel workbook with one sheet per metric: the most assigned equipment categories, the number and cost of posted maintenances per month, the growth of the equipment register per month, and the number of active users per month. Open maintenance records are not included and no user names are shown.</source>
+          <target state="translated">Muestra estadísticas operativas de un período en un libro de Excel con una hoja por métrica: las categorías de equipo más asignadas, el número y el coste de los mantenimientos registrados por mes, el crecimiento del registro de equipos por mes y el número de usuarios activos por mes. Los registros de mantenimiento abiertos no se incluyen y no se muestran nombres de usuario.</target>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Report EQM Usage Analytics - ReportLayout UsageAnalyticsExcel - Property Summary</note>
+        </trans-unit>
+        <trans-unit id="Report 121410886 - ReportLayout 622365176 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Usage Analytics (Excel)</source>
+          <target state="translated">Análisis de uso (Excel)</target>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Report EQM Usage Analytics - ReportLayout UsageAnalyticsExcel - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Query 3923740150 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Assignments by Category</source>
+          <target state="translated">Asignaciones por categoría</target>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Query EQM Assignments by Category - Property Caption</note>
         </trans-unit>
         <trans-unit id="Query 611850204 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
           <source>Equipment by Category</source>

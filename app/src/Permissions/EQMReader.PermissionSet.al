@@ -39,14 +39,17 @@ permissionset 50100 "EQM - Reader"
         table "EQM Error Log Entry" = X,
         table "EQM Warranty Alert" = X,
         table "EQM Maint. Cost Buffer" = X,
+        table "EQM Usage Analytics Buffer" = X,
         query "EQM Equipment by Category" = X,
         query "EQM Equipment by Status" = X,
         query "EQM Maint. Cost by Category" = X,
         query "EQM Maint. Cost by Equipment" = X,
         query "EQM Open Warranty Alerts" = X,
+        query "EQM Assignments by Category" = X,
         report "EQM Equipment Register" = X,
         report "EQM Asset Utilization" = X,
         report "EQM Maint. Cost Analysis" = X,
+        report "EQM Usage Analytics" = X,
         page "EQM Equipment List" = X,
         page "EQM Equipment Card" = X,
         page "EQM Equipment Assignments" = X,
@@ -117,5 +120,6 @@ permissionset 50100 "EQM - Reader"
         codeunit "EQM Power Automate Subscr." = X,
         codeunit "EQM Request Approval Mgt." = X,
         codeunit "EQM Telemetry Mgt." = X,
-        codeunit "EQM Telemetry Subscr." = X;
+        codeunit "EQM Telemetry Subscr." = X,
+        codeunit "EQM Usage Analytics Mgt." = X;
 }
