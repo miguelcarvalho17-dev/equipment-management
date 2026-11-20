@@ -1,6 +1,21 @@
 # Changelog
 Newest first. Grouped by Added / Changed / Fixed / Obsolete.
 
+## FR-051 Error Logging (version stays 29.0.0.0, no bump)
+### Added
+- Equipment Error Log: a list of the errors that stopped the daily warranty alert job, the overdue maintenance job, or the scheduling of these jobs. Each entry shows when the error happened, the user, the process, the error message, the error code and the call stack. Open it from Equipment Setup (Navigation > Error Log) or from Tell Me. Feature doc docs/features/FR-051-error-logging.md. Help docs/help/FR-051-error-logging.md.
+### Changed
+- Permission set EQM - Administrator can read and delete the error log entries. EQM - Reader can run the new error log objects but cannot read the entries. EQM - Manager and EQM - API Consumer get no new rights.
+- The daily warranty alert job and the overdue maintenance job keep their logic. When one of them fails, its error is also written to the error log, and the job still fails with the same message.
+### Fixed
+- None.
+### Obsolete
+- None.
+
+Release notes: Administrators can see which monitoring job failed, when, and for which user, in the new Equipment Error Log. The error message and call stack of each failure are kept there. The job queue entry still shows the same error message as before. Entries stay until you delete them.
+
+Note: no upgrade code, no install code, no app.json change, version stays 29.0.0.0. The log is only written when a job fails, so no data changes on install or upgrade. Error messages can contain data from the records that were processed, so only administrators can read the log. Phase 1 covers only the two monitoring jobs and their scheduling: errors of pages, actions, reports and API calls are not logged, and no automatic cleanup runs. Not verified: tests not executed locally, CI result pending (test codeunits EQM Error Log Tests, EQM Error Log Isolation Tests and two new tests in EQM Role Permission Tests); the logging of a failed job in a sandbox, the scheduling failure and the translations are not checked yet (docs/TODO.md, section FR-051 sandbox checks); no separate AppSource validation ran. The feature doc is docs/features/FR-051-error-logging.md.
+
 ## FR-066 Demo Data (version stays 29.0.0.0, no bump)
 ### Added
 - Equipment Setup: the actions Create Demo Data and Delete Demo Data. Create adds sample employees, equipment, assignments and maintenance records to the company so that you can try out the app. Delete removes that demo data again. Records that you created are not deleted, and demo records that you added notes, attachments, pictures, requests or your own maintenance to are kept. Feature doc docs/features/FR-066-demo-data.md. Help docs/help/FR-066-demo-data.md.

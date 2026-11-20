@@ -171,6 +171,14 @@ page 50103 "EQM Equipment Setup"
                     MonitoringJobMgt.ShowMonitoringJobs();
                 end;
             }
+            action(ErrorLog)
+            {
+                Caption = 'Error Log';
+                ToolTip = 'View the errors that stopped the daily monitoring jobs or the scheduling of these jobs.';
+                Image = ErrorLog;
+                Visible = CanReadErrorLog;
+                RunObject = page "EQM Error Log";
+            }
             action(IntegrationEventEntries)
             {
                 Caption = 'Integration Event Entries';
@@ -211,6 +219,7 @@ page 50103 "EQM Equipment Setup"
         EnableEquipmentRequests: Boolean;
         EnableApis: Boolean;
         CanManage: Boolean;
+        CanReadErrorLog: Boolean;
         WarrantyJobStatus: Text;
         MaintenanceJobStatus: Text;
         JobsScheduledMsg: Label '%1 monitoring job queue entries were created. %2 already existed and were not changed.', Comment = '%1 = number of job queue entries created, %2 = number of job queue entries that already existed';
@@ -218,8 +227,10 @@ page 50103 "EQM Equipment Setup"
 
     trigger OnOpenPage()
     var
+        ErrorLogEntry: Record "EQM Error Log Entry";
         DefaultData: Codeunit "EQM Default Data";
     begin
+        CanReadErrorLog := ErrorLogEntry.ReadPermission();
         ApiIntegrationEnabled := FeatureMgt.IsEnabled("EQM Feature"::"API Integration");
         WarrantyAlertsEnabled := FeatureMgt.IsEnabled("EQM Feature"::"Warranty Alerts");
         MaintenancePlanningEnabled := FeatureMgt.IsEnabled("EQM Feature"::"Maintenance Planning");
