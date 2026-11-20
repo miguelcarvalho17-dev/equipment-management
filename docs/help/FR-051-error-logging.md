@@ -43,7 +43,7 @@ For how to find and restart a job queue entry, see [Use job queues to schedule t
 
 ## Delete entries
 - Open the Equipment Error Log, select the entries to remove, and delete them.
-- The log has no automatic cleanup. Entries stay until someone deletes them.
+- Entries stay until someone deletes them, or until a retention policy deletes them (see `docs/help/FR-054-background-processing-optimization.md`).
 
 ## Things to know
 - The log is per company. Entries in one company are not shown in another company.

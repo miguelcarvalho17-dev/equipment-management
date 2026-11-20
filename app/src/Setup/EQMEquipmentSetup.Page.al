@@ -8,7 +8,7 @@ page 50103 "EQM Equipment Setup"
     UsageCategory = Administration;
     AdditionalSearchTerms = 'equipment numbers, equipment number series, maintenance number series, equipment request numbers, equipment job queue, equipment monitoring, integration events, outbox, feature management, turn features on or off, application setup, default warranty alert days, default maintenance frequency, enable notifications, enable equipment requests, enable APIs';
     AboutTitle = 'About equipment setup';
-    AboutText = 'Set the number series for equipment, maintenance records and equipment requests, the default warranty alert days and maintenance frequency, and turn notifications, equipment requests and the APIs on or off for this company. The app runs its monitoring every day through job queue entries: one creates warranty alerts, one checks overdue maintenance. They are created automatically; if one is missing, choose **Schedule Monitoring Jobs**. Turn on **Integration Events Enabled** to record business events for external systems. Users see a change to a feature the next time they open a page.';
+    AboutText = 'Set the number series for equipment, maintenance records and equipment requests, the default warranty alert days and maintenance frequency, and turn notifications, equipment requests and the APIs on or off for this company. The app runs its monitoring every day through job queue entries: one creates warranty alerts, one checks overdue maintenance and one recalculates the next maintenance dates. They are created automatically; if one is missing, choose **Schedule Monitoring Jobs**. Turn on **Integration Events Enabled** to record business events for external systems. Users see a change to a feature the next time they open a page.';
     SourceTable = "EQM Equipment Setup";
     InsertAllowed = false;
     DeleteAllowed = false;
@@ -105,6 +105,13 @@ page 50103 "EQM Equipment Setup"
                     Caption = 'Overdue Maintenance Job';
                     Editable = false;
                     ToolTip = 'Specifies the status of the job queue entry that checks overdue maintenance every day. Not scheduled means that no entry exists; choose Schedule Monitoring Jobs to create it.';
+                }
+                field(MaintenanceCalcJobStatus; MaintenanceCalcJobStatus)
+                {
+                    Caption = 'Maintenance Calculation Job';
+                    Editable = false;
+                    Visible = MaintenancePlanningEnabled;
+                    ToolTip = 'Specifies the status of the job queue entry that recalculates the next maintenance date of the equipment every day. Not scheduled means that no entry exists; choose Schedule Monitoring Jobs to create it.';
                 }
             }
         }
@@ -222,6 +229,7 @@ page 50103 "EQM Equipment Setup"
         CanReadErrorLog: Boolean;
         WarrantyJobStatus: Text;
         MaintenanceJobStatus: Text;
+        MaintenanceCalcJobStatus: Text;
         JobsScheduledMsg: Label '%1 monitoring job queue entries were created. %2 already existed and were not changed.', Comment = '%1 = number of job queue entries created, %2 = number of job queue entries that already existed';
         SetupMissingErr: Label 'The equipment setup has not been created in this company yet. Ask a user with the Equipment Administrator permission set to open the Equipment Setup page.';
 
@@ -258,5 +266,6 @@ page 50103 "EQM Equipment Setup"
     begin
         WarrantyJobStatus := MonitoringJobMgt.GetJobStatusText(Codeunit::"EQM Warranty Alert Job");
         MaintenanceJobStatus := MonitoringJobMgt.GetJobStatusText(Codeunit::"EQM Maintenance Monitor Job");
+        MaintenanceCalcJobStatus := MonitoringJobMgt.GetJobStatusText(Codeunit::"EQM Maintenance Calc. Job");
     end;
 }

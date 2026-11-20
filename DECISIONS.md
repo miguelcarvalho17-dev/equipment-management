@@ -234,3 +234,13 @@ A decision that applies to all future work (not just one task) belongs in the "S
 - FR-052 report | Named data items after the sheets (MostAssignedCategories, MaintenanceTrends, EquipmentGrowth, ActiveUsers) | Reversible: no (sheet names are a layout contract)
 - FR-052 report | Named the Active Users column `ActiveUsersCount` over `ActiveUsers`, to avoid AL0589 | Reversible: no (dataset columns are a contract once released)
 - FR-052 tests | Equipment growth tests use the current month with deltas, because SystemCreatedAt cannot be backdated | Reversible: yes
+- FR-054 archiving | Chose standard Retention Policies (user's answer) over an own archive job | Reversible: yes
+- FR-054 archiving | Registered 50115 (no filter, Logged At), 50107 (locked filter Acknowledged/Cancelled, 1 year, SystemModifiedAt) and 50110 (locked filter Processed, 3 months, Processed At); never audit, history, maintenance log, notes or assignment tables | Reversible: yes
+- FR-054 archiving | Chose locked filter lines so open alerts and unprocessed entries can never be deleted by a policy | Reversible: yes
+- FR-054 archiving | Chose a tag-guarded step in "EQM Upgrade Mgt." not pre-registered for new companies; no subscription to OnRefreshAllowedTables (internal); no permission change for the retention job user | Reversible: yes
+- FR-054 maintenance job | Chose a daily recalculation of the stored Next Maintenance Date as "Maintenance Calculations", with Modify(false), UpdLock re-read per stale row, and a Commit every 1000 updates only when isolated (UpdatedCount > 0 guard) | Reversible: yes
+- FR-054 maintenance job | Chose 05:00 for the new entry, skip when Maintenance Planning is off, telemetry EQM0012 (counts only) | Reversible: no (telemetry contract once released)
+- FR-054 warranty | Chose a Dictionary preload of non-cancelled alerts over one IsEmpty per equipment; LockTable unchanged | Reversible: yes
+- FR-054 objects | Chose logic in existing 50108 plus public job codeunit 50145 | Reversible: no (job codeunit ID permanent at release)
+- FR-054 tests | Named test codeunit 50172 "EQM Background Process. Tests" because the planned name exceeded 30 characters (AL0305) | Reversible: yes
+- FR-054 build | Compiled with the extension's alc.dll via dotnet because the AL MCP had no project loaded | Reversible: yes

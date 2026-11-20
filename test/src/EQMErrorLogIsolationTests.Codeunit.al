@@ -5,7 +5,7 @@ using System.TestLibraries.Utilities;
 using System.Threading;
 
 /// <summary>
-/// Tests for FR-051 Error Logging, scenarios I1 to I3: a failing monitoring job writes an entry that survives the
+/// Tests for FR-051 Error Logging, scenarios I1 to I4: a failing monitoring job writes an entry that survives the
 /// rollback of the job, and the job still fails with the original text. The entry is committed by the platform, so
 /// each test commits first, reads the new entries into variables, deletes them and commits again before it asserts.
 /// A failed statement (asserterror) rolls back the transaction, so each test has exactly one asserterror.
@@ -109,6 +109,39 @@ codeunit 50155 "EQM Error Log Isolation Tests"
         // [THEN] The job body started once and no entry was written
         Assert.AreEqual(1, Subscriber.GetRaisedCount(), 'The job should have started once');
         Assert.AreEqual(0, EntryCount, 'No entry should be written');
+    end;
+
+    [Test]
+    [TransactionModel(TransactionModel::AutoCommit)]
+    procedure MaintenanceCalcJobFailureIsLoggedWithItsOperation()
+    var
+        FirstEntry: Record "EQM Error Log Entry";
+        JobQueueEntry: Record "Job Queue Entry";
+        Subscriber: Codeunit "EQM Error Log Test Subscr";
+        StartEntryNo: Integer;
+        EntryCount: Integer;
+        ErrorText: Text;
+        RaisedText: Text;
+    begin
+        // [SCENARIO I4] A failing maintenance calculation job writes one committed entry with its own operation
+        // [GIVEN] No open write transaction, and a subscriber that makes the job fail with a text that contains a placeholder
+        PrepareWithoutWriteTransaction(StartEntryNo);
+        ErrorText := PlaceholderTextTok;
+        ErrorText += Format(CreateGuid());
+        Subscriber.SetFailure(Codeunit::"EQM Maintenance Calc. Job", ErrorText);
+        BindSubscription(Subscriber);
+
+        // [WHEN] The job codeunit runs
+        asserterror Codeunit.Run(Codeunit::"EQM Maintenance Calc. Job", JobQueueEntry);
+        RaisedText := GetLastErrorText();
+        EntryCount := TakeNewEntries(StartEntryNo, FirstEntry);
+
+        // [THEN] The job failed with the original text, and exactly one entry holds the failure
+        Assert.AreEqual(ErrorText, RaisedText, 'The job should fail with the original text');
+        Assert.AreEqual(1, EntryCount, 'Exactly one entry should be written');
+        Assert.AreEqual("EQM Error Operation"::"Maintenance Calculation Job", FirstEntry.Operation, 'Operation should be the maintenance calculation job');
+        Assert.AreEqual(Codeunit::"EQM Maintenance Calc. Job", FirstEntry."Object ID", 'Object ID should be the job codeunit');
+        Assert.AreEqual(ErrorText, FirstEntry."Error Message", 'Error message should be the original text');
     end;
 
     local procedure PrepareWithoutWriteTransaction(var StartEntryNo: Integer)

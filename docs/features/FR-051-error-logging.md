@@ -14,7 +14,8 @@ Status: implemented on branch `feature/FR-051-error-logging`, not committed, not
 |---|---|
 | Warranty Alert Job | The daily warranty alert job stops with an error. |
 | Overdue Maintenance Job | The daily overdue maintenance job stops with an error. |
-| Schedule Monitoring Jobs | Creating the two daily job queue entries stops with an error. This happens in the Schedule Monitoring Jobs action, during install, and when the setup is created. |
+| Maintenance Calculation Job | The daily maintenance calculation job (FR-054, 05:00) stops with an error. |
+| Schedule Monitoring Jobs | Creating the daily job queue entries stops with an error. This happens in the Schedule Monitoring Jobs action, during install, and when the setup is created. |
 
 Not logged:
 - A successful run of a job, and a successful scheduling.
@@ -54,7 +55,7 @@ If the log entry cannot be written, the original error is still raised unchanged
 - Error Code, Error Call Stack and Object ID are classified as system metadata.
 
 ## Retention
-- No automatic cleanup in this phase. Entries stay until an administrator deletes them. A retention policy is a later phase (it needs install and upgrade code).
+- Entries stay until an administrator deletes them, or until a standard retention policy deletes them. Retention policies for this table were added by FR-054 (`docs/features/FR-054-background-processing-optimization.md`); the table has no filter and uses the field Logged At. The app creates no policy by itself.
 - The log is per company.
 
 ## Not logged in phase 1

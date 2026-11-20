@@ -11,6 +11,7 @@ codeunit 50110 "EQM Warranty Alert Mgt."
         NothingToAcknowledgeErr: Label 'The selected warranty alerts are already acknowledged or cancelled.';
         AlertsGeneratedTelemetryTok: Label 'EQM0001', Locked = true;
         AlertsGeneratedTelemetryMsg: Label 'Warranty alerts generated.', Locked = true;
+        AlertKeyTok: Label '%1|%2|%3', Locked = true;
         ScheduledTok: Label 'JobQueue', Locked = true;
         ManualTok: Label 'Manual', Locked = true;
         AlertsCreatedDimTok: Label 'AlertsCreated', Locked = true;
@@ -104,6 +105,7 @@ codeunit 50110 "EQM Warranty Alert Mgt."
         Equipment: Record "EQM Equipment";
         AlertInterval: Enum "EQM Warranty Alert Interval";
         WarrantyStatus: Enum "EQM Warranty Status";
+        ExistingAlertKeys: Dictionary of [Text, Boolean];
         AlertDays: Integer;
     begin
         CreatedCount := 0;
@@ -116,6 +118,7 @@ codeunit 50110 "EQM Warranty Alert Mgt."
         // on the first run there may be no rows to lock yet, so a residual duplicate risk remains (plan R5).
         WarrantyAlert.LockTable();
         CancelledCount := CancelStaleAlerts();
+        LoadExistingAlertKeys(ReferenceDate, ReferenceDate + AlertDays, ExistingAlertKeys);
 
         Equipment.SetLoadFields("No.", "Warranty End Date", Status);
         Equipment.SetRange("Warranty End Date", ReferenceDate, ReferenceDate + AlertDays);
@@ -125,8 +128,9 @@ codeunit 50110 "EQM Warranty Alert Mgt."
                     WarrantyStatus := Equipment.CalcWarrantyStatus(ReferenceDate);
                     if WarrantyStatus in [WarrantyStatus::Active, WarrantyStatus::"Expiring Soon"] then
                         if FindDueInterval(Equipment.GetWarrantyDaysRemaining(ReferenceDate), AlertInterval) then
-                            if not AlertExists(Equipment."No.", Equipment."Warranty End Date", AlertInterval) then begin
+                            if not ExistingAlertKeys.ContainsKey(GetAlertKey(Equipment."No.", Equipment."Warranty End Date", AlertInterval)) then begin
                                 CreateAlert(Equipment, AlertInterval, ReferenceDate);
+                                ExistingAlertKeys.Add(GetAlertKey(Equipment."No.", Equipment."Warranty End Date", AlertInterval), true);
                                 CreatedCount += 1;
                             end;
                 end;
@@ -200,16 +204,26 @@ codeunit 50110 "EQM Warranty Alert Mgt."
         exit(Equipment.IsFinalStatus(EquipmentStatus));
     end;
 
-    local procedure AlertExists(EquipmentNo: Code[20]; WarrantyEndDate: Date; AlertInterval: Enum "EQM Warranty Alert Interval"): Boolean
+    local procedure LoadExistingAlertKeys(FromDate: Date; ToDate: Date; var ExistingAlertKeys: Dictionary of [Text, Boolean])
     var
         WarrantyAlert: Record "EQM Warranty Alert";
+        AlertKey: Text;
     begin
-        WarrantyAlert.SetCurrentKey("Equipment No.", "Warranty End Date", "Alert Interval");
-        WarrantyAlert.SetRange("Equipment No.", EquipmentNo);
-        WarrantyAlert.SetRange("Warranty End Date", WarrantyEndDate);
-        WarrantyAlert.SetRange("Alert Interval", AlertInterval);
+        WarrantyAlert.SetCurrentKey(Status, "Warranty End Date");
         WarrantyAlert.SetFilter(Status, '<>%1', WarrantyAlert.Status::Cancelled);
-        exit(not WarrantyAlert.IsEmpty());
+        WarrantyAlert.SetRange("Warranty End Date", FromDate, ToDate);
+        WarrantyAlert.SetLoadFields("Equipment No.", "Warranty End Date", "Alert Interval");
+        if WarrantyAlert.FindSet() then
+            repeat
+                AlertKey := GetAlertKey(WarrantyAlert."Equipment No.", WarrantyAlert."Warranty End Date", WarrantyAlert."Alert Interval");
+                if not ExistingAlertKeys.ContainsKey(AlertKey) then
+                    ExistingAlertKeys.Add(AlertKey, true);
+            until WarrantyAlert.Next() = 0;
+    end;
+
+    local procedure GetAlertKey(EquipmentNo: Code[20]; WarrantyEndDate: Date; AlertInterval: Enum "EQM Warranty Alert Interval"): Text
+    begin
+        exit(StrSubstNo(AlertKeyTok, EquipmentNo, Format(WarrantyEndDate, 0, 9), AlertInterval.AsInteger()));
     end;
 
     local procedure CreateAlert(Equipment: Record "EQM Equipment"; AlertInterval: Enum "EQM Warranty Alert Interval"; ReferenceDate: Date)

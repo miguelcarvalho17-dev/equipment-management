@@ -28,6 +28,7 @@ codeunit 50115 "EQM Monitoring Job Mgt."
         JobQueueCategoryDescTxt: Label 'Equipment Management', MaxLength = 30;
         WarrantyJobDescTxt: Label 'Equipment Management: create warranty alerts', MaxLength = 250;
         MaintenanceJobDescTxt: Label 'Equipment Management: check overdue maintenance', MaxLength = 250;
+        MaintenanceCalcJobDescTxt: Label 'Equipment Management: recalculate planned maintenance dates', MaxLength = 250;
         NotScheduledTxt: Label 'Not scheduled', Comment = 'Shown on Equipment Setup when no job queue entry exists for the monitoring job.';
         DailyFormulaTok: Label '<1D>', Locked = true;
         JobsScheduledTelemetryTok: Label 'EQM0003', Locked = true;
@@ -123,17 +124,18 @@ codeunit 50115 "EQM Monitoring Job Mgt."
         CreatedCount := 0;
         ExistingCount := 0;
         EnsureJobQueueCategory();
-        EnsureJob(Codeunit::"EQM Warranty Alert Job", WarrantyJobDescTxt, CreatedCount, ExistingCount);
-        EnsureJob(Codeunit::"EQM Maintenance Monitor Job", MaintenanceJobDescTxt, CreatedCount, ExistingCount);
+        EnsureJob(Codeunit::"EQM Warranty Alert Job", WarrantyJobDescTxt, 060000T, CreatedCount, ExistingCount);
+        EnsureJob(Codeunit::"EQM Maintenance Monitor Job", MaintenanceJobDescTxt, 060000T, CreatedCount, ExistingCount);
+        EnsureJob(Codeunit::"EQM Maintenance Calc. Job", MaintenanceCalcJobDescTxt, 050000T, CreatedCount, ExistingCount);
         LogScheduled(TriggerTok, CreatedCount, ExistingCount);
     end;
 
-    local procedure EnsureJob(CodeunitId: Integer; JobDescription: Text; var CreatedCount: Integer; var ExistingCount: Integer)
+    local procedure EnsureJob(CodeunitId: Integer; JobDescription: Text; StartingTime: Time; var CreatedCount: Integer; var ExistingCount: Integer)
     begin
         if JobExists(CodeunitId) then
             ExistingCount += 1
         else begin
-            CreateRecurringJob(CodeunitId, JobDescription);
+            CreateRecurringJob(CodeunitId, JobDescription, StartingTime);
             CreatedCount += 1;
         end;
     end;
@@ -158,9 +160,9 @@ codeunit 50115 "EQM Monitoring Job Mgt."
     end;
 
     // The only place that decides how an entry is created and made ready. It uses the standard public
-    // procedure for a recurring codeunit entry (category, attempts, daily formula, start time); that procedure
+    // procedure for a recurring codeunit entry (category, attempts, daily formula, the start time of the job); that procedure
     // enqueues the entry itself.
-    local procedure CreateRecurringJob(CodeunitId: Integer; JobDescription: Text)
+    local procedure CreateRecurringJob(CodeunitId: Integer; JobDescription: Text; StartingTime: Time)
     var
         JobQueueEntry: Record "Job Queue Entry";
         NoRecordId: RecordId;
@@ -168,7 +170,7 @@ codeunit 50115 "EQM Monitoring Job Mgt."
     begin
         Evaluate(DailyFormula, DailyFormulaTok);
         JobQueueEntry.ScheduleRecurrentJobQueueEntryWithRunDateFormula(
-            JobQueueEntry."Object Type to Run"::Codeunit, CodeunitId, NoRecordId, GetJobQueueCategoryCode(), 3, DailyFormula, 060000T);
+            JobQueueEntry."Object Type to Run"::Codeunit, CodeunitId, NoRecordId, GetJobQueueCategoryCode(), 3, DailyFormula, StartingTime);
         JobQueueEntry.Description := CopyStr(JobDescription, 1, MaxStrLen(JobQueueEntry.Description));
         JobQueueEntry.Modify(true);
     end;
@@ -216,7 +218,7 @@ codeunit 50115 "EQM Monitoring Job Mgt."
         JobQueueEntry: Record "Job Queue Entry";
     begin
         JobQueueEntry.SetRange("Object Type to Run", JobQueueEntry."Object Type to Run"::Codeunit);
-        JobQueueEntry.SetFilter("Object ID to Run", '%1|%2', Codeunit::"EQM Warranty Alert Job", Codeunit::"EQM Maintenance Monitor Job");
+        JobQueueEntry.SetFilter("Object ID to Run", '%1|%2|%3', Codeunit::"EQM Warranty Alert Job", Codeunit::"EQM Maintenance Monitor Job", Codeunit::"EQM Maintenance Calc. Job");
         Page.Run(Page::"Job Queue Entries", JobQueueEntry);
     end;
 

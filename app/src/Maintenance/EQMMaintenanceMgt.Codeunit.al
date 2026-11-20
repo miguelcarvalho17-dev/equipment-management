@@ -3,7 +3,8 @@ namespace MiguelCarvalho.EquipmentManagement;
 using Microsoft.Purchases.Vendor;
 
 /// <summary>
-/// Read helpers for maintenance records shown on equipment pages, and the confirmation before posting.
+/// Read helpers for maintenance records shown on equipment pages, and the confirmation before posting,
+/// and recalculates planned maintenance dates.
 /// </summary>
 codeunit 50108 "EQM Maintenance Mgt."
 {
@@ -19,6 +20,11 @@ codeunit 50108 "EQM Maintenance Mgt."
         OverdueDaysDimTok: Label 'OverdueDays', Locked = true;
         ReferenceDateDimTok: Label 'ReferenceDate', Locked = true;
         TriggerDimTok: Label 'Trigger', Locked = true;
+        RecalcTelemetryTok: Label 'EQM0012', Locked = true;
+        RecalcTelemetryMsg: Label 'Planned maintenance dates recalculated.', Locked = true;
+        EquipmentCheckedDimTok: Label 'EquipmentChecked', Locked = true;
+        DatesUpdatedDimTok: Label 'DatesUpdated', Locked = true;
+        PlannedOverdueDimTok: Label 'PlannedOverdueCount', Locked = true;
 
     /// <summary>
     /// Returns whether the equipment has any maintenance record. Equipment with maintenance records cannot be deleted.
@@ -247,6 +253,93 @@ codeunit 50108 "EQM Maintenance Mgt."
         else
             Dimensions.Add(TriggerDimTok, ManualTok);
         Session.LogMessage(OverdueCheckedTelemetryTok, OverdueCheckedTelemetryMsg, Verbosity::Normal, DataClassification::SystemMetadata, TelemetryScope::All, Dimensions);
+    end;
+
+    /// <summary>
+    /// Recalculates the stored next maintenance date of all equipment that is not lost or disposed and corrects stale values.
+    /// Commits after every 1000 updates when CommitPerBatch is true. 0D means today.
+    /// </summary>
+    /// <param name="ReferenceDate">The date that planned dates are compared with. 0D means today.</param>
+    /// <param name="IsScheduled">True when a job queue entry runs the recalculation; false when a user does.</param>
+    /// <param name="CommitPerBatch">True to commit after every 1000 updates. Use it only when no caller transaction is open.</param>
+    /// <param name="CheckedCount">Returns the number of equipment records checked.</param>
+    /// <param name="UpdatedCount">Returns the number of stored dates that were corrected.</param>
+    /// <param name="PlannedOverdueCount">Returns the number of checked equipment whose planned date is before the reference date.</param>
+    internal procedure RecalculateNextMaintenanceDates(ReferenceDate: Date; IsScheduled: Boolean; CommitPerBatch: Boolean; var CheckedCount: Integer; var UpdatedCount: Integer; var PlannedOverdueCount: Integer)
+    var
+        Equipment: Record "EQM Equipment";
+        StaleEquipmentNos: List of [Code[20]];
+        StaleEquipmentNo: Code[20];
+        NewDate: Date;
+    begin
+        CheckedCount := 0;
+        UpdatedCount := 0;
+        PlannedOverdueCount := 0;
+        if ReferenceDate = 0D then
+            ReferenceDate := Today();
+
+        Equipment.SetLoadFields("No.", Status, "Last Maintenance Date", "Maintenance Frequency (Months)", "Next Maintenance Date");
+        if Equipment.FindSet() then
+            repeat
+                if not Equipment.IsFinalStatus(Equipment.Status) then begin
+                    CheckedCount += 1;
+                    NewDate := Equipment.CalcNextMaintenanceDate();
+                    if NewDate <> Equipment."Next Maintenance Date" then
+                        StaleEquipmentNos.Add(Equipment."No.");
+                    if (NewDate <> 0D) and (NewDate < ReferenceDate) then
+                        PlannedOverdueCount += 1;
+                end;
+            until Equipment.Next() = 0;
+
+        foreach StaleEquipmentNo in StaleEquipmentNos do begin
+            if UpdateStoredNextMaintenanceDate(StaleEquipmentNo) then
+                UpdatedCount += 1;
+            // Releases the row locks during a long job. Every update is idempotent, so a later failure leaves only correct data.
+            if CommitPerBatch and (UpdatedCount > 0) and (UpdatedCount mod GetRecalcCommitBatchSize() = 0) then
+                Commit();
+        end;
+
+        LogRecalcTelemetry(ReferenceDate, IsScheduled, CheckedCount, UpdatedCount, PlannedOverdueCount);
+    end;
+
+    local procedure UpdateStoredNextMaintenanceDate(EquipmentNo: Code[20]): Boolean
+    var
+        EquipmentToUpdate: Record "EQM Equipment";
+        NewDate: Date;
+    begin
+        EquipmentToUpdate.ReadIsolation := IsolationLevel::UpdLock;
+        if not EquipmentToUpdate.Get(EquipmentNo) then
+            exit(false);
+        if EquipmentToUpdate.IsFinalStatus(EquipmentToUpdate.Status) then
+            exit(false);
+        NewDate := EquipmentToUpdate.CalcNextMaintenanceDate();
+        if NewDate = EquipmentToUpdate."Next Maintenance Date" then
+            exit(false);
+
+        EquipmentToUpdate."Next Maintenance Date" := NewDate;
+        // Modify(false) is deliberate: it corrects a derived field only and must not run consistency checks or audit on old data.
+        EquipmentToUpdate.Modify(false);
+        exit(true);
+    end;
+
+    local procedure GetRecalcCommitBatchSize(): Integer
+    begin
+        exit(1000);
+    end;
+
+    local procedure LogRecalcTelemetry(ReferenceDate: Date; IsScheduled: Boolean; CheckedCount: Integer; UpdatedCount: Integer; PlannedOverdueCount: Integer)
+    var
+        Dimensions: Dictionary of [Text, Text];
+    begin
+        Dimensions.Add(EquipmentCheckedDimTok, Format(CheckedCount, 0, 9));
+        Dimensions.Add(DatesUpdatedDimTok, Format(UpdatedCount, 0, 9));
+        Dimensions.Add(PlannedOverdueDimTok, Format(PlannedOverdueCount, 0, 9));
+        Dimensions.Add(ReferenceDateDimTok, Format(ReferenceDate, 0, 9));
+        if IsScheduled then
+            Dimensions.Add(TriggerDimTok, ScheduledTok)
+        else
+            Dimensions.Add(TriggerDimTok, ManualTok);
+        Session.LogMessage(RecalcTelemetryTok, RecalcTelemetryMsg, Verbosity::Normal, DataClassification::SystemMetadata, TelemetryScope::All, Dimensions);
     end;
 
     /// <summary>

@@ -1,6 +1,7 @@
 namespace MiguelCarvalho.EquipmentManagement.Tests;
 
 using MiguelCarvalho.EquipmentManagement;
+using System.DataAdministration;
 using System.TestLibraries.Utilities;
 using System.Upgrade;
 
@@ -153,6 +154,64 @@ codeunit 50177 "EQM Upgrade Tests"
         // [THEN] The alert days are still 0
         EquipmentSetup.Get();
         Assert.AreEqual(0, EquipmentSetup."Default Warranty Alert Days", EquipmentSetup.FieldCaption("Default Warranty Alert Days"));
+    end;
+
+    [Test]
+    [TransactionModel(TransactionModel::AutoRollback)]
+    procedure RetentionPolicyTablesAreRegistered()
+    var
+        RetenPolAllowedTables: Codeunit "Reten. Pol. Allowed Tables";
+    begin
+        // [SCENARIO RP1] The error log, warranty alert and integration event tables become allowed tables of retention policies
+        // [GIVEN] No setup is needed
+
+        // [WHEN] The registration runs
+        UpgradeMgt.AddRetentionPolicyAllowedTables();
+
+        // [THEN] The three tables are allowed tables
+        Assert.IsTrue(RetenPolAllowedTables.IsAllowedTable(Database::"EQM Error Log Entry"), 'Error Log Entry');
+        Assert.IsTrue(RetenPolAllowedTables.IsAllowedTable(Database::"EQM Warranty Alert"), 'Warranty Alert');
+        Assert.IsTrue(RetenPolAllowedTables.IsAllowedTable(Database::"EQM Integration Event Entry"), 'Integration Event Entry');
+    end;
+
+    [Test]
+    [TransactionModel(TransactionModel::AutoRollback)]
+    procedure RetentionPolicyStepIsTagGuardedAndIdempotent()
+    var
+        RetenPolAllowedTables: Codeunit "Reten. Pol. Allowed Tables";
+        UpgradeTag: Codeunit "Upgrade Tag";
+    begin
+        // [SCENARIO RP2] The retention policy step sets its tag and can run twice without an error
+        // [GIVEN] No setup is needed
+
+        // [WHEN] The step runs twice
+        UpgradeMgt.UpgradeRetentionPolicyTables();
+        UpgradeMgt.UpgradeRetentionPolicyTables();
+
+        // [THEN] The tag is set and the three tables are still allowed tables
+        Assert.IsTrue(UpgradeTag.HasUpgradeTag(UpgradeMgt.GetRetentionPolicyTablesTag()), 'The upgrade tag should be set');
+        Assert.IsTrue(RetenPolAllowedTables.IsAllowedTable(Database::"EQM Error Log Entry"), 'Error Log Entry');
+        Assert.IsTrue(RetenPolAllowedTables.IsAllowedTable(Database::"EQM Warranty Alert"), 'Warranty Alert');
+        Assert.IsTrue(RetenPolAllowedTables.IsAllowedTable(Database::"EQM Integration Event Entry"), 'Integration Event Entry');
+    end;
+
+    [Test]
+    [TransactionModel(TransactionModel::AutoRollback)]
+    procedure AuditAndHistoryTablesAreNeverAllowed()
+    var
+        RetenPolAllowedTables: Codeunit "Reten. Pol. Allowed Tables";
+    begin
+        // [SCENARIO RP3] (negative) The audit, maintenance log, history and assignment tables are never allowed tables
+        // [GIVEN] No setup is needed
+
+        // [WHEN] The registration runs
+        UpgradeMgt.AddRetentionPolicyAllowedTables();
+
+        // [THEN] None of those tables is an allowed table
+        Assert.IsFalse(RetenPolAllowedTables.IsAllowedTable(Database::"EQM Equipment Audit Entry"), 'Equipment Audit Entry');
+        Assert.IsFalse(RetenPolAllowedTables.IsAllowedTable(Database::"EQM Maintenance Log Entry"), 'Maintenance Log Entry');
+        Assert.IsFalse(RetenPolAllowedTables.IsAllowedTable(Database::"EQM Maintenance History Entry"), 'Maintenance History Entry');
+        Assert.IsFalse(RetenPolAllowedTables.IsAllowedTable(Database::"EQM Equipment Assignment"), 'Equipment Assignment');
     end;
 
     local procedure Initialize()

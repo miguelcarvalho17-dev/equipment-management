@@ -101,7 +101,7 @@ Open items after FR-001 Equipment Registration (written 2026-11-02). Nothing fro
 - [ ] WS-SB7 Non-SUPER Reader sees the warranty fields and cannot change them; non-SUPER Manager can.
 - [ ] WS-SB8 Teaching tip of the Equipment Card shows the new text.
 
-## FR-018 sandbox checks (not run; automated tests deferred, Q11, test codeunit 50172 reserved)
+## FR-018 sandbox checks (not run; automated tests deferred, Q11; test codeunit 50172 "EQM Background Process. Tests" reserved, built in FR-054)
 Source: "Verification still open" in `docs/plans/FR-018-automated-background-processing.md`.
 - [ ] BG-SB1 Build with CodeCop, UICop and AppSourceCop: no errors or warnings. Covers `TaskScheduler.CanCreateTask` on runtime 18.0, text page variables with `Editable = false` and tooltips, `Session.LogMessage` with a dictionary, images Calendar and JobListSetup (fallbacks in the plan). `.g.xlf` has the new texts.
 - [ ] BG-SB2 (mandatory) Behavior of `ScheduleRecurrentJobQueueEntryWithRunDateFormula`: entry is inserted and Ready, the Description set by `Modify(true)` is kept, record Earliest Start Date/Time, Run-on flags and rerun delay. Decides whether `CreateRecurringJob` stays as is.
@@ -496,3 +496,16 @@ Source: "Sandbox checks" in `docs/plans/FR-052-usage-analytics.md`, and the know
 - [ ] UA-SB5 (manual, sandbox, performance): run the report for 12 months with volumes close to FR-053 (1,000,000 assignments, 100,000 equipment). Record the run time. The audit trail and the assignments have no index on the dates, so this is the check for the risk noted in the plan.
 - [ ] UA-SB6 (manual, sandbox, time zone): set a time zone far from UTC (for example UTC+12 or UTC-10) for the user. Create an assignment and an audit entry (an equipment change) in the last hour of one month and in the first hour of the next month, in local time. Run the report for both months. Record which month each entry is counted in on the Most Assigned Categories and Active Users sheets, and check that it is the local month of the entry. Record the result.
 - [ ] Record the results in `docs/features/FR-052-usage-analytics.md` ("Verification status") and `docs/help/FR-052-usage-analytics.md` (clear the TODO(verify) line) and clear the items above.
+
+## FR-054 sandbox checks (tests not executed; test codeunit 50172 "EQM Background Process. Tests", test I4 in 50155 and RP1-RP3 in 50177, CI result pending)
+Source: "Manual sandbox checks" in `docs/plans/FR-054-background-processing-optimization.md`, and the open points in `docs/features/FR-054-background-processing-optimization.md`. No separate AppSource validation ran.
+- [ ] Run the test codeunits "EQM Background Process. Tests" (`test/src/EQMBackgroundProcessTests.Codeunit.al`), "EQM Error Log Isolation Tests" and "EQM Upgrade Tests" in AL-Go CI or with AL Test Runner in a sandbox. Written, never executed. Record the counts from `gh run view <run-id> --log`. Not verified until the push.
+- [ ] BP-SB1 (manual, sandbox): Schedule Monitoring Jobs in an existing dev company creates only the 50145 entry (Created 1, Existing 2). The entry is Ready, starts at 05:00, and keeps its Description. Not automated (FR-018 V2).
+- [ ] BP-SB2 (manual, sandbox): the new job runs before the 06:00 jobs in category EQM.
+- [ ] BP-SB3 (manual, sandbox): with a job user that has only EQM - Reader, the job fails on the first stale row, and the error log shows it.
+- [ ] BP-SB4 (manual, sandbox): EQM0012 appears in telemetry.
+- [ ] RP-SB1 (manual, sandbox): Retention Policies page. New policies on the three tables show the locked filter lines, and "Apply to all records" cannot remove them. Deleting closed alerts and processed entries works as SUPER. Open alerts and unprocessed entries are never deleted.
+- [ ] RP-SB2 (manual, sandbox): record whether the allowed-tables list is per company. Create a company after install and check whether the three tables are allowed there.
+- [ ] RP-SB3 (manual, sandbox): record whether the standard Refresh action of the allowed tables removes our tables.
+- [ ] RP-SB4 (manual, sandbox): run the retention job as a non-SUPER EQM - Administrator and record the permission error on the Warranty Alert table (Administrator has only indirect `d` there). Documentation input for the help.
+- [ ] Record the results in `docs/features/FR-054-background-processing-optimization.md` ("Verification status") and `docs/help/FR-054-background-processing-optimization.md` (clear the TODO(verify) line) and clear the items above.

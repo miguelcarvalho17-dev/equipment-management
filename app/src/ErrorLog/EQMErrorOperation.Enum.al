@@ -25,4 +25,8 @@ enum 50113 "EQM Error Operation"
     {
         Caption = 'Schedule Monitoring Jobs';
     }
+    value(4; "Maintenance Calculation Job")
+    {
+        Caption = 'Maintenance Calculation Job';
+    }
 }

@@ -1,6 +1,6 @@
 # Automatic daily monitoring (AppSource end-user help)
 
-Equipment Management checks your equipment every day without anyone starting it. Two job queue entries do the work: one creates warranty alerts, the other checks for overdue maintenance. The app creates them for you.
+Equipment Management checks your equipment every day without anyone starting it. Three job queue entries do the work: one creates warranty alerts, one checks for overdue maintenance, and one corrects the planned maintenance dates. The app creates them for you.
 
 ## Before you start: permissions
 - **Administrator** can create the entries again with **Schedule Monitoring Jobs**.
@@ -13,7 +13,7 @@ Equipment Management checks your equipment every day without anyone starting it.
 | Warranty Alert Job | Creates warranty alerts at 90, 60 and 30 days before a warranty ends (see Warranty alerts). |
 | Overdue Maintenance Job | Counts maintenance records that are still open more than 14 days after their Maintenance Date. It changes no data and sends no notification; the result is only recorded in telemetry. |
 
-Both run once a day at 06:00 and try up to 3 times if they fail. The first run may be the next 06:00 rather than right away.
+Both run once a day at 06:00 and try up to 3 times if they fail. The first run may be the next 06:00 rather than right away. The third job, which corrects the planned maintenance dates, runs once a day at 05:00 when Maintenance Planning is on (see `docs/help/FR-054-background-processing-optimization.md`).
 
 ## When the jobs are created
 - When the app is installed in a company.

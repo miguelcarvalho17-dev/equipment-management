@@ -111,6 +111,7 @@ permissionset 50100 "EQM - Reader"
         codeunit "EQM Notification Mgt." = X,
         codeunit "EQM Notification Subscribers" = X,
         codeunit "EQM Maintenance Monitor Job" = X,
+        codeunit "EQM Maintenance Calc. Job" = X,
         codeunit "EQM Monitoring Job Mgt." = X,
         codeunit "EQM Business Events" = X,
         codeunit "EQM Business Event Subscr." = X,

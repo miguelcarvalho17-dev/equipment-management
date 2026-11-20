@@ -53,6 +53,7 @@
         50142,
         50143,
         50144,
+        50145,
         50149
       ]
     },
@@ -1861,6 +1862,65 @@
         {
           "codeunit": 50155,
           "test": "MonitorJobFailureIsLoggedAndJobStillFails"
+        }
+      ]
+    },
+    {
+      "type": "codeunit",
+      "id": 50145,
+      "member": "OnRun",
+      "tests": [
+        {
+          "codeunit": 50172,
+          "test": "MaintCalcJobCorrectsStaleDate"
+        },
+        {
+          "codeunit": 50155,
+          "test": "MaintenanceCalcJobFailureIsLoggedWithItsOperation"
+        }
+      ]
+    },
+    {
+      "type": "codeunit",
+      "id": 50108,
+      "member": "RecalculateNextMaintenanceDates",
+      "tests": [
+        {
+          "codeunit": 50172,
+          "test": "RecalculationCorrectsAStaleDate"
+        }
+      ]
+    },
+    {
+      "type": "codeunit",
+      "id": 50139,
+      "member": "UpgradeRetentionPolicyTables",
+      "tests": [
+        {
+          "codeunit": 50177,
+          "test": "RetentionPolicyStepIsTagGuardedAndIdempotent"
+        }
+      ]
+    },
+    {
+      "type": "codeunit",
+      "id": 50139,
+      "member": "AddRetentionPolicyAllowedTables",
+      "tests": [
+        {
+          "codeunit": 50177,
+          "test": "RetentionPolicyTablesAreRegistered"
+        }
+      ]
+    },
+    {
+      "type": "codeunit",
+      "id": 50139,
+      "member": "GetRetentionPolicyTablesTag",
+      "tests": [
+        {
+          "codeunit": 50177,
+          "test": "RetentionPolicyStepIsTagGuardedAndIdempotent"
         }
       ]
     }
