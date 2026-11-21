@@ -509,3 +509,16 @@ Source: "Manual sandbox checks" in `docs/plans/FR-054-background-processing-opti
 - [ ] RP-SB3 (manual, sandbox): record whether the standard Refresh action of the allowed tables removes our tables.
 - [ ] RP-SB4 (manual, sandbox): run the retention job as a non-SUPER EQM - Administrator and record the permission error on the Warranty Alert table (Administrator has only indirect `d` there). Documentation input for the help.
 - [ ] Record the results in `docs/features/FR-054-background-processing-optimization.md` ("Verification status") and `docs/help/FR-054-background-processing-optimization.md` (clear the TODO(verify) line) and clear the items above.
+
+## FR-057 sandbox checks (tests not executed; 7 test procedures written in test codeunit "EQM Role Permission Tests" 50162, CI result pending)
+Source: "Manual sandbox checks" in `docs/plans/FR-057-permission-review.md`. The structural tests (scenarios 12 to 15) only read permission metadata; these checks cover enforcement. No separate AppSource validation ran.
+- [ ] OP-SB1 (manual, sandbox): a user without SUPER, with D365 BASIC and EQM - Operator, can assign and return from the equipment card and the Employee Card, register maintenance (number series consumed), post maintenance, add a note, acknowledge alerts and generate alerts, without a permission error.
+- [ ] OP-SB2 (manual, sandbox): New equipment fails on save with a permission error.
+- [ ] OP-SB3 (manual, sandbox): Delete equipment fails with a permission error.
+- [ ] OP-SB4 (manual, sandbox): Equipment Categories and Equipment Setup open read-only.
+- [ ] OP-SB5 (manual, sandbox): approve or reject a request, and create a request, fail with a permission error.
+- [ ] OP-SB6 (manual, sandbox): attachment upload fails, and the equipment picture cannot be edited (`Record.WritePermission()`).
+- [ ] OP-SB7 (manual, sandbox): the Error Log action is hidden on Equipment Setup.
+- [ ] OP-SB8 (manual, sandbox): the Warranty Alerts page has Acknowledge and Generate enabled.
+- [ ] Run the test codeunit "EQM Role Permission Tests" (`test/src/EQMRolePermissionTests.Codeunit.al`) with AL Test Runner in a sandbox, or read the result in AL-Go CI. Written, not executed locally. Record the counts from `gh run view <run-id> --log`.
+- [ ] Record the results in `docs/features/FR-057-permission-review.md` ("Verification status") and `docs/help/FR-057-permission-review.md` (clear the TODO(verify) lines) and clear the items above.

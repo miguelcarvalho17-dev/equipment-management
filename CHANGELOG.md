@@ -1,6 +1,20 @@
 # Changelog
 Newest first. Grouped by Added / Changed / Fixed / Obsolete.
 
+## FR-057 Permission Review
+### Added
+- Equipment Operator permission set: for people who do the daily equipment work. An Operator can assign and return equipment, register and post maintenance, add notes, acknowledge and generate warranty alerts, and change existing equipment. An Operator cannot create or delete equipment, change categories or setup, or work with equipment requests and attachments. Feature doc docs/features/FR-057-permission-review.md. Help docs/help/FR-057-permission-review.md.
+### Changed
+- None. Equipment Reader, Manager, Administrator and API Consumer keep their rights.
+### Fixed
+- None.
+### Obsolete
+- None.
+
+Release notes: Administrators can give people who do the daily equipment work the new Equipment Operator permission set. It covers assigning and returning equipment, maintenance, notes and warranty alerts, and does not allow creating or deleting equipment, changing categories or setup, or handling requests. The Equipment Manager covers everything an Operator can do.
+
+Note: no table, field, page, codeunit, event or upgrade code change, no app.json change, version stays 29.0.0.0. The new set is added to the app; no existing role gets new rights. Known limits: an Operator can change existing equipment fields, including the status and the name; renaming equipment with attachments fails with a permission error. Not verified: tests not executed locally, CI result pending (test codeunit 50162 "EQM Role Permission Tests", seven new tests); the permission behaviour in a sandbox is not checked yet (docs/TODO.md, section FR-057 sandbox checks); no separate AppSource validation ran. The feature doc is docs/features/FR-057-permission-review.md.
+
 ## FR-054 Background Processing Optimization (version stays 29.0.0.0, no bump)
 ### Added
 - Maintenance Calculation Job: a third daily job, at 05:00, that recalculates the stored next maintenance date of every equipment that is not lost or disposed. It runs only when Maintenance Planning is on and corrects only dates that are out of date. Schedule Monitoring Jobs creates it. Its failures appear in the Equipment Error Log. Feature doc docs/features/FR-054-background-processing-optimization.md.

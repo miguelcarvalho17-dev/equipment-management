@@ -5733,6 +5733,11 @@
           <note from="Developer" annotates="general" priority="2"></note>
           <note from="Xliff Generator" annotates="general" priority="3">PermissionSet EQM - Manager - Property Caption</note>
         </trans-unit>
+        <trans-unit id="PermissionSet 3820463048 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Equipment Operator</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">PermissionSet EQM - Operator - Property Caption</note>
+        </trans-unit>
         <trans-unit id="PermissionSet 4096382515 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
           <source>Equipment Reader</source>
           <note from="Developer" annotates="general" priority="2"></note>

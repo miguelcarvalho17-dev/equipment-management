@@ -14,6 +14,8 @@ using System.Threading;
 /// "Metadata Permission Set Rel." (assignable flag and includes), "Page Metadata" and "AllObjWithCaption" (object lists).
 /// Nothing is written, so there is nothing to roll back. Permission enforcement itself (scenarios S1 to S4) is a
 /// manual sandbox check.
+/// FR-057 adds the Equipment Operator role (scenarios 12 to 15): assignable, includes Reader, matrix, negative
+/// rights, Manager covers Operator, and Operator keeps Reader's Execute rights.
 /// Rights are compared as a 5 character text in the order Read, Insert, Modify, Delete, Execute.
 /// Y = Yes (direct), I = Indirect, - = none.
 /// </summary>
@@ -28,6 +30,7 @@ codeunit 50162 "EQM Role Permission Tests"
         ManagerRoleTok: Label 'EQM - MANAGER', Locked = true;
         AdministratorRoleTok: Label 'EQM - ADMINISTRATOR', Locked = true;
         ApiConsumerRoleTok: Label 'EQM - API CONSUMER', Locked = true;
+        OperatorRoleTok: Label 'EQM - OPERATOR', Locked = true;
         EQMObjectIdFilterTok: Label '50100..50149', Locked = true;
         SetMissingErr: Label 'Permission set %1 should exist.', Comment = '%1 = role ID';
         AssignableErr: Label 'Permission set %1 should be assignable.', Comment = '%1 = role ID';
@@ -42,6 +45,8 @@ codeunit 50162 "EQM Role Permission Tests"
         NoDeleteErr: Label '%1 should have no Delete on table %2.', Comment = '%1 = role ID, %2 = table ID';
         NothingCheckedErr: Label 'No objects of type %1 were found in 50100-50149, so the check would pass for no reason.', Comment = '%1 = object type number';
         NotAtLeastAdminErr: Label 'Administrator should have equal or stronger rights than API Consumer on object type %1, ID %2 (API Consumer %3, Administrator %4).', Comment = '%1 = object type number, %2 = object ID, %3 = rights of API Consumer, %4 = rights of Administrator';
+        NotAtLeastManagerErr: Label 'Manager should have equal or stronger rights than Operator on object type %1, ID %2 (Operator %3, Manager %4).', Comment = '%1 = object type number, %2 = object ID, %3 = rights of Operator, %4 = rights of Manager';
+        OperatorMissingErr: Label 'Operator should have Execute on object type %1, ID %2 like Reader.', Comment = '%1 = object type number, %2 = object ID';
         ReaderMissingErr: Label 'Reader should have Execute on object type %1, ID %2.', Comment = '%1 = object type number, %2 = object ID';
         ApiConsumerMissingErr: Label 'API Consumer should have Execute on API page %1.', Comment = '%1 = page ID';
         NoneErr: Label 'API Consumer should have no access to non-API page %1.', Comment = '%1 = page ID';
@@ -391,6 +396,143 @@ codeunit 50162 "EQM Role Permission Tests"
         AssertTableDataRights(ManagerRoleTok, Database::"EQM Error Log Entry", '-----');
         AssertTableDataRights(ReaderRoleTok, Database::"EQM Error Log Entry", '-----');
         AssertTableDataRights(ApiConsumerRoleTok, Database::"EQM Error Log Entry", '-----');
+    end;
+
+    [Test]
+    procedure OperatorIsAssignableAndIncludesOnlyReader()
+    begin
+        // [SCENARIO 12] (FR-057) Operator exists, is assignable and includes only Reader
+        // [GIVEN] The installed apps
+        // [WHEN] The permission set EQM - Operator is read from the metadata
+        // [THEN] It is assignable and has exactly one include relation, to EQM - READER
+        AssertAssignableWithInclude(OperatorRoleTok, ReaderRoleTok);
+    end;
+
+    [Test]
+    procedure OperatorTableDataMatchesMatrix()
+    begin
+        // [SCENARIO 13] (FR-057) Operator effective tabledata equals the matrix column exactly
+        // [GIVEN] The matrix of the plan: letters are Read, Insert, Modify, Delete, Execute (Y = Yes, I = Indirect, - = none)
+        // [WHEN] The effective permissions of EQM - Operator are expanded
+        // [THEN] Every table has exactly the rights of the matrix
+        AssertTableDataRights(OperatorRoleTok, Database::"EQM Equipment", 'Y-Y--');
+        AssertTableDataRights(OperatorRoleTok, Database::"EQM Equipment Category", 'Y----');
+        AssertTableDataRights(OperatorRoleTok, Database::"EQM Equipment Setup", 'Y----');
+        AssertTableDataRights(OperatorRoleTok, Database::"EQM Equipment Assignment", 'YII--');
+        AssertTableDataRights(OperatorRoleTok, Database::"EQM Maintenance Record", 'YYY--');
+        AssertTableDataRights(OperatorRoleTok, Database::"EQM Maintenance History Entry", 'YI---');
+        AssertTableDataRights(OperatorRoleTok, Database::"EQM Warranty Alert", 'YYY--');
+        AssertTableDataRights(OperatorRoleTok, Database::"EQM Maintenance Log Entry", 'YI---');
+        AssertTableDataRights(OperatorRoleTok, Database::"EQM Equipment Note", 'YY---');
+        AssertTableDataRights(OperatorRoleTok, Database::"EQM Integration Event Entry", 'YI---');
+        AssertTableDataRights(OperatorRoleTok, Database::"EQM Equipment Request", 'Y----');
+        AssertTableDataRights(OperatorRoleTok, Database::"EQM Equipment Audit Entry", 'YI---');
+        AssertTableDataRights(OperatorRoleTok, Database::"EQM Feature Setup", 'Y----');
+        AssertTableDataRights(OperatorRoleTok, Database::"EQM Error Log Entry", '-----');
+        AssertTableDataRights(OperatorRoleTok, Database::"EQM Demo Data Entry", '-----');
+        AssertTableDataRights(OperatorRoleTok, Database::"Document Attachment", 'Y----');
+    end;
+
+    [Test]
+    procedure OperatorCannotCreateEquipmentOrDeleteAnything()
+    var
+        OperatorPermission: Record "Expanded Permission";
+        Checked: Integer;
+    begin
+        // [SCENARIO 13] (FR-057, negative) Operator cannot create equipment, and has no Delete on any table
+        // [GIVEN] All tabledata entries of Operator
+        FilterPermissions(OperatorPermission, OperatorRoleTok, 0);
+
+        // [WHEN] The rights of each are read
+        if OperatorPermission.FindSet() then
+            repeat
+                Checked += 1;
+
+                // [THEN] Delete is none (direct and indirect)
+                Assert.AreEqual('-', CopyStr(RightsText(OperatorPermission), 4, 1), StrSubstNo(NoDeleteErr, OperatorRoleTok, OperatorPermission."Object ID"));
+            until OperatorPermission.Next() = 0;
+        Assert.IsTrue(Checked > 0, StrSubstNo(NothingCheckedErr, 0));
+        Assert.AreEqual('-', CopyStr(RightsOf(OperatorRoleTok, 0, Database::"EQM Equipment"), 2, 1), StrSubstNo(UnexpectedRightErr, OperatorRoleTok, Database::"EQM Equipment"));
+    end;
+
+    [Test]
+    procedure OperatorCannotWriteMasterDataSetupOrRequests()
+    begin
+        // [SCENARIO 13] (FR-057, negative) Operator has no Insert, Modify or Delete on Category, Setup, Feature Setup, Request and Document Attachment
+        // [GIVEN] The effective permissions of EQM - Operator
+        // [WHEN] The rights on these tables are read
+        // [THEN] Insert, Modify and Delete are none (direct and indirect)
+        AssertNoWriteRights(OperatorRoleTok, Database::"EQM Equipment Category");
+        AssertNoWriteRights(OperatorRoleTok, Database::"EQM Equipment Setup");
+        AssertNoWriteRights(OperatorRoleTok, Database::"EQM Feature Setup");
+        AssertNoWriteRights(OperatorRoleTok, Database::"EQM Equipment Request");
+        AssertNoWriteRights(OperatorRoleTok, Database::"Document Attachment");
+    end;
+
+    [Test]
+    procedure OperatorHasNoAccessToErrorLogDemoDataOrJobQueue()
+    begin
+        // [SCENARIO 13] (FR-057, negative) Operator has no entry on Error Log, Demo Data Entry and Job Queue Entry
+        // [GIVEN] The effective permissions of EQM - Operator
+        // [WHEN] The rights on these tables are read
+        // [THEN] There is no right at all
+        AssertTableDataRights(OperatorRoleTok, Database::"EQM Error Log Entry", '-----');
+        AssertTableDataRights(OperatorRoleTok, Database::"EQM Demo Data Entry", '-----');
+        AssertNoEntry(OperatorRoleTok, 0, Database::"Job Queue Entry");
+    end;
+
+    [Test]
+    procedure ManagerCoversEverythingOperatorCan()
+    var
+        OperatorPermission: Record "Expanded Permission";
+        ManagerRights: Text;
+        OperatorRights: Text;
+        Position: Integer;
+        Checked: Integer;
+    begin
+        // [SCENARIO 14] (FR-057) For every Operator entry, Manager's effective right is equal or stronger (Yes > Indirect > none)
+        // [GIVEN] All effective permission entries of Operator
+        OperatorPermission.SetRange("Role ID", OperatorRoleTok);
+
+        // [WHEN] The same object is looked up in the effective permissions of Manager
+        if OperatorPermission.FindSet() then
+            repeat
+                Checked += 1;
+                OperatorRights := RightsText(OperatorPermission);
+                ManagerRights := RightsOf(ManagerRoleTok, OperatorPermission."Object Type", OperatorPermission."Object ID");
+
+                // [THEN] Each of Read, Insert, Modify, Delete and Execute is equal or stronger
+                for Position := 1 to 5 do
+                    Assert.IsTrue(
+                        Strength(CopyStr(ManagerRights, Position, 1)) >= Strength(CopyStr(OperatorRights, Position, 1)),
+                        StrSubstNo(NotAtLeastManagerErr, OperatorPermission."Object Type", OperatorPermission."Object ID", OperatorRights, ManagerRights));
+            until OperatorPermission.Next() = 0;
+        Assert.IsTrue(Checked > 0, StrSubstNo(NothingCheckedErr, 0));
+    end;
+
+    [Test]
+    procedure OperatorCanExecuteEverythingReaderCan()
+    var
+        ReaderPermission: Record "Expanded Permission";
+        ObjectType: Integer;
+        Checked: Integer;
+    begin
+        // [SCENARIO 15] (FR-057) Operator has Execute on every table, report, codeunit, page and query where Reader has Execute
+        // [GIVEN] All Reader entries of these object types with Execute
+        // [WHEN] The same object is looked up in the effective permissions of Operator
+        foreach ObjectType in ObjectTypesToCheck() do begin
+            FilterPermissions(ReaderPermission, ReaderRoleTok, ObjectType);
+            if ReaderPermission.FindSet() then
+                repeat
+                    if CopyStr(RightsText(ReaderPermission), 5, 1) = 'Y' then begin
+                        Checked += 1;
+
+                        // [THEN] Operator has Execute (direct)
+                        Assert.AreEqual('Y', CopyStr(RightsOf(OperatorRoleTok, ObjectType, ReaderPermission."Object ID"), 5, 1), StrSubstNo(OperatorMissingErr, ObjectType, ReaderPermission."Object ID"));
+                    end;
+                until ReaderPermission.Next() = 0;
+        end;
+        Assert.IsTrue(Checked > 0, StrSubstNo(NothingCheckedErr, 0));
     end;
 
     local procedure ObjectTypesToCheck() ObjectTypes: List of [Integer]

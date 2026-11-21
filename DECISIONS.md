@@ -244,3 +244,14 @@ A decision that applies to all future work (not just one task) belongs in the "S
 - FR-054 objects | Chose logic in existing 50108 plus public job codeunit 50145 | Reversible: no (job codeunit ID permanent at release)
 - FR-054 tests | Named test codeunit 50172 "EQM Background Process. Tests" because the planned name exceeded 30 characters (AL0305) | Reversible: yes
 - FR-054 build | Compiled with the extension's alc.dll via dotnet because the AL MCP had no project loaded | Reversible: yes
+- FR-057 roles | Chose a new set "EQM - Operator" that includes Reader, over making Manager include Operator, so the existing hierarchy and test ExistingRolesKeepTheirHierarchy stay unchanged; Manager covers Operator is asserted by test T6 | Reversible: yes until first release (Role ID becomes a contract)
+- FR-057 roles | User approved a new permission set (stop-list item), Option A | Reversible: n/a
+- FR-057 operator rights | Chose direct M on equipment over indirect m through code, because assign, return and maintenance modify table 50100 from table and page code. Accepted limit: Operator can edit card fields and rename equipment (phase 3) | Reversible: yes
+- FR-057 operator rights | Chose RIM on Warranty Alert (same as Manager) over M only, because page 50120 gates Acknowledge and Generate on WritePermission | Reversible: yes
+- FR-057 operator rights | Chose no write rights on Equipment Request, because approval is a plain Modify and permissions cannot separate requesting from approving | Reversible: yes
+- FR-057 operator rights | Chose Document Attachment R only (inherited) over RI, because direct rights on that standard table apply to attachments of every BC record | Reversible: yes
+- FR-057 review | Chose to document audit findings F1 (Document Attachment RIMD) and F2 (user IDs readable by Reader) for phase 2 over removing rights now, because removal is on the stop list | Reversible: yes
+- FR-057 tests | Chose to add Operator tests T1-T7 to existing codeunit 50162 over a new test codeunit (scarce test IDs) | Reversible: yes
+- FR-057 objects | Chose permission set ID 50105 from a source scan, because the AL MCP had no project loaded | Reversible: yes
+- FR-057 translations | Chose 'Operador de equipamento' (pt-PT) and 'Operador de equipo' (es-ES), consistent with existing role captions | Reversible: yes
+- FR-057 build | Compiled app/ and test/ with the extension's alc.dll because the AL MCP had no project loaded; test/ compiled against a scratch package cache because test/.alpackages holds a stale app copy | Reversible: yes
