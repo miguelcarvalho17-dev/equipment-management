@@ -64,7 +64,7 @@ Open items after FR-001 Equipment Registration (written 2026-11-02). Nothing fro
 - [ ] HS-SB10 Rename a vendor used in posted maintenance as a non-EQM user: no error, and the entries keep the old vendor number and name.
 - [ ] HS-SB11 Posting user without Vendor read: posting works and Vendor Name on the entry is blank (R4).
 - [ ] HS-SB12 An error during posting (for example a future date set by data) leaves no entry and the record stays Open.
-- [ ] FR-011 follow-ups: update the personal-data classification item to include "Posted By", "Performed By" and "Vendor Name" (R5). Tests need `internalsVisibleTo` for the test app in app.json (H8).
+- [x] (done with FR-058, 2026-11-21) FR-011 R5: "Posted By" is EndUserIdentifiableInformation; "Performed By" and "Vendor Name" stay CustomerContent. See `docs/features/FR-058-data-classification.md`. H8 is met: `internalsVisibleTo` for the test app is in app.json.
 
 ## FR-012 sandbox checks (not run; automated tests deferred, Q9, test codeunit 50166 reserved)
 - [ ] MS-SB0 After publishing, list equipment with open maintenance records from FR-010/FR-011 testing; post them or accept that they cannot be assigned until posted.
@@ -155,7 +155,7 @@ Source: "Manual sandbox checks" in `docs/plans/FR-021-maintenance-dashboard.md`.
 - [x] FR-007 known limitation (Employee read): addressed in code by NFR-002 (name blank without Employee read, `ReadPermission()` guard). Not verified in a sandbox (SB9).
 - [ ] **New companies:** default data and number series are created only in `OnInstallAppPerCompany`. In a company created later the setup record is missing, and equipment creation fails on `TestField("Equipment Nos.")`. Create the defaults on company initialization (subscribe to the company-initialize event) or give the user path working permissions. NFR-002: the Administrator path now has indirect No. Series rights (ri), but defaults are still created only on install or when an Administrator opens Setup. Readers and Managers get the setup-missing error. Not verified (SB8).
 - [x] **Setup permissions (Read too permissive):** addressed in code by NFR-002 (EQM - Reader has R only). Not verified in a sandbox (SB2, SB8).
-- [ ] Decide whether "Assigned Employee No." should carry a personal-data classification.
+- [x] (decided with FR-058, 2026-11-21) "Assigned Employee No." keeps CustomerContent: it is employee data, not end-user data. Administrators can mark it Personal in the Data Classification Worksheet. See `docs/features/FR-058-data-classification.md`.
 - [ ] Setup defaults are created only when the setup record is missing. If the record exists but "Equipment Nos." is blank, nothing happens. Fix or document.
 - [ ] Document attachments on equipment (needs al-event-finder first; NFR-003 Q9).
 - [ ] Shared internal helper for the guarded employee full name, now repeated in five pages (NFR-003 R5).
