@@ -255,3 +255,11 @@ A decision that applies to all future work (not just one task) belongs in the "S
 - FR-057 objects | Chose permission set ID 50105 from a source scan, because the AL MCP had no project loaded | Reversible: yes
 - FR-057 translations | Chose 'Operador de equipamento' (pt-PT) and 'Operador de equipo' (es-ES), consistent with existing role captions | Reversible: yes
 - FR-057 build | Compiled app/ and test/ with the extension's alc.dll because the AL MCP had no project loaded; test/ compiled against a scratch package cache because test/.alpackages holds a stale app copy | Reversible: yes
+- FR-058 classification | Kept table-level CustomerContent inheritance instead of writing DataClassification on every field (same effective value, AS0016 enforces, no published metadata touched) | Reversible: yes
+- FR-058 employee numbers | Kept 50100 f10, 50103 f3, 50111 f2, 50112 f5 as CustomerContent, not EUII: employees are data subjects, not end users of the service; admins flag them Personal in the Data Classification Worksheet | Reversible: yes (metadata-only)
+- FR-058 Performed By / Vendor Name | Kept 50105 f8, 50106 f10 and 50106 f7 as CustomerContent, not EUII or OII (free text / third-party data entered by users) | Reversible: yes
+- FR-058 Posted By | Confirmed 50106 f11 already EUII; no change | Reversible: yes
+- FR-058 system fields | Did not move system-generated fields from CustomerContent to SystemMetadata (classifying higher is safe; lowering touches published metadata) | Reversible: yes
+- FR-058 test | Metadata test on system table Field instead of a Python repo check; test codeunit 50163 (unbuilt reservation, ID from source scan because the AL MCP had no project loaded) | Reversible: yes
+- FR-058 test | User-ID detection by name rule (Code[50] named "User ID" or "... By") plus explicit list | Reversible: yes
+- FR-058 build | Compiled with alc on a scratchpad copy because the AL MCP had no project loaded | Reversible: yes

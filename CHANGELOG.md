@@ -1,6 +1,20 @@
 # Changelog
 Newest first. Grouped by Added / Changed / Fixed / Obsolete.
 
+## FR-058 Data Classification (version stays 29.0.0.0, no bump)
+### Added
+- Data classification of the app: every field has a classification, and a new test checks it on every build. The help lists the fields that hold personal data, and an administrator can mark the employee numbers as personal in the Data Classification Worksheet. Feature doc docs/features/FR-058-data-classification.md. Help docs/help/FR-058-data-classification.md.
+### Changed
+- None. No field's classification changed, so stored data and the app's behaviour are the same.
+### Fixed
+- None.
+### Obsolete
+- None.
+
+Release notes: Equipment Management documents which fields hold personal data. The user names of the people who acted in the app are classified as end user identifiable information. Employee numbers are customer content, and an administrator can mark them as personal data in the Data Classification Worksheet. The app changes no stored data.
+
+Note: no `app/` code change, no `app.json` change, no upgrade code, no permission set change, version stays 29.0.0.0. No classification value changed, so there is no metadata or breaking-change impact. Not verified: tests not executed locally, CI result pending (test codeunit EQM Data Classification Tests, six tests DC1 to DC6); the Data Classification Worksheet steps are not checked in a sandbox yet (help article, TODO(verify)); no separate AppSource validation ran. The feature doc is docs/features/FR-058-data-classification.md.
+
 ## FR-057 Permission Review
 ### Added
 - Equipment Operator permission set: for people who do the daily equipment work. An Operator can assign and return equipment, register and post maintenance, add notes, acknowledge and generate warranty alerts, and change existing equipment. An Operator cannot create or delete equipment, change categories or setup, or work with equipment requests and attachments. Feature doc docs/features/FR-057-permission-review.md. Help docs/help/FR-057-permission-review.md.
