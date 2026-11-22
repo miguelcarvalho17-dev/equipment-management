@@ -1,6 +1,20 @@
 # Changelog
 Newest first. Grouped by Added / Changed / Fixed / Obsolete.
 
+## FR-059 User Documentation (version stays 29.0.0.0, no bump)
+### Added
+- User guide in one place: `docs/user-guide/` has 19 pages in task order. They cover the overview, getting started, setup, each functional area, integration, the API, a page and report reference, advanced scenarios, troubleshooting and FAQ, security and permissions, and release notes. The README links to the guide. Feature doc docs/features/FR-059-user-documentation.md. Help docs/help/FR-059-user-documentation.md.
+### Changed
+- None.
+### Fixed
+- None.
+### Obsolete
+- None.
+
+Release notes: Equipment Management has a user guide. It explains setup, the daily work with equipment, maintenance, warranties, requests, reports, notifications, integration and the API, and the permission sets. Each topic links to the feature article it comes from. The app changes nothing.
+
+Note: no `app/` change, no `app.json` change, no tests, version stays 29.0.0.0. Documentation only. Not verified: the guide steps are not checked in a Business Central sandbox (TODO(verify) markers in the guide); no separate AppSource validation ran. The feature doc is docs/features/FR-059-user-documentation.md.
+
 ## FR-058 Data Classification (version stays 29.0.0.0, no bump)
 ### Added
 - Data classification of the app: every field has a classification, and a new test checks it on every build. The help lists the fields that hold personal data, and an administrator can mark the employee numbers as personal in the Data Classification Worksheet. Feature doc docs/features/FR-058-data-classification.md. Help docs/help/FR-058-data-classification.md.

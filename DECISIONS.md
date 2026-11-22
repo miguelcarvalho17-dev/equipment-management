@@ -263,3 +263,14 @@ A decision that applies to all future work (not just one task) belongs in the "S
 - FR-058 test | Metadata test on system table Field instead of a Python repo check; test codeunit 50163 (unbuilt reservation, ID from source scan because the AL MCP had no project loaded) | Reversible: yes
 - FR-058 test | User-ID detection by name rule (Code[50] named "User ID" or "... By") plus explicit list | Reversible: yes
 - FR-058 build | Compiled with alc on a scratchpad copy because the AL MCP had no project loaded | Reversible: yes
+- FR-059 location | New folder docs/user-guide/ with one file per section, not docs/help/ or one large file | Reversible: yes
+- FR-059 file names | Stable unnumbered kebab-case slugs so they can become ContextSensitiveHelpPage targets in phase 2 | Reversible: yes until phase 2 ships help links
+- FR-059 reuse | Consolidated task-oriented rewrite linking per-feature help under "Related"; existing docs/help articles left unedited and conflicts reported | Reversible: yes
+- FR-059 source precedence | AL source > newest FR help article > older help article | Reversible: yes
+- FR-059 identifiers | No object IDs or AL names in the guide; page-to-article map only in the feature doc | Reversible: yes
+- FR-059 field tables | Descriptions taken from AL ToolTips (minus "Specifies ", first letter capitalised) | Reversible: yes
+- FR-059 releases | One "29.0.0.0 (not released yet)" section grouped by area from CHANGELOG release notes | Reversible: yes
+- FR-059 scope | Contributor articles (FR-045-049, FR-061, developer part of FR-029) left to FR-060 | Reversible: yes
+- FR-059 verification | One-off link and caption check by the developer instead of a new repo_checks.py check (phase 2) | Reversible: yes
+- FR-059 help links | No app.json help/contextSensitiveHelpUrl or ContextSensitiveHelpPage in phase 1 (stop list, no host) | Reversible: yes
+- FR-059 file writing | reports.md and releases.md written via shell heredoc because the Write tool rejected those names | Reversible: yes
