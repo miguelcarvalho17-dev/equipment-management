@@ -78,7 +78,7 @@ To react to a record being created or changed, use the Business Central trigger 
 
 ## Developers
 
-Developers can subscribe to the business events of the app in their own extensions. This is described in the developer documentation (FR-060), which is not written yet.
+Developers can subscribe to the business events of the app in their own extensions. This is described in the [developer documentation](../api/events.md) (FR-060).
 
 ## What to know
 

@@ -78,7 +78,7 @@ See [Setup and configuration](setup-and-configuration.md) for the switches. The 
 
 ## What to know
 
-- Business events for developers are described in the developer documentation (FR-060), which is not written yet.
+- Business events for developers are described in the [developer documentation](../api/events.md) (FR-060).
 - Daily jobs run in each company that has them. Check each company on **Equipment Setup**.
 
 ## Related

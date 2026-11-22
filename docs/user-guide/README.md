@@ -31,7 +31,7 @@ Equipment Management keeps this information in Business Central, where your empl
 - **Administrators** who install the app, set it up, give permissions and watch the daily jobs.
 - **Integrators** who connect other systems to the app.
 
-Developers who want to extend the app should use the developer documentation (FR-060). It is not written yet.
+Developers who want to extend the app should use the [developer documentation](../README.md) (FR-060).
 
 ## Key concepts
 

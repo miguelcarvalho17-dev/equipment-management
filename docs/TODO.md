@@ -530,3 +530,21 @@ Source: `docs/plans/FR-059-user-documentation.md`. No AL change, no tests. No se
 - [ ] Decide hosting and the `app.json` `help`/`contextSensitiveHelpUrl` values (stop list, user decision, phase 2).
 - [ ] Add `ContextSensitiveHelpPage` per the page-to-article map in `docs/features/FR-059-user-documentation.md` (phase 2).
 - [ ] Keep the guide in sync in each new FR (see the feature doc, "Maintaining the guide").
+
+## FR-060 checks (documentation only; not verified in a sandbox)
+Source: `docs/plans/FR-060-developer-documentation.md`. No AL change, no tests. No separate AppSource validation ran.
+- [ ] Fix the stale text in `README.md` in a chore: the V3 table gives the API route `/api/equipment/v1.0/...`, the real route is `/api/miguelCarvalho/equipment/v1.0/...`; the "V4 progress" section is out of date (it says 2 of 24 requirements are done).
+- [ ] Keep `docs/architecture/extension-structure.md` (object inventory), `docs/api/events.md` and `docs/api/endpoints.md` in sync in every FR that adds, renames or removes objects, events or API fields. The inventory tables are generated with the `OBJECT_RE` pattern of `.github/scripts/repo_checks.py` plus `profile`.
+- [ ] Phase 2 (user decisions): add an object-inventory check and a markdown link check to `repo_checks.py`; publish the docs (reference documentation with ALDoc through `DeployReferenceDocumentation.yaml`, or a static site); tell al-docs to maintain `docs/architecture`, `docs/api` and `docs/release-notes` (`.claude/agents/al-docs.md`).
+- [ ] Clear the `TODO(verify)` request samples in `docs/api/endpoints.md` in a sandbox, and the `TODO(verify)` subscription note in `docs/api/events.md` (a partner extension subscribing to the `internal` business event publishers).
+- [ ] Conflicts found between sources while writing the developer docs (the source code or the newer document won; the older documents were not edited):
+  - FR-048 gives the artifact names as `1.0.<run>.0`; FR-049 and `.AL-Go/settings.json` (`repoVersion` 29.0) give `29.0.<run>.0`.
+  - FR-042 lists five features; enum 50112 `EQM Feature` has six values (`Notifications` was added later).
+  - FR-029 says the job codeunit 50111 itself calls `GenerateAlerts`, `Commit` and `RaiseWarrantyExpiredEvents`; in the source the job codeunits only call `RunJob` in codeunit 50143, which runs the body (FR-051).
+  - FR-044 lists one upgrade tag; `EQM Upgrade Mgt.` has two (`...FR044-DefaultWarrantyAlertDays-20261118` and `...FR054-RetentionPolicyTables-20261120`).
+  - FR-026 convention C8 says API pages get `= X` in EQM - Reader only; EQM - API Consumer (FR-036) holds them too. FR-001 lists three permission sets; there are now five and one extension.
+  - `.github/RELEASENOTES.copy.md` is the release notes of the AL-Go template, not of this app.
+  - `test/app.json` depends on Equipment Management with minimum version `1.0.0.0` (the app version is 29.0.0.0). VER5 only requires that the minimum is not above the app version.
+  - The `Test Current/Next Minor/Next Major.settings.json` files set `versioningStrategy` to 15; check VER4 reads only `.AL-Go/settings.json` (strategy 0).
+  - FR-044 to FR-047 and others say "written, not executed, CI result pending". CI/CD run 44925652127 on `main` (2026-11-21, commit `e292f84`) shows 569 tests, 569 passed; the previous `main` run 44920033270 failed on `InsertedNoteGetsSystemUserAndTime` (563 tests, 1 failed). The cause of that failure is not analysed.
+  - FR-047 baseline (2026-11-19) differs from today's `coverage_check.py` result (Business Logic 57.8%, 118/204; API 0.0%; Critical Process 77.8%); the baseline is a record, not an error.
