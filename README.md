@@ -83,6 +83,7 @@ V2 is complete: all requirements in the V2 milestone are built and merged.
 | Auditability (maintenance log entries) | NFR-005 | Built, not yet verified in a Business Central sandbox |
 
 Feature documentation is in `docs/features/`, user help in `docs/help/` and the change history in `CHANGELOG.md`.
+The consolidated user guide is in [`docs/user-guide/`](docs/user-guide/README.md).
 
 ## Version 3
 

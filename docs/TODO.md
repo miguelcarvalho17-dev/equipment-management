@@ -522,3 +522,11 @@ Source: "Manual sandbox checks" in `docs/plans/FR-057-permission-review.md`. The
 - [ ] OP-SB8 (manual, sandbox): the Warranty Alerts page has Acknowledge and Generate enabled.
 - [ ] Run the test codeunit "EQM Role Permission Tests" (`test/src/EQMRolePermissionTests.Codeunit.al`) with AL Test Runner in a sandbox, or read the result in AL-Go CI. Written, not executed locally. Record the counts from `gh run view <run-id> --log`.
 - [ ] Record the results in `docs/features/FR-057-permission-review.md` ("Verification status") and `docs/help/FR-057-permission-review.md` (clear the TODO(verify) lines) and clear the items above.
+
+## FR-059 checks (documentation only; not verified in a sandbox)
+Source: `docs/plans/FR-059-user-documentation.md`. No AL change, no tests. No separate AppSource validation ran.
+- [ ] Walk through every guide page in `docs/user-guide/` in a sandbox and clear its `TODO(verify)` markers.
+- [ ] Add screenshots (phase 3).
+- [ ] Decide hosting and the `app.json` `help`/`contextSensitiveHelpUrl` values (stop list, user decision, phase 2).
+- [ ] Add `ContextSensitiveHelpPage` per the page-to-article map in `docs/features/FR-059-user-documentation.md` (phase 2).
+- [ ] Keep the guide in sync in each new FR (see the feature doc, "Maintaining the guide").
