@@ -84,6 +84,7 @@ V2 is complete: all requirements in the V2 milestone are built and merged.
 
 Feature documentation is in `docs/features/`, user help in `docs/help/` and the change history in `CHANGELOG.md`.
 The consolidated user guide is in [`docs/user-guide/`](docs/user-guide/README.md).
+Developer documentation (architecture, setup, CI/CD, testing, API, AppSource readiness) starts at [`docs/README.md`](docs/README.md).
 
 ## Version 3
 

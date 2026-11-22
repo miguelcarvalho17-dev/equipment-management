@@ -1,6 +1,20 @@
 # Changelog
 Newest first. Grouped by Added / Changed / Fixed / Obsolete.
 
+## FR-060 Developer Documentation (version stays 29.0.0.0, no bump)
+### Added
+- Developer documentation in `docs/`. The index is `docs/README.md`. It covers the architecture overview, the extension structure, the testing strategy, AppSource readiness, the development setup, the CI/CD process, the REST API endpoints, the events for partners, and the release notes index. Feature doc docs/features/FR-060-developer-documentation.md. Help docs/help/FR-060-developer-documentation.md.
+### Changed
+- The user guide's three sentences that said the developer documentation was not written yet now link to it. The root README links `docs/README.md`.
+### Fixed
+- None.
+### Obsolete
+- None.
+
+Release notes: Equipment Management has developer documentation for partners and contributors. It describes the app structure, the REST API and the published events, and the build and test pipeline. The end-user guide is unchanged.
+
+Note: no `app/` change, no `app.json` change, no workflow change, no tests, version stays 29.0.0.0. Documentation only. Not verified: nothing is checked in a Business Central sandbox, and the sample API request in docs/api/endpoints.md is marked TODO(verify); no separate AppSource validation ran. The feature doc is docs/features/FR-060-developer-documentation.md.
+
 ## FR-059 User Documentation (version stays 29.0.0.0, no bump)
 ### Added
 - User guide in one place: `docs/user-guide/` has 19 pages in task order. They cover the overview, getting started, setup, each functional area, integration, the API, a page and report reference, advanced scenarios, troubleshooting and FAQ, security and permissions, and release notes. The README links to the guide. Feature doc docs/features/FR-059-user-documentation.md. Help docs/help/FR-059-user-documentation.md.
