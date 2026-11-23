@@ -12,6 +12,7 @@ codeunit 50198 "EQM Feature Mgt. Tests"
     var
         Assert: Codeunit "Library Assert";
         FeatureMgt: Codeunit "EQM Feature Mgt.";
+        FeatureAvailabilityStub: Codeunit "EQM Feature Avail. Stub";
         Counter: Integer;
         EquipmentNoTok: Label 'FMEQ%1X', Locked = true;
         CategoryCodeTok: Label 'FMCAT%1', Locked = true;
@@ -463,11 +464,102 @@ codeunit 50198 "EQM Feature Mgt. Tests"
         Assert.IsTrue(IntegrationEventMgt.IsEnabled(), 'Integration events should be written');
     end;
 
+    [Test]
+    [TransactionModel(TransactionModel::AutoRollback)]
+    procedure FeatureMgtThroughInterfaceIsEnabledWithoutSetupRow()
+    var
+        FeatureAvailability: Interface "EQM IFeature Availability";
+        Ordinal: Integer;
+    begin
+        Initialize();
+        // [SCENARIO F1] The default implementation answers through the interface like a direct call
+        // [GIVEN] No feature setup rows (Initialize) and the feature management codeunit held as the interface
+        FeatureAvailability := FeatureMgt;
+
+        // [WHEN] IsEnabled is called through the interface for each feature
+        // [THEN] Each returns true
+        foreach Ordinal in Enum::"EQM Feature".Ordinals() do
+            Assert.IsTrue(FeatureAvailability.IsEnabled(Enum::"EQM Feature".FromInteger(Ordinal)), 'Feature should be enabled without a row');
+    end;
+
+    [Test]
+    [TransactionModel(TransactionModel::AutoRollback)]
+    procedure FeatureMgtThroughInterfaceIsDisabledWhenTurnedOff()
+    var
+        FeatureAvailability: Interface "EQM IFeature Availability";
+    begin
+        Initialize();
+        // [SCENARIO F2] A feature that is turned off is reported off through the interface
+        // [GIVEN] Warranty Alerts is turned off
+        FeatureMgt.SetFeatureEnabled(Enum::"EQM Feature"::"Warranty Alerts", false);
+        FeatureAvailability := FeatureMgt;
+
+        // [WHEN] IsEnabled is called through the interface
+        // [THEN] Warranty Alerts is off and Notifications is still on
+        Assert.IsFalse(FeatureAvailability.IsEnabled(Enum::"EQM Feature"::"Warranty Alerts"), 'Warranty Alerts should be off');
+        Assert.IsTrue(FeatureAvailability.IsEnabled(Enum::"EQM Feature"::Notifications), 'Notifications should stay on');
+    end;
+
+    [Test]
+    [TransactionModel(TransactionModel::AutoRollback)]
+    procedure InjectedFeatureAvailabilityTurnsIntegrationEventsOff()
+    var
+        IntegrationEventMgt: Codeunit "EQM Integration Event Mgt.";
+    begin
+        Initialize();
+        // [SCENARIO I1] An injected source that turns API Integration off stops the integration events
+        // [GIVEN] Integration Events Enabled is on, no setup rows (the database says on), the stub says off
+        EnsureEquipmentSetup(true);
+        FeatureAvailabilityStub.Disable(Enum::"EQM Feature"::"API Integration");
+        IntegrationEventMgt.SetFeatureAvailability(FeatureAvailabilityStub);
+
+        // [WHEN] IsEnabled is called on the integration event codeunit
+        // [THEN] It returns false and the stub was asked once
+        Assert.IsFalse(IntegrationEventMgt.IsEnabled(), 'Integration events should not be written');
+        Assert.AreEqual(1, FeatureAvailabilityStub.CountAsked(Enum::"EQM Feature"::"API Integration"), 'The stub should be asked once');
+    end;
+
+    [Test]
+    [TransactionModel(TransactionModel::AutoRollback)]
+    procedure InjectedFeatureAvailabilityTurnsIntegrationEventsOn()
+    var
+        IntegrationEventMgt: Codeunit "EQM Integration Event Mgt.";
+    begin
+        Initialize();
+        // [SCENARIO I2] An injected source that turns API Integration on overrides the database
+        // [GIVEN] Integration Events Enabled is on, the database says API Integration is off, the stub says on
+        EnsureEquipmentSetup(true);
+        FeatureMgt.SetFeatureEnabled(Enum::"EQM Feature"::"API Integration", false);
+        IntegrationEventMgt.SetFeatureAvailability(FeatureAvailabilityStub);
+
+        // [WHEN] IsEnabled is called on the integration event codeunit
+        // [THEN] It returns true, so the Feature Setup table was not read
+        Assert.IsTrue(IntegrationEventMgt.IsEnabled(), 'Integration events should be written');
+    end;
+
+    [Test]
+    [TransactionModel(TransactionModel::AutoRollback)]
+    procedure InjectedFeatureAvailabilityStillNeedsTheSetupSwitch()
+    var
+        IntegrationEventMgt: Codeunit "EQM Integration Event Mgt.";
+    begin
+        Initialize();
+        // [SCENARIO I3] The injected source does not replace the Integration Events Enabled setting
+        // [GIVEN] Integration Events Enabled is off and the stub says every feature is on
+        EnsureEquipmentSetup(false);
+        IntegrationEventMgt.SetFeatureAvailability(FeatureAvailabilityStub);
+
+        // [WHEN] IsEnabled is called on the integration event codeunit
+        // [THEN] It returns false
+        Assert.IsFalse(IntegrationEventMgt.IsEnabled(), 'The setup switch should still be needed');
+    end;
+
     local procedure Initialize()
     var
         FeatureSetup: Record "EQM Feature Setup";
     begin
         FeatureSetup.DeleteAll();
+        FeatureAvailabilityStub.Reset();
     end;
 
     local procedure NextId(): Text

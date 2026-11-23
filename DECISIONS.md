@@ -312,3 +312,13 @@ A decision that applies to all future work (not just one task) belongs in the "S
 - FR-064 build | AL MCP had no project loaded, so app/ and test/ were compiled with alc on scratchpad copies; g.xlf copied from that build, then xlf_sync | Reversible: yes
 - FR-064 tests | T8 and T9 call SendReturnedFromMaintenanceNotification directly over posting through Maintenance Mgt. (same dispatch path) | Reversible: yes
 - FR-064 interface implementations | Send and Recall are plain procedure, not internal, in the BC provider and the spy (AL0920, error AL0921 from runtime 17), even though the codeunits are Access = Internal | Reversible: yes
+- FR-065 scope | Chose feature activation ("EQM Feature Mgt.".IsEnabled) as phase 1 over the telemetry sink, because moving Session.LogMessage into another object changes alObjectId/alObjectName/alObjectType of EQM0001-EQM0012 | Reversible: yes
+- FR-065 consumers | Chose only business-logic codeunits 50112, 50122, 50143 over also the 12 pages (UI layer) | Reversible: yes
+- FR-065 default implementation | Chose "EQM Feature Mgt." implementing "EQM IFeature Availability" directly (IsEnabled internal to public on an internal codeunit) over a new adapter codeunit | Reversible: yes
+- FR-065 interface surface | Chose a single method IsEnabled, Access = Internal, no enum or selector, over also exposing CheckEnabled or making it public | Reversible: yes
+- FR-065 test seam | Chose an internal SetFeatureAvailability per consumer plus a SingleInstance stub (50170), consistent with FR-064 SetProvider, over an InternalEvent seam | Reversible: yes
+- FR-065 runner propagation | Chose to pass an injected implementation from RunJob to the inner JobRunner only when one was set | Reversible: yes
+- FR-065 IDs | Chose test codeunit 50170 (superseded FR-016 reservation) for the stub and added the 9 tests to existing 50171, 50172, 50198, because free test IDs are scarce; IDs from a source scan because the AL MCP had no project loaded | Reversible: yes
+- FR-065 coverage | Chose declared traces for the three SetFeatureAvailability procedures (ambiguous name) over three different procedure names | Reversible: yes
+- FR-065 build | AL MCP had no project loaded, so app/ and test/ were compiled with alc.dll on scratchpad copies | Reversible: yes
+- FR-065 implementation | Ordered variables in 50143 so CodeCop AA0021 stays clean | Reversible: yes

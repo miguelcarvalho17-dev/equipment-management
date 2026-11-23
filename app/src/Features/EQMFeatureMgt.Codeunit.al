@@ -2,9 +2,10 @@ namespace MiguelCarvalho.EquipmentManagement;
 
 /// <summary>
 /// Feature activation: tells whether an optional feature is turned on in the current company. A feature without a
-/// row in "EQM Feature Setup" is enabled, so nothing changes until an administrator turns a feature off.
+/// row in "EQM Feature Setup" is enabled, so nothing changes until an administrator turns a feature off. It is the default implementation of
+/// "EQM IFeature Availability".
 /// </summary>
-codeunit 50138 "EQM Feature Mgt."
+codeunit 50138 "EQM Feature Mgt." implements "EQM IFeature Availability"
 {
     Access = Internal;
 
@@ -22,7 +23,7 @@ codeunit 50138 "EQM Feature Mgt."
     /// <summary>Returns whether the feature is turned on in the current company.</summary>
     /// <param name="Feature">The feature.</param>
     /// <returns>True when the feature has no setup row, when its row is enabled, or when the user cannot read the setup.</returns>
-    internal procedure IsEnabled(Feature: Enum "EQM Feature"): Boolean
+    procedure IsEnabled(Feature: Enum "EQM Feature"): Boolean
     var
         FeatureSetup: Record "EQM Feature Setup";
     begin

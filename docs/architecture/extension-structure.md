@@ -74,7 +74,7 @@ Never edit the `.g.xlf` by hand. The build regenerates it. The language files ar
 
 ## Object inventory (app)
 
-Counts: 133 objects: 18 tables, 1 table extension, 39 pages, 2 page extensions, 4 reports, 39 codeunits, 6 queries, 15 enums, 1 enum extension, 1 interface, 5 permission sets, 1 permission set extension, 1 profile. FR-064 added codeunits 50146 and 50147, enum 50114 and the interface.
+Counts: 134 objects: 18 tables, 1 table extension, 39 pages, 2 page extensions, 4 reports, 39 codeunits, 6 queries, 15 enums, 1 enum extension, 2 interfaces, 5 permission sets, 1 permission set extension, 1 profile. FR-064 added codeunits 50146 and 50147, enum 50114 and the interface "EQM INotification Provider". FR-065 added the interface "EQM IFeature Availability" and no codeunit.
 
 Access is the value of `Access =` in the file. "default (Public)" means the object has no `Access` property, which makes it public. Profiles have no ID.
 
@@ -206,6 +206,7 @@ Access is the value of `Access =` in the file. "default (Public)" means the obje
 | Enum | 50114 | EQM Notification Provider | Internal | `app/src/Notifications/EQMNotificationProvider.Enum.al` |
 | Enum extension | 50100 | EQM Event Category | default (Public) | `app/src/PowerAutomate/EQMEventCategory.EnumExt.al` |
 | Interface | n/a | EQM INotification Provider | Internal | `app/src/Notifications/EQMINotificationProvider.Interface.al` |
+| Interface | n/a | EQM IFeature Availability | Internal | `app/src/Features/EQMIFeatureAvailability.Interface.al` |
 | Permission set | 50100 | EQM - Reader | default (Public) | `app/src/Permissions/EQMReader.PermissionSet.al` |
 | Permission set | 50101 | EQM - Manager | default (Public) | `app/src/Permissions/EQMManager.PermissionSet.al` |
 | Permission set | 50102 | EQM - Administrator | default (Public) | `app/src/Permissions/EQMAdministrator.PermissionSet.al` |
@@ -242,7 +243,7 @@ The hierarchy is taken from `IncludedPermissionSets` in `app/src/Permissions`. E
 
 `test/app.json`: name `Equipment Management Tests`, version `1.0.0.0`, ID range 50150 to 50199, features `NoImplicitWith` only (no `TranslationFile`), dependencies on `Equipment Management` (minimum version `1.0.0.0`) and `Library Assert` (Microsoft, `29.0.0.0`). `test/.vscode/settings.json` runs CodeCop and UICop only. The test app reaches internal objects of the app through `internalsVisibleTo`. The dependency matrix is in [Dependencies](dependencies.md). How the tests are organised: [testing strategy](testing-strategy.md).
 
-Test object inventory: 44 codeunits in `test/src`, namespace `MiguelCarvalho.EquipmentManagement.Tests`. 38 have `Subtype = Test`, and 6 are helpers (the `... Test Subscr` codeunits and the FR-064 notification provider spy) with no `Subtype`. The test app has no other object type. The list of test procedures per codeunit is in the [test catalogue](testing-strategy.md#test-codeunit-catalogue).
+Test object inventory: 45 codeunits in `test/src`, namespace `MiguelCarvalho.EquipmentManagement.Tests`. 38 have `Subtype = Test`, and 7 are helpers (the `... Test Subscr` codeunits, the FR-064 notification provider spy and the FR-065 feature availability stub) with no `Subtype`. The test app has no other object type. The list of test procedures per codeunit is in the [test catalogue](testing-strategy.md#test-codeunit-catalogue).
 
 | Type | ID | Name | Access | File |
 |---|---|---|---|---|
@@ -263,6 +264,7 @@ Test object inventory: 44 codeunits in `test/src`, namespace `MiguelCarvalho.Equ
 | Codeunit | 50164 | EQM Maintenance Tests | default (Public) | `test/src/EQMMaintenanceTests.Codeunit.al` |
 | Codeunit | 50168 | EQM Warranty Tests | default (Public) | `test/src/EQMWarrantyTests.Codeunit.al` |
 | Codeunit | 50169 | EQM Usage Analytics Tests | default (Public) | `test/src/EQMUsageAnalyticsTests.Codeunit.al` |
+| Codeunit | 50170 | EQM Feature Avail. Stub | Internal | `test/src/EQMFeatureAvailStub.Codeunit.al` |
 | Codeunit | 50171 | EQM Notification Tests | default (Public) | `test/src/EQMNotificationTests.Codeunit.al` |
 | Codeunit | 50172 | EQM Background Process. Tests | default (Public) | `test/src/EQMBackgroundProcessTests.Codeunit.al` |
 | Codeunit | 50174 | EQM Notif. Provider Spy | Internal | `test/src/EQMNotifProviderSpy.Codeunit.al` |
@@ -299,6 +301,6 @@ Regenerate the two inventory tables whenever an FR adds, renames or removes an o
 
 - [Architecture overview](README.md)
 - [Testing strategy](testing-strategy.md)
-- Feature docs: [FR-036](../features/FR-036-permission-sets.md), [FR-057](../features/FR-057-permission-review.md), [FR-055](../features/FR-055-multi-language-support.md), [FR-058](../features/FR-058-data-classification.md), [FR-061](../features/FR-061-code-quality-compliance.md), [FR-064](../features/FR-064-feature-interfaces.md)
+- Feature docs: [FR-036](../features/FR-036-permission-sets.md), [FR-057](../features/FR-057-permission-review.md), [FR-055](../features/FR-055-multi-language-support.md), [FR-058](../features/FR-058-data-classification.md), [FR-061](../features/FR-061-code-quality-compliance.md), [FR-064](../features/FR-064-feature-interfaces.md), [FR-065](../features/FR-065-dependency-inversion.md)
 - [CLAUDE.md](../../CLAUDE.md)
 - Microsoft Learn: [Access modifiers in AL](https://learn.microsoft.com/dynamics365/business-central/dev-itpro/developer/devenv-using-access-modifiers), [app.json files](https://learn.microsoft.com/dynamics365/business-central/dev-itpro/developer/devenv-json-files)

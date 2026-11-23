@@ -22,7 +22,10 @@ codeunit 50143 "EQM Monitoring Job Runner"
     end;
 
     var
+        FeatureMgt: Codeunit "EQM Feature Mgt.";
+        FeatureAvailability: Interface "EQM IFeature Availability";
         JobCodeunitId: Integer;
+        IsFeatureAvailabilitySet: Boolean;
         OriginalErrorTok: Label '%1', Locked = true;
 
     /// <summary>
@@ -38,6 +41,8 @@ codeunit 50143 "EQM Monitoring Job Runner"
         ErrorText: Text;
     begin
         JobRunner.SetJob(JobCodeunitIdToRun);
+        if IsFeatureAvailabilitySet then
+            JobRunner.SetFeatureAvailability(FeatureAvailability);
         if Database.IsInWriteTransaction() then begin
             JobRunner.Run();
             exit;
@@ -60,6 +65,16 @@ codeunit 50143 "EQM Monitoring Job Runner"
     end;
 
     /// <summary>
+    /// Replaces the source that tells whether a feature is turned on. Used by tests. RunJob passes it on to the job it starts.
+    /// </summary>
+    /// <param name="NewFeatureAvailability">The source to use.</param>
+    internal procedure SetFeatureAvailability(NewFeatureAvailability: Interface "EQM IFeature Availability")
+    begin
+        FeatureAvailability := NewFeatureAvailability;
+        IsFeatureAvailabilitySet := true;
+    end;
+
+    /// <summary>
     /// Raised before the body of a monitoring job runs. Internal: used by the test app to make a job fail.
     /// </summary>
     /// <param name="JobCodeunitIdToRun">The ID of the job codeunit that is about to run.</param>
@@ -71,12 +86,11 @@ codeunit 50143 "EQM Monitoring Job Runner"
     local procedure RunWarrantyAlertJob()
     var
         WarrantyAlertMgt: Codeunit "EQM Warranty Alert Mgt.";
-        FeatureMgt: Codeunit "EQM Feature Mgt.";
         CreatedCount: Integer;
         CancelledCount: Integer;
     begin
         // Warranty Alerts turned off: no alerts are created. The warranty-expired business event is not part of the feature.
-        if FeatureMgt.IsEnabled("EQM Feature"::"Warranty Alerts") then begin
+        if IsFeatureEnabled("EQM Feature"::"Warranty Alerts") then begin
             WarrantyAlertMgt.GenerateAlerts(Today(), true, CreatedCount, CancelledCount);
             // A failing partner subscriber of OnWarrantyExpired must not roll back the alerts that were just created.
             Commit();
@@ -94,15 +108,28 @@ codeunit 50143 "EQM Monitoring Job Runner"
     local procedure RunMaintenanceCalculationJob()
     var
         MaintenanceMgt: Codeunit "EQM Maintenance Mgt.";
-        FeatureMgt: Codeunit "EQM Feature Mgt.";
         CheckedCount: Integer;
         UpdatedCount: Integer;
         PlannedOverdueCount: Integer;
     begin
         // Maintenance Planning turned off: the planned dates are not recalculated.
-        if not FeatureMgt.IsEnabled("EQM Feature"::"Maintenance Planning") then
+        if not IsFeatureEnabled("EQM Feature"::"Maintenance Planning") then
             exit;
         // Commits per batch only when the job runs isolated; a transaction that a caller opened is never committed.
         MaintenanceMgt.RecalculateNextMaintenanceDates(Today(), true, not Database.IsInWriteTransaction(), CheckedCount, UpdatedCount, PlannedOverdueCount);
+    end;
+
+    local procedure EnsureFeatureAvailability()
+    begin
+        if IsFeatureAvailabilitySet then
+            exit;
+        FeatureAvailability := FeatureMgt;
+        IsFeatureAvailabilitySet := true;
+    end;
+
+    local procedure IsFeatureEnabled(Feature: Enum "EQM Feature"): Boolean
+    begin
+        EnsureFeatureAvailability();
+        exit(FeatureAvailability.IsEnabled(Feature));
     end;
 }
