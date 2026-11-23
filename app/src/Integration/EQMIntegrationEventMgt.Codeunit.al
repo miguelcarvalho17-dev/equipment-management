@@ -8,6 +8,11 @@ codeunit 50122 "EQM Integration Event Mgt."
     Access = Internal;
     Permissions = tabledata "EQM Integration Event Entry" = rim;
 
+    var
+        FeatureMgt: Codeunit "EQM Feature Mgt.";
+        FeatureAvailability: Interface "EQM IFeature Availability";
+        IsFeatureAvailabilitySet: Boolean;
+
     /// <summary>
     /// Checks whether the API Integration feature is on and Integration Events Enabled is switched on in the equipment setup.
     /// </summary>
@@ -15,9 +20,8 @@ codeunit 50122 "EQM Integration Event Mgt."
     internal procedure IsEnabled(): Boolean
     var
         EquipmentSetup: Record "EQM Equipment Setup";
-        FeatureMgt: Codeunit "EQM Feature Mgt.";
     begin
-        if not FeatureMgt.IsEnabled("EQM Feature"::"API Integration") then
+        if not IsFeatureEnabled("EQM Feature"::"API Integration") then
             exit(false);
         EquipmentSetup.SetLoadFields("Integration Events Enabled");
         if not EquipmentSetup.Get() then
@@ -59,5 +63,29 @@ codeunit 50122 "EQM Integration Event Mgt."
         IntegrationEventEntry."Processed At" := CurrentDateTime();
         IntegrationEventEntry.AllowModifyFromMgt();
         IntegrationEventEntry.Modify(true);
+    end;
+
+    /// <summary>
+    /// Replaces the source that tells whether a feature is turned on. Used by tests.
+    /// </summary>
+    /// <param name="NewFeatureAvailability">The source to use.</param>
+    internal procedure SetFeatureAvailability(NewFeatureAvailability: Interface "EQM IFeature Availability")
+    begin
+        FeatureAvailability := NewFeatureAvailability;
+        IsFeatureAvailabilitySet := true;
+    end;
+
+    local procedure EnsureFeatureAvailability()
+    begin
+        if IsFeatureAvailabilitySet then
+            exit;
+        FeatureAvailability := FeatureMgt;
+        IsFeatureAvailabilitySet := true;
+    end;
+
+    local procedure IsFeatureEnabled(Feature: Enum "EQM Feature"): Boolean
+    begin
+        EnsureFeatureAvailability();
+        exit(FeatureAvailability.IsEnabled(Feature));
     end;
 }

@@ -21,6 +21,7 @@ codeunit 50172 "EQM Background Process. Tests"
         Assert: Codeunit "Library Assert";
         MaintenanceMgt: Codeunit "EQM Maintenance Mgt.";
         WarrantyAlertMgt: Codeunit "EQM Warranty Alert Mgt.";
+        FeatureAvailabilityStub: Codeunit "EQM Feature Avail. Stub";
         Counter: Integer;
         EquipmentNoTok: Label 'EQMBGP%1X', Locked = true;
         CategoryCodeTok: Label 'EQMBGPC%1', Locked = true;
@@ -211,6 +212,58 @@ codeunit 50172 "EQM Background Process. Tests"
 
     [Test]
     [TransactionModel(TransactionModel::AutoRollback)]
+    procedure InjectedFeatureAvailabilityStopsCalculationJob()
+    var
+        Equipment: Record "EQM Equipment";
+        JobRunner: Codeunit "EQM Monitoring Job Runner";
+        StaleDate: Date;
+    begin
+        Initialize();
+        // [SCENARIO R1] (negative) An injected source that turns Maintenance Planning off stops the calculation job
+        // [GIVEN] No feature rows (the database says on), equipment E with a stale next date, and the stub says off
+        CreateEquipmentWithPlan(Equipment, Today() - 1 - Random(365));
+        MakeStale(Equipment);
+        StaleDate := Equipment."Next Maintenance Date";
+        FeatureAvailabilityStub.Disable(Enum::"EQM Feature"::"Maintenance Planning");
+        JobRunner.SetFeatureAvailability(FeatureAvailabilityStub);
+
+        // [WHEN] The calculation job runs through the runner
+        JobRunner.RunJob(Codeunit::"EQM Maintenance Calc. Job", Enum::"EQM Error Operation"::"Maintenance Calculation Job");
+
+        // [THEN] The stale date is not corrected, and the stub was asked once
+        Equipment.Get(Equipment."No.");
+        Assert.AreEqual(StaleDate, Equipment."Next Maintenance Date", Equipment.FieldCaption("Next Maintenance Date"));
+        Assert.AreEqual(1, FeatureAvailabilityStub.CountAsked(Enum::"EQM Feature"::"Maintenance Planning"), 'The stub should be asked once');
+    end;
+
+    [Test]
+    [TransactionModel(TransactionModel::AutoRollback)]
+    procedure InjectedFeatureAvailabilityRunsCalculationJob()
+    var
+        Equipment: Record "EQM Equipment";
+        FeatureMgt: Codeunit "EQM Feature Mgt.";
+        JobRunner: Codeunit "EQM Monitoring Job Runner";
+        ExpectedDate: Date;
+    begin
+        Initialize();
+        // [SCENARIO R2] An injected source reaches the inner runner that runs the job
+        // [GIVEN] The database says Maintenance Planning is off, equipment E has a stale next date, and the stub says on
+        FeatureMgt.SetFeatureEnabled(Enum::"EQM Feature"::"Maintenance Planning", false);
+        CreateEquipmentWithPlan(Equipment, Today() - 1 - Random(365));
+        ExpectedDate := Equipment."Next Maintenance Date";
+        MakeStale(Equipment);
+        JobRunner.SetFeatureAvailability(FeatureAvailabilityStub);
+
+        // [WHEN] The calculation job runs through the runner
+        JobRunner.RunJob(Codeunit::"EQM Maintenance Calc. Job", Enum::"EQM Error Operation"::"Maintenance Calculation Job");
+
+        // [THEN] The stored date is the calculated date again
+        Equipment.Get(Equipment."No.");
+        Assert.AreEqual(ExpectedDate, Equipment."Next Maintenance Date", Equipment.FieldCaption("Next Maintenance Date"));
+    end;
+
+    [Test]
+    [TransactionModel(TransactionModel::AutoRollback)]
     procedure EnsureCreatesNothingWhenAllThreeEntriesExist()
     var
         MonitoringJobMgt: Codeunit "EQM Monitoring Job Mgt.";
@@ -330,6 +383,7 @@ codeunit 50172 "EQM Background Process. Tests"
     begin
         // Everything runs in the test transaction, which is rolled back (AutoRollback), so nothing is committed or cleaned up.
         FeatureSetup.DeleteAll();
+        FeatureAvailabilityStub.Reset();
         if not EquipmentSetup.Get() then begin
             EquipmentSetup.Init();
             EquipmentSetup.Insert(false);

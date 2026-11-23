@@ -19,6 +19,7 @@ codeunit 50171 "EQM Notification Tests"
         FeatureMgt: Codeunit "EQM Feature Mgt.";
         WarrantyAlertMgt: Codeunit "EQM Warranty Alert Mgt.";
         ProviderSpy: Codeunit "EQM Notif. Provider Spy";
+        FeatureAvailabilityStub: Codeunit "EQM Feature Avail. Stub";
         Counter: Integer;
         HandledId: Guid;
         HandledMessage: Text;
@@ -289,6 +290,62 @@ codeunit 50171 "EQM Notification Tests"
         Assert.AreEqual(0, ProviderSpy.SentCount(), 'No notification should reach the provider');
     end;
 
+    [Test]
+    [TransactionModel(TransactionModel::AutoRollback)]
+    procedure InjectedFeatureAvailabilityStopsNotifications()
+    var
+        Equipment: Record "EQM Equipment";
+        NotificationMgt: Codeunit "EQM Notification Mgt.";
+        Provider: Interface "EQM INotification Provider";
+    begin
+        // [SCENARIO] (negative) An injected source that turns Notifications off stops the notifications
+        Initialize();
+
+        // [GIVEN] The spy provider, no feature rows (the database says on), the stub says Notifications is off
+        Provider := ProviderSpy;
+        NotificationMgt.SetProvider(Provider);
+        NotificationMgt.RegisterDefaultNotifications();
+        FeatureAvailabilityStub.Disable(Enum::"EQM Feature"::Notifications);
+        NotificationMgt.SetFeatureAvailability(FeatureAvailabilityStub);
+        CreateEquipmentWithWarrantyAlert(Equipment);
+
+        // [WHEN] The equipment notifications are shown for X
+        NotificationMgt.ShowEquipmentNotifications(Equipment);
+
+        // [THEN] Nothing reaches the provider, two recalls do, and the stub was asked once
+        Assert.AreEqual(0, ProviderSpy.SentCount(), 'No notification should reach the provider');
+        Assert.AreEqual(2, ProviderSpy.RecallCount(), 'The previous notifications should still be recalled');
+        Assert.AreEqual(1, FeatureAvailabilityStub.CountAsked(Enum::"EQM Feature"::Notifications), 'The stub should be asked once for Notifications');
+    end;
+
+    [Test]
+    [TransactionModel(TransactionModel::AutoRollback)]
+    procedure InjectedFeatureAvailabilityAllowsNotifications()
+    var
+        Equipment: Record "EQM Equipment";
+        NotificationMgt: Codeunit "EQM Notification Mgt.";
+        Provider: Interface "EQM INotification Provider";
+    begin
+        // [SCENARIO] An injected source that turns Notifications on overrides the database
+        Initialize();
+
+        // [GIVEN] The spy provider, the database says Notifications is off, the stub says everything is on
+        Provider := ProviderSpy;
+        NotificationMgt.SetProvider(Provider);
+        NotificationMgt.RegisterDefaultNotifications();
+        FeatureMgt.SetFeatureEnabled(Enum::"EQM Feature"::Notifications, false);
+        NotificationMgt.SetFeatureAvailability(FeatureAvailabilityStub);
+        CreateEquipmentWithWarrantyAlert(Equipment);
+
+        // [WHEN] The equipment notifications are shown for X
+        NotificationMgt.ShowEquipmentNotifications(Equipment);
+
+        // [THEN] The warranty notification reaches the provider and the stub was asked for both features once
+        Assert.AreEqual(1, ProviderSpy.CountSent(NotificationMgt.GetWarrantyNotificationId()), 'One warranty notification should reach the provider');
+        Assert.AreEqual(1, FeatureAvailabilityStub.CountAsked(Enum::"EQM Feature"::Notifications), 'The stub should be asked once for Notifications');
+        Assert.AreEqual(1, FeatureAvailabilityStub.CountAsked(Enum::"EQM Feature"::"Warranty Alerts"), 'The stub should be asked once for Warranty Alerts');
+    end;
+
     [SendNotificationHandler(true)]
     procedure SendNotificationHandler(var TheNotification: Notification): Boolean
     begin
@@ -324,6 +381,7 @@ codeunit 50171 "EQM Notification Tests"
         EquipmentSetup."Default Warranty Alert Days" := WarrantyAlertMgt.GetLongestIntervalDays();
         EquipmentSetup.Modify(false);
         ProviderSpy.Reset();
+        FeatureAvailabilityStub.Reset();
         HandledId := NullGuid;
         HandledRecallId := NullGuid;
         HandledMessage := '';

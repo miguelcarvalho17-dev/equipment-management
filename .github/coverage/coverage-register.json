@@ -1925,6 +1925,42 @@
           "test": "RetentionPolicyStepIsTagGuardedAndIdempotent"
         }
       ]
+    },
+    {
+      "type": "codeunit",
+      "id": 50112,
+      "member": "SetFeatureAvailability",
+      "tests": [
+        {
+          "codeunit": 50171,
+          "test": "InjectedFeatureAvailabilityStopsNotifications"
+        }
+      ],
+      "note": "Same name on 50112, 50122 and 50143; declared trace."
+    },
+    {
+      "type": "codeunit",
+      "id": 50122,
+      "member": "SetFeatureAvailability",
+      "tests": [
+        {
+          "codeunit": 50198,
+          "test": "InjectedFeatureAvailabilityTurnsIntegrationEventsOff"
+        }
+      ],
+      "note": "Same name on 50112, 50122 and 50143; declared trace."
+    },
+    {
+      "type": "codeunit",
+      "id": 50143,
+      "member": "SetFeatureAvailability",
+      "tests": [
+        {
+          "codeunit": 50172,
+          "test": "InjectedFeatureAvailabilityStopsCalculationJob"
+        }
+      ],
+      "note": "Same name on 50112, 50122 and 50143; declared trace."
     }
   ]
 }

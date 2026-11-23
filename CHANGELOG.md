@@ -1,6 +1,20 @@
 # Changelog
 Newest first. Grouped by Added / Changed / Fixed / Obsolete.
 
+## FR-065 Dependency Inversion (version stays 29.0.0.0, no bump)
+### Added
+- Contributor-facing feature availability interface "EQM IFeature Availability". The equipment business logic asks whether a feature is turned on through it, so tests can replace the answer. Feature doc docs/features/FR-065-dependency-inversion.md. Help docs/help/FR-065-dependency-inversion.md.
+### Changed
+- None. The features, notifications, integration events and background jobs keep their behaviour.
+### Fixed
+- None.
+### Obsolete
+- None.
+
+Release notes: none for users. The equipment features, notifications and background jobs work as before. The change prepares tests and later sources for feature checks.
+
+Note: no table, field, page, enum, permission set, translation or upgrade change, no `app.json` change, version stays 29.0.0.0. Not verified: tests not executed locally, CI result pending (nine new tests in codeunits EQM Feature Mgt. Tests, EQM Notification Tests and EQM Background Process. Tests, with the existing regression tests listed in the feature doc); the build and the repo checks are pending in CI; the test stub's use of an internal interface is pending the CI build; no separate AppSource validation ran. The feature doc is docs/features/FR-065-dependency-inversion.md.
+
 ## FR-064 Feature Interfaces (version stays 29.0.0.0, no bump)
 ### Added
 - Contributor-facing notification provider interface. A delivery channel for equipment notifications can now be added without changing the notification rules. The Business Central notification is the only channel in this release. Feature doc docs/features/FR-064-feature-interfaces.md. Help docs/help/FR-064-feature-interfaces.md.

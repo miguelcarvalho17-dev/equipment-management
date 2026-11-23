@@ -5,7 +5,7 @@ using System.Environment.Configuration;
 /// <summary>
 /// Shows Business Central notifications about expiring warranties, overdue maintenance and equipment that is back
 /// from maintenance, and handles their actions. Nothing is shown when the Notifications feature is turned off in the
-/// company. The notifications are delivered through a notification provider; the default provider shows them as
+/// company. Whether a feature is turned on is asked through "EQM IFeature Availability". The notifications are delivered through a notification provider; the default provider shows them as
 /// Business Central notifications.
 /// </summary>
 codeunit 50112 "EQM Notification Mgt."
@@ -18,6 +18,8 @@ codeunit 50112 "EQM Notification Mgt."
         FeatureMgt: Codeunit "EQM Feature Mgt.";
         NotificationProvider: Interface "EQM INotification Provider";
         IsProviderSet: Boolean;
+        FeatureAvailability: Interface "EQM IFeature Availability";
+        IsFeatureAvailabilitySet: Boolean;
         WarrantyNotificationIdTok: Label '6F3B9C2E-8A41-4D7B-9E15-2C7A0B5D3F01', Locked = true;
         OverdueMaintNotificationIdTok: Label 'A82D4F6B-1C93-4E58-B7A0-5D9E3C1F7A02', Locked = true;
         ReturnedNotificationIdTok: Label 'D14E7A9C-3B65-4F2D-8C1E-9A6F0B2D5E03', Locked = true;
@@ -91,7 +93,7 @@ codeunit 50112 "EQM Notification Mgt."
         RecallNotification(GetOverdueMaintenanceNotificationId());
         if not GuiAllowed() then
             exit;
-        if not FeatureMgt.IsEnabled("EQM Feature"::Notifications) then
+        if not IsFeatureEnabled("EQM Feature"::Notifications) then
             exit;
         if Equipment.SystemCreatedAt = 0DT then
             exit;
@@ -107,7 +109,7 @@ codeunit 50112 "EQM Notification Mgt."
     begin
         if not IsNotificationEnabled(GetWarrantyNotificationId()) then
             exit;
-        if not FeatureMgt.IsEnabled("EQM Feature"::"Warranty Alerts") then
+        if not IsFeatureEnabled("EQM Feature"::"Warranty Alerts") then
             exit;
         if Equipment."Warranty End Date" = 0D then
             exit;
@@ -163,7 +165,7 @@ codeunit 50112 "EQM Notification Mgt."
         RecallNotification(GetOverdueMaintenanceNotificationId());
         if not GuiAllowed() then
             exit;
-        if not FeatureMgt.IsEnabled("EQM Feature"::Notifications) then
+        if not IsFeatureEnabled("EQM Feature"::Notifications) then
             exit;
         if MaintenanceRecord.SystemCreatedAt = 0DT then
             exit;
@@ -185,7 +187,7 @@ codeunit 50112 "EQM Notification Mgt."
     begin
         if not GuiAllowed() then
             exit;
-        if not FeatureMgt.IsEnabled("EQM Feature"::Notifications) then
+        if not IsFeatureEnabled("EQM Feature"::Notifications) then
             exit;
 
         SendOpenWarrantyAlertsNotification();
@@ -199,7 +201,7 @@ codeunit 50112 "EQM Notification Mgt."
     begin
         if not IsNotificationEnabled(GetWarrantyNotificationId()) then
             exit;
-        if not FeatureMgt.IsEnabled("EQM Feature"::"Warranty Alerts") then
+        if not IsFeatureEnabled("EQM Feature"::"Warranty Alerts") then
             exit;
         AlertCount := WarrantyAlertMgt.CountOpenAlerts();
         if AlertCount = 0 then
@@ -249,7 +251,7 @@ codeunit 50112 "EQM Notification Mgt."
     begin
         if not GuiAllowed() then
             exit;
-        if not FeatureMgt.IsEnabled("EQM Feature"::Notifications) then
+        if not IsFeatureEnabled("EQM Feature"::Notifications) then
             exit;
         if not IsNotificationEnabled(GetReturnedFromMaintenanceNotificationId()) then
             exit;
@@ -367,6 +369,16 @@ codeunit 50112 "EQM Notification Mgt."
         IsProviderSet := true;
     end;
 
+    /// <summary>
+    /// Replaces the source that tells whether a feature is turned on. Used by tests.
+    /// </summary>
+    /// <param name="NewFeatureAvailability">The source to use.</param>
+    internal procedure SetFeatureAvailability(NewFeatureAvailability: Interface "EQM IFeature Availability")
+    begin
+        FeatureAvailability := NewFeatureAvailability;
+        IsFeatureAvailabilitySet := true;
+    end;
+
     local procedure SendThroughProvider(var NotificationPayload: Codeunit "EQM Notification Payload")
     begin
         EnsureProvider();
@@ -377,6 +389,20 @@ codeunit 50112 "EQM Notification Mgt."
     begin
         EnsureProvider();
         NotificationProvider.Recall(NotificationId);
+    end;
+
+    local procedure EnsureFeatureAvailability()
+    begin
+        if IsFeatureAvailabilitySet then
+            exit;
+        FeatureAvailability := FeatureMgt;
+        IsFeatureAvailabilitySet := true;
+    end;
+
+    local procedure IsFeatureEnabled(Feature: Enum "EQM Feature"): Boolean
+    begin
+        EnsureFeatureAvailability();
+        exit(FeatureAvailability.IsEnabled(Feature));
     end;
 
     local procedure GetEquipmentName(Equipment: Record "EQM Equipment"): Text
