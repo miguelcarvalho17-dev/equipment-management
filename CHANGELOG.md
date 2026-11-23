@@ -1,6 +1,20 @@
 # Changelog
 Newest first. Grouped by Added / Changed / Fixed / Obsolete.
 
+## FR-063 Dependency Management
+### Added
+- Developer page docs/architecture/dependencies.md with the minimum Business Central version (29.0, online), the manifest values, the dependency matrix of the app and the test app, removed and unused dependencies, the standard modules used, tooling dependencies, upgrade notes and known gaps. Repo checks check 9 "Dependency matrix" (DEP1 to DEP6): it fails a pull request when the page no longer matches `app/app.json` and `test/app.json`, and warns on every change of `application`, `platform`, `runtime` or dependencies against `main`. Feature doc docs/features/FR-063-dependency-management.md. Help docs/help/FR-063-dependency-management.md.
+### Changed
+- Links to the new page in docs/README.md, the architecture, setup and release-notes pages. The setup page now lists nine repository checks.
+### Fixed
+- None.
+### Obsolete
+- None.
+
+Release notes: none for the app. Contributors get a documented dependency matrix, the minimum Business Central version (29.0) and upgrade notes, with a check that keeps them in sync.
+
+Note: no `app/` or `app.json` change, version stays 29.0.0.0. Not verified: the check 9 result in CI is pending (Repo checks log of the pull request); the Python tests in `.github/scripts/test_dependency_check.py` are not run in CI; no separate AppSource validation ran.
+
 ## FR-062 Breaking Change Validation
 ### Added
 - Repo checks check 8 "Schema compatibility" on every pull request into `main`. It fails a pull request that removes or renames an object, field, key or enum value, changes a field type or shortens a Text or Code field, changes an enum's extensibility, or sets an element to Removed without Pending first. Changes that need a data move give warnings. Feature doc docs/features/FR-062-breaking-change-validation.md. Help docs/help/FR-062-breaking-change-validation.md.

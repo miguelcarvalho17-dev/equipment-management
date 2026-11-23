@@ -559,3 +559,10 @@ Source: `docs/plans/FR-062-breaking-change-validation.md`. Phase 1 is the static
 - [ ] Phase 3: switch the base of the schema check from `main` to the latest release tag.
 - [ ] Phase 4: static check of API page fields, entity names and report dataset columns.
 - [ ] Review the accepted list `.github/schema/accepted-breaking-changes.json` before each release. Remove stale entries.
+
+## FR-063 checks (no AL change; Repo checks result pending)
+Source: `docs/plans/FR-063-dependency-management.md`. No separate AppSource validation ran.
+- [ ] CI-1: the "Repo checks" log of the pull request shows the check 9 summary and `Dependency check: OK`.
+- [ ] TODO(verify): the Business Central version of the CI build artifact (no `artifact` in `.AL-Go/settings.json`); read it from a CI log and record it in `docs/architecture/dependencies.md`.
+- [ ] User decisions (stop list): set `platform` to `29.0.0.0` in both manifests; raise the test app's minimum on the app to `29.0.0.0`; add a CI build pinned to the minimum release 29.0; schedule the Test Next Minor and Test Next Major runs.
+- [ ] Run Test Next Major before the next release wave.

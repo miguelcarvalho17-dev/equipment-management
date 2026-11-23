@@ -293,3 +293,11 @@ A decision that applies to all future work (not just one task) belongs in the "S
 - FR-062 obsolete metadata | New Pending/Removed requires ObsoleteReason and 'Major.Minor' ObsoleteTag (SCH12 error) | Reversible: yes
 - FR-062 enums | No AL change; strategy documented and enforced by SCH09/SCH10 (all status case statements already have else) | Reversible: yes
 - FR-062 parser | Member regexes run on string-stripped lines, property values on comment-stripped lines; stale exception = matches no finding of any severity | Reversible: yes
+- FR-063 layout | One page docs/architecture/dependencies.md holds minimum BC version, dependency matrix and upgrade notes, consistent with the FR-060 folder layout | Reversible: yes
+- FR-063 enforcement | Stdlib check 9 (dependency_check.py, DEP1–DEP6) in repo_checks.py keeps the matrix equal to app.json; no workflow edit | Reversible: yes
+- FR-063 DEP6 severity | Dependency/platform change against main is a warning, not an error, so a user-approved stop-list change can still merge; DEP4 forces the doc update | Reversible: yes
+- FR-063 manifests | platform 1.0.0.0 and test-app minimum 1.0.0.0 documented as known gaps, not changed (app.json is stop list) | Reversible: yes
+- FR-063 test dependencies | Any, Tests-TestLibraries and Library - Lower Permissions not added to test/app.json; no test needs them (stop list) | Reversible: yes
+- FR-063 namespaces | Owning Microsoft app per standard namespace not stated; symbols were unavailable, page says all come through the application property | Reversible: yes
+- FR-063 CI artifact | CI build pinned to minimum release 29.0 not done (AL-Go settings, user decision); recorded as known gap | Reversible: yes
+- FR-063 docs authorship | Developer wrote feature doc, help article and CHANGELOG before al-docs ran; al-docs then checked them | Reversible: yes

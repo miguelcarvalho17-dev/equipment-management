@@ -14,7 +14,7 @@ This is the entry point to all documentation of the repository. The developer do
 
 | Folder | Audience | Contents |
 |---|---|---|
-| [`architecture/`](architecture/README.md) | Developers | Architecture overview, [extension structure](architecture/extension-structure.md) with the object inventory, [testing strategy](architecture/testing-strategy.md) and [AppSource readiness](architecture/appsource-readiness.md). |
+| [`architecture/`](architecture/README.md) | Developers | Architecture overview, [extension structure](architecture/extension-structure.md) with the object inventory, [testing strategy](architecture/testing-strategy.md) and [AppSource readiness](architecture/appsource-readiness.md), and [dependencies and supported versions](architecture/dependencies.md). |
 | [`setup/`](setup/README.md) | Developers | Development environment, contribution workflow, and the [CI/CD process](setup/ci-cd.md). |
 | [`api/`](api/README.md) | Integrators and partner developers | The REST API ([endpoints](api/endpoints.md)) and the AL and external [events](api/events.md). |
 | [`user-guide/`](user-guide/README.md) | End users and administrators | The consolidated user guide (FR-059), 19 pages in task order. |
@@ -38,6 +38,7 @@ Each requirement (FR-NNN) leaves one file in each of these folders. The files ar
 ## Where to start
 
 - To understand how the app is built, read the [architecture overview](architecture/README.md), then the [extension structure](architecture/extension-structure.md).
+- To check the supported Business Central versions or add a dependency, read [dependencies](architecture/dependencies.md).
 - To set up a development environment or contribute, read [setup](setup/README.md).
 - To integrate with the app, read the [API overview](api/README.md) and the [events](api/events.md).
 - To see how far the app is from a submission, read [AppSource readiness](architecture/appsource-readiness.md).

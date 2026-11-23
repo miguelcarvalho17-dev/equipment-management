@@ -11,6 +11,7 @@ Checks:
   6. App version policy (FR-049): see version_check.py.
   7. Language files (FR-055): see xlf_sync.py.
   8. Schema compatibility (FR-062): with --base, see schema_check.py.
+  9. Dependency matrix (FR-063): see dependency_check.py; DEP6 needs --base.
 
 Usage: repo_checks.py [--base <git ref>] [--branch <head branch name>]
 Without --base, only the checks that need no diff run (1, and 2 when --branch is given).
@@ -25,6 +26,7 @@ from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 import coverage_check  # noqa: E402
+import dependency_check  # noqa: E402
 import schema_check  # noqa: E402
 import version_check  # noqa: E402
 import xlf_sync  # noqa: E402
@@ -170,6 +172,19 @@ def check_schema(base):
         print("Schema check: OK")
 
 
+def check_dependencies(base):
+    base_texts = dependency_check.read_base_texts(ROOT, base) if base else None
+    dep_errors, dep_warnings, summary = dependency_check.run(ROOT, base_texts)
+    for line in summary:
+        print(line)
+    for msg in dep_warnings:
+        warning(msg)
+    for msg in dep_errors:
+        error(msg)
+    if not dep_errors:
+        print("Dependency check: OK")
+
+
 def main():
     parser = argparse.ArgumentParser()
     parser.add_argument("--base")
@@ -179,6 +194,7 @@ def main():
     check_coverage()
     check_versions(args.base)
     check_language_files()
+    check_dependencies(args.base)
     check_feature_files(args.branch)
     if args.base:
         files = changed_files(args.base)

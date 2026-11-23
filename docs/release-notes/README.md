@@ -30,6 +30,7 @@ The app version is **29.0.0.0** (`app/app.json`). It is **not released**: no Git
 - Major.Minor come from `version` in `app/app.json`. Major follows the Business Central major version of `application`. Minor is raised by the owner for a feature release.
 - Build is the CI run number and Revision is the run attempt minus 1. Both stay 0 in `app.json`; the pipeline stamps them. Agents do not edit `app.json`.
 - Every release after 29.0.0.0 that changes data needs an upgrade step ([FR-044](../features/FR-044-data-upgrade-support.md)).
+- Raising the minimum Business Central version follows the [upgrade notes](../architecture/dependencies.md#upgrade-notes).
 
 Details and the version checks VER1 to VER7: [FR-049](../features/FR-049-release-management.md).
 

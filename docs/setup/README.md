@@ -16,7 +16,7 @@ This page explains how to get the code, build it, run the repository checks loca
 ## Prerequisites
 
 - Visual Studio Code with the AL Language extension.
-- A Business Central 29 sandbox for symbols and manual checks. The app targets application `29.0.0.0` and runtime `18.0`.
+- A Business Central 29 sandbox for symbols and manual checks. The app targets application `29.0.0.0` and runtime `18.0`. Supported versions: [Dependencies](../architecture/dependencies.md).
 - Python 3.9 or newer for the repository checks (they use the standard library only).
 - Optional: the GitHub CLI (`gh`) to read pull request checks and run logs.
 
@@ -42,7 +42,7 @@ This page explains how to get the code, build it, run the repository checks loca
 python3 .github/scripts/repo_checks.py --base origin/main --branch <branch>
 ```
 
-Run `git fetch origin` first so `origin/main` is current. Without `--base`, only the checks that need no diff run. The script has eight checks (from its docstring):
+Run `git fetch origin` first so `origin/main` is current. Without `--base`, only the checks that need no diff run. The script has nine checks (from its docstring):
 
 1. **Object IDs:** unique per object type and inside the ID range of the app that owns them.
 2. **Feature branches** (`feature/FR-NNN-*`): the plan, the feature doc, the help article and a CHANGELOG entry exist.
@@ -52,6 +52,7 @@ Run `git fetch origin` first so `origin/main` is current. Without `--base`, only
 6. **App version policy (FR-049):** `version_check.py`.
 7. **Language files (FR-055):** `xlf_sync.py check`.
 8. **Schema compatibility (FR-062):** `schema_check.py`. It runs only with `--base`. It fails on breaking schema changes against `main`.
+9. **Dependency matrix (FR-063):** `dependency_check.py`. DEP6 (dependency changes against `main`) runs only with `--base`.
 
 The schema check can also run on its own. It needs the base ref:
 
