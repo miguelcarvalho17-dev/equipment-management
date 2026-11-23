@@ -64,7 +64,7 @@ Follow these steps in `app/src/Install/EQMUpgradeMgt.Codeunit.al`.
 3. Add the tag to `RegisterPerCompanyUpgradeTags` (the `OnGetPerCompanyUpgradeTags` subscriber), so new companies count as upgraded.
 4. Call the step from `UpgradePerCompany()`.
 5. The step must be idempotent, set-based (ModifyAll, or DataTransfer for big tables), with no UI and no Commit, and safe on fresh-install data. If it is not safe there, Install must only set the tag.
-6. Never delete or rename published fields. Obsolete them first (Pending, then Removed) and move their data in a step.
+6. Never delete or rename published fields. Obsolete them first (Pending, then Removed) and move their data in a step. The full field removal lifecycle, and the checks that enforce it, are in [FR-062](FR-062-breaking-change-validation.md).
 7. Bump the version at release. This is a user decision.
 8. Add positive and negative tests in the test app, the same way as "EQM Upgrade Tests".
 

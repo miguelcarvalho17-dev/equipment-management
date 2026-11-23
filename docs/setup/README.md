@@ -42,7 +42,7 @@ This page explains how to get the code, build it, run the repository checks loca
 python3 .github/scripts/repo_checks.py --base origin/main --branch <branch>
 ```
 
-Run `git fetch origin` first so `origin/main` is current. Without `--base`, only the checks that need no diff run. The script has seven checks (from its docstring):
+Run `git fetch origin` first so `origin/main` is current. Without `--base`, only the checks that need no diff run. The script has eight checks (from its docstring):
 
 1. **Object IDs:** unique per object type and inside the ID range of the app that owns them.
 2. **Feature branches** (`feature/FR-NNN-*`): the plan, the feature doc, the help article and a CHANGELOG entry exist.
@@ -51,6 +51,15 @@ Run `git fetch origin` first so `origin/main` is current. Without `--base`, only
 5. **Test coverage register (FR-047):** integrity errors fail; below-target results warn while `enforce` is false.
 6. **App version policy (FR-049):** `version_check.py`.
 7. **Language files (FR-055):** `xlf_sync.py check`.
+8. **Schema compatibility (FR-062):** `schema_check.py`. It runs only with `--base`. It fails on breaking schema changes against `main`.
+
+The schema check can also run on its own. It needs the base ref:
+
+```text
+python3 .github/scripts/schema_check.py --base origin/main
+```
+
+See [FR-062](../features/FR-062-breaking-change-validation.md) for the rules and [the help article](../help/FR-062-breaking-change-validation.md) for how to fix a failure.
 
 What a feature branch needs for check 2:
 

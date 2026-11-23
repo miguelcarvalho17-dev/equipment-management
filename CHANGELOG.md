@@ -1,6 +1,20 @@
 # Changelog
 Newest first. Grouped by Added / Changed / Fixed / Obsolete.
 
+## FR-062 Breaking Change Validation
+### Added
+- Repo checks check 8 "Schema compatibility" on every pull request into `main`. It fails a pull request that removes or renames an object, field, key or enum value, changes a field type or shortens a Text or Code field, changes an enum's extensibility, or sets an element to Removed without Pending first. Changes that need a data move give warnings. Feature doc docs/features/FR-062-breaking-change-validation.md. Help docs/help/FR-062-breaking-change-validation.md.
+### Changed
+- None. The app's behaviour, objects and data are unchanged.
+### Fixed
+- None.
+### Obsolete
+- None.
+
+Release notes: none for the app. Contributors get a repository check that blocks breaking schema changes before they reach `main`.
+
+Note: no `app/` change, no `app.json` change, no workflow or ruleset change, version stays 29.0.0.0 (no bump). Not verified: the check 8 result in CI is pending (Repo checks log of the pull request); the Python tests in `.github/scripts/test_schema_check.py` were not run by the docs step and CI does not run them; no separate AppSource validation ran. The AppSourceCop baseline comparison is phase 2 and needs a first release. The feature doc is docs/features/FR-062-breaking-change-validation.md.
+
 ## FR-060 Developer Documentation (version stays 29.0.0.0, no bump)
 ### Added
 - Developer documentation in `docs/`. The index is `docs/README.md`. It covers the architecture overview, the extension structure, the testing strategy, AppSource readiness, the development setup, the CI/CD process, the REST API endpoints, the events for partners, and the release notes index. Feature doc docs/features/FR-060-developer-documentation.md. Help docs/help/FR-060-developer-documentation.md.

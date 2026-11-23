@@ -548,3 +548,14 @@ Source: `docs/plans/FR-060-developer-documentation.md`. No AL change, no tests. 
   - The `Test Current/Next Minor/Next Major.settings.json` files set `versioningStrategy` to 15; check VER4 reads only `.AL-Go/settings.json` (strategy 0).
   - FR-044 to FR-047 and others say "written, not executed, CI result pending". CI/CD run 44925652127 on `main` (2026-11-21, commit `e292f84`) shows 569 tests, 569 passed; the previous `main` run 44920033270 failed on `InsertedNoteGetsSystemUserAndTime` (563 tests, 1 failed). The cause of that failure is not analysed.
   - FR-047 baseline (2026-11-19) differs from today's `coverage_check.py` result (Business Logic 57.8%, 118/204; API 0.0%; Critical Process 77.8%); the baseline is a record, not an error.
+
+## FR-062 checks (no AL change; Repo checks result pending)
+Source: `docs/plans/FR-062-breaking-change-validation.md`. Phase 1 is the static schema check (check 8 of `repo_checks.py`). No separate AppSource validation ran.
+- [ ] CI-1: the "Repo checks" log of the pull request shows the check 8 summary and `Schema check: OK`.
+- [x] Run `python3 .github/scripts/test_schema_check.py` locally and record the result in the pull request. CI does not run it (workflow edits are on the stop list). Done 2026-11-23: local test run 27 tests OK (all four Python test files OK).
+- [x] Run the history check from the plan (step 6) against an older commit on `main`, and record the findings in the feature doc. Done 2026-11-23: runs against b8b885d (FR-044 merge, 112 objects) and 9be7e25 (HEAD~30, 93 objects) gave 0 errors, 0 warnings.
+- [ ] Confirm in the GitHub branch protection that `Repo checks` is a required status check (FR-048 TODO(verify)).
+- [ ] Phase 2 (user decision, stop list): run AL-Go **Create release** once. Then the AppSourceCop baseline applies in Pull Request Build. Then decide `obsoleteTagVersion` in `app/AppSourceCop.json` and AS0072 to AS0076 in the ruleset.
+- [ ] Phase 3: switch the base of the schema check from `main` to the latest release tag.
+- [ ] Phase 4: static check of API page fields, entity names and report dataset columns.
+- [ ] Review the accepted list `.github/schema/accepted-breaking-changes.json` before each release. Remove stale entries.

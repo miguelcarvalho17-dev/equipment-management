@@ -285,3 +285,11 @@ A decision that applies to all future work (not just one task) belongs in the "S
 - FR-060 test counts | Only "tests pass" claim is CI run 44925652127 (main); earlier failing run 44920033270 also quoted | Reversible: yes
 - FR-060 events.md | Subscribing to internal publishers (codeunit 50119) flagged TODO(verify) | Reversible: yes
 - FR-060 extension-structure | 17 explicit Access = Public objects listed by ID, the other 69 by count and category | Reversible: yes
+- FR-062 phase 1 | Static Python schema check (base main vs PR head) as check 8 of repo_checks.py, instead of the AppSourceCop binary baseline (needs a first release and an AppSourceCop.json edit, stop list) | Reversible: yes
+- FR-062 check 8 placement | Inside repo_checks.py, because RepoChecks.yaml already passes --base with full history; no workflow edit | Reversible: yes
+- FR-062 exceptions file | .github/schema/accepted-breaking-changes.json; each entry needs reason and decision reference | Reversible: yes
+- FR-062 scope | Main app only; schema and object identity only; procedures, events, page and API contracts left to AppSourceCop in phase 2 | Reversible: yes
+- FR-062 length changes | Text/Code length increase is a warning (AS0086), all other type changes are errors | Reversible: yes
+- FR-062 obsolete metadata | New Pending/Removed requires ObsoleteReason and 'Major.Minor' ObsoleteTag (SCH12 error) | Reversible: yes
+- FR-062 enums | No AL change; strategy documented and enforced by SCH09/SCH10 (all status case statements already have else) | Reversible: yes
+- FR-062 parser | Member regexes run on string-stripped lines, property values on comment-stripped lines; stale exception = matches no finding of any severity | Reversible: yes

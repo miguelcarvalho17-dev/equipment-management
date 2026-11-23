@@ -10,6 +10,7 @@ Checks:
      only warn while "enforce" is false (see coverage_check.py).
   6. App version policy (FR-049): see version_check.py.
   7. Language files (FR-055): see xlf_sync.py.
+  8. Schema compatibility (FR-062): with --base, see schema_check.py.
 
 Usage: repo_checks.py [--base <git ref>] [--branch <head branch name>]
 Without --base, only the checks that need no diff run (1, and 2 when --branch is given).
@@ -24,6 +25,7 @@ from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 import coverage_check  # noqa: E402
+import schema_check  # noqa: E402
 import version_check  # noqa: E402
 import xlf_sync  # noqa: E402
 
@@ -155,6 +157,19 @@ def check_language_files():
         print("Language files: OK")
 
 
+def check_schema(base):
+    base_files = schema_check.read_base_files(ROOT, base)
+    schema_errors, schema_warnings, summary = schema_check.run(ROOT, base_files)
+    for line in summary:
+        print(line)
+    for msg in schema_warnings:
+        warning(msg)
+    for msg in schema_errors:
+        error(msg)
+    if base_files is not None and not schema_errors:
+        print("Schema check: OK")
+
+
 def main():
     parser = argparse.ArgumentParser()
     parser.add_argument("--base")
@@ -169,6 +184,7 @@ def main():
         files = changed_files(args.base)
         check_plan_headers(files)
         check_translations(files)
+        check_schema(args.base)
     if errors:
         print(f"\n{len(errors)} problem(s) found.")
         sys.exit(1)
