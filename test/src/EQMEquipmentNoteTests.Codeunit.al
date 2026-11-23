@@ -36,12 +36,15 @@ codeunit 50183 "EQM Equipment Note Tests"
         EquipmentNote: Record "EQM Equipment Note";
         TimeBefore: DateTime;
         TimeAfter: DateTime;
+        TimeToleranceMs: Integer;
     begin
         // [SCENARIO 1] A note is stored with the system user and creation time
         // [GIVEN] Saved equipment E
         CreateEquipment(Equipment, EquipmentNoTok);
 
         // [WHEN] A note is inserted
+        // The database stores DateTime values rounded to about 3 ms, so the stored value can differ from the clock readings by a few milliseconds
+        TimeToleranceMs := 50;
         TimeBefore := CurrentDateTime();
         AddNote(EquipmentNote, EquipmentNoTok, FirstCommentTok);
         TimeAfter := CurrentDateTime();
@@ -52,8 +55,8 @@ codeunit 50183 "EQM Equipment Note Tests"
         EquipmentNote.FindFirst();
         Assert.AreEqual(FirstCommentTok, EquipmentNote.Comment, 'The comment should be stored');
         Assert.AreEqual(CopyStr(UserId(), 1, MaxStrLen(EquipmentNote."User ID")), EquipmentNote."User ID", 'User ID should be the current user');
-        Assert.IsTrue(EquipmentNote."Created At" >= TimeBefore, 'Created At should not be before the insert');
-        Assert.IsTrue(EquipmentNote."Created At" <= TimeAfter, 'Created At should not be after the insert');
+        Assert.IsTrue(EquipmentNote."Created At" >= TimeBefore - TimeToleranceMs, 'Created At should not be before the insert');
+        Assert.IsTrue(EquipmentNote."Created At" <= TimeAfter + TimeToleranceMs, 'Created At should not be after the insert');
     end;
 
     [Test]
