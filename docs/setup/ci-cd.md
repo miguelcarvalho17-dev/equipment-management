@@ -96,6 +96,7 @@ flowchart TD
     RC --> R6[6 Version policy]
     RC --> R7[7 Language files]
     RC --> R8[8 Schema compatibility]
+    RC --> R9[9 Dependency matrix]
 ```
 
 - The two workflows run in parallel. `Pull Request Build` has the jobs `Initialization`, `Build`, `CodeAnalysisUpload` and `StatusCheck` (`Pull Request Status Check`). `PregateCheck` runs only for pull requests from forks.
@@ -112,6 +113,7 @@ Summary of [FR-049](../features/FR-049-release-management.md):
 - **Artifact names** follow `equipment-management-main-Apps-29.0.<run>.0` (the `repoVersion` is 29.0). FR-048 recorded `1.0.<run>.0` before FR-049 aligned them. The `.app` file carries the same 29.0.&lt;run&gt;.0 version.
 - **Version checks** VER1 to VER7 run in Repo checks (check 6): four-part version, Build and Revision are 0, `repoVersion` matches, strategy 0, the test app depends on the app, the version does not go down, and a warning when Major or Minor is raised.
 - **Schema checks** SCH00 to SCH14 run in Repo checks (check 8, FR-062) on pull requests only. They compare the `app/` AL source with `main`. An error fails the check; a warning is shown as an annotation. Accepted breaking changes are listed in `.github/schema/accepted-breaking-changes.json`. See [FR-062](../features/FR-062-breaking-change-validation.md).
+- **Dependency checks** DEP1 to DEP6 run in Repo checks (check 9, FR-063). DEP6 warns on pull requests when a dependency, `application`, `platform` or `runtime` changes. See [Dependencies](../architecture/dependencies.md).
 - **Release procedure** (not run for this repository): latest CI/CD run on `main` is green; check the upgrade steps; run **Create release** with `buildVersion` `latest`, tag `<Major>.<Minor>.<Build>`, `releaseType` `Release` and `updateVersionNumber` `+0.1`; merge the version-bump pull request; upload the `.app` to Partner Center manually (publishing is not automated).
 - **No release exists yet.** `CreateRelease.yaml` and `IncrementVersionNumber.yaml` were never run.
 
@@ -135,6 +137,6 @@ gh run view <run-id> --log | grep -E "tests,|passed"
 
 ## Related
 
-- Feature docs: [FR-048](../features/FR-048-automated-build-pipeline.md), [FR-049](../features/FR-049-release-management.md), [FR-061](../features/FR-061-code-quality-compliance.md), [FR-062](../features/FR-062-breaking-change-validation.md)
+- Feature docs: [FR-048](../features/FR-048-automated-build-pipeline.md), [FR-049](../features/FR-049-release-management.md), [FR-061](../features/FR-061-code-quality-compliance.md), [FR-062](../features/FR-062-breaking-change-validation.md), [FR-063](../features/FR-063-dependency-management.md)
 - [Setup](README.md), [Testing strategy](../architecture/testing-strategy.md), [AppSource readiness](../architecture/appsource-readiness.md)
 - Microsoft Learn: [AL-Go for GitHub overview](https://learn.microsoft.com/dynamics365/business-central/dev-itpro/al-go/algo-overview), [Version numbers](https://learn.microsoft.com/dynamics365/business-central/dev-itpro/administration/version-numbers)

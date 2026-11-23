@@ -29,7 +29,7 @@ Source: [`app/app.json`](../../app/app.json). `app.json` is the source of truth;
 | target | `Cloud` |
 | idRanges | 50100 to 50149 (demo range, see [AppSource readiness](appsource-readiness.md)) |
 | features | `NoImplicitWith`, `TranslationFile` |
-| dependencies | none |
+| dependencies | none (see [Dependencies](dependencies.md)) |
 | internalsVisibleTo | the test app `Equipment Management Tests` (`eef4c303-e1d4-40b5-bc85-dd8bec4e0748`) |
 | namespace of all objects | `MiguelCarvalho.EquipmentManagement` (tests: `MiguelCarvalho.EquipmentManagement.Tests`) |
 | `privacyStatement`, `EULA`, `help`, `url`, `logo` | empty (open AppSource items) |
@@ -185,7 +185,7 @@ The app also calls standard codeunits directly, for example `Upgrade Tag`, `Rete
 ## Related
 
 - Feature docs listed in the tables above, and [`docs/features/`](../features/)
-- [Extension structure](extension-structure.md), [Testing strategy](testing-strategy.md), [AppSource readiness](appsource-readiness.md)
+- [Extension structure](extension-structure.md), [Testing strategy](testing-strategy.md), [AppSource readiness](appsource-readiness.md), [Dependencies](dependencies.md)
 - [Events and API](../api/README.md)
 - [CLAUDE.md](../../CLAUDE.md)
 - Microsoft Learn: [Events in AL](https://learn.microsoft.com/dynamics365/business-central/dev-itpro/developer/devenv-events-in-al), [Event types](https://learn.microsoft.com/dynamics365/business-central/dev-itpro/developer/devenv-event-types), [Extensibility overview](https://learn.microsoft.com/dynamics365/business-central/dev-itpro/developer/devenv-dev-overview)

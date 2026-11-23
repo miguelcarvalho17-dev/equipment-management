@@ -236,7 +236,7 @@ The hierarchy is taken from `IncludedPermissionSets` in `app/src/Permissions`. E
 
 ## Test app
 
-`test/app.json`: name `Equipment Management Tests`, version `1.0.0.0`, ID range 50150 to 50199, features `NoImplicitWith` only (no `TranslationFile`), dependencies on `Equipment Management` (minimum version `1.0.0.0`) and `Library Assert` (Microsoft, `29.0.0.0`). `test/.vscode/settings.json` runs CodeCop and UICop only. The test app reaches internal objects of the app through `internalsVisibleTo`. How the tests are organised: [testing strategy](testing-strategy.md).
+`test/app.json`: name `Equipment Management Tests`, version `1.0.0.0`, ID range 50150 to 50199, features `NoImplicitWith` only (no `TranslationFile`), dependencies on `Equipment Management` (minimum version `1.0.0.0`) and `Library Assert` (Microsoft, `29.0.0.0`). `test/.vscode/settings.json` runs CodeCop and UICop only. The test app reaches internal objects of the app through `internalsVisibleTo`. The dependency matrix is in [Dependencies](dependencies.md). How the tests are organised: [testing strategy](testing-strategy.md).
 
 Test object inventory: 42 codeunits in `test/src`, namespace `MiguelCarvalho.EquipmentManagement.Tests`. 37 have `Subtype = Test`, and 5 are helpers (the `... Test Subscr` codeunits) with no `Subtype`. The test app has no other object type. The list of test procedures per codeunit is in the [test catalogue](testing-strategy.md#test-codeunit-catalogue).
 
