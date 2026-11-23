@@ -6741,6 +6741,18 @@
           <note from="Developer" annotates="general" priority="2"></note>
           <note from="Xliff Generator" annotates="general" priority="3">Enum EQM Maintenance Type - EnumValue Upgrade - Property Caption</note>
         </trans-unit>
+        <trans-unit id="Enum 2649644007 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Equipment Notification Provider</source>
+          <target state="translated">Proveedor de notificaciones de equipo</target>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Enum EQM Notification Provider - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Enum 2649644007 - EnumValue 2869069751 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Business Central notification</source>
+          <target state="translated">Notificación de Business Central</target>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Enum EQM Notification Provider - EnumValue Business Central - Property Caption</note>
+        </trans-unit>
         <trans-unit id="Enum 3833034160 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
           <source>Request Status</source>
           <target state="translated">Estado de la solicitud</target>

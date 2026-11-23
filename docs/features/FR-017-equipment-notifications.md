@@ -3,6 +3,8 @@
 ## Purpose
 Business Central notifications (the bar at the top of a page) tell users about three situations while they work: a warranty that is about to expire, maintenance that has been open too long, and equipment that is back from maintenance. Each notification has an action that opens the records to act on, and each kind can be switched off per user in My Notifications.
 
+Update FR-064: the notifications are now sent through a notification provider (see [FR-064](FR-064-feature-interfaces.md)). Behaviour is unchanged. Codeunit 50171 is now the FR-064 test codeunit "EQM Notification Tests" (nine tests of the provider and dispatch); the FR-017 tests below are still not written.
+
 Status: describes the code as implemented (uncommitted changes on branch `feature/FR-017-equipment-notifications`). Build result and review verdict are not part of the documenter input: TODO(verify). **No automated tests (deferred, plan decision Q11; test codeunit 50171 reserved, nothing written; the 40 scenarios NT1 to NT40 in docs/plans/FR-017-equipment-notifications.md are a reference only). Nothing was run in a sandbox; checks NT-SB1 to NT-SB12 are open (see "Not verified").** App version stays 29.0.0.0. No new table, field, page or enum; no upgrade codeunit; no published events; one standard event subscribed (events report below).
 
 ## Objects
@@ -64,7 +66,7 @@ Searched BC 29 Base Application 29.0.54011.57272 symbols (names and signatures r
 ## Permissions
 | Permission set | Change |
 |---|---|
-| 50100 EQM - Reader | `codeunit "EQM Notification Mgt." = X`, `codeunit "EQM Notification Subscribers" = X`. |
+| 50100 EQM - Reader | `codeunit "EQM Notification Mgt." = X`, `codeunit "EQM Notification Subscribers" = X`. From FR-064: also `codeunit "EQM Notification Payload" = X` and `codeunit "EQM BC Notification Provider" = X`. |
 | 50101 / 50102 | No change. |
 | 50103 D365 BASIC (extension) | No change. No standard tabledata for My Notifications was added. |
 

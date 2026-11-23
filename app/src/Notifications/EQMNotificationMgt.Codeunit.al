@@ -5,7 +5,8 @@ using System.Environment.Configuration;
 /// <summary>
 /// Shows Business Central notifications about expiring warranties, overdue maintenance and equipment that is back
 /// from maintenance, and handles their actions. Nothing is shown when the Notifications feature is turned off in the
-/// company.
+/// company. The notifications are delivered through a notification provider; the default provider shows them as
+/// Business Central notifications.
 /// </summary>
 codeunit 50112 "EQM Notification Mgt."
 {
@@ -15,6 +16,8 @@ codeunit 50112 "EQM Notification Mgt."
         MaintenanceMgt: Codeunit "EQM Maintenance Mgt.";
         WarrantyAlertMgt: Codeunit "EQM Warranty Alert Mgt.";
         FeatureMgt: Codeunit "EQM Feature Mgt.";
+        NotificationProvider: Interface "EQM INotification Provider";
+        IsProviderSet: Boolean;
         WarrantyNotificationIdTok: Label '6F3B9C2E-8A41-4D7B-9E15-2C7A0B5D3F01', Locked = true;
         OverdueMaintNotificationIdTok: Label 'A82D4F6B-1C93-4E58-B7A0-5D9E3C1F7A02', Locked = true;
         ReturnedNotificationIdTok: Label 'D14E7A9C-3B65-4F2D-8C1E-9A6F0B2D5E03', Locked = true;
@@ -99,7 +102,7 @@ codeunit 50112 "EQM Notification Mgt."
 
     local procedure SendEquipmentWarrantyNotification(Equipment: Record "EQM Equipment"; ReferenceDate: Date)
     var
-        Notification: Notification;
+        NotificationPayload: Codeunit "EQM Notification Payload";
         DaysRemaining: Integer;
     begin
         if not IsNotificationEnabled(GetWarrantyNotificationId()) then
@@ -116,39 +119,37 @@ codeunit 50112 "EQM Notification Mgt."
         if not WarrantyAlertMgt.HasOpenAlert(Equipment."No.", Equipment."Warranty End Date") then
             exit;
 
-        Notification.Id := GetWarrantyNotificationId();
-        Notification.Scope := NotificationScope::LocalScope;
+        NotificationPayload.SetNotificationId(GetWarrantyNotificationId());
         case DaysRemaining of
             0:
-                Notification.Message := StrSubstNo(WarrantyExpiresTodayMsg, GetEquipmentName(Equipment), Equipment."No.");
+                NotificationPayload.SetMessage(StrSubstNo(WarrantyExpiresTodayMsg, GetEquipmentName(Equipment), Equipment."No."));
             1:
-                Notification.Message := StrSubstNo(WarrantyExpiresTomorrowMsg, GetEquipmentName(Equipment), Equipment."No.");
+                NotificationPayload.SetMessage(StrSubstNo(WarrantyExpiresTomorrowMsg, GetEquipmentName(Equipment), Equipment."No."));
             else
-                Notification.Message := StrSubstNo(WarrantyExpiresInDaysMsg, GetEquipmentName(Equipment), Equipment."No.", DaysRemaining);
+                NotificationPayload.SetMessage(StrSubstNo(WarrantyExpiresInDaysMsg, GetEquipmentName(Equipment), Equipment."No.", DaysRemaining));
         end;
-        Notification.SetData(EquipmentNoDataTok, Equipment."No.");
-        Notification.AddAction(ShowWarrantyAlertsActionLbl, Codeunit::"EQM Notification Mgt.", 'ShowWarrantyAlerts');
-        Notification.AddAction(DontShowAgainActionLbl, Codeunit::"EQM Notification Mgt.", 'DisableNotification');
-        Notification.Send();
+        NotificationPayload.SetData(EquipmentNoDataTok, Equipment."No.");
+        NotificationPayload.AddAction(ShowWarrantyAlertsActionLbl, Codeunit::"EQM Notification Mgt.", 'ShowWarrantyAlerts');
+        NotificationPayload.AddAction(DontShowAgainActionLbl, Codeunit::"EQM Notification Mgt.", 'DisableNotification');
+        SendThroughProvider(NotificationPayload);
     end;
 
     local procedure SendEquipmentOverdueNotification(Equipment: Record "EQM Equipment"; ReferenceDate: Date)
     var
         MaintenanceRecord: Record "EQM Maintenance Record";
-        Notification: Notification;
+        NotificationPayload: Codeunit "EQM Notification Payload";
     begin
         if not IsNotificationEnabled(GetOverdueMaintenanceNotificationId()) then
             exit;
         if not MaintenanceMgt.FindOldestOverdueMaintenance(Equipment."No.", ReferenceDate, MaintenanceRecord) then
             exit;
 
-        Notification.Id := GetOverdueMaintenanceNotificationId();
-        Notification.Scope := NotificationScope::LocalScope;
-        Notification.Message := StrSubstNo(EquipmentMaintenanceOverdueMsg, MaintenanceRecord."No.", GetEquipmentName(Equipment), Equipment."No.", MaintenanceMgt.CalcDaysOpen(MaintenanceRecord, ReferenceDate));
-        Notification.SetData(EquipmentNoDataTok, Equipment."No.");
-        Notification.AddAction(ShowOpenMaintenanceActionLbl, Codeunit::"EQM Notification Mgt.", 'ShowOpenMaintenance');
-        Notification.AddAction(DontShowAgainActionLbl, Codeunit::"EQM Notification Mgt.", 'DisableNotification');
-        Notification.Send();
+        NotificationPayload.SetNotificationId(GetOverdueMaintenanceNotificationId());
+        NotificationPayload.SetMessage(StrSubstNo(EquipmentMaintenanceOverdueMsg, MaintenanceRecord."No.", GetEquipmentName(Equipment), Equipment."No.", MaintenanceMgt.CalcDaysOpen(MaintenanceRecord, ReferenceDate)));
+        NotificationPayload.SetData(EquipmentNoDataTok, Equipment."No.");
+        NotificationPayload.AddAction(ShowOpenMaintenanceActionLbl, Codeunit::"EQM Notification Mgt.", 'ShowOpenMaintenance');
+        NotificationPayload.AddAction(DontShowAgainActionLbl, Codeunit::"EQM Notification Mgt.", 'DisableNotification');
+        SendThroughProvider(NotificationPayload);
     end;
 
     /// <summary>
@@ -157,7 +158,7 @@ codeunit 50112 "EQM Notification Mgt."
     /// <param name="MaintenanceRecord">The maintenance record that is current on the page.</param>
     internal procedure ShowMaintenanceRecordNotification(MaintenanceRecord: Record "EQM Maintenance Record")
     var
-        Notification: Notification;
+        NotificationPayload: Codeunit "EQM Notification Payload";
     begin
         RecallNotification(GetOverdueMaintenanceNotificationId());
         if not GuiAllowed() then
@@ -171,11 +172,10 @@ codeunit 50112 "EQM Notification Mgt."
         if not MaintenanceMgt.IsMaintenanceOverdue(MaintenanceRecord, Today()) then
             exit;
 
-        Notification.Id := GetOverdueMaintenanceNotificationId();
-        Notification.Scope := NotificationScope::LocalScope;
-        Notification.Message := StrSubstNo(MaintenanceRecordOverdueMsg, MaintenanceRecord."No.", MaintenanceMgt.CalcDaysOpen(MaintenanceRecord, Today()));
-        Notification.AddAction(DontShowAgainActionLbl, Codeunit::"EQM Notification Mgt.", 'DisableNotification');
-        Notification.Send();
+        NotificationPayload.SetNotificationId(GetOverdueMaintenanceNotificationId());
+        NotificationPayload.SetMessage(StrSubstNo(MaintenanceRecordOverdueMsg, MaintenanceRecord."No.", MaintenanceMgt.CalcDaysOpen(MaintenanceRecord, Today())));
+        NotificationPayload.AddAction(DontShowAgainActionLbl, Codeunit::"EQM Notification Mgt.", 'DisableNotification');
+        SendThroughProvider(NotificationPayload);
     end;
 
     /// <summary>
@@ -194,7 +194,7 @@ codeunit 50112 "EQM Notification Mgt."
 
     local procedure SendOpenWarrantyAlertsNotification()
     var
-        Notification: Notification;
+        NotificationPayload: Codeunit "EQM Notification Payload";
         AlertCount: Integer;
     begin
         if not IsNotificationEnabled(GetWarrantyNotificationId()) then
@@ -205,20 +205,19 @@ codeunit 50112 "EQM Notification Mgt."
         if AlertCount = 0 then
             exit;
 
-        Notification.Id := GetWarrantyNotificationId();
-        Notification.Scope := NotificationScope::LocalScope;
+        NotificationPayload.SetNotificationId(GetWarrantyNotificationId());
         if AlertCount = 1 then
-            Notification.Message := OneOpenWarrantyAlertMsg
+            NotificationPayload.SetMessage(OneOpenWarrantyAlertMsg)
         else
-            Notification.Message := StrSubstNo(OpenWarrantyAlertsMsg, AlertCount);
-        Notification.AddAction(ShowWarrantyAlertsActionLbl, Codeunit::"EQM Notification Mgt.", 'ShowWarrantyAlerts');
-        Notification.AddAction(DontShowAgainActionLbl, Codeunit::"EQM Notification Mgt.", 'DisableNotification');
-        Notification.Send();
+            NotificationPayload.SetMessage(StrSubstNo(OpenWarrantyAlertsMsg, AlertCount));
+        NotificationPayload.AddAction(ShowWarrantyAlertsActionLbl, Codeunit::"EQM Notification Mgt.", 'ShowWarrantyAlerts');
+        NotificationPayload.AddAction(DontShowAgainActionLbl, Codeunit::"EQM Notification Mgt.", 'DisableNotification');
+        SendThroughProvider(NotificationPayload);
     end;
 
     local procedure SendOverdueMaintenanceSummaryNotification()
     var
-        Notification: Notification;
+        NotificationPayload: Codeunit "EQM Notification Payload";
         OverdueCount: Integer;
     begin
         if not IsNotificationEnabled(GetOverdueMaintenanceNotificationId()) then
@@ -227,15 +226,14 @@ codeunit 50112 "EQM Notification Mgt."
         if OverdueCount = 0 then
             exit;
 
-        Notification.Id := GetOverdueMaintenanceNotificationId();
-        Notification.Scope := NotificationScope::LocalScope;
+        NotificationPayload.SetNotificationId(GetOverdueMaintenanceNotificationId());
         if OverdueCount = 1 then
-            Notification.Message := StrSubstNo(OneOverdueMaintenanceMsg, MaintenanceMgt.GetMaintenanceOverdueDays())
+            NotificationPayload.SetMessage(StrSubstNo(OneOverdueMaintenanceMsg, MaintenanceMgt.GetMaintenanceOverdueDays()))
         else
-            Notification.Message := StrSubstNo(OverdueMaintenanceSummaryMsg, OverdueCount, MaintenanceMgt.GetMaintenanceOverdueDays());
-        Notification.AddAction(ShowOverdueMaintenanceActionLbl, Codeunit::"EQM Notification Mgt.", 'ShowOverdueMaintenance');
-        Notification.AddAction(DontShowAgainActionLbl, Codeunit::"EQM Notification Mgt.", 'DisableNotification');
-        Notification.Send();
+            NotificationPayload.SetMessage(StrSubstNo(OverdueMaintenanceSummaryMsg, OverdueCount, MaintenanceMgt.GetMaintenanceOverdueDays()));
+        NotificationPayload.AddAction(ShowOverdueMaintenanceActionLbl, Codeunit::"EQM Notification Mgt.", 'ShowOverdueMaintenance');
+        NotificationPayload.AddAction(DontShowAgainActionLbl, Codeunit::"EQM Notification Mgt.", 'DisableNotification');
+        SendThroughProvider(NotificationPayload);
     end;
 
     /// <summary>
@@ -247,7 +245,7 @@ codeunit 50112 "EQM Notification Mgt."
     internal procedure SendReturnedFromMaintenanceNotification(EquipmentNo: Code[20]; StatusBeforePosting: Enum "EQM Equipment Status")
     var
         Equipment: Record "EQM Equipment";
-        Notification: Notification;
+        NotificationPayload: Codeunit "EQM Notification Payload";
     begin
         if not GuiAllowed() then
             exit;
@@ -263,13 +261,12 @@ codeunit 50112 "EQM Notification Mgt."
         if Equipment.Status <> Equipment.Status::Available then
             exit;
 
-        Notification.Id := GetReturnedFromMaintenanceNotificationId();
-        Notification.Scope := NotificationScope::LocalScope;
-        Notification.Message := StrSubstNo(ReturnedFromMaintenanceMsg, GetEquipmentName(Equipment), EquipmentNo);
-        Notification.SetData(EquipmentNoDataTok, EquipmentNo);
-        Notification.AddAction(OpenEquipmentCardActionLbl, Codeunit::"EQM Notification Mgt.", 'OpenEquipmentCard');
-        Notification.AddAction(DontShowAgainActionLbl, Codeunit::"EQM Notification Mgt.", 'DisableNotification');
-        Notification.Send();
+        NotificationPayload.SetNotificationId(GetReturnedFromMaintenanceNotificationId());
+        NotificationPayload.SetMessage(StrSubstNo(ReturnedFromMaintenanceMsg, GetEquipmentName(Equipment), EquipmentNo));
+        NotificationPayload.SetData(EquipmentNoDataTok, EquipmentNo);
+        NotificationPayload.AddAction(OpenEquipmentCardActionLbl, Codeunit::"EQM Notification Mgt.", 'OpenEquipmentCard');
+        NotificationPayload.AddAction(DontShowAgainActionLbl, Codeunit::"EQM Notification Mgt.", 'DisableNotification');
+        SendThroughProvider(NotificationPayload);
     end;
 
     /// <summary>
@@ -349,12 +346,37 @@ codeunit 50112 "EQM Notification Mgt."
         MyNotifications.InsertDefault(GetReturnedFromMaintenanceNotificationId(), CopyStr(ReturnedNotificationNameTxt, 1, 128), ReturnedNotificationDescTxt, true);
     end;
 
-    local procedure RecallNotification(NotificationId: Guid)
-    var
-        Notification: Notification;
+    /// <summary>
+    /// Replaces the provider that delivers the notifications. Used by tests to capture what is sent.
+    /// </summary>
+    /// <param name="NewProvider">The provider to use.</param>
+    internal procedure SetProvider(NewProvider: Interface "EQM INotification Provider")
     begin
-        Notification.Id := NotificationId;
-        Notification.Recall();
+        NotificationProvider := NewProvider;
+        IsProviderSet := true;
+    end;
+
+    local procedure EnsureProvider()
+    var
+        DefaultProvider: Enum "EQM Notification Provider";
+    begin
+        if IsProviderSet then
+            exit;
+        DefaultProvider := DefaultProvider::"Business Central";
+        NotificationProvider := DefaultProvider;
+        IsProviderSet := true;
+    end;
+
+    local procedure SendThroughProvider(var NotificationPayload: Codeunit "EQM Notification Payload")
+    begin
+        EnsureProvider();
+        NotificationProvider.Send(NotificationPayload);
+    end;
+
+    local procedure RecallNotification(NotificationId: Guid)
+    begin
+        EnsureProvider();
+        NotificationProvider.Recall(NotificationId);
     end;
 
     local procedure GetEquipmentName(Equipment: Record "EQM Equipment"): Text

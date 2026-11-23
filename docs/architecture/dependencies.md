@@ -47,7 +47,7 @@ Repo checks check 9 (DEP4) compares this table with both app.json files; update 
 | Equipment Management | No other app (`dependencies` is empty) | – | – | – | – | – | – |
 | Equipment Management Tests | Application | Microsoft | – | 29.0.0.0 | `application` property | Test symbols | No |
 | Equipment Management Tests | Equipment Management | Miguel Carvalho | `e6c30407-ec71-4f48-a790-70da80abc992` | 1.0.0.0 | `dependencies` | App under test; internals through `internalsVisibleTo` | No |
-| Equipment Management Tests | Library Assert | Microsoft | `dd0be2ea-f733-4d65-bb34-a28f4624fb14` | 29.0.0.0 | `dependencies` | `Codeunit "Library Assert"` in all 37 test codeunits | No (test framework, comes with the container) |
+| Equipment Management Tests | Library Assert | Microsoft | `dd0be2ea-f733-4d65-bb34-a28f4624fb14` | 29.0.0.0 | `dependencies` | `Codeunit "Library Assert"` in all 38 test codeunits | No (test framework, comes with the container) |
 
 Inbound side: only the test app depends on the app. Partner extensions may depend on the public surface, see [Events](../api/events.md) and [Extension structure](extension-structure.md#public-surface).
 

@@ -2,7 +2,7 @@
 
 > Applies to Equipment Management 29.0.0.0 (not released). Facts are taken from the repository on branch feature/FR-060-developer-documentation; nothing is verified in a Business Central sandbox.
 
-The app has a separate test app in `test/` with 37 test codeunits and 569 test procedures, plus 5 helper codeunits. Tests run in CI through AL-Go. This page describes the test layers, the conventions, the coverage targets, how the tests run and what is not covered.
+The app has a separate test app in `test/` with 38 test codeunits and 578 test procedures, plus 6 helper codeunits. Tests run in CI through AL-Go. This page describes the test layers, the conventions, the coverage targets, how the tests run and what is not covered.
 
 **In this article**
 - [Test layers](#test-layers)
@@ -31,7 +31,7 @@ The app has a separate test app in `test/` with 37 test codeunits and 569 test p
 
 ## Test codeunit catalogue
 
-Generated from `test/src` on 2026-11-22. "Tests" is the number of `[Test]` procedures in the file; "helper" marks the `... Test Subscr` codeunits, which are not run as tests and only record what a test needs to observe. The sum of the Tests column is 569.
+Generated from `test/src` on 2026-11-22. The rows for 50171 and 50174 (FR-064) were added by hand on 2026-11-23 from the source. "Tests" is the number of `[Test]` procedures in the file; "helper" marks the `... Test Subscr` codeunits and the FR-064 spy, which are not run as tests and only record what a test needs to observe. The sum of the Tests column is 578.
 
 | ID | Name | Tests | Area | Feature |
 |---|---|---|---|---|
@@ -52,7 +52,9 @@ Generated from `test/src` on 2026-11-22. "Tests" is the number of `[Test]` proce
 | 50164 | EQM Maintenance Tests | 26 | Unit: maintenance | FR-045 |
 | 50168 | EQM Warranty Tests | 16 | Unit: warranty | FR-045 |
 | 50169 | EQM Usage Analytics Tests | 17 | Usage analytics | FR-052 |
+| 50171 | EQM Notification Tests | 9 | Notification provider and dispatch | FR-064 |
 | 50172 | EQM Background Process. Tests | 12 | Background processing | FR-054 |
+| 50174 | EQM Notif. Provider Spy | helper | Helper: records notifications sent to the spy provider | FR-064 |
 | 50176 | EQM Demo Data Tests | 26 | Demo data | FR-066 |
 | 50177 | EQM Upgrade Tests | 9 | Upgrade steps | FR-044, FR-054 |
 | 50178 | EQM Equipment Picture Tests | 15 | Equipment pictures | FR-023 |
@@ -82,8 +84,8 @@ Generated from `test/src` on 2026-11-22. "Tests" is the number of `[Test]` proce
 
 These were confirmed by reading the test files on this branch.
 
-- **`Subtype = Test`** on every test codeunit (37 of 37) and **`TestPermissions = Disabled`** (37 of 37). Because of this, the tests run without lowered permissions. `Permissions Mock` did not lower the rights in CI, so reader tests that depended on it were removed (note in `docs/TODO.md`, section FR-023).
-- **`[TransactionModel(TransactionModel::AutoRollback)]`** on the tests that write data (35 of 37 codeunits). The two others are 50162, which only reads permission metadata, and 50155, whose tests use `TransactionModel::AutoCommit` because the error log entry must survive the rollback of the job; each test commits first, reads and deletes the new entries, and commits again before it asserts ([FR-051](../features/FR-051-error-logging.md)).
+- **`Subtype = Test`** on every test codeunit (38 of 38) and **`TestPermissions = Disabled`** (38 of 38). Because of this, the tests run without lowered permissions. `Permissions Mock` did not lower the rights in CI, so reader tests that depended on it were removed (note in `docs/TODO.md`, section FR-023).
+- **`[TransactionModel(TransactionModel::AutoRollback)]`** on the tests that write data (36 of 38 codeunits). The two others are 50162, which only reads permission metadata, and 50155, whose tests use `TransactionModel::AutoCommit` because the error log entry must survive the rollback of the job; each test commits first, reads and deletes the new entries, and commits again before it asserts ([FR-051](../features/FR-051-error-logging.md)).
 - **`[SCENARIO]`, `[GIVEN]`, `[WHEN]`, `[THEN]`** comments in each test.
 - **At most one `asserterror`, as the last action.** A failed statement rolls back the whole test transaction, so the error text is checked afterwards.
 - **Test data** comes from Locked `Tok` labels with a prefix (for example `EQMCRT`) plus a counter, and from `Random()`. Tests do not depend on demo data or on other tests.
