@@ -301,3 +301,14 @@ A decision that applies to all future work (not just one task) belongs in the "S
 - FR-063 namespaces | Owning Microsoft app per standard namespace not stated; symbols were unavailable, page says all come through the application property | Reversible: yes
 - FR-063 CI artifact | CI build pinned to minimum release 29.0 not done (AL-Go settings, user decision); recorded as known gap | Reversible: yes
 - FR-063 docs authorship | Developer wrote feature doc, help article and CHANGELOG before al-docs ran; al-docs then checked them | Reversible: yes
+- FR-064 scope | Phase 1 = interface + payload + Business Central provider with no behaviour change, over also building Email and Teams providers now (stop list: business rules, HTTP/secret) | Reversible: yes
+- FR-064 Teams | Power Automate flow on the existing FR-029/FR-031 business events is the in-scope Teams route (phase 3, docs only), over an AL webhook provider | Reversible: yes
+- FR-064 API surface | Interface, payload, provider and enum are Access = Internal, enum Extensible = false; public AppSource contracts are permanent, so shape them after two real providers | Reversible: yes (internal to public is non-breaking, the reverse is not)
+- FR-064 contract | Payload codeunit (id, message, data, ordered actions) over primitive parameters or the platform Notification type | Reversible: yes
+- FR-064 gating | GuiAllowed, feature, My Notifications and business conditions stay in "EQM Notification Mgt."; action handlers stay on codeunit 50112 | Reversible: yes
+- FR-064 test seam | Internal SetProvider(Interface) on 50112 plus SingleInstance spy in the test app, over an InternalEvent seam | Reversible: yes
+- FR-064 permissions | X on 50146 and 50147 in EQM - Reader only (inherited by Operator, Manager, Administrator), not API Consumer | Reversible: yes
+- FR-064 IDs | Enum 50114, codeunits 50146/50147, tests 50171/50174 (unbuilt reservations), from a source scan because the AL MCP had no project loaded | Reversible: yes
+- FR-064 build | AL MCP had no project loaded, so app/ and test/ were compiled with alc on scratchpad copies; g.xlf copied from that build, then xlf_sync | Reversible: yes
+- FR-064 tests | T8 and T9 call SendReturnedFromMaintenanceNotification directly over posting through Maintenance Mgt. (same dispatch path) | Reversible: yes
+- FR-064 interface implementations | Send and Recall are plain procedure, not internal, in the BC provider and the spy (AL0920, error AL0921 from runtime 17), even though the codeunits are Access = Internal | Reversible: yes

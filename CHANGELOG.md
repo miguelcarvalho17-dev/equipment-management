@@ -1,6 +1,21 @@
 # Changelog
 Newest first. Grouped by Added / Changed / Fixed / Obsolete.
 
+## FR-064 Feature Interfaces (version stays 29.0.0.0, no bump)
+### Added
+- Contributor-facing notification provider interface. A delivery channel for equipment notifications can now be added without changing the notification rules. The Business Central notification is the only channel in this release. Feature doc docs/features/FR-064-feature-interfaces.md. Help docs/help/FR-064-feature-interfaces.md.
+### Changed
+- The six equipment notifications and their recalls are sent through the provider. Their texts, actions, data and My Notifications switches are unchanged.
+- Permission set EQM - Reader can run the internal notification payload and provider codeunits. EQM - Operator, EQM - Manager and EQM - Administrator inherit it. EQM - API Consumer gets no new rights.
+### Fixed
+- None.
+### Obsolete
+- None.
+
+Release notes: none for users. The equipment notifications work as before. The change prepares later delivery channels, such as email and Teams, which are not part of this release.
+
+Note: no table, field, page or upgrade change, no `app.json` change, version stays 29.0.0.0. Not verified: tests not executed locally, CI result pending (test codeunit EQM Notification Tests, nine tests, and the existing notification tests EQM Process Integration Tests as regression); the build result and the repo checks are pending in CI; the test spy's use of an internal interface is pending the CI build; no separate AppSource validation ran. The feature doc is docs/features/FR-064-feature-interfaces.md.
+
 ## FR-063 Dependency Management
 ### Added
 - Developer page docs/architecture/dependencies.md with the minimum Business Central version (29.0, online), the manifest values, the dependency matrix of the app and the test app, removed and unused dependencies, the standard modules used, tooling dependencies, upgrade notes and known gaps. Repo checks check 9 "Dependency matrix" (DEP1 to DEP6): it fails a pull request when the page no longer matches `app/app.json` and `test/app.json`, and warns on every change of `application`, `platform`, `runtime` or dependencies against `main`. Feature doc docs/features/FR-063-dependency-management.md. Help docs/help/FR-063-dependency-management.md.
