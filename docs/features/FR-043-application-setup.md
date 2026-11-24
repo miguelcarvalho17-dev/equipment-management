@@ -1,5 +1,7 @@
 # FR-043 Application Setup
 
+> **Sandbox verification (2026-11-24):** verified in a Business Central sandbox by the project owner; no defects were reported. The detailed results are not recorded here, so statements below that say "not verified" or carry `TODO(verify)` predate this run.
+
 ## Purpose
 The Equipment Setup page (GitHub issue #84) becomes the central place where an administrator configures Equipment Management for each company. It gets two groups of settings:
 - **Defaults:** Default Warranty Alert Days and Default Maintenance Frequency (Months).

@@ -1,5 +1,7 @@
 # FR-029 Business Events
 
+> **Sandbox verification (2026-11-24):** verified in a Business Central sandbox by the project owner; no defects were reported. The detailed results are not recorded here, so statements below that say "not verified" or carry `TODO(verify)` predate this run.
+
 ## Purpose
 Five integration events let partner extensions react to business moments (equipment created, assigned, returned, maintenance created, warranty expired) without changing this app (GitHub issue #67). The events only notify: they are raised after the fact and cannot change or skip the standard logic. There is no `IsHandled` and no `var` parameter.
 

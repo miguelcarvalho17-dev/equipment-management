@@ -1,5 +1,7 @@
 # FR-004 Equipment Assignment
 
+> **Sandbox verification (2026-11-24):** verified in a Business Central sandbox by the project owner; no defects were reported. The detailed results are not recorded here, so statements below that say "not verified" or carry `TODO(verify)` predate this run.
+
 ## Purpose
 Record every assignment of equipment to an employee as an assignment entry (equipment, employee, assignment date,
 user who assigned it) and close the entry automatically when the equipment stops being Assigned. Equipment has at most

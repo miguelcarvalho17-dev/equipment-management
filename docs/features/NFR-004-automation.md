@@ -1,5 +1,7 @@
 # NFR-004 Automation
 
+> **Sandbox verification (2026-11-24):** verified in a Business Central sandbox by the project owner; no defects were reported. The detailed results are not recorded here, so statements below that say "not verified" or carry `TODO(verify)` predate this run.
+
 ## Purpose
 Requirement: system monitoring processes run fully automated through Business Central Job Queue processing.
 Status: **met in code, not verified in a sandbox.** NFR-004 adds no code. It traces the requirement to the objects delivered by FR-018 (see [FR-018](FR-018-automated-background-processing.md)). No AL change, no new object, no permission change, no automated tests. App version stays 29.0.0.0.

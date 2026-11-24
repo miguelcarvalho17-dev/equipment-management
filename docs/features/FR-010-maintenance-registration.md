@@ -1,5 +1,7 @@
 # FR-010 Maintenance Registration
 
+> **Sandbox verification (2026-11-24):** verified in a Business Central sandbox by the project owner; no defects were reported. The detailed results are not recorded here, so statements below that say "not verified" or carry `TODO(verify)` predate this run.
+
 ## Purpose
 FR-011 update: records now have a Status (Open or Posted). Corrections are possible only while Open; posting freezes the record and writes it to the maintenance history. See docs/features/FR-011-maintenance-history.md.
 

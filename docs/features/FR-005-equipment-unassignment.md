@@ -1,5 +1,7 @@
 # FR-005 Equipment Unassignment (Return)
 
+> **Sandbox verification (2026-11-24):** verified in a Business Central sandbox by the project owner; no defects were reported. The detailed results are not recorded here, so statements below that say "not verified" or carry `TODO(verify)` predate this run.
+
 ## Purpose
 Users return assigned equipment. The employee is removed from the equipment, the status becomes Available and the active
 assignment entry is closed (never deleted). Returning is the only way to change Assigned equipment to Available. It can be

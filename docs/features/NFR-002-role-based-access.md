@@ -1,5 +1,7 @@
 # NFR-002 Role-based access
 
+> **Sandbox verification (2026-11-24):** verified in a Business Central sandbox by the project owner; no defects were reported. The detailed results are not recorded here, so statements below that say "not verified" or carry `TODO(verify)` predate this run.
+
 ## Purpose
 The app ships three roles as permission sets: **Equipment Reader** (view only), **Equipment Manager** (create and change equipment, assign and return) and **Equipment Administrator** (full functional access). Enforcement is in the permission sets only; pages do not check role names.
 

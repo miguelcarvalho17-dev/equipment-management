@@ -1,5 +1,7 @@
 # NFR-005 Auditability
 
+> **Sandbox verification (2026-11-24):** verified in a Business Central sandbox by the project owner; no defects were reported. The detailed results are not recorded here, so statements below that say "not verified" or carry `TODO(verify)` predate this run.
+
 ## Purpose
 Requirement: every maintenance operation leaves a permanent, read-only record of who did what and when, and maintenance data is never deleted. Status: **implemented, review APPROVE, build clean (CodeCop + UICop, 0 errors, 0 warnings). Not verified in a sandbox; automated tests deferred (plan Q3, codeunit 50177 reserved, not written).** App version stays 29.0.0.0 (not released, no upgrade code).
 

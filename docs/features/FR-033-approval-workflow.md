@@ -1,5 +1,7 @@
 # FR-033 Approval Workflow
 
+> **Sandbox verification (2026-11-24):** verified in a Business Central sandbox by the project owner; no defects were reported. The detailed results are not recorded here, so statements below that say "not verified" or carry `TODO(verify)` predate this run.
+
 ## Purpose
 A manager sends an Open equipment request (FR-032) for approval. Another manager approves or rejects it, and the decision is recorded with user, date and comment. An Approved request can be completed with the action "Assign Equipment", which assigns available equipment of the requested type to the employee (FR-004 logic) and sets the request to Completed. Rejected and Completed requests are final (GitHub issue #71).
 

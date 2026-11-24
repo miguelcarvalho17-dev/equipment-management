@@ -1,5 +1,7 @@
 # FR-041 Maintenance Cost Analysis Report
 
+> **Sandbox verification (2026-11-24):** verified in a Business Central sandbox by the project owner; no defects were reported. The detailed results are not recorded here, so statements below that say "not verified" or carry `TODO(verify)` predate this run.
+
 ## Purpose
 A maintenance cost report for the equipment (GitHub issue #79). It shows the posted maintenance cost and the number of maintenances, with one row per category, equipment, year and month. The user can limit the rows with the request page filters on the equipment (No., Category Code) and on the posted maintenance (Maintenance Date, Maintenance Type). The report is read-only.
 

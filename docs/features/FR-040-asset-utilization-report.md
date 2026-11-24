@@ -1,5 +1,7 @@
 # FR-040 Asset Utilization Report
 
+> **Sandbox verification (2026-11-24):** verified in a Business Central sandbox by the project owner; no defects were reported. The detailed results are not recorded here, so statements below that say "not verified" or carry `TODO(verify)` predate this run.
+
 ## Purpose
 A utilization figure for the equipment (GitHub issue #78). It shows how much of the equipment is assigned, as a percentage: total, assigned, available and in-maintenance equipment, and the utilization percentage (assigned divided by total equipment, times 100). The user can limit the figures with the request page filters on **Category Code** and **Location Code**. The report is read-only.
 

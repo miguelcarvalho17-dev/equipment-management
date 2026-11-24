@@ -1,5 +1,7 @@
 # FR-011 Equipment Maintenance History
 
+> **Sandbox verification (2026-11-24):** verified in a Business Central sandbox by the project owner; no defects were reported. The detailed results are not recorded here, so statements below that say "not verified" or carry `TODO(verify)` predate this run.
+
 ## Purpose
 Maintenance records (FR-010) get an Open/Posted status. Posting freezes the record and writes one read-only copy to a new table, "EQM Maintenance History Entry". The posted history is shown on the Equipment Card and in its own list. History entries can never be changed, renamed or deleted.
 

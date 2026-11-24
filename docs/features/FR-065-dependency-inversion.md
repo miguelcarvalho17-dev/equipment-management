@@ -1,5 +1,7 @@
 # FR-065 Dependency Inversion
 
+> **Sandbox verification (2026-11-24):** verified in a Business Central sandbox by the project owner; no defects were reported. The detailed results are not recorded here, so statements below that say "not verified" or carry `TODO(verify)` predate this run.
+
 ## Purpose
 The business logic codeunits asked "EQM Feature Mgt." directly whether an optional feature was turned on. A test could change the answer only by writing rows in the Feature Setup table. FR-065 puts the question behind an internal interface, "EQM IFeature Availability", with one method, `IsEnabled`. Three codeunits now ask through the interface: "EQM Notification Mgt.", "EQM Integration Event Mgt." and "EQM Monitoring Job Runner". Their default answer is still "EQM Feature Mgt.", so the behaviour does not change. Tests can inject another answer. This is the first phase of the work in issue #106 and supports the mockable unit tests of FR-045.
 

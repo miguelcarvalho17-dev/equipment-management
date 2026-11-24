@@ -1,5 +1,7 @@
 # FR-055 Multi-Language Support
 
+> **Sandbox verification (2026-11-24):** verified in a Business Central sandbox by the project owner; no defects were reported. The detailed results are not recorded here, so statements below that say "not verified" or carry `TODO(verify)` predate this run.
+
 ## Purpose
 Shows the app's user interface in English (source), Portuguese (Portugal, pt-PT) and Spanish (Spain, es-ES). Captions, ToolTips, messages, error messages, labels and teaching tip texts follow the language a user chooses in Business Central (My Settings > Language).
 

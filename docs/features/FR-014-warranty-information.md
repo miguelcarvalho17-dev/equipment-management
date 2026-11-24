@@ -1,5 +1,7 @@
 # FR-014 Warranty Information
 
+> **Sandbox verification (2026-11-24):** verified in a Business Central sandbox by the project owner; no defects were reported. The detailed results are not recorded here, so statements below that say "not verified" or carry `TODO(verify)` predate this run.
+
 ## Purpose
 Users record the warranty of each piece of equipment on the equipment record: when it starts, when it ends, who provides it and its reference number. The data is shown in a Warranty section on the Equipment Card, so users can check whether a repair is still covered before they register maintenance. All four fields are optional. When both dates are filled in, the end date must be later than the start date.
 

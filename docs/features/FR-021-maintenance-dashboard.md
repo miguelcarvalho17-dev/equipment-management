@@ -1,5 +1,7 @@
 # FR-021 Maintenance Dashboard
 
+> **Sandbox verification (2026-11-24):** verified in a Business Central sandbox by the project owner; no defects were reported. The detailed results are not recorded here, so statements below that say "not verified" or carry `TODO(verify)` predate this run.
+
 ## Purpose
 The equipment dashboard (page 50109) and the Equipment Manager Role Center (page 50110) show the four maintenance KPIs of GitHub issue #40: Equipment in Maintenance, Planned Maintenance This Month, Overdue Maintenance and Total Maintenance Cost YTD. Two already existed (FR-009, FR-020). FR-021 adds Planned Maintenance This Month and Total Maintenance Cost YTD as tiles on the shared cue part 50106, each with a drill-down. Nothing is stored; the tiles are FlowFields on a temporary cue table.
 

@@ -1,5 +1,7 @@
 # FR-039 Equipment Register Report
 
+> **Sandbox verification (2026-11-24):** verified in a Business Central sandbox by the project owner; no defects were reported. The detailed results are not recorded here, so statements below that say "not verified" or carry `TODO(verify)` predate this run.
+
 ## Purpose
 An inventory register of the equipment (GitHub issue #77). It lists each piece of equipment with its main data, so a user can see the whole inventory or a part of it on one printout or in one workbook. The user chooses the filters on the request page: **Category**, **Status**, **Employee** and **Purchase Date**. The report is read-only.
 

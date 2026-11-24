@@ -1,5 +1,7 @@
 # FR-050 Application Telemetry
 
+> **Sandbox verification (2026-11-24):** verified in a Business Central sandbox by the project owner; no defects were reported. The detailed results are not recorded here, so statements below that say "not verified" or carry `TODO(verify)` predate this run.
+
 ## Purpose
 Sends a usage signal to the environment's Application Insights when equipment is created, assigned or returned, when maintenance is registered and when a warranty expires (issue #91). The signals show how the application is used. They are not a record of the business data, and they change no business logic.
 

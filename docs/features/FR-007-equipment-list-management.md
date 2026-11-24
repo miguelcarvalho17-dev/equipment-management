@@ -1,5 +1,7 @@
 # FR-007 Equipment List Management
 
+> **Sandbox verification (2026-11-24):** verified in a Business Central sandbox by the project owner; no defects were reported. The detailed results are not recorded here, so statements below that say "not verified" or carry `TODO(verify)` predate this run.
+
 ## Purpose
 Users open one list of all equipment and narrow it by category, status and assigned employee, and find equipment by number or serial number. Page 50100 "EQM Equipment List" (FR-001) already covers this through the standard BC search box, filter pane and the status views. FR-007 adds a teaching tip, an "Assigned Employee Name" column and two navigation actions into the filtered list. No code implements search or filtering.
 

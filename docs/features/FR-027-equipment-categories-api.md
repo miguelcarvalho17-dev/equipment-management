@@ -1,5 +1,7 @@
 # FR-027 Equipment Categories API
 
+> **Sandbox verification (2026-11-24):** verified in a Business Central sandbox by the project owner; no defects were reported. The detailed results are not recorded here, so statements below that say "not verified" or carry `TODO(verify)` predate this run.
+
 ## Purpose
 Read-only Business Central API v1.0 entity `categories` on table 50101 "EQM Equipment Category" (FR-002), so external systems can list categories and resolve the `categoryCode` values returned by `equipments` (FR-026) (GitHub issue #65). It follows the API conventions C1 to C10 in `docs/features/FR-026-equipment-api.md`.
 

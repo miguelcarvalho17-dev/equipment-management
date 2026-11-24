@@ -1,5 +1,7 @@
 # FR-063 Dependency Management
 
+> **Sandbox verification (2026-11-24):** verified in a Business Central sandbox by the project owner; no defects were reported. The detailed results are not recorded here, so statements below that say "not verified" or carry `TODO(verify)` predate this run.
+
 ## Purpose
 External dependencies are documented and version-controlled (GitHub issue #104). One developer page, `docs/architecture/dependencies.md`, holds the minimum Business Central version, the dependency matrix and the upgrade notes. Check 9 of `repo_checks.py` keeps the page equal to `app/app.json` and `test/app.json`.
 

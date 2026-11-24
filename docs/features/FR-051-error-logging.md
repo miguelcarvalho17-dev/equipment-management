@@ -1,5 +1,7 @@
 # FR-051 Error Logging
 
+> **Sandbox verification (2026-11-24):** verified in a Business Central sandbox by the project owner; no defects were reported. The detailed results are not recorded here, so statements below that say "not verified" or carry `TODO(verify)` predate this run.
+
 ## Purpose
 Records the errors that stop the app's unattended processes (issue #92). An entry gives the time, the user, the process, the object, the error message, the error code and the call stack. Administrators read the entries on the Equipment Error Log page.
 

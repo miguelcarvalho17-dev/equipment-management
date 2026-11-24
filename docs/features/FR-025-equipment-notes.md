@@ -1,5 +1,7 @@
 # FR-025 Equipment Notes
 
+> **Sandbox verification (2026-11-24):** verified in a Business Central sandbox by the project owner; no defects were reported. The detailed results are not recorded here, so statements below that say "not verified" or carry `TODO(verify)` predate this run.
+
 ## Purpose
 Users record short operational notes on a piece of equipment (GitHub issue #63). Each note stores when it was written, who wrote it and the comment. Notes are listed newest first on the Equipment Card and can never be changed or deleted, so the history of the equipment stays traceable. The standard Notes FactBox (record links) is unchanged and remains a free notepad; it is not immutable and not controlled by EQM roles.
 

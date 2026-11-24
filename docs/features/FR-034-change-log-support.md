@@ -1,5 +1,7 @@
 # FR-034 Change Log Support
 
+> **Sandbox verification (2026-11-24):** verified in a Business Central sandbox by the project owner; no defects were reported. The detailed results are not recorded here, so statements below that say "not verified" or carry `TODO(verify)` predate this run.
+
 ## Purpose
 Make changes to equipment traceable through the standard Business Central Change Log: category, status, assigned employee and the stored warranty fields of table 50100 "EQM Equipment" (GitHub issue #72). The app registers these fields in the Change Log setup on install. It does not switch the Change Log on.
 

@@ -1,5 +1,7 @@
 # FR-020 Overdue Maintenance Monitoring
 
+> **Sandbox verification (2026-11-24):** verified in a Business Central sandbox by the project owner; no defects were reported. The detailed results are not recorded here, so statements below that say "not verified" or carry `TODO(verify)` predate this run.
+
 ## Purpose
 Users see which equipment has missed its planned maintenance. Equipment is overdue when its Next Maintenance Date (FR-019) is before today. The date is shown in red on the Equipment List, the Equipment Card and the Maintenance FactBox, and a dashboard / Role Center tile "Overdue Maintenance Equipment" counts the overdue equipment and drills down to it. Nothing is stored and no job runs; the result is calculated from the date every time it is shown.
 

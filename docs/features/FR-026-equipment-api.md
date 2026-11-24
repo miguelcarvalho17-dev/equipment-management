@@ -1,5 +1,7 @@
 # FR-026 Equipment API
 
+> **Sandbox verification (2026-11-24):** verified in a Business Central sandbox by the project owner; no defects were reported. The detailed results are not recorded here, so statements below that say "not verified" or carry `TODO(verify)` predate this run.
+
 ## Purpose
 Custom Business Central API v1.0 for equipment (GET, POST, PATCH, DELETE, plus two bound actions), including category, status and the current employee assignment, for inventory sync, CMDB, mobile and self-service clients (GitHub issue #64). Every write goes through the existing table triggers and procedures of table 50100, so the rules of FR-001 to FR-024 apply as in the UI. This feature also fixes the API conventions C1 to C10 that FR-027 (#65) and FR-028 (#66) must follow.
 

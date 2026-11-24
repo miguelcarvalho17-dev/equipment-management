@@ -1,5 +1,7 @@
 # FR-015 Warranty Monitoring
 
+> **Sandbox verification (2026-11-24):** verified in a Business Central sandbox by the project owner; no defects were reported. The detailed results are not recorded here, so statements below that say "not verified" or carry `TODO(verify)` predate this run.
+
 ## Purpose
 Users see at a glance whether the warranty of each piece of equipment is Active, Expiring Soon or Expired, so they can act before coverage ends and know whether a repair is still covered. The status is calculated from the Warranty End Date (FR-014) and today's date every time it is shown. Nobody sets it and no job runs. It appears on the Equipment Card, on the Equipment List and as two dashboard tiles.
 

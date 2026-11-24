@@ -1,5 +1,7 @@
 # FR-024 Document Attachments
 
+> **Sandbox verification (2026-11-24):** verified in a Business Central sandbox by the project owner; no defects were reported. The detailed results are not recorded here, so statements below that say "not verified" or carry `TODO(verify)` predate this run.
+
 ## Purpose
 Equipment records can hold any number of files (purchase invoices, maintenance reports, warranty certificates, user manuals, delivery notes) through the standard Document Attachment framework (GitHub issue #62). Files are listed in an **Attachments** FactBox on the Equipment Card and managed from an **Attachments** action. Each file can be classified with an EQM category, shown only for equipment attachments.
 

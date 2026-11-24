@@ -1,5 +1,7 @@
 # FR-002 Equipment Categories
 
+> **Sandbox verification (2026-11-24):** verified in a Business Central sandbox by the project owner; no defects were reported. The detailed results are not recorded here, so statements below that say "not verified" or carry `TODO(verify)` predate this run.
+
 ## Purpose
 Administrators maintain the list of equipment categories (Code, Description, Active). Only active categories can be
 newly set on equipment. Equipment that already uses a category keeps it after the category is made inactive.

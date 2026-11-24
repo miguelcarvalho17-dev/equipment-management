@@ -1,5 +1,7 @@
 # FR-058 Data Classification
 
+> **Sandbox verification (2026-11-24):** verified in a Business Central sandbox by the project owner; no defects were reported. The detailed results are not recorded here, so statements below that say "not verified" or carry `TODO(verify)` predate this run.
+
 ## Purpose
 Every table and field of the app must have a data classification (issue #99). The classification tells the platform and the administrator what kind of data a field holds, so that personal data can be found and handled for compliance. This change checks the classifications of all fields, decides the two open personal-data items in `docs/TODO.md`, and adds a test that keeps them from drifting.
 

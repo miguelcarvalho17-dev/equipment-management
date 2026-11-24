@@ -1,5 +1,7 @@
 # FR-053 Large Dataset Support
 
+> **Sandbox verification (2026-11-24):** verified in a Business Central sandbox by the project owner; no defects were reported. The detailed results are not recorded here, so statements below that say "not verified" or carry `TODO(verify)` predate this run.
+
 ## Purpose
 Keeps the app usable in companies with 100,000+ equipment records and 1,000,000+ assignment records (issue #94). NFR-001 (#22) set the current target at 10,000 records and deferred the warranty job change to this feature. This is phase 1: indexes, one cache, one query and tests. No change to what users see, except speed.
 

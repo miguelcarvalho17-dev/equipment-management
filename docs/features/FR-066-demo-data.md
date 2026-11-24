@@ -1,5 +1,7 @@
 # FR-066 Demo Data
 
+> **Sandbox verification (2026-11-24):** verified in a Business Central sandbox by the project owner; no defects were reported. The detailed results are not recorded here, so statements below that say "not verified" or carry `TODO(verify)` predate this run.
+
 ## Purpose
 Gives a new company sample data to look at. An administrator runs **Create Demo Data** on the Equipment Setup page. The action adds about 8 employees, 15 equipment records, assignments and maintenance records. **Delete Demo Data** removes what the demo created and keeps everything a user created or changed in a way that matters.
 

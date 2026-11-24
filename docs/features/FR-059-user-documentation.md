@@ -1,5 +1,7 @@
 # FR-059 User Documentation
 
+> **Sandbox verification (2026-11-24):** verified in a Business Central sandbox by the project owner; no defects were reported. The detailed results are not recorded here, so statements below that say "not verified" or carry `TODO(verify)` predate this run.
+
 ## Purpose
 Equipment Management has one help article for each feature, but no single guide for end users, functional consultants and administrators. This change adds a consolidated user guide in `docs/user-guide/` (issue #100). The guide describes the current behaviour as task-based pages, in one sidebar order. Each functional page links the per-feature help articles it was built from. The change is documentation only.
 

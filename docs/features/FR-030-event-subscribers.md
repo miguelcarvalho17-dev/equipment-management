@@ -1,5 +1,7 @@
 # FR-030 Event Subscribers (integration event outbox)
 
+> **Sandbox verification (2026-11-24):** verified in a Business Central sandbox by the project owner; no defects were reported. The detailed results are not recorded here, so statements below that say "not verified" or carry `TODO(verify)` predate this run.
+
 ## Purpose
 A new Integration module subscribes to the five FR-029 business events and writes one outbox entry per event, in the same transaction as the business operation (GitHub issue #68). External systems read pending entries through an API and mark them processed. No existing business code changes. No standard BC event is used, so there is no events report.
 

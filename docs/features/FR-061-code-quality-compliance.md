@@ -1,5 +1,7 @@
 # FR-061 Code Quality Compliance
 
+> **Sandbox verification (2026-11-24):** verified in a Business Central sandbox by the project owner; no defects were reported. The detailed results are not recorded here, so statements below that say "not verified" or carry `TODO(verify)` predate this run.
+
 ## Purpose
 The solution shall pass the Microsoft code analyzers: CodeCop, UICop and AppSourceCop (GitHub issue #102). The main app runs all three, locally and in CI. The test app runs CodeCop and UICop locally only; CI does not analyse it (see Test app analysis). PerTenantExtensionCop is not used, because the project delivers in AppSource mode. This feature changes no AL behaviour. It changes analyzer settings, adds an AppSourceCop configuration for the main app, fixes two findings in the test app and records what remains open.
 
