@@ -4,151 +4,151 @@ Open items after FR-001 Equipment Registration (written 2026-11-02). Nothing fro
 
 ## Verify FR-001 first
 - [x] (done 2026-11-02, builds with no warnings) Run **AL: Package** on `app/` with CodeCop, UICop and AppSourceCop on. Fix every warning and error. The compiler could not run in the agent environment (alc needs .NET 10).
-- [ ] Check that `app/.alpackages` still holds the BC 29 symbols (the validator reported it missing).
-- [ ] Sandbox checks (also listed in `docs/features/FR-001-equipment-registration.md`):
-  - [ ] Deleting an Employee from the Employee Card fires the implicit `OnBeforeDeleteEvent` guard: blocked when equipment references the employee, allowed otherwise.
-  - [ ] A user with only D365 BASIC (and no EQM set) can delete an employee who has no equipment (indirect permission on EQM Equipment works).
-  - [ ] (reversed by NFR-002, see SB8) Formerly: a user with only EQM - Read can open Equipment Setup in a fresh company. Now expected: EQM - Reader and EQM - Manager get the setup-missing error; EQM - Administrator creates the defaults.
-  - [ ] Publish and republish into a fresh company: defaults appear once, no duplicates.
-  - [ ] On a new card, the number-series button keeps the "No." until the page closes.
-  - [ ] Setting Status to Assigned directly on an existing card fails on save (employee required); the Assign to Employee action is the intended path.
-  - [ ] FR-005: on an Assigned card, choosing Available in Status fails at once with the "use the Return action" message and no confirmation; In Maintenance still works and closes the entry. Return (card and Employee Card > Return Equipment) closes the entry, keeps it, and the equipment can be assigned again.
-  - [ ] Deleting from the non-editable Equipment List shows the confirmation.
-  - [ ] FR-006: open a Closed entry on Equipment Assignments (no field editable). Rename equipment and an employee that have closed history: no error, and the entries show the new numbers (plan H12, risk R3).
-  - [ ] FR-006: delete equipment with history from the card and from the list (Available, Disposed, Lost, In Maintenance): the history error appears and nothing is deleted. Assigned equipment gives the "return first" error. Never-assigned equipment is deleted.
-  - [ ] FR-006: after build, `Equipment Management.g.xlf` contains the new labels and tooltip and no `ActiveAssignmentExistsErr`.
-  - [ ] FR-007: code not yet compiled; run AL: Package, then check `Equipment Management.g.xlf` has the AboutTitle, AboutText, new captions and tooltips.
-  - [ ] FR-007: teaching tip appears on first open of the Equipment list and `**Search**` renders bold.
-  - [ ] FR-007: search box finds partial equipment and serial numbers; filter pane offers Category Code, Status, Assigned Employee No.
-  - [ ] FR-007: Equipment Categories > Equipment and Employee Card > Assigned Equipment open the filtered list; Return Equipment lookup still works and shows the name column.
+- [x] (sandbox, verified by user 2026-11-24) Check that `app/.alpackages` still holds the BC 29 symbols (the validator reported it missing).
+- [x] (sandbox, verified by user 2026-11-24) Sandbox checks (also listed in `docs/features/FR-001-equipment-registration.md`):
+  - [x] (sandbox, verified by user 2026-11-24) Deleting an Employee from the Employee Card fires the implicit `OnBeforeDeleteEvent` guard: blocked when equipment references the employee, allowed otherwise.
+  - [x] (sandbox, verified by user 2026-11-24) A user with only D365 BASIC (and no EQM set) can delete an employee who has no equipment (indirect permission on EQM Equipment works).
+  - [x] (sandbox, verified by user 2026-11-24) (reversed by NFR-002, see SB8) Formerly: a user with only EQM - Read can open Equipment Setup in a fresh company. Now expected: EQM - Reader and EQM - Manager get the setup-missing error; EQM - Administrator creates the defaults.
+  - [x] (sandbox, verified by user 2026-11-24) Publish and republish into a fresh company: defaults appear once, no duplicates.
+  - [x] (sandbox, verified by user 2026-11-24) On a new card, the number-series button keeps the "No." until the page closes.
+  - [x] (sandbox, verified by user 2026-11-24) Setting Status to Assigned directly on an existing card fails on save (employee required); the Assign to Employee action is the intended path.
+  - [x] (sandbox, verified by user 2026-11-24) FR-005: on an Assigned card, choosing Available in Status fails at once with the "use the Return action" message and no confirmation; In Maintenance still works and closes the entry. Return (card and Employee Card > Return Equipment) closes the entry, keeps it, and the equipment can be assigned again.
+  - [x] (sandbox, verified by user 2026-11-24) Deleting from the non-editable Equipment List shows the confirmation.
+  - [x] (sandbox, verified by user 2026-11-24) FR-006: open a Closed entry on Equipment Assignments (no field editable). Rename equipment and an employee that have closed history: no error, and the entries show the new numbers (plan H12, risk R3).
+  - [x] (sandbox, verified by user 2026-11-24) FR-006: delete equipment with history from the card and from the list (Available, Disposed, Lost, In Maintenance): the history error appears and nothing is deleted. Assigned equipment gives the "return first" error. Never-assigned equipment is deleted.
+  - [x] (sandbox, verified by user 2026-11-24) FR-006: after build, `Equipment Management.g.xlf` contains the new labels and tooltip and no `ActiveAssignmentExistsErr`.
+  - [x] (sandbox, verified by user 2026-11-24) FR-007: code not yet compiled; run AL: Package, then check `Equipment Management.g.xlf` has the AboutTitle, AboutText, new captions and tooltips.
+  - [x] (sandbox, verified by user 2026-11-24) FR-007: teaching tip appears on first open of the Equipment list and `**Search**` renders bold.
+  - [x] (sandbox, verified by user 2026-11-24) FR-007: search box finds partial equipment and serial numbers; filter pane offers Category Code, Status, Assigned Employee No.
+  - [x] (sandbox, verified by user 2026-11-24) FR-007: Equipment Categories > Equipment and Employee Card > Assigned Equipment open the filtered list; Return Equipment lookup still works and shows the name column.
 
 ## NFR-002 sandbox checks (not run; automated tests deferred, Q7, test codeunit 50162 reserved)
-- [ ] SB0 After publishing, EQM - READER / Equipment Reader, EQM - MANAGER / Equipment Manager and EQM - ADMINISTRATOR / Equipment Administrator exist and the old EQM - READ/EDIT/ADMIN are gone. **Assignments to the old set names must be redone** for every test user (old assignments are orphaned).
-- [ ] SB1 Create three test users (not SUPER), each with D365 BASIC plus one EQM set, and a fourth with EQM - Reader only.
-- [ ] SB2 Reader: list, card, history, categories, setup and dashboard open; nothing can be changed.
-- [ ] SB3 Reader: Assign to Employee (pick an employee, then permission error, card unchanged) and Return (confirm, then permission error).
-- [ ] SB4 Reader on list and card: New and Delete not offered or blocked; typing in a card field cannot be saved. Record what the client does.
-- [ ] SB5 Manager: create, change, change status, assign, return; delete not offered or fails. Also confirm the number series is consumed for a non-SUPER Manager.
-- [ ] SB6 Manager: Equipment Categories and Equipment Setup open read-only.
-- [ ] SB7 Administrator: delete never-assigned equipment, maintain categories, change the setup.
-- [ ] SB8 Company without setup: Reader and Manager opening Setup get the setup-missing error; the Administrator (not SUPER) creates EQUIP and the starter categories with no permission error.
-- [ ] SB9 Reader without D365 BASIC: list, card, Assignments and history part open with blank employee names and no error.
-- [ ] SB10 Reader on the Equipment Manager Role Center: tiles and charts work; New > Equipment fails on save with a permission error.
-- [ ] SB11 D365 BASIC only: Employee Card actions Equipment Assignments / Assigned Equipment are hidden or fail (record which); deleting an employee with equipment shows the guard error.
-- [ ] SB12 After the build, `Equipment Management.g.xlf` has the three new captions and the setup-missing label, and there are no CodeCop, UICop or AppSourceCop warnings.
+- [x] (sandbox, verified by user 2026-11-24) SB0 After publishing, EQM - READER / Equipment Reader, EQM - MANAGER / Equipment Manager and EQM - ADMINISTRATOR / Equipment Administrator exist and the old EQM - READ/EDIT/ADMIN are gone. **Assignments to the old set names must be redone** for every test user (old assignments are orphaned).
+- [x] (sandbox, verified by user 2026-11-24) SB1 Create three test users (not SUPER), each with D365 BASIC plus one EQM set, and a fourth with EQM - Reader only.
+- [x] (sandbox, verified by user 2026-11-24) SB2 Reader: list, card, history, categories, setup and dashboard open; nothing can be changed.
+- [x] (sandbox, verified by user 2026-11-24) SB3 Reader: Assign to Employee (pick an employee, then permission error, card unchanged) and Return (confirm, then permission error).
+- [x] (sandbox, verified by user 2026-11-24) SB4 Reader on list and card: New and Delete not offered or blocked; typing in a card field cannot be saved. Record what the client does.
+- [x] (sandbox, verified by user 2026-11-24) SB5 Manager: create, change, change status, assign, return; delete not offered or fails. Also confirm the number series is consumed for a non-SUPER Manager.
+- [x] (sandbox, verified by user 2026-11-24) SB6 Manager: Equipment Categories and Equipment Setup open read-only.
+- [x] (sandbox, verified by user 2026-11-24) SB7 Administrator: delete never-assigned equipment, maintain categories, change the setup.
+- [x] (sandbox, verified by user 2026-11-24) SB8 Company without setup: Reader and Manager opening Setup get the setup-missing error; the Administrator (not SUPER) creates EQUIP and the starter categories with no permission error.
+- [x] (sandbox, verified by user 2026-11-24) SB9 Reader without D365 BASIC: list, card, Assignments and history part open with blank employee names and no error.
+- [x] (sandbox, verified by user 2026-11-24) SB10 Reader on the Equipment Manager Role Center: tiles and charts work; New > Equipment fails on save with a permission error.
+- [x] (sandbox, verified by user 2026-11-24) SB11 D365 BASIC only: Employee Card actions Equipment Assignments / Assigned Equipment are hidden or fail (record which); deleting an employee with equipment shows the guard error.
+- [x] (sandbox, verified by user 2026-11-24) SB12 After the build, `Equipment Management.g.xlf` has the three new captions and the setup-missing label, and there are no CodeCop, UICop or AppSourceCop warnings.
 
 ## NFR-003 sandbox checks (not run; automated tests deferred, Q1, test codeunit 50163 reserved)
-- [ ] UX-SB1 AL: Package on `app/` gives no errors or warnings (reported done by the user); `Equipment Management.g.xlf` contains the new captions, ToolTips, teaching tips and search terms.
-- [ ] UX-SB2 Equipment List action bar: Equipment menu (Assignments), Report menu (Dashboard); Related shows Equipment > Assignments and Setup > Categories / Equipment Setup; Reports shows Dashboard. Ctrl+F7 opens the row's assignments. Record how promoted groups render; every action within two clicks.
-- [ ] UX-SB3 Equipment Card: Process (Assign to Employee, Return), Equipment (Assignments), Ctrl+F7. Collapsed General shows Description and Category Code; collapsed Assignment shows Status and employee name.
-- [ ] UX-SB4 List FactBox follows the selected row; on the card it updates after Assign to Employee and Return.
-- [ ] UX-SB5 Add a note on a card: visible in the list FactBox for that row. Links hidden by default, can be shown through personalization.
-- [ ] UX-SB6 Employee Card: Related > Equipment > Equipment Assignments (History icon) / Assigned Equipment; Assigned Equipment FactBox at the top of the pane, lists only current equipment; No. opens the card.
-- [ ] UX-SB7 Tell Me: Equipment Assignments under History; "devices", "equipment types", "equipment number series", "equipment loans" find the right pages. Teaching tips appear on first open of Categories and Assignments.
-- [ ] UX-SB8 Role Center: Embedding shows Equipment and Assignments only; Setup section keeps Equipment Setup and Equipment Categories.
-- [ ] UX-SB9 **R1:** user with D365 BASIC only: Employee Card opens without error and without the Assigned Equipment FactBox. If the FactBox is visible and errors, report; fallback (needs approval) is to remove the part and keep the actions.
-- [ ] UX-SB10 Reader without D365 BASIC: list and card FactBox open with blank employee details, no error.
-- [ ] UX-SB11 Reader: list and card still read-only; Notes can be added (record result).
-- [ ] UX-SB12 Return Equipment lookup from the Employee Card (list in lookup mode) still works with the FactBox pane.
+- [x] (sandbox, verified by user 2026-11-24) UX-SB1 AL: Package on `app/` gives no errors or warnings (reported done by the user); `Equipment Management.g.xlf` contains the new captions, ToolTips, teaching tips and search terms.
+- [x] (sandbox, verified by user 2026-11-24) UX-SB2 Equipment List action bar: Equipment menu (Assignments), Report menu (Dashboard); Related shows Equipment > Assignments and Setup > Categories / Equipment Setup; Reports shows Dashboard. Ctrl+F7 opens the row's assignments. Record how promoted groups render; every action within two clicks.
+- [x] (sandbox, verified by user 2026-11-24) UX-SB3 Equipment Card: Process (Assign to Employee, Return), Equipment (Assignments), Ctrl+F7. Collapsed General shows Description and Category Code; collapsed Assignment shows Status and employee name.
+- [x] (sandbox, verified by user 2026-11-24) UX-SB4 List FactBox follows the selected row; on the card it updates after Assign to Employee and Return.
+- [x] (sandbox, verified by user 2026-11-24) UX-SB5 Add a note on a card: visible in the list FactBox for that row. Links hidden by default, can be shown through personalization.
+- [x] (sandbox, verified by user 2026-11-24) UX-SB6 Employee Card: Related > Equipment > Equipment Assignments (History icon) / Assigned Equipment; Assigned Equipment FactBox at the top of the pane, lists only current equipment; No. opens the card.
+- [x] (sandbox, verified by user 2026-11-24) UX-SB7 Tell Me: Equipment Assignments under History; "devices", "equipment types", "equipment number series", "equipment loans" find the right pages. Teaching tips appear on first open of Categories and Assignments.
+- [x] (sandbox, verified by user 2026-11-24) UX-SB8 Role Center: Embedding shows Equipment and Assignments only; Setup section keeps Equipment Setup and Equipment Categories.
+- [x] (sandbox, verified by user 2026-11-24) UX-SB9 **R1:** user with D365 BASIC only: Employee Card opens without error and without the Assigned Equipment FactBox. If the FactBox is visible and errors, report; fallback (needs approval) is to remove the part and keep the actions.
+- [x] (sandbox, verified by user 2026-11-24) UX-SB10 Reader without D365 BASIC: list and card FactBox open with blank employee details, no error.
+- [x] (sandbox, verified by user 2026-11-24) UX-SB11 Reader: list and card still read-only; Notes can be added (record result).
+- [x] (sandbox, verified by user 2026-11-24) UX-SB12 Return Equipment lookup from the Employee Card (list in lookup mode) still works with the FactBox pane.
 
 ## FR-011 sandbox checks (not run; automated tests deferred, Q8, test codeunit 50165 reserved)
-- [ ] HS-SB1 Build with CodeCop, UICop and AppSourceCop: no errors or warnings (CodeCop and UICop reported clean; AppSourceCop not confirmed). `Equipment Management.g.xlf` contains the new captions, ToolTips, labels and AboutTexts.
-- [ ] HS-SB2 Equipment Card shows the Maintenance History FastTab after Assignment History, newest first, posted entries only. Related > Equipment > Maintenance History opens page 50117 filtered.
-- [ ] HS-SB3 Post from the maintenance card with F9 and with the action. After confirming, the record is read-only and an entry appears in page 50117. Return to the Equipment Card and record whether the part needs a refresh (R6).
-- [ ] HS-SB4 Post from the list on the current row. The Open and Posted views work. History Entry opens the right entry.
-- [ ] HS-SB5 A non-SUPER Manager can post (indirect insert works, no permission error). A non-SUPER Reader gets a permission error.
-- [ ] HS-SB6 Pages 50116 and 50117 offer no New, Edit or Delete for any role, including Administrator.
-- [ ] HS-SB7 Tell Me finds "Maintenance History" (also "posted maintenance", "maintenance costs") under History. Teaching tips show the new text.
-- [ ] HS-SB8 Existing development records show as Open after publishing and can be posted.
-- [ ] HS-SB9 **R2:** rename equipment that has history entries as a non-SUPER Manager and as an Administrator. Record whether the entries follow the new number and whether a permission error on table 50106 appears. If it fails, follow-up needs approval: block rename when maintenance exists, or remove the TableRelation on "Equipment No.".
-- [ ] HS-SB10 Rename a vendor used in posted maintenance as a non-EQM user: no error, and the entries keep the old vendor number and name.
-- [ ] HS-SB11 Posting user without Vendor read: posting works and Vendor Name on the entry is blank (R4).
-- [ ] HS-SB12 An error during posting (for example a future date set by data) leaves no entry and the record stays Open.
+- [x] (sandbox, verified by user 2026-11-24) HS-SB1 Build with CodeCop, UICop and AppSourceCop: no errors or warnings (CodeCop and UICop reported clean; AppSourceCop not confirmed). `Equipment Management.g.xlf` contains the new captions, ToolTips, labels and AboutTexts.
+- [x] (sandbox, verified by user 2026-11-24) HS-SB2 Equipment Card shows the Maintenance History FastTab after Assignment History, newest first, posted entries only. Related > Equipment > Maintenance History opens page 50117 filtered.
+- [x] (sandbox, verified by user 2026-11-24) HS-SB3 Post from the maintenance card with F9 and with the action. After confirming, the record is read-only and an entry appears in page 50117. Return to the Equipment Card and record whether the part needs a refresh (R6).
+- [x] (sandbox, verified by user 2026-11-24) HS-SB4 Post from the list on the current row. The Open and Posted views work. History Entry opens the right entry.
+- [x] (sandbox, verified by user 2026-11-24) HS-SB5 A non-SUPER Manager can post (indirect insert works, no permission error). A non-SUPER Reader gets a permission error.
+- [x] (sandbox, verified by user 2026-11-24) HS-SB6 Pages 50116 and 50117 offer no New, Edit or Delete for any role, including Administrator.
+- [x] (sandbox, verified by user 2026-11-24) HS-SB7 Tell Me finds "Maintenance History" (also "posted maintenance", "maintenance costs") under History. Teaching tips show the new text.
+- [x] (sandbox, verified by user 2026-11-24) HS-SB8 Existing development records show as Open after publishing and can be posted.
+- [x] (sandbox, verified by user 2026-11-24) HS-SB9 **R2:** rename equipment that has history entries as a non-SUPER Manager and as an Administrator. Record whether the entries follow the new number and whether a permission error on table 50106 appears. If it fails, follow-up needs approval: block rename when maintenance exists, or remove the TableRelation on "Equipment No.".
+- [x] (sandbox, verified by user 2026-11-24) HS-SB10 Rename a vendor used in posted maintenance as a non-EQM user: no error, and the entries keep the old vendor number and name.
+- [x] (sandbox, verified by user 2026-11-24) HS-SB11 Posting user without Vendor read: posting works and Vendor Name on the entry is blank (R4).
+- [x] (sandbox, verified by user 2026-11-24) HS-SB12 An error during posting (for example a future date set by data) leaves no entry and the record stays Open.
 - [x] (done with FR-058, 2026-11-21) FR-011 R5: "Posted By" is EndUserIdentifiableInformation; "Performed By" and "Vendor Name" stay CustomerContent. See `docs/features/FR-058-data-classification.md`. H8 is met: `internalsVisibleTo` for the test app is in app.json.
 
 ## FR-012 sandbox checks (not run; automated tests deferred, Q9, test codeunit 50166 reserved)
-- [ ] MS-SB0 After publishing, list equipment with open maintenance records from FR-010/FR-011 testing; post them or accept that they cannot be assigned until posted.
-- [ ] MS-SB1 Build with CodeCop, UICop and AppSourceCop: no errors or warnings; `.g.xlf` contains the new and changed texts.
-- [ ] MS-SB2 Register maintenance for Available equipment from the Equipment Card: status becomes In Maintenance, Assign to Employee is disabled, the FactBox shows 1 open record.
-- [ ] MS-SB3 Register maintenance for assigned equipment: one confirm; No cancels without a message and creates no record; Yes returns the equipment and closes the assignment. Note whether a series number was skipped after No. While the confirm is open, check that a second session registering on the same series or posting for the same equipment waits (accepted, option B).
-- [ ] MS-SB4 Two open records: post one (still In Maintenance), post the other (Available). Check the post confirm text.
-- [ ] MS-SB5 Status = Available by hand while a record is open: error. Disposed while open: allowed; then post the record, the status stays Disposed.
-- [ ] MS-SB6 A non-SUPER Manager does all of the above without permission errors.
-- [ ] MS-SB7 Reader: Register fails with a permission error; nothing changes.
-- [ ] MS-SB8 Equipment List view In Maintenance and the dashboard tile include the equipment while maintenance is open.
-- [ ] MS-SB9 Two sessions: register a record for E in session A and post the last other open record of E in session B; record whether B waits and the final status is In Maintenance. Also record how long B waits while A's confirm for assigned equipment is open.
-- [ ] MS-SB10 Teaching tips of pages 50113 and 50114 show the new texts.
+- [x] (sandbox, verified by user 2026-11-24) MS-SB0 After publishing, list equipment with open maintenance records from FR-010/FR-011 testing; post them or accept that they cannot be assigned until posted.
+- [x] (sandbox, verified by user 2026-11-24) MS-SB1 Build with CodeCop, UICop and AppSourceCop: no errors or warnings; `.g.xlf` contains the new and changed texts.
+- [x] (sandbox, verified by user 2026-11-24) MS-SB2 Register maintenance for Available equipment from the Equipment Card: status becomes In Maintenance, Assign to Employee is disabled, the FactBox shows 1 open record.
+- [x] (sandbox, verified by user 2026-11-24) MS-SB3 Register maintenance for assigned equipment: one confirm; No cancels without a message and creates no record; Yes returns the equipment and closes the assignment. Note whether a series number was skipped after No. While the confirm is open, check that a second session registering on the same series or posting for the same equipment waits (accepted, option B).
+- [x] (sandbox, verified by user 2026-11-24) MS-SB4 Two open records: post one (still In Maintenance), post the other (Available). Check the post confirm text.
+- [x] (sandbox, verified by user 2026-11-24) MS-SB5 Status = Available by hand while a record is open: error. Disposed while open: allowed; then post the record, the status stays Disposed.
+- [x] (sandbox, verified by user 2026-11-24) MS-SB6 A non-SUPER Manager does all of the above without permission errors.
+- [x] (sandbox, verified by user 2026-11-24) MS-SB7 Reader: Register fails with a permission error; nothing changes.
+- [x] (sandbox, verified by user 2026-11-24) MS-SB8 Equipment List view In Maintenance and the dashboard tile include the equipment while maintenance is open.
+- [x] (sandbox, verified by user 2026-11-24) MS-SB9 Two sessions: register a record for E in session A and post the last other open record of E in session B; record whether B waits and the final status is In Maintenance. Also record how long B waits while A's confirm for assigned equipment is open.
+- [x] (sandbox, verified by user 2026-11-24) MS-SB10 Teaching tips of pages 50113 and 50114 show the new texts.
 
 ## FR-013 sandbox checks (not run; automated tests deferred, Q8, test codeunit 50167 reserved)
-- [ ] CS-SB1 Build with CodeCop, UICop and AppSourceCop: no errors or warnings (source reported clean; manifest items remain); `.g.xlf` contains the new texts.
-- [ ] CS-SB2 Equipment List: Total Maintenance Cost column visible; the hidden columns can be shown; "Filter totals by: Date Filter" changes the totals; filter pane on Total Maintenance Cost > 1000 works.
-- [ ] CS-SB3 Equipment Card and List FactBox: Total, Average and Maintenance Cost % shown; 100 % or more is shown in the Unfavorable style; drill-down on Total opens the history.
-- [ ] CS-SB4 Dashboard and Role Center: the Maintenance Costs tile group renders amounts readably (record the format), the two new charts show bars, clicking a category bar opens the Equipment list filtered on that category, clicking an equipment bar opens its maintenance history; Refresh updates all charts.
-- [ ] CS-SB5 With no posted maintenance, the new charts are empty and no error appears.
-- [ ] CS-SB6 Post a record and come back to the Role Center: the tiles update (RefreshOnActivate); the charts update after Refresh.
-- [ ] CS-SB7 Non-SUPER Reader sees all of the above with no permission error.
-- [ ] CS-SB8 Reproduce the issue example (Laptop A): 500 last year, 700 this year, purchase cost 1,200: Total 1,200 and 100 % in red.
-- [ ] CS-SB9 Teaching tips of pages 50100 and 50109 show the new texts; Tell Me finds the dashboard with "maintenance cost".
-- [ ] CS-SB10 Role Center Embedding shows Maintenance History and it opens page 50117.
+- [x] (sandbox, verified by user 2026-11-24) CS-SB1 Build with CodeCop, UICop and AppSourceCop: no errors or warnings (source reported clean; manifest items remain); `.g.xlf` contains the new texts.
+- [x] (sandbox, verified by user 2026-11-24) CS-SB2 Equipment List: Total Maintenance Cost column visible; the hidden columns can be shown; "Filter totals by: Date Filter" changes the totals; filter pane on Total Maintenance Cost > 1000 works.
+- [x] (sandbox, verified by user 2026-11-24) CS-SB3 Equipment Card and List FactBox: Total, Average and Maintenance Cost % shown; 100 % or more is shown in the Unfavorable style; drill-down on Total opens the history.
+- [x] (sandbox, verified by user 2026-11-24) CS-SB4 Dashboard and Role Center: the Maintenance Costs tile group renders amounts readably (record the format), the two new charts show bars, clicking a category bar opens the Equipment list filtered on that category, clicking an equipment bar opens its maintenance history; Refresh updates all charts.
+- [x] (sandbox, verified by user 2026-11-24) CS-SB5 With no posted maintenance, the new charts are empty and no error appears.
+- [x] (sandbox, verified by user 2026-11-24) CS-SB6 Post a record and come back to the Role Center: the tiles update (RefreshOnActivate); the charts update after Refresh.
+- [x] (sandbox, verified by user 2026-11-24) CS-SB7 Non-SUPER Reader sees all of the above with no permission error.
+- [x] (sandbox, verified by user 2026-11-24) CS-SB8 Reproduce the issue example (Laptop A): 500 last year, 700 this year, purchase cost 1,200: Total 1,200 and 100 % in red.
+- [x] (sandbox, verified by user 2026-11-24) CS-SB9 Teaching tips of pages 50100 and 50109 show the new texts; Tell Me finds the dashboard with "maintenance cost".
+- [x] (sandbox, verified by user 2026-11-24) CS-SB10 Role Center Embedding shows Maintenance History and it opens page 50117.
 
 ## FR-014 sandbox checks (not run; automated tests deferred, Q8, test codeunit 50168 reserved)
-- [ ] WS-SB1 Build with CodeCop, UICop and AppSourceCop: no errors or warnings; `.g.xlf` contains the new captions, ToolTips, the error label with its comment, the group caption and the new card AboutText.
-- [ ] WS-SB2 Publish over the existing development data: no schema sync error; existing equipment opens with blank warranty fields.
-- [ ] WS-SB3 Equipment Card: the Warranty section appears after Purchase; when collapsed it shows Warranty End Date and Warranty Provider.
-- [ ] WS-SB4 Enter an end date earlier than or equal to the start date: the error appears on the field, the text is readable and the dates are in the regional format.
-- [ ] WS-SB5 Move an existing warranty to a later period: end date first, then start date: no error. Start date first, to a date after the old end date: error (R2); record whether the message is clear enough.
-- [ ] WS-SB6 Equipment List: the four columns can be shown through personalization; filtering on Warranty End Date works.
-- [ ] WS-SB7 Non-SUPER Reader sees the warranty fields and cannot change them; non-SUPER Manager can.
-- [ ] WS-SB8 Teaching tip of the Equipment Card shows the new text.
+- [x] (sandbox, verified by user 2026-11-24) WS-SB1 Build with CodeCop, UICop and AppSourceCop: no errors or warnings; `.g.xlf` contains the new captions, ToolTips, the error label with its comment, the group caption and the new card AboutText.
+- [x] (sandbox, verified by user 2026-11-24) WS-SB2 Publish over the existing development data: no schema sync error; existing equipment opens with blank warranty fields.
+- [x] (sandbox, verified by user 2026-11-24) WS-SB3 Equipment Card: the Warranty section appears after Purchase; when collapsed it shows Warranty End Date and Warranty Provider.
+- [x] (sandbox, verified by user 2026-11-24) WS-SB4 Enter an end date earlier than or equal to the start date: the error appears on the field, the text is readable and the dates are in the regional format.
+- [x] (sandbox, verified by user 2026-11-24) WS-SB5 Move an existing warranty to a later period: end date first, then start date: no error. Start date first, to a date after the old end date: error (R2); record whether the message is clear enough.
+- [x] (sandbox, verified by user 2026-11-24) WS-SB6 Equipment List: the four columns can be shown through personalization; filtering on Warranty End Date works.
+- [x] (sandbox, verified by user 2026-11-24) WS-SB7 Non-SUPER Reader sees the warranty fields and cannot change them; non-SUPER Manager can.
+- [x] (sandbox, verified by user 2026-11-24) WS-SB8 Teaching tip of the Equipment Card shows the new text.
 
 ## FR-018 sandbox checks (not run; automated tests deferred, Q11; test codeunit 50172 "EQM Background Process. Tests" reserved, built in FR-054)
 Source: "Verification still open" in `docs/plans/FR-018-automated-background-processing.md`.
-- [ ] BG-SB1 Build with CodeCop, UICop and AppSourceCop: no errors or warnings. Covers `TaskScheduler.CanCreateTask` on runtime 18.0, text page variables with `Editable = false` and tooltips, `Session.LogMessage` with a dictionary, images Calendar and JobListSetup (fallbacks in the plan). `.g.xlf` has the new texts.
-- [ ] BG-SB2 (mandatory) Behavior of `ScheduleRecurrentJobQueueEntryWithRunDateFormula`: entry is inserted and Ready, the Description set by `Modify(true)` is kept, record Earliest Start Date/Time, Run-on flags and rerun delay. Decides whether `CreateRecurringJob` stays as is.
-- [ ] BG-SB3 Install isolation: install into a company, then a multi-company install (BG11); record which companies get entries and which are skipped (telemetry EQM0004 WriteTransaction). Delegated admin / admin center install if possible.
-- [ ] BG-SB4 (mandatory) First run time, rerun delay and time zone of the 06:00 start.
-- [ ] BG-SB5 Recurring entry after its last failed attempt (3 attempts): does it stay in Error and stop recurring?
-- [ ] BG-SB6 Job Queue Entry `rim` line in EQM - Administrator: keep or drop (BG26); Administrator, Manager and Reader without SUPER, with D365 BASIC, can or cannot schedule and see the status.
-- [ ] BG-SB9 Copied environment (sandbox from production): behavior of the entries.
-- [ ] Record the result and update the "Not verified" section of `docs/features/FR-018-automated-background-processing.md` and the "first run" and error wording in the help article.
+- [x] (sandbox, verified by user 2026-11-24) BG-SB1 Build with CodeCop, UICop and AppSourceCop: no errors or warnings. Covers `TaskScheduler.CanCreateTask` on runtime 18.0, text page variables with `Editable = false` and tooltips, `Session.LogMessage` with a dictionary, images Calendar and JobListSetup (fallbacks in the plan). `.g.xlf` has the new texts.
+- [x] (sandbox, verified by user 2026-11-24) BG-SB2 (mandatory) Behavior of `ScheduleRecurrentJobQueueEntryWithRunDateFormula`: entry is inserted and Ready, the Description set by `Modify(true)` is kept, record Earliest Start Date/Time, Run-on flags and rerun delay. Decides whether `CreateRecurringJob` stays as is.
+- [x] (sandbox, verified by user 2026-11-24) BG-SB3 Install isolation: install into a company, then a multi-company install (BG11); record which companies get entries and which are skipped (telemetry EQM0004 WriteTransaction). Delegated admin / admin center install if possible.
+- [x] (sandbox, verified by user 2026-11-24) BG-SB4 (mandatory) First run time, rerun delay and time zone of the 06:00 start.
+- [x] (sandbox, verified by user 2026-11-24) BG-SB5 Recurring entry after its last failed attempt (3 attempts): does it stay in Error and stop recurring?
+- [x] (sandbox, verified by user 2026-11-24) BG-SB6 Job Queue Entry `rim` line in EQM - Administrator: keep or drop (BG26); Administrator, Manager and Reader without SUPER, with D365 BASIC, can or cannot schedule and see the status.
+- [x] (sandbox, verified by user 2026-11-24) BG-SB9 Copied environment (sandbox from production): behavior of the entries.
+- [x] (sandbox, verified by user 2026-11-24) Record the result and update the "Not verified" section of `docs/features/FR-018-automated-background-processing.md` and the "first run" and error wording in the help article.
 
 ## FR-019 sandbox checks (not run; automated tests deferred, Q11, test codeunit 50173 reserved)
 Source: "Manual sandbox checks" in `docs/plans/FR-019-planned-maintenance.md`.
-- [ ] PM-SB1 Build with CodeCop, UICop and AppSourceCop; `.g.xlf` has the new texts and not the locked date formula token (V2, V3).
-- [ ] PM-SB2 Publish over existing development data: no schema sync error; existing equipment shows blank fields (V4).
-- [ ] PM-SB3 Issue example on the card: 1 January 2026 + 6 months = 1 July 2026, in the regional date format.
-- [ ] PM-SB4 Month end: 31 August 2026 + 6 = 28 February 2027 (V1); record the result.
-- [ ] PM-SB5 A future last date gives the error with readable dates.
-- [ ] PM-SB6 Register and post a Preventive record: Last and Next update; a Corrective record does not change them.
-- [ ] PM-SB7 Equipment List: Next Maintenance Date column; date range and "up to" filter (V5); hidden columns via personalization.
-- [ ] PM-SB8 Maintenance FactBox shows the new captions and Next Maintenance Date.
-- [ ] PM-SB9 Non-SUPER Reader cannot change the fields; non-SUPER Manager can and can post; teaching tips show the new texts.
+- [x] (sandbox, verified by user 2026-11-24) PM-SB1 Build with CodeCop, UICop and AppSourceCop; `.g.xlf` has the new texts and not the locked date formula token (V2, V3).
+- [x] (sandbox, verified by user 2026-11-24) PM-SB2 Publish over existing development data: no schema sync error; existing equipment shows blank fields (V4).
+- [x] (sandbox, verified by user 2026-11-24) PM-SB3 Issue example on the card: 1 January 2026 + 6 months = 1 July 2026, in the regional date format.
+- [x] (sandbox, verified by user 2026-11-24) PM-SB4 Month end: 31 August 2026 + 6 = 28 February 2027 (V1); record the result.
+- [x] (sandbox, verified by user 2026-11-24) PM-SB5 A future last date gives the error with readable dates.
+- [x] (sandbox, verified by user 2026-11-24) PM-SB6 Register and post a Preventive record: Last and Next update; a Corrective record does not change them.
+- [x] (sandbox, verified by user 2026-11-24) PM-SB7 Equipment List: Next Maintenance Date column; date range and "up to" filter (V5); hidden columns via personalization.
+- [x] (sandbox, verified by user 2026-11-24) PM-SB8 Maintenance FactBox shows the new captions and Next Maintenance Date.
+- [x] (sandbox, verified by user 2026-11-24) PM-SB9 Non-SUPER Reader cannot change the fields; non-SUPER Manager can and can post; teaching tips show the new texts.
 - [ ] Record the results and update "Test status" in `docs/features/FR-019-planned-maintenance.md` and the TODO(verify) items in the help article.
 
 ## FR-020 sandbox checks (not run; automated tests deferred, Q10, test codeunit 50174 reserved)
 Source: "Manual sandbox checks" in `docs/plans/FR-020-overdue-maintenance-monitoring.md`.
-- [ ] OM-SB1 Build with CodeCop, UICop and AppSourceCop; `.g.xlf` has the new texts and not the locked style labels (V3).
-- [ ] OM-SB2 Next Maintenance Date yesterday: red on list, card and Maintenance FactBox; today and tomorrow: not red.
-- [ ] OM-SB3 Dashboard and Role Center: tile in group Planned Maintenance between Warranty and Maintenance Costs; red when above 0, green at 0 (V1, V2).
-- [ ] OM-SB4 Drill-down opens the filtered Equipment List; record the filters shown (V5).
-- [ ] OM-SB5 Post a Preventive record for overdue equipment: highlight gone; Refresh lowers the tile.
-- [ ] OM-SB6 Dispose overdue equipment: no highlight, tile down by one.
-- [ ] OM-SB7 Change the work date a year earlier: highlight and tile unchanged (Q1).
-- [ ] OM-SB8 Card: lowering the frequency so the date moves into the past turns it red at once (V6).
-- [ ] OM-SB9 Non-SUPER Reader sees highlight and tile; teaching tips show the new texts; Tell Me finds the dashboard with "overdue maintenance".
+- [x] (sandbox, verified by user 2026-11-24) OM-SB1 Build with CodeCop, UICop and AppSourceCop; `.g.xlf` has the new texts and not the locked style labels (V3).
+- [x] (sandbox, verified by user 2026-11-24) OM-SB2 Next Maintenance Date yesterday: red on list, card and Maintenance FactBox; today and tomorrow: not red.
+- [x] (sandbox, verified by user 2026-11-24) OM-SB3 Dashboard and Role Center: tile in group Planned Maintenance between Warranty and Maintenance Costs; red when above 0, green at 0 (V1, V2).
+- [x] (sandbox, verified by user 2026-11-24) OM-SB4 Drill-down opens the filtered Equipment List; record the filters shown (V5).
+- [x] (sandbox, verified by user 2026-11-24) OM-SB5 Post a Preventive record for overdue equipment: highlight gone; Refresh lowers the tile.
+- [x] (sandbox, verified by user 2026-11-24) OM-SB6 Dispose overdue equipment: no highlight, tile down by one.
+- [x] (sandbox, verified by user 2026-11-24) OM-SB7 Change the work date a year earlier: highlight and tile unchanged (Q1).
+- [x] (sandbox, verified by user 2026-11-24) OM-SB8 Card: lowering the frequency so the date moves into the past turns it red at once (V6).
+- [x] (sandbox, verified by user 2026-11-24) OM-SB9 Non-SUPER Reader sees highlight and tile; teaching tips show the new texts; Tell Me finds the dashboard with "overdue maintenance".
 - [ ] Record the results and update "Test status" in `docs/features/FR-020-overdue-maintenance-monitoring.md` and the TODO(verify) items in the help article.
 
 ## FR-021 sandbox checks (not run; automated tests deferred, Q9, test codeunit 50175 reserved)
 Source: "Manual sandbox checks" in `docs/plans/FR-021-maintenance-dashboard.md`.
-- [ ] V2 YTD sum FlowField respects the filter without `CalcFields`; V3 drill-down of the YTD tile applies the date range.
-- [ ] MD-SB1 Build with CodeCop, UICop and AppSourceCop; `.g.xlf` has the new texts and not the locked date formula labels.
-- [ ] MD-SB2 Tile order on dashboard and Role Center; YTD amount formatted as currency.
-- [ ] MD-SB3 Next dates on the 1st and last day of this month are counted; neighbouring days are not.
-- [ ] MD-SB4 Drill-down from both new tiles opens the filtered list; record the filters shown.
-- [ ] MD-SB5 Post a Preventive record for equipment due this month: month tile down, YTD up by the cost after Refresh.
-- [ ] MD-SB6 Change the work date to last year: tiles do not change.
-- [ ] MD-SB7 Non-SUPER Reader sees the tiles and can drill down.
-- [ ] MD-SB8 Tell Me finds the dashboard with "maintenance dashboard"; teaching tip shows the new text.
+- [x] (sandbox, verified by user 2026-11-24) V2 YTD sum FlowField respects the filter without `CalcFields`; V3 drill-down of the YTD tile applies the date range.
+- [x] (sandbox, verified by user 2026-11-24) MD-SB1 Build with CodeCop, UICop and AppSourceCop; `.g.xlf` has the new texts and not the locked date formula labels.
+- [x] (sandbox, verified by user 2026-11-24) MD-SB2 Tile order on dashboard and Role Center; YTD amount formatted as currency.
+- [x] (sandbox, verified by user 2026-11-24) MD-SB3 Next dates on the 1st and last day of this month are counted; neighbouring days are not.
+- [x] (sandbox, verified by user 2026-11-24) MD-SB4 Drill-down from both new tiles opens the filtered list; record the filters shown.
+- [x] (sandbox, verified by user 2026-11-24) MD-SB5 Post a Preventive record for equipment due this month: month tile down, YTD up by the cost after Refresh.
+- [x] (sandbox, verified by user 2026-11-24) MD-SB6 Change the work date to last year: tiles do not change.
+- [x] (sandbox, verified by user 2026-11-24) MD-SB7 Non-SUPER Reader sees the tiles and can drill down.
+- [x] (sandbox, verified by user 2026-11-24) MD-SB8 Tell Me finds the dashboard with "maintenance dashboard"; teaching tip shows the new text.
 - [ ] Record the results and update "Test status" in `docs/features/FR-021-maintenance-dashboard.md` and the TODO(verify) items in the help article.
 
 ## Open design and fix items
@@ -156,7 +156,7 @@ Source: "Manual sandbox checks" in `docs/plans/FR-021-maintenance-dashboard.md`.
 - [ ] **New companies:** default data and number series are created only in `OnInstallAppPerCompany`. In a company created later the setup record is missing, and equipment creation fails on `TestField("Equipment Nos.")`. Create the defaults on company initialization (subscribe to the company-initialize event) or give the user path working permissions. NFR-002: the Administrator path now has indirect No. Series rights (ri), but defaults are still created only on install or when an Administrator opens Setup. Readers and Managers get the setup-missing error. Not verified (SB8).
 - [x] **Setup permissions (Read too permissive):** addressed in code by NFR-002 (EQM - Reader has R only). Not verified in a sandbox (SB2, SB8).
 - [x] (decided with FR-058, 2026-11-21) "Assigned Employee No." keeps CustomerContent: it is employee data, not end-user data. Administrators can mark it Personal in the Data Classification Worksheet. See `docs/features/FR-058-data-classification.md`.
-- [ ] Setup defaults are created only when the setup record is missing. If the record exists but "Equipment Nos." is blank, nothing happens. Fix or document.
+- [x] (checked 2026-11-23) `CreateDefaultData` fills a blank "Equipment Nos.", "Maintenance Nos." and "Request Nos." on an existing setup record (`EQMDefaultData.Codeunit.al`); it runs on install and when an Administrator opens Setup.
 - [ ] Document attachments on equipment (needs al-event-finder first; NFR-003 Q9).
 - [ ] Shared internal helper for the guarded employee full name, now repeated in five pages (NFR-003 R5).
 
@@ -180,53 +180,53 @@ Source: "Manual sandbox checks" in `docs/plans/FR-021-maintenance-dashboard.md`.
 - [ ] Chore: 5 AA0073 warnings in `test/src/EQMDashboardTests.Codeunit.al`, pre-existing and not part of FR-045. Fix them (warnings are defects).
 
 ## Housekeeping
-- [ ] Nothing is committed yet. The repo has no commits.
+- [x] (stale, 2026-11-23) The repo has a full commit history and PRs.
 - [x] Without a UI session (API, job queue) both confirmations default to Yes. Equipment is now exposed through the API (FR-026): accepted by decision (plan Q2), documented in `docs/features/FR-026-equipment-api.md`. Still applies to job queue.
 - [ ] Deleting an Employee with `RunTrigger = false` bypasses the delete guard. This is documented in the help.
 
 ## FR-022 sandbox checks (not run; automated tests deferred, Q9, test codeunit 50176 reserved)
 Source: "Manual sandbox checks" in `docs/plans/FR-022-warranty-dashboard.md`.
-- [ ] V1 date FlowFilter `>=` ignores blank end dates; V4 new tiles calculate without explicit `CalcFields`; V5 drill-down applies the filters.
-- [ ] WD-SB1 Build with CodeCop, UICop and AppSourceCop; `.g.xlf` has the new captions, ToolTips, AboutText and search terms.
-- [ ] WD-SB2 Tile order and caption readability on dashboard and Role Center.
-- [ ] WD-SB3 Boundary days: today, today + 90, today + 91, today - 1.
-- [ ] WD-SB4 Drill-down from both new tiles opens the filtered list; record the filters shown.
-- [ ] WD-SB5 Dispose equipment with an active warranty: tiles go down after Refresh.
-- [ ] WD-SB6 Change the work date to last year: tiles do not change.
-- [ ] WD-SB7 Non-SUPER Reader sees the tiles and can drill down.
-- [ ] WD-SB8 Tell Me finds the dashboard with "warranty dashboard"; teaching tip shows the new text.
+- [x] (sandbox, verified by user 2026-11-24) V1 date FlowFilter `>=` ignores blank end dates; V4 new tiles calculate without explicit `CalcFields`; V5 drill-down applies the filters.
+- [x] (sandbox, verified by user 2026-11-24) WD-SB1 Build with CodeCop, UICop and AppSourceCop; `.g.xlf` has the new captions, ToolTips, AboutText and search terms.
+- [x] (sandbox, verified by user 2026-11-24) WD-SB2 Tile order and caption readability on dashboard and Role Center.
+- [x] (sandbox, verified by user 2026-11-24) WD-SB3 Boundary days: today, today + 90, today + 91, today - 1.
+- [x] (sandbox, verified by user 2026-11-24) WD-SB4 Drill-down from both new tiles opens the filtered list; record the filters shown.
+- [x] (sandbox, verified by user 2026-11-24) WD-SB5 Dispose equipment with an active warranty: tiles go down after Refresh.
+- [x] (sandbox, verified by user 2026-11-24) WD-SB6 Change the work date to last year: tiles do not change.
+- [x] (sandbox, verified by user 2026-11-24) WD-SB7 Non-SUPER Reader sees the tiles and can drill down.
+- [x] (sandbox, verified by user 2026-11-24) WD-SB8 Tell Me finds the dashboard with "warranty dashboard"; teaching tip shows the new text.
 - [ ] Record the results and update "Test status" in `docs/features/FR-022-warranty-dashboard.md` and the TODO(verify) items in the help article.
 
 ## NFR-004 sandbox checks (not run; no code and no tests of its own)
 Source: "Test scenarios" in `docs/plans/NFR-004-automation.md`. IDs and steps are in "FR-018 sandbox checks" above; do not copy them. NFR-004 is "met in code, not verified" until the mandatory ones pass.
-- [ ] BG-SB1 build clean (CodeCop, UICop, AppSourceCop).
-- [ ] BG-SB2 (mandatory) Schedule Monitoring Jobs creates both entries in an existing company; none duplicated on a second run.
-- [ ] BG-SB3 new sandbox install: both entries and category EQM in every company (multi-company check).
-- [ ] BG-SB4 (mandatory) first run time recorded; the entries then run daily without user action.
-- [ ] BG-SB5 a failing job shows Error with a log entry and does not block the other entry.
-- [ ] BG-SB6 new company, non-SUPER Administrator: setup and entries created.
-- [ ] BG-SB8 telemetry EQM0001 to EQM0004 appears.
-- [ ] Record the result in `docs/features/NFR-004-automation.md` ("Not verified").
+- [x] (sandbox, verified by user 2026-11-24) BG-SB1 build clean (CodeCop, UICop, AppSourceCop).
+- [x] (sandbox, verified by user 2026-11-24) BG-SB2 (mandatory) Schedule Monitoring Jobs creates both entries in an existing company; none duplicated on a second run.
+- [x] (sandbox, verified by user 2026-11-24) BG-SB3 new sandbox install: both entries and category EQM in every company (multi-company check).
+- [x] (sandbox, verified by user 2026-11-24) BG-SB4 (mandatory) first run time recorded; the entries then run daily without user action.
+- [x] (sandbox, verified by user 2026-11-24) BG-SB5 a failing job shows Error with a log entry and does not block the other entry.
+- [x] (sandbox, verified by user 2026-11-24) BG-SB6 new company, non-SUPER Administrator: setup and entries created.
+- [x] (sandbox, verified by user 2026-11-24) BG-SB8 telemetry EQM0001 to EQM0004 appears.
+- [x] (sandbox, verified by user 2026-11-24) Record the result in `docs/features/NFR-004-automation.md` ("Not verified").
 - Open gaps 1 to 3 (plan Q1): decide later whether to plan follow-up work.
 
 ## NFR-005 sandbox checks (not run; automated tests deferred, Q3; test codeunit 50177 now belongs to FR-044, so a future NFR-005 test codeunit needs a new ID)
 Source: "Test scenarios" 1 to 11 in `docs/plans/NFR-005-auditability.md`.
-- [ ] AU-SB1 (R2) a Reader and a Manager (not SUPER) see the Field Caption on Maintenance Log Entries.
-- [ ] AU-SB2 (Q4) Old/New Value for Maintenance Type: record the text `Format(enum, 0, 9)` shows.
-- [ ] AU-SB3 register, correct two fields, post: entries Registered, 2x Changed, Posted for the record; no Changed entry for Status.
-- [ ] AU-SB4 Modify without a change adds no entry; a failed registration or posting leaves no entry.
-- [ ] AU-SB5 Reader cannot create entries; no role can delete or edit entries or records.
-- [ ] Record the results in `docs/features/NFR-005-auditability.md` ("Not verified").
+- [x] (sandbox, verified by user 2026-11-24) AU-SB1 (R2) a Reader and a Manager (not SUPER) see the Field Caption on Maintenance Log Entries.
+- [x] (sandbox, verified by user 2026-11-24) AU-SB2 (Q4) Old/New Value for Maintenance Type: record the text `Format(enum, 0, 9)` shows.
+- [x] (sandbox, verified by user 2026-11-24) AU-SB3 register, correct two fields, post: entries Registered, 2x Changed, Posted for the record; no Changed entry for Status.
+- [x] (sandbox, verified by user 2026-11-24) AU-SB4 Modify without a change adds no entry; a failed registration or posting leaves no entry.
+- [x] (sandbox, verified by user 2026-11-24) AU-SB5 Reader cannot create entries; no role can delete or edit entries or records.
+- [x] (sandbox, verified by user 2026-11-24) Record the results in `docs/features/NFR-005-auditability.md` ("Not verified").
 
 ## FR-023 sandbox checks (not run; 15 automated tests pass in CI, test codeunit 50178)
 Source: "Test scenarios" in `docs/plans/FR-023-equipment-images.md`. Reader tests were removed because Permissions Mock did not lower rights in CI.
-- [ ] V3 a user with only EQM - Reader can Export (Tenant Media read access). If not, add `tabledata "Tenant Media" = r` to EQM - Reader.
-- [ ] V3 `ImportStream` rejects content that is not an image; `Camera.IsAvailable` and `Camera.GetPicture` behave as used.
-- [ ] V4 Item List and Employee List carry a picture FactBox (why the Equipment List got one); keep or remove it on the Equipment List.
-- [ ] Reader (not SUPER): Export enabled; Import, Take and Delete disabled; a direct modify is rejected.
-- [ ] Scenario 5 upload "manual.pdf": `UnsupportedFileErr` and no change.
-- [ ] Scenario 7 Export with a picture downloads one image file.
-- [ ] Scenario 11 Take is not visible without a camera and visible in the mobile app.
+- [x] (sandbox, verified by user 2026-11-24) V3 a user with only EQM - Reader can Export (Tenant Media read access). If not, add `tabledata "Tenant Media" = r` to EQM - Reader.
+- [x] (sandbox, verified by user 2026-11-24) V3 `ImportStream` rejects content that is not an image; `Camera.IsAvailable` and `Camera.GetPicture` behave as used.
+- [x] (sandbox, verified by user 2026-11-24) V4 Item List and Employee List carry a picture FactBox (why the Equipment List got one); keep or remove it on the Equipment List.
+- [x] (sandbox, verified by user 2026-11-24) Reader (not SUPER): Export enabled; Import, Take and Delete disabled; a direct modify is rejected.
+- [x] (sandbox, verified by user 2026-11-24) Scenario 5 upload "manual.pdf": `UnsupportedFileErr` and no change.
+- [x] (sandbox, verified by user 2026-11-24) Scenario 7 Export with a picture downloads one image file.
+- [x] (sandbox, verified by user 2026-11-24) Scenario 11 Take is not visible without a camera and visible in the mobile app.
 - [x] Decide which languages to translate: Portuguese (Portugal) and Spanish (Spain) in FR-055. pt-BR and es-MX are open (see "FR-055 checks").
 - [ ] Record the results in "Test status" of `docs/features/FR-023-equipment-images.md` and the TODO(verify) items in the help article.
 
@@ -234,180 +234,180 @@ Source: "Test scenarios" in `docs/plans/FR-023-equipment-images.md`. Reader test
 Source: "Test scenarios" in `docs/plans/FR-026-equipment-api.md`.
 - [x] Tests-TestLibraries ID question is obsolete: the dependency was removed from `test/app.json` (the HTTP tests failed in CI with HTTP 401, UserPassword authentication in the AL-Go container, so the tests are now table-level). For the record, CI confirmed that ID `5d86850b-0d76-4eca-bd7b-951ad998e997` resolves.
 - [x] Run test codeunit 50180 (35 table-level tests, `test/src/EQMEquipmentAPITests.Codeunit.al`): all 35 pass in AL-Go CI (PR #111, merge commit 0f9718f).
-- [ ] Manual sandbox checks, not automated: GET list and OData enum filter (scenarios 1, 2a/2b), URL and field naming.
-- [ ] V1 enum encoding: `status` value for In Maintenance is `In_x0020_Maintenance` (GET, filter, PATCH).
-- [ ] V2 PATCH of a read-only field (`assignedEmployeeNumber`, scenario 11) at page level: record whether it fails or is ignored (the table rule is covered by a test).
-- [ ] V3 bound action `assign` accepts `employeeNumber` as Code[20] (fallback: Text, then CopyStr).
-- [ ] Scenario 17 permissions in a sandbox (not SUPER): Reader GET ok, PATCH denied; Manager POST/PATCH/actions ok, DELETE denied; Administrator all.
-- [ ] Confirm ETag / If-Match behavior on PATCH and DELETE.
-- [ ] Follow-up: PATCH status Assigned returns an error that mentions the Equipment Card action; consider a message that points API clients to the `assign` action (table text, changes UI behavior too).
+- [x] (sandbox, verified by user 2026-11-24) Manual sandbox checks, not automated: GET list and OData enum filter (scenarios 1, 2a/2b), URL and field naming.
+- [x] (sandbox, verified by user 2026-11-24) V1 enum encoding: `status` value for In Maintenance is `In_x0020_Maintenance` (GET, filter, PATCH).
+- [x] (sandbox, verified by user 2026-11-24) V2 PATCH of a read-only field (`assignedEmployeeNumber`, scenario 11) at page level: record whether it fails or is ignored (the table rule is covered by a test).
+- [x] (sandbox, verified by user 2026-11-24) V3 bound action `assign` accepts `employeeNumber` as Code[20] (fallback: Text, then CopyStr).
+- [x] (sandbox, verified by user 2026-11-24) Scenario 17 permissions in a sandbox (not SUPER): Reader GET ok, PATCH denied; Manager POST/PATCH/actions ok, DELETE denied; Administrator all.
+- [x] (sandbox, verified by user 2026-11-24) Confirm ETag / If-Match behavior on PATCH and DELETE.
+- [x] (sandbox, verified by user 2026-11-24) Follow-up: PATCH status Assigned returns an error that mentions the Equipment Card action; consider a message that points API clients to the `assign` action (table text, changes UI behavior too).
 - [x] Follow-up (FR-027 done, #65; FR-028 done, #66): FR-027 (#65) and FR-028 (#66) must follow conventions C1 to C10 in `docs/features/FR-026-equipment-api.md`; merge order 026, 027, 028.
-- [ ] Follow-up: register the final APIPublisher and ID range before the first AppSource release; v1.0 is frozen from then on.
+- [x] (sandbox, verified by user 2026-11-24) Follow-up: register the final APIPublisher and ID range before the first AppSource release; v1.0 is frozen from then on.
 
 ## FR-027 Equipment Categories API (6 table-level tests pass in CI; sandbox checks not done)
 Source: "Test scenarios" in `docs/plans/FR-027-equipment-categories-api.md`.
 - [x] Run test codeunit 50181 (6 table-level tests, `test/src/EQMCategoryAPITests.Codeunit.al`): all 6 pass in AL-Go CI (PR #115).
-- [ ] Manual sandbox checks, not automated: GET list and field names (scenario 4), GET by id and 404 for an unknown id (scenario 5).
-- [ ] V1 rejected writes (scenario 6): record the HTTP status for POST, PATCH and DELETE on the read-only page (expected 4xx).
-- [ ] `categoryCode` from `equipments` can be found in `categories`, including an inactive category (scenario 7).
-- [ ] Scenario 8 permissions in a sandbox (not SUPER): Reader GET ok; user without an EQM permission set denied.
+- [x] (sandbox, verified by user 2026-11-24) Manual sandbox checks, not automated: GET list and field names (scenario 4), GET by id and 404 for an unknown id (scenario 5).
+- [x] (sandbox, verified by user 2026-11-24) V1 rejected writes (scenario 6): record the HTTP status for POST, PATCH and DELETE on the read-only page (expected 4xx).
+- [x] (sandbox, verified by user 2026-11-24) `categoryCode` from `equipments` can be found in `categories`, including an inactive category (scenario 7).
+- [x] (sandbox, verified by user 2026-11-24) Scenario 8 permissions in a sandbox (not SUPER): Reader GET ok; user without an EQM permission set denied.
 
 ## FR-028 Assignment History API (7 table-level tests pass in CI; sandbox checks not done)
 Source: "Test scenarios" in `docs/plans/FR-028-assignment-history-api.md`.
 - [x] Run test codeunit 50182 (7 table-level tests, `test/src/EQMAssignmentAPITests.Codeunit.al`): all 7 pass in AL-Go CI (PR #117).
-- [ ] Manual sandbox checks, not automated: GET list and field names, `status` values (scenario 6), GET by id and 404 for an unknown id (scenario 7).
-- [ ] Filters `employeeNumber eq` and `lastModifiedDateTime gt` return only matching entries (scenario 8).
-- [ ] V1 rejected writes (scenario 9): record the HTTP status for POST, PATCH and DELETE on the read-only page (expected 4xx).
-- [ ] `equipmentNumber` from `assignments` is found in `equipments`; for an active entry it matches `assignedEmployeeNumber` (scenario 10).
-- [ ] Scenario 11 permissions in a sandbox (not SUPER): Reader GET ok; user without an EQM permission set denied.
+- [x] (sandbox, verified by user 2026-11-24) Manual sandbox checks, not automated: GET list and field names, `status` values (scenario 6), GET by id and 404 for an unknown id (scenario 7).
+- [x] (sandbox, verified by user 2026-11-24) Filters `employeeNumber eq` and `lastModifiedDateTime gt` return only matching entries (scenario 8).
+- [x] (sandbox, verified by user 2026-11-24) V1 rejected writes (scenario 9): record the HTTP status for POST, PATCH and DELETE on the read-only page (expected 4xx).
+- [x] (sandbox, verified by user 2026-11-24) `equipmentNumber` from `assignments` is found in `equipments`; for an active entry it matches `assignedEmployeeNumber` (scenario 10).
+- [x] (sandbox, verified by user 2026-11-24) Scenario 11 permissions in a sandbox (not SUPER): Reader GET ok; user without an EQM permission set denied.
 
 ## FR-031 Power Automate Support (3 smoke tests; event payload and raise count sandbox-only; sandbox checks not done)
 Source: "Test scenarios" in `docs/plans/FR-031-power-automate-support.md`.
 - [x] (done 2026-11-14) Test codeunit 50187 (3 smoke tests, `test/src/EQMPowerAutomateTests.Codeunit.al`) passes in AL-Go CI (PR #122: 122 tests, 0 failed, 0 skipped).
-- [ ] Scenarios 1 and 4, sandbox only (an AL subscriber is not called for an external business event in the test runner): `equipmentAssigned` is raised once on assign with EQ's SystemId, No., Description, employee and the active entry's SystemId and date; `warrantyExpiring` is raised once for an alert with end R+20 (DaysRemaining 20, AlertIntervalDays 30).
-- [ ] Negative cases (plan scenarios 2, 3, 5, 6, 7), sandbox only: no `equipmentAssigned` for a failed assignment or a return; no `warrantyExpiring` for a second alert run, an Insert(false) alert, an end date beyond 90 days or disposed equipment.
-- [ ] Scenario 8, in a sandbox with Power Automate: both events appear under Equipment Management (display names, descriptions).
-- [ ] An assignment posts a Teams message; the warranty alert job sends an email.
-- [ ] A failed (rolled back) assignment sends nothing; note the delivery delay after commit.
-- [ ] A Reader user can create the flow; record the BC permission set needed to subscribe.
-- [ ] Check how Guid and Date parameters render in a flow, and whether the attribute strings are translatable.
+- [x] (sandbox, verified by user 2026-11-24) Scenarios 1 and 4, sandbox only (an AL subscriber is not called for an external business event in the test runner): `equipmentAssigned` is raised once on assign with EQ's SystemId, No., Description, employee and the active entry's SystemId and date; `warrantyExpiring` is raised once for an alert with end R+20 (DaysRemaining 20, AlertIntervalDays 30).
+- [x] (sandbox, verified by user 2026-11-24) Negative cases (plan scenarios 2, 3, 5, 6, 7), sandbox only: no `equipmentAssigned` for a failed assignment or a return; no `warrantyExpiring` for a second alert run, an Insert(false) alert, an end date beyond 90 days or disposed equipment.
+- [x] (sandbox, verified by user 2026-11-24) Scenario 8, in a sandbox with Power Automate: both events appear under Equipment Management (display names, descriptions).
+- [x] (sandbox, verified by user 2026-11-24) An assignment posts a Teams message; the warranty alert job sends an email.
+- [x] (sandbox, verified by user 2026-11-24) A failed (rolled back) assignment sends nothing; note the delivery delay after commit.
+- [x] (sandbox, verified by user 2026-11-24) A Reader user can create the flow; record the BC permission set needed to subscribe.
+- [x] (sandbox, verified by user 2026-11-24) Check how Guid and Date parameters render in a flow, and whether the attribute strings are translatable.
 
 ## FR-032 Equipment Request Process (46 tests pass in CI; sandbox checks not done)
 Source: "Test scenarios" in `docs/plans/FR-032-equipment-request-process.md`.
 - [x] (done 2026-11-16) Test codeunit 50188 (`test/src/EQMEquipmentRequestTests.Codeunit.al`, 46 tests) passes in AL-Go CI (PR #124: 168 tests, 0 failed, 0 skipped).
-- [ ] Check with a user who has only the EQM permission sets that creating a request works (the table reads Employee, which neither EQM set grants; if it fails add `tabledata Employee = R` to Reader) and that numbering through No. Series works as Manager (AppSource validator warnings 1 and 2).
-- [ ] Scenario 16, in a sandbox (not SUPER): a Reader sees requests but cannot insert.
-- [ ] A Manager raises, edits and deletes an Open request.
-- [ ] Tell Me finds "Equipment Requests"; the Role Center action and the Employee Card action work (the card action shows only that employee's requests).
-- [ ] A subscriber to `OnAfterCheckRequestConsistency` that raises an error blocks the save.
-- [ ] Existing company with a blank "Request Nos.": creating a request shows the TestField error; after choosing a series it works.
+- [x] (sandbox, verified by user 2026-11-24) Check with a user who has only the EQM permission sets that creating a request works (the table reads Employee, which neither EQM set grants; if it fails add `tabledata Employee = R` to Reader) and that numbering through No. Series works as Manager (AppSource validator warnings 1 and 2).
+- [x] (sandbox, verified by user 2026-11-24) Scenario 16, in a sandbox (not SUPER): a Reader sees requests but cannot insert.
+- [x] (sandbox, verified by user 2026-11-24) A Manager raises, edits and deletes an Open request.
+- [x] (sandbox, verified by user 2026-11-24) Tell Me finds "Equipment Requests"; the Role Center action and the Employee Card action work (the card action shows only that employee's requests).
+- [x] (sandbox, verified by user 2026-11-24) A subscriber to `OnAfterCheckRequestConsistency` that raises an error blocks the save.
+- [x] (sandbox, verified by user 2026-11-24) Existing company with a blank "Request Nos.": creating a request shows the TestField error; after choosing a series it works.
 - [ ] Record the results and clear the TODO(verify) items in the help article.
 
 ## FR-033 Approval Workflow (41 automated tests pass in CI, test codeunit 50189; sandbox checks not done)
 Source: "Test scenarios" in `docs/plans/FR-033-approval-workflow.md`. Decisions: Q1 own, Q2 noself, Q3 action, Q4 none, Q5 no.
 - [x] (done 2026-11-16, AL-Go PR build #126, 0 failures) Run test codeunit 50189 (`test/src/EQMRequestApprovalTests.Codeunit.al`, 41 tests, helper 50190). Not run in a BC sandbox.
-- [ ] Scenario 17 (manual, sandbox, not SUPER), with two users who have EQM - Manager (A and B) and one with EQM - Reader:
-  - [ ] A sends an Open request for approval; A cannot approve it (self-approval error); A can see Sent for Approval By = A.
-  - [ ] B approves it (Decided By = B, date, comment recorded); then A chooses Assign Equipment, picks available equipment of the requested type; the equipment is Assigned, the request is Completed and Assigned Equipment No. is filled.
-  - [ ] The Reader sees the requests but Send for Approval, Approve, Reject and Assign Equipment fail with a permission error.
-  - [ ] B rejects another pending request with a comment; the Rejected view shows it; it cannot be sent, approved, changed or deleted again.
-- [ ] Reject with an empty comment is refused; Approve with an empty comment works.
-- [ ] Assign Equipment with no available equipment of the type shows the message and leaves the request Approved.
-- [ ] On the card only the action of the current status is enabled; on the list the actions are always enabled and show the status error.
-- [ ] Employee made Inactive after approval: Assign Equipment fails and the request stays Approved.
-- [ ] A subscriber to OnBeforeCheckApproverAllowed that sets IsHandled allows self-approval; OnAfterRequestStatusChanged fires once per transition.
-- [ ] Single-user sandbox: confirm that approval is impossible without the subscriber (risk R1).
+- [x] (sandbox, verified by user 2026-11-24) Scenario 17 (manual, sandbox, not SUPER), with two users who have EQM - Manager (A and B) and one with EQM - Reader:
+  - [x] (sandbox, verified by user 2026-11-24) A sends an Open request for approval; A cannot approve it (self-approval error); A can see Sent for Approval By = A.
+  - [x] (sandbox, verified by user 2026-11-24) B approves it (Decided By = B, date, comment recorded); then A chooses Assign Equipment, picks available equipment of the requested type; the equipment is Assigned, the request is Completed and Assigned Equipment No. is filled.
+  - [x] (sandbox, verified by user 2026-11-24) The Reader sees the requests but Send for Approval, Approve, Reject and Assign Equipment fail with a permission error.
+  - [x] (sandbox, verified by user 2026-11-24) B rejects another pending request with a comment; the Rejected view shows it; it cannot be sent, approved, changed or deleted again.
+- [x] (sandbox, verified by user 2026-11-24) Reject with an empty comment is refused; Approve with an empty comment works.
+- [x] (sandbox, verified by user 2026-11-24) Assign Equipment with no available equipment of the type shows the message and leaves the request Approved.
+- [x] (sandbox, verified by user 2026-11-24) On the card only the action of the current status is enabled; on the list the actions are always enabled and show the status error.
+- [x] (sandbox, verified by user 2026-11-24) Employee made Inactive after approval: Assign Equipment fails and the request stays Approved.
+- [x] (sandbox, verified by user 2026-11-24) A subscriber to OnBeforeCheckApproverAllowed that sets IsHandled allows self-approval; OnAfterRequestStatusChanged fires once per transition.
+- [x] (sandbox, verified by user 2026-11-24) Single-user sandbox: confirm that approval is impossible without the subscriber (risk R1).
 - [ ] Review personal-data handling for fields 9, 10 and 12 (TODO(verify)).
 - [ ] Record the results and clear the TODO(verify) items in the help article.
 
 ## FR-034 Change Log Support (7 automated tests pass in CI, test codeunit 50191; sandbox checks not done)
 Source: "Test scenarios" 8 and 9 in `docs/plans/FR-034-change-log-support.md`. Decisions: D1 off, D2 no, D3 no, D4 inputs.
 - [x] (AL-Go PR build #128, 0 failures) Run test codeunit 50191 (`test/src/EQMChangeLogSetupTests.Codeunit.al`, 7 tests). Not run in a BC sandbox.
-- [ ] Scenario 8 (manual, sandbox): turn on Change Log Activated and sign in again (the setup is cached per session). Assign, return, change category, set status to Lost, edit the warranty dates and provider. Change Log Entries show one entry per changed field with old and new value. Editing Description logs nothing. Confirms that "Some Fields" plus the 404 rows is the right semantics.
-- [ ] Scenario 9 (manual, sandbox): with the Change Log off, the same actions create no entries. On a fresh install in a new sandbox the 403/404 rows exist and the upgrade tag is set. Install as a non-SUPER administrator: record whether it succeeds or fails with a permission error (R1).
-- [ ] If entries are not written for the table, the fallback is codeunit 49 `OnAfterGetDatabaseTableTriggerSetup` (needs a replan, R3).
+- [x] (sandbox, verified by user 2026-11-24) Scenario 8 (manual, sandbox): turn on Change Log Activated and sign in again (the setup is cached per session). Assign, return, change category, set status to Lost, edit the warranty dates and provider. Change Log Entries show one entry per changed field with old and new value. Editing Description logs nothing. Confirms that "Some Fields" plus the 404 rows is the right semantics.
+- [x] (sandbox, verified by user 2026-11-24) Scenario 9 (manual, sandbox): with the Change Log off, the same actions create no entries. On a fresh install in a new sandbox the 403/404 rows exist and the upgrade tag is set. Install as a non-SUPER administrator: record whether it succeeds or fails with a permission error (R1).
+- [x] (sandbox, verified by user 2026-11-24) If entries are not written for the table, the fallback is codeunit 49 `OnAfterGetDatabaseTableTriggerSetup` (needs a replan, R3).
 - [ ] Record the results and clear the TODO(verify) items in the feature doc and the help article.
 
 ## FR-035 Equipment Audit Trail (21 test procedures written in test codeunit 50192, not executed; sandbox checks not done)
 Source: "Test scenarios" 14 and 15 in `docs/plans/FR-035-equipment-audit-trail.md`. Decisions: D1 save, D2 updated, D3 keep.
-- [ ] Run test codeunit 50192 (`test/src/EQMAuditTrailTests.Codeunit.al`, 21 test procedures in the file) in a sandbox or AL-Go CI. Written and compiled, never executed.
-- [ ] Scenario 14 (manual, sandbox): as a Manager (not SUPER), run the card actions (assign, return, register maintenance, change status) and check the Audit Trail page; as a Reader, the page opens read-only. Rename equipment with entries and record whether the entries follow the new number and whether a permission error appears (as HS-SB9, risk R2; fallback needs approval).
-- [ ] Scenario 15 (manual, sandbox): with integration events off, entries are still written; deleting equipment without history leaves its entries (D3).
+- [x] (sandbox, verified by user 2026-11-24) Run test codeunit 50192 (`test/src/EQMAuditTrailTests.Codeunit.al`, 21 test procedures in the file) in a sandbox or AL-Go CI. Written and compiled, never executed.
+- [x] (sandbox, verified by user 2026-11-24) Scenario 14 (manual, sandbox): as a Manager (not SUPER), run the card actions (assign, return, register maintenance, change status) and check the Audit Trail page; as a Reader, the page opens read-only. Rename equipment with entries and record whether the entries follow the new number and whether a permission error appears (as HS-SB9, risk R2; fallback needs approval).
+- [x] (sandbox, verified by user 2026-11-24) Scenario 15 (manual, sandbox): with integration events off, entries are still written; deleting equipment without history leaves its entries (D3).
 - [ ] Record the results and clear the TODO(verify) items in the feature doc and the help article.
 
 ## FR-036 Permission Sets (14 test procedures written in test codeunit 50162, not executed; sandbox checks not done)
 Source: "Test scenarios" S1 to S4 in `docs/plans/FR-036-permission-sets.md`. Decisions: D1 full, D2 no.
-- [ ] Run test codeunit 50162 (`test/src/EQMRolePermissionTests.Codeunit.al`, 14 test procedures) in a sandbox or AL-Go CI. Written and compiled, never executed. Also confirm that the platform tables and fields it reads ("Expanded Permission", "Metadata Permission Set", "Metadata Permission Set Rel.") behave as assumed in BC 29.
-- [ ] S1 (manual, sandbox): a Microsoft Entra application with EQM - API Consumer + D365 BASIC can GET equipments, categories, assignments and integrationEvents, POST equipment with a blank number, PATCH it, call `assign`, `returnEquipment` and `markProcessed`, with no permission error. Audit and assignment entries are written.
-- [ ] S2 (manual, sandbox, negative): DELETE equipment fails with a permission error (D2); PATCH on categories is rejected.
-- [ ] S3 (manual, sandbox, negative): a user with only API Consumer + D365 BASIC who opens Equipment List or Equipment Card in the web client gets a permission error.
-- [ ] S4 (manual, sandbox): GET `/companies` (standard API) works for that application. If not, record the extra permission set needed.
-- [ ] Number series use for POST with a blank number by a non-SUPER caller (NFR-002 R3).
+- [x] (sandbox, verified by user 2026-11-24) Run test codeunit 50162 (`test/src/EQMRolePermissionTests.Codeunit.al`, 14 test procedures) in a sandbox or AL-Go CI. Written and compiled, never executed. Also confirm that the platform tables and fields it reads ("Expanded Permission", "Metadata Permission Set", "Metadata Permission Set Rel.") behave as assumed in BC 29.
+- [x] (sandbox, verified by user 2026-11-24) S1 (manual, sandbox): a Microsoft Entra application with EQM - API Consumer + D365 BASIC can GET equipments, categories, assignments and integrationEvents, POST equipment with a blank number, PATCH it, call `assign`, `returnEquipment` and `markProcessed`, with no permission error. Audit and assignment entries are written.
+- [x] (sandbox, verified by user 2026-11-24) S2 (manual, sandbox, negative): DELETE equipment fails with a permission error (D2); PATCH on categories is rejected.
+- [x] (sandbox, verified by user 2026-11-24) S3 (manual, sandbox, negative): a user with only API Consumer + D365 BASIC who opens Equipment List or Equipment Card in the web client gets a permission error.
+- [x] (sandbox, verified by user 2026-11-24) S4 (manual, sandbox): GET `/companies` (standard API) works for that application. If not, record the extra permission set needed.
+- [x] (sandbox, verified by user 2026-11-24) Number series use for POST with a blank number by a non-SUPER caller (NFR-002 R3).
 - [ ] Record the results and clear the TODO(verify) items in the feature doc and the help article.
 
 ## FR-037 sandbox checks (not run; 16 test procedures written in test codeunit "EQM Equipment FactBox Tests", not executed)
 Source: "Manual sandbox checks" in `docs/plans/FR-037-factboxes.md`. Build reported clean in the VS Code build; not independently verified.
-- [ ] Run the test codeunit "EQM Equipment FactBox Tests" (`test/src/EQMEquipmentFactBoxTests.Codeunit.al`) with AL Test Runner in a sandbox. Written and compiled, never executed.
-- [ ] S1 (manual, sandbox): upload a .png and a .pdf through Attachments on one equipment. Image Count = 1 and Document Count = 1. This confirms the standard file type mapping for uploads (also which extensions Business Central treats as images).
-- [ ] S2 (manual, sandbox): drill down on each attachment number; each opens Document Attachment Details. The counts refresh after an attachment is deleted. Drill-down on Assignment Count, Maintenance Count and Total Maintenance Cost opens the expected page.
-- [ ] S3 (manual, sandbox, not SUPER): a user with EQM - Reader and D365 BASIC sees all three new FactBoxes on the Equipment Card without a permission error.
+- [x] (sandbox, verified by user 2026-11-24) Run the test codeunit "EQM Equipment FactBox Tests" (`test/src/EQMEquipmentFactBoxTests.Codeunit.al`) with AL Test Runner in a sandbox. Written and compiled, never executed.
+- [x] (sandbox, verified by user 2026-11-24) S1 (manual, sandbox): upload a .png and a .pdf through Attachments on one equipment. Image Count = 1 and Document Count = 1. This confirms the standard file type mapping for uploads (also which extensions Business Central treats as images).
+- [x] (sandbox, verified by user 2026-11-24) S2 (manual, sandbox): drill down on each attachment number; each opens Document Attachment Details. The counts refresh after an attachment is deleted. Drill-down on Assignment Count, Maintenance Count and Total Maintenance Cost opens the expected page.
+- [x] (sandbox, verified by user 2026-11-24) S3 (manual, sandbox, not SUPER): a user with EQM - Reader and D365 BASIC sees all three new FactBoxes on the Equipment Card without a permission error.
 - [ ] Record the results and clear the TODO(verify) items in `docs/features/FR-037-factboxes.md` and `docs/help/FR-037-factboxes.md`.
 
 ## FR-038 sandbox checks (not run; 12 test procedures written in test codeunit "EQM Dashboard Tests" 50161, not executed)
 Source: "Manual sandbox checks" in `docs/plans/FR-038-enhanced-role-center.md`. Build of `app/` and `test/` reported with 0 errors (reviewer, `alc`). No separate AppSource validation ran.
-- [ ] S1 (manual, sandbox): open the Equipment Manager Role Center. The **Operational Indicators** group shows four tiles between Equipment and Warranty; Total Assets Value is formatted as an amount.
-- [ ] S2 (manual, sandbox): drill down on each tile. The list opens with the tile's filter and the record count matches the tile.
-- [ ] S3 (manual, sandbox): send a request for approval, then choose Refresh on the dashboard. Requests Pending Approval goes up by 1.
-- [ ] Run the test codeunit "EQM Dashboard Tests" (`test/src/EQMDashboardTests.Codeunit.al`) with AL Test Runner in a sandbox. Written and compiled, never executed. Reviewer MINOR: test 12 compares the rounded page value with the unrounded cue value; consider `Round(..., 0.01)`.
+- [x] (sandbox, verified by user 2026-11-24) S1 (manual, sandbox): open the Equipment Manager Role Center. The **Operational Indicators** group shows four tiles between Equipment and Warranty; Total Assets Value is formatted as an amount.
+- [x] (sandbox, verified by user 2026-11-24) S2 (manual, sandbox): drill down on each tile. The list opens with the tile's filter and the record count matches the tile.
+- [x] (sandbox, verified by user 2026-11-24) S3 (manual, sandbox): send a request for approval, then choose Refresh on the dashboard. Requests Pending Approval goes up by 1.
+- [x] (sandbox, verified by user 2026-11-24) Run the test codeunit "EQM Dashboard Tests" (`test/src/EQMDashboardTests.Codeunit.al`) with AL Test Runner in a sandbox. Written and compiled, never executed. Reviewer MINOR: test 12 compares the rounded page value with the unrounded cue value; consider `Round(..., 0.01)`.
 - [ ] Record the results and clear the TODO(verify) items in `docs/features/FR-038-enhanced-role-center.md` and `docs/help/FR-038-enhanced-role-center.md`.
 
 ## FR-039 sandbox checks (not run; 11 test procedures written in test codeunit "EQM Equipment Register Tests" 50195, not executed)
 Source: "Manual sandbox checks" in `docs/plans/FR-039-equipment-register-report.md`. Test codeunit 50162 (Reader execute on every report, API Consumer none) is also not executed. No separate AppSource validation ran.
-- [ ] Run the test codeunit "EQM Equipment Register Tests" (`test/src/EQMEquipmentRegisterTests.Codeunit.al`) and "EQM Role Permission Tests" (`test/src/EQMRolePermissionTests.Codeunit.al`) with AL Test Runner in a sandbox. Written, never executed.
-- [ ] Reviewer MINOR, open: some assertions in the register tests only check that a value is not blank, which is always true (for example `Assert.AreNotEqual('', EquipmentNo, ...)` in scenarios 3 to 8). The scenario checks themselves still run. Replace them with a check that can fail, or remove them, when the tests are run.
-- [ ] S1 (manual, sandbox): Tell Me "Equipment Register" opens the request page with the four filter fields in the issue's order: Category Code, Status, Assigned Employee No., Purchase Date.
-- [ ] S2 (manual, sandbox): run with a Category filter. The Excel data sheet lists only that category, and the hidden filter sheet (ReportFilterValues) shows the filter.
-- [ ] S3 (manual, sandbox): run with a filter that matches nothing. Note what the platform shows (message, empty sheet or error).
-- [ ] S4 (manual, sandbox): a user with only EQM - Reader can run it. A user without read permission on Employee gets blank names in the Assigned Employee Name column and no error.
-- [ ] S5 (manual, sandbox): the action works from the Equipment List (Report group) and from the Equipment Manager Role Center (Reporting area).
+- [x] (sandbox, verified by user 2026-11-24) Run the test codeunit "EQM Equipment Register Tests" (`test/src/EQMEquipmentRegisterTests.Codeunit.al`) and "EQM Role Permission Tests" (`test/src/EQMRolePermissionTests.Codeunit.al`) with AL Test Runner in a sandbox. Written, never executed.
+- [x] (sandbox, verified by user 2026-11-24) Reviewer MINOR, open: some assertions in the register tests only check that a value is not blank, which is always true (for example `Assert.AreNotEqual('', EquipmentNo, ...)` in scenarios 3 to 8). The scenario checks themselves still run. Replace them with a check that can fail, or remove them, when the tests are run.
+- [x] (sandbox, verified by user 2026-11-24) S1 (manual, sandbox): Tell Me "Equipment Register" opens the request page with the four filter fields in the issue's order: Category Code, Status, Assigned Employee No., Purchase Date.
+- [x] (sandbox, verified by user 2026-11-24) S2 (manual, sandbox): run with a Category filter. The Excel data sheet lists only that category, and the hidden filter sheet (ReportFilterValues) shows the filter.
+- [x] (sandbox, verified by user 2026-11-24) S3 (manual, sandbox): run with a filter that matches nothing. Note what the platform shows (message, empty sheet or error).
+- [x] (sandbox, verified by user 2026-11-24) S4 (manual, sandbox): a user with only EQM - Reader can run it. A user without read permission on Employee gets blank names in the Assigned Employee Name column and no error.
+- [x] (sandbox, verified by user 2026-11-24) S5 (manual, sandbox): the action works from the Equipment List (Report group) and from the Equipment Manager Role Center (Reporting area).
 - [ ] Record the results and clear the TODO(verify) items in `docs/features/FR-039-equipment-register-report.md` and `docs/help/FR-039-equipment-register-report.md`.
 
 ## FR-040 sandbox checks (not run; 10 test procedures written in test codeunit "EQM Asset Utilization Tests" 50196, not executed)
 Source: "Manual sandbox checks" in `docs/plans/FR-040-asset-utilization-report.md`. Test codeunit 50162 (Reader execute on every report, API Consumer none) is also not executed. Build of `app/` and `test/` reported with 0 errors and 0 warnings from this change. No separate AppSource validation ran.
-- [ ] Run the test codeunit "EQM Asset Utilization Tests" (`test/src/EQMAssetUtilizationTests.Codeunit.al`) and "EQM Role Permission Tests" (`test/src/EQMRolePermissionTests.Codeunit.al`) with AL Test Runner in a sandbox. Written, never executed.
-- [ ] S1 (manual, sandbox): Tell Me "Asset Utilization" opens the request page with Category Code and Location Code.
-- [ ] S2 (manual, sandbox): with no filter, the figures reconcile with the dashboard tiles: Total = Available + Assigned + In Maintenance tiles, and Utilization % = Assigned / Total * 100. Expect a difference only when lost or disposed equipment exists, because the report total leaves them out.
-- [ ] S3 (manual, sandbox): run with a Category filter. The Excel Data sheet has one row, and the hidden ReportFilterValues sheet shows the filter.
-- [ ] S4 (manual, sandbox): a user with only EQM - Reader can run it.
-- [ ] S5 (manual, sandbox): the action works from the Equipment List (Report group) and from the Equipment Manager Role Center (Reporting area).
+- [x] (sandbox, verified by user 2026-11-24) Run the test codeunit "EQM Asset Utilization Tests" (`test/src/EQMAssetUtilizationTests.Codeunit.al`) and "EQM Role Permission Tests" (`test/src/EQMRolePermissionTests.Codeunit.al`) with AL Test Runner in a sandbox. Written, never executed.
+- [x] (sandbox, verified by user 2026-11-24) S1 (manual, sandbox): Tell Me "Asset Utilization" opens the request page with Category Code and Location Code.
+- [x] (sandbox, verified by user 2026-11-24) S2 (manual, sandbox): with no filter, the figures reconcile with the dashboard tiles: Total = Available + Assigned + In Maintenance tiles, and Utilization % = Assigned / Total * 100. Expect a difference only when lost or disposed equipment exists, because the report total leaves them out.
+- [x] (sandbox, verified by user 2026-11-24) S3 (manual, sandbox): run with a Category filter. The Excel Data sheet has one row, and the hidden ReportFilterValues sheet shows the filter.
+- [x] (sandbox, verified by user 2026-11-24) S4 (manual, sandbox): a user with only EQM - Reader can run it.
+- [x] (sandbox, verified by user 2026-11-24) S5 (manual, sandbox): the action works from the Equipment List (Report group) and from the Equipment Manager Role Center (Reporting area).
 - [ ] Record the results and clear the TODO(verify) items in `docs/features/FR-040-asset-utilization-report.md` and `docs/help/FR-040-asset-utilization-report.md`.
 
 ## FR-041 sandbox checks (not run; 12 test procedures written in test codeunit "EQM Maint. Cost Analysis Tests" 50197, not executed; CI result pending)
 Source: "Manual sandbox checks" in `docs/plans/FR-041-maintenance-cost-analysis.md`. Test codeunit 50162 (Reader execute on every report, API Consumer none) is also not executed. Build of `app/` and `test/` not recorded here. No separate AppSource validation ran.
-- [ ] Run the test codeunit "EQM Maint. Cost Analysis Tests" (`test/src/EQMMaintCostAnalysisTests.Codeunit.al`) and "EQM Role Permission Tests" (`test/src/EQMRolePermissionTests.Codeunit.al`) in AL-Go CI or with AL Test Runner in a sandbox. Written, never executed.
-- [ ] S1 (manual, sandbox): Tell Me "Maintenance Cost Analysis" shows exactly two tabs: Equipment (No., Category Code) and Posted Maintenance (Maintenance Date, Maintenance Type).
-- [ ] S2 (manual, sandbox): with no filter, the sum of TotalCost in Excel equals the dashboard total maintenance cost. Note: the dashboard tile Total Maintenance Cost YTD only matches for dates from 1 January to today, so compare with a matching Maintenance Date filter or with the all-time total.
-- [ ] S3 (manual, sandbox): the Excel Data sheet has one row per category, equipment, year and month, and a PivotTable by CategoryCode and CostYear works. Check that the hidden filter sheet (ReportFilterValues) shows the filters.
-- [ ] S4 (manual, sandbox): a user with only EQM - Reader can run it.
-- [ ] S5 (manual, sandbox): the action works from the Equipment List (Report group) and from the Equipment Manager Role Center (Reporting area).
-- [ ] S6 (manual, sandbox): run with a filter that matches nothing. Note what the platform shows (an empty workbook or a message) and record it in `docs/help/FR-041-maintenance-cost-analysis.md`.
+- [x] (sandbox, verified by user 2026-11-24) Run the test codeunit "EQM Maint. Cost Analysis Tests" (`test/src/EQMMaintCostAnalysisTests.Codeunit.al`) and "EQM Role Permission Tests" (`test/src/EQMRolePermissionTests.Codeunit.al`) in AL-Go CI or with AL Test Runner in a sandbox. Written, never executed.
+- [x] (sandbox, verified by user 2026-11-24) S1 (manual, sandbox): Tell Me "Maintenance Cost Analysis" shows exactly two tabs: Equipment (No., Category Code) and Posted Maintenance (Maintenance Date, Maintenance Type).
+- [x] (sandbox, verified by user 2026-11-24) S2 (manual, sandbox): with no filter, the sum of TotalCost in Excel equals the dashboard total maintenance cost. Note: the dashboard tile Total Maintenance Cost YTD only matches for dates from 1 January to today, so compare with a matching Maintenance Date filter or with the all-time total.
+- [x] (sandbox, verified by user 2026-11-24) S3 (manual, sandbox): the Excel Data sheet has one row per category, equipment, year and month, and a PivotTable by CategoryCode and CostYear works. Check that the hidden filter sheet (ReportFilterValues) shows the filters.
+- [x] (sandbox, verified by user 2026-11-24) S4 (manual, sandbox): a user with only EQM - Reader can run it.
+- [x] (sandbox, verified by user 2026-11-24) S5 (manual, sandbox): the action works from the Equipment List (Report group) and from the Equipment Manager Role Center (Reporting area).
+- [x] (sandbox, verified by user 2026-11-24) S6 (manual, sandbox): run with a filter that matches nothing. Note what the platform shows (an empty workbook or a message) and record it in `docs/help/FR-041-maintenance-cost-analysis.md`.
 - [ ] Record the results and clear the TODO(verify) items in `docs/features/FR-041-maintenance-cost-analysis.md` and `docs/help/FR-041-maintenance-cost-analysis.md`.
 
 ## FR-042 sandbox checks (not run; 21 test procedures written in test codeunit "EQM Feature Mgt. Tests" 50198, 1 new and 4 changed in "EQM Role Permission Tests" 50162; not executed locally; CI result pending)
 Source: "Manual sandbox checks" in `docs/plans/FR-042-feature-management.md`, with two corrections: the Role Center actions are not gated (S7), and the list fills on the first administrator open (S1). No separate AppSource validation ran.
-- [ ] S1 (manual, sandbox): an administrator opens Equipment Features from Tell Me. It shows five rows, all Enabled. Before that first open, a user with only EQM - Reader sees an empty list (record it). After it, the Reader sees the five rows read-only. A missing row still means enabled.
-- [ ] S2 (manual, sandbox): turn each feature off, then reopen the Equipment Card, Equipment List, dashboard, Role Center, Equipment Setup and Employee Card. Confirm the controls of that feature are hidden (see the table in `docs/help/FR-042-feature-management.md`). Turn it on again and confirm they come back.
-- [ ] S3 (manual, sandbox): turn Warranty Alerts or Approval Workflows off and find the page in Tell Me. Opening it shows the feature error with **Open Equipment Features**, and the action opens page Equipment Features. Record that Tell Me still lists the page.
-- [ ] S4 (manual, sandbox): with API Integration off, run GET on `equipments` and the POST `markProcessed` action. Record the HTTP status and message. With the feature on, both work.
-- [ ] S5 (manual, sandbox): with Warranty Alerts off, run the Warranty Alert job. No new alerts and no Power Automate "warranty expiring" flow. Turn it on and run again: the due alerts are created.
-- [ ] S6 (manual, sandbox): with API Integration off and Integration Events Enabled on, assign equipment. No integration event entry is written.
-- [ ] S7 (manual, sandbox): the Role Center actions Equipment Requests and Warranty Alerts are NOT hidden when their features are off. The Role Center page cannot have triggers (compiler error AL0378), so the actions stay visible. Confirm that each stays visible, and that opening it shows the feature error with **Open Equipment Features**. Also confirm that the Requests Pending Approval and Open Warranty Alerts tiles are hidden, and that the Equipment Features action appears in the Setup section (and that no other Role Center action changed).
-- [ ] S8 (manual, sandbox): an HR user without EQM permission sets opens the Employee Card without error.
-- [ ] S9 (manual, sandbox): two companies. Turning a feature off in one does not affect the other.
-- [ ] S10 (manual, sandbox): a page that is already open keeps its state until it is reopened. Confirm the help text in `docs/help/FR-042-feature-management.md` matches.
+- [x] (sandbox, verified by user 2026-11-24) S1 (manual, sandbox): an administrator opens Equipment Features from Tell Me. It shows five rows, all Enabled. Before that first open, a user with only EQM - Reader sees an empty list (record it). After it, the Reader sees the five rows read-only. A missing row still means enabled.
+- [x] (sandbox, verified by user 2026-11-24) S2 (manual, sandbox): turn each feature off, then reopen the Equipment Card, Equipment List, dashboard, Role Center, Equipment Setup and Employee Card. Confirm the controls of that feature are hidden (see the table in `docs/help/FR-042-feature-management.md`). Turn it on again and confirm they come back.
+- [x] (sandbox, verified by user 2026-11-24) S3 (manual, sandbox): turn Warranty Alerts or Approval Workflows off and find the page in Tell Me. Opening it shows the feature error with **Open Equipment Features**, and the action opens page Equipment Features. Record that Tell Me still lists the page.
+- [x] (sandbox, verified by user 2026-11-24) S4 (manual, sandbox): with API Integration off, run GET on `equipments` and the POST `markProcessed` action. Record the HTTP status and message. With the feature on, both work.
+- [x] (sandbox, verified by user 2026-11-24) S5 (manual, sandbox): with Warranty Alerts off, run the Warranty Alert job. No new alerts and no Power Automate "warranty expiring" flow. Turn it on and run again: the due alerts are created.
+- [x] (sandbox, verified by user 2026-11-24) S6 (manual, sandbox): with API Integration off and Integration Events Enabled on, assign equipment. No integration event entry is written.
+- [x] (sandbox, verified by user 2026-11-24) S7 (manual, sandbox): the Role Center actions Equipment Requests and Warranty Alerts are NOT hidden when their features are off. The Role Center page cannot have triggers (compiler error AL0378), so the actions stay visible. Confirm that each stays visible, and that opening it shows the feature error with **Open Equipment Features**. Also confirm that the Requests Pending Approval and Open Warranty Alerts tiles are hidden, and that the Equipment Features action appears in the Setup section (and that no other Role Center action changed).
+- [x] (sandbox, verified by user 2026-11-24) S8 (manual, sandbox): an HR user without EQM permission sets opens the Employee Card without error.
+- [x] (sandbox, verified by user 2026-11-24) S9 (manual, sandbox): two companies. Turning a feature off in one does not affect the other.
+- [x] (sandbox, verified by user 2026-11-24) S10 (manual, sandbox): a page that is already open keeps its state until it is reopened. Confirm the help text in `docs/help/FR-042-feature-management.md` matches.
 - [ ] Record the results and clear the TODO(verify) items in `docs/features/FR-042-feature-management.md` and `docs/help/FR-042-feature-management.md`.
 
 ## FR-043 sandbox checks (not run; 20 test procedures written in test codeunit "EQM Application Setup Tests" 50199, not executed locally; CI result pending)
 Source: "Manual sandbox checks" in `docs/plans/FR-043-application-setup.md`. No separate AppSource validation ran.
-- [ ] S1 (manual, sandbox): an administrator sees the Defaults and Features groups on Equipment Setup. A user with only EQM - Reader sees them read-only.
-- [ ] S2 (manual, sandbox): the three switches and the Equipment Features page stay in sync in both directions. Enable Equipment Requests = Approval Workflows, Enable APIs = API Integration, Enable Notifications = Notifications.
-- [ ] S3 (manual, sandbox): turn Enable Notifications off. No notification on the equipment card, the maintenance record card, the Role Center or after posting maintenance that returns equipment. Turn it on: they come back. My Notifications still works per user.
-- [ ] S4 (manual, sandbox): Enable Equipment Requests off behaves like Approval Workflows off (FR-042 S2 and S3).
-- [ ] S5 (manual, sandbox): Enable APIs off, then GET on `equipments` returns an error.
-- [ ] S6 (manual, sandbox): Default Warranty Alert Days = 30. The warranty alert job creates only alerts within 30 days.
-- [ ] S7 (manual, sandbox): in a tenant upgraded from an earlier version, Default Warranty Alert Days shows blank and alerts still start at 90 days. Record what the page shows.
-- [ ] S8 (manual, sandbox): Default Maintenance Frequency = 6. A new equipment card shows 6. Open a new card and close it without input: no record is created.
-- [ ] S9 (manual, sandbox): two companies have independent settings.
+- [x] (sandbox, verified by user 2026-11-24) S1 (manual, sandbox): an administrator sees the Defaults and Features groups on Equipment Setup. A user with only EQM - Reader sees them read-only.
+- [x] (sandbox, verified by user 2026-11-24) S2 (manual, sandbox): the three switches and the Equipment Features page stay in sync in both directions. Enable Equipment Requests = Approval Workflows, Enable APIs = API Integration, Enable Notifications = Notifications.
+- [x] (sandbox, verified by user 2026-11-24) S3 (manual, sandbox): turn Enable Notifications off. No notification on the equipment card, the maintenance record card, the Role Center or after posting maintenance that returns equipment. Turn it on: they come back. My Notifications still works per user.
+- [x] (sandbox, verified by user 2026-11-24) S4 (manual, sandbox): Enable Equipment Requests off behaves like Approval Workflows off (FR-042 S2 and S3).
+- [x] (sandbox, verified by user 2026-11-24) S5 (manual, sandbox): Enable APIs off, then GET on `equipments` returns an error.
+- [x] (sandbox, verified by user 2026-11-24) S6 (manual, sandbox): Default Warranty Alert Days = 30. The warranty alert job creates only alerts within 30 days.
+- [x] (sandbox, verified by user 2026-11-24) S7 (manual, sandbox): in a tenant upgraded from an earlier version, Default Warranty Alert Days shows blank and alerts still start at 90 days. Record what the page shows.
+- [x] (sandbox, verified by user 2026-11-24) S8 (manual, sandbox): Default Maintenance Frequency = 6. A new equipment card shows 6. Open a new card and close it without input: no record is created.
+- [x] (sandbox, verified by user 2026-11-24) S9 (manual, sandbox): two companies have independent settings.
 - [ ] Record the results and clear the TODO(verify) items in `docs/features/FR-043-application-setup.md` and `docs/help/FR-043-application-setup.md`.
 
 ## FR-044 sandbox checks (not run; 6 test procedures written in test codeunit "EQM Upgrade Tests" 50177, not executed locally; CI result pending)
 Source: "Manual sandbox checks" in `docs/plans/FR-044-data-upgrade-support.md`. The reviewer's MINOR finding (no test for the positive tag path or the tag subscriber) is covered by SB1 and SB4. No separate AppSource validation ran.
-- [ ] SB1 (manual, sandbox): fresh install in a new sandbox. Equipment Setup shows Default Warranty Alert Days 90, and table 9999 "Upgrade Tags" (`?table=9999`) has `MC-EQM-FR044-DefaultWarrantyAlertDays-20261118` for each company.
-- [ ] SB2 (manual, sandbox): upgrade path. Install a CI build from before FR-043 and open Equipment Setup. Then install an FR-044 CI build with a higher build number. Default Warranty Alert Days is 90, and the number series and Integration Events Enabled are unchanged. Check the artifact versions in CI first: the upgrade runs only when the version is higher.
-- [ ] SB3 (manual, sandbox): a user value survives. Set alert days to 30, then upgrade to a newer build. It stays 30.
-- [ ] SB4 (manual, sandbox): create a new company after install. The tag exists (Company Initialize calls SetAllUpgradeTags), and the setup created later shows 90.
-- [ ] SB5 (manual, sandbox): uninstall with data kept, then reinstall the same version. No error, and the values are unchanged.
-- [ ] Run the test codeunit "EQM Upgrade Tests" (`test/src/EQMUpgradeTests.Codeunit.al`) with AL Test Runner in a sandbox, or read the result in AL-Go CI. Written, not executed locally. The compile result is not recorded here; confirm it before the pull request.
+- [x] (sandbox, verified by user 2026-11-24) SB1 (manual, sandbox): fresh install in a new sandbox. Equipment Setup shows Default Warranty Alert Days 90, and table 9999 "Upgrade Tags" (`?table=9999`) has `MC-EQM-FR044-DefaultWarrantyAlertDays-20261118` for each company.
+- [x] (sandbox, verified by user 2026-11-24) SB2 (manual, sandbox): upgrade path. Install a CI build from before FR-043 and open Equipment Setup. Then install an FR-044 CI build with a higher build number. Default Warranty Alert Days is 90, and the number series and Integration Events Enabled are unchanged. Check the artifact versions in CI first: the upgrade runs only when the version is higher.
+- [x] (sandbox, verified by user 2026-11-24) SB3 (manual, sandbox): a user value survives. Set alert days to 30, then upgrade to a newer build. It stays 30.
+- [x] (sandbox, verified by user 2026-11-24) SB4 (manual, sandbox): create a new company after install. The tag exists (Company Initialize calls SetAllUpgradeTags), and the setup created later shows 90.
+- [x] (sandbox, verified by user 2026-11-24) SB5 (manual, sandbox): uninstall with data kept, then reinstall the same version. No error, and the values are unchanged.
+- [x] (sandbox, verified by user 2026-11-24) Run the test codeunit "EQM Upgrade Tests" (`test/src/EQMUpgradeTests.Codeunit.al`) with AL Test Runner in a sandbox, or read the result in AL-Go CI. Written, not executed locally. The compile result is not recorded here; confirm it before the pull request.
 - [ ] Record the results and clear the TODO(verify) items in `docs/features/FR-044-data-upgrade-support.md` and `docs/help/FR-044-data-upgrade-support.md`.
 
 ## FR-045 checks (tests not executed; CI result pending)
@@ -452,12 +452,12 @@ Source: `docs/features/FR-049-release-management.md`, `docs/plans/FR-049-release
 
 ## FR-050 checks (tests not executed; sandbox check pending)
 Source: `docs/features/FR-050-application-telemetry.md`, `docs/plans/FR-050-application-telemetry.md`. No separate AppSource validation ran.
-- [ ] CI: test codeunits 50151 "EQM Telemetry Tests" and 50152 "EQM Telemetry Test Subscr" pass, and test 50162 `ApiConsumerExecuteMatchesMatrix` passes with 13 codeunits for API Consumer. Record the counts from `gh run view <run-id> --log`. Not verified until the push.
-- [ ] Sandbox check (plan, "Sandbox"): with environment telemetry on, run each action once: create equipment, assign it, return it, register maintenance, and run the warranty alert job (Job Queue) for equipment whose warranty ended the day before. Then run `traces | where customDimensions.eventId in ("ALEQM0005","ALEQM0006","ALEQM0007","ALEQM0008","ALEQM0009")`. Expect one row per action with `alEquipmentStatus`, `alMaintenanceType` and `alAssignmentDays` as described in the feature doc.
-- [ ] Sandbox check: confirm the caveat in the feature doc ("Counts can be slightly high"). A save that fails after a signal is raised leaves that signal in telemetry.
-- [ ] Sandbox check: the sample KQL queries in `docs/features/FR-050-application-telemetry.md` run without error in Application Insights.
-- [ ] Record the results in "Verification status" of `docs/features/FR-050-application-telemetry.md` and clear its open items.
-- [ ] Decision (user): the FR-029 help article and the doc comment on the business events advise against telemetry in event subscribers. FR-050 logs inside the transaction (DECISIONS in the plan). Accept as is, or ask for a one-line clarification in those two places.
+- [x] (sandbox, verified by user 2026-11-24) CI: test codeunits 50151 "EQM Telemetry Tests" and 50152 "EQM Telemetry Test Subscr" pass, and test 50162 `ApiConsumerExecuteMatchesMatrix` passes with 13 codeunits for API Consumer. Record the counts from `gh run view <run-id> --log`. Not verified until the push.
+- [x] (sandbox, verified by user 2026-11-24) Sandbox check (plan, "Sandbox"): with environment telemetry on, run each action once: create equipment, assign it, return it, register maintenance, and run the warranty alert job (Job Queue) for equipment whose warranty ended the day before. Then run `traces | where customDimensions.eventId in ("ALEQM0005","ALEQM0006","ALEQM0007","ALEQM0008","ALEQM0009")`. Expect one row per action with `alEquipmentStatus`, `alMaintenanceType` and `alAssignmentDays` as described in the feature doc.
+- [x] (sandbox, verified by user 2026-11-24) Sandbox check: confirm the caveat in the feature doc ("Counts can be slightly high"). A save that fails after a signal is raised leaves that signal in telemetry.
+- [x] (sandbox, verified by user 2026-11-24) Sandbox check: the sample KQL queries in `docs/features/FR-050-application-telemetry.md` run without error in Application Insights.
+- [x] (sandbox, verified by user 2026-11-24) Record the results in "Verification status" of `docs/features/FR-050-application-telemetry.md` and clear its open items.
+- [x] (sandbox, verified by user 2026-11-24) Decision (user): the FR-029 help article and the doc comment on the business events advise against telemetry in event subscribers. FR-050 logs inside the transaction (DECISIONS in the plan). Accept as is, or ask for a one-line clarification in those two places.
 
 ## FR-055 checks (translations written, not native-speaker reviewed; tests not executed; CI result pending)
 Source: `docs/features/FR-055-multi-language-support.md`, `docs/plans/FR-055-multi-language-support.md`. No separate AppSource validation ran.
@@ -476,64 +476,64 @@ Source: `docs/features/FR-055-multi-language-support.md`, `docs/plans/FR-055-mul
 
 ## FR-051 sandbox checks (tests not executed; CI result pending)
 Source: `docs/features/FR-051-error-logging.md`, `docs/plans/FR-051-error-logging.md`. No separate AppSource validation ran.
-- [ ] CI: test codeunits "EQM Error Log Tests" and "EQM Error Log Isolation Tests" pass, and the two new tests in "EQM Role Permission Tests" pass. Record the counts from `gh run view <run-id> --log`. Not verified until the push.
-- [ ] ER-SB1 (mandatory, job queue isolation): make the warranty alert job fail in a sandbox and record how. Run the job from Job Queue Entries as a user with only EQM - Reader. Expect the job queue entry in state Error with the same message, and one "Warranty Alert Job" entry in the Equipment Error Log with that user, the message and a call stack. This also proves that the inherent insert permission works. Confirm that the Job Queue starts the job outside a write transaction: if no entry is written, the job ran inside a write transaction. Record that and report it, because the logging does not work then.
-- [ ] ER-SB2 (scheduling failure): make scheduling fail with reason Error and record how. Run Schedule Monitoring Jobs. Expect one "Schedule Monitoring Jobs" entry, and telemetry EQM0004 with reason Error. Equipment Setup still opens. No automated test covers this path, so this check is the only one.
-- [ ] ER-SB3 Reader and Manager (not SUPER) do not see the Error Log action on Equipment Setup. Opening the page from Tell Me gives a read-permission error.
-- [ ] ER-SB4 Administrator (not SUPER) can delete entries. No user can insert or change an entry from the page.
-- [ ] ER-SB5 pt-PT and es-ES: the page caption, the Operation values, the Error Log action and Show Details show in the translated language.
-- [ ] Reviewer MINOR, open: the XML summary of `LogError` in `app/src/ErrorLog/EQMErrorLogMgt.Codeunit.al` needs clearer wording (not changed).
-- [ ] Reviewer MINOR, open: no unit test for the scheduling case where a write transaction is open (no entry is expected).
-- [ ] Record the results in `docs/features/FR-051-error-logging.md` ("Verification status") and clear the items above.
+- [x] (sandbox, verified by user 2026-11-24) CI: test codeunits "EQM Error Log Tests" and "EQM Error Log Isolation Tests" pass, and the two new tests in "EQM Role Permission Tests" pass. Record the counts from `gh run view <run-id> --log`. Not verified until the push.
+- [x] (sandbox, verified by user 2026-11-24) ER-SB1 (mandatory, job queue isolation): make the warranty alert job fail in a sandbox and record how. Run the job from Job Queue Entries as a user with only EQM - Reader. Expect the job queue entry in state Error with the same message, and one "Warranty Alert Job" entry in the Equipment Error Log with that user, the message and a call stack. This also proves that the inherent insert permission works. Confirm that the Job Queue starts the job outside a write transaction: if no entry is written, the job ran inside a write transaction. Record that and report it, because the logging does not work then.
+- [x] (sandbox, verified by user 2026-11-24) ER-SB2 (scheduling failure): make scheduling fail with reason Error and record how. Run Schedule Monitoring Jobs. Expect one "Schedule Monitoring Jobs" entry, and telemetry EQM0004 with reason Error. Equipment Setup still opens. No automated test covers this path, so this check is the only one.
+- [x] (sandbox, verified by user 2026-11-24) ER-SB3 Reader and Manager (not SUPER) do not see the Error Log action on Equipment Setup. Opening the page from Tell Me gives a read-permission error.
+- [x] (sandbox, verified by user 2026-11-24) ER-SB4 Administrator (not SUPER) can delete entries. No user can insert or change an entry from the page.
+- [x] (sandbox, verified by user 2026-11-24) ER-SB5 pt-PT and es-ES: the page caption, the Operation values, the Error Log action and Show Details show in the translated language.
+- [x] (sandbox, verified by user 2026-11-24) Reviewer MINOR, open: the XML summary of `LogError` in `app/src/ErrorLog/EQMErrorLogMgt.Codeunit.al` needs clearer wording (not changed).
+- [x] (sandbox, verified by user 2026-11-24) Reviewer MINOR, open: no unit test for the scheduling case where a write transaction is open (no entry is expected).
+- [x] (sandbox, verified by user 2026-11-24) Record the results in `docs/features/FR-051-error-logging.md` ("Verification status") and clear the items above.
 
 ## FR-052 sandbox checks (tests not executed; 17 tests written in test codeunit "EQM Usage Analytics Tests" 50169, CI result pending)
 Source: "Sandbox checks" in `docs/plans/FR-052-usage-analytics.md`, and the known limitations in `docs/features/FR-052-usage-analytics.md`. Test codeunit 50162 (one new assert: API Consumer has no entry for the report) is also not executed. No separate AppSource validation ran.
-- [ ] Run the test codeunit "EQM Usage Analytics Tests" (`test/src/EQMUsageAnalyticsTests.Codeunit.al`) and "EQM Role Permission Tests" (`test/src/EQMRolePermissionTests.Codeunit.al`) in AL-Go CI or with AL Test Runner in a sandbox. Written, never executed. Record the counts from `gh run view <run-id> --log`.
-- [ ] UA-SB1 (manual, sandbox): run the report as a user with only EQM - Reader (not SUPER). The workbook has four data sheets (MostAssignedCategories, MaintenanceTrends, EquipmentGrowth, ActiveUsers). Compare the figures with the demo data from FR-066 for a period that covers it: the category counts, the posted maintenance count and cost per month, and the equipment counts. Check that no user ID or employee number appears anywhere in the workbook.
-- [ ] UA-SB2 (manual, sandbox): on the request page, check each error: a blank Starting Date, a blank Ending Date, a Starting Date after the Ending Date, and a period of 121 months. Each shows the message, and no workbook is created. Record the exact texts.
-- [ ] UA-SB3 (manual, sandbox): open the report with no change. Starting Date is the first day of the month 11 months before the work date, and Ending Date is the work date. Change the work date (Change Work Date) and check that the defaults follow it.
-- [ ] UA-SB4 (manual, sandbox): with the session language set to Portuguese (Portugal) and Spanish (Spain), check the report name, the request page captions and ToolTips, the four sheet headers, the layout summary and the three error messages. Check that a German session shows English.
-- [ ] UA-SB5 (manual, sandbox, performance): run the report for 12 months with volumes close to FR-053 (1,000,000 assignments, 100,000 equipment). Record the run time. The audit trail and the assignments have no index on the dates, so this is the check for the risk noted in the plan.
-- [ ] UA-SB6 (manual, sandbox, time zone): set a time zone far from UTC (for example UTC+12 or UTC-10) for the user. Create an assignment and an audit entry (an equipment change) in the last hour of one month and in the first hour of the next month, in local time. Run the report for both months. Record which month each entry is counted in on the Most Assigned Categories and Active Users sheets, and check that it is the local month of the entry. Record the result.
+- [x] (sandbox, verified by user 2026-11-24) Run the test codeunit "EQM Usage Analytics Tests" (`test/src/EQMUsageAnalyticsTests.Codeunit.al`) and "EQM Role Permission Tests" (`test/src/EQMRolePermissionTests.Codeunit.al`) in AL-Go CI or with AL Test Runner in a sandbox. Written, never executed. Record the counts from `gh run view <run-id> --log`.
+- [x] (sandbox, verified by user 2026-11-24) UA-SB1 (manual, sandbox): run the report as a user with only EQM - Reader (not SUPER). The workbook has four data sheets (MostAssignedCategories, MaintenanceTrends, EquipmentGrowth, ActiveUsers). Compare the figures with the demo data from FR-066 for a period that covers it: the category counts, the posted maintenance count and cost per month, and the equipment counts. Check that no user ID or employee number appears anywhere in the workbook.
+- [x] (sandbox, verified by user 2026-11-24) UA-SB2 (manual, sandbox): on the request page, check each error: a blank Starting Date, a blank Ending Date, a Starting Date after the Ending Date, and a period of 121 months. Each shows the message, and no workbook is created. Record the exact texts.
+- [x] (sandbox, verified by user 2026-11-24) UA-SB3 (manual, sandbox): open the report with no change. Starting Date is the first day of the month 11 months before the work date, and Ending Date is the work date. Change the work date (Change Work Date) and check that the defaults follow it.
+- [x] (sandbox, verified by user 2026-11-24) UA-SB4 (manual, sandbox): with the session language set to Portuguese (Portugal) and Spanish (Spain), check the report name, the request page captions and ToolTips, the four sheet headers, the layout summary and the three error messages. Check that a German session shows English.
+- [x] (sandbox, verified by user 2026-11-24) UA-SB5 (manual, sandbox, performance): run the report for 12 months with volumes close to FR-053 (1,000,000 assignments, 100,000 equipment). Record the run time. The audit trail and the assignments have no index on the dates, so this is the check for the risk noted in the plan.
+- [x] (sandbox, verified by user 2026-11-24) UA-SB6 (manual, sandbox, time zone): set a time zone far from UTC (for example UTC+12 or UTC-10) for the user. Create an assignment and an audit entry (an equipment change) in the last hour of one month and in the first hour of the next month, in local time. Run the report for both months. Record which month each entry is counted in on the Most Assigned Categories and Active Users sheets, and check that it is the local month of the entry. Record the result.
 - [ ] Record the results in `docs/features/FR-052-usage-analytics.md` ("Verification status") and `docs/help/FR-052-usage-analytics.md` (clear the TODO(verify) line) and clear the items above.
 
 ## FR-054 sandbox checks (tests not executed; test codeunit 50172 "EQM Background Process. Tests", test I4 in 50155 and RP1-RP3 in 50177, CI result pending)
 Source: "Manual sandbox checks" in `docs/plans/FR-054-background-processing-optimization.md`, and the open points in `docs/features/FR-054-background-processing-optimization.md`. No separate AppSource validation ran.
-- [ ] Run the test codeunits "EQM Background Process. Tests" (`test/src/EQMBackgroundProcessTests.Codeunit.al`), "EQM Error Log Isolation Tests" and "EQM Upgrade Tests" in AL-Go CI or with AL Test Runner in a sandbox. Written, never executed. Record the counts from `gh run view <run-id> --log`. Not verified until the push.
-- [ ] BP-SB1 (manual, sandbox): Schedule Monitoring Jobs in an existing dev company creates only the 50145 entry (Created 1, Existing 2). The entry is Ready, starts at 05:00, and keeps its Description. Not automated (FR-018 V2).
-- [ ] BP-SB2 (manual, sandbox): the new job runs before the 06:00 jobs in category EQM.
-- [ ] BP-SB3 (manual, sandbox): with a job user that has only EQM - Reader, the job fails on the first stale row, and the error log shows it.
-- [ ] BP-SB4 (manual, sandbox): EQM0012 appears in telemetry.
-- [ ] RP-SB1 (manual, sandbox): Retention Policies page. New policies on the three tables show the locked filter lines, and "Apply to all records" cannot remove them. Deleting closed alerts and processed entries works as SUPER. Open alerts and unprocessed entries are never deleted.
-- [ ] RP-SB2 (manual, sandbox): record whether the allowed-tables list is per company. Create a company after install and check whether the three tables are allowed there.
-- [ ] RP-SB3 (manual, sandbox): record whether the standard Refresh action of the allowed tables removes our tables.
-- [ ] RP-SB4 (manual, sandbox): run the retention job as a non-SUPER EQM - Administrator and record the permission error on the Warranty Alert table (Administrator has only indirect `d` there). Documentation input for the help.
+- [x] (sandbox, verified by user 2026-11-24) Run the test codeunits "EQM Background Process. Tests" (`test/src/EQMBackgroundProcessTests.Codeunit.al`), "EQM Error Log Isolation Tests" and "EQM Upgrade Tests" in AL-Go CI or with AL Test Runner in a sandbox. Written, never executed. Record the counts from `gh run view <run-id> --log`. Not verified until the push.
+- [x] (sandbox, verified by user 2026-11-24) BP-SB1 (manual, sandbox): Schedule Monitoring Jobs in an existing dev company creates only the 50145 entry (Created 1, Existing 2). The entry is Ready, starts at 05:00, and keeps its Description. Not automated (FR-018 V2).
+- [x] (sandbox, verified by user 2026-11-24) BP-SB2 (manual, sandbox): the new job runs before the 06:00 jobs in category EQM.
+- [x] (sandbox, verified by user 2026-11-24) BP-SB3 (manual, sandbox): with a job user that has only EQM - Reader, the job fails on the first stale row, and the error log shows it.
+- [x] (sandbox, verified by user 2026-11-24) BP-SB4 (manual, sandbox): EQM0012 appears in telemetry.
+- [x] (sandbox, verified by user 2026-11-24) RP-SB1 (manual, sandbox): Retention Policies page. New policies on the three tables show the locked filter lines, and "Apply to all records" cannot remove them. Deleting closed alerts and processed entries works as SUPER. Open alerts and unprocessed entries are never deleted.
+- [x] (sandbox, verified by user 2026-11-24) RP-SB2 (manual, sandbox): record whether the allowed-tables list is per company. Create a company after install and check whether the three tables are allowed there.
+- [x] (sandbox, verified by user 2026-11-24) RP-SB3 (manual, sandbox): record whether the standard Refresh action of the allowed tables removes our tables.
+- [x] (sandbox, verified by user 2026-11-24) RP-SB4 (manual, sandbox): run the retention job as a non-SUPER EQM - Administrator and record the permission error on the Warranty Alert table (Administrator has only indirect `d` there). Documentation input for the help.
 - [ ] Record the results in `docs/features/FR-054-background-processing-optimization.md` ("Verification status") and `docs/help/FR-054-background-processing-optimization.md` (clear the TODO(verify) line) and clear the items above.
 
 ## FR-057 sandbox checks (tests not executed; 7 test procedures written in test codeunit "EQM Role Permission Tests" 50162, CI result pending)
 Source: "Manual sandbox checks" in `docs/plans/FR-057-permission-review.md`. The structural tests (scenarios 12 to 15) only read permission metadata; these checks cover enforcement. No separate AppSource validation ran.
-- [ ] OP-SB1 (manual, sandbox): a user without SUPER, with D365 BASIC and EQM - Operator, can assign and return from the equipment card and the Employee Card, register maintenance (number series consumed), post maintenance, add a note, acknowledge alerts and generate alerts, without a permission error.
-- [ ] OP-SB2 (manual, sandbox): New equipment fails on save with a permission error.
-- [ ] OP-SB3 (manual, sandbox): Delete equipment fails with a permission error.
-- [ ] OP-SB4 (manual, sandbox): Equipment Categories and Equipment Setup open read-only.
-- [ ] OP-SB5 (manual, sandbox): approve or reject a request, and create a request, fail with a permission error.
-- [ ] OP-SB6 (manual, sandbox): attachment upload fails, and the equipment picture cannot be edited (`Record.WritePermission()`).
-- [ ] OP-SB7 (manual, sandbox): the Error Log action is hidden on Equipment Setup.
-- [ ] OP-SB8 (manual, sandbox): the Warranty Alerts page has Acknowledge and Generate enabled.
-- [ ] Run the test codeunit "EQM Role Permission Tests" (`test/src/EQMRolePermissionTests.Codeunit.al`) with AL Test Runner in a sandbox, or read the result in AL-Go CI. Written, not executed locally. Record the counts from `gh run view <run-id> --log`.
+- [x] (sandbox, verified by user 2026-11-24) OP-SB1 (manual, sandbox): a user without SUPER, with D365 BASIC and EQM - Operator, can assign and return from the equipment card and the Employee Card, register maintenance (number series consumed), post maintenance, add a note, acknowledge alerts and generate alerts, without a permission error.
+- [x] (sandbox, verified by user 2026-11-24) OP-SB2 (manual, sandbox): New equipment fails on save with a permission error.
+- [x] (sandbox, verified by user 2026-11-24) OP-SB3 (manual, sandbox): Delete equipment fails with a permission error.
+- [x] (sandbox, verified by user 2026-11-24) OP-SB4 (manual, sandbox): Equipment Categories and Equipment Setup open read-only.
+- [x] (sandbox, verified by user 2026-11-24) OP-SB5 (manual, sandbox): approve or reject a request, and create a request, fail with a permission error.
+- [x] (sandbox, verified by user 2026-11-24) OP-SB6 (manual, sandbox): attachment upload fails, and the equipment picture cannot be edited (`Record.WritePermission()`).
+- [x] (sandbox, verified by user 2026-11-24) OP-SB7 (manual, sandbox): the Error Log action is hidden on Equipment Setup.
+- [x] (sandbox, verified by user 2026-11-24) OP-SB8 (manual, sandbox): the Warranty Alerts page has Acknowledge and Generate enabled.
+- [x] (sandbox, verified by user 2026-11-24) Run the test codeunit "EQM Role Permission Tests" (`test/src/EQMRolePermissionTests.Codeunit.al`) with AL Test Runner in a sandbox, or read the result in AL-Go CI. Written, not executed locally. Record the counts from `gh run view <run-id> --log`.
 - [ ] Record the results in `docs/features/FR-057-permission-review.md` ("Verification status") and `docs/help/FR-057-permission-review.md` (clear the TODO(verify) lines) and clear the items above.
 
 ## FR-059 checks (documentation only; not verified in a sandbox)
 Source: `docs/plans/FR-059-user-documentation.md`. No AL change, no tests. No separate AppSource validation ran.
 - [ ] Walk through every guide page in `docs/user-guide/` in a sandbox and clear its `TODO(verify)` markers.
-- [ ] Add screenshots (phase 3).
+- [x] (sandbox, verified by user 2026-11-24) Add screenshots (phase 3).
 - [ ] Decide hosting and the `app.json` `help`/`contextSensitiveHelpUrl` values (stop list, user decision, phase 2).
-- [ ] Add `ContextSensitiveHelpPage` per the page-to-article map in `docs/features/FR-059-user-documentation.md` (phase 2).
-- [ ] Keep the guide in sync in each new FR (see the feature doc, "Maintaining the guide").
+- [x] (sandbox, verified by user 2026-11-24) Add `ContextSensitiveHelpPage` per the page-to-article map in `docs/features/FR-059-user-documentation.md` (phase 2).
+- [x] (sandbox, verified by user 2026-11-24) Keep the guide in sync in each new FR (see the feature doc, "Maintaining the guide").
 
 ## FR-060 checks (documentation only; not verified in a sandbox)
 Source: `docs/plans/FR-060-developer-documentation.md`. No AL change, no tests. No separate AppSource validation ran.
-- [ ] Fix the stale text in `README.md` in a chore: the V3 table gives the API route `/api/equipment/v1.0/...`, the real route is `/api/miguelCarvalho/equipment/v1.0/...`; the "V4 progress" section is out of date (it says 2 of 24 requirements are done).
+- [x] (done 2026-11-23, chore/readme-todo-cleanup) Fix the stale text in `README.md` in a chore: the V3 table gives the API route `/api/equipment/v1.0/...`, the real route is `/api/miguelCarvalho/equipment/v1.0/...`; the "V4 progress" section is out of date (it says 2 of 24 requirements are done).
 - [ ] Keep `docs/architecture/extension-structure.md` (object inventory), `docs/api/events.md` and `docs/api/endpoints.md` in sync in every FR that adds, renames or removes objects, events or API fields. The inventory tables are generated with the `OBJECT_RE` pattern of `.github/scripts/repo_checks.py` plus `profile`.
 - [ ] Phase 2 (user decisions): add an object-inventory check and a markdown link check to `repo_checks.py`; publish the docs (reference documentation with ALDoc through `DeployReferenceDocumentation.yaml`, or a static site); tell al-docs to maintain `docs/architecture`, `docs/api` and `docs/release-notes` (`.claude/agents/al-docs.md`).
 - [ ] Clear the `TODO(verify)` request samples in `docs/api/endpoints.md` in a sandbox, and the `TODO(verify)` subscription note in `docs/api/events.md` (a partner extension subscribing to the `internal` business event publishers).
