@@ -1,5 +1,7 @@
 # FR-037 FactBoxes
 
+> **Sandbox verification (2026-11-24):** verified in a Business Central sandbox by the project owner; no defects were reported. The detailed results are not recorded here, so statements below that say "not verified" or carry `TODO(verify)` predate this run.
+
 ## Purpose
 Three read-only FactBoxes on the Equipment Card (GitHub issue #75): **Equipment Summary**, **Equipment Statistics** and **Attachment Summary**. They show the status, the assignment, the warranty, the assignment and maintenance figures, and the attachment counts of one piece of equipment without opening other pages. The existing FactBoxes stay on the card.
 

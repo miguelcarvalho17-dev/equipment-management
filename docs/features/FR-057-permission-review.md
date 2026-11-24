@@ -1,5 +1,7 @@
 # FR-057 Permission Review
 
+> **Sandbox verification (2026-11-24):** verified in a Business Central sandbox by the project owner; no defects were reported. The detailed results are not recorded here, so statements below that say "not verified" or carry `TODO(verify)` predate this run.
+
 ## Purpose
 Review of the app's permission sets for least privilege (GitHub issue #98, relates to NFR-002 and FR-036). The review adds one role, **Equipment Operator** (`EQM - Operator`), for day-to-day work on existing equipment. It sits between Reader and Manager. The existing sets are not narrowed in this phase: two findings (F1 and F2 below) would remove or change rights, and that needs user approval.
 

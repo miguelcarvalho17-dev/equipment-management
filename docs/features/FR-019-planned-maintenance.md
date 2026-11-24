@@ -1,5 +1,7 @@
 # FR-019 Planned Maintenance
 
+> **Sandbox verification (2026-11-24):** verified in a Business Central sandbox by the project owner; no defects were reported. The detailed results are not recorded here, so statements below that say "not verified" or carry `TODO(verify)` predate this run.
+
 ## Purpose
 Users plan recurring maintenance per piece of equipment: they enter how often it must be maintained (in months) and when it was last maintained, and the app calculates the next maintenance date. Posting a Preventive maintenance record moves the last maintenance date forward automatically. Example: last maintenance 1 January 2026 and frequency 6 months give a next maintenance date of 1 July 2026.
 

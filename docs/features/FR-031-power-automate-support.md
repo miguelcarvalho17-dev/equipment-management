@@ -1,5 +1,7 @@
 # FR-031 Power Automate Support (external business events)
 
+> **Sandbox verification (2026-11-24):** verified in a Business Central sandbox by the project owner; no defects were reported. The detailed results are not recorded here, so statements below that say "not verified" or carry `TODO(verify)` predate this run.
+
 ## Purpose
 Two business moments are published as external business events, so a flow can start from them with the trigger "When a business event occurs" of the Business Central connector in Power Automate (GitHub issue #69): equipment assigned, and warranty expiring. The flows themselves are built by the customer in Power Automate. No existing business code changes. The only subscriptions are to this app's own publisher (codeunit 50119, FR-029) and to the platform trigger event of its own table 50107, so there is no events report.
 

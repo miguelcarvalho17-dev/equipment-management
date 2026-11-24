@@ -1,5 +1,7 @@
 # FR-023 Equipment Images
 
+> **Sandbox verification (2026-11-24):** verified in a Business Central sandbox by the project owner; no defects were reported. The detailed results are not recorded here, so statements below that say "not verified" or carry `TODO(verify)` predate this run.
+
 ## Purpose
 Each equipment record can hold one picture (GitHub issue #61). The picture is stored in a MediaSet field and shown in a "Picture" FactBox on the Equipment Card and the Equipment List. Users with edit rights can take, import, export and delete it; importing or taking a new picture replaces the existing one after confirmation, as Item Picture (page 346) does.
 

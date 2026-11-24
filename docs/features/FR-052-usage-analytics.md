@@ -1,5 +1,7 @@
 # FR-052 Usage Analytics
 
+> **Sandbox verification (2026-11-24):** verified in a Business Central sandbox by the project owner; no defects were reported. The detailed results are not recorded here, so statements below that say "not verified" or carry `TODO(verify)` predate this run.
+
 ## Purpose
 Gives managers a view of how the equipment register is used over a period. One Excel report, **Usage Analytics**, shows four metrics: the most assigned categories, the maintenance trends, the growth of the equipment register and the number of active users. Each metric is one sheet of the workbook. The report calculates the figures from data the app already records (assignments, posted maintenance, equipment and the audit trail) when it runs. Nothing new is stored.
 

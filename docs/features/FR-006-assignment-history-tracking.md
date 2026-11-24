@@ -1,5 +1,7 @@
 # FR-006 Assignment History Tracking
 
+> **Sandbox verification (2026-11-24):** verified in a Business Central sandbox by the project owner; no defects were reported. The detailed results are not recorded here, so statements below that say "not verified" or carry `TODO(verify)` predate this run.
+
 ## Purpose
 Every assignment of equipment is kept as a history entry (table 50103) with equipment, employee, start date, end date and
 the user who assigned it. FR-004 and FR-005 already create and close the entries. FR-006 adds two hard rules so the history

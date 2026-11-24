@@ -1,5 +1,7 @@
 # FR-013 Maintenance Cost Tracking
 
+> **Sandbox verification (2026-11-24):** verified in a Business Central sandbox by the project owner; no defects were reported. The detailed results are not recorded here, so statements below that say "not verified" or carry `TODO(verify)` predate this run.
+
 ## Purpose
 Managers see what each piece of equipment has cost in maintenance, next to what it cost to buy. Four KPIs are calculated live from the posted maintenance history (table 50106): Total Maintenance Cost, Average Maintenance Cost, Maintenance Cost by Category and Maintenance Cost by Equipment. They appear on the Equipment list, the Maintenance FactBox, the dashboard and the Equipment Manager Role Center. A Maintenance Cost % column compares the cost with the purchase cost and is highlighted at 100 % or more.
 

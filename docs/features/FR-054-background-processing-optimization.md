@@ -1,5 +1,7 @@
 # FR-054 Background Processing Optimization
 
+> **Sandbox verification (2026-11-24):** verified in a Business Central sandbox by the project owner; no defects were reported. The detailed results are not recorded here, so statements below that say "not verified" or carry `TODO(verify)` predate this run.
+
 ## Purpose
 Long-running processes run through the job queue (issue #95). This change does three things:
 

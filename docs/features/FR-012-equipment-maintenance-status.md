@@ -1,5 +1,7 @@
 # FR-012 Equipment Maintenance Status
 
+> **Sandbox verification (2026-11-24):** verified in a Business Central sandbox by the project owner; no defects were reported. The detailed results are not recorded here, so statements below that say "not verified" or carry `TODO(verify)` predate this run.
+
 ## Purpose
 Links maintenance records (FR-010, FR-011) to the equipment status (FR-003) and the assignment rules (FR-004, FR-005). Registering a maintenance record sets the equipment to In Maintenance. While the equipment has an open maintenance record it cannot be assigned. Posting the last open record sets the equipment back to Available.
 

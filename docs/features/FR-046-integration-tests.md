@@ -1,5 +1,7 @@
 # FR-046 Integration Tests
 
+> **Sandbox verification (2026-11-24):** verified in a Business Central sandbox by the project owner; no defects were reported. The detailed results are not recorded here, so statements below that say "not verified" or carry `TODO(verify)` predate this run.
+
 ## Purpose
 Adds integration-level tests for four business processes: equipment assignment, maintenance, equipment request approval and notifications. Each test runs several business steps in one transaction and checks the effects across modules: assignment history, audit trail, integration outbox, maintenance log, equipment requests and notifications. The earlier unit tests check one rule at a time. These tests check that the steps agree with each other. The tests use the test app in `test/`. The app itself does not change.
 

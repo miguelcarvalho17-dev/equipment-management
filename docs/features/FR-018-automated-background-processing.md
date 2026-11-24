@@ -1,5 +1,7 @@
 # FR-018 Automated Background Processing
 
+> **Sandbox verification (2026-11-24):** verified in a Business Central sandbox by the project owner; no defects were reported. The detailed results are not recorded here, so statements below that say "not verified" or carry `TODO(verify)` predate this run.
+
 ## Purpose
 The daily monitoring runs by itself through Business Central job queue entries: one entry creates warranty alerts (FR-016), one checks overdue maintenance (FR-017 rule). The app creates the entries on install, when the setup is first created in a new company, and on demand from Equipment Setup. Equipment Setup shows the state of both entries.
 

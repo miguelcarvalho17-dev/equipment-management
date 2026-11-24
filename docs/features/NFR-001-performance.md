@@ -1,5 +1,7 @@
 # NFR-001 Performance
 
+> **Sandbox verification (2026-11-24):** verified in a Business Central sandbox by the project owner; no defects were reported. The detailed results are not recorded here, so statements below that say "not verified" or carry `TODO(verify)` predate this run.
+
 ## Purpose
 Keeps the equipment list and the dashboard responsive with large datasets (issue #22). The requirement: the Equipment list opens in less than 3 seconds for up to 10,000 records, and dashboard figures are calculated with FlowFields or Queries. FR-053 (100k+ records, issue #94) is out of scope.
 

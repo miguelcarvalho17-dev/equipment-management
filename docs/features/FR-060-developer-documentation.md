@@ -1,5 +1,7 @@
 # FR-060 Developer Documentation
 
+> **Sandbox verification (2026-11-24):** verified in a Business Central sandbox by the project owner; no defects were reported. The detailed results are not recorded here, so statements below that say "not verified" or carry `TODO(verify)` predate this run.
+
 ## Purpose
 The repository had no technical documentation for developers, partners or reviewers. Issue #101 asks for six deliverables: an architecture overview, the extension structure, the CI/CD process, the testing strategy, the API documentation and AppSource readiness. This change adds them as Markdown pages under `docs/`. It uses the target folders of the issue (`docs/architecture`, `docs/setup`, `docs/api`, `docs/user-guide`, `docs/release-notes`) and documents the current source layout. Nothing is renamed or moved.
 

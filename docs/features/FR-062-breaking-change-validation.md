@@ -1,5 +1,7 @@
 # FR-062 Breaking Change Validation
 
+> **Sandbox verification (2026-11-24):** verified in a Business Central sandbox by the project owner; no defects were reported. The detailed results are not recorded here, so statements below that say "not verified" or carry `TODO(verify)` predate this run.
+
 ## Purpose
 A pull request that makes an incompatible schema change to the main app fails the repository checks before it reaches `main`. The check covers removed or renamed objects, fields and keys, changed field types, enum values that are removed or renamed, and obsolete states that are set in the wrong order. It also records the rules for retiring a field and for extending an enum.
 

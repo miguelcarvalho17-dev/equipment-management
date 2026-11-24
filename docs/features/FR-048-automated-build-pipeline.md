@@ -1,5 +1,7 @@
 # FR-048 Automated Build Pipeline
 
+> **Sandbox verification (2026-11-24):** verified in a Business Central sandbox by the project owner; no defects were reported. The detailed results are not recorded here, so statements below that say "not verified" or carry `TODO(verify)` predate this run.
+
 ## Purpose
 Every pull request into `main`, every push to `main` and every release is validated by AL-Go for GitHub (GitHub issue #89). The pipeline already compiled the app and ran the test app. This feature records the audit and turns on CodeCop and UICop, and makes AppSourceCop explicit, in `.AL-Go/settings.json`. No AL code and no workflow YAML changed.
 

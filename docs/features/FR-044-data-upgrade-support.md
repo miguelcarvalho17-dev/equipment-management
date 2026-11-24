@@ -1,5 +1,7 @@
 # FR-044 Data Upgrade Support
 
+> **Sandbox verification (2026-11-24):** verified in a Business Central sandbox by the project owner; no defects were reported. The detailed results are not recorded here, so statements below that say "not verified" or carry `TODO(verify)` predate this run.
+
 ## Purpose
 The app gets a reusable way to run data upgrades. Each data change is one step. Each step is guarded by its own upgrade tag, so it runs once per company, however often the upgrade or the install is repeated. Phase 1 adds the first real step: the FR-043 field "Default Warranty Alert Days" is set on existing setup rows where it is still blank (0).
 

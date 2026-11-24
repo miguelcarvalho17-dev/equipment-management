@@ -1,5 +1,7 @@
 # FR-016 Warranty Alerts
 
+> **Sandbox verification (2026-11-24):** verified in a Business Central sandbox by the project owner; no defects were reported. The detailed results are not recorded here, so statements below that say "not verified" or carry `TODO(verify)` predate this run.
+
 ## Purpose
 When a warranty is about to end, the app creates an alert 90, 60 and 30 days before the Warranty End Date, so users can plan a renewal, schedule a replacement or raise a warranty claim in time. Alerts are stored records. A daily job queue entry (or a manager, with the Generate Alerts action) creates them; users see them in the Warranty Alerts list, in a dashboard tile and from the Equipment Card, and acknowledge them when they have acted.
 

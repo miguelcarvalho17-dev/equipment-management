@@ -1,5 +1,7 @@
 # FR-008 Equipment Card
 
+> **Sandbox verification (2026-11-24):** verified in a Business Central sandbox by the project owner; no defects were reported. The detailed results are not recorded here, so statements below that say "not verified" or carry `TODO(verify)` predate this run.
+
 ## Purpose
 Users get one card with everything about a piece of equipment: details, current status, current assignment, the full assignment history and who created and last changed the record. Page 50101 "EQM Equipment Card" (FR-001) already existed. FR-008 adds the assignment details of the active entry, the assignment history as a section on the card, and "who" audit fields.
 

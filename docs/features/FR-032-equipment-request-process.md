@@ -1,5 +1,7 @@
 # FR-032 Equipment Request Process
 
+> **Sandbox verification (2026-11-24):** verified in a Business Central sandbox by the project owner; no defects were reported. The detailed results are not recorded here, so statements below that say "not verified" or carry `TODO(verify)` predate this run.
+
 ## Purpose
 A user can raise an equipment request for an employee: who needs equipment, which type (an equipment category), why, and when (GitHub issue #70). Requests are numbered from a number series and carry a status (Open, Pending Approval, Approved, Rejected, Completed). In this feature every request is created Open and stays Open: nothing in the app changes the status yet. The transitions (send, approve, reject, complete) belong to FR-033 Approval Workflow. An Open request can be corrected or deleted; a request in any other status is locked.
 

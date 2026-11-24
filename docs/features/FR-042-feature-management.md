@@ -1,5 +1,7 @@
 # FR-042 Feature Management
 
+> **Sandbox verification (2026-11-24):** verified in a Business Central sandbox by the project owner; no defects were reported. The detailed results are not recorded here, so statements below that say "not verified" or carry `TODO(verify)` predate this run.
+
 ## Purpose
 An administrator turns five optional features on or off for each company, on the Equipment Features page, without code changes (GitHub issue #83). The features are Equipment Images, Warranty Alerts, Approval Workflows, API Integration and Maintenance Planning. Each feature switches on its own. When a feature is off, its controls are hidden and its entry pages show an error. No data is deleted.
 

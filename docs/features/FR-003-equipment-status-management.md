@@ -1,5 +1,7 @@
 # FR-003 Equipment Status Management
 
+> **Sandbox verification (2026-11-24):** verified in a Business Central sandbox by the project owner; no defects were reported. The detailed results are not recorded here, so statements below that say "not verified" or carry `TODO(verify)` predate this run.
+
 ## Purpose
 Give every equipment record one current lifecycle status (Available, Assigned, In Maintenance, Lost, Disposed) and
 enforce the rules for changing it. Lost and Disposed are final statuses. The rules live in table 50100, so they apply to

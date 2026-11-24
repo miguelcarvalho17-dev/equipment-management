@@ -1,5 +1,7 @@
 # FR-001 Equipment Registration
 
+> **Sandbox verification (2026-11-24):** verified in a Business Central sandbox by the project owner; no defects were reported. The detailed results are not recorded here, so statements below that say "not verified" or carry `TODO(verify)` predate this run.
+
 ## Purpose
 Maintain equipment master data (number, category, serial number, purchase data, status) and assign equipment
 to employees. Later features (maintenance) build on these records. The app also blocks deleting a standard

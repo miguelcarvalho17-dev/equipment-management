@@ -1,5 +1,7 @@
 # FR-035 Equipment Audit Trail
 
+> **Sandbox verification (2026-11-24):** verified in a Business Central sandbox by the project owner; no defects were reported. The detailed results are not recorded here, so statements below that say "not verified" or carry `TODO(verify)` predate this run.
+
 ## Purpose
 One chronological, read-only lifecycle timeline per piece of equipment (GitHub issue #73): Created, Updated, Assigned, Returned, Sent to Maintenance, Disposed. Each entry records who, when, the status after the event, and the assignment entry or maintenance record behind it. The trail is always on; it has no setup and cannot be switched off.
 

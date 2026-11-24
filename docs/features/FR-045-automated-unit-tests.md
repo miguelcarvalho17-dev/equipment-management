@@ -1,5 +1,7 @@
 # FR-045 Automated Unit Tests
 
+> **Sandbox verification (2026-11-24):** verified in a Business Central sandbox by the project owner; no defects were reported. The detailed results are not recorded here, so statements below that say "not verified" or carry `TODO(verify)` predate this run.
+
 ## Purpose
 Adds automated tests for five areas of the app: equipment creation, assignment logic, status changes, maintenance processing and warranty calculation. Before this change, these rules were covered only in part by the existing tests. The tests use the test app in `test/`. The app itself does not change.
 

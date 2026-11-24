@@ -1,5 +1,7 @@
 # FR-064 Feature Interfaces
 
+> **Sandbox verification (2026-11-24):** verified in a Business Central sandbox by the project owner; no defects were reported. The detailed results are not recorded here, so statements below that say "not verified" or carry `TODO(verify)` predate this run.
+
 ## Purpose
 The equipment notifications of FR-017 were sent directly from the notification codeunit. FR-064 puts them behind an internal interface, "EQM INotification Provider", so that a delivery channel can be added or swapped without changing the notification rules. Phase 1, this change, delivers the interface, a channel-neutral payload and the Business Central provider. All six notification paths send through the provider. Behaviour does not change.
 

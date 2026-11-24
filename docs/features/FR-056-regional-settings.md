@@ -1,5 +1,7 @@
 # FR-056 Regional Settings
 
+> **Sandbox verification (2026-11-24):** verified in a Business Central sandbox by the project owner; no defects were reported. The detailed results are not recorded here, so statements below that say "not verified" or carry `TODO(verify)` predate this run.
+
 ## Purpose
 Shows dates, numbers and amounts in the user's Business Central regional format (My Settings > Region). Before this change, one page showed stored values in XML format: the Maintenance Log Entries page (50121) showed a date as `2026-11-19`, a cost as `1234.5` and a maintenance type as `1` instead of "Corrective".
 

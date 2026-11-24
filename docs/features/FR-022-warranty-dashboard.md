@@ -1,5 +1,7 @@
 # FR-022 Warranty Dashboard
 
+> **Sandbox verification (2026-11-24):** verified in a Business Central sandbox by the project owner; no defects were reported. The detailed results are not recorded here, so statements below that say "not verified" or carry `TODO(verify)` predate this run.
+
 ## Purpose
 The equipment dashboard (page 50109) and the Equipment Manager Role Center (page 50110) show the four warranty KPIs of GitHub issue #41: Active Warranties, Warranties Expiring in 90 Days, Warranties Expiring in 30 Days and Expired Warranties. Two already existed as FR-015 tiles; FR-022 renames their captions and adds Active Warranties and Warranties Expiring in 90 Days as tiles on the shared cue part 50106, each with a drill-down. Nothing is stored; the tiles are FlowFields on a temporary cue table.
 

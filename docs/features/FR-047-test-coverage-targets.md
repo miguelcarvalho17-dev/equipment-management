@@ -1,5 +1,7 @@
 # FR-047 Test Coverage Targets
 
+> **Sandbox verification (2026-11-24):** verified in a Business Central sandbox by the project owner; no defects were reported. The detailed results are not recorded here, so statements below that say "not verified" or carry `TODO(verify)` predate this run.
+
 ## Purpose
 Sets minimum test coverage targets for the app (issue #88): Business Logic 80%, APIs 80% and Critical Processes 100%. The targets are measured by a static check that runs in Repo checks on every pull request. The check does not measure lines. It measures **procedure reach** for Business Logic and APIs, and **rule coverage** for the Critical Processes. The app does not change. No AL file, no `app.json` and no permission set changes.
 

@@ -1,5 +1,7 @@
 # FR-017 Equipment Notifications
 
+> **Sandbox verification (2026-11-24):** verified in a Business Central sandbox by the project owner; no defects were reported. The detailed results are not recorded here, so statements below that say "not verified" or carry `TODO(verify)` predate this run.
+
 ## Purpose
 Business Central notifications (the bar at the top of a page) tell users about three situations while they work: a warranty that is about to expire, maintenance that has been open too long, and equipment that is back from maintenance. Each notification has an action that opens the records to act on, and each kind can be switched off per user in My Notifications.
 

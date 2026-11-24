@@ -1,5 +1,7 @@
 # FR-009 Dashboard and KPIs
 
+> **Sandbox verification (2026-11-24):** verified in a Business Central sandbox by the project owner; no defects were reported. The detailed results are not recorded here, so statements below that say "not verified" or carry `TODO(verify)` predate this run.
+
 ## Purpose
 Managers get a dashboard with six KPI tiles (Total, Available, Assigned, In Maintenance, Lost, Disposed equipment) and two charts (equipment by category, equipment by status). It is the home page of a new **Equipment Manager** role (own Role Center and profile) and also a standalone page, "Equipment Dashboard", for users in any other role. Every tile and chart data point opens the Equipment list filtered to the equipment behind the number.
 

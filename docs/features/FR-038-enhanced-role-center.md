@@ -1,5 +1,7 @@
 # FR-038 Enhanced Role Center
 
+> **Sandbox verification (2026-11-24):** verified in a Business Central sandbox by the project owner; no defects were reported. The detailed results are not recorded here, so statements below that say "not verified" or carry `TODO(verify)` predate this run.
+
 ## Purpose
 Four operational KPI tiles on the equipment cue part (GitHub issue #76): **Requests Pending Approval**, **Warranties Expiring This Month**, **Open Maintenance Activities** and **Total Assets Value**. They show the approval queue, the warranties that end before the end of the month, the open maintenance records and the purchase cost of the equipment in use, on the Equipment Manager Role Center and the Equipment Dashboard, without opening other pages. The existing tiles stay as they are.
 

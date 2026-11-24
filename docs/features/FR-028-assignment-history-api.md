@@ -1,5 +1,7 @@
 # FR-028 Assignment History API
 
+> **Sandbox verification (2026-11-24):** verified in a Business Central sandbox by the project owner; no defects were reported. The detailed results are not recorded here, so statements below that say "not verified" or carry `TODO(verify)` predate this run.
+
 ## Purpose
 Read-only Business Central API v1.0 entity `assignments` on table 50103 "EQM Equipment Assignment" (FR-004, FR-005, FR-006), so reporting and analytics platforms can read equipment movements (who had which equipment, from when to when) without database access (GitHub issue #66). It follows the API conventions C1 to C10 in `docs/features/FR-026-equipment-api.md`.
 

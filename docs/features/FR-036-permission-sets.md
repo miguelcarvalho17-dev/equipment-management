@@ -1,5 +1,7 @@
 # FR-036 Permission Sets
 
+> **Sandbox verification (2026-11-24):** verified in a Business Central sandbox by the project owner; no defects were reported. The detailed results are not recorded here, so statements below that say "not verified" or carry `TODO(verify)` predate this run.
+
 ## Purpose
 Four assignable roles for the app (GitHub issue #74): Equipment Reader, Equipment Manager, Equipment Administrator and the new **Equipment API Consumer**. The first three already existed (NFR-002, extended by FR-010 to FR-035) and were audited, not changed. This feature adds the API Consumer set (data access through the four API pages only, no UI pages, no queries) and automated structural tests for all four sets.
 
